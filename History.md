@@ -59,3 +59,15 @@ commit by afterloe (lm6289511@gmail.com)
 > distributed/slave.js  
 > package.json  
 
+
+0.0.3 / 2017-1-11 18:33:54
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加工具构建页面
+
+### new files
+> tools/  
+### modify files
+> package.json  
+

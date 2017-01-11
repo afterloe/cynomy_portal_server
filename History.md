@@ -30,7 +30,7 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > Makefile  
 
-0.0.3 / 2017-1-11 15:29:38
+0.0.1 / 2017-1-11 15:29:38
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
@@ -43,4 +43,19 @@ commit by afterloe (lm6289511@gmail.com)
 > index.js  
 > package.json  
 > servers/registry.js  
+
+0.0.3 / 2017-1-11 16:4:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 集成webSocket服务，实现双向通讯，在test下有websocket的客户端进行测试，重新构建salve.js
+
+### new files
+> servers/websocket.js  
+> test/  
+### modify files
+> .cynomy  
+> History.md  
+> distributed/slave.js  
+> package.json  
 

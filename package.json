@@ -4,7 +4,7 @@
   "description": "the config portal of server",
   "main": "index.js",
   "scripts": {
-	"start": "node index.js",
+    "start": "node index.js",
     "test": "mocha ./test/*_test.js"
   },
   "repository": {
@@ -30,6 +30,7 @@
   "dependencies": {
     "koa": "^1.2.4",
     "koa-bodyparser": "^2.3.0",
-    "koa-router": "^5.0.0"
+    "koa-router": "^5.0.0",
+    "websocket": "^1.0.24"
   }
 }

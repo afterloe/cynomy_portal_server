@@ -12,9 +12,10 @@
 "use strict";
 
 const [{createServer}, {resolve}] = [require("http"), require("path")];
-const registry = require(resolve(__dirname, "..", "servers", "registry"));
+const [registry, ws] = [require(resolve(__dirname, "..", "servers", "registry")), require(resolve(__dirname, "..", "servers", "websocket"))];
 
 const server = createServer(registry.callback());
+ws(server);
 
 let workerServer;
 

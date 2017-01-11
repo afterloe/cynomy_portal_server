@@ -1,0 +1,212 @@
+{
+  "TooOftenRequest": {
+    "code": "401.4",
+    "en-US": "too often, please try again later",
+    "zh-CN": "请求过于频繁，请稍后再试"
+  },
+  "ExceedMaximum": {
+    "code": "500",
+    "en-US": "Exceed the maximum value",
+    "zh-CN": "超过最大值"
+  },
+  "ExceedMinimum": {
+    "code": "500",
+    "en-US": "Exceed the minimum",
+    "zh-CN": "超过最小值"
+  },
+  "NotExistsFile": {
+    "code": "404",
+    "en-US": "The file has been moved",
+    "zh-CN": "文件不存在"
+  },
+  "NotExistsSequence": {
+    "code": "400",
+    "en-US": "sequence not exists",
+    "zh-CN": "序列不存在"
+  },
+  "ExistsSequence": {
+    "code": "501",
+    "en-US": "sequence already exists",
+    "zh-CN": "序列已存在"
+  },
+  "ExistsRisk": {
+    "code": "400",
+    "en-US": "risk exists",
+    "zh-CN": "存在风险"
+  },
+  "OauthError": {
+    "code": "401.4",
+    "en-US": "authentication fail",
+    "zh-CN": "授权失败"
+  },
+  "SendVerificationCodeFail": {
+    "code": "401.4",
+    "en-US": "send security code failed",
+    "zh-CN": "发送安全码失败"
+  },
+  "VerificationCodeInvalid": {
+    "code": "404.4",
+    "en-US": "verification code invalid",
+    "zh-CN": "验证码失效"
+  },
+  "VerificationCodeError": {
+    "code": "401.4",
+    "en-US": "security code error",
+    "zh-CN": "安全码错误"
+  },
+  "FileNotFind": {
+    "code": "404.0",
+    "en-US": "file not find",
+    "zh-CN": "文件未找到"
+  },
+  "NeedSignIn": {
+    "code": "401.5",
+    "en-US": "please login",
+    "zh-CN": "请登录"
+  },
+  "IllegalEquipment": {
+    "code": "403.10",
+    "en-US": "Illegal equipment",
+    "zh-CN": "非法设备"
+  },
+  "ValidationFail": {
+    "code": "406",
+    "en-US": "validation failure",
+    "zh-CN": "校验失败"
+  },
+  "SessionError": {
+    "code": "401.5",
+    "en-US": "token validation failure",
+    "zh-CN": "token 校验失败"
+  },
+  "OperationFailed": {
+    "code": "501",
+    "en-US": "operation failed",
+    "zh-CN": "操作失败"
+  },
+  "UserNotExist": {
+    "code": "501",
+    "en-US": "user does not exist",
+    "zh-CN": "用户不存在"
+  },
+  "UserExist": {
+    "code": "501",
+    "en-US": "user is exist",
+    "zh-CN": "用户存在"
+  },
+  "UnsupportedId": {
+    "code": "404",
+    "en-US": "unsupported identity",
+    "zh-CN": "非法的用户标识"
+  },
+  "NotAppendApp": {
+    "code": "400",
+    "en-US": "You did not add the application",
+    "zh-CN": "您未添加该应用"
+  },
+  "NoThisFunction": {
+    "code": "404",
+    "en-US": "no such this function",
+    "zh-CN": "没有这个方法"
+  },
+  "NoThisClient": {
+    "code": "404",
+    "en-US": "client is no super this platform",
+    "zh-CN": "客户端暂未支持该平台"
+  },
+  "NoThisApp": {
+    "code": "404",
+    "en-US": "no such this application",
+    "zh-CN": "没有这个应用"
+  },
+  "AccountOrPwdError": {
+    "code": "400",
+    "en-US": "account or password is Error",
+    "zh-CN": "账号或密码错误"
+  },
+  "LackParameters": {
+    "code": "400",
+    "en-US": "missing parameter",
+    "zh-CN": "缺少参数"
+  },
+  "PhoneNumberFormatMismatch": {
+    "code": "400",
+    "en-US": "phone number format mismatch",
+    "zh-CN": "电话号码格式错误"
+  },
+  "AppIsExists": {
+    "code": "400",
+    "en-US": "App is Exists",
+    "zh-CN": "应用已经被创建"
+  },
+  "EmailFormatMismatch": {
+    "code": "400",
+    "en-US": "Email format mismatch",
+    "zh-CN": "邮件地址格式错误"
+  },
+  "PwdFormatMismatch": {
+    "code": "400",
+    "en-US": "password format mismatch",
+    "zh-CN": "密码格式错误"
+  },
+  "CfgFormatMismatch": {
+    "code": "400",
+    "en-US": "config format mismatch",
+    "zh-CN": "配置文件格式错误"
+  },
+  "StandardCallbackObject": {
+    "code": "400",
+    "en-US": "is not a standard callback object",
+    "zh-CN": "不是一个标准的回调对象"
+  },
+  "SecretError": {
+    "code": "400",
+    "en-US": "app_secret error",
+    "zh-CN": "应用秘钥错误"
+  },
+  "NotMatchMode": {
+    "code": "404",
+    "en-US": "third sign no matching mode",
+    "zh-CN": "不支持的第三方"
+  },
+  "RedirectURIError": {
+    "code": "400",
+    "en-US": "third redirect uri is wrong",
+    "zh-CN": "第三方回调地址错误"
+  },
+  "AccessTokenError": {
+    "code": "400",
+    "en-US": "access_token has error",
+    "zh-CN": "accessToken 错误"
+  },
+  "TookenOverTime": {
+    "code": "401.6",
+    "en-US": "access token overtime",
+    "zh-CN": "token 超时"
+  },
+  "LifeCycleError": {
+    "code": "400",
+    "en-US": "life cycle error",
+    "zh-CN": "生命周期状态错误"
+  },
+  "AlreadyAuth": {
+    "code": "501",
+    "en-US": "apply auth Fail, Already apply bound",
+    "zh-CN": "申请开启授权失败,该应用已开启授权"
+  },
+  "BindError": {
+    "code": "501",
+    "en-US": "Bind Fail, Already bound",
+    "zh-CN": "绑定失败, 账号已绑定"
+  },
+  "NickNameError": {
+    "code": "400",
+    "en-US": "user name format error",
+    "zh-CN": "用户名格式错误"
+  },
+  "PackageJsonError": {
+    "code": "400",
+    "en-US": "format packageJson failed",
+    "zh-CN": "packageJson 格式错误"
+  }
+}

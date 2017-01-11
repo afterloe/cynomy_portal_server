@@ -28,8 +28,18 @@ siteConfig.set("registryPort", 15024); // 监听端口
 siteConfig.set("db", "/home/afterloe/wehouse.db"); // DB 目录
 siteConfig.set("dataDir", dataDir); // 数据存储目录
 siteConfig.set("logDir", logDir); // 日志存储目录
+siteConfig.set("redisConfig", { // redis 设置
+  host: "127.0.0.1",
+  port: "6379",
+  timeout: 172800 // 超时设置 秒
+});
+siteConfig.set("security", { // 安全设置
+  securityKey: "cynomys-redis-oauth",
+  outEncoding: "base64",
+  algorithm: "aes-256-cbc"
+});
 siteConfig.set("mailSender", {
-        enable : false, // 是否开启邮件发送功能
+  enable : false, // 是否开启邮件发送功能
 });
 
 const get = key => siteConfig.has(key)? siteConfig.get(key) : ({});

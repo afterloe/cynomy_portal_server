@@ -71,3 +71,19 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > package.json  
 
+
+0.0.3 / 2017-1-11 22:19:59
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 补充session服务
+
+### new files
+> errors/  
+> interceptors/  
+> services/  
+> tools/security.js  
+> tools/utilities.js  
+### modify files
+> config/index.js  
+

@@ -8,7 +8,7 @@ History.md
 Portal 资源开发历史
 ===
 
-0.0.3 / 2017-1-11 14:34:46
+0.0.1 / 2017-1-11 14:34:46
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
@@ -29,4 +29,18 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/  
 ### modify files
 > Makefile  
+
+0.0.3 / 2017-1-11 15:29:38
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: http服务初始化完成，postman测试／author成功。
+
+### modify files
+> History.md  
+> config/index.js  
+> distributed/slave.js  
+> index.js  
+> package.json  
+> servers/registry.js  
 

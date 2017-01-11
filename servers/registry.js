@@ -11,10 +11,12 @@
   */
 "use strict";
 
-const [{resolve}, koa, router] = [require("path"), require("koa"), require("koa-router")()];
+const [{resolve}, koa, bodyParser, router] = [require("path"), require("koa"), require("koa-bodyparser"), require("koa-router")()];
 const registration = require(resolve(__dirname, "..", "routers"));
 
 const app = koa();
+
+app.use(bodyParser());
 
 app.use(function* (next) {
   const start = new Date();
@@ -27,7 +29,8 @@ app.name = "portal";
 
 registration(router);
 
-app.use(router.routes()).use(router.allowedMethods());
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 app.use(function* (next) {
   this.set("Content-Type", "application/json");

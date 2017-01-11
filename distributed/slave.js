@@ -26,6 +26,10 @@ process.on("message", (msg, handler) => {
   }
 });
 
+process.on("catch-error", (err, ctx) => {
+  console.log("process has err! %s, %s", err, ctx);
+});
+
 process.on("uncaughtException", err => {
   process.send({act: "suicide"});
   console.log(err);

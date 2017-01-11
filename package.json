@@ -1,1 +1,35 @@
-{"name":"cynomy_portal_server","version":"1.0.0","description":"the config portal of server","main":"index.js","scripts":{"test":"mocha ./test/*_test.js"},"repository":{"type":"git","url":"git+https://github.com/afterloe/cynomy_portal_server.git"},"keywords":["cynomy","portal"],"author":"afterloe <lm6289511@gmail.com> (https://github.com/afterloe)","license":"MIT","bugs":{"url":"https://github.com/afterloe/cynomy_portal_server/issues"},"homepage":"https://github.com/afterloe/cynomy_portal_server#readme","devDependencies":{"istanbul":"^0.4.5","jshint":"^2.9.4","mocha":"^3.2.0","mochawesome":"^2.0.0"}}
+{
+  "name": "cynomy_portal_server",
+  "version": "1.0.0",
+  "description": "the config portal of server",
+  "main": "index.js",
+  "scripts": {
+	"start": "node index.js",
+    "test": "mocha ./test/*_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afterloe/cynomy_portal_server.git"
+  },
+  "keywords": [
+    "cynomy",
+    "portal"
+  ],
+  "author": "afterloe <lm6289511@gmail.com> (https://github.com/afterloe)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/afterloe/cynomy_portal_server/issues"
+  },
+  "homepage": "https://github.com/afterloe/cynomy_portal_server#readme",
+  "devDependencies": {
+    "istanbul": "^0.4.5",
+    "jshint": "^2.9.4",
+    "mocha": "^3.2.0",
+    "mochawesome": "^2.0.0"
+  },
+  "dependencies": {
+    "koa": "^1.2.4",
+    "koa-bodyparser": "^2.3.0",
+    "koa-router": "^5.0.0"
+  }
+}

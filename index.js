@@ -38,6 +38,7 @@ if (enable) {
   cluster.schedulingPolicy = cluster.SCHED_RR; // 启用轮叫调度策略
   const server = createServer();
   server.listen(registryPort, bindHost, () => {
+    console.log("TCP net socket is runnig in %s:%s", bindHost, registryPort);
     for (let i = 0; i < slaveNum; i++) {
       startSlave(server);
     }

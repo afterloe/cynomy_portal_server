@@ -87,3 +87,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > config/index.js  
 
+
+0.0.3 / 2017-1-11 22:25:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 调整模块信息，debug注册信息
+
+### modify files
+> package.json  
+> servers/registry.js  
+

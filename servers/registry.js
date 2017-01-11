@@ -12,18 +12,12 @@
 "use strict";
 
 const [{resolve}, koa, bodyParser, router] = [require("path"), require("koa"), require("koa-bodyparser"), require("koa-router")()];
-const registration = require(resolve(__dirname, "..", "routers"));
+const [registration, session] = [require(resolve(__dirname, "..", "routers")), require(resolve(__dirname, "..", "interceptors", "session"))];
 
 const app = koa();
 
 app.use(bodyParser());
-
-app.use(function* (next) {
-  const start = new Date();
-  this.requestIp = this.request.ip;
-  yield next;
-  console.log("[%s][%s] %s %s - %s ms", new Date().toLocaleString(), this.requestIp, this.method, this.url, new Date() - start);
-});
+app.use(session);
 
 app.name = "portal";
 

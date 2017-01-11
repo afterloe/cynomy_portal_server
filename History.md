@@ -98,3 +98,16 @@ commit by afterloe (lm6289511@gmail.com)
 > package.json  
 > servers/registry.js  
 
+
+0.0.3 / 2017-1-11 23:11:8
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复pug模板导致的文件错乱的问题
+
+### new files
+> test/buildCli  
+> test/funTest.js  
+### modify files
+> tools/buildPage.js  
+

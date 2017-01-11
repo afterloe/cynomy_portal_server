@@ -11,8 +11,8 @@
   */
 "use strict";
 
-const [pug, {resolve, extname}, {existsSync, statSync, readdirSync, writeFile, basename}] = [require("pug"), require("path"), require("fs")];
-const [PATH, DATA] = [Symbol("PATH"), Symbol("DATA")];
+const [pug, {resolve, extname, basename}, {existsSync, statSync, readdirSync, writeFile}] = [require("pug"), require("path"), require("fs")];
+const [PATH, DATA, SUFFIX] = [Symbol("PATH"), Symbol("DATA"), ".pug"];
 
 /**
  * 设置jade模板的文件夹目录
@@ -37,7 +37,7 @@ const setPugTemplatePath = __path => {
  *
  * @param {Object} json 每个文件的动态数据,key的名字要和模板的名字一致
  */
-const setPortalDatd = json => {
+const setPortalData = json => {
   if (json instanceof Object) {
     module[DATA] = json;
     return ;
@@ -78,10 +78,10 @@ const compileTemplates = outPath => {
   for (let i = 0; i < files.length; i++) {
     let file = files[i];
     let suffix = extname(file);
-    if (".pug" !== suffix) {
+    if (SUFFIX !== suffix) {
       continue ;
     }
-    let key = basename(file);
+    let key = basename(file, SUFFIX);
     tasks.push(writeHTML(key, file, resolve(outPath, `${key}.html`)));
   }
   return Promise.all(tasks);
@@ -89,6 +89,6 @@ const compileTemplates = outPath => {
 
 module.exports = {
   setPugTemplatePath,
-  setPortalDatd,
+  setPortalData,
   compileTemplates,
 };

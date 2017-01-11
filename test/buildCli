@@ -1,0 +1,27 @@
+#!/usr/bin/env node
+/**
+  * afterloe - cynomy_portal_server/test/buildCli
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <afterloeliu@jwis.cn> (https://github.com/afterloe)
+  * Date:
+  *   2017-1-11 22:30:26
+  */
+"use strict";
+
+const {resolve} = require("path");
+const buildPage = require(resolve(__dirname, "..", "tools", "buildPage"));
+
+const [, , source, outDir] = process.argv;
+buildPage.setPugTemplatePath(source);
+buildPage.setPortalData({
+  index: {
+    name : "afterloe"
+  }
+});
+
+const promise = buildPage.compileTemplates(outDir);
+promise.then(data => console.log(data)).catch(err => console.log(err));

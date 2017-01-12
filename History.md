@@ -123,3 +123,13 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/buildPage.js  
 > tools/utilities.js  
 
+
+0.0.3 / 2017-1-12 20:45:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加文件删除方法，用于处理构建页面时产生的不必要的文件
+
+### modify files
+> tools/buildPage.js  
+

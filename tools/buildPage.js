@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [pug, {resolve, extname, basename}, {existsSync, statSync, readdirSync, writeFile}] = [require("pug"), require("path"), require("fs")];
+const [pug, {resolve, extname, basename}, {existsSync, statSync, readdirSync, writeFile, unlink}] = [require("pug"), require("path"), require("fs")];
 const [PATH, DATA, SUFFIX] = [Symbol("PATH"), Symbol("DATA"), ".pug"];
 
 /**
@@ -96,8 +96,28 @@ const compileTemplates = outPath => {
   return Promise.all(tasks);
 };
 
+const deleteFile = __path => new Promise((solve, reject) => {
+  unlink(__path, err => {
+    if (err) {
+      reject(err);
+      return;
+    }
+
+    solve();
+  });
+});
+
+const cleanTemplates = () => {
+  const [files, tasks] = [readdirSync(module[PATH]), []];
+  for (let i = 0; i < files.length; i++) {
+    tasks.push(deleteFile(resolve(module[PATH], files[i])));
+  }
+  return Promise.all(tasks);
+};
+
 module.exports = {
   setPugTemplatePath,
   setPortalData,
   compileTemplates,
+  cleanTemplates,
 };

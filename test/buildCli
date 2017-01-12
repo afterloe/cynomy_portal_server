@@ -13,15 +13,12 @@
 "use strict";
 
 const {resolve} = require("path");
-const buildPage = require(resolve(__dirname, "..", "tools", "buildPage"));
+const tools = resolve(__dirname, "..", "tools");
+const [buildPage, {readyConfig}] = [require(resolve(tools, "buildPage")), require(resolve(tools, "utilities"))];
 
-const [, , source, outDir] = process.argv;
+const [, , source, config, outDir] = process.argv;
 buildPage.setPugTemplatePath(source);
-buildPage.setPortalData({
-  index: {
-    name : "afterloe"
-  }
-});
+buildPage.setPortalData(readyConfig(config));
 
 const promise = buildPage.compileTemplates(outDir);
 promise.then(data => console.log(data)).catch(err => console.log(err));

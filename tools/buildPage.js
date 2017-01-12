@@ -39,6 +39,15 @@ const setPugTemplatePath = __path => {
  */
 const setPortalData = json => {
   if (json instanceof Object) {
+    const {common} = json;
+    for (let i = 0; i < common.length; i++) {
+      for (let key in json) {
+        if ("public" === key) {
+          continue;
+        }
+        Object.assign(json[key], json[common[i]]);
+      }
+    }
     module[DATA] = json;
     return ;
   }

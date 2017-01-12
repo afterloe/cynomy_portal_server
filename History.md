@@ -111,3 +111,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/buildPage.js  
 
+
+0.0.3 / 2017-1-12 15:54:28
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复jade模版倒入的时候公共资源没有引入的异常，修复读取资源的时候没有递归处理
+
+### modify files
+> test/buildCli  
+> tools/buildPage.js  
+> tools/utilities.js  
+

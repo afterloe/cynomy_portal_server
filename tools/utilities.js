@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const uuid = require('node-uuid');
+const [uuid, {readFileSync}] = [require("node-uuid"), require("fs")];
 
 const verificationCodeDictionary = [
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9",
@@ -75,8 +75,24 @@ const subMail = mail => {
     return mail;
 };
 
+/**
+ * 读取客制化数据
+ *
+ * @param  {String} __path 客制化文件存放位置
+ * @return {Object}        key-value 数据
+ */
+const readyConfig = __path => {
+  try {
+    const buf = readFileSync(__path);
+    return JSON.parse(buf.toString());
+  } catch (error) {
+    return {};
+  }
+};
+
 module.exports = {
   randomCode,
+  readyConfig,
   uuidCode,
   randomNum: securityCode,
   subMail,

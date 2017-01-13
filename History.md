@@ -133,3 +133,13 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/buildPage.js  
 
+
+0.0.3 / 2017-1-13 23:14:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: CouchDB 建模
+
+### new files
+> dao/  
+

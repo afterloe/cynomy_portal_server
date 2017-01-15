@@ -11,10 +11,19 @@
   */
 "use strict";
 
-const [{resolve}, koa, bodyParser, router] = [require("path"), require("koa"), require("koa-bodyparser"), require("koa-router")()];
+const [{resolve}, koa, bodyParser, router, Pug] = [require("path"), require("koa"), require("koa-bodyparser"), require("koa-router")(), require("koa-pug")];
 const [registration, session] = [require(resolve(__dirname, "..", "routers")), require(resolve(__dirname, "..", "interceptors", "session"))];
 
 const app = koa();
+new Pug({
+  viewPath: "./template",
+  debug: false,
+  noCache: true,
+  pretty: false,
+  compileDebug: false,
+  basedir: "./template",
+  app,
+});
 
 app.use(bodyParser());
 app.use(session);
@@ -25,12 +34,6 @@ registration(router);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
-
-app.use(function* (next) {
-  this.set("Content-Type", "application/json");
-  this.set("Handler-Process", process.pid);
-  return yield next;
-});
 
 app.on("error", (err, ctx) => {
   process.emit("catch-error", err, ctx);

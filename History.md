@@ -143,3 +143,20 @@ commit by afterloe (lm6289511@gmail.com)
 ### new files
 > dao/  
 
+
+0.0.3 / 2017-1-15 22:48:11
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 配置jade模板，动态数据搭建
+
+### new files
+> interceptors/jsonSmart.js  
+> template/  
+### modify files
+> .gitignore  
+> Makefile  
+> package.json  
+> routers/index.js  
+> servers/registry.js  
+

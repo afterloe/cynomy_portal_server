@@ -12,6 +12,15 @@
 "use strict";
 
 module.exports = _ => {
+  _.get("/test", function* (next) {
+    this.render("index", {
+      title: "首页",
+      static: "http://almcloud.jwis.cn/",
+    });
+
+    return yield next;
+  });
+
   _.get("/author", function* (next) {
     this.body = JSON.stringify({
         name: "afterloe",

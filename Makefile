@@ -8,7 +8,7 @@ MOCHA_FILES := $(shell find ./test -name '*_test.js')
 all: check mocha-test
 
 # 检测代码是否符合标准
-check: $(shell find . -name '*.js' ! -path './node_modules/*')
+check: $(shell find . -name '*.js' ! -path './node_modules/*' ! -path './mochawesome-reports/*')
 	@jshint $^
 
 # mocha测试

@@ -85,13 +85,13 @@ const definition = _obj => {
       return yield* classMethod[k].apply(col, args);
     };
   }
+  moduleDefine.query = query;
+  moduleDefine.queryOne = queryOne;
+  moduleDefine.close = closeConnection;
   return moduleDefine;
 };
 
 module.exports = {
-  closeConnection,
   definition,
-  query,
-  queryOne,
   import: buildModule,
 };

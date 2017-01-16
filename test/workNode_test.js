@@ -14,11 +14,11 @@
 const [{resolve}, co] = [require("path"), require("co")];
 const {workNodeDao} = require(resolve(__dirname, "..", "dao"));
 
-
 co(function* () {
   yield workNodeDao.insert({name: "产品规划"});
   yield workNodeDao.insert({name: "产品设计"});
   yield workNodeDao.insert({name: "产品开发"});
   yield workNodeDao.insert({name: "产品测试"});
   yield workNodeDao.insert({name: "产品发布"});
+  workNodeDao.close();
 }).then(data => console.log(data)).catch(err => console.log(err));

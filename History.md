@@ -196,3 +196,15 @@ commit by afterloe (lm6289511@gmail.com)
 > config/index.js  
 > package.json  
 
+
+0.0.3 / 2017-1-16 22:31:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: mongodb 连接调试，补全主食信息
+
+### modify files
+> config/index.js  
+> dao/sequel.js  
+> test/workNode_test.js  
+

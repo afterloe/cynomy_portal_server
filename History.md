@@ -180,3 +180,19 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > dao/domain/couchDB.js  
 
+
+0.0.3 / 2017-1-16 22:12:15
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: mongodb 接入
+
+### new files
+> dao/  
+> test/workFlow_test.js  
+> test/workNode_test.js  
+### modify files
+> Makefile  
+> config/index.js  
+> package.json  
+

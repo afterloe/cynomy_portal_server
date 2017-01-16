@@ -23,7 +23,13 @@ siteConfig.set("distributed", { // 多线程配置
         slaveNum : num // 奴隶数
 });
 // siteConfig.set("bindHost", "127.0.0.1"); // 监听IP
-siteConfig.set("bindHost", "0.0.0.0"); // 监听端口
+siteConfig.set("bindHost", "0.0.0.0"); // 监听IP
+siteConfig.set("db", { // 数据库链接配置
+  name: "cynomy_portal", // 数据库名
+  dialect: "mongodb", // 数据库类型
+  host: "192.168.1.108", // 数据库远程地址
+  port: 27017, // 数据库连接端口
+});
 siteConfig.set("registryPort", 15024); // 监听端口
 siteConfig.set("db", "/home/afterloe/wehouse.db"); // DB 目录
 siteConfig.set("dataDir", dataDir); // 数据存储目录
@@ -45,5 +51,5 @@ siteConfig.set("mailSender", {
 const get = key => siteConfig.has(key)? siteConfig.get(key) : ({});
 
 module.exports = {
-        get,
+  get,
 };

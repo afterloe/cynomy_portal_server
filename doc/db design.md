@@ -1,0 +1,75 @@
+数据库关系设计 v0.0.1
+###
+> MIT Licensed  
+> author: afterloe  
+> mail: afterloeliu@jwis.cn  
+> webSite: https://github.com/afterloe  
+
+关系设计
+===
+纵观设计图，可以发现所有的东西都是基于产品来进行扩展的。所有基础信息应该是产品，也就是所谓的产出。产出位于每一次迭代。而迭代又是基于软件研发流程来管控的。所以产出可以是代码，也可以是文档。<br/>
+
+#### 产出(produce) 设计
+```json
+{
+  "author": "产出人员",
+  "name": "产出的文件名",
+  "path": "下载地址",
+  "time": "产出时间",
+  "version": "版本"
+}
+```
+既然有了产出那么该工作流就能被管控起来，每个工作流都由工作节点来控制<br/>
+
+#### 工作流节点(work-flow node) 设计
+```json
+{
+  "work-flow": "所属工作流",
+  "name": "节点名",
+  "beginTimestamp": "进入节点的时间",
+  "nextTimestamp": "进入下一个节点的时间",
+  "owner": "节点负责人",
+  "uploadCount": "更新次数",
+  "produceList": "产出列表"
+}
+```
+
+#### 工作流(work-flow) 设计
+```json
+{
+  "name": "工作流名字",
+  "chainNodes": "工作流节点列表",
+  "members": "参与该工作流的人员列表",
+  "status": "工作流状态",
+  "nextNode": "下一个节点",
+  "previousNode": "上一个节点",
+  "beginTimestamp": "工作流启动时间",
+  "endTimestamp": "工作流结束时间"
+}
+```
+
+其实原理是这样，当一个工作流跑起来之后，会经过各个活动(工作流节点)，由每个节点的负责人来确定该工作时候完成，完成之后推动工作流进入下一个节点。进入到下一个节点之前就会对完成的节点进行一次校验，检查产出列表。并展示产出信息。这样工作流结束之后可以从各个节点看到产出。所以要在工作流启动的时候就要指定好参加这次流程的人员，并指派好负责人。如果不想手动指派那么就需要使用角色标签来标识。
+
+#### 标签 (target) 设计
+```json
+{
+  "name": "标签名",
+  "keyWord": "领域关键字，通过搜索来标识",
+  "property": "属性",
+  "domain": "访问域"
+}
+```
+
+#### 用户 (user) 设计
+```json
+{
+  "name": "用户名",
+  "targes": "标签列表",
+  "mail": "邮箱",
+  "avatar": "头像",
+  "introduction": "简介",
+  "position": "职位",
+  "phoneNum": "手机号",
+  "isLogin": "是否登陆"
+}
+```

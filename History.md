@@ -219,3 +219,13 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/work-node.js  
 > errors/i18nError.json  
 
+
+0.0.3 / 2017-1-16 23:41:50
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: docs 添加数据库设计文档
+
+### new files
+> doc/  
+

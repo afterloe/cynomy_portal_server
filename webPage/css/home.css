@@ -1,0 +1,94 @@
+/**
+  * afterloe - cynomy_portal_server/webPage/css/home.css
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <afterloeliu@jwis.cn> (https://github.com/afterloe)
+  * Date:
+  *   2017-1-16 13:31:57
+  */
+
+/* ///////////////////////////////   目录选择器 */
+.structure {
+    background-color: #ffffff;
+}
+
+.dir-menu {
+    margin-bottom: 0;
+    padding-top: 3.5em;
+    padding-left: 0;
+    padding-bottom: 3.5em;
+}
+
+.dir-menu > li {
+    list-style: none;
+    display: -webkit-inline-box;
+    width: 20.4em;
+    height: 7.7em;
+    margin: 0 2rem 0 5rem;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1100px) {
+  .dir-menu > li {
+      list-style: none;
+      display: -webkit-inline-box;
+      width: 20em;
+      height: 7.1em;
+      margin: 0 2rem 0 5rem;
+      cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 960px) {
+  .dir-menu > li {
+      list-style: none;
+      display: -webkit-inline-box;
+      width: 20em;
+      height: 7.1em;
+      margin: 1em 1em 0 4em;
+      cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 690px) {
+  .dir-menu > li {
+      list-style: none;
+      display: -webkit-inline-box;
+      width: 20em;
+      height: 7.1em;
+      margin: 1em 1em 0 2.5em;
+      cursor: pointer;
+  }
+}
+
+.dir-product {
+    background: url(../images/产品目录.png) no-repeat;
+}
+
+.dir-platform {
+    background: url(../images/平台目录.png) no-repeat;
+}
+
+.dir-public {
+    background: url(../images/公共目录.png) no-repeat;
+}
+
+.dir-product:hover {
+    background: url(../images/产品目录-selected.png) no-repeat;
+}
+
+.dir-platform:hover {
+    background: url(../images/平台目录-selected.png) no-repeat;
+}
+
+.dir-public:hover {
+    background: url(../images/公共目录-selected.png) no-repeat;
+}
+
+/* ///////////////////////////////   项目详情 */
+.tableHeader {
+
+}

@@ -208,3 +208,14 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/sequel.js  
 > test/workNode_test.js  
 
+
+0.0.3 / 2017-1-16 22:52:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 异常定制，特殊能力提升
+
+### modify files
+> dao/work-node.js  
+> errors/i18nError.json  
+

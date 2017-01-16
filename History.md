@@ -170,3 +170,13 @@ commit by afterloe (lm6289511@gmail.com)
 ### new files
 > webPage/  
 
+
+0.0.3 / 2017-1-16 18:31:41
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 弃用couchdb，使用mongodb进行dao层构建
+
+### delete files
+> dao/domain/couchDB.js  
+

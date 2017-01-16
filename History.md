@@ -229,3 +229,13 @@ commit by afterloe (lm6289511@gmail.com)
 ### new files
 > doc/  
 
+
+0.0.3 / 2017-1-16 23:51:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 数据库设计文档添加内容
+
+### modify files
+> "doc/db  
+

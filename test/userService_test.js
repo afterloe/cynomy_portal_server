@@ -15,7 +15,7 @@ const {resolve} = require("path"), co = require("co");
 const {user_dao} = require(resolve(__dirname, "..", "dao"));
 const userService = require(resolve(__dirname, "..", "services", "userService"));
 
-const user_xlsx = resolve(process.env.HOME, "user.xlsx");
+const user_xlsx = resolve(__dirname, "..", "doc", "user.xlsx");
 const users = userService.loaderFromXlsx(user_xlsx);
 
 co(function* () {

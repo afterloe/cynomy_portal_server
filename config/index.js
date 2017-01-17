@@ -44,6 +44,13 @@ siteConfig.set("security", { // 安全设置
 });
 siteConfig.set("mailSender", { // 邮件功能设置
   enable : false, // 是否开启邮件发送功能
+  from: "", // 你的邮件的发件人
+  port: 25, // 邮件端口
+  host: "", // 发件箱端口
+  auth: {  // 发件人设置
+    user: "", // 发件人账号
+    pwd: "" // 发件人密码
+  }
 });
 
 /**

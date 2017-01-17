@@ -373,3 +373,16 @@ commit by afterloe (lm6289511@gmail.com)
 > services/userService.js  
 > test/userService_test.js  
 
+
+1.0.1 / 2017-1-17 19:22:21
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: config 添加邮件配置
+
+### new files
+> doc/user.xlsx  
+### modify files
+> config/index.js  
+> test/userService_test.js  
+

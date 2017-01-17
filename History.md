@@ -279,3 +279,20 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/work-flow.js  
 > dao/work-node.js  
 
+
+1.0.0 / 2017-1-17 15:29:10
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: dao联合调试，error底层重构，解除dao下的默写文件的异常检测
+
+### modify files
+> Makefile  
+> dao/public.js  
+> dao/sequel.js  
+> dao/target.js  
+> dao/user.js  
+> dao/work-flow.js  
+> dao/work-node.js  
+> errors/index.js  
+

@@ -21,4 +21,4 @@ Object.assign(commonsLib, classMethod);
 
 const className = "worknode";
 
-module.exports = _ => _.definition({commonsLib, className});
+module.exports = _ => _.definition({classMethod: commonsLib, className});

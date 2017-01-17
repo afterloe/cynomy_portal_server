@@ -35,14 +35,18 @@ function* update(_document) {
  * @return {Generator}           [数据库操作函数，使用co或next来驱动]
  */
 function* insert(_document) {
-  const {name, state} = _document;
-  if (!name || !state) {
+  const {name} = _document;
+  if (!name) {
     err.throwLackParameters();
     return ;
   }
 
+  if (!_document.state) {
+    _document.state = 200;
+  }
+
   if (!_document.createTimestamp) {
-    _document.createTimestamp = new Date().now();
+    _document.createTimestamp = Date.now();
   }
 
   return yield this.insertOne(_document);
@@ -73,7 +77,7 @@ function* remove(_document) {
     return this.updateOne({_id}, {
       $set: {
         state : 500,
-        deleteTime: new Date().now(),
+        deleteTime: Date.now(),
       }
     });
   }

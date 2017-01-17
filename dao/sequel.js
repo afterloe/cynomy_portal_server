@@ -77,14 +77,17 @@ const definition = _obj => {
   const moduleDefine = {};
   const {classMethod, className} = _obj;
   moduleDefine.moduleName = className;
-  for (let k in classMethod) {
-    moduleDefine[k] = function* (...args) {
+  Object.keys(classMethod).map(method => {
+    if (!classMethod[method].apply) {
+      return;
+    }
+    moduleDefine[method] = function* (...args) {
       const col = yield* getCollection(className);
       col.newObjectId = newObjectId;
       col.valid = valid;
-      return yield* classMethod[k].apply(col, args);
+      return yield* classMethod[method].apply(col, args);
     };
-  }
+  });
   moduleDefine.query = query;
   moduleDefine.queryOne = queryOne;
   moduleDefine.close = closeConnection;

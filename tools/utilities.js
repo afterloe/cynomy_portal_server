@@ -21,65 +21,77 @@ const verificationCodeDictionary = [
 const [verificationCodeDictionaryLength, securityCodeDictionaryLength] = [verificationCodeDictionary.length, securityCodeDictionary.length];
 
 /**
- * 生成短位安全码
+ * 短位安全码
  *
- * @param number
+ * @param  {Integer} [number=6]     [验证码长度]
+ * @throw {Error}                   [当参数不为整型的时候抛出 parameter type error的异常]
+ * @returns {string}                [指定长度的验证码字符串]
  */
 const securityCode = (number = 6) => {
-    let [need, i] = [[], 0];
-    do {
-        let index = Math.floor(Math.random() * securityCodeDictionaryLength);
-        need.push(securityCodeDictionary[index]);
-        i++;
-    } while (i < number);
-    return need.join("");
+  if (!Number.isInteger(number)) {
+    throw new Error("parameter type error");
+    return ;
+  }
+  let [need, i] = [[], 0];
+  while (i < number){
+    let index = Math.floor(Math.random() * securityCodeDictionaryLength);
+    need.push(securityCodeDictionary[index]);
+    i++;
+  }
+  return need.join("");
 };
 
 /**
  * 生成随机码
  *
- * @param number
- * @returns {string}
+ * @param {Integer}  [number=4]     [验证码长度]
+ * @throw {Error}                   [当参数不为整型的时候抛出 parameter type error的异常]
+ * @returns {string}                [指定长度的验证码字符串]
  */
 const randomCode = (number = 4) => {
+    if (!Number.isInteger(number)) {
+      throw new Error("parameter type error");
+      return ;
+    }
     let [need, i] = [[], 0];
-    do {
-        let index = Math.floor(Math.random() * verificationCodeDictionaryLength);
-        need.push(verificationCodeDictionary[index]);
-        i++;
-    } while (i < number);
+    while (i < number) {
+      let index = Math.floor(Math.random() * verificationCodeDictionaryLength);
+      need.push(verificationCodeDictionary[index]);
+      i++;
+    }
     return need.join("");
 };
 
 /**
- * UUID 生成器 生成唯一id，标示某个记录
+ * UUID生成器
  *
- * @returns {string}
+ * @return {String} [32位随机字符串]
  */
 const uuidCode = () => uuid.v1().split("-").join("");
 
 /**
- * 隐藏敏感信息
+ * 隐藏邮箱信息
  *
- * @param mail
- * @returns {*}
+ * @param  {String} mail [需要隐藏的邮箱]
+ * @return {String}      [隐藏后的邮箱字符串]
  */
 const subMail = mail => {
-    let tempStr = "";
-    mail = mail.replace(/(..)(.+)(@)/g, ($1, $2, $3, $4) => {
-        for (var i = $3.length - 1; i >= 0; i--) {
-            tempStr += "*";
-        }
-        return $2 + tempStr + $4;
-    });
-    return mail;
+  let tempStr = "";
+  mail = mail.replace(/(..)(.+)(@)/g, ($1, $2, $3, $4) => {
+    for (let i = $3.length - 1; i >= 0; i--) {
+      tempStr += "*";
+    }
+    return $2 + tempStr + $4;
+  });
+
+  return mail;
 };
 
 /**
  * 读取客制化数据
  *
- * @param  {String} __path 客制化文件存放位置
- * @return {Object}        key-value 数据
+ * @param  {String} __path [客制化文件存放位置]
+ * @return {Object}        [key-value 数据]
  */
 const readyConfig = __path => {
   try {

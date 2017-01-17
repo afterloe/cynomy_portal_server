@@ -386,3 +386,17 @@ commit by afterloe (lm6289511@gmail.com)
 > config/index.js  
 > test/userService_test.js  
 
+
+1.0.1 / 2017-1-17 22:32:42
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加tools/utilities.js 文件的底层支持，添加对应的mocha测试用例
+
+### new files
+> test/utilities_test.js  
+### modify files
+> tools/utilities.js  
+### delete files
+> test/readyConfig_test.js  
+

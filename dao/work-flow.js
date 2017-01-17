@@ -11,15 +11,14 @@
   */
 "use strict";
 
-function* insert(_workflow) {
-  const {} = _workflow;
-  return yield this.insertOne();
-}
+const {resolve} = require("path");
+const commonsLib = require(resolve(__dirname, "public"));
 
 const classMethod = {
-  insert,
 };
+
+Object.assign(commonsLib, classMethod);
 
 const className = "workflow";
 
-module.exports = _ => _.definition({classMethod, className});
+module.exports = _ => _.definition({commonsLib, className});

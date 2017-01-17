@@ -263,3 +263,19 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/index.js  
 > "doc/db  
 
+
+1.0.0 / 2017-1-17 14:58:21
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: dao层集中升级
+
+### new files
+> dao/public.js  
+### modify files
+> config/index.js  
+> dao/target.js  
+> dao/user.js  
+> dao/work-flow.js  
+> dao/work-node.js  
+

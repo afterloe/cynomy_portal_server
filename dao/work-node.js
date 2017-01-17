@@ -12,42 +12,13 @@
 "use strict";
 
 const {resolve} = require("path");
-const err = require(resolve(__dirname, "..", "errors"));
-
-/**
- * 创建工作流节点
- *
- * @param  {Object{name}}    _worknode [传入数据]
- * @return {Generator}           [数据库操作函数，使用co或next来驱动]
- */
-function* insert(_worknode) {
-  const {name} = _worknode;
-  if (!name) {
-    err.throwLackParameters();
-    return ;
-  }
-  return yield this.insertOne({name});
-}
-
-/**
- * 更新工作流节点
- *
- * @param  {Object{_id, upload}}    _nodeInfo [工作流节点信息]
- * @return {Generator}           [数据库操作函数，使用co或next来驱动]
- */
-function* update(_nodeInfo) {
-  const {_id, upload} = _nodeInfo;
-  if (this.valid(_id)) {
-    return this.updateOne({_id}, upload);
-  }
-  err.throwParametersError();
-}
+const commonsLib = require(resolve(__dirname, "public"));
 
 const classMethod = {
-  insert,
-  update,
 };
+
+Object.assign(commonsLib, classMethod);
 
 const className = "worknode";
 
-module.exports = _ => _.definition({classMethod, className});
+module.exports = _ => _.definition({commonsLib, className});

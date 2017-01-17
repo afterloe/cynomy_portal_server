@@ -19,11 +19,6 @@
     "en-US": "The file has been moved",
     "zh-CN": "文件不存在"
   },
-  "ExistsRisk": {
-    "code": "400",
-    "en-US": "risk exists",
-    "zh-CN": "存在风险"
-  },
   "OauthError": {
     "code": "401.4",
     "en-US": "authentication fail",
@@ -69,10 +64,15 @@
     "en-US": "user does not exist",
     "zh-CN": "用户不存在"
   },
+  "TargetExist": {
+    "code": "501",
+    "en-US": "target is exist",
+    "zh-CN": "标签已存在"
+  },
   "UserExist": {
     "code": "501",
     "en-US": "user is exist",
-    "zh-CN": "用户存在"
+    "zh-CN": "用户已存在"
   },
   "UnsupportedId": {
     "code": "404",

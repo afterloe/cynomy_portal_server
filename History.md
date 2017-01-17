@@ -400,3 +400,16 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > test/readyConfig_test.js  
 
+
+1.0.1 / 2017-1-17 23:28:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 构建标签服务- 创建标签，扩展doc下数据库设计文档
+
+### new files
+> services/targetService.js  
+### modify files
+> "doc/db  
+> errors/i18nError.json  
+

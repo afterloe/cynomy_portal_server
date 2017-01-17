@@ -249,3 +249,17 @@ commit by afterloe (lm6289511@gmail.com)
 > History.md  
 > "doc/db  
 
+
+1.0.0 / 2017-1-17 10:46:57
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: dao层数据搭建，数据库设计文档升级
+
+### new files
+> dao/target.js  
+> dao/user.js  
+### modify files
+> dao/index.js  
+> "doc/db  
+

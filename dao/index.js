@@ -20,4 +20,6 @@ module.exports = {
   sequel,
   workFlowDao: loadDao("work-flow"),
   workNodeDao: loadDao("work-node"),
+  userDao: loadDao("user"),
+  targetDao: loadDao("target"),
 };

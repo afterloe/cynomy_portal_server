@@ -284,7 +284,9 @@ commit by afterloe (lm6289511@gmail.com)
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: dao联合调试，error底层重构，解除dao下的默写文件的异常检测
+  * master: dao联合调试
+  * error底层重构
+  * 解除dao下的默写文件的异常检测
 
 ### modify files
 > Makefile  
@@ -295,4 +297,27 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/work-flow.js  
 > dao/work-node.js  
 > errors/index.js  
+
+1.0.1 / 2017-1-17 15:46:9
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: dao底层文件结构优化，dao层暴露优化
+
+### new files
+> dao/goods.js  
+> dao/produce.js  
+> dao/workflow-node.js  
+> dao/workflow-template.js  
+> dao/workflow.js  
+### modify files
+> .cynomy  
+> History.md  
+> dao/index.js  
+> package.json  
+### delete files
+> dao/work-flow.js  
+> dao/work-node.js  
+> test/workFlow_test.js  
+> test/workNode_test.js  
 

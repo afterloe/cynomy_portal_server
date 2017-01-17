@@ -1,5 +1,5 @@
 /**
-  * afterloe - cynomy_portal_server/dao/work-node.js
+  * afterloe - cynomy_portal_server/dao/workflow-node.js
   *
   * Copyright(c) afterloe.
   * MIT Licensed

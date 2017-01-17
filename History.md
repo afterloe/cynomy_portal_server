@@ -348,3 +348,17 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/public.js  
 > package.json  
 
+
+1.0.1 / 2017-1-17 18:34:54
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: userServer添加方法支持
+
+### new files
+> test/dao_test.js  
+### modify files
+> dao/public.js  
+> services/userService.js  
+> test/userService_test.js  
+

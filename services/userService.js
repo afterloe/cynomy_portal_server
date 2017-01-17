@@ -12,11 +12,24 @@
 "use strict";
 
 const [{resolve}, xlsx] = [require("path"), require("node-xlsx").default];
+const [{user_dao}] = [require(resolve(__dirname, "..", "dao"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
 
-const createUser = _users => {
+function* createUser (_users) {
+  const [task, __users] = [[], []];
+  for(let i = 0; i < _users.length; i++) {
+    const flag = yield user_dao.checkExist(_users[i]);
+    if (false === flag) {
+      task.push(i);
+    }
+  }
 
-};
+  for(let i = 0; i < task.length; i++) {
+    __users.push(_users[task[i]]);
+  }
+
+  return yield user_dao.insertMany(__users);
+}
 
 /**
  * 从execl中读取用户信息
@@ -45,4 +58,5 @@ const loaderFromXlsx = _file => {
 
 module.exports = {
   loaderFromXlsx,
+  createUser,
 };

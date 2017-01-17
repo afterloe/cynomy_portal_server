@@ -413,3 +413,16 @@ commit by afterloe (lm6289511@gmail.com)
 > "doc/db  
 > errors/i18nError.json  
 
+
+1.0.1 / 2017-1-17 23:42:51
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 工作流引擎编码开始
+
+### new files
+> services/workflowService.js  
+### modify files
+> services/userService.js  
+> tools/utilities.js  
+

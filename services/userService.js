@@ -76,7 +76,7 @@ function* createUser(_user) {
     err.throwUserExist();
   }
 
-  yield user_dao.insert(buildUser(_user));
+  return yield user_dao.insert(buildUser(_user));
 }
 
 /**

@@ -30,7 +30,6 @@ const [verificationCodeDictionaryLength, securityCodeDictionaryLength] = [verifi
 const securityCode = (number = 6) => {
   if (!Number.isInteger(number)) {
     throw new Error("parameter type error");
-    return ;
   }
   let [need, i] = [[], 0];
   while (i < number){
@@ -51,7 +50,6 @@ const securityCode = (number = 6) => {
 const randomCode = (number = 4) => {
     if (!Number.isInteger(number)) {
       throw new Error("parameter type error");
-      return ;
     }
     let [need, i] = [[], 0];
     while (i < number) {

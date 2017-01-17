@@ -1,11 +1,11 @@
-History.md
+Portal build历史
 ###
 > MIT Licensed  
 > author: afterloe <lm6289511@gmail.com> (https://github.com/afterloe)  
 > mail:   
 > webSite:   
 
-Portal 资源开发历史
+Portal build历史
 ===
 
 0.0.1 / 2017-1-11 14:34:46
@@ -237,5 +237,15 @@ commit by afterloe (lm6289511@gmail.com)
   * master: 数据库设计文档添加内容
 
 ### modify files
+> "doc/db  
+
+0.0.3 / 2017-1-17 10:4:21
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: dao设计文档升级
+
+### modify files
+> History.md  
 > "doc/db  
 

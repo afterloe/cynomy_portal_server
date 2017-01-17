@@ -19,6 +19,6 @@ const classMethod = {
 
 Object.assign(commonsLib, classMethod);
 
-const className = "worknode";
+const className = "workflow_node";
 
 module.exports = _ => _.definition({classMethod: commonsLib, className});

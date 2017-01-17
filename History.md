@@ -321,3 +321,16 @@ commit by afterloe (lm6289511@gmail.com)
 > test/workFlow_test.js  
 > test/workNode_test.js  
 
+
+1.0.1 / 2017-1-17 15:49:28
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: dao底层文件结构优化
+
+### modify files
+> dao/goods.js  
+> dao/produce.js  
+> dao/workflow-node.js  
+> dao/workflow-template.js  
+

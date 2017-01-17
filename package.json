@@ -35,6 +35,7 @@
     "koa-router": "^5.0.0",
     "mongodb": "^2.2.21",
     "node-uuid": "^1.4.7",
+    "node-xlsx": "^0.7.4",
     "pug": "^2.0.0-beta6",
     "websocket": "^1.0.24"
   }

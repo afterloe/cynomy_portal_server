@@ -334,3 +334,17 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/workflow-node.js  
 > dao/workflow-template.js  
 
+
+1.0.1 / 2017-1-17 17:39:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: dao底层文件结构优化
+
+### new files
+> services/userService.js  
+> test/userService_test.js  
+### modify files
+> dao/public.js  
+> package.json  
+

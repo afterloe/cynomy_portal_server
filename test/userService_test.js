@@ -19,7 +19,7 @@ const user_xlsx = resolve(process.env.HOME, "user.xlsx");
 const users = userService.loaderFromXlsx(user_xlsx);
 
 co(function* () {
-  const p = yield userService.createUser(users);
+  const p = yield userService.createUsers(users);
   console.log(p);
   user_dao.close();
-});
+}).catch(err => console.log(err));

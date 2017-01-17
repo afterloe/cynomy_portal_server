@@ -362,3 +362,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/userService.js  
 > test/userService_test.js  
 
+
+1.0.1 / 2017-1-17 19:11:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: userServer方法优化
+
+### modify files
+> services/userService.js  
+> test/userService_test.js  
+

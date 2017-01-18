@@ -9,6 +9,11 @@
     "en-US": "Exceed the maximum value",
     "zh-CN": "超过最大值"
   },
+  "ServerIsBusy": {
+    "code": "500",
+    "en-US": "server is busy",
+    "zh-CN": "服务器繁忙"
+  },
   "ExceedMinimum": {
     "code": "500",
     "en-US": "Exceed the minimum",

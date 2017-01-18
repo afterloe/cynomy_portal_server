@@ -518,3 +518,17 @@ commit by afterloe (lm6289511@gmail.com)
 > package.json  
 > test/userService_test.js  
 
+
+1.0.2 / 2017-1-18 19:29:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: goodsService升级，生产方法初始搭建，等待优化
+
+### new files
+> services/goodsService.js  
+### modify files
+> "doc/db  
+> errors/i18nError.json  
+> test/funTest.js  
+

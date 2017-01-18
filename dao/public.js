@@ -85,17 +85,31 @@ function* remove ({_id}) {
  * 检测是否存在重复元素
  *
  * @param  {Object{name}} _document   [需要检测的数据]
- * @return {[type]}           [description]
+ * @return {Boolean}                  [true - 存在 | false - 不存在]
  */
 function* checkExist ({name}){
   const _doc = yield this.findOne({name});
   return _doc ? true : false;
 }
 
+/**
+ * 通过id查询数据
+ *
+ * @param  {ObjectId, String}    _ [id]
+ * @return {Generator}   [数据库操作函数，使用co或next来驱动]
+ */
+function* queryById(_) {
+  if (this.valid(_)) {
+    _ = this.newObjectId(_);
+    return this.findOne({_id: _});
+  }
+}
+
 module.exports = {
   insert,
   update,
   checkExist,
+  queryById,
   remove,
   insertMany,
 };

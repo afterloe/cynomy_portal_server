@@ -83,8 +83,10 @@ const definition = _obj => {
     }
     moduleDefine[method] = function* (...args) {
       const col = yield* getCollection(className);
-      col.newObjectId = newObjectId;
-      col.valid = valid;
+      Object.assign(col, {
+        newObjectId,
+        valid
+      });
       return yield* classMethod[method].apply(col, args);
     };
   });

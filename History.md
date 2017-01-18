@@ -503,3 +503,18 @@ commit by afterloe (lm6289511@gmail.com)
 > services/userService.js  
 > services/workflowService.js  
 
+
+1.0.2 / 2017-1-18 17:49:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 底层功能优化，添加全局queryById方法
+
+### modify files
+> .cynomy  
+> dao/public.js  
+> dao/sequel.js  
+> dao/user.js  
+> package.json  
+> test/userService_test.js  
+

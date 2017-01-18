@@ -18,6 +18,12 @@ const userService = require(resolve(__dirname, "..", "services", "userService"))
 const user_xlsx = resolve(__dirname, "..", "doc", "user.xlsx");
 const users = userService.loaderFromXlsx(user_xlsx);
 
+// co(function* () {
+//   const personal = yield user_dao.queryById("587f1ee03440c526d64be6512");
+//   console.log(personal);
+//   user_dao.close();
+// }).catch(err => console.log(err));
+
 co(function* () {
   const p = yield userService.createUsers(users);
   console.log(p);

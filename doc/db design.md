@@ -22,7 +22,7 @@
 ```
 既然有了产出那么该工作流就能被管控起来，每个工作流都由工作节点来控制
 
-#### 工作流节点(work-flow node) 设计
+#### 工作流节点模版 (work-flow node) 设计
 ```json
 {
   "name": "节点名",
@@ -30,12 +30,26 @@
 }
 ```
 
-#### 工作流模版(work-flow Template) 设计
+#### 工作流模版 (work-flow Template) 设计
 ```json
 {
   "name": "工作流名字",
   "chainNodes": "工作流节点列表",
   "tags": "标签列表",
+}
+```
+
+#### 工作流节点实例 (work-flow instance node) 设计
+```json
+{
+  "workflow": "工作流实例",
+  "stat": "not start、working、stopped、finish",
+  "reason": "当前原因",
+  "name": "节点名",
+  "owner": "节点负责人",
+  "beginTimestamp": "进入节点的时间",
+  "uploadCount": "更新次数",
+  "produceList": "产出列表"
 }
 ```
 
@@ -45,15 +59,8 @@
   "name": "实例名",
   "template": "流程模板",
   "members": "参与该工作流的人员列表",
-  "status": {
-    "stat": "not start、working、stopped",
-    "reason": "当前原因",
-    "name": "节点名",
-    "owner": "节点负责人",
-    "beginTimestamp": "进入节点的时间",
-    "uploadCount": "更新次数",
-    "produceList": "产出列表"
-  },
+  "status": "实例节点 (work-flow instance node)",
+  "nodeList": "实例节点 (work-flow instance node) 组",
   "nextNode": "下一个节点",
   "previousNode": "上一个节点",
   "beginTimestamp": "工作流启动时间",

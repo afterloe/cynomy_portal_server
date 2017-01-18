@@ -448,3 +448,13 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/workflow.js  
 > services/targetService.js  
 
+
+1.0.1 / 2017-1-18 11:48:58
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow升级，修改节点模板和节点实例
+
+### modify files
+> "doc/db  
+

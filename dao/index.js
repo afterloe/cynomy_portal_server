@@ -20,7 +20,8 @@ module.exports = {
   sequel,
   workFlow_instance_dao: loadDao("workflow-instance"), // 工作流实例
   workFlow_template_dao: loadDao("workflow-template"), // 工作流模版
-  workFlow_node_dao: loadDao("workflow-node"), // 工作流节点
+  workFlow_node_template_dao: loadDao("workflow-node-template"), // 工作流节点模板
+  workFlow_node_instance_dao: loadDao("workflow-node-instance"), // 工作流节点实例
   user_dao: loadDao("user"), // 用户
   tag_dao: loadDao("tag"), // 标签
   goods_dao: loadDao("goods"), // 产出

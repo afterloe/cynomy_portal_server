@@ -1,5 +1,5 @@
 /**
-  * afterloe - cynomy_portal_server/dao/workflow-node.js
+  * afterloe - cynomy_portal_server/dao/workflow-node-template.js
   *
   * Copyright(c) afterloe.
   * MIT Licensed
@@ -19,6 +19,6 @@ const classMethod = {
 
 Object.assign(commonsLib, classMethod);
 
-const className = "workflow_node";
+const className = "workflow_node_template";
 
 module.exports = _ => _.definition({classMethod: commonsLib, className});

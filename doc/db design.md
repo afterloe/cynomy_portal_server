@@ -49,6 +49,7 @@
   "owner": "节点负责人",
   "beginTimestamp": "进入节点的时间",
   "uploadCount": "更新次数",
+  "index": "节点索引",
   "produceList": "产出列表"
 }
 ```

@@ -39,10 +39,10 @@
     "en-US": "please login",
     "zh-CN": "请登录"
   },
-  "IllegalEquipment": {
-    "code": "403.10",
-    "en-US": "Illegal equipment",
-    "zh-CN": "非法设备"
+  "NosuchThisWorkFlowTemplate": {
+    "code": "404.0",
+    "en-US": "workflow template engine not found",
+    "zh-CN": "工作流模版引擎未找到"
   },
   "ValidationFail": {
     "code": "406",
@@ -94,10 +94,15 @@
     "en-US": "missing parameter",
     "zh-CN": "缺少参数"
   },
+  "throwBuildWorkFlowNodeFailed": {
+    "code": "500",
+    "en-US": "build workflow node faied",
+    "zh-CN": "构建工作流节点失败"
+  },
   "ParametersError": {
     "code": "400",
     "en-US": "passer Error parameter",
-    "zh-CN": "传入错误参数"
+    "zh-CN": "参数类型错误"
   },
   "EmailFormatMismatch": {
     "code": "400",

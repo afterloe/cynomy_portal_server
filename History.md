@@ -458,3 +458,22 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > "doc/db  
 
+
+1.0.1 / 2017-1-18 15:6:9
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow升级，创建工作流，编辑工作流模版，创建工作流节点功能优化
+
+### new files
+> dao/workflow-node-instance.js  
+> dao/workflow-node-template.js  
+### modify files
+> dao/index.js  
+> dao/public.js  
+> "doc/db  
+> errors/i18nError.json  
+> services/workflowService.js  
+### delete files
+> dao/workflow-node.js  
+

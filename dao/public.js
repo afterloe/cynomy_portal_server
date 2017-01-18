@@ -34,22 +34,21 @@ function* update (_document) {
  * @param  {Object{name}}    _user [_document]
  * @return {Generator}           [数据库操作函数，使用co或next来驱动]
  */
-function* insert (_document) {
-  const {name} = _document;
-  if (!name) {
-    err.throwLackParameters();
+function* insert (_) {
+  if (!_.name) {
+    err.throwLackParameters("name");
     return ;
   }
 
-  if (!_document.state) {
-    _document.state = 200;
+  if (!_.state) {
+    _.state = 200;
   }
 
-  if (!_document.createTimestamp) {
-    _document.createTimestamp = Date.now();
+  if (!_.createTimestamp) {
+    _.createTimestamp = Date.now();
   }
 
-  return this.insertOne(_document);
+  return this.insertOne(_);
 }
 
 /**
@@ -58,9 +57,9 @@ function* insert (_document) {
  * @param  {Array}    _documents  [需要插入的一群数据]
  * @return {Generator}            [数据库操作函数，使用co或next来驱动]
  */
-function* insertMany (_documents) {
-  if (_documents instanceof Array) {
-    return _documents.length > 0 ? this.insertMany(_documents): null;
+function* insertMany (_) {
+  if (_ instanceof Array) {
+    return _.length > 0 ? this.insertMany(_): null;
   }
   err.throwParametersError();
 }

@@ -33,6 +33,7 @@ const buildUser = _user => {
     introduction: "",
     position: "",
     phoneNum: "",
+    createTimestamp: Date.now(),
     state: 200,
     isLogin: false,
   };

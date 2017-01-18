@@ -491,3 +491,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > test/userService_test.js  
 
+
+1.0.1 / 2017-1-18 17:25:22
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow升级，添加设置节点负责人功能
+
+### modify files
+> errors/i18nError.json  
+> services/userService.js  
+> services/workflowService.js  
+

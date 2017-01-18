@@ -94,6 +94,11 @@
     "en-US": "account or password is Error",
     "zh-CN": "账号或密码错误"
   },
+  "PersonalNotIn": {
+    "code": "400",
+    "en-US": "",
+    "zh-CN": "人员未在该流程的人员列表中"
+  },
   "LackParameters": {
     "code": "400",
     "en-US": "missing parameter",

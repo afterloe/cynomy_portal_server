@@ -13,7 +13,7 @@
 
 const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
-  {throwLackParameters, throwParametersError, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+  {throwLackParameters, throwParametersError, throwPersonalNotIn, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
 /**
  * 构建工作流节点模板
@@ -164,6 +164,7 @@ function* startUpWorkFlow(_workFlow) {
   }
   const nodeList = _.nodeList;
   nodeList[0].stat = "working";
+  nodeList[0].beginTimestamp = Date.now();
   const [status, nextNode] = [nodeList[0], nodeList.length > 1 ? nodeList[1] : null];
   yield workFlow_instance_dao.update({
     _id: _._id,
@@ -196,7 +197,7 @@ function* buildProduct(_workFlow, autoStart) {
    * 4.自动完成status,nextNode,previousNode
    * 5.启动流程
    */
-   const lackParameter = checkParameter(_workFlow, "name", "template"); // 产品名，工作流模版引擎
+   const lackParameter = checkParameter(_workFlow, "name", "template", "members"); // 产品名，工作流模版引擎 参与人员
    if (lackParameter) {
      throwLackParameters(lackParameter);
    }
@@ -225,9 +226,45 @@ function* buildProduct(_workFlow, autoStart) {
    }
 }
 
+/**
+ * 给指定工作流中的节点设置负责人
+ *
+ * @param  {String}    _workFlow [工作流实例id]
+ * @param  {Object}    _user     [设置成user的用户信息]
+ * @param  {Integer}   _node     [工作流节点下标]
+ * @return {Generator}           [description]
+ */
+function* setLeader(_workFlow, _user, _node) {
+  const _ = yield workFlow_instance_dao.queryById(_workFlow);
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  const leader = _.members.find(member => member.mail === _user.mail);
+  if (!leader) {
+    throwPersonalNotIn();
+  }
+  const [nodeList, status] = [_.nodeList, _.status];
+  if (nodeList[_node]) {
+    nodeList[_node].owner = leader;
+  }
+  if (status.index === _node) {
+    status.owner = leader;
+  }
+  yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        nodeList,
+        status,
+      }
+    }
+  });
+}
+
 module.exports = {
   createWorkFlowNode,
   createWorkFlow,
   buildProduct,
+  setLeader,
   startUpWorkFlow,
 };

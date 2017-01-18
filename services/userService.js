@@ -12,7 +12,7 @@
 "use strict";
 
 const [{resolve}, xlsx] = [require("path"), require("node-xlsx").default];
-const [{user_dao}, err, utilities] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+const [{user_dao}, {throwLackParameters, throwParametersError, throwUserExist}, {randomNum, checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
 
 /**
@@ -22,16 +22,18 @@ const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{
  * @return {Object}       [用户对象]
  */
 const buildUser = _user => {
-  if (!_user.mail) {
-    err.throwLackParameters();
+  const lackParameter = checkParameter(_user, "mail");
+  if (lackParameter) {
+    throwLackParameters(lackParameter);
   }
   const _ = {
-    name: `Coyote-${utilities.randomNum(12)}`,
-    targes: [],
+    name: `Coyote-${randomNum(12)}`,
+    tags : [],
     avatar: "",
     introduction: "",
     position: "",
     phoneNum: "",
+    state: 200,
     isLogin: false,
   };
   Object.assign(_, _user);
@@ -73,7 +75,7 @@ const loaderFromXlsx = _file => {
 function* createUser(_user) {
   const _ = yield user_dao.checkExist(_user);
   if (true === _) {
-    err.throwUserExist();
+    throwUserExist();
   }
 
   return yield user_dao.insert(buildUser(_user));
@@ -99,13 +101,12 @@ function* createUsers (_users) {
       _.push(buildUser(user));
     }
     if (0 === _.length) {
-      err.throwParametersError("length = 0");
+      throwParametersError("length = 0");
     }
     return yield user_dao.insertMany(_);
   }
 
-  err.throwParametersError();
-  return ;
+  throwParametersError();
 }
 
 module.exports = {

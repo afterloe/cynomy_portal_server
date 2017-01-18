@@ -25,23 +25,35 @@
 #### 工作流节点(work-flow node) 设计
 ```json
 {
-  "work-flow": "所属工作流",
   "name": "节点名",
-  "beginTimestamp": "进入节点的时间",
-  "nextTimestamp": "进入下一个节点的时间",
-  "owner": "节点负责人",
-  "uploadCount": "更新次数",
-  "produceList": "产出列表"
+  "tags": "标签列表",
 }
 ```
 
-#### 工作流(work-flow Template) 设计
+#### 工作流模版(work-flow Template) 设计
 ```json
 {
   "name": "工作流名字",
   "chainNodes": "工作流节点列表",
+  "tags": "标签列表",
+}
+```
+
+#### 流程实例 (work-flow instance) 设计
+```json
+{
+  "name": "实例名",
+  "template": "流程模板",
   "members": "参与该工作流的人员列表",
-  "status": "工作流状态",
+  "status": {
+    "stat": "not start、working、stopped",
+    "reason": "当前原因",
+    "name": "节点名",
+    "owner": "节点负责人",
+    "beginTimestamp": "进入节点的时间",
+    "uploadCount": "更新次数",
+    "produceList": "产出列表"
+  },
   "nextNode": "下一个节点",
   "previousNode": "上一个节点",
   "beginTimestamp": "工作流启动时间",
@@ -65,7 +77,7 @@
 ```json
 {
   "name": "用户名",
-  "targes": "标签列表",
+  "tags": "标签列表",
   "mail": "邮箱",
   "avatar": "头像",
   "introduction": "简介",

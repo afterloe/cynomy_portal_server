@@ -426,3 +426,25 @@ commit by afterloe (lm6289511@gmail.com)
 > services/userService.js  
 > tools/utilities.js  
 
+
+1.0.1 / 2017-1-18 11:40:3
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow升级，修改模板，命名规范化
+
+### new files
+> dao/tag.js  
+> dao/workflow-instance.js  
+> services/tagService.js  
+### modify files
+> dao/index.js  
+> "doc/db  
+> services/userService.js  
+> services/workflowService.js  
+> tools/utilities.js  
+### delete files
+> dao/target.js  
+> dao/workflow.js  
+> services/targetService.js  
+

@@ -1,5 +1,5 @@
 /**
-  * afterloe - cynomy_portal_server/dao/workflow.js
+  * afterloe - cynomy_portal_server/dao/tag.js
   *
   * Copyright(c) afterloe.
   * MIT Licensed
@@ -7,7 +7,7 @@
   * Authors:
   *   afterloe <afterloeliu@jwis.cn> (https://github.com/afterloe)
   * Date:
-  *   2017-1-16 21:13:30
+  *   2017-1-17 10:43:31
   */
 "use strict";
 
@@ -19,6 +19,6 @@ const classMethod = {
 
 Object.assign(commonsLib, classMethod);
 
-const className = "workflow";
+const className = "tag";
 
 module.exports = _ => _.definition({classMethod: commonsLib, className});

@@ -12,23 +12,27 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{workFlow_dao, workFlow_template_dao, workNode_dao}, err] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors"))];
+const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_dao}, {throwLackParameters}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
-const buildWorkFlowNode = (_workflowNode) => {
-  const _ = {};
-  // TODO
+const buildWorkFlowNode = _workflowNode => {
+  const _ = {
+    tags : [],
+    state: 200
+  };
   Object.assign(_, _workflowNode);
   return _;
 };
 
-const buildWorkFlowTemplate = (_workflowNodes) => {
-  const _ = {};
-  // TODO
+const buildWorkFlowTemplate = _workflowNodes => {
+  const _ = {
+    tags : [],
+    state: 200,
+  };
   Object.assign(_, _workflowNodes);
   return _;
 };
 
-const buildWorkFlow = (_workFlow) => {
+const buildWorkFlow = _workFlow => {
   const _ = {};
   // TODO
   Object.assign(_, _workFlow);
@@ -36,18 +40,27 @@ const buildWorkFlow = (_workFlow) => {
 };
 
 function* createWorkFlowNode(_workflowNode) {
-  // TODO
-  return yield workNode_dao.insert(buildWorkFlowNode(_workflowNode));
+  const lackParameter = checkParameter(_workflowNode, "name");
+  if (lackParameter) {
+    throwLackParameters(lackParameter);
+  }
+  return yield workFlow_node_dao.insert(buildWorkFlowNode(_workflowNode));
 }
 
 function* createWorkFlowTemplate(_workFlowNodes) {
-  // TODO
+  const lackParameter = checkParameter(_workFlowNodes, "name", "chainNodes");
+  if (lackParameter) {
+    throwLackParameters(lackParameter);
+  }
   return yield workFlow_template_dao.insert(buildWorkFlowTemplate(_workFlowNodes));
 }
 
 function* startWorkflow(_workFlow) {
-  // TODO
-  return yield workFlow_dao.insert(buildWorkFlow(_workFlow));
+  const lackParameter = checkParameter(_workFlow, "name", "chainNodes", "members");
+  if (lackParameter) {
+    throwLackParameters(lackParameter);
+  }
+  return yield workFlow_instance_dao.insert(buildWorkFlow(_workFlow));
 }
 
 module.exports = {

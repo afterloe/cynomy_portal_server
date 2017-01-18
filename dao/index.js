@@ -18,11 +18,11 @@ const loadDao = _name => sequel.import(resolve(__dirname, _name));
 
 module.exports = {
   sequel,
-  workFlow_dao: loadDao("workflow"), // 工作流实例
+  workFlow_instance_dao: loadDao("workflow-instance"), // 工作流实例
   workFlow_template_dao: loadDao("workflow-template"), // 工作流模版
-  workNode_dao: loadDao("workflow-node"), // 工作流节点
+  workFlow_node_dao: loadDao("workflow-node"), // 工作流节点
   user_dao: loadDao("user"), // 用户
-  target_dao: loadDao("target"), // 标签
+  tag_dao: loadDao("tag"), // 标签
   goods_dao: loadDao("goods"), // 产出
   produce_dao: loadDao("produce"), // 产品
 };

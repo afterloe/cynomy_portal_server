@@ -100,10 +100,26 @@ const readyConfig = __path => {
   }
 };
 
+/**
+ * 检查对象是否包含属性
+ *
+ * @param  {Object} _    [要检测的对象]
+ * @param  {String} args [可变参数, 需要检测的属性]
+ * @return {String}      [缺少的属性名]
+ */
+const checkParameter = (_, ...args) => {
+  for (let i = 0; i < args.length; i++) {
+    if (!_[args[i]]) {
+      return args[i];
+    }
+  }
+};
+
 module.exports = {
   randomCode,
   readyConfig,
   uuidCode,
   randomNum: securityCode,
   subMail,
+  checkParameter,
 };

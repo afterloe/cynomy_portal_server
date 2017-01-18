@@ -1,5 +1,5 @@
 /**
-  * afterloe - cynomy_portal_server/services/targetService.js
+  * afterloe - cynomy_portal_server/services/tagService.js
   *
   * Copyright(c) afterloe.
   * MIT Licensed
@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{target_dao}, err] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors"))];
+const [{tag_dao}, {throwLackParameters, throwTargetExist}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
 /**
  * 构建标签对象
@@ -22,9 +22,10 @@ const [{target_dao}, err] = [require(resolve(__dirname, "..", "dao")), require(r
  */
 const buildTarget = _target => {
   const _ = {
-    "keyWord": [],
-    "property": [],
-    "domain": [],
+    keyWord: [],
+    property: [],
+    domain: [],
+    state: 200,
   };
   Object.assign(_, _target);
   return _;
@@ -39,16 +40,16 @@ const buildTarget = _target => {
  * @return {Generator}          [description]
  */
 function* createTarget(_target){
-  if (!_target.name) {
-    err.throwLackParameters("name");
-    return ;
+  const lackParameter = checkParameter(_target, "name");
+  if (lackParameter) {
+    throwLackParameters(lackParameter);
   }
-  const _ = yield target_dao.checkExist(_target);
+  const _ = yield tag_dao.checkExist(_target);
   if (true === _) {
-    err.throwTargetExist();
+    throwTargetExist();
   }
 
-  return yield target_dao.insert(buildTarget(_target));
+  return yield tag_dao.insert(buildTarget(_target));
 }
 
 module.exports = {

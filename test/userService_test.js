@@ -23,3 +23,15 @@ co(function* () {
   console.log(p);
   user_dao.close();
 }).catch(err => console.log(err));
+
+co(function* () {
+  const p = yield userService.createUser({name: "天才刘", mail: "55125@qq.com"});
+  console.log(p);
+  console.log(p.result.n);
+  console.log(p.result.ok);
+  const _id = p.ops[0]._id;
+  console.log(typeof _id);
+  console.log(_id instanceof Object);
+  console.log(_id.toString());
+  user_dao.close();
+}).catch(err => console.log(err));

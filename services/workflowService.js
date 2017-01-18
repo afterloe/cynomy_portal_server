@@ -13,7 +13,7 @@
 
 const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
-  {throwLackParameters, throwParametersError, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+  {throwLackParameters, throwParametersError, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
 /**
  * 构建工作流节点模板
@@ -54,7 +54,7 @@ const buildWorkFlowTemplate = _workFlow => {
  */
 const buildWorkFlowNode = (_chainNode, _index) => {
   const _ = {
-    stat: "not start", //not start、working、stopped、finish
+    stat: "not start",
     reason: "",
     owner: "",
     beginTimestamp: "",
@@ -139,10 +139,44 @@ function* instanceNodeList(nodeList, workflow) {
   yield workFlow_node_instance_dao.insertMany(_);
 }
 
+/**
+ * 启动工作流
+ *
+ * @param  {String}    _workFlow [工作流id]
+ * @return {Generator}           [description]
+ */
 function* startUpWorkFlow(_workFlow) {
-  // beginTimestamp
-  // nextNode: nodeList[1] || null,
-  // previousNode: null
+  /*
+   * 1.依据工作流实例id查询出工作流
+   * 2.检测工作流实例是否已启动
+   * 3.获取工作流活动节点组
+   * 4.设置status 为节点组第一个节点
+   * 5.设置节点组第一个节点的stat为 working
+   * 6.设置下一个节点，上一个节点
+   * 7.保存节点信息
+   */
+  const _ = yield workFlow_instance_dao.queryById(_workFlow);
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  if (_.beginTimestamp) {
+    return ;
+  }
+  const nodeList = _.nodeList;
+  nodeList[0].stat = "working";
+  const [status, nextNode] = [nodeList[0], nodeList.length > 1 ? nodeList[1] : null];
+  yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        beginTimestamp: Date.now(),
+        previousNode: null,
+        nodeList,
+        status,
+        nextNode,
+      }
+    }
+  });
 }
 
 /**
@@ -178,14 +212,16 @@ function* buildProduct(_workFlow, autoStart) {
      name: _workFlow.name,
      template: _workFlow.template,
      members: _workFlow.members,
-     status: nodeList[0],
      nodeList,
    });
-   // TODO result 不是最终的数据，需要处理
    const result = yield workFlow_instance_dao.insert(_);
-   yield instanceNodeList(nodeList, result);
+   if (result.result.n !== result.result.ok) {
+     throwBuildFailed();
+   }
+   const _id = result.ops[0]._id.toString();
+   yield instanceNodeList(nodeList, _id);
    if (true === autoStart) {
-     return yield startUpWorkFlow(result);
+     return yield* startUpWorkFlow(_id);
    }
 }
 

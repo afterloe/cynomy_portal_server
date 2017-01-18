@@ -101,7 +101,7 @@ function* createUsers (_users) {
       _.push(buildUser(user));
     }
     if (0 === _.length) {
-      throwParametersError("length = 0");
+      throwParametersError("", "length = 0");
     }
     return yield user_dao.insertMany(_);
   }

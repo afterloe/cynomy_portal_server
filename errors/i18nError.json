@@ -39,6 +39,11 @@
     "en-US": "please login",
     "zh-CN": "请登录"
   },
+  "NosuchThisWorkFlow": {
+    "code": "404.0",
+    "en-US": "workflow not found",
+    "zh-CN": "工作流未找到"
+  },
   "NosuchThisWorkFlowTemplate": {
     "code": "404.0",
     "en-US": "workflow template engine not found",
@@ -94,7 +99,12 @@
     "en-US": "missing parameter",
     "zh-CN": "缺少参数"
   },
-  "throwBuildWorkFlowNodeFailed": {
+  "BuildFailed": {
+    "code": "500",
+    "en-US": "build faied",
+    "zh-CN": "构建失败"
+  },
+  "BuildWorkFlowNodeFailed": {
     "code": "500",
     "en-US": "build workflow node faied",
     "zh-CN": "构建工作流节点失败"

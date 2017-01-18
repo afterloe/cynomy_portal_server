@@ -477,3 +477,17 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > dao/workflow-node.js  
 
+
+1.0.1 / 2017-1-18 16:17:7
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow升级，启动工作流功能，自动启动工作流功能
+
+### modify files
+> dao/user.js  
+> errors/i18nError.json  
+> services/userService.js  
+> services/workflowService.js  
+> test/userService_test.js  
+

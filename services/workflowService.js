@@ -304,7 +304,38 @@ function* setLeader(_workFlow, _user, _node) {
   });
 }
 
-function* changeAndSyncNodeStat(_nodeId, stat) {
+function* obmitStartWorkflow(_id) {
+  const _ = yield workFlow_instance_dao.queryById(_id);
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  if (!_.status) {
+    throwOperationFailed();
+  }
+  return _;
+}
+
+function* syncNodeToWorkflow(_node) {
+  const {workflow, index} = _node;
+  const {nextNode, previousNode, status, nodeList} = yield obmitStartWorkflow(workflow);
+  nodeList[index] = {
+    _id: _node._id.toString(),
+    name: _node.name,
+    owner: _node.owner,
+    index,
+    stat: _node.stat
+  };
+  let _ = {nodeList};
+  if (nextNode && index === nextNode.index) {
+    Object.assign(_, {nextNode: _node});
+  } else if (previousNode && index === previousNode.index) {
+    Object.assign(_, {previousNode: _node});
+  } else if (status && index === status.index) {
+    Object.assign(_, {status: _node});
+  }
+}
+
+function* changeAndSyncNodeStat(_nodeId, setter) {
   const _ = yield workFlow_node_instance_dao.queryById(_nodeId);
   if (!_) {
     throwNosuchThisWorkflowNodeInstance();
@@ -312,31 +343,21 @@ function* changeAndSyncNodeStat(_nodeId, stat) {
   yield workFlow_node_instance_dao.upload({
     _id: _._id,
     upload: {
-      $set: {
-        stat
-      }
+      $set: setter
     }
   });
 
-  Object.assign(_, {stat});
+  Object.assign(_, setter);
   return _;
 }
 
 function* retroversion(_workFlow) {
-  const _ = yield workFlow_instance_dao.queryById(_workFlow);
-  if (!_) {
-    throwNosuchThisWorkFlow();
-  }
-  if (!_.status) {
-    throwOperationFailed();
-  }
-
+  const _ = yield obmitStartWorkflow(_workFlow);
   const {previousNode, status} = _;
-
   if (!previousNode) {
     throwOperationFailed();
   }
-  const [newStatus, newNextNode] = yield [changeAndSyncNodeStat(previousNode._id, "working"), changeAndSyncNodeStat(status._id, "not start")];
+  const [newStatus, newNextNode] = yield [changeAndSyncNodeStat(previousNode._id, {stat: "working", beginTimestamp: Date.now()}), changeAndSyncNodeStat(status._id, {stat: "not start", beginTimestamp: null})];
 
   const newPreviousNodeId = _.nodeList[newStatus.index - 1] ? _.nodeList[newStatus.index - 1]._id : undefined;
   const newPreviousNode = newPreviousNodeId ? yield workFlow_node_instance_dao.queryById(newPreviousNodeId): null;
@@ -354,20 +375,14 @@ function* retroversion(_workFlow) {
 }
 
 function* promoteProcess(_workFlow) {
-  const _ = yield workFlow_instance_dao.queryById(_workFlow);
-  if (!_) {
-    throwNosuchThisWorkFlow();
-  }
-  if (!_.status) {
-    throwOperationFailed();
-  }
-
+  const _ = yield obmitStartWorkflow(_workFlow);
   const {nextNode, status} = _;
 
   if (!nextNode) {
     throwOperationFailed();
   }
-  const [newStatus, newPreviousNode] = yield [changeAndSyncNodeStat(nextNode._id, "working"), changeAndSyncNodeStat(status._id, "finish")];
+  const timeStamp =  Date.now();
+  const [newStatus, newPreviousNode] = yield [changeAndSyncNodeStat(nextNode._id, {stat: "working", beginTimestamp: timeStamp}), changeAndSyncNodeStat(status._id, {stat: "finish", endTimestamp: timeStamp})];
 
   const newNextNodeId = _.nodeList[newStatus.index + 1] ? _.nodeList[newStatus.index + 1]._id : undefined;
   const newNextNode = newNextNodeId ? yield workFlow_node_instance_dao.queryById(newNextNodeId): null;
@@ -384,53 +399,31 @@ function* promoteProcess(_workFlow) {
   });
 }
 
-function* uploadNodeProduceList(_workFlow, {name, produceList, reason}) {
-  const _ = yield workFlow_instance_dao.queryById(_workFlow);
+function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
+  const _ = yield workFlow_node_instance_dao.queryById(_workFlowNode);
   if (!_) {
-    throwNosuchThisWorkFlow();
-  }
-  if (!_.status) {
-    return ;
-  }
-  const nodeList = _.nodeList;
-
-  for (let i = 0; i < nodeList.length; i++) {
-    let node = nodeList[i];
-    if (node.name === name) {
-      const uploadCount = Number.parseInt(node.uploadCount) + 1;
-      Object.assign(node, {
-        uploadCount,
-        reason: reason? reason: ""
-      });
-
-      yield workFlow_node_instance_dao.update({
-        _id: node._id,
-        upload: {
-          $set: {
-            produceList,
-            uploadCount,
-            reason: node.reason
-          }
-        }
-      });
-
-    }
+    throwNosuchThisWorkflowNodeInstance();
   }
 
-  const status = nodeList[_.status.index];
-  const nextNode = _.nextNode? nodeList[_.nextNode.index]: null;
-  const previousNode = _.previousNode? nodeList[_.previousNode.index]: null;
+  const uploadCount = Number.parseInt(_.uploadCount) + 1;
 
-  return yield workFlow_instance_dao.update({
+  yield workFlow_node_instance_dao.upload({
     _id: _._id,
     upload: {
       $set: {
-        status,
-        nextNode,
-        previousNode
+        produceList,
+        uploadCount,
+        reason: reason? reason : ""
       }
     }
   });
+  Object.assign(_, {
+    produceList,
+    uploadCount,
+    reason: reason? reason : ""
+  });
+
+  return yield syncNodeToWorkflow(_);
 }
 
 module.exports = {

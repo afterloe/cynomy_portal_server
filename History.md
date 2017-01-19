@@ -547,7 +547,7 @@ commit by afterloe (lm6289511@gmail.com)
 > test/funTest.js  
 
 
-1.0.2 / 2017-01-19 16:18:15
+1.0.2 / 2017-1-19 16:55:7
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
@@ -557,6 +557,8 @@ commit by afterloe (lm6289511@gmail.com)
   * master: workflow 优化 修复工作流实例节点没有同步到工作流实例和节点实例的异常
   * master: workflow 优化 修复启动工作流的时候工作节点没有同步状态
   * master: workflow 优化 修复启动工作流的时未同步当前节点和下一节点的信息
+  * master: workflow 优化 回退流程时没有同步节点信息到数据库
+  * master: workflow 优化 推进流程时没有同步节点信息到数据库
 
 ### modify files
 > services/goodsService.js  
@@ -564,24 +566,13 @@ commit by afterloe (lm6289511@gmail.com)
 ### new files
 > tools/chain.js  
 
-1.0.2 / 2017-1-19 16:48:29
+1.0.2 / 2017-1-19 18:51:48
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: workflow 优化 回退流程时没有同步节点信息到数据库
+  * master: workflow 优化 流程推动功能底层优化，节点添加对项目的状态的支持
 
 ### modify files
 > History.md  
-> errors/i18nError.json  
-> services/workflowService.js  
-
-
-1.0.2 / 2017-1-19 16:55:7
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow 优化 推进流程时没有同步节点信息到数据库
-
-### modify files
 > services/workflowService.js  
 

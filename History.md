@@ -559,6 +559,7 @@ commit by afterloe (lm6289511@gmail.com)
   * master: workflow 优化 修复启动工作流的时未同步当前节点和下一节点的信息
   * master: workflow 优化 回退流程时没有同步节点信息到数据库
   * master: workflow 优化 推进流程时没有同步节点信息到数据库
+  * master: workflow 优化 流程推动功能底层优化，节点添加对项目的状态的支持
 
 ### modify files
 > services/goodsService.js  
@@ -566,11 +567,11 @@ commit by afterloe (lm6289511@gmail.com)
 ### new files
 > tools/chain.js  
 
-1.0.2 / 2017-1-19 18:51:48
+1.0.2 / 2017-1-19 19:6:33
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: workflow 优化 流程推动功能底层优化，节点添加对项目的状态的支持
+  * master: workflow 优化 流程推动功能底层优化, 推送数据到工作流失败的异常
 
 ### modify files
 > History.md  

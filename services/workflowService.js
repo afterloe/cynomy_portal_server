@@ -274,7 +274,7 @@ function* buildProduct(_workFlow, autoStart) {
  *
  * @param  {String}    _workFlow [工作流实例id]
  * @param  {Object}    _user     [设置成user的用户信息]
- * @param  {Integer}   _node     [工作流节点下标]
+ * @param  {Integer}   _node     [工作流实例节点id]
  * @return {Generator}           [description]
  */
 function* setLeader(_workFlow, _user, _node) {
@@ -286,22 +286,9 @@ function* setLeader(_workFlow, _user, _node) {
   if (!leader) {
     throwPersonalNotIn();
   }
-  const [nodeList, status] = [_.nodeList, _.status];
-  if (nodeList[_node]) {
-    nodeList[_node].owner = leader;
-  }
-  if (status.index === _node) {
-    status.owner = leader;
-  }
-  return yield workFlow_instance_dao.update({
-    _id: _._id,
-    upload: {
-      $set: {
-        nodeList,
-        status,
-      }
-    }
-  });
+
+  const node = yield changeAndSyncNodeStat(_node, {owner: leader});
+  return yield syncNodeToWorkflow(node);
 }
 
 function* obmitStartWorkflow(_id) {
@@ -333,6 +320,13 @@ function* syncNodeToWorkflow(_node) {
   } else if (status && index === status.index) {
     Object.assign(_, {status: _node});
   }
+
+  return yield workFlow_instance_dao.upload({
+    _id: workflow,
+    upload: {
+      $set: _
+    }
+  });
 }
 
 function* changeAndSyncNodeStat(_nodeId, setter) {

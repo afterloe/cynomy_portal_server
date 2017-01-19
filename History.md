@@ -590,3 +590,13 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > services/workflowService.js  
 
+
+1.0.2 / 2017-1-19 16:8:59
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 优化 修复启动工作流的时候工作节点没有同步状态
+
+### modify files
+> services/workflowService.js  
+

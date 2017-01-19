@@ -184,6 +184,17 @@ function* startUpWorkFlow(_workFlow) {
   const nodeList = _.nodeList;
   nodeList[0].stat = "working";
   nodeList[0].beginTimestamp = Date.now();
+
+  yield workFlow_node_instance_dao.upload({
+    _id : nodeList[0]._id,
+    upload: {
+      $set: {
+        stat: nodeList[0].stat,
+        beginTimestamp: nodeList[0].beginTimestamp
+      }
+    }
+  });
+
   const [status, nextNode] = [nodeList[0], nodeList.length > 1 ? nodeList[1] : null];
   yield workFlow_instance_dao.update({
     _id: _._id,
@@ -291,10 +302,13 @@ function* setLeader(_workFlow, _user, _node) {
 
 function* retroversion(_workFlow) {
   const _ = yield workFlow_instance_dao.queryById(_workFlow);
-  // TODO bug: 流程未启动 不能回退
   if (!_) {
     throwNosuchThisWorkFlow();
   }
+  if (!_.status) {
+    throwOperationFailed();
+  }
+
   // TODO 工作节点没有更新 stat 并且未同步到数据库
   const newStatus = _.previousNode; // 未考虑为null的情况，设置上一个节点时可能益处
   const newNextNode = _.status;

@@ -580,3 +580,13 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > services/workflowService.js  
 
+
+1.0.2 / 2017-1-19 23:24:27
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 模块进入测试
+
+### new files
+> test/workflowService_test.js  
+

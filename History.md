@@ -547,56 +547,29 @@ commit by afterloe (lm6289511@gmail.com)
 > test/funTest.js  
 
 
-1.0.2 / 2017-1-19 13:47:28
+1.0.2 / 2017-01-19 16:08:59
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
   * master: 产出流程优化，workflowService添加对工作流的更新支持
+  * master: workflow 优化添加外部方法更新工作流中的节点信息，流程推动和流程回退
+  * master: workflow 优化 修复创建工作流模板的时候传入相同节点的节点列表导致后续业务错乱的异常
+  * master: workflow 优化 修复工作流实例节点没有同步到工作流实例和节点实例的异常
+  * master: workflow 优化 修复启动工作流的时候工作节点没有同步状态
 
 ### modify files
 > services/goodsService.js  
 > services/workflowService.js  
-
-
-1.0.2 / 2017-1-19 15:17:8
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow 优化添加外部方法更新工作流中的节点信息，流程推动和流程回退
-
 ### new files
 > tools/chain.js  
-### modify files
-> services/workflowService.js  
 
-
-1.0.2 / 2017-1-19 15:38:1
+1.0.2 / 2017-1-19 16:18:15
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: workflow 优化 修复创建工作流模板的时候传入相同节点的节点列表导致后续业务错乱的异常
+  * master: workflow 优化 修复启动工作流的时未同步当前节点和下一节点的信息
 
 ### modify files
-> services/workflowService.js  
-> test/funTest.js  
-
-
-1.0.2 / 2017-1-19 15:50:36
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow 优化 修复工作流实例节点没有同步到工作流实例和节点实例的异常
-
-### modify files
-> services/workflowService.js  
-
-
-1.0.2 / 2017-1-19 16:8:59
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow 优化 修复启动工作流的时候工作节点没有同步状态
-
-### modify files
+> History.md  
 > services/workflowService.js  
 

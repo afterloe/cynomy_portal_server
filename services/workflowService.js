@@ -195,7 +195,10 @@ function* startUpWorkFlow(_workFlow) {
     }
   });
 
-  const [status, nextNode] = [nodeList[0], nodeList.length > 1 ? nodeList[1] : null];
+  const status = yield workFlow_node_instance_dao.queryById(nodeList[0]._id);
+  const nextNodeId = nodeList.length > 1 ? nodeList[1]._id : undefined;
+  const nextNode = nextNodeId ? yield workFlow_node_instance_dao.queryById(nextNodeId): null;
+
   yield workFlow_instance_dao.update({
     _id: _._id,
     upload: {

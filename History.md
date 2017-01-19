@@ -557,3 +557,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > services/workflowService.js  
 
+
+1.0.2 / 2017-1-19 15:17:8
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 优化添加外部方法更新工作流中的节点信息，流程推动和流程回退
+
+### new files
+> tools/chain.js  
+### modify files
+> services/workflowService.js  
+

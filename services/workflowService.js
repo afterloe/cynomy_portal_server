@@ -13,7 +13,7 @@
 
 const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
-  {throwLackParameters, throwParametersError, throwPersonalNotIn, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+  {throwLackParameters, throwParametersError, throwExceedMinimum, throwPersonalNotIn, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
 /**
  * 构建工作流节点模板
@@ -116,6 +116,7 @@ function* createWorkFlowNode(_workflowNode) {
  */
 function* createWorkFlow(_workFlow) {
   const lackParameter = checkParameter(_workFlow, "name", "chainNodes");
+  // TODO 严重bug  chainNodes中不能有名字相同的节点
   if (lackParameter) {
     throwLackParameters(lackParameter);
   }
@@ -136,7 +137,8 @@ function* instanceNodeList(nodeList, workflow) {
     Object.assign(node, {workflow});
     _.push(node);
   }
-  yield workFlow_node_instance_dao.insertMany(_);
+  const data = yield workFlow_node_instance_dao.insertMany(_);
+  return data.ops;
 }
 
 /**
@@ -205,7 +207,7 @@ function* buildProduct(_workFlow, autoStart) {
    if (!workFlowTemplate) {
      throwNosuchThisWorkFlowTemplate();
    }
-   const nodeList = buildWorkFlowNodeList(workFlowTemplate.chainNodes); // nodeList 没有序列化到 mongo中
+   const nodeList = buildWorkFlowNodeList(workFlowTemplate.chainNodes); // TODO nodeList 没有序列化到 mongo中
    const _ = {
      state : 200,
    };
@@ -219,7 +221,7 @@ function* buildProduct(_workFlow, autoStart) {
    if (result.result.n !== result.result.ok) {
      throwBuildFailed();
    }
-   const _id = result.ops[0]._id.toString();
+   const _id = result.ops[0]._id.toString();// TODO nodeList 没有序列化到 mongo中
    yield instanceNodeList(nodeList, _id);
    if (true === autoStart) {
      return yield* startUpWorkFlow(_id);
@@ -250,7 +252,7 @@ function* setLeader(_workFlow, _user, _node) {
   if (status.index === _node) {
     status.owner = leader;
   }
-  yield workFlow_instance_dao.update({
+  return yield workFlow_instance_dao.update({
     _id: _._id,
     upload: {
       $set: {
@@ -261,19 +263,108 @@ function* setLeader(_workFlow, _user, _node) {
   });
 }
 
-function* uploadWorkflow() {
+function* retroversion(_workFlow) {
+  const _ = yield workFlow_instance_dao.queryById(_workFlow);
+  // TODO bug: 流程未启动 不能回退
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  // TODO 工作节点没有更新 stat 并且未同步到数据库
+  const newStatus = _.previousNode; // 未考虑为null的情况，设置上一个节点时可能益处
+  const newNextNode = _.status;
+  const newPreviousNode = _.nodeList[newStatus.index - 1] ? _.nodeList[newStatus.index - 1] : null;
 
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        status: newStatus,
+        nextNode: newNextNode,
+        previousNode: newPreviousNode
+      }
+    }
+  });
 }
 
-function* updateNode() {
+function* promoteProcess(_workFlow) {
+  const _ = yield workFlow_instance_dao.queryById(_workFlow);
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  // TODO 工作节点没有更新 stat 并且未同步到数据库
+  const newStatus = _.nextNode; // 未考虑为null的情况，设置下一个节点时可能益处
+  const newPreviousNode = _.status;
+  const newNextNode = _.nodeList[newStatus.index + 1] ? _.nodeList[newStatus.index + 1] : null;
 
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        status: newStatus,
+        nextNode: newNextNode,
+        previousNode: newPreviousNode
+      }
+    }
+  });
+}
+
+function* uploadNodeProduceList(_workFlow, {name, produceList, reason}) {
+  const _ = yield workFlow_instance_dao.queryById(_workFlow);
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  if (!_.status) {
+    return ;
+  }
+  const nodeList = _.nodeList;
+
+  for (let i = 0; i < nodeList.length; i++) {
+    let node = nodeList[i];
+    if (node.name === name) {
+      const uploadCount = Number.parseInt(node.uploadCount) + 1;
+      Object.assign(node, {
+        uploadCount,
+        reason: reason? reason: ""
+      });
+
+      yield workFlow_node_instance_dao.update({
+        _id: node._id,
+        upload: {
+          $set: {
+            produceList,
+            uploadCount,
+            reason: node.reason
+          }
+        }
+      });
+
+    }
+  }
+
+  const status = nodeList[_.status.index];
+  const nextNode = _.nextNode? nodeList[_.nextNode.index]: null;
+  const previousNode = _.previousNode? nodeList[_.previousNode.index]: null;
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        status,
+        nextNode,
+        previousNode
+      }
+    }
+  });
 }
 
 module.exports = {
   createWorkFlowNode,
   createWorkFlow,
   buildProduct,
-  updateNode,
-  setLeader,
   startUpWorkFlow,
+  retroversion,
+  promoteProcess,
+
+  uploadNodeProduceList,
+  setLeader,
 };

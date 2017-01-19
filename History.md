@@ -569,3 +569,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > services/workflowService.js  
 
+
+1.0.2 / 2017-1-19 15:38:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 优化 修复创建工作流模板的时候传入相同节点的节点列表导致后续业务错乱的异常
+
+### modify files
+> services/workflowService.js  
+> test/funTest.js  
+

@@ -30,9 +30,15 @@ function scanDir(_path) {
   return _.push(_path);
 }
 const start = Date.now();
-console.log(scanDir("/usr"));
-// 180871
-// 10.78
-//
+console.log(scanDir(__dirname));
 console.log(_.length);
 console.log((Date.now() - start)/ 1000);
+
+const chainNodes = [{name : "afterloe"},{name : "joe"},{name : "bash"},{name : "yangyangyang"},{name : "zhou"},{name : "ff"}];
+for (let i = 0; i < chainNodes.length; i++){
+  for (let j = i + 1; j < chainNodes.length; j++) {
+    if (chainNodes[i].name === chainNodes[j].name) {
+      throw new Error("有相同的.");
+    }
+  }
+}

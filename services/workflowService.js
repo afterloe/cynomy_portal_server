@@ -13,7 +13,7 @@
 
 const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
-  {throwLackParameters, throwParametersError, throwExceedMinimum, throwPersonalNotIn, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+  {throwLackParameters, throwParametersError, throwOperationFailed, throwPersonalNotIn, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
 /**
  * 构建工作流节点模板
@@ -116,7 +116,14 @@ function* createWorkFlowNode(_workflowNode) {
  */
 function* createWorkFlow(_workFlow) {
   const lackParameter = checkParameter(_workFlow, "name", "chainNodes");
-  // TODO 严重bug  chainNodes中不能有名字相同的节点
+  const chainNodes = _workFlow.chainNodes;
+  for (let i = 0; i < chainNodes.length; i++){
+    for (let j = i + 1; j < chainNodes.length; j++) {
+      if (chainNodes[i].name === chainNodes[j].name) {
+        throwOperationFailed("zh-CN", "存在相同节点");
+      }
+    }
+  }
   if (lackParameter) {
     throwLackParameters(lackParameter);
   }

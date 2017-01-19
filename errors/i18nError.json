@@ -49,6 +49,11 @@
     "en-US": "workflow not found",
     "zh-CN": "工作流未找到"
   },
+  "NosuchThisWorkflowNodeInstance": {
+    "code": "404.0",
+    "en-US": "no such this workflow node instance",
+    "zh-CN": "工作流实例节点未找到"
+  },
   "NosuchThisWorkFlowTemplate": {
     "code": "404.0",
     "en-US": "workflow template engine not found",

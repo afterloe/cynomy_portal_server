@@ -13,7 +13,8 @@
 
 const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
-  {throwLackParameters, throwParametersError, throwOperationFailed, throwPersonalNotIn, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+  {throwLackParameters, throwParametersError, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn,
+  throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
 /**
  * 构建工作流节点模板
@@ -303,6 +304,24 @@ function* setLeader(_workFlow, _user, _node) {
   });
 }
 
+function* changeNodeStat(_nodeId, stat) {
+  const _ = yield workFlow_node_instance_dao.queryById(_nodeId);
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+  yield workFlow_node_instance_dao.upload({
+    _id: _._id,
+    upload: {
+      $set: {
+        stat
+      }
+    }
+  });
+
+  Object.assign(_, {stat});
+  return _;
+}
+
 function* retroversion(_workFlow) {
   const _ = yield workFlow_instance_dao.queryById(_workFlow);
   if (!_) {
@@ -312,10 +331,21 @@ function* retroversion(_workFlow) {
     throwOperationFailed();
   }
 
-  // TODO 工作节点没有更新 stat 并且未同步到数据库
-  const newStatus = _.previousNode; // 未考虑为null的情况，设置上一个节点时可能益处
-  const newNextNode = _.status;
-  const newPreviousNode = _.nodeList[newStatus.index - 1] ? _.nodeList[newStatus.index - 1] : null;
+  const {previousNode, status} = _;
+
+  if (!previousNode) {
+    throwOperationFailed();
+  }
+  const [newStatus, newNextNode] = yield [changeNodeStat(previousNode._id, "working"), changeNodeStat(status._id, "not start")];
+
+  // 未考虑为null的情况，设置上一个节点时可能益处
+  const newPreviousNodeId = _.nodeList[newStatus.index - 1] ? _.nodeList[newStatus.index - 1]._id : undefined;
+  let newPreviousNode;
+  if (!newPreviousNodeId) {
+    newPreviousNode = null;
+  } else {
+    newPreviousNode = yield workFlow_node_instance_dao.queryById(newPreviousNodeId);
+  }
 
   return yield workFlow_instance_dao.update({
     _id: _._id,

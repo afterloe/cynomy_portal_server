@@ -580,3 +580,13 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > test/funTest.js  
 
+
+1.0.2 / 2017-1-19 15:50:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 优化 修复工作流实例节点没有同步到工作流实例和节点实例的异常
+
+### modify files
+> services/workflowService.js  
+

@@ -144,8 +144,18 @@ function* instanceNodeList(nodeList, workflow) {
     Object.assign(node, {workflow});
     _.push(node);
   }
-  const data = yield workFlow_node_instance_dao.insertMany(_);
-  return data.ops;
+  const {ops} = yield workFlow_node_instance_dao.insertMany(_);
+  const copy = [];
+  for (let i = 0; i < ops.length; i++) {
+      copy.push({
+        _id: ops._id.toString(),
+        name: ops.name,
+        index: ops.index,
+        stat: ops.stat
+      });
+  }
+
+  return copy;
 }
 
 /**
@@ -214,7 +224,7 @@ function* buildProduct(_workFlow, autoStart) {
    if (!workFlowTemplate) {
      throwNosuchThisWorkFlowTemplate();
    }
-   const nodeList = buildWorkFlowNodeList(workFlowTemplate.chainNodes); // TODO nodeList 没有序列化到 mongo中
+   const nodeList = buildWorkFlowNodeList(workFlowTemplate.chainNodes);
    const _ = {
      state : 200,
    };
@@ -222,14 +232,23 @@ function* buildProduct(_workFlow, autoStart) {
      name: _workFlow.name,
      template: _workFlow.template,
      members: _workFlow.members,
-     nodeList,
    });
    const result = yield workFlow_instance_dao.insert(_);
    if (result.result.n !== result.result.ok) {
      throwBuildFailed();
    }
-   const _id = result.ops[0]._id.toString();// TODO nodeList 没有序列化到 mongo中
-   yield instanceNodeList(nodeList, _id);
+   const _id = result.ops[0]._id.toString();
+   const _nodeList = yield instanceNodeList(nodeList, _id);
+
+   yield workFlow_instance_dao.upload({
+     _id,
+     upload : {
+       $set : {
+         nodeList: _nodeList
+       }
+     }
+   });
+
    if (true === autoStart) {
      return yield* startUpWorkFlow(_id);
    }

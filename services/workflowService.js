@@ -270,38 +270,28 @@ function* buildProduct(_workFlow, autoStart) {
 }
 
 /**
- * 给指定工作流中的节点设置负责人
+ * 获取处于工作状态的指定工作流
  *
- * @param  {String}    _workFlow [工作流实例id]
- * @param  {Object}    _user     [设置成user的用户信息]
- * @param  {Integer}   _node     [工作流实例节点id]
- * @return {Generator}           [description]
+ * @param  {String}    _id  [工作流id]
+ * @return {Object}         [工作流实例对象]
  */
-function* setLeader(_workFlow, _user, _node) {
-  const _ = yield workFlow_instance_dao.queryById(_workFlow);
-  if (!_) {
-    throwNosuchThisWorkFlow();
-  }
-  const leader = _.members.find(member => member.mail === _user.mail);
-  if (!leader) {
-    throwPersonalNotIn();
-  }
-
-  const node = yield changeAndSyncNodeStat(_node, {owner: leader});
-  return yield syncNodeToWorkflow(node);
-}
-
 function* obmitStartWorkflow(_id) {
   const _ = yield workFlow_instance_dao.queryById(_id);
   if (!_) {
     throwNosuchThisWorkFlow();
   }
-  if (!_.status) {
+  if (!_.beginTimestamp) { // 如果没有启动是没有启动时间戳
     throwOperationFailed();
   }
   return _;
 }
 
+/**
+ * 同步指定的工作流实例节点到所在的工作流实例
+ *
+ * @param  {Object}    _node [工作流实例节点对象]
+ * @return {Generator}       [description]
+ */
 function* syncNodeToWorkflow(_node) {
   const {workflow, index} = _node;
   const {nextNode, previousNode, status, nodeList} = yield obmitStartWorkflow(workflow);
@@ -329,6 +319,35 @@ function* syncNodeToWorkflow(_node) {
   });
 }
 
+/**
+ * 给指定工作流中的节点设置负责人
+ *
+ * @param  {String}    _workFlow [工作流实例id]
+ * @param  {Object}    _user     [设置成user的用户信息]
+ * @param  {Integer}   _node     [工作流实例节点id]
+ * @return {Generator}           [description]
+ */
+function* setLeader(_workFlow, _user, _node) {
+  const _ = yield workFlow_instance_dao.queryById(_workFlow);
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  const leader = _.members.find(member => member.mail === _user.mail);
+  if (!leader) {
+    throwPersonalNotIn();
+  }
+
+  const node = yield changeAndSyncNodeStat(_node, {owner: leader});
+  return yield syncNodeToWorkflow(node);
+}
+
+/**
+ * 同步变更工作流节点实例
+ *
+ * @param  {String}    _nodeId [工作流节点实例的id]
+ * @param  {Object}    setter  [需要同步的数据]
+ * @return {Object}            [工作流节点实例]
+ */
 function* changeAndSyncNodeStat(_nodeId, setter) {
   const _ = yield workFlow_node_instance_dao.queryById(_nodeId);
   if (!_) {
@@ -345,6 +364,12 @@ function* changeAndSyncNodeStat(_nodeId, setter) {
   return _;
 }
 
+/**
+ * 流程回退
+ *
+ * @param  {String}    _workFlow [工作流实例id]
+ * @return {Generator}           [description]
+ */
 function* retroversion(_workFlow) {
   const _ = yield obmitStartWorkflow(_workFlow);
   const {previousNode, status} = _;
@@ -368,6 +393,12 @@ function* retroversion(_workFlow) {
   });
 }
 
+/**
+ * 推动流程
+ *
+ * @param  {String}    _workFlow [工作流实例id]
+ * @return {Generator}           [description]
+ */
 function* promoteProcess(_workFlow) {
   const _ = yield obmitStartWorkflow(_workFlow);
   const {nextNode, status} = _;
@@ -393,6 +424,14 @@ function* promoteProcess(_workFlow) {
   });
 }
 
+/**
+ * 更新节点产出信息
+ *
+ * @param  {String}    _workFlowNode [工作流实例节点id]
+ * @param  {Array}    produceList    [产出内容列表]
+ * @param  {String}    reason        [更新原因]
+ * @return {Generator}               [description]
+ */
 function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
   const _ = yield workFlow_node_instance_dao.queryById(_workFlowNode);
   if (!_) {
@@ -427,7 +466,6 @@ module.exports = {
   startUpWorkFlow,
   retroversion,
   promoteProcess,
-
   uploadNodeProduceList,
   setLeader,
 };

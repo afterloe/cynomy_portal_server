@@ -575,3 +575,13 @@ commit by afterloe (lm6289511@gmail.com)
 > errors/i18nError.json  
 > services/workflowService.js  
 
+
+1.0.2 / 2017-1-19 16:55:7
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 优化 推进流程时没有同步节点信息到数据库
+
+### modify files
+> services/workflowService.js  
+

@@ -304,7 +304,7 @@ function* setLeader(_workFlow, _user, _node) {
   });
 }
 
-function* changeNodeStat(_nodeId, stat) {
+function* changeAndSyncNodeStat(_nodeId, stat) {
   const _ = yield workFlow_node_instance_dao.queryById(_nodeId);
   if (!_) {
     throwNosuchThisWorkflowNodeInstance();
@@ -336,16 +336,10 @@ function* retroversion(_workFlow) {
   if (!previousNode) {
     throwOperationFailed();
   }
-  const [newStatus, newNextNode] = yield [changeNodeStat(previousNode._id, "working"), changeNodeStat(status._id, "not start")];
+  const [newStatus, newNextNode] = yield [changeAndSyncNodeStat(previousNode._id, "working"), changeAndSyncNodeStat(status._id, "not start")];
 
-  // 未考虑为null的情况，设置上一个节点时可能益处
   const newPreviousNodeId = _.nodeList[newStatus.index - 1] ? _.nodeList[newStatus.index - 1]._id : undefined;
-  let newPreviousNode;
-  if (!newPreviousNodeId) {
-    newPreviousNode = null;
-  } else {
-    newPreviousNode = yield workFlow_node_instance_dao.queryById(newPreviousNodeId);
-  }
+  const newPreviousNode = newPreviousNodeId ? yield workFlow_node_instance_dao.queryById(newPreviousNodeId): null;
 
   return yield workFlow_instance_dao.update({
     _id: _._id,
@@ -364,10 +358,19 @@ function* promoteProcess(_workFlow) {
   if (!_) {
     throwNosuchThisWorkFlow();
   }
-  // TODO 工作节点没有更新 stat 并且未同步到数据库
-  const newStatus = _.nextNode; // 未考虑为null的情况，设置下一个节点时可能益处
-  const newPreviousNode = _.status;
-  const newNextNode = _.nodeList[newStatus.index + 1] ? _.nodeList[newStatus.index + 1] : null;
+  if (!_.status) {
+    throwOperationFailed();
+  }
+
+  const {nextNode, status} = _;
+
+  if (!nextNode) {
+    throwOperationFailed();
+  }
+  const [newStatus, newPreviousNode] = yield [changeAndSyncNodeStat(nextNode._id, "working"), changeAndSyncNodeStat(status._id, "finish")];
+
+  const newNextNodeId = _.nodeList[newStatus.index + 1] ? _.nodeList[newStatus.index + 1]._id : undefined;
+  const newNextNode = newNextNodeId ? yield workFlow_node_instance_dao.queryById(newNextNodeId): null;
 
   return yield workFlow_instance_dao.update({
     _id: _._id,

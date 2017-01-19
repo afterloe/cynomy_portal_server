@@ -11,18 +11,17 @@
   */
 "use strict";
 
-const [{resolve}, {statSync, existsSync, readdirSync}] = [require("path"), require("fs")];
+const [{resolve}, {statSync, existsSync}] = [require("path"), require("fs")];
 const [{goods_dao, workFlow_instance_dao}, {throwNotExistsFile, throwParametersError, throwNosuchThisWorkFlow, throwCfgFormatMismatch, throwLackParameters},
   {checkParameter, readyConfig}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
-const FILES = Symbol("FILES");
-module[FILES] = [];
 
-const buildGoods = _goods => {
+const buildGoods = (_goods, workflow, name, index) => {
   const lackParameter = checkParameter(_goods, "name", "path", "version", "author");
   if (lackParameter) {
     throwLackParameters(lackParameter);
   }
   const _ = {
+    workflow, name, index,
     tags : [],
     state: 200,
     downCount: 0,
@@ -32,37 +31,14 @@ const buildGoods = _goods => {
   return _;
 };
 
-const scanDir = _path => {
-  let stat = statSync(_path);
-  if (stat.isDirectory()) {
-    let files = readdirSync(_path);
-    for (let i = 0; i < files.length; i++) {
-      scanDir(resolve(_path, files[i]));
-    }
-    files = undefined;
-  }
-  stat = undefined;
-  return module[FILES].push(_path);
-};
-
-function* instanceGoodses() {
-  const _ = [];
-  for(let i = 0; i < module[FILES].length; i++) {
-    const _goods = module[FILES][i];
-    const flag = yield goods_dao.checkExist(_goods);
-    if (true === flag) {
-      continue;
-    }
-    _.push(buildGoods(_goods));
-  }
-  if (0 === _.length) {
-    throwParametersError("", "length = 0");
+function* instanceGoodses(_, {workflow, name, index}) {
+  for(let i = 0; i < _.length; i++) {
+    _[i] = buildGoods(_[i], workflow, name, index);
   }
   yield goods_dao.insertMany(_);
-  module[FILES] = [];
 }
 
-function* production(_temp) { // 缺少产出人员 版本信息 path路径
+function* production(_temp) {
   /*
    * 1.读取websocket 接收的tar包并解压后的文件夹目录 [参数]
    * 2.扫描解压包后的内容,查询配置文件。
@@ -92,7 +68,7 @@ function* production(_temp) { // 缺少产出人员 版本信息 path路径
   for(let nodeName in productionList) {
     for(let i = 0; i < nodeList.length; i++) {
       if (nodeList[i].name === nodeName) {
-        nodeList[i].produceList = yield instanceGoodses(productionList[nodeName]);
+        nodeList[i].produceList = yield instanceGoodses(productionList[nodeName], nodeList[i]);
         nodeList[i].uploadCount = nodeList[i].uploadCount + 1;
       }
     }

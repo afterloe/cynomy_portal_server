@@ -546,3 +546,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > test/funTest.js  
 
+
+1.0.2 / 2017-1-19 13:47:28
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 产出流程优化，workflowService添加对工作流的更新支持
+
+### modify files
+> services/goodsService.js  
+> services/workflowService.js  
+

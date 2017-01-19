@@ -205,7 +205,7 @@ function* buildProduct(_workFlow, autoStart) {
    if (!workFlowTemplate) {
      throwNosuchThisWorkFlowTemplate();
    }
-   const nodeList = buildWorkFlowNodeList(workFlowTemplate.chainNodes);
+   const nodeList = buildWorkFlowNodeList(workFlowTemplate.chainNodes); // nodeList 没有序列化到 mongo中
    const _ = {
      state : 200,
    };
@@ -261,10 +261,19 @@ function* setLeader(_workFlow, _user, _node) {
   });
 }
 
+function* uploadWorkflow() {
+
+}
+
+function* updateNode() {
+
+}
+
 module.exports = {
   createWorkFlowNode,
   createWorkFlow,
   buildProduct,
+  updateNode,
   setLeader,
   startUpWorkFlow,
 };

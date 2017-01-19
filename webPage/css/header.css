@@ -1,0 +1,101 @@
+/*头部样式*/
+body{
+    padding-top:90px;background:#f2f2f2;font-family: "微软雅黑"
+}
+::-webkit-scrollbar {width: 14px;height: 14px;}
+::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb {border-radius: 999px;border: 5px solid transparent;}
+::-webkit-scrollbar-track {box-shadow: 1px 1px 5px rgba(0,0,0,.2) inset;}
+::-webkit-scrollbar-thumb {min-height: 20px;background-clip: content-box;box-shadow: 0 0 0 5px rgba(0,0,0,.2) inset;}
+.container{padding-left:0;padding-right:0;}
+.header-container-fluid{
+    padding-left:0px;
+}
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+    color: #3d9bff;
+}
+.navbar-nav {
+    margin: 1em 2em 0 1em;
+    color: #333333;
+    font-size: 18px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #3d9bff;
+    background-color: #ffffff;
+    border-bottom: 0.12em solid #3d9bff;
+}
+
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 1.4em 3em;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #333333;
+}
+
+.navbar-form {
+    margin-top: 2.7em;
+}
+
+.nav-search {
+    height: 2em
+}
+header{
+    background-color: #ffffff;
+    position: fixed;
+    width:100%;
+    top:0;
+    z-index:9999;
+}
+.header-navbar{
+    border:none;
+    background-color: #ffffff;border-bottom:1px solid #dbdbdb;
+}
+
+.navbar-header{
+    width:181px;
+    height:90px;
+}
+.navbar-form .input-group>.form-control{
+    border-right:none;
+}
+.header-searchIcon{
+    background-color: transparent;
+    background: url(../images/searchIcon.png) center no-repeat;
+}
+.navbar-header{
+    background: url('../images/logo.png') no-repeat center;
+    background-size: contain;
+}
+@media screen and (max-width: 767px) {
+    .header-search,.navbar-nav,footer{
+        display: none;
+    }
+}
+@media screen and (min-width: 992px) and (max-width: 1201px) {
+    .nav>li>a{
+        padding: 1.4em 1.5em;
+    }
+
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    .nav>li>a{
+        padding: 1.4em 0.6em;
+    }
+    .navbar-form{
+        padding-left:0px;
+    }
+    .input-group{
+        width:160px;
+    }
+}
+
+
+@media screen and (min-width: 769px) {
+    .navbar-nav{
+        margin: 1em 1em 0 1em;
+    }
+}
+

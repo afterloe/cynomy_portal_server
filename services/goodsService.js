@@ -12,16 +12,17 @@
 "use strict";
 
 const [{resolve}, {statSync, existsSync}] = [require("path"), require("fs")];
-const [{goods_dao, workFlow_instance_dao}, {throwNotExistsFile, throwParametersError, throwNosuchThisWorkFlow, throwCfgFormatMismatch, throwLackParameters},
-  {checkParameter, readyConfig}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwParametersError, throwNosuchThisWorkFlow, throwCfgFormatMismatch, throwLackParameters},
+  {checkParameter, readyConfig}, {uploadNodeProduceList}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")),
+  require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "./workflowService"))];
 
-const buildGoods = (_goods, workflow, name, index) => {
+const buildGoods = (_goods, workflow, name, _id) => {
   const lackParameter = checkParameter(_goods, "name", "path", "version", "author");
   if (lackParameter) {
     throwLackParameters(lackParameter);
   }
   const _ = {
-    workflow, name, index,
+    workflow, name, _id,
     tags : [],
     state: 200,
     downCount: 0,
@@ -31,12 +32,11 @@ const buildGoods = (_goods, workflow, name, index) => {
   return _;
 };
 
-function* instanceGoodses(_, {workflow, name, index}) {
-  for(let i = 0; i < _.length; i++) {
-    _[i] = buildGoods(_[i], workflow, name, index);
+const buildGoodses = (_goodses, {workflow, name, _id}) => {
+  for (let i = 0; i < _goodses.length; i++) {
+    _goodses[i] = buildGoods(_goodses[i], workflow, name, _id);
   }
-  yield goods_dao.insertMany(_);
-}
+};
 
 function* production(_temp) {
   /*
@@ -65,24 +65,21 @@ function* production(_temp) {
   }
   const productionList = _cfg.production;
   const nodeList = workflow.nodeList;
+
   for(let nodeName in productionList) {
     for(let i = 0; i < nodeList.length; i++) {
       if (nodeList[i].name === nodeName) {
-        nodeList[i].produceList = yield instanceGoodses(productionList[nodeName], nodeList[i]);
-        nodeList[i].uploadCount = nodeList[i].uploadCount + 1;
+        const nodeInstance = yield workFlow_node_instance_dao.queryById(nodeList[i]._id);
+        let produceList = buildGoodses(productionList[nodeName], nodeInstance);
+        yield uploadNodeProduceList(nodeList[i]._id, {
+          produceList,
+          reason: _cfg.reason
+        });
       }
     }
+
+    yield goods_dao.insertMany(productionList[nodeName]);
   }
-  const status = nodeList[workflow.status.index];
-  yield workFlow_instance_dao.update({
-    _id: workflow._id,
-    upload: {
-      $set: {
-        nodeList,
-        status,
-      }
-    }
-  });
 }
 
 module.exports = {

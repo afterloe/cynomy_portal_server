@@ -547,7 +547,7 @@ commit by afterloe (lm6289511@gmail.com)
 > test/funTest.js  
 
 
-1.0.2 / 2017-1-19 19:06:33
+1.0.2 / 2017-1-19 19:34:29
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
@@ -561,20 +561,22 @@ commit by afterloe (lm6289511@gmail.com)
   * master: workflow 优化 推进流程时没有同步节点信息到数据库
   * master: workflow 优化 流程推动功能底层优化，节点添加对项目的状态的支持
   * master: workflow 优化 流程推动功能底层优化, 推送数据到工作流失败的异常
+  * master: workflow 优化 流程推动功能底层优化，补全注释信息
 
 ### modify files
 > services/goodsService.js  
 > services/workflowService.js  
 ### new files
-> tools/chain.js  
+> tools/chain.js   
 
-1.0.2 / 2017-1-19 19:34:29
+1.0.2 / 2017-1-19 23:17:40
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: workflow 优化 流程推动功能底层优化，补全注释信息
+  * master: 产出方法完成
 
 ### modify files
 > History.md  
+> services/goodsService.js  
 > services/workflowService.js  
 

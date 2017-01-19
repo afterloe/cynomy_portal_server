@@ -450,6 +450,7 @@ function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
       }
     }
   });
+  
   Object.assign(_, {
     produceList,
     uploadCount,

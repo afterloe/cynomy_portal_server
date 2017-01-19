@@ -532,3 +532,17 @@ commit by afterloe (lm6289511@gmail.com)
 > errors/i18nError.json  
 > test/funTest.js  
 
+
+1.0.2 / 2017-1-19 12:0:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 产出流程文档构建，服务端构建文档功能构建，待优化
+
+### new files
+> doc/production.md  
+### modify files
+> dao/workflow-instance.js  
+> services/goodsService.js  
+> test/funTest.js  
+

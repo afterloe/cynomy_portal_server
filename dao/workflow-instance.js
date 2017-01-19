@@ -14,7 +14,23 @@
 const {resolve} = require("path");
 const commonsLib = require(resolve(__dirname, "public"));
 
+/**
+ * 通过工作流名字来查询工作流实例 - 精确匹配
+ *
+ * @param  {String}    name [工作流实例名字]
+ * @return {Object}         [工作流实例对象]
+ */
+const queryByName = function* (name) {
+  const _ = yield this.queryOne({
+    name,
+    state: 200
+  });
+
+  return _ ? _ : undefined;
+};
+
 const classMethod = {
+  queryByName,
 };
 
 Object.assign(commonsLib, classMethod);

@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const {basename, extname} = require("path"), {statSync, existsSync, readdirSync} = require("fs"), {resolve} = require("path");
+const {basename, extname} = require("path"), {statSync, readdirSync} = require("fs"), {resolve} = require("path");
 console.log(basename("/home/afterloe/index.pug", ".pug"));
 console.log(extname("/home/afterloe/index.pug"));
 

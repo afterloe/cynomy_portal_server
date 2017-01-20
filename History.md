@@ -613,3 +613,13 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > test/workflowService_test.js  
 
+
+1.0.2 / 2017-1-20 11:39:4
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow bug修复：正常流程下创建工作流模版工作流节点模板功能测试代码测试完毕
+
+### modify files
+> test/workflowService_test.js  
+

@@ -15,6 +15,7 @@ const [{resolve}, {deepStrictEqual}, co] = [require("path"), require('assert'), 
 const workflowService = require(resolve(__dirname, "..", "services", "workflowService"));
 
 describe("workflowService", () => {
+
   describe("#createWorkFlowNode", () => {
     it("normal treatment", done => {
       co(function* () {
@@ -60,6 +61,57 @@ describe("workflowService", () => {
         done();
       }).catch(err => done(err));
     });
-  });
 
+    it("with same chainNodes items", done => {
+      co(function* () {
+        const workfolwTemplate = {
+          name: "研发设计流程1",
+          chainNodes: [{
+            name: "设计"
+          },{
+            name: "开发"
+          },{
+            name: "测试"
+          },{
+            name: "开发"
+          }],
+        };
+
+        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        deepStrictEqual(0, _.result.ok);
+
+      }).catch(() => done());
+    });
+
+    it("with same name template", done => {
+      co(function* () {
+        const workfolwTemplate = {
+          name : "研发设计流程",
+          chainNodes: [{
+            name: "设计"
+          },{
+            name: "研发"
+          },{
+            name: "测试"
+          },{
+            name: "发布"
+          }]
+        };
+        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        deepStrictEqual(0, _.result.ok);
+      }).catch(() => done());
+    });
+
+    it("with no chainNodes items or items length is zero", done => {
+      co(function* () {
+        const workfolwTemplate = {
+          name : "研发设计流程2",
+          chainNodes: []
+        };
+        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        deepStrictEqual(0, _.result.ok);
+      }).catch(() => done());
+    });
+  });
+    
 });

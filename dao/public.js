@@ -105,11 +105,16 @@ function* queryById(_) {
   }
 }
 
+function* clean() {
+  return this.deleteMany({});
+}
+
 module.exports = {
   insert,
   update,
   checkExist,
   queryById,
+  clean,
   remove,
   insertMany,
 };

@@ -623,3 +623,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > test/workflowService_test.js  
 
+
+1.0.2 / 2017-1-20 14:22:54
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow bug修复：没有工作节点或节点长度为0的时候也能创建工作流模版
+
+### modify files
+> dao/public.js  
+> services/workflowService.js  
+> test/workflowService_test.js  
+

@@ -126,6 +126,9 @@ function* createWorkFlow(_workFlow) {
     throwObjectExists();
   }
   const chainNodes = _workFlow.chainNodes;
+  if(chainNodes.length === 0) {
+    throwParametersError();
+  }
   for (let i = 0; i < chainNodes.length; i++){
     for (let j = i + 1; j < chainNodes.length; j++) {
       if (chainNodes[i].name === chainNodes[j].name) {
@@ -468,6 +471,11 @@ function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
   return yield syncNodeToWorkflow(_);
 }
 
+function* cleanDocuments() {
+  const [a,b,c,d] = yield [workFlow_instance_dao.clean(), workFlow_template_dao.clean(), workFlow_node_template_dao.clean(), workFlow_node_instance_dao.clean()];
+  return {a,b,c,d};
+}
+
 module.exports = {
   createWorkFlowNode,
   createWorkFlow,
@@ -477,4 +485,5 @@ module.exports = {
   promoteProcess,
   uploadNodeProduceList,
   setLeader,
+  cleanDocuments,
 };

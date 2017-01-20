@@ -16,6 +16,12 @@ const workflowService = require(resolve(__dirname, "..", "services", "workflowSe
 
 describe("workflowService", () => {
 
+  before(done => {
+    co(function* () {
+      yield workflowService.cleanDocuments();
+    }).then(() => done()).catch(err => done(err));
+  });
+
   describe("#createWorkFlowNode", () => {
     it("normal treatment", done => {
       co(function* () {
@@ -113,5 +119,4 @@ describe("workflowService", () => {
       }).catch(() => done());
     });
   });
-    
 });

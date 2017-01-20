@@ -26,6 +26,11 @@ const buildUser = _user => {
   if (lackParameter) {
     throwLackParameters(lackParameter);
   }
+
+  if (!mailRegex.test(_user.mail)) {
+    throwParametersError();
+  }
+
   const _ = {
     name: `Coyote-${randomNum(12)}`,
     tags : [],
@@ -38,6 +43,25 @@ const buildUser = _user => {
     isLogin: false,
   };
   Object.assign(_, _user);
+  return _;
+};
+
+/**
+ * User数组去除重复项
+ *
+ * @param  {Array} users [需要去除重复内容的users]
+ * @return {Array}   [去除重复内容后的users]
+ */
+const removDuplication = users => {
+  const _ = [];
+  for (let i = 0; i < users.length; i++){
+    for (let j = i + 1; j < users.length; j++) {
+      if (users[i].name === users[j].name && users[i].mail === users[j].mail) {
+        continue;
+      }
+      _.push(users[i]);
+    }
+  }
   return _;
 };
 
@@ -74,12 +98,15 @@ const loaderFromXlsx = _file => {
  * @return {Generator}       [description]
  */
 function* createUser(_user) {
-  const _ = yield user_dao.checkExist(_user);
-  if (true === _) {
-    throwUserExist();
+  if (_user instanceof Object) {
+    const _ = yield user_dao.checkExist(_user);
+    if (true === _) {
+      throwUserExist();
+    }
+    return yield user_dao.insert(buildUser(_user));
+  } else {
+    throwParametersError();
   }
-
-  return yield user_dao.insert(buildUser(_user));
 }
 
 /**
@@ -92,6 +119,7 @@ function* createUser(_user) {
  */
 function* createUsers (_users) {
   if (_users instanceof Array) {
+    _users = removDuplication(_users);
     const _ = [];
     for(let i = 0; i < _users.length; i++) {
       const user = _users[i];
@@ -110,8 +138,14 @@ function* createUsers (_users) {
   throwParametersError();
 }
 
+function* cleanDocuments() {
+  const a = yield user_dao.clean();
+  return {a};
+}
+
 module.exports = {
   loaderFromXlsx,
   createUsers,
   createUser,
+  cleanDocuments,
 };

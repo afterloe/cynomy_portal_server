@@ -175,6 +175,13 @@ describe("workflowService", () => {
 
   });
 
+  describe("#buildProduct", () => {
+    it("normal treatment", done => {
+      co(function* () {
+        const _ = yield workflowService.buildProduct();
+      }).then(() => done()).catch(err => done(err));
+    });
 
+  });
 
 });

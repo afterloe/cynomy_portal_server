@@ -228,7 +228,7 @@ function* startUpWorkFlow(_workFlow) {
 /**
  * 构建产品
  *
- * @param  {Object{name, template}}    _workFlow [工作流基础信息包括 产品名 name，工作流模板引擎id template]
+ * @param  {Object{name, template, members}}    _workFlow [工作流基础信息包括 产品名 name，工作流模板引擎id template, 成员列表]
  * @param  {Boolean}    autoStart [hook项 是否自动启动工作流]
  * @throw  {Error}                [如果缺少name 和 template 会抛出缺少参数的异常]
  * @throw  {Error}                [如果提供的工作流模版引擎id无效或无法找到对应的工作流则会抛出异常]

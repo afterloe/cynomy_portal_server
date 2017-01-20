@@ -591,58 +591,31 @@ commit by afterloe (lm6289511@gmail.com)
 > test/workflowService_test.js  
 
 
-1.0.2 / 2017-1-20 10:50:17
+1.0.2 / 2017-01-20 14:47:02
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
   * master: workflow bug修复：拒绝创建同名工作流节点模版
+  * master: workflow bug修复：拒绝创建同名工作流模版
+  * master: workflow bug修复：正常流程下创建工作流模版工作流节点模板功能测试代码测试完毕
+  * master: workflow bug修复：没有工作节点或节点长度为0的时候也能创建工作流模版
+  * master: workflow 单元测试优化，丰富测试用例，异常把控
 
 ### modify files
 > errors/i18nError.json  
 > services/workflowService.js  
 > test/workflowService_test.js  
 
-
-1.0.2 / 2017-1-20 11:23:20
+1.0.2 / 2017-1-20 16:15:19
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: workflow bug修复：拒绝创建同名工作流模版
+  * master: userService 单元测试开启，补全测试用例，修改测试异常
 
 ### modify files
+> History.md  
+> services/userService.js  
 > services/workflowService.js  
-> test/workflowService_test.js  
-
-
-1.0.2 / 2017-1-20 11:39:4
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow bug修复：正常流程下创建工作流模版工作流节点模板功能测试代码测试完毕
-
-### modify files
-> test/workflowService_test.js  
-
-
-1.0.2 / 2017-1-20 14:22:54
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow bug修复：没有工作节点或节点长度为0的时候也能创建工作流模版
-
-### modify files
-> dao/public.js  
-> services/workflowService.js  
-> test/workflowService_test.js  
-
-
-1.0.2 / 2017-1-20 14:47:2
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow 单元测试优化，丰富测试用例，异常把控
-
-### modify files
-> services/workflowService.js  
+> test/userService_test.js  
 > test/workflowService_test.js  
 

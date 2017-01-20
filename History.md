@@ -602,3 +602,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > test/workflowService_test.js  
 
+
+1.0.2 / 2017-1-20 11:23:20
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow bug修复：拒绝创建同名工作流模版
+
+### modify files
+> services/workflowService.js  
+> test/workflowService_test.js  
+

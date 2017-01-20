@@ -105,7 +105,7 @@ function* createWorkFlowNode(_workflowNode) {
   if (lackParameter) {
     throwLackParameters(lackParameter);
   }
-  const _ = workFlow_node_template_dao.checkExist(_workflowNode);
+  const _ = yield workFlow_node_template_dao.checkExist(_workflowNode);
   if (_) {
     throwObjectExists();
   }
@@ -121,6 +121,10 @@ function* createWorkFlowNode(_workflowNode) {
  */
 function* createWorkFlow(_workFlow) {
   const lackParameter = checkParameter(_workFlow, "name", "chainNodes");
+  const _ = yield workFlow_template_dao.checkExist(_workFlow);
+  if (_) {
+    throwObjectExists();
+  }
   const chainNodes = _workFlow.chainNodes;
   for (let i = 0; i < chainNodes.length; i++){
     for (let j = i + 1; j < chainNodes.length; j++) {

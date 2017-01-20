@@ -126,7 +126,7 @@ function* createWorkFlow(_workFlow) {
     throwObjectExists();
   }
   const chainNodes = _workFlow.chainNodes;
-  if(chainNodes.length === 0) {
+  if(!chainNodes || !chainNodes.length || chainNodes.length === 0) {
     throwParametersError();
   }
   for (let i = 0; i < chainNodes.length; i++){

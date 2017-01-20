@@ -635,3 +635,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > test/workflowService_test.js  
 
+
+1.0.2 / 2017-1-20 14:47:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 单元测试优化，丰富测试用例，异常把控
+
+### modify files
+> services/workflowService.js  
+> test/workflowService_test.js  
+

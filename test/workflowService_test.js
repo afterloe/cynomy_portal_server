@@ -30,8 +30,7 @@ describe("workflowService", () => {
         };
         const _ = yield workflowService.createWorkFlowNode(node);
         deepStrictEqual(1, _.result.ok);
-        done();
-      }).catch(err => done(err));
+      }).then(() => done()).catch(err => done(err));
     });
 
     it("same node can't save to the db", done => {
@@ -41,8 +40,13 @@ describe("workflowService", () => {
         };
         const _ = yield workflowService.createWorkFlowNode(node);
         deepStrictEqual(0, _.result.ok);
-        done();
-      }).catch(() => done());
+      }).catch(err => {
+        if (/对象已存在/.test(err)) {
+          done();
+        } else {
+          done(err);
+        }
+      });
     });
   });
 
@@ -64,8 +68,7 @@ describe("workflowService", () => {
 
         const _ = yield workflowService.createWorkFlow(workfolwTemplate);
         deepStrictEqual(1, _.result.ok);
-        done();
-      }).catch(err => done(err));
+      }).then(() => done()).catch(err => done(err));
     });
 
     it("with same chainNodes items", done => {
@@ -86,7 +89,13 @@ describe("workflowService", () => {
         const _ = yield workflowService.createWorkFlow(workfolwTemplate);
         deepStrictEqual(0, _.result.ok);
 
-      }).catch(() => done());
+      }).catch(err => {
+        if (/存在相同节点/.test(err)) {
+          done();
+        } else {
+          done(err);
+        }
+      });
     });
 
     it("with same name template", done => {
@@ -105,7 +114,13 @@ describe("workflowService", () => {
         };
         const _ = yield workflowService.createWorkFlow(workfolwTemplate);
         deepStrictEqual(0, _.result.ok);
-      }).catch(() => done());
+      }).catch(err => {
+        if (/对象已存在/.test(err)) {
+          done();
+        } else {
+          done(err);
+        }
+      });
     });
 
     it("with no chainNodes items or items length is zero", done => {
@@ -116,7 +131,50 @@ describe("workflowService", () => {
         };
         const _ = yield workflowService.createWorkFlow(workfolwTemplate);
         deepStrictEqual(0, _.result.ok);
-      }).catch(() => done());
+      }).catch(err => {
+        if (/参数类型错误/.test(err)) {
+          done();
+        } else {
+          done(err);
+        }
+      });
     });
+
+    it("with lack paramse", done => {
+      co(function* () {
+        const workfolwTemplate = {
+          name : "研发设计流程2",
+        };
+        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        deepStrictEqual(0, _.result.ok);
+      }).catch(err => {
+        if (/参数类型错误/.test(err)) {
+          done();
+        } else {
+          done(err);
+        }
+      });
+    });
+
+    it("with wrong paramse", done => {
+      co(function* () {
+        const workfolwTemplate = {
+          name : "研发设计流程2",
+          chainNodes: 1234
+        };
+        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        deepStrictEqual(0, _.result.ok);
+      }).catch(err => {
+        if (/参数类型错误/.test(err)) {
+          done();
+        } else {
+          done(err);
+        }
+      });
+    });
+
   });
+
+
+
 });

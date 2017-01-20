@@ -590,3 +590,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### new files
 > test/workflowService_test.js  
 
+
+1.0.2 / 2017-1-20 10:50:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow bug修复：拒绝创建同名工作流节点模版
+
+### modify files
+> errors/i18nError.json  
+> services/workflowService.js  
+> test/workflowService_test.js  
+

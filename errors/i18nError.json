@@ -1,108 +1,13 @@
 {
-  "TooOftenRequest": {
-    "code": "401.4",
-    "en-US": "too often, please try again later",
-    "zh-CN": "请求过于频繁，请稍后再试"
-  },
-  "ExceedMaximum": {
-    "code": "500",
-    "en-US": "Exceed the maximum value",
-    "zh-CN": "超过最大值"
-  },
-  "ServerIsBusy": {
-    "code": "500",
-    "en-US": "server is busy",
-    "zh-CN": "服务器繁忙"
-  },
-  "ExceedMinimum": {
-    "code": "500",
-    "en-US": "Exceed the minimum",
-    "zh-CN": "超过最小值"
-  },
-  "NotExistsFile": {
-    "code": "404",
-    "en-US": "The file has been moved",
-    "zh-CN": "文件不存在"
-  },
-  "OauthError": {
-    "code": "401.4",
-    "en-US": "authentication fail",
-    "zh-CN": "授权失败"
-  },
-  "VerificationCodeError": {
-    "code": "401.4",
-    "en-US": "security code error",
-    "zh-CN": "安全码错误"
-  },
-  "FileNotFind": {
-    "code": "404.0",
-    "en-US": "file not find",
-    "zh-CN": "文件未找到"
-  },
-  "NeedSignIn": {
-    "code": "401.5",
-    "en-US": "please login",
-    "zh-CN": "请登录"
-  },
-  "NosuchThisWorkFlow": {
-    "code": "404.0",
-    "en-US": "workflow not found",
-    "zh-CN": "工作流未找到"
-  },
-  "NosuchThisWorkflowNodeInstance": {
-    "code": "404.0",
-    "en-US": "no such this workflow node instance",
-    "zh-CN": "工作流实例节点未找到"
-  },
-  "NosuchThisWorkFlowTemplate": {
-    "code": "404.0",
-    "en-US": "workflow template engine not found",
-    "zh-CN": "工作流模版引擎未找到"
-  },
-  "ValidationFail": {
-    "code": "406",
-    "en-US": "validation failure",
-    "zh-CN": "校验失败"
-  },
-  "SessionError": {
-    "code": "401.5",
-    "en-US": "token validation failure",
-    "zh-CN": "token 校验失败"
-  },
-  "OperationFailed": {
-    "code": "501",
-    "en-US": "operation failed",
-    "zh-CN": "操作失败"
-  },
-  "UserNotExist": {
-    "code": "501",
-    "en-US": "user does not exist",
-    "zh-CN": "用户不存在"
-  },
-  "TargetExist": {
-    "code": "501",
-    "en-US": "target is exist",
-    "zh-CN": "标签已存在"
-  },
-  "UserExist": {
-    "code": "501",
-    "en-US": "user is exist",
-    "zh-CN": "用户已存在"
-  },
-  "UnsupportedId": {
-    "code": "404",
-    "en-US": "unsupported identity",
-    "zh-CN": "非法的用户标识"
-  },
-  "NoThisFunction": {
-    "code": "404",
-    "en-US": "no such this function",
-    "zh-CN": "没有这个方法"
-  },
   "AccountOrPwdError": {
     "code": "400",
     "en-US": "account or password is Error",
     "zh-CN": "账号或密码错误"
+  },
+  "ObjectExists": {
+    "code": "400",
+    "en-US": "object is exists",
+    "zh-CN": "对象已存在"
   },
   "PersonalNotIn": {
     "code": "400",
@@ -113,16 +18,6 @@
     "code": "400",
     "en-US": "missing parameter",
     "zh-CN": "缺少参数"
-  },
-  "BuildFailed": {
-    "code": "500",
-    "en-US": "build faied",
-    "zh-CN": "构建失败"
-  },
-  "BuildWorkFlowNodeFailed": {
-    "code": "500",
-    "en-US": "build workflow node faied",
-    "zh-CN": "构建工作流节点失败"
   },
   "ParametersError": {
     "code": "400",
@@ -163,5 +58,115 @@
     "code": "400",
     "en-US": "format packageJson failed",
     "zh-CN": "packageJson 格式错误"
+  },
+  "TooOftenRequest": {
+    "code": "401.4",
+    "en-US": "too often, please try again later",
+    "zh-CN": "请求过于频繁，请稍后再试"
+  },
+  "OauthError": {
+    "code": "401.4",
+    "en-US": "authentication fail",
+    "zh-CN": "授权失败"
+  },
+  "SessionError": {
+    "code": "401.5",
+    "en-US": "token validation failure",
+    "zh-CN": "token 校验失败"
+  },
+  "NeedSignIn": {
+    "code": "401.5",
+    "en-US": "please login",
+    "zh-CN": "请登录"
+  },
+  "VerificationCodeError": {
+    "code": "401.4",
+    "en-US": "security code error",
+    "zh-CN": "安全码错误"
+  },
+  "NotExistsFile": {
+    "code": "404",
+    "en-US": "The file has been moved",
+    "zh-CN": "文件不存在"
+  },
+  "FileNotFind": {
+    "code": "404.0",
+    "en-US": "file not find",
+    "zh-CN": "文件未找到"
+  },
+  "NosuchThisWorkFlow": {
+    "code": "404.0",
+    "en-US": "workflow not found",
+    "zh-CN": "工作流未找到"
+  },
+  "NosuchThisWorkflowNodeInstance": {
+    "code": "404.0",
+    "en-US": "no such this workflow node instance",
+    "zh-CN": "工作流实例节点未找到"
+  },
+  "NosuchThisWorkFlowTemplate": {
+    "code": "404.0",
+    "en-US": "workflow template engine not found",
+    "zh-CN": "工作流模版引擎未找到"
+  },
+  "UnsupportedId": {
+    "code": "404",
+    "en-US": "unsupported identity",
+    "zh-CN": "非法的用户标识"
+  },
+  "NoThisFunction": {
+    "code": "404",
+    "en-US": "no such this function",
+    "zh-CN": "没有这个方法"
+  },
+  "ValidationFail": {
+    "code": "406",
+    "en-US": "validation failure",
+    "zh-CN": "校验失败"
+  },
+  "ExceedMaximum": {
+    "code": "500",
+    "en-US": "Exceed the maximum value",
+    "zh-CN": "超过最大值"
+  },
+  "ServerIsBusy": {
+    "code": "500",
+    "en-US": "server is busy",
+    "zh-CN": "服务器繁忙"
+  },
+  "BuildFailed": {
+    "code": "500",
+    "en-US": "build faied",
+    "zh-CN": "构建失败"
+  },
+  "BuildWorkFlowNodeFailed": {
+    "code": "500",
+    "en-US": "build workflow node faied",
+    "zh-CN": "构建工作流节点失败"
+  },
+  "ExceedMinimum": {
+    "code": "500",
+    "en-US": "Exceed the minimum",
+    "zh-CN": "超过最小值"
+  },
+  "OperationFailed": {
+    "code": "501",
+    "en-US": "operation failed",
+    "zh-CN": "操作失败"
+  },
+  "UserNotExist": {
+    "code": "501",
+    "en-US": "user does not exist",
+    "zh-CN": "用户不存在"
+  },
+  "TargetExist": {
+    "code": "501",
+    "en-US": "target is exist",
+    "zh-CN": "标签已存在"
+  },
+  "UserExist": {
+    "code": "501",
+    "en-US": "user is exist",
+    "zh-CN": "用户已存在"
   }
 }

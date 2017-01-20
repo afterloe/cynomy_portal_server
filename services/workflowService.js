@@ -13,7 +13,7 @@
 
 const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
-  {throwLackParameters, throwParametersError, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn,
+  {throwLackParameters, throwParametersError, throwObjectExists, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn,
   throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
 /**
@@ -104,6 +104,10 @@ function* createWorkFlowNode(_workflowNode) {
   const lackParameter = checkParameter(_workflowNode, "name");
   if (lackParameter) {
     throwLackParameters(lackParameter);
+  }
+  const _ = workFlow_node_template_dao.checkExist(_workflowNode);
+  if (_) {
+    throwObjectExists();
   }
   return yield workFlow_node_template_dao.insert(buildWorkFlowNodeTemplate(_workflowNode)); // 在模版中创建节点信息
 }
@@ -450,7 +454,7 @@ function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
       }
     }
   });
-  
+
   Object.assign(_, {
     produceList,
     uploadCount,

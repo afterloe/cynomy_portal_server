@@ -180,7 +180,7 @@ describe("userService", () => {
         const _ = yield userService.createUsers(users);
         deepStrictEqual(2, _.result.n);
       }).catch(err => {
-        if (/参数类型错误/.test(err)) {
+        if (/缺少参数/.test(err)) {
           done();
         } else {
           done(err);
@@ -205,6 +205,15 @@ describe("userService", () => {
       });
     });
 
+  });
+
+  describe("#getUserList", () => {
+    it("normal treatment", done => {
+      co(function* () {
+        const _ = yield userService.getUserList();
+        deepStrictEqual(6, _.length);
+      }).then(() => done()).catch(err => done(err));
+    });
   });
 
 });

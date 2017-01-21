@@ -21,8 +21,11 @@ const err = require(resolve(__dirname, "..", "errors"));
  * @return {Generator}           [数据库操作函数，使用co或next来驱动]
  */
 function* update (_document) {
-  const {_id, upload} = _document;
+  let {_id, upload} = _document;
   if (this.valid(_id)) {
+    if ("string" === typeof _id) {
+      _id = this.newObjectId(_id);
+    }
     return this.updateOne({_id}, upload);
   }
   err.throwParametersError();
@@ -109,10 +112,18 @@ function* clean() {
   return this.deleteMany({});
 }
 
+function* queryAll(filed = {}, number = 100, page = 0, order = "createTimestamp") {
+  page < 1 ? page = 0 : page--;
+  return this.find({
+    state : 200
+  }, filed).sort({[order]: -1}).skip(number * page).limit(number).toArray();
+}
+
 module.exports = {
   insert,
   update,
   checkExist,
+  queryAll,
   queryById,
   clean,
   remove,

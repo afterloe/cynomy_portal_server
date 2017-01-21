@@ -159,12 +159,13 @@ function* instanceNodeList(nodeList, workflow) {
   const {ops} = yield workFlow_node_instance_dao.insertMany(_);
   const copy = [];
   for (let i = 0; i < ops.length; i++) {
-      copy.push({
-        _id: ops._id.toString(),
-        name: ops.name,
-        index: ops.index,
-        stat: ops.stat
-      });
+    let item = ops[i];
+    copy.push({
+      _id: item._id,
+      name: item.name,
+      index: item.index,
+      stat: item.stat
+    });
   }
 
   return copy;
@@ -266,7 +267,7 @@ function* buildProduct(_workFlow, autoStart) {
    const _id = result.ops[0]._id.toString();
    const _nodeList = yield instanceNodeList(nodeList, _id);
 
-   yield workFlow_instance_dao.upload({
+   yield workFlow_instance_dao.update({
      _id,
      upload : {
        $set : {
@@ -277,6 +278,8 @@ function* buildProduct(_workFlow, autoStart) {
 
    if (true === autoStart) {
      return yield* startUpWorkFlow(_id);
+   } else {
+     return _id;
    }
 }
 

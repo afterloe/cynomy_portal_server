@@ -12,9 +12,12 @@
 "use strict";
 
 const [{resolve}, {deepStrictEqual}, co] = [require("path"), require('assert'), require("co")];
-const workflowService = require(resolve(__dirname, "..", "services", "workflowService"));
+const services = resolve(__dirname, "..", "services");
+const [workflowService, userService] = [require(resolve(services, "workflowService")), require(resolve(services, "userService"))];
 
 describe("workflowService", () => {
+
+  const map = new Map();
 
   before(done => {
     co(function* () {
@@ -68,6 +71,7 @@ describe("workflowService", () => {
 
         const _ = yield workflowService.createWorkFlow(workfolwTemplate);
         deepStrictEqual(1, _.result.ok);
+        map.set("template", _.ops[0]);
       }).then(() => done()).catch(err => done(err));
     });
 
@@ -176,9 +180,39 @@ describe("workflowService", () => {
   });
 
   describe("#buildProduct", () => {
+    before(done => {
+      co(function* () {
+        yield userService.cleanDocuments();
+        const users = [{
+          name : "afterloe",
+          mail : "afterloe@mocha.cn",
+        },{
+          name : "joe",
+          mail : "joe@mocha.cn",
+        },{
+          name : "audy",
+          mail : "audy@mocha.cn",
+        },{
+          name : "yangyangyang",
+          mail : "yyy@mocha.cn",
+        }];
+        return yield userService.createUsers(users);
+      }).then(_ => {
+        map.set("members", _.ops);
+        done();
+      }).catch(err => done(err));
+    });
+
     it("normal treatment", done => {
       co(function* () {
-        const _ = yield workflowService.buildProduct();
+        const [template, members] = [map.get("template")._id, map.get("members")];
+        const _ = yield workflowService.buildProduct({
+          name: "TRU Mate v1.1.1",
+          template,
+          members
+        });
+        deepStrictEqual(24, _.length);
+
       }).then(() => done()).catch(err => done(err));
     });
 

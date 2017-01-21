@@ -619,3 +619,18 @@ commit by afterloe (lm6289511@gmail.com)
 > test/userService_test.js  
 > test/workflowService_test.js  
 
+
+1.0.2 / 2017-1-21 18:18:52
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 调试创建工作流方法，修正userList，修正筛选方案
+
+### modify files
+> config/index.js  
+> dao/public.js  
+> services/userService.js  
+> services/workflowService.js  
+> test/userService_test.js  
+> test/workflowService_test.js  
+

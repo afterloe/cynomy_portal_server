@@ -54,14 +54,16 @@ const buildUser = _user => {
  */
 const removDuplication = users => {
   const _ = [];
-  for (let i = 0; i < users.length; i++){
-    for (let j = i + 1; j < users.length; j++) {
-      if (users[i].name === users[j].name && users[i].mail === users[j].mail) {
-        continue;
+  for (let i = 0; i < users.length; i++) {
+    let flag = false;
+    for (let j = 0; j < _.length; j++) {
+      if (_[j].name === users[i].name && _[j].mail === users[i].mail){
+        flag = true;
       }
-      _.push(users[i]);
     }
+    flag === true ? null:_.push(users[i]);
   }
+  
   return _;
 };
 
@@ -138,6 +140,10 @@ function* createUsers (_users) {
   throwParametersError();
 }
 
+function* getUserList () {
+  return yield user_dao.queryAll();
+}
+
 function* cleanDocuments() {
   const a = yield user_dao.clean();
   return {a};
@@ -147,5 +153,6 @@ module.exports = {
   loaderFromXlsx,
   createUsers,
   createUser,
+  getUserList,
   cleanDocuments,
 };

@@ -310,11 +310,13 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/workflow-node.js  
 > dao/workflow-template.js  
 > dao/workflow.js  
+
 ### modify files
 > .cynomy  
 > History.md  
 > dao/index.js  
 > package.json  
+
 ### delete files
 > dao/work-flow.js  
 > dao/work-node.js  
@@ -587,13 +589,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > test/workflowService_test.js  
 
-1.0.2 / 2017-1-22 14:23:46
+1.0.2 / 2017-1-22 21:33:59
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
   * master: 调试创建工作流方法，修正userList，修正筛选方案
   * master: workflow 启动实例流程测试 完成
   * master: workflow 修复设置leader功能
+  * master: 添加对底层的支持，修正推送修改信息到工作流节点上，去除设置leader会出现过多信息的bug
+  * master: workflow 推进流程 回退流程测试完毕
 
 ### modify files
 > config/index.js  
@@ -603,29 +607,14 @@ commit by afterloe (lm6289511@gmail.com)
 > test/workflowService_test.js  
 > dao/public.js  
 
-1.0.2 / 2017-1-22 17:58:16
+1.0.3 / 2017-1-22 21:37:40
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: 添加对底层的支持，修正推送修改信息到工作流节点上，去除设置leader会出现过多信息的bug
+  * master: v1.0.3版本准备完毕，进入发版
 
-### new files
-> test/goodsService_test.js  
 ### modify files
+> .cynomy  
 > History.md  
-> dao/workflow-instance.js  
-> services/goodsService.js  
-> services/workflowService.js  
-> test/workflowService_test.js  
-
-
-1.0.2 / 2017-1-22 21:33:59
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow 推进流程 回退流程测试完毕
-
-### modify files
-> config/index.js  
-> test/workflowService_test.js  
+> package.json  
 

@@ -9,6 +9,7 @@
     <link href="css/header.css" rel="stylesheet" />
     <link href="css/footer.css" rel="stylesheet" />
     <link href="css/directory.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/mask.css">
     
     <!-- Custom Fonts -->
     
@@ -16,39 +17,42 @@
 <body>
 
     <!-- 上传文档弹窗 -->
-    <div class="popup mask_add" style="display:none;">
+    <div class="popup">
         <div class="mask">
-            <div class="box box_add" >
+            <div class="box" >
                 <header>
                     <span>My Research V1.1 输出资料</span>
                     <span class="btn_close"></span>
                 </header>
-                <form action="" class="form form_add" >
+                <form action="" class="form" >
                     <div class="file">
                         <span>上传文件为定位、价值、关键特性、路标、原型等资料</span>
                         <span>
-                            <input type="file" placeholder="上传文档" />
-                            <input type="button" value="上传文档">
+                            <input type="file" placeholder="" id="source"/>
+                            <input type="button" value="上传文档" id="uploadFile">
                         </span>
                     </div>
                     <div class="description">
-                        <ul>
-                            <li>
+                        <ul class="dataFile">
+                            <!-- <li>
                                 <span>1、</span>
                                 <span>My Research V1.1 产品规划</span>
                                 <span>2017-02-01</span>
-                                <span></span>
+                                <span class='closeFile'></span>
                             </li>
                             <li>
-                                <span>1、</span>
+                                <span>2、</span>
                                 <span>My Research V1.1 产品规划</span>
                                 <span>2017-02-01</span>
+                                <span class='closeFile'></span>
                             </li>
                             <li>
-                                <span>1、</span>
+                                <span>3、</span>
                                 <span>My Research V1.1 产品规划</span>
                                 <span>2017-02-01</span>
-                            </li>
+                                <span class='closeFile'></span>
+                            </li> -->
+
                         </ul>
                     </div>
                     <div class="last">
@@ -155,21 +159,21 @@
                     			<span class="download">
                     				<img src="images/下载.png" alt="">
                     			</span>
-                                <span class="dataClose"></span>
+                                <span class="dataClose"></span> 
                     		</div>
                     	</li>
                     	<li>
                     		<div>
-                    			<i></i>
-                    			<span class="name">My Research 的产品定位.Html</span>
-                    			<span class="time">2017-01-25</span>
-                    			<span>17:05:36</span>
-                    			<span>彭博</span>
-                    			<span class="download">
-                    				<img src="images/链接-default-.png" alt="">
-                    			</span>
-                                <span class="dataClose"></span>
-                    		</div>
+                                <i></i>
+                                <span class="name">My Research 的产品定位.PPT</span>
+                                <span class="time">2017-01-25</span>
+                                <span>17:05:36</span>
+                                <span>彭博</span>
+                                <span class="download">
+                                    <img src="images/下载.png" alt="">
+                                </span>
+                                <span class="dataClose"></span> 
+                            </div>
                     	</li>
 
 
@@ -323,5 +327,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/header.js"></script>
 <script src="js/rem.js"></script>
-<!-- <script src="js/directory.js"></script> -->
+<script src="js/footer.js"></script>
+<script src="js/directory.js"></script>
 </html>

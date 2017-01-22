@@ -2,6 +2,7 @@
 body{
     padding-top:90px;background:#f2f2f2;font-family: "微软雅黑"
 }
+input{border:0;outline: none;}
 ::-webkit-scrollbar {width: 14px;height: 14px;}
 ::-webkit-scrollbar-track, ::-webkit-scrollbar-thumb {border-radius: 999px;border: 5px solid transparent;}
 ::-webkit-scrollbar-track {box-shadow: 1px 1px 5px rgba(0,0,0,.2) inset;}

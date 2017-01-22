@@ -9,11 +9,63 @@
 	<link href="css/header.css" rel="stylesheet" />
     <link href="css/footer.css" rel="stylesheet" />
     <link href="css/platform.css" rel="stylesheet" />
-   
+    <link rel="stylesheet" href="css/mask.css">
     <!-- Custom Fonts -->
     
 </head>
 <body>
+    <!-- 上传文档弹窗 -->
+    <div class="popup">
+        <div class="mask">
+            <div class="box" >
+                <header>
+                    <span>My Research V1.1 输出资料</span>
+                    <span class="btn_close"></span>
+                </header>
+                <form action="" class="form" >
+                    <div class="file">
+                        <span>上传文件为定位、价值、关键特性、路标、原型等资料</span>
+                        <span>
+                            <input type="file" placeholder="" id="source"/>
+                            <input type="button" value="上传文档" id="uploadFile">
+                        </span>
+                    </div>
+                    <div class="description">
+                        <ul class="dataFile">
+                            <!-- <li>
+                                <span>1、</span>
+                                <span>My Research V1.1 产品规划</span>
+                                <span>2017-02-01</span>
+                                <span class='closeFile'></span>
+                            </li>
+                            <li>
+                                <span>2、</span>
+                                <span>My Research V1.1 产品规划</span>
+                                <span>2017-02-01</span>
+                                <span class='closeFile'></span>
+                            </li>
+                            <li>
+                                <span>3、</span>
+                                <span>My Research V1.1 产品规划</span>
+                                <span>2017-02-01</span>
+                                <span class='closeFile'></span>
+                            </li> -->
+
+                        </ul>
+                    </div>
+                    <div class="last">
+                        <span>上传人：</span>
+                        <span>
+                            <input type="text" placeholder="输入姓名">
+                        </span>
+                        <span>
+                            <button class="submit_re">开始上传</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 	<!--头部-->
     <header>
         <div class="header-body">
@@ -139,7 +191,11 @@
             </ul>
             <div id="myTabContent" class="tab-content">	
                 <div class="tab-pane fade in active" id="plan">
-                    <div class="header"><span class="titlePlan"></span>&nbsp;&nbsp;产品规划辅助资料</div>
+                    <div class="header">
+                        <span class="titlePlan"></span>
+                        <span>&nbsp;&nbsp;产品规划辅助资料</span>
+                        <span class="upload"></span>
+                    </div>
                     <ul class="dataPlan data">
                     	<li>
                     		<div>
@@ -170,9 +226,13 @@
                     </ul>
                 </div>
                 <div class="tab-pane fade" id="design">
-                	<div class="header"><span class="titleDesign"></span>&nbsp;&nbsp;产品设计辅助资料</div>
+                	<div class="header">
+                        <span class="titleDesign"></span>
+                        <span>&nbsp;&nbsp;产品设计辅助资料</span>
+                        <span class="upload"></span>
+                    </div>
                     <ul class="dataDesign data">
-                    	<!-- <li>
+                    	<li>
                     		<div>
                     			<i></i>
                     			<span class="name">My Research 的产品定位.PPT</span>
@@ -197,12 +257,16 @@
                     			</span>
                                 <span class="dataClose"></span>
                     		</div>
-                    	</li> -->
+                    	</li>
 
                     </ul>
                 </div>
                 <div class="tab-pane fade" id="development">
-                	<div class="header"><span class="titleDevelopment"></span>&nbsp;&nbsp;产品开发辅助资料</div>
+                	<div class="header">
+                        <span class="titleDevelopment"></span>
+                        <span>&nbsp;&nbsp;产品开发辅助资料</span>
+                        <span class="upload"></span>
+                    </div>
                    <ul class="dataDevelopment data">
                     	<!-- <li>
                     		<div>
@@ -234,7 +298,11 @@
                     </ul>
                 </div>
                 <div class="tab-pane fade" id="test">
-                	<div class="header"><span class="titleTest"></span>&nbsp;&nbsp;产品测试辅助资料</div>
+                	<div class="header">
+                        <span class="titleTest"></span>
+                        <span>&nbsp;&nbsp;产品测试辅助资料</span>
+                        <span class="upload"></span>
+                    </div>
                    <ul class="dataTest data">
                     	<li>
                     		<div>
@@ -265,7 +333,11 @@
                     </ul>
                 </div>
                 <div class="tab-pane fade" id="release">
-                	<div class="header"><span class="titleRelease"></span>&nbsp;&nbsp;产品发布辅助资料</div>
+                	<div class="header">
+                        <span class="titleRelease"></span>
+                        <span>&nbsp;&nbsp;产品发布辅助资料</span>
+                        <span class="upload"></span>
+                    </div>
                     <ul class="dataRelease data">
                     	<li>
                     		<div>
@@ -317,5 +389,6 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/header.js"></script>
 <script src="js/rem.js"></script>
+<script src="js/footer.js"></script>
 <script src="js/platform.js"></script> 
 </html>

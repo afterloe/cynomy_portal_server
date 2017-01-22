@@ -57,40 +57,15 @@ input{border:0;}
 	.data li:last-child{border-left:0;}
     .data li:first-child div i{background:#3d9bff;}
     
-    /* 弹窗开始 */
-    .popup{width: 100%;height: 100%;position: fixed;background-color: rgba(220, 220, 220, 0.1);z-index: 11000;top:0;left:0;}
-    .mask{width:100%;height:100%;position: relative;}
-    .box {position: absolute;top: 55%;left: 50%; margin-left:-300px;margin-top:-150px;width: 600px;border: 1px solid #dbdbdb;border-radius:5px;z-index: 1000;background: #fff;box-shadow:0px 0px 5px #dbdbdb;height: 300px;z-index:10000;
-    }
-    .box header span:nth-child(2){background:url(../images/close-bounced-default.png) no-repeat center;width:12px;height:12px;margin-top:14px;display: inline-block;margin-left:360px;cursor: pointer;
-    }
-    .box header span:nth-child(1){padding-left:20px;color:#333333;
-    }
-    .box header span:nth-child(2):hover{background:url(../images/close-bounced-selected.png) no-repeat  center;
-    }
-    .box header{height: 40px;line-height: 40px;color: #838383;background-color: #ffffff;position: relative;z-index: 1000;border-top-left-radius: 5px;border-top-right-radius: 5px;overflow: hidden;border-top:0;border-bottom:1px solid #dbdbdb;}
-    .form{width:558px;margin-left:21px;margin-top:3px;height:238px;background:#f3f3f3;}
-    .form div.file{width:100%;height:20px;line-height: 20px;color:#cfcfcf;overflow: hidden;}
-    .form div span{float:left;}
-    .form div.file span:nth-child(1){display: inline-block;width:428px;text-align: right;margin-right:5px;}
-    .form div.file span:nth-child(2){position: relative;display: inline-block;zoom: 1;cursor: pointer;overflow: hidden;vertical-align: middle;}
-    .form div.file span:nth-child(2) input:nth-child(1){ position: absolute;right: 0;top: 0;_zoom: 30;font-size: 300px \9;height: 100%;_height: auto;opacity: 0;filter: alpha(opacity=0);-ms-filter: "alpha(opacity=0)";cursor: pointer;}
-    .form div.file span:nth-child(2) input:nth-child(2){background-color: #f3f3f3;color: #3d9bff;border: 0 ;width: 120px ;border-radius: 0 }
-    .form div.description{width:558px;height:180px;margin-top:10px;}
-    .form div.description ul{overflow-y:auto;width:520px;margin:0 auto;height:180px;}
-    .form div.description ul li{width:100%;height:26px;line-height: 26px;overflow: hidden;}
-    .form div.description ul li span{float:left;height:26px;line-height: 26px;display: inline-block;}
-    .form div.description ul li span:nth-child(1){width:30px;text-align: center;}
-    .form div.description ul li span:nth-child(2){width:220px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap;}
-    .form div.description ul li span:nth-child(3){width:100px;margin-right:120px;}
-    .form div.description ul li span:nth-child(4){background:url(../images/close-bounced-default.png) no-repeat center 6px;width:12px;height:26px;cursor: pointer;}
-    .form div.description ul li span:nth-child(4):hover{background:url(../images/close-bounced-selected.png) no-repeat  center 6px;}
+    
+
 
 }
 
 @media (max-width:768px){
-	html body{width:100%;font-size:0.26rem;background:#fff;padding-bottom:1000px;box-sizing: border-box;overflow-x: hidden;}
-	.directory_content{width: 100%;}
+	html body{width:100%;font-size:0.26rem;background:#fff;box-sizing: border-box;overflow-x: hidden;}
+    .popup{display: none;}
+	.directory_content{width: 100%;padding-bottom:500px;}
 	.container{padding-right: 15px;padding-left: 15px;margin-right: 0;margin-left: 0;}
 	.wrapper{width: 100%;margin-left: 0;margin-right: 0;margin: 0 auto;overflow: hidden;}
 	.wrapper .nav{width:100%;float:left;height:1.2rem;}
@@ -103,76 +78,33 @@ input{border:0;}
     font-weight: 600;width:100%;cursor:pointer;position: relative;}
 	.wrapper .nav-tabs > li>div.same a {display: inline-block;height: 100%;color: #94defb;
     width: 0.6rem;cursor:pointer;position: absolute;left:0;right:0;margin:0 auto;z-index:10;}
-    .wrapper .nav-tabs > li>div.same a:hover{
-    	transfrom:scale(1.1) ;
-    	-webkit-transform:scale(1.1) ;
-    	-moz-transform:scale(1.1);
-    	-o-transform:scale(1.1);}
+    .wrapper .nav-tabs > li>div.same a:hover{transfrom:scale(1.1) ;-webkit-transform:scale(1.1) ;-moz-transform:scale(1.1);-o-transform:scale(1.1);}
     .wrapper .nav-tabs > li>div.same span {color:transparent;}
 	.wrapper .nav-tabs > li>div.same a.plan{background:url(../images/1.3.png) no-repeat center;}
 	.wrapper .nav-tabs > li>div.same a.design{background:url(../images/1.4.png) no-repeat center;}
 	.wrapper .nav-tabs > li>div.same a.development{background:url(../images/1.5.png) no-repeat center;}
 	.wrapper .nav-tabs > li>div.same a.test{background:url(../images/1.6.png) no-repeat center;}
 	.wrapper .nav-tabs > li>div.same a.release{background:url(../images/1.7.png) no-repeat center;}
-	.wrapper .nav-tabs > li > span.product {
-		font-size:0.24rem;
-    display: inline-block;
-    width: 100%;
-    height: 0.4rem;
-    position: relative;
-    color: #323232;
-    line-height: 0.4rem;}
+	.wrapper .nav-tabs > li > span.product {font-size:0.24rem;display: inline-block;width: 100%;height: 0.4rem;position: relative;color: #323232;line-height: 0.4rem;}
 	.wrapper .nav-tabs > li.active > a,.wrapper .nav-tabs > li.active > a:focus,.wrapper .nav-tabs > li.active > a:hover {border-bottom:0;border:0;background:none;color:none;}
 	.wrapper .nav-tabs > li>div.same a:hover{border:0;}
-	.wrapper .nav-tabs > li.active>span.product{ font-size:0.24rem;
-    display: inline-block;
-    width: 100%;
-    height: 0.4rem;
-    position: relative;
-    color: #00a1df;
+	.wrapper .nav-tabs > li.active>span.product{ font-size:0.24rem;display: inline-block;width: 100%;height: 0.4rem;position: relative;color: #00a1df;
 	}
     .wrapper .nav-tabs > li.active>span.product:before{position: absolute;top: 0.61rem;width: 0;height: 0;left: 43%;margin-left: -10px;content: " ";border-bottom: 20px solid  #f2f2f2 ;border-left: 15px solid transparent ;border-right: 15px solid transparent ;z-index:10;
     }
-	.wrapper .tab-content {width: 100%;
-    margin-top: 1.8rem;
-    background: #f2f2f2;
-    border-radius: 5px;
-    padding-top: 0.1rem;overflow: hidden;
+	.wrapper .tab-content {width: 100%;margin-top: 1.8rem;background: #f2f2f2;border-radius: 5px;padding-top: 0.1rem;overflow: hidden;
 	}
 	#plan .header,#design .header,#development .header,#test .header,#release .header{height: 1rem;line-height: 1rem;font-size: 0.28rem;border-bottom: 1px solid #dbdbdb;padding-left: 0.35rem;color:#717171;font-weight:500;}
-	.data{margin-top: 0.15rem;
-    /* margin-left: 0.4rem; */
-    width: 100%;}
-	.data li{margin-left: 0.2rem;
-    height: 1rem;
-    border-left: 1px solid #dbdbdb;}
-	.data li div{height: 1rem;
-    width: 100%;
-  }
-	.data li div i{display: inline-block;
-    width: 0.16rem;
-    height: 0.16rem;
-    border-radius: 50%;
-    background: #dbdbdb;
-    float: left;
-    margin-left: -0.08rem;
-    /* margin-top: 0.08rem;
-    /* margin-top: 0.08rem; */}
-	.data li div span{margin-top: -0.05rem;
-    display: inline-block;
-    float: left;
-    width: 1.85rem;
-    text-align: center;
-    height: 0.5rem;
+	.data{margin-top: 0.15rem;/* margin-left: 0.4rem; */width: 100%;}
+	.data li{margin-left: 0.2rem;height: 1rem;border-left: 1px solid #dbdbdb;width:98%;}
+	.data li div{height: 1rem;width: 100%;}
+	.data li div i{display: inline-block;width: 0.16rem;height: 0.16rem;border-radius: 50%;background: #dbdbdb;float: left;margin-left: -0.08rem;/* margin-top: 0.08rem;/* margin-top: 0.08rem; */}
+	.data li div span{margin-top: -0.05rem;display: inline-block;float: left;width: 1.85rem;text-align: center;height: 0.5rem;
     }
-	.data li div span.name{margin-top: -0.05rem; 
-    width: 3.5rem;
-    margin-left: 0.09rem;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;}
-	.data li div span.time{width: 2rem;
-    margin-left: 0;}
+	.data li div span.name{margin-top: -0.05rem; width: 3.5rem;margin-left: 0.09rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+	.data li div span.time{width: 2rem;margin-left: 0;}
+    .data li div span.dataClose{width: 0;
+    0}
 	.data li:last-child{border-left:0;}
     .data li:first-child div i{background:#3d9bff;}
 

@@ -1,10 +1,3 @@
-<!--
-  create by afterloe, MIT Licensed
-
-  portal_web/home.html
-  Copyright(c) afterloe. 2017-1-16 10:22:14
-  Authors: afterloe <afterloeliu@jwis.cn> (https://github.com/afterloe)
--->
 <html>
 
 <head>
@@ -15,12 +8,11 @@
     <title>R&D portal - home</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/header.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/footer.css">
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/home.css" rel="stylesheet" />
+    <link href="css/footer.css" rel="stylesheet" />
 </head>
 
-<body>
+<body oncontextmenu="javascript:return false;">
     <!--头部-->
     <header>
         <div class="header-body">
@@ -53,60 +45,198 @@
             </nav>
         </div>
     </header>
-
-    <!-- /////////////////////////////////////////Content -->
-    <div class="content" >
+    <!--模板html-->
+    <div class="menu" style="display: none;">
+        <p class="addNext">新增同级</p>
+        <p class="addSub">新增子级</p>
+        <p class="del">删除</p>
+    </div>
+    <table class="table" style="display: none;">
+        <tbody>
+        <tr class="platform">
+            <td class="platformName">
+                <input type="text"  value="" placeholder="平台名"/>
+            </td>
+            <td class="platformDetail">
+                <div class="product">
+                    <div class="productInfo">
+                        <input class="productName" type="text" value="" placeholder="平台名"/>
+                        <span class="productLink"></span>
+                        <input class="linkURL" type="text" value="" placeholder="下载地址或官网地址"/>
+                    </div>
+                    <ul class="nav nav-tabs productStatus">
+                        <li class="planStatus1">
+                            <span class="icon"></span>
+                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                        </li>
+                        <li class="designStatus1">
+                            <span class="icon"></span>
+                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                        </li>
+                        <li class="developStatus1">
+                            <span class="icon"></span>
+                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                        </li>
+                        <li class="testStatus1">
+                            <span class="icon"></span>
+                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                        </li>
+                        <li class="releaseStatus1">
+                            <span class="icon"></span>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--主体内容-->
+    <div class="container content">
         <!-- dir-structure -->
         <div class="container structure">
             <ul class="dir-menu">
-                <li class="dir-platform selected"></li>
+                <div class="feedback"></div>
+                <li class="first dir-platform selected"></li>
                 <li class="dir-product"></li>
                 <li class="dir-public"></li>
             </ul>
+            <div class="catalogShadow">
+                <div class="catalogMark currentCataMark1"></div>
+                <div class="catalogMark currentCataMark2"></div>
+                <div class="catalogMark currentCataMark3"></div>
+                <div class="save"></div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <tbody>
+                        <!--<tr class="platform">
+                            <td class="platformName">
+                                <input type="text" readonly='true' value="平台1" placeholder="平台名"/>
+                            </td>
+                            <td class="platformDetail">
+                                <div class="product">
+                                    <div class="productInfo">
+                                        <input class="productName" readonly='true' type="text" value="TRU Matsfsdfsdfsdsde V1.0.1" placeholder="平台名"/>
+                                        <span class="productLink"></span>
+                                    </div>
+                                    <ul class="nav nav-tabs productStatus">
+                                        <li class="planStatus2">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="designStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="developStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="testStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="releaseStatus1">
+                                            <span class="icon"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product">
+                                    <div class="productInfo">
+                                        <input class="productName" readonly='true' type="text" value="TRU Matsfsdfsdfsdsde V1.0.1" placeholder="平台名"/>
+                                        <span class="productLink"></span>
+                                    </div>
+                                    <ul class="nav nav-tabs productStatus">
+                                        <li class="planStatus2">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="designStatus2">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="developStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="testStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="releaseStatus1">
+                                            <span class="icon"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="platform">
+                            <td class="platformName">
+                                <input type="text" readonly='true'value="平台1" placeholder="平台名"/>
+                            </td>
+                            <td class="platformDetail">
+                                <div class="product">
+                                    <div class="productInfo">
+                                        <input class="productName" readonly='true' type="text" value="TRU Matsfsdfsdfsdsde V1.0.1" placeholder="平台名"/>
+                                        <span class="productLink"></span>
+                                    </div>
+                                    <ul class="nav nav-tabs productStatus">
+                                        <li class="planStatus2">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="designStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="developStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="testStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="releaseStatus1">
+                                            <span class="icon"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="product">
+                                    <div class="productInfo">
+                                        <input class="productName" readonly='true' type="text" value="TRU Matsfsdfsdfsdsde V1.0.1" placeholder="平台名"/>
+                                        <span class="productLink"></span>
+                                    </div>
+                                    <ul class="nav nav-tabs productStatus">
+                                        <li class="planStatus2">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="designStatus2">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="developStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="testStatus1">
+                                            <span class="icon"></span>
+                                            <span class="line">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</span>
+                                        </li>
+                                        <li class="releaseStatus1">
+                                            <span class="icon"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-
-    <!-- product table -->
-    <div class="container structure">
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead>
-                  <tr>
-                    <th class="tableHeader"></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td rowspan="3">平台 V2.0</td>
-                    <td><span>TRU Mate 2.0</span><a class="produce-link" href="#"></a></td>
-                    <td>
-                      <ul></ul>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td rowspan="3">平台 V1.0</td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-                <tfoot></tfoot>
-            </table>
-        </div>
-    </div>
-
-   <!--页脚-->
+    <!--页脚-->
     <footer class="footer">
         <div class="copyright">
             <div class="container">
@@ -117,11 +247,7 @@
 </body>
 <!-- jQuery -->
 <script src="js/jquery-2.1.1.js"></script>
-<script src="js/masonry.pkgd.min.js"></script>
-<script src="js/jquery.flexslider-min.js"></script>
-<!-- Resource jQuery -->
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
 <script src="js/header.js"></script>
-
+<script src="js/home.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </html>

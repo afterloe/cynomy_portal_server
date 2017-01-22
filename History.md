@@ -646,3 +646,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > test/workflowService_test.js  
 
+
+1.0.2 / 2017-1-22 14:23:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 修复设置leader功能
+
+### modify files
+> services/workflowService.js  
+> test/workflowService_test.js  
+

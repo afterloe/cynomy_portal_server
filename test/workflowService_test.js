@@ -230,4 +230,16 @@ describe("workflowService", () => {
     });
 
   });
+
+  describe("#setLeader", () => {
+    it("normal treatment", done => {
+      co(function* () {
+        const [workFlow, user, node] = [map.get("workflowInstance"), map.get("members")[0], 1];
+        const _ = yield workflowService.setLeader(workFlow, user, node);
+        deepStrictEqual(1, _.result.n);
+        deepStrictEqual(1, _.result.nModified);
+        deepStrictEqual(1, _.result.ok);
+      }).then(() => done()).catch(err => done(err));
+    });
+  });
 });

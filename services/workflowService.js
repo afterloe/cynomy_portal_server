@@ -325,7 +325,7 @@ function* syncNodeToWorkflow(_node) {
     Object.assign(_, {status: _node});
   }
 
-  return yield workFlow_instance_dao.upload({
+  return yield workFlow_instance_dao.update({
     _id: workflow,
     upload: {
       $set: _
@@ -338,10 +338,10 @@ function* syncNodeToWorkflow(_node) {
  *
  * @param  {String}    _workFlow [工作流实例id]
  * @param  {Object}    _user     [设置成user的用户信息]
- * @param  {Integer}   _node     [工作流实例节点id]
+ * @param  {Integer}   index     [工作流实例节点id]
  * @return {Generator}           [description]
  */
-function* setLeader(_workFlow, _user, _node) {
+function* setLeader(_workFlow, _user, _index) {
   const _ = yield workFlow_instance_dao.queryById(_workFlow);
   if (!_) {
     throwNosuchThisWorkFlow();
@@ -350,8 +350,13 @@ function* setLeader(_workFlow, _user, _node) {
   if (!leader) {
     throwPersonalNotIn();
   }
+  _index--;
+  const nodeSubstitute = _.nodeList[_index];
+  if (!nodeSubstitute) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
 
-  const node = yield changeAndSyncNodeStat(_node, {owner: leader});
+  const node = yield changeAndSyncNodeStat(nodeSubstitute._id, {owner: leader});
   return yield syncNodeToWorkflow(node);
 }
 
@@ -367,7 +372,7 @@ function* changeAndSyncNodeStat(_nodeId, setter) {
   if (!_) {
     throwNosuchThisWorkflowNodeInstance();
   }
-  yield workFlow_node_instance_dao.upload({
+  yield workFlow_node_instance_dao.update({
     _id: _._id,
     upload: {
       $set: setter
@@ -454,7 +459,7 @@ function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
 
   const uploadCount = Number.parseInt(_.uploadCount) + 1;
 
-  yield workFlow_node_instance_dao.upload({
+  yield workFlow_node_instance_dao.update({
     _id: _._id,
     upload: {
       $set: {
@@ -484,9 +489,9 @@ module.exports = {
   createWorkFlow,
   buildProduct,
   startUpWorkFlow,
-  retroversion,
-  promoteProcess,
-  uploadNodeProduceList,
   setLeader,
+  uploadNodeProduceList,
+  promoteProcess,
+  retroversion,
   cleanDocuments,
 };

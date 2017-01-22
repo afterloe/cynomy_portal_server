@@ -284,4 +284,31 @@ describe("workflowService", () => {
     });
 
   });
+
+  describe("#promoteProcess", () => {
+    it("normal treatment", done => {
+      co(function* () {
+        const workflowInstance = map.get("workflowInstance");
+        const _ = yield workflowService.promoteProcess(workflowInstance._id);
+        deepStrictEqual(1, _.result.n);
+        deepStrictEqual(1, _.result.nModified);
+        deepStrictEqual(1, _.result.ok);
+      }).then(() => done()).catch(err => done(err));
+    });
+    
+  });
+
+  describe("#retroversion", () => {
+    it("normal treatment", done => {
+      co(function* () {
+        const workflowInstance = map.get("workflowInstance");
+        const _ = yield workflowService.retroversion(workflowInstance._id);
+        deepStrictEqual(1, _.result.n);
+        deepStrictEqual(1, _.result.nModified);
+        deepStrictEqual(1, _.result.ok);
+      }).then(() => done()).catch(err => done(err));
+    });
+
+  });
+
 });

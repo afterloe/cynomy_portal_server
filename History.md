@@ -618,3 +618,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > test/workflowService_test.js  
 
+
+1.0.2 / 2017-1-22 21:33:59
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 推进流程 回退流程测试完毕
+
+### modify files
+> config/index.js  
+> test/workflowService_test.js  
+

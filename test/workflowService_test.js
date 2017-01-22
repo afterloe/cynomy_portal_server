@@ -212,10 +212,22 @@ describe("workflowService", () => {
           members
         });
         deepStrictEqual(24, _.length);
-
+        map.set("workflowInstance", _);
       }).then(() => done()).catch(err => done(err));
     });
 
   });
 
+  describe("#startUpWorkFlow", () => {
+    it("normal treatment", done => {
+      co(function* () {
+        const workFlow = map.get("workflowInstance");
+        const _ = yield workflowService.startUpWorkFlow(workFlow);
+        deepStrictEqual(1, _.result.n);
+        deepStrictEqual(1, _.result.nModified);
+        deepStrictEqual(1, _.result.ok);
+      }).then(() => done()).catch(err => done(err));
+    });
+
+  });
 });

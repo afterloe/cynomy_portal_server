@@ -634,3 +634,15 @@ commit by afterloe (lm6289511@gmail.com)
 > test/userService_test.js  
 > test/workflowService_test.js  
 
+
+1.0.2 / 2017-1-22 10:16:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 启动实例流程测试 完成
+
+### modify files
+> config/index.js  
+> services/workflowService.js  
+> test/workflowService_test.js  
+

@@ -161,7 +161,7 @@ function* instanceNodeList(nodeList, workflow) {
   for (let i = 0; i < ops.length; i++) {
     let item = ops[i];
     copy.push({
-      _id: item._id,
+      _id: item._id.toString(),
       name: item.name,
       index: item.index,
       stat: item.stat
@@ -198,7 +198,7 @@ function* startUpWorkFlow(_workFlow) {
   nodeList[0].stat = "working";
   nodeList[0].beginTimestamp = Date.now();
 
-  yield workFlow_node_instance_dao.upload({
+  yield workFlow_node_instance_dao.update({
     _id : nodeList[0]._id,
     upload: {
       $set: {
@@ -212,7 +212,7 @@ function* startUpWorkFlow(_workFlow) {
   const nextNodeId = nodeList.length > 1 ? nodeList[1]._id : undefined;
   const nextNode = nextNodeId ? yield workFlow_node_instance_dao.queryById(nextNodeId): null;
 
-  yield workFlow_instance_dao.update({
+  return yield workFlow_instance_dao.update({
     _id: _._id,
     upload: {
       $set: {

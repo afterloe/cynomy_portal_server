@@ -101,9 +101,9 @@
             //删除编辑的样式
             $(".platform").removeClass('platformEdit');
             $(".product").removeClass('productSubEdit');
-            //$("input").attr('readonly','false');
+            $("input").attr('readonly','false');
             $("input").removeAttr("readonly");
-            $(".form-control").removeAttr("readonly");
+            //$(".form-control").removeAttr("readonly");
             $(this).hide();
         });
 

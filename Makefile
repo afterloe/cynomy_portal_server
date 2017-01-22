@@ -1,4 +1,4 @@
-.PHONY: check,mocha-test
+.PHONY: check,mocha-test,test
 
 PATH := ./node_modules/.bin:$(PATH)
 SHELL := /bin/bash
@@ -6,6 +6,9 @@ MOCHA_FILES := $(shell find ./test -name '*_test.js')
 
 # 轮询指令
 all: check mocha-test
+
+# 测试指令
+test: mocha-test test-cov
 
 # 检测代码是否符合标准
 check: $(shell find . -name '*.js' ! -path './node_modules/*' ! -path './mochawesome-reports/*' ! -path './webPage/*')

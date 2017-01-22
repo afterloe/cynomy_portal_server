@@ -13,18 +13,20 @@
                 let $currentCataMark = $(".currentCataMark" +  (index + 1));
                 $currentCataMark.show();
                 $currentCataMark.siblings().hide();
-            };
+            }
         });
         //点击平台
         $(".content").on("mousedown",'.platformName',function(e){
-            if(e.button != "2")return;//非右键单击  不响应
+            if(e.button != "2") {
+              return;//非右键单击  不响应
+            }
             let $this = $(this);
             if('pointer' != $this.css('cursor'))return;  //不是允许点击的样式 不响应
             let $menu = $this.find('.menu');
             if(!$menu.length){
                 $menu = $(".menu:first");
                 $this.append($menu);
-            };
+            }
             $menu.css({
                 top:e.offsetY +　10,
                 left: e.offsetX +　10
@@ -40,7 +42,7 @@
             let $target = $(e.target);
             if(!$target.hasClass('platformName') && !$target.parent().hasClass('platformName')){
                 $(".menu").hide();
-            };
+            }
         });
 
         //点击产品名
@@ -64,7 +66,9 @@
             let  $firstPlatform = $(".platform:first");
             $(this).parent().parent().parent().before($firstPlatform.clone().addClass('platformEdit'));
             //显示保存按钮
-            if(!$save.is(':visible'))$save.show();
+            if(!$save.is(':visible')){
+              $save.show();
+            }
 
         });
         //增加子级
@@ -72,7 +76,9 @@
             let  [$firstProduct,$platform]= [$(".product:first"),$(this).parent().parent().parent()];
             $platform.find('.platformDetail').prepend($firstProduct.clone().addClass('productSubEdit'));
             //显示保存按钮
-            if(!$save.is(':visible'))$save.show();
+            if(!$save.is(':visible')){
+              $save.show();
+            }
         });
         //点击保存，console输入的值
         $(".save").bind('click',function(){
@@ -87,8 +93,8 @@
                     console.log($product.find(".productName").val());//应用名
                     console.log($product.find(".linkURL").val());//应用链接地址
                     $product.find(".productLink").attr('data-link',$product.find(".linkURL").val()); //赋值到icon
-                };
-            };
+                }
+            }
 
             let $productEdited = $(".productSubEdit"); //编辑的子级
             for(var j = 0;j<$productEdited.length;j++){
@@ -96,7 +102,7 @@
                 console.log($product.find(".productName").val());//应用名
                 console.log($product.find(".linkURL").val());//应用链接地址
                 $product.find(".productLink").attr('data-link',$product.find(".linkURL").val()); //赋值到icon
-            };
+            }
 
             //删除编辑的样式
             $(".platform").removeClass('platformEdit');
@@ -180,6 +186,6 @@
                 $products.append($product);
             }
             $("tbody").append($platform);
-        };
+        }
     });
 })(jQuery);

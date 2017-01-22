@@ -618,3 +618,15 @@ commit by afterloe (lm6289511@gmail.com)
 > History.md  
 > package.json  
 
+
+1.0.3 / 2017-1-22 22:41:24
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 覆盖率测试方案启动，重写makefile文件，下一步开启用户登录方法编写和tag标签支持，
+
+
+### modify files
+> Makefile  
+> webPage/js/home.js  
+

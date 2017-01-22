@@ -1,4 +1,41 @@
 $(function(){
+	//弹窗出来后的一些操作
+	var input = document.getElementById("source");
+	//文件域选择文件时, 执行readFile函数,把上传的文档信息放置dataFile中
+	input.addEventListener('change',readFile,false);
+	var i = 1;
+	function readFile(){ 
+	    var file = this.files[0]; 
+	    console.log(file)
+	    console.log("文件名:"+file.name);
+		console.log("文件类型:"+file.type);
+		console.log("文件大小:"+file.size);
+		var date =  new Date();
+		var dateString = date.toLocaleDateString();
+
+		//把每次上传的文档名字传入dataFile
+		var html = "<li><span>"+(i++)+"、</span><span>"+file.name+"</span><span>"+dateString+"</span><span class='closeFile'></span></li>";
+		$(".dataFile").append(html);	
+		//点击关闭按钮，取消该项文档的添加
+		$(".closeFile").on("click",function(){
+			console.log($(this).parent("li"))
+			$(this).parent("li").remove();
+		});
+	}
+	//关闭zhezhaoc
+	$(".btn_close").on("click",function(){
+		$(".popup").css("display","none");
+	});
+	//打开遮罩层
+	$(".upload").on("click",function(){
+		$(".popup").css("display","block");
+	});
+
+	//点击关闭按钮，取消该项文档的添加
+	$(".dataClose").on("click",function(){
+		console.log($(this).parent("div").parent("li"))
+		$(this).parent("div").parent("li").remove();
+	});
 	//进入该页面，content_one从上往下运动
 	var width = $(window).width();
 	if(width > 768){
@@ -10,52 +47,71 @@ $(function(){
 		$(".content_one").animate({"margin-top":0},1000,function(){
 			$(".content_one").css("margin-top",0);
 		});
-		//根据ul.data的内容，改变tab每个li的背景图片
+		//根据ul.data的内容，改变tab每个li的背景图片 以此判断ul是否有上传的文档
 		if($(".dataPlan").find("li").length > 0){
 			$(".plan").css("background","url(images/3.1.1.png) no-repeat left center");
-			$(".plan").closest("li").find(".product").addClass("ac");
+
 		}
 		if($(".dataDesign").find("li").length > 0){
 			$(".design").css("background","url(images/3.2.2.png) no-repeat left center");
-			$(".design").closest("li").find(".product").addClass("ac");
+
 		}
 		if($(".dataDevelopment").find("li").length > 0){
 			$(".development").css("background","url(images/3.3.3.png) no-repeat left center");
-			$(".development").closest("li").find(".product").addClass("ac");
+
 		}
 		if($(".dataTest").find("li").length > 0){
 			$(".test").css("background","url(images/3.4.4.png) no-repeat left center");
-			$(".test").closest("li").find(".product").addClass("ac");
+
 		}
 		if($(".dataRelease").find("li").length > 0){
-			$(".release").css("background","url(images/3.5.5.png) no-repeat left center")
-			$(".release").closest("li").find(".product").addClass("ac");
+			$(".release").css("background","url(images/3.5.5.png) no-repeat left center");
+
 		};
+
+		//当每个ul下都有上传的文档时，更换产品菜单的背景图
+		if($(".dataRelease").find("li").length > 0 && $(".dataTest").find("li").length > 0 && $(".dataDevelopment").find("li").length > 0 &&　$(".dataDesign").find("li").length > 0　&& $(".dataPlan").find("li").length > 0){
+			$(".plan").css("background","url(images/plan.png) no-repeat left center");
+			$(".design").css("background","url(images/design.png) no-repeat left center");
+			$(".development").css("background","url(images/development.png) no-repeat left center");
+			$(".test").css("background","url(images/test.png) no-repeat left center");
+			$(".release").css("background","url(images/release.png) no-repeat left center")
+		}
 
 	}else{
 		$(".content_one").css("margin-top",0);
 		//根据ul.data的内容，改变tab每个li的背景图片
 		if($(".dataPlan").find("li").length > 0){
 			$(".plan").css("background","url(images/c44.png) no-repeat left center");
-			$(".plan").closest("li").find(".product").addClass("ac");
+
 		}
 		if($(".dataDesign").find("li").length > 0){
 			$(".design").css("background","url(images/c55.png) no-repeat left center");
-			$(".design").closest("li").find(".product").addClass("ac");
+
 		}
 		if($(".dataDevelopment").find("li").length > 0){
-			$(".development").css("background","url(images/c66.png) no-repeat left center");
-			$(".development").closest("li").find(".product").addClass("ac");
+			$(".development").css("background","url(images/1.5.png) no-repeat left center");
+
 		}
 		if($(".dataTest").find("li").length > 0){
 			$(".test").css("background","url(images/c77.png) no-repeat left center");
-			$(".test").closest("li").find(".product").addClass("ac");
+
 		}
 		if($(".dataRelease").find("li").length > 0){
 			$(".release").css("background","url(images/c88.png) no-repeat left center")
-			$(".release").closest("li").find(".product").addClass("ac");
+
 		};
+		//当每个ul下都有上传的文档时，更换产品菜单的背景图
+		if($(".dataRelease").find("li").length > 0 && $(".dataTest").find("li").length > 0 && $(".dataDevelopment").find("li").length > 0 &&　$(".dataDesign").find("li").length > 0　&& $(".dataPlan").find("li").length > 0){
+			$(".plan").css("background","url(images/1.3.png) no-repeat left center");
+			$(".design").css("background","url(images/1.4.png) no-repeat left center");
+			$(".development").css("background","url(images/1.5.png) no-repeat left center");
+			$(".test").css("background","url(images/1.6.png) no-repeat left center");
+			$(".release").css("background","url(images/1.7.png) no-repeat left center")
+		}
 	}
+
+
 	
 	
 

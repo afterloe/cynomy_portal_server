@@ -14,7 +14,7 @@
 const [{resolve}, {statSync, existsSync}] = [require("path"), require("fs")];
 const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwParametersError, throwNosuchThisWorkFlow, throwCfgFormatMismatch, throwLackParameters},
   {checkParameter, readyConfig}, {uploadNodeProduceList}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")),
-  require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "./workflowService"))];
+  require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "workflowService"))];
 
 const buildGoods = (_goods, workflow, name, _id) => {
   const lackParameter = checkParameter(_goods, "name", "path", "version", "author");
@@ -63,8 +63,10 @@ function* production(_temp) {
   if (!workflow) {
     throwNosuchThisWorkFlow();
   }
+
   const productionList = _cfg.production;
   const nodeList = workflow.nodeList;
+  const _ = {};
 
   for(let nodeName in productionList) {
     for(let i = 0; i < nodeList.length; i++) {
@@ -78,10 +80,18 @@ function* production(_temp) {
       }
     }
 
-    yield goods_dao.insertMany(productionList[nodeName]);
+    const {ops} = yield goods_dao.insertMany(productionList[nodeName]);
+    _[nodeName] = ops;
   }
+
+  return _;
+}
+
+function* cleanDocuments() {
+  return yield goods_dao.clean();
 }
 
 module.exports = {
+  cleanDocuments,
   production,
 };

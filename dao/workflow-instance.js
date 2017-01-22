@@ -21,7 +21,7 @@ const commonsLib = require(resolve(__dirname, "public"));
  * @return {Object}         [工作流实例对象]
  */
 const queryByName = function* (name) {
-  const _ = yield this.queryOne({
+  const _ = yield this.findOne({
     name,
     state: 200
   });

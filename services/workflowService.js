@@ -355,8 +355,15 @@ function* setLeader(_workFlow, _user, _index) {
   if (!nodeSubstitute) {
     throwNosuchThisWorkflowNodeInstance();
   }
-
-  const node = yield changeAndSyncNodeStat(nodeSubstitute._id, {owner: leader});
+  const {_id, name, mail, avatar} = leader;
+  const node = yield changeAndSyncNodeStat(nodeSubstitute._id, {
+    owner: {
+      _id,
+      name,
+      mail,
+      avatar,
+    }
+  });
   return yield syncNodeToWorkflow(node);
 }
 
@@ -479,6 +486,18 @@ function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
   return yield syncNodeToWorkflow(_);
 }
 
+function* workflowInfo(workflow) {
+  let _ = yield workFlow_instance_dao.queryById(workflow);
+  if (!_) {
+    _ = yield workFlow_instance_dao.queryByName(workflow);
+  }
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  return _;
+}
+
 function* cleanDocuments() {
   const [a,b,c,d] = yield [workFlow_instance_dao.clean(), workFlow_template_dao.clean(), workFlow_node_template_dao.clean(), workFlow_node_instance_dao.clean()];
   return {a,b,c,d};
@@ -487,6 +506,7 @@ function* cleanDocuments() {
 module.exports = {
   createWorkFlowNode,
   createWorkFlow,
+  workflowInfo,
   buildProduct,
   startUpWorkFlow,
   setLeader,

@@ -562,34 +562,13 @@ commit by afterloe (lm6289511@gmail.com)
   * master: workflow 优化 流程推动功能底层优化，节点添加对项目的状态的支持
   * master: workflow 优化 流程推动功能底层优化, 推送数据到工作流失败的异常
   * master: workflow 优化 流程推动功能底层优化，补全注释信息
+  * master: workflow 模块进入测试
 
 ### modify files
 > services/goodsService.js  
 > services/workflowService.js  
 ### new files
 > tools/chain.js   
-
-1.0.2 / 2017-1-19 23:17:40
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 产出方法完成
-
-### modify files
-> History.md  
-> services/goodsService.js  
-> services/workflowService.js  
-
-
-1.0.2 / 2017-1-19 23:24:27
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow 模块进入测试
-
-### new files
-> test/workflowService_test.js  
-
 
 1.0.2 / 2017-01-20 14:47:02
 ==================
@@ -600,60 +579,42 @@ commit by afterloe (lm6289511@gmail.com)
   * master: workflow bug修复：正常流程下创建工作流模版工作流节点模板功能测试代码测试完毕
   * master: workflow bug修复：没有工作节点或节点长度为0的时候也能创建工作流模版
   * master: workflow 单元测试优化，丰富测试用例，异常把控
+  * master: 产出方法完成
+  * master: userService 单元测试开启，补全测试用例，修改测试异常
 
 ### modify files
 > errors/i18nError.json  
 > services/workflowService.js  
 > test/workflowService_test.js  
 
-1.0.2 / 2017-1-20 16:15:19
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: userService 单元测试开启，补全测试用例，修改测试异常
-
-### modify files
-> History.md  
-> services/userService.js  
-> services/workflowService.js  
-> test/userService_test.js  
-> test/workflowService_test.js  
-
-
-1.0.2 / 2017-1-21 18:18:52
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 调试创建工作流方法，修正userList，修正筛选方案
-
-### modify files
-> config/index.js  
-> dao/public.js  
-> services/userService.js  
-> services/workflowService.js  
-> test/userService_test.js  
-> test/workflowService_test.js  
-
-
-1.0.2 / 2017-1-22 10:16:36
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: workflow 启动实例流程测试 完成
-
-### modify files
-> config/index.js  
-> services/workflowService.js  
-> test/workflowService_test.js  
-
-
 1.0.2 / 2017-1-22 14:23:46
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
+  * master: 调试创建工作流方法，修正userList，修正筛选方案
+  * master: workflow 启动实例流程测试 完成
   * master: workflow 修复设置leader功能
 
 ### modify files
+> config/index.js  
+> services/userService.js  
+> services/workflowService.js  
+> test/userService_test.js  
+> test/workflowService_test.js  
+> dao/public.js  
+
+1.0.2 / 2017-1-22 17:58:16
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加对底层的支持，修正推送修改信息到工作流节点上，去除设置leader会出现过多信息的bug
+
+### new files
+> test/goodsService_test.js  
+### modify files
+> History.md  
+> dao/workflow-instance.js  
+> services/goodsService.js  
 > services/workflowService.js  
 > test/workflowService_test.js  
 

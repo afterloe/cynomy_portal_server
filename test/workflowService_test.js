@@ -242,4 +242,46 @@ describe("workflowService", () => {
       }).then(() => done()).catch(err => done(err));
     });
   });
+
+  describe("#uploadNodeProduceList", () => {
+    before(done => {
+      co(function* () {
+        const instance = yield workflowService.workflowInfo("TRU Mate v1.1.1");
+        map.set("workflowInstance", instance);
+      }).then(() => done()).catch(err => done(err));
+    });
+
+    it("normal treatment", done => {
+      co(function* () {
+        const [workFlowNode, produceList, reason] = [map.get("workflowInstance").nodeList[0]._id,
+        [{
+          "author": "产出人员",
+          "name": "产出的文件名",
+          "path": "下载地址",
+          "createTimestamp": "产出时间",
+          "downCount": "下载次数",
+          "version": "版本"
+        },{
+          "author": "产出人员",
+          "name": "产出的文件名",
+          "path": "下载地址",
+          "createTimestamp": "产出时间",
+          "downCount": "下载次数",
+          "version": "版本"
+        },{
+          "author": "产出人员",
+          "name": "产出的文件名",
+          "path": "下载地址",
+          "createTimestamp": "产出时间",
+          "downCount": "下载次数",
+          "version": "版本"
+        }],"这周完成了项目的基本架构方案和对应的ppt"];
+        const _ = yield workflowService.uploadNodeProduceList(workFlowNode, {produceList, reason});
+        deepStrictEqual(1, _.result.n);
+        deepStrictEqual(1, _.result.nModified);
+        deepStrictEqual(1, _.result.ok);
+      }).then(() => done()).catch(err => done(err));
+    });
+
+  });
 });

@@ -1,26 +1,43 @@
 /*首页中间内容区域样式*/
+
 .structure {
     background-color: #ffffff;
 }
 
+
 .feedback{
+   /*  position:absolute;
+   right:0;
+   top:1.5em;
+   margin-left:-7em;
+   width:7em;
+   height:2em;
+   background: url('../images/feedback.png') no-repeat center;
+   cursor:pointer;
+   background-size:contain; */
     position:absolute;
-    //right:0;
+    right:0.5em;
     top:1.5em;
     margin-left:-7em;
-    //width:7em;
-    //height:2em;
+    width:140px;
+    height:40px;
     background: url('../images/feedback.png') no-repeat center;
     cursor:pointer;
     background-size:contain;
-    right:0.5em;
-    width:140px;
-    height:40px;
 }
 .feedback:hover{
-
+   /*  position:absolute;
+   right:0;
+   top:1.5em;
+   margin-left:-7em;
+   width:7em;
+   height:2em;
+   background: url('../images/feedback.png') no-repeat center;
+   cursor:pointer;
+   background-size:contain; */
+    
     background: url('../images/2-selected.png') no-repeat center;
-   
+    
 }
 
 .dir-menu {
@@ -32,6 +49,12 @@
 }
 
 .dir-menu > li {
+    /* list-style: none;
+    display: -webkit-inline-box;
+    width: 19.6em;
+    height: 7.7em;
+    margin: 0 2rem 0 5rem;
+    cursor: pointer; */
     list-style: none;
     display: -webkit-inline-box;
     width: 19.6em;
@@ -41,12 +64,15 @@
 }
 
 @media only screen and (max-width: 1100px) {
+    .dir-menu >li.first{
+        margin-left:4.5em;
+    }
   .dir-menu > li {
       list-style: none;
       display: -webkit-inline-box;
       width: 20em;
       height: 7.1em;
-      margin: 0 2rem 0 5rem;
+      margin: 2rem 0.5rem 0 0rem;
       cursor: pointer;
   }
 }
@@ -63,15 +89,27 @@
 }
 
 @media only screen and (max-width: 690px) {
-  .dir-menu > li {
-      list-style: none;
-      display: -webkit-inline-box;
-      width: 20em;
-      height: 7.1em;
-      margin: 1em 1em 0 2.5em;
-      cursor: pointer;
-  }
-  .feedback{display: none;}
+    .dir-menu > li {
+        list-style: none;
+        display: -webkit-inline-box;
+        width: 20em;
+        height: 7.1em;
+        margin: 1em 1em 0 5em;
+        cursor: pointer;
+    }
+    .feedback{
+       display: none;
+    }
+    .catalogShadow{
+        
+        margin-left:0;
+        margin-right:0;
+    }
+    .table-responsive {
+
+        margin-left:0;
+        margin-right:0;
+    }
 }
 .searchIcon{
     background: url(../images/searchIcon.png) center no-repeat;
@@ -100,6 +138,8 @@
     height:2.5em;
     background-color: #ccc;
     position:relative;
+    margin-left:15px;
+    margin-right:15px;
 }
 .catalogMark{
     float:left;
@@ -147,7 +187,7 @@
 }
 @media screen and (max-width: 767px) {
     .catalogShadow{
-        height:1.5em;
+        height:1.5em;margin-left:0;margin-right:0;
     }
     .save{
         right:0.25em;
@@ -155,12 +195,18 @@
         width:1em;
         height:1em;
     }
-    .feedback{display: none;}
+    .table-responsive {
+
+        margin-left:0;
+        margin-right:0;
+    }
 }
 
 .table-responsive {
     overflow: hidden;
     padding-bottom:5em;
+    margin-left:15px;
+    margin-right:15px;
 }
 .platformName{
     background-color: #f6f6f6;
@@ -211,7 +257,6 @@
         display: block;
         width:auto;
     }
-    .feedback{display: none;}
 }
 .product{
     font-size: 0;
@@ -240,7 +285,6 @@
 }
 @media screen and (max-width: 649px) {
     .productName{width:100%;display: block;}
-    .feedback{display: none;}
 }
 .icon,.line{
     display: inline-block;
@@ -332,7 +376,15 @@
     .productEdit .productName,.productEdit .linkURL{
         border:solid 1px #999;
     }
-    .feedback{display: none;}
+    .catalogShadow{
+        margin-left:0;margin-right:0;
+    }
+    .table-responsive {
+
+        margin-left:0;
+        margin-right:0;
+    }
+
 }
 
 /*可编辑样式*/

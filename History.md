@@ -660,3 +660,17 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/user.js  
 > services/userService.js  
 
+
+1.0.3 / 2017-1-23 20:13:22
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * dev: 邮件辅助工具 激活邮件发送功能
+
+
+### new files
+> tools/mailHelper.js  
+
+### modify files
+> config/index.js  
+

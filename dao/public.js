@@ -112,9 +112,18 @@ function* clean() {
   return this.deleteMany({});
 }
 
+/**
+ * 查询文档集合
+ *
+ * @param  {Object}    [filed={}]                [过滤字段，如果传入的对象存在key则只有key否则包含对象所有的属性]
+ * @param  {Number}    [number=100]              [分页数量]
+ * @param  {Number}    [page=0]                  [分页列表]
+ * @param  {String}    [order="createTimestamp"] [排序字段]
+ * @return {Array}                               [文档数组]
+ */
 function* queryAll(filed = {}, number = 100, page = 0, order = "createTimestamp") {
   page < 1 ? page = 0 : page--;
-  return this.find({
+  return yield this.find({
     state : 200
   }, filed).sort({[order]: -1}).skip(number * page).limit(number).toArray();
 }

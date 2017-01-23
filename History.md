@@ -644,3 +644,19 @@ commit by afterloe (lm6289511@gmail.com)
 > services/tagService.js  
 > services/workflowService.js  
 
+
+1.0.3 / 2017-1-23 19:23:40
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: userService 构建基础邮件登录系统
+
+
+### new files
+> bin/  
+
+### modify files
+> dao/public.js  
+> dao/user.js  
+> services/userService.js  
+

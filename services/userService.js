@@ -12,7 +12,7 @@
 "use strict";
 
 const [{resolve}, xlsx] = [require("path"), require("node-xlsx").default];
-const [{user_dao}, {throwLackParameters, throwParametersError, throwUserExist}, {randomNum, checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+const [{user_dao}, {throwLackParameters, throwParametersError, throwOauthError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
 
 /**
@@ -63,7 +63,7 @@ const removDuplication = users => {
     }
     flag === true ? null:_.push(users[i]);
   }
-  
+
   return _;
 };
 
@@ -140,8 +140,46 @@ function* createUsers (_users) {
   throwParametersError();
 }
 
-function* getUserList () {
-  return yield user_dao.queryAll();
+/**
+ * 获取正常状态下所有用户列表
+ *
+ * @param  {Integer}    number [单页分页数量]
+ * @param  {Integer}    page   [分码]
+ * @return {Array}             [用户列表]
+ */
+function* getUserList (number, page) {
+  return yield user_dao.queryAll({}, number, page);
+}
+
+function* login(mail, permit) {
+  if (!mail || !permit) {
+    throwLackParameters();
+  }
+
+  const _ = yield user_dao.login(mail, permit);
+  if (!_) {
+    throwOauthError();
+  }
+
+  // TODO 记录登录信息(登录时间，ip)
+  return _;
+}
+
+function* obmitLoginPermit(mail){
+  const _ = yield user_dao.findByMail(mail);
+  if (!_) {
+    throwUserNotExist();
+  }
+  const permit = uuidCode();
+
+  return yield user_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        permit,
+      }
+    }
+  });
 }
 
 function* cleanDocuments() {
@@ -155,4 +193,6 @@ module.exports = {
   createUser,
   getUserList,
   cleanDocuments,
+  login,
+  obmitLoginPermit,
 };

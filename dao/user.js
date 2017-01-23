@@ -15,12 +15,18 @@ const {resolve} = require("path");
 const commonsLib = require(resolve(__dirname, "public"));
 
 const checkExist = function* ({name, mail}) {
-  const _doc = yield this.findOne({name, mail});
-  return _doc ? true : false;
+  const _ = yield this.findOne({name, mail});
+  return _ ? true : false;
+};
+
+const findByMail = function* (mail){
+  const _ = yield this.findOne({mail});
+  return _;
 };
 
 const classMethod = {
   checkExist,
+  findByMail,
 };
 
 Object.assign(commonsLib, classMethod);

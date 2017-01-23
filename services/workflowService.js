@@ -14,7 +14,8 @@
 const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
   {throwLackParameters, throwParametersError, throwObjectExists, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn,
-  throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+  throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] =
+[require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
 /**
  * 构建工作流节点模板
@@ -254,6 +255,7 @@ function* buildProduct(_workFlow, autoStart) {
    const nodeList = buildWorkFlowNodeList(workFlowTemplate.chainNodes);
    const _ = {
      state : 200,
+     tags: [],
    };
    Object.assign(_, {
      name: _workFlow.name,
@@ -486,6 +488,11 @@ function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
   return yield syncNodeToWorkflow(_);
 }
 
+/**
+ * 获取工作信息
+ * @param  {String}    workflow [工作流实例名 或 工作流id]
+ * @return {Object}          [工作流对象]
+ */
 function* workflowInfo(workflow) {
   let _ = yield workFlow_instance_dao.queryById(workflow);
   if (!_) {
@@ -498,9 +505,39 @@ function* workflowInfo(workflow) {
   return _;
 }
 
+/**
+ * 清楚数据库信息
+ * @return {Generator} [description]
+ */
 function* cleanDocuments() {
   const [a,b,c,d] = yield [workFlow_instance_dao.clean(), workFlow_template_dao.clean(), workFlow_node_template_dao.clean(), workFlow_node_instance_dao.clean()];
   return {a,b,c,d};
+}
+
+function* setTag(workflow, tag) {
+  if (!tag || !tag.name) {
+    throwLackParameters();
+  }
+  const _ = yield workFlow_instance_dao.queryById(workflow);
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  const tags = _.tags;
+  const flag = tags.find(_tag => _tag.name === tag.name);
+  if (flag) {
+    throwOperationFailed();
+  }
+
+  tags.push(tag);
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        tags,
+      }
+    }
+  });
 }
 
 module.exports = {
@@ -513,5 +550,7 @@ module.exports = {
   uploadNodeProduceList,
   promoteProcess,
   retroversion,
+
+  setTag,
   cleanDocuments,
 };

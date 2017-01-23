@@ -630,3 +630,17 @@ commit by afterloe (lm6289511@gmail.com)
 > Makefile  
 > webPage/js/home.js  
 
+
+1.0.3 / 2017-1-23 18:43:15
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改makefile构建流程，忽略测试覆盖率代码生成报表的检测，支持工作流实例添加tag
+
+
+### modify files
+> Makefile  
+> "doc/db  
+> services/tagService.js  
+> services/workflowService.js  
+

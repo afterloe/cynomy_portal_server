@@ -11,7 +11,7 @@ all: check mocha-test
 test: mocha-test test-cov
 
 # 检测代码是否符合标准
-check: $(shell find . -name '*.js' ! -path './node_modules/*' ! -path './mochawesome-reports/*' ! -path './webPage/*')
+check: $(shell find . -name '*.js' ! -path './node_modules/*' ! -path './coverage/*' ! -path './mochawesome-reports/*' ! -path './webPage/*')
 	@jshint $^
 
 # mocha测试

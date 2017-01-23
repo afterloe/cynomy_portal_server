@@ -39,7 +39,7 @@ const buildTarget = _target => {
  * @throw  {Error}              [标签存在则会抛出异常]
  * @return {Generator}          [description]
  */
-function* createTarget(_target){
+function* createTag(_target){
   const lackParameter = checkParameter(_target, "name");
   if (lackParameter) {
     throwLackParameters(lackParameter);
@@ -52,6 +52,12 @@ function* createTarget(_target){
   return yield tag_dao.insert(buildTarget(_target));
 }
 
+function* obmitTagsList(number, page) {
+  const _ = yield tag_dao.queryAll({}, number, page);
+  return _;
+}
+
 module.exports = {
-  createTarget,
+  createTag,
+  obmitTagsList,
 };

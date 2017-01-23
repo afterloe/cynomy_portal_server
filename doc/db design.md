@@ -58,6 +58,7 @@
 ```json
 {
   "name": "实例名",
+  "tags": "标签列表",
   "template": "流程模板",
   "members": "参与该工作流的人员列表",
   "status": "实例节点 (work-flow instance node)",

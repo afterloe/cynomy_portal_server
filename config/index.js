@@ -44,12 +44,12 @@ siteConfig.set("security", { // 安全设置
 });
 siteConfig.set("mailSender", { // 邮件功能设置
   enable : false, // 是否开启邮件发送功能
-  from: "tru@jwis.cn", // 你的邮件的发件人
+  from: "", // 你的邮件的发件人
   port: 25, // 邮件端口
-  host: "smtp.jwis.cn", // 发件箱端口
+  host: "", // 发件箱端口
   auth: {  // 发件人设置
-    user: "tru@jwis.cn", // 发件人账号
-    pass: "Qwer1234" // 发件人密码
+    user: "", // 发件人账号
+    pass: "" // 发件人密码
   }
 });
 

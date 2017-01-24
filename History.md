@@ -685,3 +685,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > config/index.js  
 
+
+1.0.3 / 2017-1-24 21:56:15
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: dao中公共方法添加对标签的检索功能，workflow新增方法支持标签搜索工作流实例
+
+
+### modify files
+> dao/public.js  
+> services/workflowService.js  
+

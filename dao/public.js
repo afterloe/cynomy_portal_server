@@ -128,6 +128,17 @@ function* queryAll(filed = {}, number = 100, page = 0, order = "createTimestamp"
   }, filed).sort({[order]: -1}).skip(number * page).limit(number).toArray();
 }
 
+function* searchByTags(tags){
+  return this.find({
+    tags,
+    state: 200
+  }, {
+    name : 1,
+    tags: 1,
+    beginTimestamp: 1,
+  });
+}
+
 module.exports = {
   insert,
   update,
@@ -137,4 +148,5 @@ module.exports = {
   clean,
   remove,
   insertMany,
+  searchByTags,
 };

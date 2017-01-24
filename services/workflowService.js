@@ -540,6 +540,15 @@ function* setTag(workflow, tag) {
   });
 }
 
+function* searchProduct(tag) {
+  if ("string" !== typeof tag) {
+    throwParametersError();
+  }
+
+  const _ = yield workFlow_instance_dao.searchByTags(tag);
+  return _;
+}
+
 module.exports = {
   createWorkFlowNode,
   createWorkFlow,
@@ -552,5 +561,6 @@ module.exports = {
   retroversion,
 
   setTag,
+  searchProduct,
   cleanDocuments,
 };

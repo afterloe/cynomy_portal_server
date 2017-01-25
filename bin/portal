@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+/**
+  * afterloe - cynomy_portal_server/bin/portal
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <afterloeliu@jwis.cn> (https://github.com/afterloe)
+  * Date:
+  *   2017-1-23 18:49:29
+  */
+"use strict";
+
+const [{resolve}, program] = [require("path"), require("commander")];
+
+// 设置generatorTar命令行版本
+program.version(require(resolve(__dirname, "..", "package")).version);
+
+// help 命令
+program.
+  command("help").
+  description("显示使用帮助").
+  action(() => program.outputHelp());
+
+// 测试*.tar包是否符合标准
+program.
+  command("test <tar>").
+  description("测试tar包数据是否正常").
+  option("-o, --out [out]", "输出测试结果").
+  action((tar, options) => console.log(tar, options));
+
+// 构建静态页面
+program.
+  command("build").
+  description("构建页面").
+  option("-s, --source <source>", "资源包").
+  action(options => console.log(options));
+
+// 导入数据
+program.
+  command("import <tar>").
+  description("导入tar包数据").
+  action((tar, options) => console.log(tar, options));
+
+// 导出数据
+program.
+  command("export <path>").
+  description("导出tar包数据").
+  option("-o, --outDir <outDir>", "导出目录").
+  action((path, options) => console.log(tar, options));
+
+if (process.argv.length < 3 ) {
+  process.argv.push("help");
+}
+
+program.parse(process.argv);

@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "co": "^4.6.0",
+    "commander": "^2.9.0",
     "koa": "^1.2.4",
     "koa-bodyparser": "^2.3.0",
     "koa-pug": "^3.0.0-1",

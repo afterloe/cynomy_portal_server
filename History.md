@@ -697,3 +697,21 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/public.js  
 > services/workflowService.js  
 
+
+1.0.3 / 2017-1-25 20:58:38
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加管理脚本进行数据导入和导出
+
+
+### new files
+> bin/portal  
+> services/cliService.js  
+
+### modify files
+> package.json  
+
+### delete files
+> bin/generatorTar  
+

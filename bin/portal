@@ -13,6 +13,7 @@
 "use strict";
 
 const [{resolve}, program] = [require("path"), require("commander")];
+const lib = resolve(__dirname, "..", "lib");
 
 // 设置generatorTar命令行版本
 program.version(require(resolve(__dirname, "..", "package")).version);
@@ -32,10 +33,9 @@ program.
 
 // 构建静态页面
 program.
-  command("build").
-  description("构建页面").
-  option("-s, --source <source>", "资源包").
-  action(options => console.log(options));
+  command("build <path>").
+  description("构建数据tar包").
+  action((sourcePath, options) => require(resolve(lib, "buildTar"))(sourcePath, options));
 
 // 导入数据
 program.

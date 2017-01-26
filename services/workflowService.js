@@ -490,6 +490,7 @@ function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
 
 /**
  * 获取工作信息
+ *
  * @param  {String}    workflow [工作流实例名 或 工作流id]
  * @return {Object}          [工作流对象]
  */
@@ -506,7 +507,7 @@ function* workflowInfo(workflow) {
 }
 
 /**
- * 清楚数据库信息
+ * 清除数据库信息
  * @return {Generator} [description]
  */
 function* cleanDocuments() {

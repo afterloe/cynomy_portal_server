@@ -715,3 +715,21 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > bin/generatorTar  
 
+
+1.0.3 / 2017-1-26 22:2:48
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 基础功能添加压缩文件夹
+
+
+### new files
+> lib/  
+
+### modify files
+> bin/portal  
+> services/workflowService.js  
+
+### delete files
+> services/cliService.js  
+

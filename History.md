@@ -744,3 +744,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > lib/buildTar.js  
 
+
+1.0.3 / 2017-1-27 11:15:33
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完善tar打包功能，采用相对路径进行操作
+
+
+### modify files
+> lib/buildTar.js  
+

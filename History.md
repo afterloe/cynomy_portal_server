@@ -733,3 +733,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > services/cliService.js  
 
+
+1.0.3 / 2017-1-27 10:50:40
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完善tar打包功能
+
+
+### modify files
+> lib/buildTar.js  
+

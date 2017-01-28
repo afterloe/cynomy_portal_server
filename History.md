@@ -767,3 +767,14 @@ commit by afterloe (lm6289511@gmail.com)
 > bin/portal  
 > services/workflowService.js  
 
+
+1.0.3 / 2017-1-28 18:10:45
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 回退流程时自动关闭结束时间戳
+
+
+### modify files
+> services/workflowService.js  
+

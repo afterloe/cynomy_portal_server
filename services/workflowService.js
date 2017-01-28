@@ -299,6 +299,10 @@ function* obmitStartWorkflow(_id) {
   if (!_.beginTimestamp) { // 如果没有启动是没有启动时间戳
     throwOperationFailed();
   }
+
+  if (_.endTimestamp) { // 如果有关闭时间戳则说明工作流已经关闭
+    throwOperationFailed();
+  }
   return _;
 }
 
@@ -415,7 +419,10 @@ function* retroversion(_workFlow) {
       $set: {
         status: newStatus,
         nextNode: newNextNode,
-        previousNode: newPreviousNode
+        previousNode: newPreviousNode,
+      },
+      $unset: {
+        endTimestamp: 1
       }
     }
   });

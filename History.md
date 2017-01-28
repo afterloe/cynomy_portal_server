@@ -755,3 +755,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > lib/buildTar.js  
 
+
+1.0.3 / 2017-1-28 18:6:27
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加结束流程方法
+
+
+### modify files
+> bin/portal  
+> services/workflowService.js  
+

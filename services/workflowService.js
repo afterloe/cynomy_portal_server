@@ -421,6 +421,25 @@ function* retroversion(_workFlow) {
   });
 }
 
+function* endProcess(_workFlow) {
+  if (!_workFlow) {
+    throwLackParameters();
+  }
+  const _ = this._id ? this : yield obmitStartWorkflow(_workFlow);
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        status: null,
+        nextNode: null,
+        previousNode: null,
+        endTimestamp: Date.now()
+      }
+    }
+  });
+}
+
 /**
  * 推动流程
  *
@@ -432,8 +451,9 @@ function* promoteProcess(_workFlow) {
   const {nextNode, status} = _;
 
   if (!nextNode) {
-    throwOperationFailed();
+    return yield endProcess.call(_);
   }
+
   const timeStamp =  Date.now();
   const [newStatus, newPreviousNode] = yield [changeAndSyncNodeStat(nextNode._id, {stat: "working", beginTimestamp: timeStamp}), changeAndSyncNodeStat(status._id, {stat: "finish", endTimestamp: timeStamp})];
 

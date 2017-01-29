@@ -12,7 +12,8 @@
 "use strict";
 
 const [{createServer}, {resolve}] = [require("http"), require("path")];
-const [registry, ws] = [require(resolve(__dirname, "..", "servers", "registry")), require(resolve(__dirname, "..", "servers", "websocket"))];
+const servers = resolve(__dirname, "..", "servers");
+const [registry, ws] = [require(resolve(servers, "registry")), require(resolve(servers, "websocket"))];
 
 const server = createServer(registry.callback());
 ws(server);

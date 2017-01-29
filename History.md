@@ -800,3 +800,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### new files
 > tools/_util.html  
 
+
+1.0.3 / 2017-1-29 21:43:34
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws 接口职责连优化，支持多种协议
+
+
+### modify files
+> distributed/slave.js  
+> servers/websocket.js  
+

@@ -778,3 +778,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > services/workflowService.js  
 
+
+1.0.3 / 2017-1-29 18:46:40
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: mail sender 配置使用
+
+
+### modify files
+> tools/mailHelper.js  
+

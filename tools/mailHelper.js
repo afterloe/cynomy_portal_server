@@ -12,7 +12,6 @@
 "use strict";
 
 const [nodemailer, {noop}, {hostname}, {resolve}] = [require('nodemailer'), require('utility'), require('os'), require("path")];
-const {subMail} = require(resolve(__dirname, "utilities"));
 const [SMTP, TRANSPORT, NODENAME] = [Symbol("SMTP"), Symbol("TRANSPORT"), Symbol("NODENAME")];
 const {get} = require(resolve(__dirname, "..", "config"));
 
@@ -31,7 +30,7 @@ module[SMTP] = get("mailSender");
 exports.notice = (to, level, subject, html, callback = noop) => {
   subject = `[${module[NODENAME]}][${level}][${hostname()}] ${subject}`; //标题
   html = String(html);//html内容
-  if (mailSender.enable === false) {
+  if (module[SMTP].enable === false) {
     console.log("[send mail debug] [%s] to: %s, subject: %s\n%s", new Date(), to, subject, html);
     return callback();
   }
@@ -54,10 +53,10 @@ LEVELS.map(level => {
  */
 exports.sendPromise = (to, subject, html) => new Promise((resolve, reject) => {
   if (!module[TRANSPORT]) {
-    module[TRANSPORT] = nodemailer.createTransport(smtpConfig);
+    module[TRANSPORT] = nodemailer.createTransport(module[SMTP]);
   }
 
-  transport.sendMail({
+  module[TRANSPORT].sendMail({
     from: module[SMTP].from || module[SMTP].sender,
     to,
     subject,

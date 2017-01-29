@@ -1,0 +1,38 @@
+<!--
+  create by afterloe, MIT Licensed
+
+  cynomy_portal_server/tools/_util.html
+  Copyright(c) afterloe. 2017-1-29 18:48:24
+  Authors: afterloe <afterloeliu@jwis.cn> (https://github.com/afterloe)
+-->
+<html>
+
+<head>
+    <meta charset="utf8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1,user-scalable=no" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>cynomys config page</title>
+</head>
+
+<body>
+</body>
+<script>
+    var ws = new WebSocket("ws://127.0.0.1:15024", "echo-protocol");
+
+    ws.onopen = function() {
+      var number = Math.round(Math.random() * 0xFFFFFF);
+      ws.send(number);
+    };
+
+    ws.onmessage = function(evt) {
+        var received_msg = evt.data;
+        console.log(received_msg);
+    };
+
+    ws.onclose = function() {
+        console.log("连接已关闭...");
+    };
+</script>
+
+</html>

@@ -13,26 +13,35 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>cynomys config page</title>
+    <script>
+      const ws = new WebSocket("ws://127.0.0.1:15024", "node-protocol");
+      Object.assign(ws, {
+        onopen: () => console.log("webSocket is connection Success!"),
+        onmessage: evt => {
+          const {data} = evt;
+          console.log(data);
+        },
+        onclose: () => console.log("webSocket is close!"),
+      });
+    </script>
 </head>
 
 <body>
+  <h1>
+    <button onclick="obmitWorkflowInfo();">获取工作流信息</button><br/>
+    <button onclick="obmitWorkflowTemplate();">获取工作流模版信息</button><br/>
+    <button onclick="obmitWorkflowNode();">获取工作流节点信息</button><br/>
+    <button onclick="obmitUsers();">获取人员信息</button><br/>
+    <button onclick="userManager();">人员管理</button><br/>
+    <button onclick="createWorkflowTemplate();">创建工作流模版</button><br/>
+    <button onclick="createProduce();">创建产品</button><br/>
+    <button onclick="updateWorkflow();">更新产品节点</button><br/>
+  </h1>
 </body>
 <script>
-    var ws = new WebSocket("ws://127.0.0.1:15024", "echo-protocol");
-
-    ws.onopen = function() {
-      var number = Math.round(Math.random() * 0xFFFFFF);
+    const obmitWorkflowInfo = () => {
+      const number = Math.round(Math.random() * 0xFFFFFF);
       ws.send(number);
     };
-
-    ws.onmessage = function(evt) {
-        var received_msg = evt.data;
-        console.log(received_msg);
-    };
-
-    ws.onclose = function() {
-        console.log("连接已关闭...");
-    };
 </script>
-
 </html>

@@ -13,35 +13,80 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>cynomys config page</title>
-    <script>
-      const ws = new WebSocket("ws://127.0.0.1:15024", "node-protocol");
-      Object.assign(ws, {
-        onopen: () => console.log("webSocket is connection Success!"),
-        onmessage: evt => {
-          const {data} = evt;
-          console.log(data);
-        },
-        onclose: () => console.log("webSocket is close!"),
-      });
-    </script>
 </head>
 
 <body>
-  <h1>
-    <button onclick="obmitWorkflowInfo();">获取工作流信息</button><br/>
-    <button onclick="obmitWorkflowTemplate();">获取工作流模版信息</button><br/>
-    <button onclick="obmitWorkflowNode();">获取工作流节点信息</button><br/>
-    <button onclick="obmitUsers();">获取人员信息</button><br/>
-    <button onclick="userManager();">人员管理</button><br/>
-    <button onclick="createWorkflowTemplate();">创建工作流模版</button><br/>
-    <button onclick="createProduce();">创建产品</button><br/>
-    <button onclick="updateWorkflow();">更新产品节点</button><br/>
-  </h1>
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-light bg-faded" style="background-color: rgba(255,255,255,.15);">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="#">Cynomys</a>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">系统设置</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">个性化设置</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">查看节点</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">重启节点</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="搜一搜">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+            </form>
+        </div>
+    </nav>
+
+    <div class="container-fluid" style="padding-top: 4rem;">
+        <div class="row">
+            <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">概况 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">人员信息</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">工作流信息</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">文件列表</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <main class="col-sm-9">
+                <p id="console">Hello word!</p>
+            </main>
+        </div>
+    </div>
 </body>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script>
-    const obmitWorkflowInfo = () => {
-      const number = Math.round(Math.random() * 0xFFFFFF);
-      ws.send(number);
-    };
+  const ws = new WebSocket("ws://127.0.0.1:15024", "node-protocol");
+  Object.assign(ws, {
+    onopen: () => console.log("webSocket is connection Success!"),
+    onmessage: evt => {
+      const {data} = evt;
+      $("#console").html(data);
+    },
+    onclose: () => $("#console").html(`socket client is up`),
+  });
 </script>
+
 </html>

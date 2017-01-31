@@ -67,6 +67,31 @@
             </nav>
 
             <main class="col-sm-9">
+              <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
                 <h1>node console</h1>
                 <p id="console">Connection to Cynomys node ...</p>
                 <div id="userInfo">
@@ -117,9 +142,38 @@
                 </div>
                 <div id="workflowInfo">
                   <h2>工作流信息</h2>
+                  <div class="row">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
                 </div>
                 <div id="filesInfo">
                   <h2>文件列表</h2>
+                  <div class="row">
+
+                    <div class="card" style="height: 11rem;">
+                      <div class="card-block">
+                        <h4 class="card-title">大明湖畔.pptx</h4>
+                        <p class="card-text">afterloe 上传 于2017-01-23 12:24:13</p>
+                        <a href="#" class="btn btn-primary">下载</a>
+                        <a href="#" class="btn btn-danger">删除</a>
+                      </div>
+                    </div>
+
+                  </div>
                 </div>
             </main>
         </div>
@@ -140,6 +194,7 @@
     },
     onclose: () => $("#console").html(`socket client is up`),
   });
+
 </script>
 <script>
   $("#userInfo").hide();

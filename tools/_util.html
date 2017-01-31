@@ -50,24 +50,77 @@
     <div class="container-fluid" style="padding-top: 4rem;">
         <div class="row">
             <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
-                <ul class="nav nav-pills flex-column">
+                <ul class="nav nav-pills flex-column" id="leftItem">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">概况 <span class="sr-only">(current)</span></a>
+                        <a class="nav-link active" id="overwrite" href="#">概况</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">人员信息</a>
+                        <a class="nav-link" id="nav-userInfo" href="#">人员信息</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">工作流信息</a>
+                        <a class="nav-link" id="nav-workflowInfo" href="#">工作流信息</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">文件列表</a>
+                        <a class="nav-link" id="nav-filesInfo" href="#">文件列表</a>
                     </li>
                 </ul>
             </nav>
 
             <main class="col-sm-9">
-                <p id="console">Hello word!</p>
+                <h1>node console</h1>
+                <p id="console">Connection to Cynomys node ...</p>
+                <div id="userInfo">
+                  <h2>人员信息</h2>
+                  <div class="float-right">
+                    <button type="button" class="btn btn-primary">导入用户数据</button>
+                    <button type="button" class="btn btn-secondary">导出用户数据</button>
+                  </div>
+                  <table class="table table-striped">
+                    <thead class="thead-inverse">
+                      <tr>
+                        <th>#</th>
+                        <th>姓名</th>
+                        <th>邮箱</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr scope="row">
+                        <td>1,001</td>
+                        <td>namo</td>
+                        <td>namo@jwis.cn</td>
+                        <td>
+                          <button type="button" class="btn btn-link">删除</button>
+                          <button type="button" class="btn btn-link">重置密码</button>
+                        </td>
+                      </tr>
+                      <tr scope="row">
+                        <td>1,002</td>
+                        <td>afterloe</td>
+                        <td>afterloe@jwis.cn</td>
+                        <td>
+                          <button type="button" class="btn btn-link">删除</button>
+                          <button type="button" class="btn btn-link">重置密码</button>
+                        </td>
+                      </tr>
+                      <tr scope="row">
+                        <td>1,003</td>
+                        <td>audy</td>
+                        <td>audy@jwis.cn</td>
+                        <td>
+                          <button type="button" class="btn btn-link">删除</button>
+                          <button type="button" class="btn btn-link">重置密码</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div id="workflowInfo">
+                  <h2>工作流信息</h2>
+                </div>
+                <div id="filesInfo">
+                  <h2>文件列表</h2>
+                </div>
             </main>
         </div>
     </div>
@@ -80,7 +133,7 @@
 <script>
   const ws = new WebSocket("ws://127.0.0.1:15024", "node-protocol");
   Object.assign(ws, {
-    onopen: () => console.log("webSocket is connection Success!"),
+    onopen: () => $("#console").html(`webSocket is connection Success!`),
     onmessage: evt => {
       const {data} = evt;
       $("#console").html(data);
@@ -88,5 +141,41 @@
     onclose: () => $("#console").html(`socket client is up`),
   });
 </script>
+<script>
+  $("#userInfo").hide();
+  $("#workflowInfo").hide();
+  $("#filesInfo").hide();
 
+  const clickFunction = _ => {
+    $("#leftItem").find("a").each(function(){
+      $(this).removeClass("active");
+    });
+    _.addClass("active");
+  }
+
+  $("#overwrite").click(function() {
+    clickFunction($(this));
+    $("#userInfo").hide();
+    $("#workflowInfo").hide();
+    $("#filesInfo").hide();
+  });
+  $("#nav-userInfo").click(function() {
+    clickFunction($(this));
+    $("#userInfo").show();
+    $("#workflowInfo").hide();
+    $("#filesInfo").hide();
+  });
+  $("#nav-workflowInfo").click(function() {
+    clickFunction($(this));
+    $("#userInfo").hide();
+    $("#workflowInfo").show();
+    $("#filesInfo").hide();
+  });
+  $("#nav-filesInfo").click(function() {
+    clickFunction($(this));
+    $("#userInfo").hide();
+    $("#workflowInfo").hide();
+    $("#filesInfo").show();
+  });
+</script>
 </html>

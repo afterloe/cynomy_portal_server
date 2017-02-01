@@ -856,3 +856,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-1 13:53:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复导航栏和进度条信息
+
+
+### modify files
+> tools/_util.html  
+

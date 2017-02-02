@@ -889,3 +889,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-2 16:6:42
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 定义http借口
+
+
+### modify files
+> servers/websocket.js  
+> tools/_util.html  
+

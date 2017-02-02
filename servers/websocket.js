@@ -43,12 +43,15 @@ const ws4echo = (protocol, request, origin) => {
 
 const ws4node = (protocol, request, origin) => {
   if ("node-protocol" === protocol) {
-    const conn = request.accept(protocol, origin);
+    const connection = request.accept(protocol, origin);
     console.log("%s Welcome accept cynomy node manager!", new Date());
-    conn.on("message", message => {
+    connection.on("message", message => {
       if ("utf8" === message.type) {
         console.log("node Received Message: " + message.utf8Data);
-        conn.sendUTF(origin + " : " + message.utf8Data);
+        connection.sendUTF(origin + " : " + message.utf8Data);
+      } else if ("binary" === message.type) {
+        console.log("Received Binary Message of " + message.binaryData.length + " bytes");
+        connection.sendBytes(message.binaryData);
       }
     });
   } else {

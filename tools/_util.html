@@ -5,7 +5,8 @@
   Copyright(c) afterloe. 2017-1-29 18:48:24
   Authors: afterloe <afterloeliu@jwis.cn> (https://github.com/afterloe)
 -->
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf8" />
@@ -13,11 +14,6 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>cynomys config page</title>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -72,7 +68,7 @@
             </nav>
 
             <main class="col-sm-9">
-                <h1>node console</h1>
+                <h1>控制台输出</h1>
                 <p id="console">Connection to Cynomys node ...</p>
                 <div id="userInfo">
                   <h2>人员信息</h2>
@@ -205,11 +201,15 @@
             <h4 class="modal-title" id="myModalLabel">导入用户数据</h4>
           </div>
           <div class="modal-body">
-            ...
+            <div class="form-group">
+              <label for="exampleInputFile">选择xlsx文件导入</label>
+              <input type="file" class="form-control-file" accept="xlsx" placeholder="选择xlsx文件导入" id="exampleInputFile" aria-describedby="fileHelp">
+              <small id="fileHelp" class="form-text text-muted">上传用户相关的xlsx文件，如果有重复的这不会导入到数据库</small>
+            </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary">导入</button>
           </div>
         </div>
       </div>
@@ -298,15 +298,29 @@
       </div>
     </div>
 </body>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script>
-  const ws = new WebSocket("ws://127.0.0.1:15024", "node-protocol");
+  const siteConfig = new Map();
+  siteConfig.set("host", "127.0.0.1");
+  siteConfig.set("port", "15024");
+  siteConfig.set("protocol", "node-protocol");
+  const ws = new WebSocket(`ws://${siteConfig.get("host")}:${siteConfig.get("port")}`, siteConfig.get("protocol"));
+
   Object.assign(ws, {
-    onopen: () => $("#console").html(`webSocket is connection Success!`),
+    onopen: () => $("#console").html(`<div class="alert alert-success" role="alert">
+  <strong>成功!</strong> 链接节点成功.
+</div>`),
     onmessage: evt => {
       const {data} = evt;
       $("#console").html(data);
     },
-    onclose: () => $("#console").html(`socket client is up`),
+    onclose: () => $("#console").html(`<div class="alert alert-danger" role="alert">
+  <strong>出错了!</strong> 节点链接失败.
+</div>`),
   });
 
 </script>
@@ -315,6 +329,7 @@
   $("#workflowInfo").hide();
   $("#filesInfo").hide();
 
+  // 左侧导航栏切换效果
   const clickFunction = _ => {
     $("#leftItem").find("a").each(function(){
       $(this).removeClass("active");
@@ -328,19 +343,36 @@
     $("#workflowInfo").hide();
     $("#filesInfo").hide();
   });
+
+  // 用户数据链接
   $("#nav-userInfo").click(function() {
+    $.getJSON(`http://${siteConfig.get("host")}:${siteConfig.get("port")}/user/list`, data => {
+
+    });
     clickFunction($(this));
+    // ws.send("node-manager:obmitUserInfo");
+    $.get();
     $("#userInfo").show();
     $("#workflowInfo").hide();
     $("#filesInfo").hide();
   });
+
+  // 工作流数据
   $("#nav-workflowInfo").click(function() {
+    $.getJSON(`http://${siteConfig.get("host")}:${siteConfig.get("port")}/workflow/list`, data => {
+
+    });
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").show();
     $("#filesInfo").hide();
   });
+
+  // 文件信息
   $("#nav-filesInfo").click(function() {
+    $.getJSON(`http://${siteConfig.get("host")}:${siteConfig.get("port")}/fs/list`, data => {
+
+    });
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").hide();

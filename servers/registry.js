@@ -32,6 +32,30 @@ app.name = "portal";
 
 registration(router);
 
+app.use(function* (next) {
+  // "Accept": "application/json application/xml",
+   const {accept = "web"} = this.request.header;
+   if ("application/json" === accept) {
+     this.way = "json";
+   } else {
+     this.way = "web";
+   }
+
+   this.success = (ctx) => ({
+        code: 200,
+        error: null,
+        result: ctx
+    });
+
+    this.fail = (msg, code) => ({
+        code: code || 500,
+        error: msg || "System error",
+        result: null
+    });
+
+   return yield next;
+});
+
 app.use(router.routes());
 app.use(router.allowedMethods());
 

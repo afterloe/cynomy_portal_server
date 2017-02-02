@@ -77,8 +77,12 @@
                 <div id="userInfo">
                   <h2>人员信息</h2>
                   <div class="float-right">
-                    <button type="button" class="btn btn-primary">导入用户数据</button>
-                    <button type="button" class="btn btn-secondary">导出用户数据</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importUserInfo">
+                      导入用户数据
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exportUserInfo">
+                      导出用户数据
+                    </button>
                   </div>
                   <table class="table table-striped">
                     <thead class="thead-inverse">
@@ -127,7 +131,7 @@
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% 原型创作中</div>
                       </div>
-                      TRU mate v1.0.0
+                      TRU mate v1.0.0 原型创作
                     </div>
                     <div class="col-sm-3">
                       <button type="button" class="btn btn-outline-primary btn-sm">
@@ -143,7 +147,7 @@
                       <div class="progress">
                         <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100% 流程完成</div>
                       </div>
-                      TRU mate v1.0.0
+                      TRU mate v1.0.0 已发版
                     </div>
                     <div class="col-sm-3">
                       <button type="button" class="btn btn-outline-primary btn-sm">
@@ -157,37 +161,15 @@
 
                   <div class="row" style="margin-top: 1rem;">
                     <div class="col-sm-6">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteProcess">
                         创建工作流
                       </button>
-                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">
+                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#crearteProcessTemplate">
                         创建工作流模板
                       </button>
-                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#myModal">
+                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#crearteProcessNodeTemplate">
                         创建工作流节点模板
                       </button>
-                    </div>
-                  </div>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                          </button>
-                          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                          ...
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                      </div>
                     </div>
                   </div>
 
@@ -209,6 +191,111 @@
                 </div>
             </main>
         </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="importUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">导入用户数据</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="exportUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">导出用户数据</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="crearteProcess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">创建工作流</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="crearteProcessTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">创建工作流模板</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="crearteProcessNodeTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">创建工作流节点模板</h4>
+          </div>
+          <div class="modal-body">
+            ...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
 </body>
 <script>

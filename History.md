@@ -878,3 +878,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-2 14:21:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 人员信息导入module开发完毕
+
+
+### modify files
+> tools/_util.html  
+

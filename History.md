@@ -918,3 +918,17 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > servers/registry.js  
 
+
+1.0.3 / 2017-2-3 20:58:27
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: route添加查询相关信息的方法
+
+
+### modify files
+> routers/fileSystem.js  
+> routers/workflow.js  
+> services/goodsService.js  
+> services/workflowService.js  
+

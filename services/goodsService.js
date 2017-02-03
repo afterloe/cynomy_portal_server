@@ -91,7 +91,12 @@ function* cleanDocuments() {
   return yield goods_dao.clean();
 }
 
+function* getGoodsList(number, page) {
+  return yield goods_dao.queryAll({}, number, page);
+}
+
 module.exports = {
   cleanDocuments,
   production,
+  getGoodsList,
 };

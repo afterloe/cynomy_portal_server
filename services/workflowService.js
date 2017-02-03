@@ -577,6 +577,10 @@ function* searchProduct(tag) {
   return _;
 }
 
+function* getWorkflowList(number, page) {
+  return yield workFlow_instance_dao.queryAll({}, number, page);
+}
+
 module.exports = {
   createWorkFlowNode,
   createWorkFlow,
@@ -591,4 +595,5 @@ module.exports = {
   setTag,
   searchProduct,
   cleanDocuments,
+  getWorkflowList,
 };

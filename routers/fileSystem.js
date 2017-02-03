@@ -11,8 +11,16 @@
   */
 "use strict";
 
-const list = function* (next) {
+const {resolve} = require("path");
+const goodsService = require(resolve(__dirname, "..", "services", "goodsService"));
 
+const list = function* (next) {
+  const {number, page} = this.params;
+  const userList = yield goodsService.getGoodsList(number, page);
+  if ("json" === this.way) {
+    this.set("Content-Type", "application/json");
+    this.body = this.success(userList);
+  }
   return yield next;
 };
 

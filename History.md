@@ -932,3 +932,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > services/workflowService.js  
 
+
+1.0.3 / 2017-2-4 22:43:22
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加user选择框导入的事件
+
+
+### modify files
+> tools/_util.html  
+

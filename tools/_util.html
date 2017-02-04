@@ -209,7 +209,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary">导入</button>
+            <button type="button" class="btn btn-primary" id="module-ok-importUserInfo">导入</button>
           </div>
         </div>
       </div>
@@ -377,6 +377,12 @@
     $("#userInfo").hide();
     $("#workflowInfo").hide();
     $("#filesInfo").show();
+  });
+
+  $("#module-ok-importUserInfo").click(function(){
+    // TODO
+    console.log("done select upload file");
+    $("#importUserInfo").modal("toggle");
   });
 </script>
 </html>

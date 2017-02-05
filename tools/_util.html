@@ -246,11 +246,49 @@
             <h4 class="modal-title" id="myModalLabel">创建工作流</h4>
           </div>
           <div class="modal-body">
-            ...
+            <form>
+              <div class="form-group">
+               <label for="formGroupExampleInput2">选择工作流模板</label>
+               <select class="form-control" name="workflow-template">
+                 <option value="32dnaf2i3kx2ha4">产品研发流程</option>
+                 <option value="32dnaf2i3kx2ha5">产品设计流程</option>
+                 <option value="32dnaf2i3kx2ha6">报销申请流程</option>
+               </select>
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">选择参与人员</label>
+                <div class="form-check">
+                 <label class="form-check-label">
+                   <input class="form-check-input" name="members" type="checkbox" value="42dnaf2i3kx2ha40">
+                   afterloe
+                 </label>
+                 <label class="form-check-label">
+                   <input class="form-check-input" type="checkbox" value="42dnaf2i3kx2ha41">
+                   joe
+                 </label>
+                 <label class="form-check-label">
+                   <input class="form-check-input" name="members" type="checkbox" value="42dnaf2i3kx2ha42">
+                   grace
+                 </label>
+                 <label class="form-check-label">
+                   <input class="form-check-input" name="members" type="checkbox" value="42dnaf2i3kx2ha43">
+                   yangyangyang
+                 </label>
+                 <label class="form-check-label">
+                   <input class="form-check-input" name="members" type="checkbox" value="42dnaf2i3kx2ha44">
+                   baby
+                 </label>
+                 <label class="form-check-label">
+                   <input class="form-check-input" name="members" type="checkbox" value="42dnaf2i3kx2ha45">
+                   城之内
+                 </label>
+               </div>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" id="module-ok-crearteProcess">创建</button>
           </div>
         </div>
       </div>
@@ -383,6 +421,27 @@
     // TODO
     console.log("done select upload file");
     $("#importUserInfo").modal("toggle");
+  });
+
+  $("#module-ok-crearteProcess").click(function() {
+    // TODO
+    const form = $(this).parent().parent().find("form");
+    const data = {};
+    form.serializeArray().map(item => {
+      if (data[item.name]) {
+        if (data[item.name] instanceof Array) {
+          data[item.name].push(item.value);
+        } else {
+          const _ = [];
+          _.push(data[item.name]);
+          _.push(item.value);
+          data[item.name] = _;
+        }
+      } else {
+        data[item.name] = item.value;
+      }
+    });
+    console.log(data);
   });
 </script>
 </html>

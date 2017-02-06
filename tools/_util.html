@@ -433,7 +433,7 @@
     </div>`);
   });
 
-  registry("startUpWorkFlow", (err, data) => {
+  registry("startUpWorkflow", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
   });
 
@@ -468,7 +468,7 @@
       const {name, _id, nodeList, status} = item;
       if (status) {
         const speed = Math.ceil((status.index + 1) / nodeList.length * 100);
-        const reason = status.reason;
+        const reason = status.reason || "未更新节点";
         showWorkflow.push(`<div class="row" style="margin-top: 1rem;">
           <div class="col-sm-6">
             <div class="progress">

@@ -1093,3 +1093,14 @@ commit by afterloe (lm6289511@gmail.com)
 > test/workflowService_test.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 21:14:47
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复点击启动工作流页面不刷新的问题
+
+
+### modify files
+> tools/_util.html  
+

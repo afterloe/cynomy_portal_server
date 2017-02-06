@@ -155,6 +155,7 @@
         </div>
       </div>
     </div>
+    <!-- Modal -->
     <div class="modal fade" id="exportUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -175,7 +176,7 @@
         </div>
       </div>
     </div>
-
+    <!-- Modal -->
     <div class="modal fade" id="crearteProcess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -190,16 +191,12 @@
             <form>
               <div class="form-group">
                <label for="formGroupExampleInput2">选择工作流模板</label>
-               <select class="form-control" name="workflow-template">
-                 <option value="32dnaf2i3kx2ha4">产品研发流程</option>
-                 <option value="32dnaf2i3kx2ha5">产品设计流程</option>
-                 <option value="32dnaf2i3kx2ha6">报销申请流程</option>
+               <select class="form-control" name="workflow-template" id="select-workflowTemplate">
                </select>
               </div>
               <div class="form-group">
                 <label for="formGroupExampleInput2">选择参与人员</label>
-                <div class="form-check" id="checkbox-user">
-                </div>
+                <div class="form-check" id="checkbox-user"></div>
               </div>
             </form>
           </div>
@@ -211,6 +208,7 @@
       </div>
     </div>
 
+    <!-- Modal -->
     <div class="modal fade" id="crearteProcessTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -297,6 +295,26 @@
   $("#workflowInfo").hide();
   $("#filesInfo").hide();
 
+  registry("getWorkflowTemplateList", (err, data) => {
+    const workflowTemplate = [];
+    data.map(item => {
+      workflowTemplate.push(`<option value="${item._id}">${item.name}</option>`);
+    });
+    $("#select-workflowTemplate").html(workflowTemplate.join(""));
+  });
+
+  registry("loaderFromXlsx", (err, data) => {
+    websocket.send("node-manager:userService:getUserList");
+  });
+
+  registry("binaryFile", (err, data) => {
+    websocket.send(`node-manager:userService:loaderFromXlsx(${data})`);
+  });
+
+  registry("filesInfo", (err, data) => {
+    console.log(data);
+  });
+
   registry("getUserList", (err, data) => {
     const [showUser, checkBoxUser] = [[], []];
     data.map(item => {
@@ -310,15 +328,15 @@
         </td>
       </tr>`);
       checkBoxUser.push(`<label class="form-check-label">
-        <input class="form-check-input" type="checkbox" value="${item._id}">
+        <input class="form-check-input" type="checkbox" name="members" value="${item._id}">
         ${item.name}
       </label>`);
     });
     $("#table-show-user").html(showUser.join(""));
     $("#checkbox-user").html(checkBoxUser.join(""));
   });
+
   registry("getWorkflowList", (err, data) => {
-    // table-show-workflow
     const showWorkflow = [];
     data.map(item => {
       const {name, _id, nodeList, status} = item;
@@ -327,7 +345,7 @@
       showWorkflow.push(`<div class="row" style="margin-top: 1rem;">
         <div class="col-sm-6">
           <div class="progress">
-            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: ${speed}%" aria-valuenow="${speed}" aria-valuemin="0" aria-valuemax="100">${speed} %</div>
+            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: ${speed}%" aria-valuenow="${speed}" aria-valuemin="0" aria-valuemax="100">${speed} % ${status.name}</div>
           </div>
           ${name} - ${reason}
         </div>
@@ -342,9 +360,6 @@
       </div>`);
     });
     $("#table-show-workflow").html(showWorkflow.join(""));
-  });
-  registry("filesInfo", (err, data) => {
-    console.log(data);
   });
 
   // 左侧导航栏切换效果
@@ -374,6 +389,8 @@
   // 工作流数据
   $("#nav-workflowInfo").click(function() {
     websocket.send("node-manager:workflowService:getWorkflowList");
+    websocket.send("node-manager:userService:getUserList");
+    websocket.send("node-manager:workflowService:getWorkflowTemplateList");
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").show();
@@ -390,6 +407,17 @@
 
   $("#module-ok-importUserInfo").click(function(){
     // TODO
+    //
+    const inputElement = document.getElementById("exampleInputFile");
+    const xlsx = inputElement.files[0];
+    const reader = new FileReader();
+    //以二进制形式读取文件
+    reader.readAsArrayBuffer(xlsx);
+    //文件读取完毕后该函数响应
+    reader.onload = function loaded(evt) {
+      const binaryString = evt.target.result; //发送文件
+      websocket.send(binaryString);
+    }
     console.log("done select upload file");
     $("#importUserInfo").modal("toggle");
   });
@@ -413,6 +441,7 @@
       }
     });
     console.log(data);
+    $("#crearteProcess").modal("toggle");
   });
 </script>
 </html>

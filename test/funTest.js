@@ -11,34 +11,41 @@
   */
 "use strict";
 
-const {basename, extname} = require("path"), {statSync, readdirSync} = require("fs"), {resolve} = require("path");
-console.log(basename("/home/afterloe/index.pug", ".pug"));
-console.log(extname("/home/afterloe/index.pug"));
+const data = "e9be93c0ec3d11e69c3ad3c623d1a3d0";
+const params = `node-manager:userService:loaderFromXlsx(${data})`;
 
-const _ = [];
-
-function scanDir(_path) {
-  let stat = statSync(_path);
-  if (stat.isDirectory()) {
-    let files = readdirSync(_path);
-    for (let i = 0; i < files.length; i++) {
-      scanDir(resolve(_path, files[i]));
-    }
-    files = undefined;
-  }
-  stat = undefined;
-  return _.push(_path);
-}
-const start = Date.now();
-console.log(scanDir(__dirname));
-console.log(_.length);
-console.log((Date.now() - start)/ 1000);
-
-const chainNodes = [{name : "afterloe"},{name : "joe"},{name : "bash"},{name : "yangyangyang"},{name : "zhou"},{name : "ff"}];
-for (let i = 0; i < chainNodes.length; i++){
-  for (let j = i + 1; j < chainNodes.length; j++) {
-    if (chainNodes[i].name === chainNodes[j].name) {
-      throw new Error("有相同的.");
-    }
-  }
-}
+const [ldap, service, fun] = params.split(":");
+let [_, __] = fun.split(/(?:\()(.*)(?:\))/i);
+console.log(ldap, service, fun);
+console.log(_, __);
+// const {basename, extname} = require("path"), {statSync, readdirSync} = require("fs"), {resolve} = require("path");
+// console.log(basename("/home/afterloe/index.pug", ".pug"));
+// console.log(extname("/home/afterloe/index.pug"));
+//
+// const _ = [];
+//
+// function scanDir(_path) {
+//   let stat = statSync(_path);
+//   if (stat.isDirectory()) {
+//     let files = readdirSync(_path);
+//     for (let i = 0; i < files.length; i++) {
+//       scanDir(resolve(_path, files[i]));
+//     }
+//     files = undefined;
+//   }
+//   stat = undefined;
+//   return _.push(_path);
+// }
+// const start = Date.now();
+// console.log(scanDir(__dirname));
+// console.log(_.length);
+// console.log((Date.now() - start)/ 1000);
+//
+// const chainNodes = [{name : "afterloe"},{name : "joe"},{name : "bash"},{name : "yangyangyang"},{name : "zhou"},{name : "ff"}];
+// for (let i = 0; i < chainNodes.length; i++){
+//   for (let j = i + 1; j < chainNodes.length; j++) {
+//     if (chainNodes[i].name === chainNodes[j].name) {
+//       throw new Error("有相同的.");
+//     }
+//   }
+// }

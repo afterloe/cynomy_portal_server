@@ -67,14 +67,8 @@ const removDuplication = users => {
   return _;
 };
 
-/**
- * 从execl中读取用户信息
- *
- * @param  {String} _file [xlsx文件路径]
- * @return {Array}        [用户数组]
- */
-const loaderFromXlsx = _file => {
-  const [{data}, users] = [xlsx.parse(_file)[0], []];
+const loaderUserFromXlsx = file => {
+  const [{data}, users] = [xlsx.parse(file)[0], []];
   for(let i = 1; i < data.length; i++) {
     if (data[i].length <= 0) {
       continue;
@@ -138,6 +132,22 @@ function* createUsers (_users) {
   }
 
   throwParametersError();
+}
+
+/**
+ * 从execl中导入用户数据
+ *
+ * @param  {String} file [xlsx文件路径]
+ * @return {Array}        [用户数组]
+ */
+function* loaderFromXlsx(name) {
+  const file = resolve("/tmp", name);
+  const users = loaderUserFromXlsx(file);
+  if (users && users.length > 0) {
+    return yield createUsers(users);
+  } else {
+    throwLackParameters("");
+  }
 }
 
 /**

@@ -15,8 +15,9 @@ const {server} = require("websocket");
 const [WSSERVER, ORIGIN] = [Symbol("WSSERVER"), Symbol("ORIGIN")];
 
 // -----------------------------------------------------------------------------
-const [co, {resolve}] = [require("co"), require("path")];
+const [co, {resolve}, {writeFileSync}] = [require("co"), require("path"), require("fs")];
 const service = resolve(__dirname, "..", "services");
+const {uuidCode} = require(resolve(__dirname, "..", "tools", "utilities"));
 const [userService, workflowService] = [require(resolve(service, "userService")), require(resolve(service, "workflowService"))];
 
 const nodeManager = new Map();
@@ -57,13 +58,15 @@ const ws4node = (protocol, request, origin) => {
     console.log("%s Welcome accept cynomy node manager!", new Date());
     connection.on("message", message => {
       if ("utf8" === message.type) {
-        const [ldap, service, _] = message.utf8Data.split(":");
-        console.log("%s: %s %s", ldap, service, _);
+        const [ldap, service, fun] = message.utf8Data.split(":");
+        console.log("%s: %s %s", ldap, service, fun);
+        const [_, __] = fun.split(/(?:\()(.*)(?:\))/i);
         const _service = nodeManager.get(service);
         if (_service) {
           co(function* () {
             if (_service[_]) {
-              return yield _service[_]();
+              const args = __? __.split(","): null;
+              return yield _service[_].apply(null, args);
             }
           }).then(data => {
             connection.sendUTF(JSON.stringify({
@@ -72,7 +75,6 @@ const ws4node = (protocol, request, origin) => {
               _: data,
             }));
           }).catch(err => {
-            console.log(err);
             connection.sendUTF(JSON.stringify({
               info: `${Date().toLocaleString()}: [FAILED] exec func failed ${err.message}`,
             }));
@@ -83,8 +85,15 @@ const ws4node = (protocol, request, origin) => {
           }));
         }
       } else if ("binary" === message.type) {
-        console.log("Received Binary Message of " + message.binaryData.length + " bytes");
-        connection.sendBytes(message.binaryData);
+        const file = uuidCode();
+        const path = resolve("/tmp", file);
+        writeFileSync(path, message.binaryData);
+        console.log("Received Binary Message %s bytes, in %s", message.binaryData.length, path);
+        connection.sendUTF(JSON.stringify({
+          info: `${Date().toLocaleString()}: [SUCCESS] receive file -- ${file}`,
+          type: "binaryFile",
+          _: file,
+        }));
       }
     });
   } else {

@@ -990,3 +990,18 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/websocket.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 16:17:39
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws 消息机制升级, 通过execl导入数据
+
+
+### modify files
+> servers/websocket.js  
+> services/userService.js  
+> services/workflowService.js  
+> test/funTest.js  
+> tools/_util.html  
+

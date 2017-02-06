@@ -1067,3 +1067,14 @@ commit by afterloe (lm6289511@gmail.com)
 > test/workflowService_test.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 20:35:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws升级，添加按钮事件
+
+
+### modify files
+> tools/_util.html  
+

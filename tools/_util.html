@@ -346,26 +346,49 @@
   siteConfig.set("host", "127.0.0.1");
   siteConfig.set("port", "15024");
   siteConfig.set("protocol", "node-protocol");
-  const ws = new WebSocket(`ws://${siteConfig.get("host")}:${siteConfig.get("port")}`, siteConfig.get("protocol"));
-
-  Object.assign(ws, {
+  const registerList = new Map();
+  const websocket = new WebSocket(`ws://${siteConfig.get("host")}:${siteConfig.get("port")}`, siteConfig.get("protocol"));
+  Object.assign(websocket, {
     onopen: () => $("#console").html(`<div class="alert alert-success" role="alert">
   <strong>成功!</strong> 链接节点成功.
 </div>`),
     onmessage: evt => {
       const {data} = evt;
-      $("#console").html(data);
+      const {info, type, _} = JSON.parse(data);
+      $("#console").html(info);
+      const callback = registerList.get(type);
+      if (callback && callback.call) {
+        callback(null, _);
+      }
     },
     onclose: () => $("#console").html(`<div class="alert alert-danger" role="alert">
   <strong>出错了!</strong> 节点链接失败.
 </div>`),
   });
 
+  const registry = (type, callback) => {
+    if (registerList.has(type)) {
+      throw new Error("this type is ready in this list");
+    } else {
+      registerList.set(type, callback);
+    }
+  };
+
 </script>
 <script>
   $("#userInfo").hide();
   $("#workflowInfo").hide();
   $("#filesInfo").hide();
+
+  registry("getUserList", (err, data) => {
+    console.log(data);
+  });
+  registry("workflowInfo", (err, data) => {
+    console.log(data);
+  });
+  registry("filesInfo", (err, data) => {
+    console.log(data);
+  });
 
   // 左侧导航栏切换效果
   const clickFunction = _ => {
@@ -384,12 +407,8 @@
 
   // 用户数据链接
   $("#nav-userInfo").click(function() {
-    $.getJSON(`http://${siteConfig.get("host")}:${siteConfig.get("port")}/user/list`, data => {
-
-    });
+    websocket.send("node-manager:userService:getUserList");
     clickFunction($(this));
-    // ws.send("node-manager:obmitUserInfo");
-    $.get();
     $("#userInfo").show();
     $("#workflowInfo").hide();
     $("#filesInfo").hide();
@@ -397,9 +416,6 @@
 
   // 工作流数据
   $("#nav-workflowInfo").click(function() {
-    $.getJSON(`http://${siteConfig.get("host")}:${siteConfig.get("port")}/workflow/list`, data => {
-
-    });
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").show();
@@ -408,9 +424,6 @@
 
   // 文件信息
   $("#nav-filesInfo").click(function() {
-    $.getJSON(`http://${siteConfig.get("host")}:${siteConfig.get("port")}/fs/list`, data => {
-
-    });
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").hide();

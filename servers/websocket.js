@@ -14,6 +14,15 @@
 const {server} = require("websocket");
 const [WSSERVER, ORIGIN] = [Symbol("WSSERVER"), Symbol("ORIGIN")];
 
+// -----------------------------------------------------------------------------
+const [co, {resolve}] = [require("co"), require("path")];
+const service = resolve(__dirname, "..", "services");
+const [userService] = [require(resolve(service, "userService"))];
+
+const nodeManager = new Map();
+nodeManager.set("userService", userService);
+// -----------------------------------------------------------------------------
+
 module[ORIGIN] = new Map();
 
 module[ORIGIN].set("file://", true); // 允许的协议
@@ -47,8 +56,30 @@ const ws4node = (protocol, request, origin) => {
     console.log("%s Welcome accept cynomy node manager!", new Date());
     connection.on("message", message => {
       if ("utf8" === message.type) {
-        console.log("node Received Message: " + message.utf8Data);
-        connection.sendUTF(origin + " : " + message.utf8Data);
+        const [ldap, service, _] = message.utf8Data.split(":");
+        console.log("%s: %s %s", ldap, service, _);
+        const _service = nodeManager.get(service);
+        if (_service) {
+          co(function* () {
+            if (_service[_]) {
+              return yield _service[_]();
+            }
+          }).then(data => {
+            connection.sendUTF(JSON.stringify({
+              info: `${Date().toLocaleString()}: [SUCCESS] Receive msg`,
+              type: _,
+              _: data,
+            }));
+          }).catch(err => {
+            connection.sendUTF(JSON.stringify({
+              info: `${Date().toLocaleString()}: [FAILED] exec func failed ${err.message}`,
+            }));
+          });
+        } else {
+          connection.sendUTF(JSON.stringify({
+            info: `${Date().toLocaleString()}: [FAILED] exec func failed can't find this funcation`,
+          }));
+        }
       } else if ("binary" === message.type) {
         console.log("Received Binary Message of " + message.binaryData.length + " bytes");
         connection.sendBytes(message.binaryData);

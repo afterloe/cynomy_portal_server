@@ -954,3 +954,16 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 11:13:11
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws 消息机制响应机制升级
+
+
+### modify files
+> config/index.js  
+> servers/websocket.js  
+> tools/_util.html  
+

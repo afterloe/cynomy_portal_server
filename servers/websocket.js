@@ -17,10 +17,11 @@ const [WSSERVER, ORIGIN] = [Symbol("WSSERVER"), Symbol("ORIGIN")];
 // -----------------------------------------------------------------------------
 const [co, {resolve}] = [require("co"), require("path")];
 const service = resolve(__dirname, "..", "services");
-const [userService] = [require(resolve(service, "userService"))];
+const [userService, workflowService] = [require(resolve(service, "userService")), require(resolve(service, "workflowService"))];
 
 const nodeManager = new Map();
 nodeManager.set("userService", userService);
+nodeManager.set("workflowService", workflowService);
 // -----------------------------------------------------------------------------
 
 module[ORIGIN] = new Map();
@@ -71,6 +72,7 @@ const ws4node = (protocol, request, origin) => {
               _: data,
             }));
           }).catch(err => {
+            console.log(err);
             connection.sendUTF(JSON.stringify({
               info: `${Date().toLocaleString()}: [FAILED] exec func failed ${err.message}`,
             }));

@@ -978,3 +978,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 14:1:11
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws 消息机制升级, 获取工作流信息
+
+
+### modify files
+> servers/websocket.js  
+> tools/_util.html  
+

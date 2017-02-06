@@ -90,45 +90,12 @@
                       </tr>
                     </thead>
                     <tbody id="table-show-user">
-
                     </tbody>
                   </table>
                 </div>
                 <div id="workflowInfo">
                   <h2>工作流信息</h2>
-                  <div class="row" style="margin-top: 1rem;">
-                    <div class="col-sm-6">
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25% 原型创作中</div>
-                      </div>
-                      TRU mate v1.0.0 原型创作
-                    </div>
-                    <div class="col-sm-3">
-                      <button type="button" class="btn btn-outline-primary btn-sm">
-                        更新当前节点
-                      </button>
-                      <button type="button" class="btn btn-outline-success btn-sm">
-                        推进流程
-                      </button>
-                    </div>
-                  </div>
-                  <div class="row" style="margin-top: 1rem;">
-                    <div class="col-sm-6">
-                      <div class="progress">
-                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100% 流程完成</div>
-                      </div>
-                      TRU mate v1.0.0 已发版
-                    </div>
-                    <div class="col-sm-3">
-                      <button type="button" class="btn btn-outline-primary btn-sm">
-                        更新当前节点
-                      </button>
-                      <button type="button" class="btn btn-outline-success btn-sm">
-                        推进流程
-                      </button>
-                    </div>
-                  </div>
-
+                  <div id="table-show-workflow"></div>
                   <div class="row" style="margin-top: 1rem;">
                     <div class="col-sm-6">
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteProcess">
@@ -331,7 +298,6 @@
   $("#filesInfo").hide();
 
   registry("getUserList", (err, data) => {
-    //
     const [showUser, checkBoxUser] = [[], []];
     data.map(item => {
       showUser.push(`<tr scope="row">
@@ -351,8 +317,31 @@
     $("#table-show-user").html(showUser.join(""));
     $("#checkbox-user").html(checkBoxUser.join(""));
   });
-  registry("workflowInfo", (err, data) => {
-    console.log(data);
+  registry("getWorkflowList", (err, data) => {
+    // table-show-workflow
+    const showWorkflow = [];
+    data.map(item => {
+      const {name, _id, nodeList, status} = item;
+      const speed = Math.ceil((status.index + 1) / nodeList.length * 100);
+      const reason = status.reason;
+      showWorkflow.push(`<div class="row" style="margin-top: 1rem;">
+        <div class="col-sm-6">
+          <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: ${speed}%" aria-valuenow="${speed}" aria-valuemin="0" aria-valuemax="100">${speed} %</div>
+          </div>
+          ${name} - ${reason}
+        </div>
+        <div class="col-sm-3">
+          <button type="button" data-id="${_id}" class="btn btn-outline-primary btn-sm">
+            更新当前节点
+          </button>
+          <button type="button" data-id="${_id}" class="btn btn-outline-success btn-sm">
+            推进流程
+          </button>
+        </div>
+      </div>`);
+    });
+    $("#table-show-workflow").html(showWorkflow.join(""));
   });
   registry("filesInfo", (err, data) => {
     console.log(data);
@@ -384,6 +373,7 @@
 
   // 工作流数据
   $("#nav-workflowInfo").click(function() {
+    websocket.send("node-manager:workflowService:getWorkflowList");
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").show();

@@ -197,6 +197,15 @@ function* cleanDocuments() {
   return {a};
 }
 
+function* findUsers(users) {
+  const _ = [];
+  for (let i = 0; i < users.length; i++) {
+    _.push(yield user_dao.queryById(users[i]));
+  }
+
+  return _;
+}
+
 module.exports = {
   loaderFromXlsx,
   createUsers,
@@ -205,4 +214,5 @@ module.exports = {
   cleanDocuments,
   login,
   obmitLoginPermit,
+  findUsers,
 };

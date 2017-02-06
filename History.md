@@ -1018,3 +1018,16 @@ commit by afterloe (lm6289511@gmail.com)
 > test/funTest.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 17:36:20
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws 消息机制升级, 创建流程功能优化，如果勾选了用户则填充用户信息，修正了显示问题
+
+
+### modify files
+> services/userService.js  
+> services/workflowService.js  
+> tools/_util.html  
+

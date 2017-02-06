@@ -14,8 +14,9 @@
 const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
   {throwLackParameters, throwParametersError, throwObjectExists, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn,
-  throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}] =
-[require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+  throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}, {findUsers}] =
+[require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
+require(resolve(__dirname, "userService"))];
 
 /**
  * 构建工作流节点模板
@@ -253,6 +254,7 @@ function* buildProduct(_workFlow, autoStart) {
      throwNosuchThisWorkFlowTemplate();
    }
    const nodeList = buildWorkFlowNodeList(workFlowTemplate.chainNodes);
+   const members = yield findUsers(_workFlow.members);
    const _ = {
      state : 200,
      tags: [],
@@ -260,7 +262,7 @@ function* buildProduct(_workFlow, autoStart) {
    Object.assign(_, {
      name: _workFlow.name,
      template: _workFlow.template,
-     members: _workFlow.members,
+     members,
    });
    const result = yield workFlow_instance_dao.insert(_);
    if (result.result.n !== result.result.ok) {

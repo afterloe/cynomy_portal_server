@@ -967,3 +967,14 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/websocket.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 11:35:48
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws 消息机制升级, 获取用户信息
+
+
+### modify files
+> tools/_util.html  
+

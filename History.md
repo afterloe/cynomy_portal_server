@@ -1078,3 +1078,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 21:3:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复单元测试跑动时出现的user不一致的异常，修复无法设置leader的异常，修正部分方法名，规范部分方法使用规则
+
+
+### modify files
+> services/userService.js  
+> services/workflowService.js  
+> test/userService_test.js  
+> test/workflowService_test.js  
+> tools/_util.html  
+

@@ -176,10 +176,10 @@ function* instanceNodeList(nodeList, workflow) {
 /**
  * 启动工作流
  *
- * @param  {String}    _workFlow [工作流id]
+ * @param  {String}    id [工作流id]
  * @return {Generator}           [description]
  */
-function* startUpWorkFlow(_workFlow) {
+function* startUpWorkflow(id) {
   /*
    * 1.依据工作流实例id查询出工作流
    * 2.检测工作流实例是否已启动
@@ -189,7 +189,7 @@ function* startUpWorkFlow(_workFlow) {
    * 6.设置下一个节点，上一个节点
    * 7.保存节点信息
    */
-  const _ = yield workFlow_instance_dao.queryById(_workFlow);
+  const _ = yield workFlow_instance_dao.queryById(id);
   if (!_) {
     throwNosuchThisWorkFlow();
   }
@@ -344,22 +344,22 @@ function* syncNodeToWorkflow(_node) {
 /**
  * 给指定工作流中的节点设置负责人
  *
- * @param  {String}    _workFlow [工作流实例id]
- * @param  {Object}    _user     [设置成user的用户信息]
+ * @param  {String}    workflowId [工作流实例id]
+ * @param  {String}    userId     [设置成user的用户信息]
  * @param  {Integer}   index     [工作流实例节点id]
  * @return {Generator}           [description]
  */
-function* setLeader(_workFlow, _user, _index) {
-  const _ = yield workFlow_instance_dao.queryById(_workFlow);
+function* setLeader(workflowId, userId, index) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId);
   if (!_) {
     throwNosuchThisWorkFlow();
   }
-  const leader = _.members.find(member => member.mail === _user.mail);
+  const leader = _.members.find(member => member._id.toString() === userId);
   if (!leader) {
     throwPersonalNotIn();
   }
-  _index--;
-  const nodeSubstitute = _.nodeList[_index];
+  index--;
+  const nodeSubstitute = _.nodeList[index];
   if (!nodeSubstitute) {
     throwNosuchThisWorkflowNodeInstance();
   }
@@ -596,7 +596,7 @@ module.exports = {
   createWorkflow,
   workflowInfo,
   buildProduct,
-  startUpWorkFlow,
+  startUpWorkflow,
   setLeader,
   uploadNodeProduceList,
   promoteProcess,

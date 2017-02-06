@@ -22,17 +22,17 @@ describe("userService", () => {
     }).then(() => done()).catch(err => done(err));
   });
 
-  describe("#loaderFromXlsx", () => {
+  describe("#loaderUserFromXlsx", () => {
     it("normal treatment", () => {
       const user_xlsxPath = resolve(__dirname, "..", "doc", "user.xlsx");
-      const users = userService.loaderFromXlsx(user_xlsxPath);
+      const users = userService.loaderUserFromXlsx(user_xlsxPath);
       ok(users instanceof Array);
     });
 
     it("wrong path", () => {
       throws(() => {
         const user_xlsxPath = resolve(__dirname, "..", "doc", Math.random()+".mocha");
-        const users = userService.loaderFromXlsx(user_xlsxPath);
+        const users = userService.loaderUserFromXlsx(user_xlsxPath);
         ok(users instanceof Array);
       }, /no such file or directory, open/);
     });
@@ -40,7 +40,7 @@ describe("userService", () => {
     it("wrong path", () => {
       throws(() => {
         const user_xlsxPath = resolve(__filename);
-        const users = userService.loaderFromXlsx(user_xlsxPath);
+        const users = userService.loaderUserFromXlsx(user_xlsxPath);
         ok(users instanceof Array);
       }, /Unsupported file/);
     });

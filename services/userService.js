@@ -200,7 +200,11 @@ function* cleanDocuments() {
 function* findUsers(users) {
   const _ = [];
   for (let i = 0; i < users.length; i++) {
-    _.push(yield user_dao.queryById(users[i]));
+    const user = yield user_dao.queryById(users[i]);
+    if (!user) {
+      continue;
+    }
+    _.push(user);
   }
 
   return _;
@@ -215,4 +219,5 @@ module.exports = {
   login,
   obmitLoginPermit,
   findUsers,
+  loaderUserFromXlsx,
 };

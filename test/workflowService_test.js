@@ -198,7 +198,9 @@ describe("workflowService", () => {
         }];
         return yield userService.createUsers(users);
       }).then(_ => {
-        map.set("members", _.ops);
+        const members = [];
+        _.ops.map(o => members.push(o._id.toString()));
+        map.set("members", members);
         done();
       }).catch(err => done(err));
     });
@@ -222,7 +224,7 @@ describe("workflowService", () => {
     it("normal treatment", done => {
       co(function* () {
         const workFlow = map.get("workflowInstance");
-        const _ = yield workflowService.startUpWorkFlow(workFlow);
+        const _ = yield workflowService.startUpWorkflow(workFlow);
         deepStrictEqual(1, _.result.n);
         deepStrictEqual(1, _.result.nModified);
         deepStrictEqual(1, _.result.ok);

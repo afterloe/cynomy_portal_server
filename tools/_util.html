@@ -376,8 +376,8 @@
   }
 
   function startUpProcess(btn) {
-    console.log($(btn).attr("data-id"));
-    console.log("123");
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->startUpWorkflow("${id}")`);
   }
 
   registry("getWorkflowTemplateList", (err, data) => {
@@ -418,7 +418,6 @@
       __self.click(function() {
         selectedProcess.push({
           name : __self.html(),
-          _id: __self.attr("data-id"),
         });
         buildSelectProcess();
       });
@@ -432,6 +431,10 @@
     $("#console").html(`<div class="alert alert-success" role="alert">
     <strong>成功!</strong> 创建工作流模板成功.
     </div>`);
+  });
+
+  registry("startUpWorkFlow", (err, data) => {
+    websocket.send("node-manager->workflowService->getWorkflowList");
   });
 
   registry("filesInfo", (err, data) => {

@@ -1054,3 +1054,16 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 20:18:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws升级，支持创建工作流模板
+
+
+### modify files
+> services/workflowService.js  
+> test/workflowService_test.js  
+> tools/_util.html  
+

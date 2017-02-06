@@ -25,13 +25,13 @@ describe("workflowService", () => {
     }).then(() => done()).catch(err => done(err));
   });
 
-  describe("#createWorkFlowNode", () => {
+  describe("#createWorkflowNode", () => {
     it("normal treatment", done => {
       co(function* () {
         const node = {
           name: "设计"
         };
-        const _ = yield workflowService.createWorkFlowNode(node);
+        const _ = yield workflowService.createWorkflowNode(node);
         deepStrictEqual(1, _.result.ok);
       }).then(() => done()).catch(err => done(err));
     });
@@ -41,7 +41,7 @@ describe("workflowService", () => {
         const node = {
           name: "设计"
         };
-        const _ = yield workflowService.createWorkFlowNode(node);
+        const _ = yield workflowService.createWorkflowNode(node);
         deepStrictEqual(0, _.result.ok);
       }).catch(err => {
         if (/对象已存在/.test(err)) {
@@ -53,7 +53,7 @@ describe("workflowService", () => {
     });
   });
 
-  describe("#createWorkFlow", () => {
+  describe("#createWorkflow", () => {
     it("normal treatment", done => {
       co(function* (){
         const workfolwTemplate = {
@@ -69,7 +69,7 @@ describe("workflowService", () => {
           }],
         };
 
-        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        const _ = yield workflowService.createWorkflow(workfolwTemplate);
         deepStrictEqual(1, _.result.ok);
         map.set("template", _.ops[0]);
       }).then(() => done()).catch(err => done(err));
@@ -90,7 +90,7 @@ describe("workflowService", () => {
           }],
         };
 
-        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        const _ = yield workflowService.createWorkflow(workfolwTemplate);
         deepStrictEqual(0, _.result.ok);
 
       }).catch(err => {
@@ -116,7 +116,7 @@ describe("workflowService", () => {
             name: "发布"
           }]
         };
-        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        const _ = yield workflowService.createWorkflow(workfolwTemplate);
         deepStrictEqual(0, _.result.ok);
       }).catch(err => {
         if (/对象已存在/.test(err)) {
@@ -133,7 +133,7 @@ describe("workflowService", () => {
           name : "研发设计流程2",
           chainNodes: []
         };
-        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        const _ = yield workflowService.createWorkflow(workfolwTemplate);
         deepStrictEqual(0, _.result.ok);
       }).catch(err => {
         if (/参数类型错误/.test(err)) {
@@ -149,7 +149,7 @@ describe("workflowService", () => {
         const workfolwTemplate = {
           name : "研发设计流程2",
         };
-        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        const _ = yield workflowService.createWorkflow(workfolwTemplate);
         deepStrictEqual(0, _.result.ok);
       }).catch(err => {
         if (/参数类型错误/.test(err)) {
@@ -166,7 +166,7 @@ describe("workflowService", () => {
           name : "研发设计流程2",
           chainNodes: 1234
         };
-        const _ = yield workflowService.createWorkFlow(workfolwTemplate);
+        const _ = yield workflowService.createWorkflow(workfolwTemplate);
         deepStrictEqual(0, _.result.ok);
       }).catch(err => {
         if (/参数类型错误/.test(err)) {
@@ -295,7 +295,7 @@ describe("workflowService", () => {
         deepStrictEqual(1, _.result.ok);
       }).then(() => done()).catch(err => done(err));
     });
-    
+
   });
 
   describe("#retroversion", () => {

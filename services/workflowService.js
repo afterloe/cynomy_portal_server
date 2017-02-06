@@ -102,7 +102,7 @@ const buildWorkFlowNodeList = chainNodes => {
  * @throw  {Error}                   [信息不包括name 则会抛出缺少参数异常]
  * @return {Generator}               [description]
  */
-function* createWorkFlowNode(_workflowNode) {
+function* createWorkflowNode(_workflowNode) {
   const lackParameter = checkParameter(_workflowNode, "name");
   if (lackParameter) {
     throwLackParameters(lackParameter);
@@ -121,7 +121,7 @@ function* createWorkFlowNode(_workflowNode) {
  * @throw  {Error}                                            [信息不包括name, chainNodes 则会抛出缺少参数异常]
  * @return {Generator}                                        [description]
  */
-function* createWorkFlow(_workFlow) {
+function* createWorkflow(_workFlow) {
   const lackParameter = checkParameter(_workFlow, "name", "chainNodes");
   const _ = yield workFlow_template_dao.checkExist(_workFlow);
   if (_) {
@@ -592,8 +592,8 @@ function* getWorkflowNodeList(number, page) {
 }
 
 module.exports = {
-  createWorkFlowNode,
-  createWorkFlow,
+  createWorkflowNode,
+  createWorkflow,
   workflowInfo,
   buildProduct,
   startUpWorkFlow,

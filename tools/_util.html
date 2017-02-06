@@ -344,7 +344,7 @@
 
   const buildSelectProcess = () => {
     const _ = [];
-    selectedProcess.map((node, index) => _.push(`<span class="badge badge-default" data-id="${index}">${node}</span>`));
+    selectedProcess.map((node, index) => _.push(`<span class="badge badge-default" data-id="${index}">${node.name}</span>`));
     $("#modal-nodeTemplate-selected").html(_.join(" -> "));
     $("#modal-nodeTemplate-selected > span").each(function() {
       $(this).click(function() {
@@ -375,7 +375,8 @@
     websocket.send("node-manager->workflowService->getWorkflowList");
   });
 
-  registry("createWorkFlowNode", (err, data) => {
+  registry("createWorkflowNode", (err, data) => {
+    websocket.send("node-manager->workflowService->getWorkflowNodeList");
     $("#console").html(`<div class="alert alert-success" role="alert">
     <strong>成功!</strong> 链接节点成功.
     </div>`);
@@ -384,15 +385,28 @@
   registry("getWorkflowNodeList", (err, data) => {
     const nodeTemplate = [];
     data.map(item => {
-      nodeTemplate.push(`<span class="badge badge-default">${item.name}</span>`);
+      nodeTemplate.push(`<span class="badge badge-default" data-id="${item._id}">${item.name}</span>`);
     });
     $("#modal-nodeTemplate-show").html(nodeTemplate.join(" "));
     $("#modal-nodeTemplate-show > span").each(function() {
-      $(this).click(function() {
-        selectedProcess.push($(this).html());
+      const __self = $(this);
+      __self.click(function() {
+        selectedProcess.push({
+          name : __self.html(),
+          _id: __self.attr("data-id"),
+        });
         buildSelectProcess();
       });
     });
+  });
+
+  registry("createWorkflow", (err, data) => {
+    selectedProcess.length = 0;
+    buildSelectProcess();
+    websocket.send("node-manager->workflowService->getWorkflowTemplateList");
+    $("#console").html(`<div class="alert alert-success" role="alert">
+    <strong>成功!</strong> 创建工作流模板成功.
+    </div>`);
   });
 
   registry("filesInfo", (err, data) => {
@@ -541,8 +555,7 @@
   $("#module-ok-crearteProcessNodeTemplate").click(function() {
     const form = $(this).parent().parent().find("form");
     const data = getFormData(form);
-    console.log(data);
-    websocket.send(`node-manager->workflowService->createWorkFlowNode(${JSON.stringify(data)})`);
+    websocket.send(`node-manager->workflowService->createWorkflowNode(${JSON.stringify(data)})`);
     $("#crearteProcessNodeTemplate").modal("toggle");
   });
 
@@ -550,8 +563,9 @@
   $("#module-ok-crearteProcessTemplate").click(function() {
     const form = $(this).parent().parent().find("form");
     const data = getFormData(form);
-
-    console.log(data);
+    Object.assign(data, {chainNodes: selectedProcess});
+    websocket.send(`node-manager->workflowService->createWorkflow(${JSON.stringify(data)})`);
+    $("#crearteProcessTemplate").modal("toggle");
   });
 </script>
 </html>

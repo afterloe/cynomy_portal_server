@@ -190,9 +190,14 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-               <label for="formGroupExampleInput2">选择工作流模板</label>
-               <select class="form-control" name="workflow-template" id="select-workflowTemplate">
-               </select>
+                <label for="exampleInputEmail1">产品名*</label>
+                <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="请输入产品名">
+                <small id="emailHelp" class="form-text text-muted">*为必须输入内容</small>
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">选择工作流模板</label>
+                <select class="form-control" name="template" id="select-workflowTemplate">
+                </select>
               </div>
               <div class="form-group">
                 <label for="formGroupExampleInput2">选择参与人员</label>
@@ -304,11 +309,15 @@
   });
 
   registry("loaderFromXlsx", (err, data) => {
-    websocket.send("node-manager:userService:getUserList");
+    websocket.send("node-manager->userService->getUserList");
   });
 
   registry("binaryFile", (err, data) => {
-    websocket.send(`node-manager:userService:loaderFromXlsx(${data})`);
+    websocket.send(`node-manager->userService->loaderFromXlsx("${data}")`);
+  });
+
+  registry("buildProduct", (err, data) => {
+    websocket.send("node-manager->workflowService->getWorkflowList");
   });
 
   registry("filesInfo", (err, data) => {
@@ -379,7 +388,7 @@
 
   // 用户数据链接
   $("#nav-userInfo").click(function() {
-    websocket.send("node-manager:userService:getUserList");
+    websocket.send("node-manager->userService->getUserList");
     clickFunction($(this));
     $("#userInfo").show();
     $("#workflowInfo").hide();
@@ -388,9 +397,9 @@
 
   // 工作流数据
   $("#nav-workflowInfo").click(function() {
-    websocket.send("node-manager:workflowService:getWorkflowList");
-    websocket.send("node-manager:userService:getUserList");
-    websocket.send("node-manager:workflowService:getWorkflowTemplateList");
+    websocket.send("node-manager->workflowService->getWorkflowList");
+    websocket.send("node-manager->userService->getUserList");
+    websocket.send("node-manager->workflowService->getWorkflowTemplateList");
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").show();
@@ -405,9 +414,8 @@
     $("#filesInfo").show();
   });
 
+  // 导入用户数据功能 实现
   $("#module-ok-importUserInfo").click(function(){
-    // TODO
-    //
     const inputElement = document.getElementById("exampleInputFile");
     const xlsx = inputElement.files[0];
     const reader = new FileReader();
@@ -418,10 +426,10 @@
       const binaryString = evt.target.result; //发送文件
       websocket.send(binaryString);
     }
-    console.log("done select upload file");
     $("#importUserInfo").modal("toggle");
   });
 
+  // 创建工作流功能
   $("#module-ok-crearteProcess").click(function() {
     // TODO
     const form = $(this).parent().parent().find("form");
@@ -440,7 +448,15 @@
         data[item.name] = item.value;
       }
     });
+    if (data.name.length === 0) {
+      $("#console").html(`<div class="alert alert-danger" role="alert">
+    <strong>缺少参数</strong> 请输入产品名!
+  </div>`);
+      $("#crearteProcess").modal("toggle");
+      return ;
+    }
     console.log(data);
+    websocket.send(`node-manager->workflowService->buildProduct(${JSON.stringify(data)})`);
     $("#crearteProcess").modal("toggle");
   });
 </script>

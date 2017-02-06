@@ -58,14 +58,17 @@ const ws4node = (protocol, request, origin) => {
     console.log("%s Welcome accept cynomy node manager!", new Date());
     connection.on("message", message => {
       if ("utf8" === message.type) {
-        const [ldap, service, fun] = message.utf8Data.split(":");
+        const [ldap, service, fun] = message.utf8Data.split("->");
         console.log("%s: %s %s", ldap, service, fun);
         const [_, __] = fun.split(/(?:\()(.*)(?:\))/i);
         const _service = nodeManager.get(service);
         if (_service) {
           co(function* () {
             if (_service[_]) {
-              const args = __? __.split(","): null;
+              const args = __? __.split("|"): null;
+              if (args) {
+                args.map((p,i) => args[i] = JSON.parse(p));
+              }
               return yield _service[_].apply(null, args);
             }
           }).then(data => {
@@ -75,6 +78,8 @@ const ws4node = (protocol, request, origin) => {
               _: data,
             }));
           }).catch(err => {
+            // TODO
+            console.log(err);
             connection.sendUTF(JSON.stringify({
               info: `${Date().toLocaleString()}: [FAILED] exec func failed ${err.message}`,
             }));

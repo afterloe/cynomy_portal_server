@@ -11,13 +11,15 @@
   */
 "use strict";
 
-const data = "e9be93c0ec3d11e69c3ad3c623d1a3d0";
-const params = `node-manager:userService:loaderFromXlsx(${data})`;
+const data = `{"name":"afterloe", "age":5, "sex":"man"}`;
+const params = `node-manager->userService->loaderFromXlsx("2")`;
 
-const [ldap, service, fun] = params.split(":");
+const [ldap, service, fun] = params.split("->");
 let [_, __] = fun.split(/(?:\()(.*)(?:\))/i);
 console.log(ldap, service, fun);
-console.log(_, __);
+const args = __? __.split("|"): null;
+args.map((p,i) => args[i] = JSON.parse(p));
+console.log(_, args);
 // const {basename, extname} = require("path"), {statSync, readdirSync} = require("fs"), {resolve} = require("path");
 // console.log(basename("/home/afterloe/index.pug", ".pug"));
 // console.log(extname("/home/afterloe/index.pug"));

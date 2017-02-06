@@ -1005,3 +1005,16 @@ commit by afterloe (lm6289511@gmail.com)
 > test/funTest.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 17:24:16
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws 消息机制升级, 通过按钮创建流程
+
+
+### modify files
+> servers/websocket.js  
+> test/funTest.js  
+> tools/_util.html  
+

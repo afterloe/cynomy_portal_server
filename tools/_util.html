@@ -212,7 +212,6 @@
         </div>
       </div>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="crearteProcessTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -234,7 +233,7 @@
         </div>
       </div>
     </div>
-
+    <!-- Modal -->
     <div class="modal fade" id="crearteProcessNodeTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -246,15 +245,22 @@
             <h4 class="modal-title" id="myModalLabel">创建工作流节点模板</h4>
           </div>
           <div class="modal-body">
-            ...
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">流程节点名</label>
+                <input type="email" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入节点名">
+                <small id="emailHelp" class="form-text text-muted">节点名用于标识流程进行到哪一步</small>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" id="module-ok-crearteProcessNodeTemplate">创建</button>
           </div>
         </div>
       </div>
     </div>
+
 </body>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -294,6 +300,25 @@
     }
   };
 
+  const getFormData = form => {
+    const data = {};
+    form.serializeArray().map(item => {
+      if (data[item.name]) {
+        if (data[item.name] instanceof Array) {
+          data[item.name].push(item.value);
+        } else {
+          const _ = [];
+          _.push(data[item.name]);
+          _.push(item.value);
+          data[item.name] = _;
+        }
+      } else {
+        data[item.name] = item.value;
+      }
+    });
+    return data;
+  };
+
 </script>
 <script>
   $("#userInfo").hide();
@@ -318,6 +343,12 @@
 
   registry("buildProduct", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
+  });
+
+  registry("createWorkFlowNode", (err, data) => {
+    $("#console").html(`<div class="alert alert-success" role="alert">
+    <strong>成功!</strong> 链接节点成功.
+    </div>`);
   });
 
   registry("filesInfo", (err, data) => {
@@ -447,23 +478,8 @@
 
   // 创建工作流功能
   $("#module-ok-crearteProcess").click(function() {
-    // TODO
     const form = $(this).parent().parent().find("form");
-    const data = {};
-    form.serializeArray().map(item => {
-      if (data[item.name]) {
-        if (data[item.name] instanceof Array) {
-          data[item.name].push(item.value);
-        } else {
-          const _ = [];
-          _.push(data[item.name]);
-          _.push(item.value);
-          data[item.name] = _;
-        }
-      } else {
-        data[item.name] = item.value;
-      }
-    });
+    const data = getFormData(form);
     if (data.name.length === 0) {
       $("#console").html(`<div class="alert alert-danger" role="alert">
     <strong>缺少参数</strong> 请输入产品名!
@@ -474,6 +490,15 @@
     console.log(data);
     websocket.send(`node-manager->workflowService->buildProduct(${JSON.stringify(data)})`);
     $("#crearteProcess").modal("toggle");
+  });
+
+  // 创建流程节点模板
+  $("#module-ok-crearteProcessNodeTemplate").click(function() {
+    const form = $(this).parent().parent().find("form");
+    const data = getFormData(form);
+    console.log(data);
+    websocket.send(`node-manager->workflowService->createWorkFlowNode(${JSON.stringify(data)})`);
+    $("#crearteProcessNodeTemplate").modal("toggle");
   });
 </script>
 </html>

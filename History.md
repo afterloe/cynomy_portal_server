@@ -1031,3 +1031,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 17:57:16
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws 消息机制升级, 创建流程节点模板功能
+
+
+### modify files
+> tools/_util.html  
+

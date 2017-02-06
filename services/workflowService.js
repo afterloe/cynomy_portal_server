@@ -587,6 +587,10 @@ function* getWorkflowTemplateList(number, page) {
   return yield workFlow_template_dao.queryAll({}, number, page);
 }
 
+function* getWorkflowNodeList(number, page) {
+  return yield workFlow_node_template_dao.queryAll({}, number, page);
+}
+
 module.exports = {
   createWorkFlowNode,
   createWorkFlow,
@@ -601,6 +605,7 @@ module.exports = {
   setTag,
   searchProduct,
   cleanDocuments,
+  getWorkflowNodeList,
   getWorkflowList,
   getWorkflowTemplateList,
 };

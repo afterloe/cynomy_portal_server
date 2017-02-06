@@ -1042,3 +1042,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-6 19:55:27
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws升级，支持节点构建功能
+
+
+### modify files
+> services/workflowService.js  
+> tools/_util.html  
+

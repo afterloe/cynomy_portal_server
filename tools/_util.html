@@ -224,11 +224,26 @@
             <h4 class="modal-title" id="myModalLabel">创建工作流模板</h4>
           </div>
           <div class="modal-body">
-            ...
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">模板名</label>
+                <input type="email" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入模板名">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">选择节点</label>
+                <div id="modal-nodeTemplate-show"></div>
+                <small id="emailHelp" class="form-text text-muted">单击添加到末尾</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">流程</label>
+                <div id="modal-nodeTemplate-selected"></div>
+                <small id="emailHelp" class="form-text text-muted">单击删除节点</small>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" id="module-ok-crearteProcessTemplate">创建流程模板</button>
           </div>
         </div>
       </div>
@@ -325,6 +340,21 @@
   $("#workflowInfo").hide();
   $("#filesInfo").hide();
 
+  const selectedProcess = [];
+
+  const buildSelectProcess = () => {
+    const _ = [];
+    selectedProcess.map((node, index) => _.push(`<span class="badge badge-default" data-id="${index}">${node}</span>`));
+    $("#modal-nodeTemplate-selected").html(_.join(" -> "));
+    $("#modal-nodeTemplate-selected > span").each(function() {
+      $(this).click(function() {
+        const index = $(this).attr("data-id");
+        selectedProcess.splice(index, 1);
+        buildSelectProcess();
+      });
+    });
+  };
+
   registry("getWorkflowTemplateList", (err, data) => {
     const workflowTemplate = [];
     data.map(item => {
@@ -349,6 +379,20 @@
     $("#console").html(`<div class="alert alert-success" role="alert">
     <strong>成功!</strong> 链接节点成功.
     </div>`);
+  });
+
+  registry("getWorkflowNodeList", (err, data) => {
+    const nodeTemplate = [];
+    data.map(item => {
+      nodeTemplate.push(`<span class="badge badge-default">${item.name}</span>`);
+    });
+    $("#modal-nodeTemplate-show").html(nodeTemplate.join(" "));
+    $("#modal-nodeTemplate-show > span").each(function() {
+      $(this).click(function() {
+        selectedProcess.push($(this).html());
+        buildSelectProcess();
+      });
+    });
   });
 
   registry("filesInfo", (err, data) => {
@@ -447,6 +491,7 @@
     websocket.send("node-manager->workflowService->getWorkflowList");
     websocket.send("node-manager->userService->getUserList");
     websocket.send("node-manager->workflowService->getWorkflowTemplateList");
+    websocket.send("node-manager->workflowService->getWorkflowNodeList");
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").show();
@@ -499,6 +544,14 @@
     console.log(data);
     websocket.send(`node-manager->workflowService->createWorkFlowNode(${JSON.stringify(data)})`);
     $("#crearteProcessNodeTemplate").modal("toggle");
+  });
+
+  // 创建流程模板
+  $("#module-ok-crearteProcessTemplate").click(function() {
+    const form = $(this).parent().parent().find("form");
+    const data = getFormData(form);
+
+    console.log(data);
   });
 </script>
 </html>

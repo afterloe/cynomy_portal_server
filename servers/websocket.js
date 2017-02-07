@@ -17,12 +17,16 @@ const [WSSERVER, ORIGIN] = [Symbol("WSSERVER"), Symbol("ORIGIN")];
 // -----------------------------------------------------------------------------
 const [co, {resolve}, {writeFileSync}] = [require("co"), require("path"), require("fs")];
 const service = resolve(__dirname, "..", "services");
-const {uuidCode} = require(resolve(__dirname, "..", "tools", "utilities"));
+const [{uuidCode}, {get}] = [require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config"))];
 const [userService, workflowService] = [require(resolve(service, "userService")), require(resolve(service, "workflowService"))];
 
 const nodeManager = new Map();
 nodeManager.set("userService", userService);
 nodeManager.set("workflowService", workflowService);
+
+const receiveType = new Map();
+receiveType.set(1001, "userList-xlsx");
+receiveType.set(2001, "goodsList-tar.gz");
 // -----------------------------------------------------------------------------
 
 module[ORIGIN] = new Map();
@@ -90,24 +94,29 @@ const ws4node = (protocol, request, origin) => {
           }));
         }
       } else if ("binary" === message.type) {
-        const file = uuidCode();
-        const path = resolve("/tmp", file);
-
         const wsBuff = message.binaryData;
         const length = wsBuff.length;
         const flag = wsBuff.readUInt32BE(length - 8);
-        console.log(length);
-        console.log(flag);
+
+        if (!receiveType.has(flag)) {
+          connection.sendUTF(JSON.stringify({
+            info: `${Date().toLocaleString()}: [FAILED] upload file is FAILED, can't find this permit`,
+          }));
+          return ;
+        }
+        
+        const file = uuidCode();
+        const path = resolve(get("tmpDir"), file);
 
         const fileBuffer = wsBuff.slice(0, length - 8);
         writeFileSync(path, fileBuffer);
 
-        console.log("Received Binary Message %s bytes, in %s", length, path);
-        // connection.sendUTF(JSON.stringify({
-        //   info: `${Date().toLocaleString()}: [SUCCESS] receive file -- ${file}`,
-        //   type: "binaryFile",
-        //   _: file,
-        // }));
+        console.log("received file %s bytes, save in %s", length, path);
+        connection.sendUTF(JSON.stringify({
+          info: `${Date().toLocaleString()}: [SUCCESS] receive file -- ${file}`,
+          type: receiveType.get(flag),
+          _: file,
+        }));
       }
     });
   } else {

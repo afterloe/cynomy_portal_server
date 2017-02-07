@@ -18,6 +18,7 @@ const defaultRoot = resolve(process.env.HOME, ".cynomys", "protal");
 
 const [num, dataDir, logDir] = [cpus().length, resolve(defaultRoot, "data"), resolve(defaultRoot, "logs")];
 
+siteConfig.set("tmpDir", "/tmp");
 siteConfig.set("distributed", { // 多线程配置
   enable: true, // 是否开启多线程模式
   slaveNum : num // 奴隶数

@@ -1158,3 +1158,17 @@ commit by afterloe (lm6289511@gmail.com)
 > test/funTest.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-7 16:31:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 配置文件中添加临时目录，ws服务端优化
+
+
+### modify files
+> config/index.js  
+> servers/websocket.js  
+> services/userService.js  
+> tools/lib/util.js  
+

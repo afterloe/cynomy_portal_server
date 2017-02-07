@@ -12,7 +12,8 @@
 "use strict";
 
 const [{resolve}, xlsx] = [require("path"), require("node-xlsx").default];
-const [{user_dao}, {throwLackParameters, throwParametersError, throwOauthError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+const [{get}, {user_dao}, {throwLackParameters, throwParametersError, throwOauthError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
+[require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
 
 /**
@@ -67,25 +68,6 @@ const removDuplication = users => {
   return _;
 };
 
-const loaderUserFromXlsx = file => {
-  const [{data}, users] = [xlsx.parse(file)[0], []];
-  for(let i = 1; i < data.length; i++) {
-    if (data[i].length <= 0) {
-      continue;
-    }
-    const [mail, name] = [data[i][0], data[i][1]];
-    if (!mailRegex.test(mail)) {
-      continue;
-    }
-    users.push({
-      mail,
-      name,
-    });
-  }
-
-  return users;
-};
-
 /**
  * 创建用户
  *
@@ -135,22 +117,6 @@ function* createUsers (_users) {
 }
 
 /**
- * 从execl中导入用户数据
- *
- * @param  {String} file [xlsx文件路径]
- * @return {Array}        [用户数组]
- */
-function* loaderFromXlsx(name) {
-  const file = resolve("/tmp", name);
-  const users = loaderUserFromXlsx(file);
-  if (users && users.length > 0) {
-    return yield createUsers(users);
-  } else {
-    throwLackParameters("");
-  }
-}
-
-/**
  * 获取正常状态下所有用户列表
  *
  * @param  {Integer}    number [单页分页数量]
@@ -192,9 +158,38 @@ function* obmitLoginPermit(mail){
   });
 }
 
+const loaderUserFromXlsx = file => {
+  const [{data}, users] = [xlsx.parse(file)[0], []];
+  for(let i = 1; i < data.length; i++) {
+    if (data[i].length <= 0) {
+      continue;
+    }
+    const [mail, name] = [data[i][0], data[i][1]];
+    if (!mailRegex.test(mail)) {
+      continue;
+    }
+    users.push({
+      mail,
+      name,
+    });
+  }
+
+  return users;
+};
+
 function* cleanDocuments() {
   const a = yield user_dao.clean();
   return {a};
+}
+
+function* loaderFromXlsx(name) {
+  const file = resolve(get("tmpDir"), name);
+  const users = loaderUserFromXlsx(file);
+  if (users && users.length > 0) {
+    return yield createUsers(users);
+  } else {
+    throwLackParameters("");
+  }
 }
 
 function* findUsers(users) {
@@ -211,13 +206,14 @@ function* findUsers(users) {
 }
 
 module.exports = {
-  loaderFromXlsx,
+  loaderUserFromXlsx,
   createUsers,
   createUser,
   getUserList,
   cleanDocuments,
   login,
   obmitLoginPermit,
+
   findUsers,
-  loaderUserFromXlsx,
+  loaderFromXlsx,
 };

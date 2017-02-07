@@ -245,9 +245,15 @@ $("#module-ok-importUserInfo").click(function() {
     //以二进制形式读取文件
     reader.readAsArrayBuffer(xlsx);
     //文件读取完毕后该函数响应
-    reader.onload = evt => {
-        const binaryString = evt.target.result; //发送文件
-        websocket.send(binaryString);
+    reader.onload = () => {
+      const fileBuff = reader.result;
+      const length = fileBuff.byteLength;
+
+      const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
+      const dataView = new DataView(wsBuff, length, 8);
+      dataView.setUint32(0,23); // TODO
+
+      websocket.send(wsBuff);
     };
     $("#importUserInfo").modal("toggle");
 });
@@ -290,16 +296,14 @@ $("#module-ok-updateNodeProduceList").click(function() {
     const inputElement = document.getElementById("file-updateNodeProduceList");
     const tar = inputElement.files[0];
     const reader = new FileReader();
-    //以二进制形式读取文件
     reader.readAsArrayBuffer(tar);
-    //文件读取完毕后该函数响应
     reader.onload = () => {
-        const fileBuff = reader.result; //发送文件
+        const fileBuff = reader.result;
         const length = fileBuff.byteLength;
 
         const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
         const dataView = new DataView(wsBuff, length, 8);
-        dataView.setUint32(0,23);
+        dataView.setUint32(0,23); // TODO
 
         websocket.send(wsBuff);
     };

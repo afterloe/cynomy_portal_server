@@ -1203,3 +1203,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > services/workflowService.js  
 
+
+1.0.3 / 2017-2-7 19:41:23
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 数据底层升级，修复check出现的异常
+
+
+### modify files
+> services/fileSystem.js  
+> services/goodsService.js  
+

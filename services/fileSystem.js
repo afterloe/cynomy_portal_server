@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{resolve, basename}, {spawn}, {statSync, existsSync, mkdirSync}] = [require("path"), require("child_process"), require("fs")];
+const [{resolve, basename}, {spawn}, {statSync, existsSync, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("fs")];
 const [{throwNotExistsFile, throwParametersError}, {uuidCode}, {get}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
   require(resolve(__dirname, "..", "config"))];
 const CENTER = Symbol("CENTER");
@@ -47,7 +47,20 @@ const cp = (source, target) => new Promise((solve, reject) => {
   });
 });
 
-function decompression(tar) {
+const scanDir = (_path, identification) => {
+  let stat = statSync(_path);
+  if (stat.isDirectory()) {
+    let files = readdirSync(_path);
+    for (let i = 0; i < files.length; i++) {
+      scanDir(resolve(_path, files[i]), identification);
+    }
+    files = undefined;
+  }
+  stat = undefined;
+  return module[CENTER][identification].push(_path);
+};
+
+const decompression = tar => {
   if (!existsSync(tar)) {
     return Promise.reject(throwNotExistsFile());
   }
@@ -75,9 +88,9 @@ function decompression(tar) {
       solve(tagDir);
     });
   });
-}
+};
 
-function compression(dir) {
+const compression = dir => {
   if (!existsSync(dir)) {
     return Promise.reject(throwNotExistsFile());
   }
@@ -98,19 +111,6 @@ function compression(dir) {
       solve(resolve(cwd, `${relative}.tar.gz`));
     });
   });
-}
-
-const scanDir = (_path, identification) {
-  let stat = statSync(_path);
-  if (stat.isDirectory()) {
-    let files = readdirSync(_path);
-    for (let i = 0; i < files.length; i++) {
-      scanDir(resolve(_path, files[i]), identification);
-    }
-    files = undefined;
-  }
-  stat = undefined;
-  return module[CENTER][identification].push(_path);
 };
 
 function* move(source, ...args) {

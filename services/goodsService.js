@@ -12,13 +12,11 @@
 "use strict";
 
 const [{resolve}, {statSync, existsSync}] = [require("path"), require("fs")];
-const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwParametersError, throwNosuchThisWorkFlow, throwCfgFormatMismatch, throwLackParameters},
-  {checkParameter, readyConfig}, {uploadNodeProduceList}, {get}, {decompression, move}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")),
-  require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "workflowService")), require(resolve(__dirname, "..", "config")),
-  require(resolve(__dirname, "fileSystem"))];
+const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed, throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move}] = [
+  require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "fileSystem"))];
 
 const buildGoods = (goods, workflowId, nodeName) => {
-  const lackParameter = checkParameter(_goods, "name", "path", "version", "author");
+  const lackParameter = checkParameter(goods, "name", "path", "version", "author");
   if (lackParameter) {
     throwLackParameters("", lackParameter);
   }
@@ -46,6 +44,10 @@ function* production(tmp, workflowId, nodeId) {
   }
 
   const cfg = readyConfig(resolve(tmp, ".portal"));
+  if (!cfg || !cfg.production) {
+    throwCfgFormatMismatch();
+  }
+
   const [workflow, nodeInstance] = yield [workFlow_instance_dao.queryById(workflowId), workFlow_node_instance_dao.queryById(nodeId)];
 
   if (!workflow || nodeInstance) {
@@ -60,6 +62,9 @@ function* production(tmp, workflowId, nodeId) {
     }
 
     const _ = yield goods_dao.insertMany(productionList);
+    if (productionList.length !== _.result.n) {
+      throwBuildFailed();
+    }
     yield move(resolve(tmp, "production"));
     return productionList;
   }

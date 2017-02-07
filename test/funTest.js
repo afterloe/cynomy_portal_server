@@ -12,7 +12,7 @@
 "use strict";
 
 const data = `{"name":"afterloe", "age":5, "sex":"man"}`;
-const params = `node-manager->userService->loaderFromXlsx("2")`;
+const params = `node-manager->userService->loaderFromXlsx(${data})`;
 
 const [ldap, service, fun] = params.split("->");
 let [_, __] = fun.split(/(?:\()(.*)(?:\))/i);

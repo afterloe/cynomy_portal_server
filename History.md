@@ -1141,3 +1141,20 @@ commit by afterloe (lm6289511@gmail.com)
 > test/workflowService_test.js  
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-7 15:56:24
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws 发送文件功能优化，添加对底层的支持
+
+
+### new files
+> tools/lib/  
+
+### modify files
+> Makefile  
+> servers/websocket.js  
+> test/funTest.js  
+> tools/_util.html  
+

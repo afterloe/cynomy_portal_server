@@ -92,13 +92,22 @@ const ws4node = (protocol, request, origin) => {
       } else if ("binary" === message.type) {
         const file = uuidCode();
         const path = resolve("/tmp", file);
-        writeFileSync(path, message.binaryData);
-        console.log("Received Binary Message %s bytes, in %s", message.binaryData.length, path);
-        connection.sendUTF(JSON.stringify({
-          info: `${Date().toLocaleString()}: [SUCCESS] receive file -- ${file}`,
-          type: "binaryFile",
-          _: file,
-        }));
+
+        const wsBuff = message.binaryData;
+        const length = wsBuff.length;
+        const flag = wsBuff.readUInt32BE(length - 8);
+        console.log(length);
+        console.log(flag);
+
+        const fileBuffer = wsBuff.slice(0, length - 8);
+        writeFileSync(path, fileBuffer);
+
+        console.log("Received Binary Message %s bytes, in %s", length, path);
+        // connection.sendUTF(JSON.stringify({
+        //   info: `${Date().toLocaleString()}: [SUCCESS] receive file -- ${file}`,
+        //   type: "binaryFile",
+        //   _: file,
+        // }));
       }
     });
   } else {

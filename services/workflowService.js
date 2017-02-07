@@ -599,7 +599,7 @@ function* updateProcess(workflowId, {path, reason}) {
     throwOperationFailed("", "工作流未启动！");
   }
 
-  const produceList = yield structureProduceList(path);
+  const produceList = yield structureProduceList(path, _._id, status._id);
   return yield updateNodeProduceList(status._id, {produceList, reason});
 }
 

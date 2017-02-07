@@ -18,7 +18,8 @@ const defaultRoot = resolve(process.env.HOME, ".cynomys", "protal");
 
 const [num, dataDir, logDir] = [cpus().length, resolve(defaultRoot, "data"), resolve(defaultRoot, "logs")];
 
-siteConfig.set("tmpDir", "/tmp");
+siteConfig.set("tmpDir", "/tmp"); // 临时目录，用于存放上传的临时文件
+siteConfig.set("staticDir", "/tmp/staticDir"); // 静态资源目录，用于存放静态资源
 siteConfig.set("distributed", { // 多线程配置
   enable: true, // 是否开启多线程模式
   slaveNum : num // 奴隶数

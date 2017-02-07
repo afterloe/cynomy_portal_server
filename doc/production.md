@@ -34,28 +34,24 @@
 ## .portal 文件结构
 ```json
 {
-  "name": "工作流实例名",
-  "production": {
-    "name of node1": [{
-      "name": "文件名",
-      "type": "文件类型",
-      "path": "相对路径",
-      "version": "版本",
-      "author": {
-        "name": "作者名字",
-        "mail": "作者邮箱"
-      }
-    }],
-    "name of node2": [{
-      "name": "文件名",
-      "type": "文件类型",
-      "path": "相对路径",
-      "version": "版本",
-      "author": {
-        "name": "作者名字",
-        "mail": "作者邮箱"
-      }
-    }]
-  }
+  "production": [{
+    "name": "文件名",
+    "type": "文件类型",
+    "path": "相对路径",
+    "version": "版本",
+    "author": {
+      "name": "作者名字",
+      "mail": "作者邮箱"
+    }
+  },{
+    "name": "文件名",
+    "type": "文件类型",
+    "path": "相对路径",
+    "version": "版本",
+    "author": {
+      "name": "作者名字",
+      "mail": "作者邮箱"
+    }
+  }]
 }
 ```

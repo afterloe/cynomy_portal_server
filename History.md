@@ -1186,3 +1186,20 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/_util.html  
 > tools/lib/util.js  
 
+
+1.0.3 / 2017-2-7 19:30:5
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成工作流更新节点操作
+
+
+### new files
+> services/fileSystem.js  
+
+### modify files
+> config/index.js  
+> doc/production.md  
+> services/goodsService.js  
+> services/workflowService.js  
+

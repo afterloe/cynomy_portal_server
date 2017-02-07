@@ -97,14 +97,13 @@ const ws4node = (protocol, request, origin) => {
         const wsBuff = message.binaryData;
         const length = wsBuff.length;
         const flag = wsBuff.readUInt32BE(length - 8);
-
         if (!receiveType.has(flag)) {
           connection.sendUTF(JSON.stringify({
             info: `${Date().toLocaleString()}: [FAILED] upload file is FAILED, can't find this permit`,
           }));
           return ;
         }
-        
+
         const file = uuidCode();
         const path = resolve(get("tmpDir"), file);
 

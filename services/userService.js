@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{resolve}, xlsx] = [require("path"), require("node-xlsx").default];
+const [{resolve}, xlsx, {unlinkSync}] = [require("path"), require("node-xlsx").default, require("fs")];
 const [{get}, {user_dao}, {throwLackParameters, throwParametersError, throwOauthError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
 [require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
@@ -185,10 +185,11 @@ function* cleanDocuments() {
 function* loaderFromXlsx(name) {
   const file = resolve(get("tmpDir"), name);
   const users = loaderUserFromXlsx(file);
+  unlinkSync(file);
   if (users && users.length > 0) {
     return yield createUsers(users);
   } else {
-    throwLackParameters("");
+    throwLackParameters();
   }
 }
 

@@ -72,8 +72,16 @@ registry("loaderFromXlsx", (err, data) => {
     websocket.send("node-manager->userService->getUserList");
 });
 
-registry("binaryFile", (err, data) => {
+registry("userList-xlsx", (err, data) => {
     websocket.send(`node-manager->userService->loaderFromXlsx("${data}")`);
+});
+
+registry("goodsList-tar.gz", (err, data) => {
+  const form = $("form-updateNodeProduceList");
+  const _data = getFormData(form);
+  Object.assign(_data, {path: data});
+  websocket.send(`node-manager->workflowService->updateProcess("${data.workflowId}"|${JSON.stringify(data)})`);
+  $("#updateNodeProduceList").modal("toggle");
 });
 
 registry("buildProduct", (err, data) => {
@@ -199,7 +207,7 @@ const clickFunction = _ => {
         $(this).removeClass("active");
     });
     _.addClass("active");
-}
+};
 
 $("#overwrite").click(function() {
     clickFunction($(this));
@@ -242,17 +250,13 @@ $("#module-ok-importUserInfo").click(function() {
     const inputElement = document.getElementById("exampleInputFile");
     const xlsx = inputElement.files[0];
     const reader = new FileReader();
-    //以二进制形式读取文件
     reader.readAsArrayBuffer(xlsx);
-    //文件读取完毕后该函数响应
     reader.onload = () => {
       const fileBuff = reader.result;
       const length = fileBuff.byteLength;
-
       const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
       const dataView = new DataView(wsBuff, length, 8);
-      dataView.setUint32(0,23); // TODO
-
+      dataView.setUint32(0,1001);
       websocket.send(wsBuff);
     };
     $("#importUserInfo").modal("toggle");
@@ -292,7 +296,7 @@ $("#module-ok-crearteProcessTemplate").click(function() {
 });
 
 // 更新当前节点
-$("#module-ok-updateNodeProduceList").click(function() {
+$("#module-ok-updateNodeProduceList").click(() => {
     const inputElement = document.getElementById("file-updateNodeProduceList");
     const tar = inputElement.files[0];
     const reader = new FileReader();
@@ -300,16 +304,9 @@ $("#module-ok-updateNodeProduceList").click(function() {
     reader.onload = () => {
         const fileBuff = reader.result;
         const length = fileBuff.byteLength;
-
         const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
         const dataView = new DataView(wsBuff, length, 8);
-        dataView.setUint32(0,23); // TODO
-
+        dataView.setUint32(0,2001);
         websocket.send(wsBuff);
     };
-    const form = $(this).parent().parent().find("form");
-    const data = getFormData(form);
-    Object.assign(data, {path: "l123s"});
-    // websocket.send(`node-manager->workflowService->updateProcess("${data.workflowId}"|${JSON.stringify(data)})`);
-    $("#updateNodeProduceList").modal("toggle");
 });

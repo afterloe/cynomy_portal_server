@@ -288,14 +288,15 @@
           </div>
           <div class="modal-body">
             <form>
+              <div id="hidden-views"></div>
               <div class="form-group">
                 <label for="exampleInputFile">更新数据包</label>
-                <input type="file" class="form-control-file" accept="xlsx" placeholder="选择数据tar包" id="exampleInputFile" aria-describedby="fileHelp">
+                <input type="file" class="form-control-file" accept="xlsx" placeholder="选择数据tar包" id="file-updateNodeProduceList" aria-describedby="fileHelp">
                 <small id="fileHelp" class="form-text text-muted">数据tart包来自服务器打包工具或自己的打包工具的更新数据包</small>
               </div>
               <div class="form-group">
                 <label for="exampleTextarea">更新理由</label>
-                <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+                <textarea class="form-control" name="reason" id="exampleTextarea" rows="3"></textarea>
               </div>
             </form>
           </div>
@@ -397,8 +398,11 @@
   }
 
   function uploadNode(btn) {
-    console.log($(btn).attr("data-id"));
-    console.log("123");
+    btn = $(btn);
+    const [id, nodeName] = [btn.attr("data-id"), btn.attr("data-name")];
+    const processName = btn.parent().parent().attr("data-name")
+    $("#label-updateNodeProduceList").html(`${processName} - ${nodeName} 节点更新`);
+    $("#hidden-views").html(`<input type="hidden" name="workflowId" value="${id}" />`);
     $("#updateNodeProduceList").modal("show");
   }
 
@@ -473,6 +477,10 @@
     websocket.send("node-manager->workflowService->getWorkflowList");
   });
 
+  registry("updateProcess", (err, data) => {
+    websocket.send("node-manager->workflowService->getWorkflowList");
+  });
+
   registry("filesInfo", (err, data) => {
     console.log(data);
   });
@@ -505,7 +513,7 @@
       if (status) {
         const speed = Math.ceil((status.index + 1) / nodeList.length * 100);
         const reason = status.reason || "未更新节点";
-        showWorkflow.push(`<div class="row" style="margin-top: 1rem;">
+        showWorkflow.push(`<div class="row" style="margin-top: 1rem;" data-name="${name}">
           <div class="col-sm-6">
             <div class="progress">
               <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: ${speed}%" aria-valuenow="${speed}" aria-valuemin="0" aria-valuemax="100">${speed} % ${status.name}</div>
@@ -513,7 +521,7 @@
             ${name} - ${reason}
           </div>
           <div class="col-sm-3">
-            <button type="button" data-id="${_id}" class="btn btn-outline-primary btn-sm" onClick="javascript:uploadNode(this);">
+            <button type="button" data-id="${_id}" data-name="${status.name}" class="btn btn-outline-primary btn-sm" onClick="javascript:uploadNode(this);">
               更新当前节点
             </button>
             <button type="button" data-id="${_id}" class="btn btn-outline-success btn-sm" onClick="javascript:promoteProcess(this);">
@@ -630,6 +638,15 @@
     Object.assign(data, {chainNodes: selectedProcess});
     websocket.send(`node-manager->workflowService->createWorkflow(${JSON.stringify(data)})`);
     $("#crearteProcessTemplate").modal("toggle");
+  });
+
+  // 更新当前节点
+  $("#module-ok-updateNodeProduceList").click(function() {
+    const form = $(this).parent().parent().find("form");
+    const data = getFormData(form);
+    Object.assign(data, {path: "l123s"});
+    websocket.send(`node-manager->workflowService->updateProcess("${data.workflowId}"|${JSON.stringify(data)})`);
+    $("#updateNodeProduceList").modal("toggle");
   });
 </script>
 </html>

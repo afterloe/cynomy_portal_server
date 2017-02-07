@@ -95,8 +95,36 @@ function* getGoodsList(number, page) {
   return yield goods_dao.queryAll({}, number, page);
 }
 
+function* structureProduceList(tar) {
+  console.log(tar);
+  return [{
+    "author": "产出人员",
+    "name": "产出的文件名",
+    "path": "下载地址",
+    "createTimestamp": "产出时间",
+    "downCount": "下载次数",
+    "version": "版本"
+  },{
+    "author": "产出人员",
+    "name": "产出的文件名",
+    "path": "下载地址",
+    "createTimestamp": "产出时间",
+    "downCount": "下载次数",
+    "version": "版本"
+  },{
+    "author": "产出人员",
+    "name": "产出的文件名",
+    "path": "下载地址",
+    "createTimestamp": "产出时间",
+    "downCount": "下载次数",
+    "version": "版本"
+  }];
+}
+
 module.exports = {
   cleanDocuments,
   production,
   getGoodsList,
+
+  structureProduceList,
 };

@@ -14,9 +14,9 @@
 const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
   {throwLackParameters, throwParametersError, throwObjectExists, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn,
-  throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}, {findUsers}] =
+  throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}, {findUsers}, {structureProduceList}] =
 [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
-require(resolve(__dirname, "userService"))];
+require(resolve(__dirname, "userService")), require(resolve(__dirname, "goodsService"))];
 
 /**
  * 构建工作流节点模板
@@ -281,7 +281,7 @@ function* buildProduct(_workFlow, autoStart) {
    });
 
    if (true === autoStart) {
-     return yield* startUpWorkFlow(_id);
+     return yield* startUpWorkflow(_id);
    } else {
      return _id;
    }
@@ -489,8 +489,8 @@ function* promoteProcess(id) {
  * @param  {String}    reason        [更新原因]
  * @return {Generator}               [description]
  */
-function* uploadNodeProduceList(_workFlowNode, {produceList, reason}) {
-  const _ = yield workFlow_node_instance_dao.queryById(_workFlowNode);
+function* updateNodeProduceList(nodeId, {produceList, reason}) {
+  const _ = yield workFlow_node_instance_dao.queryById(nodeId);
   if (!_) {
     throwNosuchThisWorkflowNodeInstance();
   }
@@ -591,6 +591,18 @@ function* getWorkflowNodeList(number, page) {
   return yield workFlow_node_template_dao.queryAll({}, number, page);
 }
 
+function* updateProcess(workflowId, {path, reason}) {
+  const _ = yield obmitStartWorkflow(workflowId);
+  const {status} = _;
+
+  if (!status) {
+    throwOperationFailed("", "工作流未启动！");
+  }
+
+  const produceList = yield structureProduceList(path);
+  return yield updateNodeProduceList(status._id, {produceList, reason});
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -598,7 +610,7 @@ module.exports = {
   buildProduct,
   startUpWorkflow,
   setLeader,
-  uploadNodeProduceList,
+  updateNodeProduceList,
   promoteProcess,
   retroversion,
 
@@ -608,4 +620,5 @@ module.exports = {
   getWorkflowNodeList,
   getWorkflowList,
   getWorkflowTemplateList,
+  updateProcess,
 };

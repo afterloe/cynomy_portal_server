@@ -245,7 +245,7 @@ describe("workflowService", () => {
     });
   });
 
-  describe("#uploadNodeProduceList", () => {
+  describe("#updateNodeProduceList", () => {
     before(done => {
       co(function* () {
         const instance = yield workflowService.workflowInfo("TRU Mate v1.1.1");
@@ -278,7 +278,7 @@ describe("workflowService", () => {
           "downCount": "下载次数",
           "version": "版本"
         }],"这周完成了项目的基本架构方案和对应的ppt"];
-        const _ = yield workflowService.uploadNodeProduceList(workFlowNode, {produceList, reason});
+        const _ = yield workflowService.updateNodeProduceList(workFlowNode, {produceList, reason});
         deepStrictEqual(1, _.result.n);
         deepStrictEqual(1, _.result.nModified);
         deepStrictEqual(1, _.result.ok);

@@ -455,8 +455,8 @@ function* endProcess(_workFlow) {
  * @param  {String}    _workFlow [工作流实例id]
  * @return {Generator}           [description]
  */
-function* promoteProcess(_workFlow) {
-  const _ = yield obmitStartWorkflow(_workFlow);
+function* promoteProcess(id) {
+  const _ = yield obmitStartWorkflow(id);
   const {nextNode, status} = _;
 
   if (!nextNode) {

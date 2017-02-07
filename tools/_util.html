@@ -365,14 +365,14 @@
     console.log("123");
   }
 
-  function promoteProcess(btn) {
+  function uploadNode(btn) {
     console.log($(btn).attr("data-id"));
     console.log("123");
   }
 
-  function uploadNode(btn) {
-    console.log($(btn).attr("data-id"));
-    console.log("123");
+  function promoteProcess(btn) {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->promoteProcess("${id}")`);
   }
 
   function startUpProcess(btn) {
@@ -431,6 +431,10 @@
     $("#console").html(`<div class="alert alert-success" role="alert">
     <strong>成功!</strong> 创建工作流模板成功.
     </div>`);
+  });
+
+  registry("promoteProcess", (err, data) => {
+    websocket.send("node-manager->workflowService->getWorkflowList");
   });
 
   registry("startUpWorkflow", (err, data) => {

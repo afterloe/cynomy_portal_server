@@ -1104,3 +1104,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/_util.html  
 
+
+1.0.3 / 2017-2-7 9:55:11
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws优化，流程节点推进功能实现
+
+
+### modify files
+> services/workflowService.js  
+> tools/_util.html  
+

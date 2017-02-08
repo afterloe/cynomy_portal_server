@@ -1270,3 +1270,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/lib/util.js  
 > tools/lib/websocket.js  
 
+
+1.0.3 / 2017-2-8 17:17:32
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复解压tar包的时候-C 导致的子进程失败的异常
+
+
+### modify files
+> services/fileSystem.js  
+> test/funTest.js  
+

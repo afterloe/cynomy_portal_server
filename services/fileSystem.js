@@ -101,16 +101,15 @@ const decompression = tar => {
   }
 
   return new Promise((solve, reject) => {
-    const [cwd, relative] = [resolve(tar, ".."), basename(tar)];
     const tagDir = resolve(get("tmpDir"), `tmp-${uuidCode()}`);
     mkdirSync(tagDir);
-    const tarXZF = spawn("tar", ["xzf", relative, "C", tagDir], {
-      cwd,
+    const tarXZF = spawn("tar", ["xzf", tar], {
+      cwd: tagDir,
     });
-
     tarXZF.stdout.on("data", chunk => console.log(`[SUCCESS] ${chunk}`));
     tarXZF.on("error", err => reject(err));
     tarXZF.on("close", code => {
+      console.log(code);
       if (0 !== code) {
         reject("[FAILED] 解压tar包失败");
         return ;

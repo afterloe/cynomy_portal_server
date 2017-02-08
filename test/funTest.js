@@ -11,15 +11,25 @@
   */
 "use strict";
 
-const data = `{"name":"afterloe", "age":5, "sex":"man"}`;
-const params = `node-manager->userService->loaderFromXlsx(${data})`;
+const {spawn} = require("child_process");
+const tarXZF = spawn("tar", ["xzf", "/tmp/9996e550eddc11e6a87d01486680478a"], {
+  cwd: "/tmp/tmp-0a543e60eddc11e6b321c322b7ea7dc6"
+});
+tarXZF.stdout.on("data", chunk => console.log(`[SUCCESS] ${chunk}`));
+tarXZF.on("error", err => console.log(err));
+tarXZF.on("close", code => {
+  console.log(code);
+});
 
-const [ldap, service, fun] = params.split("->");
-let [_, __] = fun.split(/(?:\()(.*)(?:\))/i);
-console.log(ldap, service, fun);
-const args = __? __.split("|"): null;
-args.map((p,i) => args[i] = JSON.parse(p));
-console.log(_, args);
+// const data = `{"name":"afterloe", "age":5, "sex":"man"}`;
+// const params = `node-manager->userService->loaderFromXlsx(${data})`;
+//
+// const [ldap, service, fun] = params.split("->");
+// let [_, __] = fun.split(/(?:\()(.*)(?:\))/i);
+// console.log(ldap, service, fun);
+// const args = __? __.split("|"): null;
+// args.map((p,i) => args[i] = JSON.parse(p));
+// console.log(_, args);
 
 // const {basename, extname} = require("path"), {statSync, readdirSync} = require("fs"), {resolve} = require("path");
 // console.log(basename("/home/afterloe/index.pug", ".pug"));

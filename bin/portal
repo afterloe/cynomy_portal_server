@@ -41,9 +41,9 @@ program.
 
 // 构建产出列表包
 program.
-  command("build <path>").
+  command("build [path]").
   description("构建数据tar包").
-  action((sourcePath, options) => require(resolve(lib, "buildTar"))(sourcePath, options));
+  action((path) => require(resolve(lib, "buildTar"))(path));
 
 // 导入数据
 program.

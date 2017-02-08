@@ -11,9 +11,8 @@
   */
 "use strict";
 
-const [{resolve, basename}, {spawn}, {statSync, writeFile, existsSync, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("fs")];
-const [{throwNotExistsFile, throwParametersError}, {uuidCode}, {get}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
-  require(resolve(__dirname, "..", "config"))];
+const [{resolve, basename}, {spawn}, {statSync, writeFile, existsSync, readFile, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("fs")];
+const [{throwNotExistsFile, throwParametersError}, {uuidCode}, {get}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config"))];
 const CENTER = Symbol("CENTER");
 
 module[CENTER] = {};
@@ -44,6 +43,24 @@ const cp = (source, target) => new Promise((solve, reject) => {
   sourceStream.on("close", () => {
     console.log(`cp file to ${targetPath} ... SUCCESS! `);
     solve(resolve(target, name));
+  });
+});
+
+const readJSON = path => new Promise((solve, reject) => {
+  if (!existsSync(path)) {
+    reject(throwNotExistsFile());
+  }
+  readFile(path, (err, buf) => {
+    if (err) {
+      reject(err);
+    }
+    let data;
+    try {
+      data = JSON.parse(buf.toString());
+    } catch (error) {
+      data = {};
+    }
+    solve(data);
   });
 });
 
@@ -156,4 +173,5 @@ module.exports = {
   move,
   cp,
   writeJSON,
+  readJSON,
 };

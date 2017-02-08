@@ -1242,3 +1242,17 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > lib/initTar.js  
 
+
+1.0.3 / 2017-2-8 15:11:22
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: fileSystem 添加读取异步读取Json的方法，重构了buildTar功能
+
+
+### modify files
+> bin/portal  
+> lib/buildTar.js  
+> lib/initTar.js  
+> services/fileSystem.js  
+

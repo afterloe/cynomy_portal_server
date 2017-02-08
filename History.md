@@ -1231,3 +1231,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/fileSystem.js  
 > test/funTest.js  
 
+
+1.0.3 / 2017-2-8 14:35:27
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复构建包的时候出现绝对路径的异常
+
+
+### modify files
+> lib/initTar.js  
+

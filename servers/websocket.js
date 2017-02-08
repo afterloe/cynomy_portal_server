@@ -60,6 +60,9 @@ const ws4node = (protocol, request, origin) => {
   if ("node-protocol" === protocol) {
     const connection = request.accept(protocol, origin);
     console.log("%s Welcome accept cynomy node manager!", new Date());
+    connection.on("close", msg => {
+      console.log("client is hang-up.");
+    });
     connection.on("message", message => {
       if ("utf8" === message.type) {
         const [ldap, service, fun] = message.utf8Data.split("->");
@@ -82,10 +85,9 @@ const ws4node = (protocol, request, origin) => {
               _: data,
             }));
           }).catch(err => {
-            // TODO
             console.log(err);
             connection.sendUTF(JSON.stringify({
-              info: `${Date().toLocaleString()}: [FAILED] exec func failed ${err.message}`,
+              info: `${Date().toLocaleString()}: [FAILED] ${err}`,
             }));
           });
         } else {
@@ -140,6 +142,7 @@ module.exports = httpServer => {
 
   module[WSSERVER] = new server({
       httpServer,
+      maxReceivedFrameSize: 1024 * 1024 * 400, // FUCK 最大文件大小限制！ 400MB
       autoAcceptConnections: false
   });
 

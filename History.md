@@ -1256,3 +1256,17 @@ commit by afterloe (lm6289511@gmail.com)
 > lib/initTar.js  
 > services/fileSystem.js  
 
+
+1.0.3 / 2017-2-8 16:50:15
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复单点消息超过64k自动关闭的异常
+
+
+### modify files
+> servers/websocket.js  
+> tools/_util.html  
+> tools/lib/util.js  
+> tools/lib/websocket.js  
+

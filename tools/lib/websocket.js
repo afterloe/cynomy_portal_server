@@ -85,9 +85,12 @@ websocket.addEventListener("message", evt => {
     }
 });
 
-websocket.addEventListener("close", () => $("#console").html(`<div class="alert alert-danger" role="alert">
-<strong>出错了!</strong> 节点链接失败.
-</div>`));
+websocket.addEventListener("close", (evt) => {
+  console.log(evt);
+  $("#console").html(`<div class="alert alert-danger" role="alert">
+  <strong>出错了!</strong> 节点链接失败.
+</div>`);
+});
 
 const registry = (type, callback) => {
     if (registerList.has(type)) {

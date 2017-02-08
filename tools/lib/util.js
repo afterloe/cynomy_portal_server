@@ -77,10 +77,10 @@ registry("userList-xlsx", (err, data) => {
 });
 
 registry("goodsList-tar.gz", (err, data) => {
-  const form = $("form-updateNodeProduceList");
+  const form = $("#form-updateNodeProduceList");
   const _data = getFormData(form);
   Object.assign(_data, {path: data});
-  websocket.send(`node-manager->workflowService->updateProcess("${data.workflowId}"|${JSON.stringify(data)})`);
+  websocket.send(`node-manager->workflowService->updateProcess("${_data.workflowId}"|${JSON.stringify(_data)})`);
   $("#updateNodeProduceList").modal("toggle");
 });
 
@@ -273,7 +273,6 @@ $("#module-ok-crearteProcess").click(function() {
         $("#crearteProcess").modal("toggle");
         return;
     }
-    console.log(data);
     websocket.send(`node-manager->workflowService->buildProduct(${JSON.stringify(data)})`);
     $("#crearteProcess").modal("toggle");
 });

@@ -50,7 +50,7 @@ function* production(tmp, workflowId, nodeId) {
 
   const [workflow, nodeInstance] = yield [workFlow_instance_dao.queryById(workflowId), workFlow_node_instance_dao.queryById(nodeId)];
 
-  if (!workflow || nodeInstance) {
+  if (!workflow || !nodeInstance) {
     throwParametersError();
   }
 

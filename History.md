@@ -1282,3 +1282,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/fileSystem.js  
 > test/funTest.js  
 
+
+1.0.3 / 2017-2-8 17:34:22
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 数据升级，后端通过tar包升级
+
+
+### modify files
+> services/fileSystem.js  
+> services/goodsService.js  
+

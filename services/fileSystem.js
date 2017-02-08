@@ -85,9 +85,10 @@ const scanDir = (_path, identification) => {
       scanDir(resolve(_path, files[i]), identification);
     }
     files = undefined;
+  } else {
+    stat = undefined;
+    return module[CENTER][identification].push(_path);
   }
-  stat = undefined;
-  return module[CENTER][identification].push(_path);
 };
 
 const decompression = tar => {
@@ -160,7 +161,7 @@ function* move(source, ...args) {
       tasks.push(cp(module[CENTER][identification][i], target));
     }
     delete module[CENTER][identification];
-    return Promise.all(tasks);
+    return yield Promise.all(tasks);
   } else {
     return yield cp(source, target);
   }

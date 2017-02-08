@@ -110,7 +110,6 @@ const decompression = tar => {
     tarXZF.stdout.on("data", chunk => console.log(`[SUCCESS] ${chunk}`));
     tarXZF.on("error", err => reject(err));
     tarXZF.on("close", code => {
-      console.log(code);
       if (0 !== code) {
         reject("[FAILED] 解压tar包失败");
         return ;
@@ -146,11 +145,22 @@ const compression = (name, path, ...args) => {
   });
 };
 
+const checkTargetPath = target => {
+  if (!existsSync(target)) {
+    mkdirSync(target);
+  }
+  const _stat = statSync(target);
+  if (_stat.isFile()) {
+    throwParametersError();
+  }
+}
+
 function* move(source, ...args) {
   if (!existsSync(source)) {
     return Promise.reject(throwNotExistsFile());
   }
   const [target = get("staticDir")] = args;
+  checkTargetPath(target);
   const _stat = statSync(source);
   if (_stat.isDirectory()) {
     const identification = new Date().toLocaleString();

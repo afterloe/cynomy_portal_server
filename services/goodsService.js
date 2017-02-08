@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{resolve}, {statSync, existsSync}] = [require("path"), require("fs")];
+const [{resolve, basename, sep}, {statSync, existsSync}] = [require("path"), require("fs")];
 const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed, throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move}] = [
   require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "fileSystem"))];
 
@@ -34,7 +34,7 @@ const buildGoods = (goods, workflowId, nodeName) => {
   return _;
 };
 
-function* production(tmp, workflowId, nodeId) {
+function* production(tmp, workflowId, nodeId, uuidCode) {
   if (!existsSync(tmp)) {
     throwNotExistsFile();
   }
@@ -58,6 +58,7 @@ function* production(tmp, workflowId, nodeId) {
 
   if (productionList instanceof Array) {
     for(let i = 0; i < productionList.length; i++) {
+      productionList[i].path = uuidCode + sep + productionList[i].path;
       productionList[i] = buildGoods(productionList[i], workflowId._id, nodeInstance.name);
     }
 
@@ -65,7 +66,7 @@ function* production(tmp, workflowId, nodeId) {
     if (productionList.length !== _.result.n) {
       throwBuildFailed();
     }
-    yield move(resolve(tmp, "production"));
+    yield move(resolve(tmp, "production"), resolve(get("staticDir"), uuidCode));
     return productionList;
   }
 
@@ -84,7 +85,7 @@ function* structureProduceList(path, workflowId, nodeId) {
   const tar = resolve(get("tmpDir"), path);
   const _ = yield decompression(tar);
 
-  return yield production(_, workflowId, nodeId);
+  return yield production(_, workflowId, nodeId, basename(path));
 }
 
 module.exports = {

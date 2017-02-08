@@ -1294,3 +1294,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/fileSystem.js  
 > services/goodsService.js  
 
+
+1.0.3 / 2017-2-8 18:7:28
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端静态数据存储功能升级！
+
+
+### modify files
+> services/fileSystem.js  
+> services/goodsService.js  
+

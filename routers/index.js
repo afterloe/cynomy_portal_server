@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const [user, workflow, fs] = [require(resolve(__dirname, "user")), require(resolve(__dirname, "workflow")), require(resolve(__dirname, "fileSystem"))];
+const [user, workflow, goodses] = [require(resolve(__dirname, "user")), require(resolve(__dirname, "workflow")), require(resolve(__dirname, "goodses"))];
 
 module.exports = _ => {
   _.get("/test", function* (next) {
@@ -31,7 +31,7 @@ module.exports = _ => {
   _.get("/workflow/list", workflow.list); // 工作流信息列表
 
   // 文件系统模块
-  _.get("/fs/list", fs.list); // 更新文件信息列表
+  _.get("/fs/list", goodses.list); // 更新文件信息列表
 
  // 测试：开发者信息
   _.get("/author", function* (next) {

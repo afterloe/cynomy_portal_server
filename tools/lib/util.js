@@ -131,8 +131,19 @@ registry("updateProcess", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
 });
 
-registry("filesInfo", (err, data) => {
-    console.log(data);
+registry("getGoodsList", (err, data) => {
+  const fileList = [];
+  data.map(item => {
+      fileList.push(`<div class="card" style="height: 11rem;">
+        <div class="card-block">
+          <h4 class="card-title">${item.name}</h4>
+          <p class="card-text">${item.author.name} - ${item.version}</p>
+          <a href="${item.path}" class="btn btn-primary">下载</a>
+          <a href="#" class="btn btn-danger">删除</a>
+        </div>
+      </div>`);
+  });
+  $("#table-show-files").html(fileList.join(""));
 });
 
 registry("getUserList", (err, data) => {
@@ -239,6 +250,7 @@ $("#nav-workflowInfo").click(function() {
 
 // 文件信息
 $("#nav-filesInfo").click(function() {
+    websocket.send("node-manager->goodsService->getGoodsList");
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").hide();

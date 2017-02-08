@@ -1306,3 +1306,23 @@ commit by afterloe (lm6289511@gmail.com)
 > services/fileSystem.js  
 > services/goodsService.js  
 
+
+1.0.3 / 2017-2-8 18:27:9
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 读取服务器文件显示成功
+
+
+### new files
+> routers/goodses.js  
+
+### modify files
+> routers/index.js  
+> servers/websocket.js  
+> tools/_util.html  
+> tools/lib/util.js  
+
+### delete files
+> routers/fileSystem.js  
+

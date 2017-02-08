@@ -1,5 +1,5 @@
 /**
-  * afterloe - cynomy_portal_server/routers/fileSystem.js
+  * afterloe - cynomy_portal_server/routers/goodses.js
   *
   * Copyright(c) afterloe.
   * MIT Licensed

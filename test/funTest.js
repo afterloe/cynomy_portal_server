@@ -20,6 +20,7 @@ console.log(ldap, service, fun);
 const args = __? __.split("|"): null;
 args.map((p,i) => args[i] = JSON.parse(p));
 console.log(_, args);
+
 // const {basename, extname} = require("path"), {statSync, readdirSync} = require("fs"), {resolve} = require("path");
 // console.log(basename("/home/afterloe/index.pug", ".pug"));
 // console.log(extname("/home/afterloe/index.pug"));

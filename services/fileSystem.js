@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{resolve, basename}, {spawn}, {statSync, existsSync, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("fs")];
+const [{resolve, basename}, {spawn}, {statSync, writeFile, existsSync, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("fs")];
 const [{throwNotExistsFile, throwParametersError}, {uuidCode}, {get}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
   require(resolve(__dirname, "..", "config"))];
 const CENTER = Symbol("CENTER");
@@ -21,8 +21,8 @@ module[CENTER] = {};
 /**
  * 复制文件
  *
- * @param  {String} targrt  复制的目标
- * @param  {String} root    项目根路径
+ * @param  {String} source  复制的目标
+ * @param  {String} target    目标路径
  * @return {Promise}
  */
 const cp = (source, target) => new Promise((solve, reject) => {
@@ -43,6 +43,19 @@ const cp = (source, target) => new Promise((solve, reject) => {
 
   sourceStream.on("close", () => {
     console.log(`cp file to ${targetPath} ... SUCCESS! `);
+    solve(resolve(target, name));
+  });
+});
+
+const writeJSON = (data, fullPath) => new Promise((solve, reject) => {
+  if (data instanceof Object) {
+    data = new Buffer(JSON.stringify(data));
+  }
+  writeFile(fullPath, data, err => {
+    if (err) {
+      reject(err);
+    }
+
     solve();
   });
 });
@@ -90,15 +103,18 @@ const decompression = tar => {
   });
 };
 
-const compression = dir => {
-  if (!existsSync(dir)) {
+const compression = (name, path, ...args) => {
+  if (!existsSync(path)) {
     return Promise.reject(throwNotExistsFile());
   }
 
   return new Promise((solve, reject) => {
-    const [cwd, relative] = [resolve(dir, ".."), basename(dir)];
-    const tarCZF = spawn("tar", ["czf", `${relative}.tar.gz`, `${relative}`], {
-      cwd,
+    // tar -czvf *.tar ./file1 ./file1 ./file1
+    const fileName = `${name}.tar.gz`;
+    args.unshift(fileName);
+    args.unshift(`czf`);
+    const tarCZF = spawn("tar", args, {
+      cwd: path,
     });
 
     tarCZF.stdout.on("data", chunk => console.log(`[SUCCESS] ${chunk}`));
@@ -108,7 +124,7 @@ const compression = dir => {
         reject("[FAILED] 压缩tar失败");
         return ;
       }
-      solve(resolve(cwd, `${relative}.tar.gz`));
+      solve(resolve(path, fileName));
     });
   });
 };
@@ -138,4 +154,6 @@ module.exports = {
   decompression,
   compression,
   move,
+  cp,
+  writeJSON,
 };

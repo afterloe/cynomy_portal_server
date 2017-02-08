@@ -1215,3 +1215,19 @@ commit by afterloe (lm6289511@gmail.com)
 > services/fileSystem.js  
 > services/goodsService.js  
 
+
+1.0.3 / 2017-2-8 14:27:55
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 构建数据包功能完毕
+
+
+### new files
+> lib/initTar.js  
+
+### modify files
+> bin/portal  
+> services/fileSystem.js  
+> test/funTest.js  
+

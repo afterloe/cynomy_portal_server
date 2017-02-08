@@ -31,6 +31,14 @@ program.
   option("-o, --out [out]", "输出测试结果").
   action((tar, options) => console.log(tar, options));
 
+// 初始化数据tar包
+program.
+  command("init [path]").
+  description("初始化tar包").
+  option("-b, --build [build]", "直接压缩成tar包").
+  option("-v, --version <version>", "直接压缩成tar包").
+  action((path, options) => require(resolve(lib, "initTar"))(path, options));
+
 // 构建产出列表包
 program.
   command("build <path>").
@@ -48,7 +56,7 @@ program.
   command("export <path>").
   description("导出tar包数据").
   option("-o, --outDir <outDir>", "导出目录").
-  action((path, options) => console.log(tar, options));
+  action((path, options) => console.log(path, options));
 
 if (process.argv.length < 3 ) {
   process.argv.push("help");

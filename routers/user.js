@@ -66,6 +66,7 @@ function* login(next) {
     }
   } catch (err) {
     this.error = err;
+    console.log(err);
   }
 
   return yield next;

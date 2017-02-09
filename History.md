@@ -1420,3 +1420,21 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/registry.js  
 > services/userService.js  
 
+
+1.0.3 / 2017-2-9 17:46:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复server中无法操作session的异常
+
+
+### new files
+> services/sessionService.js  
+
+### modify files
+> errors/i18nError.json  
+> interceptors/session.js  
+> routers/user.js  
+> services/redisService.js  
+> services/userService.js  
+

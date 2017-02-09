@@ -13,7 +13,7 @@
 
 const [{createClient}, {resolve}] = [require("redis"), require("path")];
 const {get} = require(resolve(__dirname, "..", "config"));
-const {timeout = 60 * 60 * 24 * 2, host = process.env.REDIS_PORT_6379_TCP_ADDR, port = process.env.REDIS_PORT_6379_TCP_PORT} = get("redisConfig");
+const {timeout = 60 * 60 * 24 * 15, host = process.env.REDIS_PORT_6379_TCP_ADDR, port = process.env.REDIS_PORT_6379_TCP_PORT} = get("redisConfig");
 const CLIENT = Symbol("CLIENT");
 
 /**

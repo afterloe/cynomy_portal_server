@@ -54,6 +54,11 @@
     "en-US": "life cycle error",
     "zh-CN": "生命周期状态错误"
   },
+  "TokenError": {
+    "code": "400",
+    "en-US": "token error",
+    "zh-CN": "token 错误"
+  },
   "PackageJsonError": {
     "code": "400",
     "en-US": "format packageJson failed",

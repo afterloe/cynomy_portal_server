@@ -13,8 +13,9 @@
 
 const [{resolve}, xlsx, {unlinkSync}] = [require("path"), require("node-xlsx").default, require("fs")];
 const toolsPath = resolve(__dirname, "..", "tools");
-const [{compileTemplate}, {sendPromise}, {get}, {user_dao}, {throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
-[require(resolve(toolsPath, "buildPage")), require(resolve(toolsPath, "mailHelper")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(toolsPath, "utilities"))];
+const [{compileTemplate}, {sendPromise}, {get}, {user_dao}, {sign, setSession}, {throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
+[require(resolve(toolsPath, "buildPage")), require(resolve(toolsPath, "mailHelper")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "sessionService")),
+require(resolve(__dirname, "..", "errors")), require(resolve(toolsPath, "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
 
 /**
@@ -152,10 +153,10 @@ function* loginSystem(mail, permit) {
     throwLackParameters();
   }
   const _ = yield user_dao.login(mail, permit);
-  if (!_._id) {
+  if (!_) {
     throwAccountOrPwdError();
   }
-  
+
   yield user_dao.update({
     _id: _._id,
     upload: {
@@ -168,8 +169,8 @@ function* loginSystem(mail, permit) {
     }
   });
 
-  const token = yield this.sign(mail, permit);
-  yield this.setSession(_, token);
+  const token = sign(mail, permit);
+  yield setSession(token, _);
 
   return token;
 }

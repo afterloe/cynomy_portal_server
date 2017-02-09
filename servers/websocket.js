@@ -61,7 +61,7 @@ const ws4node = (protocol, request, origin) => {
   if ("node-protocol" === protocol) {
     const connection = request.accept(protocol, origin);
     console.log("%s Welcome accept cynomy node manager!", new Date());
-    connection.on("close", msg => {
+    connection.on("close", () => {
       console.log("client is hang-up.");
     });
     connection.on("message", message => {

@@ -1393,3 +1393,17 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/user.js  
 > services/userService.js  
 
+
+1.0.3 / 2017-2-9 15:34:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 代码风格切换调整
+
+
+### modify files
+> servers/websocket.js  
+> services/fileSystem.js  
+> services/redisService.js  
+> tools/buildPage.js  
+

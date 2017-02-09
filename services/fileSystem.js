@@ -153,7 +153,7 @@ const checkTargetPath = target => {
   if (_stat.isFile()) {
     throwParametersError();
   }
-}
+};
 
 function* move(source, ...args) {
   if (!existsSync(source)) {

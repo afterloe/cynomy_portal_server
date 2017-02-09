@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [pug, {resolve, extname, basename}, {existsSync, statSync, readdirSync, writeFile, unlink}] = [require("pug"), require("path"), require("fs")];
+const [pug, {resolve, extname, basename}, {existsSync, statSync, readdirSync, writeFile}] = [require("pug"), require("path"), require("fs")];
 const [PATH, DATA, SUFFIX] = [Symbol("PATH"), Symbol("DATA"), ".pug"];
 
 /**

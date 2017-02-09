@@ -99,7 +99,7 @@ function* has(key) {
     connectionServer();
   }
   return yield exists(key);
-};
+}
 
 /**
  * 根据key来从redis中删除信息

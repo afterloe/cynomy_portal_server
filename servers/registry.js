@@ -42,18 +42,6 @@ app.use(function* (next) {
    this.way = "web";
   }
 
-  this.success = (ctx) => ({
-    code: 200,
-    error: null,
-    result: ctx
-  });
-
-  this.fail = (msg, code) => ({
-    code: code || 500,
-    error: msg || "System error",
-    result: null
-  });
-
   return yield next;
 });
 

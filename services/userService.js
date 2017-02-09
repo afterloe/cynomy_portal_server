@@ -155,16 +155,23 @@ function* loginSystem(mail, permit) {
   if (!_._id) {
     throwAccountOrPwdError();
   }
+  
   yield user_dao.update({
     _id: _._id,
     upload: {
       $set: {
         isLogin: true,
+      },
+      $unset: {
+        permit: 1,
       }
     }
   });
 
-  return _;
+  const token = yield this.sign(mail, permit);
+  yield this.setSession(_, token);
+
+  return token;
 }
 
 function* obmitLoginPermit(mail){

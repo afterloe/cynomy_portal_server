@@ -1407,3 +1407,16 @@ commit by afterloe (lm6289511@gmail.com)
 > services/redisService.js  
 > tools/buildPage.js  
 
+
+1.0.3 / 2017-2-9 16:38:58
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 登录接口调入redis
+
+
+### modify files
+> interceptors/session.js  
+> servers/registry.js  
+> services/userService.js  
+

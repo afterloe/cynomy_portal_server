@@ -11,15 +11,26 @@
   */
 "use strict";
 
-const {spawn} = require("child_process");
-const tarXZF = spawn("tar", ["xzf", "/tmp/9996e550eddc11e6a87d01486680478a"], {
-  cwd: "/tmp/tmp-0a543e60eddc11e6b321c322b7ea7dc6"
+const {resolve} = require("path");
+
+const {setPugTemplatePath, compileTemplate} = require(resolve(__dirname, "..", "tools", "buildPage"));
+setPugTemplatePath(resolve(__dirname, "..", "template"));
+const html = compileTemplate("pwdMail", {
+  time: new Date().toLocaleString(),
+  permit: "0a543e60eddc11e6b321c322b7ea7dc6",
 });
-tarXZF.stdout.on("data", chunk => console.log(`[SUCCESS] ${chunk}`));
-tarXZF.on("error", err => console.log(err));
-tarXZF.on("close", code => {
-  console.log(code);
-});
+
+console.log(html);
+
+// const {spawn} = require("child_process");
+// const tarXZF = spawn("tar", ["xzf", "/tmp/9996e550eddc11e6a87d01486680478a"], {
+//   cwd: "/tmp/tmp-0a543e60eddc11e6b321c322b7ea7dc6"
+// });
+// tarXZF.stdout.on("data", chunk => console.log(`[SUCCESS] ${chunk}`));
+// tarXZF.on("error", err => console.log(err));
+// tarXZF.on("close", code => {
+//   console.log(code);
+// });
 
 // const data = `{"name":"afterloe", "age":5, "sex":"man"}`;
 // const params = `node-manager->userService->loaderFromXlsx(${data})`;

@@ -127,6 +127,25 @@ function* getUserList (number, page) {
   return yield user_dao.queryAll({}, number, page);
 }
 
+const loaderUserFromXlsx = file => {
+  const [{data}, users] = [xlsx.parse(file)[0], []];
+  for(let i = 1; i < data.length; i++) {
+    if (data[i].length <= 0) {
+      continue;
+    }
+    const [mail, name] = [data[i][0], data[i][1]];
+    if (!mailRegex.test(mail)) {
+      continue;
+    }
+    users.push({
+      mail,
+      name,
+    });
+  }
+
+  return users;
+};
+
 function* login(mail, permit) {
   if (!mail || !permit) {
     throwLackParameters();
@@ -157,25 +176,6 @@ function* obmitLoginPermit(mail){
     }
   });
 }
-
-const loaderUserFromXlsx = file => {
-  const [{data}, users] = [xlsx.parse(file)[0], []];
-  for(let i = 1; i < data.length; i++) {
-    if (data[i].length <= 0) {
-      continue;
-    }
-    const [mail, name] = [data[i][0], data[i][1]];
-    if (!mailRegex.test(mail)) {
-      continue;
-    }
-    users.push({
-      mail,
-      name,
-    });
-  }
-
-  return users;
-};
 
 function* cleanDocuments() {
   const a = yield user_dao.clean();

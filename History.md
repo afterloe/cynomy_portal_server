@@ -1345,3 +1345,21 @@ commit by afterloe (lm6289511@gmail.com)
 > services/redisService.js  
 > tools/mailHelper.js  
 
+
+1.0.3 / 2017-2-9 14:18:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 创建登录模板，重构buidPage工具的逻辑，添加单个方法
+
+
+### new files
+> template/pwdMail.pug  
+
+### modify files
+> config/index.js  
+> services/userService.js  
+> test/funTest.js  
+> tools/buildPage.js  
+> template/pwdMail.pug  
+

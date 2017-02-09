@@ -45,7 +45,14 @@ siteConfig.set("security", { // 安全设置
   algorithm: "aes-256-cbc" // 前端cookie，tooken 加密方式
 });
 siteConfig.set("mailSender", { // 邮件功能设置
-  
+  enable : true, // 是否开启邮件发送功能
+  from: "tru@jwis.cn", // 你的邮件的发件人
+  port: 25, // 邮件端口
+  host: "smtp.jwis.cn", // 发件箱端口
+  auth: {  // 发件人设置
+    user: "tru@jwis.cn", // 发件人账号
+    pass: "Qwer1234" // 发件人密码
+  }
 });
 
 /**

@@ -96,28 +96,38 @@ const compileTemplates = outPath => {
   return Promise.all(tasks);
 };
 
-const deleteFile = __path => new Promise((solve, reject) => {
-  unlink(__path, err => {
-    if (err) {
-      reject(err);
-      return;
-    }
-
-    solve();
-  });
-});
-
-const cleanTemplates = () => {
-  const [files, tasks] = [readdirSync(module[PATH]), []];
-  for (let i = 0; i < files.length; i++) {
-    tasks.push(deleteFile(resolve(module[PATH], files[i])));
+const compileTemplate = (template, data) => {
+  const suffix = extname(template);
+  if (".pug" !== suffix) {
+    template += ".pug";
   }
-  return Promise.all(tasks);
+  const _ = resolve(module[PATH], template);
+  return pug.renderFile(_, data);
 };
+
+// const deleteFile = __path => new Promise((solve, reject) => {
+//   unlink(__path, err => {
+//     if (err) {
+//       reject(err);
+//       return;
+//     }
+//
+//     solve();
+//   });
+// });
+//
+// const cleanTemplates = () => {
+//   const [files, tasks] = [readdirSync(module[PATH]), []];
+//   for (let i = 0; i < files.length; i++) {
+//     tasks.push(deleteFile(resolve(module[PATH], files[i])));
+//   }
+//   return Promise.all(tasks);
+// };
 
 module.exports = {
   setPugTemplatePath,
   setPortalData,
   compileTemplates,
-  cleanTemplates,
+  // cleanTemplates,
+  compileTemplate,
 };

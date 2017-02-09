@@ -170,7 +170,12 @@ function* loginSystem(mail, permit) {
   });
 
   const token = sign(mail, permit);
-  yield setSession(token, _);
+  yield setSession(token, {
+    id: _._id.toString(),
+    name: _.name,
+    tags: _.tags.join(","),
+    mail,
+  });
 
   return token;
 }

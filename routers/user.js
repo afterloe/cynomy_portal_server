@@ -64,6 +64,7 @@ function* login(next) {
       this.set("Content-Type", "application/json");
       this.body = this.success(sessionId);
     }
+    this.forceSign(sessionId);
   } catch (err) {
     this.error = err;
     console.log(err);

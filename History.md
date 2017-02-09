@@ -1449,3 +1449,16 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > interceptors/session.js  
 
+
+1.0.3 / 2017-2-9 18:0:8
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 调整session提交内容，重置部分方法
+
+
+### modify files
+> interceptors/session.js  
+> routers/user.js  
+> services/userService.js  
+

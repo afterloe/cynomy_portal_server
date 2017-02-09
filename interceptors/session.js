@@ -64,6 +64,11 @@ module.exports = function* (next) {
     return yield upDateSession(cookie, value);
   };
 
+  this.forceSign = function(sessionId) {
+    this.cookies.set(key, sessionId);
+    return sessionId;
+  };
+
   this.sign = function* (to, permit) {
     cookie = sign(to, permit);
     this.cookies.set(key, cookie);

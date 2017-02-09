@@ -29,7 +29,8 @@ process.on("message", (msg, handler) => {
 });
 
 process.on("catch-error", (err, ctx) => {
-  console.log("process has err! %s, %s", err, ctx);
+  console.log("%s process catch err! %s", new Date(), err);
+  console.dir(ctx);
 });
 
 process.on("uncaughtException", err => {

@@ -1363,3 +1363,19 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/buildPage.js  
 > template/pwdMail.pug  
 
+
+1.0.3 / 2017-2-9 14:46:49
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 多线程抓取异常功能提示优化，添加RESTfull接口 获取登录许可功能成功。
+
+
+### modify files
+> distributed/slave.js  
+> routers/index.js  
+> routers/user.js  
+> servers/registry.js  
+> services/userService.js  
+> test/mail_test.js  
+

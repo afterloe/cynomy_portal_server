@@ -13,6 +13,7 @@
 
 const [{resolve}, koa, bodyParser, router, Pug] = [require("path"), require("koa"), require("koa-bodyparser"), require("koa-router")(), require("koa-pug")];
 const [registration, session] = [require(resolve(__dirname, "..", "routers")), require(resolve(__dirname, "..", "interceptors", "session"))];
+const {setPugTemplatePath} = require(resolve(__dirname, "..", "tools", "buildPage"));
 
 const app = koa();
 new Pug({
@@ -33,27 +34,27 @@ app.name = "portal";
 registration(router);
 
 app.use(function* (next) {
-  // "Accept": "application/json application/xml",
-   const {accept = "web"} = this.request.header;
-   if ("application/json" === accept) {
-     this.way = "json";
-   } else {
-     this.way = "web";
-   }
+  setPugTemplatePath(resolve(__dirname, "..", "template"));
+  const {accept = "web"} = this.request.header;
+  if ("application/json" === accept) {
+   this.way = "json";
+  } else {
+   this.way = "web";
+  }
 
-   this.success = (ctx) => ({
-        code: 200,
-        error: null,
-        result: ctx
-    });
+  this.success = (ctx) => ({
+    code: 200,
+    error: null,
+    result: ctx
+  });
 
-    this.fail = (msg, code) => ({
-        code: code || 500,
-        error: msg || "System error",
-        result: null
-    });
+  this.fail = (msg, code) => ({
+    code: code || 500,
+    error: msg || "System error",
+    result: null
+  });
 
-   return yield next;
+  return yield next;
 });
 
 app.use(router.routes());

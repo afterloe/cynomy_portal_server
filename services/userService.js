@@ -12,8 +12,9 @@
 "use strict";
 
 const [{resolve}, xlsx, {unlinkSync}] = [require("path"), require("node-xlsx").default, require("fs")];
-const [{get}, {user_dao}, {throwLackParameters, throwParametersError, throwOauthError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
-[require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+const toolsPath = resolve(__dirname, "..", "tools");
+const [{compileTemplate}, {sendPromise}, {get}, {user_dao}, {throwLackParameters, throwParametersError, throwOauthError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
+[require(resolve(toolsPath, "buildPage")), require(resolve(toolsPath, "mailHelper")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(toolsPath, "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
 
 /**
@@ -155,8 +156,7 @@ function* login(mail, permit) {
   if (!_) {
     throwOauthError();
   }
-
-  // TODO 记录登录信息(登录时间，ip)
+  console.log(_);
   return _;
 }
 
@@ -166,7 +166,12 @@ function* obmitLoginPermit(mail){
     throwUserNotExist();
   }
   const permit = uuidCode();
+  const html = compileTemplate("pwdMail", {
+    time: new Date().toLocaleString(),
+    permit: permit,
+  });
 
+  sendPromise("lm6289511@gmail.com", "JW R&D Protal System", html);
   return yield user_dao.update({
     _id: _._id,
     upload: {

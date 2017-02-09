@@ -13,15 +13,77 @@
 
 const [{createClient}, {resolve}] = [require("redis"), require("path")];
 const {get} = require(resolve(__dirname, "..", "config"));
-const {timeout = 60 * 60 * 24 * 2,host = process.env.REDIS_PORT_6379_TCP_ADDR, port = process.env.REDIS_PORT_6379_TCP_PORT} = get("redisConfig");
-
-// 惰性链接 -- 只有在redis使用的时候才开始调用链接
-let redisClient;
+const {timeout = 60 * 60 * 24 * 2, host = process.env.REDIS_PORT_6379_TCP_ADDR, port = process.env.REDIS_PORT_6379_TCP_PORT} = get("redisConfig");
+const CLIENT = Symbol("CLIENT");
 
 /**
  * 获取redis连接
  */
-const connectionServer = () => redisClient = createClient(port, host);
+const connectionServer = () => module[CLIENT] = createClient(port, host);
+
+const end = hook => {
+  module[CLIENT].end(true);
+  module[CLIENT].quit();
+  if (hook) {
+    module[CLIENT] = undefined;
+  }
+};
+
+const objectToArray = (key, seems) => {
+  const _ = [];
+  _.push(key);
+  for (let key in seems) {
+    _.push(key);
+    _.push(seems[key]);
+  }
+  return _;
+};
+
+const hmset = seems => new Promise((solve, reject) => {
+  seems.push((err, _) => {
+    if (err) {
+      reject(err);
+    }
+    solve(_);
+  });
+  module[CLIENT].hmset.apply(module[CLIENT], seems);
+});
+
+const hgetall = key => new Promise((solve, reject) => {
+  module[CLIENT].hgetall(key, (err, _) => {
+    if (err) {
+      reject(err);
+    }
+    solve(_);
+  });
+});
+
+const expire = (key, timeout) => new Promise((solve, reject) => {
+  module[CLIENT].expire(key, timeout, (err, _) => {
+    if (err) {
+      reject(err);
+    }
+    solve(_);
+  });
+});
+
+const exists = key => new Promise((solve, reject) => {
+  module[CLIENT].exists(key, (err, _) => {
+    if (err) {
+      reject(err);
+    }
+    solve(0 === _ ? false: true);
+  });
+});
+
+const delKey = key => new Promise((solve, reject) => {
+  module[CLIENT].del(key, (err, _) => {
+    if (err) {
+      reject(err);
+    }
+    solve(0 === _ ? false: true);
+  });
+});
 
 /**
  * 判断key 是否存在于redis中
@@ -29,31 +91,14 @@ const connectionServer = () => redisClient = createClient(port, host);
  * @param key
  * @returns {*}
  */
-const has = function* (key) {
+function* has(key) {
   if (!key) {
     return ;
   }
-  if (!redisClient) {
+  if (!module[CLIENT]) {
     connectionServer();
   }
-  return yield redisClient.exists(key);
-};
-
-/**
- * 根据key来从redis中获取信息
- *
- * @param key
- * @returns {*}
- */
-const getFromRedis = function* (key) {
-  if (!key) {
-    return ;
-  }
-  if (!redisClient) {
-    connectionServer();
-  }
-  const str = yield redisClient.get(key);
-  return JSON.parse(str);
+  return yield exists(key);
 };
 
 /**
@@ -62,15 +107,15 @@ const getFromRedis = function* (key) {
  * @param key
  * @returns {*}
  */
-const del = function* (key) {
+function* del(key) {
   if (!key) {
     return ;
   }
-  if (!redisClient) {
+  if (!module[CLIENT]) {
     connectionServer();
   }
-  return yield redisClient.del(key);
-};
+  return yield delKey(key);
+}
 
 /**
  * 将key 和 value存入redis
@@ -79,25 +124,39 @@ const del = function* (key) {
  * @param seems
  * @returns {*}
  */
-const set = function* (key, seems, _timeout = timeout) {
+function* set(key, seems, _timeout = timeout) {
   if (!key || !seems) {
-    return;
+    return ;
   }
-  if (!redisClient) {
+  if (!module[CLIENT]) {
     connectionServer();
   }
-  // 如果传入的value是 对象的话 就使用JSON方法将对象转化为字符串
-  if (seems instanceof Object) {
-    seems = JSON.stringify(seems);
-  }
-  const val = yield redisClient.set(key, seems); // 设置key-value
-  yield redisClient.expire(key, _timeout); // 设置超时时间
+  seems = seems instanceof Object ? objectToArray(key, seems): objectToArray(key, {_default: seems});
+  const val = yield hmset(seems); // 设置key-value
+  yield expire(key, _timeout); // 设置超时时间
   return val;
-};
+}
+
+/**
+ * 根据key来从redis中获取信息
+ *
+ * @param key
+ * @returns {*}
+ */
+function* getFromRedis(key) {
+  if (!key) {
+    return ;
+  }
+  if (!module[CLIENT]) {
+    connectionServer();
+  }
+  return yield hgetall(key);
+}
 
 module.exports = {
   has,
   get: getFromRedis,
   del,
   set,
+  end,
 };

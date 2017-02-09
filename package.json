@@ -37,7 +37,9 @@
     "mongodb": "^2.2.21",
     "node-uuid": "^1.4.7",
     "node-xlsx": "^0.7.4",
+    "nodemailer": "^3.0.2",
     "pug": "^2.0.0-beta6",
+    "redis": "^2.6.5",
     "websocket": "^1.0.24"
   }
 }

@@ -24,6 +24,7 @@ const buildGoods = (goods, workflowId, nodeName) => {
   const _ = {
     workflow: workflowId,
     nodeName,
+    uploadTime: Date.now(),
     tags : [],
     state: 200,
     downloadCount: 0,

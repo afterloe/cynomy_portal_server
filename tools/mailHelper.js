@@ -11,12 +11,13 @@
   */
 "use strict";
 
-const [nodemailer, {noop}, {hostname}, {resolve}] = [require('nodemailer'), require('utility'), require('os'), require("path")];
+const [nodemailer, {hostname}, {resolve}] = [require("nodemailer"), require("os"), require("path")];
 const [SMTP, TRANSPORT, NODENAME] = [Symbol("SMTP"), Symbol("TRANSPORT"), Symbol("NODENAME")];
 const {get} = require(resolve(__dirname, "..", "config"));
 
+const noop = (...args) => console.log("%s send message. -- %s", new Date().toLocaleString(), args);
+
 module[SMTP] = get("mailSender");
-// let {appName, mailSender, smtpConfig} = administration;
 
 /**
  * 发送日志同知级别邮件

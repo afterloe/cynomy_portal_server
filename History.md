@@ -1326,3 +1326,22 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > routers/fileSystem.js  
 
+
+1.0.3 / 2017-2-9 11:22:55
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复packejson中丢失redis和mail模块的问题，修复mailHelper发送邮件导致失败的问题，修复redisService中请求方式，重置大部分方法，采用hase进行处理。优化goodsService的数据查询处理
+
+
+### new files
+> test/mail_test.js  
+> test/redis_test.js  
+
+### modify files
+> config/index.js  
+> package.json  
+> services/goodsService.js  
+> services/redisService.js  
+> tools/mailHelper.js  
+

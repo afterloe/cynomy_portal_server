@@ -35,7 +35,7 @@ siteConfig.set("registryPort", 15024); // 监听端口
 siteConfig.set("dataDir", dataDir); // 数据存储目录
 siteConfig.set("logDir", logDir); // 日志存储目录
 siteConfig.set("redisConfig", { // redis 设置
-  host: "127.0.0.1", // redis服务器地址
+  host: "namo", // redis服务器地址
   port: "6379", // redis端口
   timeout: 172800 // 超时设置 秒
 });
@@ -45,14 +45,7 @@ siteConfig.set("security", { // 安全设置
   algorithm: "aes-256-cbc" // 前端cookie，tooken 加密方式
 });
 siteConfig.set("mailSender", { // 邮件功能设置
-  enable : false, // 是否开启邮件发送功能
-  from: "", // 你的邮件的发件人
-  port: 25, // 邮件端口
-  host: "", // 发件箱端口
-  auth: {  // 发件人设置
-    user: "", // 发件人账号
-    pass: "" // 发件人密码
-  }
+  
 });
 
 /**

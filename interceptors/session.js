@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const [key, {removeSession, getSession, upDateSession, setSession}] = ["cynomys-portal", require(resolve(__dirname, "..", "services", "sessionService"))];
+const [key, {removeSession, getSession, upDateSession, setSession, sign}] = ["cynomys-portal", require(resolve(__dirname, "..", "services", "sessionService"))];
 
 const parseLanguage = header => {
   let {language = header["accept-language"]} = header;

@@ -1438,3 +1438,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/redisService.js  
 > services/userService.js  
 
+
+1.0.3 / 2017-2-9 17:48:10
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复router中直接操作session出现异常
+
+
+### modify files
+> interceptors/session.js  
+

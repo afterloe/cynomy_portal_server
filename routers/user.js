@@ -12,34 +12,67 @@
 "use strict";
 
 const {resolve} = require("path");
-const {obmitLoginPermit, getUserList} = require(resolve(__dirname, "..", "services", "userService"));
+const [{throwLackParameters}, {obmitLoginPermit, getUserList, loginSystem}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "services", "userService"))];
 
 function* list(next) {
-  if (next.error) {
+  if (this.error) {
     return yield next;
   }
-  const {number, page} = this.params;
-  const userList = yield getUserList(number, page);
-  if ("json" === this.way) {
-    this.set("Content-Type", "application/json");
-    this.body = this.success(userList);
+  try {
+    const {number, page} = this.params;
+    const userList = yield getUserList(number, page);
+    if ("json" === this.way) {
+      this.set("Content-Type", "application/json");
+      this.body = this.success(userList);
+    }
+  }catch(err) {
+    this.error = err;
   }
   return yield next;
 }
 
 function* permit(next) {
-  if (next.error) {
+  if (this.error) {
     return yield next;
   }
-  const {mail} = this.params;
-  yield obmitLoginPermit(mail);
-  if ("json" === this.way) {
-    this.set("Content-Type", "application/json");
-    this.body = this.success();
+  try {
+    const {mail} = this.params;
+    yield obmitLoginPermit(mail);
+    if ("json" === this.way) {
+      this.set("Content-Type", "application/json");
+      this.body = this.success();
+    }
+  } catch (err) {
+    this.error = err;
   }
+
+  return yield next;
+}
+
+function* login(next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const {mail, permit} = this.request.body;
+    if (!mail || !permit) {
+      throwLackParameters();
+    }
+    const sessionId = yield loginSystem(mail, permit);
+    if ("json" === this.way) {
+      this.set("Content-Type", "application/json");
+      this.body = this.success(sessionId);
+    }
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
 }
 
 module.exports = {
   list,
   permit,
+  login,
 };

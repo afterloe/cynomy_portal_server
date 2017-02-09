@@ -14,6 +14,13 @@
 const {resolve} = require("path");
 const commonsLib = require(resolve(__dirname, "public"));
 
+const [cacheUser] = [{
+  _id: 1,
+  name: 1,
+  mail: 1,
+  tags: 1,
+}];
+
 const checkExist = function* ({name, mail}) {
   const _ = yield this.findOne({name, mail});
   return _ ? true : false;
@@ -24,8 +31,14 @@ const findByMail = function* (mail){
   return _;
 };
 
+const login = function* (mail, permit) {
+  const _ = yield this.findOne({mail, permit, state:200}, cacheUser);
+  return _;
+};
+
 const classMethod = {
   checkExist,
+  login,
   findByMail,
 };
 

@@ -13,7 +13,7 @@
 
 const [{resolve}, xlsx, {unlinkSync}] = [require("path"), require("node-xlsx").default, require("fs")];
 const toolsPath = resolve(__dirname, "..", "tools");
-const [{compileTemplate}, {sendPromise}, {get}, {user_dao}, {throwLackParameters, throwParametersError, throwOauthError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
+const [{compileTemplate}, {sendPromise}, {get}, {user_dao}, {throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
 [require(resolve(toolsPath, "buildPage")), require(resolve(toolsPath, "mailHelper")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(toolsPath, "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
 
@@ -147,16 +147,23 @@ const loaderUserFromXlsx = file => {
   return users;
 };
 
-function* login(mail, permit) {
+function* loginSystem(mail, permit) {
   if (!mail || !permit) {
     throwLackParameters();
   }
-
   const _ = yield user_dao.login(mail, permit);
-  if (!_) {
-    throwOauthError();
+  if (!_._id) {
+    throwAccountOrPwdError();
   }
-  console.log(_);
+  yield user_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        isLogin: true,
+      }
+    }
+  });
+
   return _;
 }
 
@@ -171,7 +178,7 @@ function* obmitLoginPermit(mail){
     permit: permit,
   });
 
-  sendPromise("lm6289511@gmail.com", "JW R&D Protal System", html);
+  sendPromise(mail, "JW R&D Protal System", html);
   return yield user_dao.update({
     _id: _._id,
     upload: {
@@ -217,7 +224,7 @@ module.exports = {
   createUser,
   getUserList,
   cleanDocuments,
-  login,
+  loginSystem,
   obmitLoginPermit,
 
   findUsers,

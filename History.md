@@ -1379,3 +1379,17 @@ commit by afterloe (lm6289511@gmail.com)
 > services/userService.js  
 > test/mail_test.js  
 
+
+1.0.3 / 2017-2-9 15:32:28
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端完成登录功能
+
+
+### modify files
+> dao/user.js  
+> routers/index.js  
+> routers/user.js  
+> services/userService.js  
+

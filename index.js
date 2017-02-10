@@ -46,6 +46,7 @@ if (enable) {
 } else {
   // 单进程
   console.log("sing thread runner");
+  require(resolve(__dirname, "distributed", "single"));
 }
 
 process.on("exit", () => {

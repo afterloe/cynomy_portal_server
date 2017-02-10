@@ -1487,3 +1487,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > interceptors/jsonSmart.js  
 
+
+1.0.3 / 2017-2-10 10:34:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复启动单节点失败的异常，能够单点启动服务
+
+
+### new files
+> distributed/single.js  
+
+### modify files
+> config/index.js  
+> index.js  
+

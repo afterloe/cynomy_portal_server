@@ -73,8 +73,9 @@ function* insertMany (_) {
  * @param  {Object{_id}}    _document [需要删除的数据]
  * @return {Generator}                [数据库操作函数，使用co或next来驱动]
  */
-function* remove ({_id}) {
+function* remove (_id) {
   if (this.valid(_id)) {
+    _id = this.newObjectId(_id);
     return this.updateOne({_id}, {
       $set: {
         state : 500,

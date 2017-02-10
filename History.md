@@ -1560,3 +1560,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/_util.html  
 > tools/lib/util.js  
 
+
+1.0.3 / 2017-2-10 17:2:30
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 升级tagsServer支持删除标签功能
+
+
+### modify files
+> dao/public.js  
+> tools/lib/util.js  
+

@@ -369,9 +369,10 @@ $("#module-ok-updateNodeProduceList").click(() => {
 $("#module-ok-crearteTag").click(function() {
 	const form = $(this).parent().parent().find("form");
 	const data = getFormData(form);
-	data.keyWord = data.keyWord.split(",");
-	data.pro = data.pro.split(",");
-	data.domain = data.domain.split(",");
+	const {keyWord, pro, domain} = data;
+	data.keyWord = keyWord === "" ? []:keyWord.split(",");
+	data.pro = pro === "" ? []:pro.split(",");
+	data.domain = domain === "" ? []:domain.split(",");
 	websocket.send(`node-manager->tagsService->createTag(${JSON.stringify(data)})`);
 });
 

@@ -13,6 +13,7 @@
 
 $("#userInfo").hide();
 $("#workflowInfo").hide();
+$("#tagsInfo").hide();
 $("#filesInfo").hide();
 
 const selectedProcess = [];
@@ -225,6 +226,7 @@ $("#overwrite").click(function() {
     $("#userInfo").hide();
     $("#workflowInfo").hide();
     $("#filesInfo").hide();
+    $("#tagsInfo").hide();
 });
 
 // 用户数据链接
@@ -233,6 +235,7 @@ $("#nav-userInfo").click(function() {
     clickFunction($(this));
     $("#userInfo").show();
     $("#workflowInfo").hide();
+    $("#tagsInfo").hide();
     $("#filesInfo").hide();
 });
 
@@ -245,7 +248,17 @@ $("#nav-workflowInfo").click(function() {
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").show();
+    $("#tagsInfo").hide();
     $("#filesInfo").hide();
+});
+
+// 标签管理
+$("#nav-tags").click(function() {
+  clickFunction($(this));
+  $("#userInfo").hide();
+  $("#workflowInfo").hide();
+  $("#filesInfo").hide();
+  $("#tagsInfo").show();
 });
 
 // 文件信息
@@ -253,6 +266,7 @@ $("#nav-filesInfo").click(function() {
     websocket.send("node-manager->goodsService->getGoodsList");
     clickFunction($(this));
     $("#userInfo").hide();
+    $("#tagsInfo").hide();
     $("#workflowInfo").hide();
     $("#filesInfo").show();
 });

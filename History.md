@@ -1502,3 +1502,15 @@ commit by afterloe (lm6289511@gmail.com)
 > config/index.js  
 > index.js  
 
+
+1.0.3 / 2017-2-10 10:58:4
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 管理工具添加对标签的支持
+
+
+### modify files
+> tools/_util.html  
+> tools/lib/util.js  
+

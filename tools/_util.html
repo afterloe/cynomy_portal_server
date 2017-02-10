@@ -62,6 +62,9 @@
                         <a class="nav-link" id="nav-workflowInfo" href="#">工作流信息</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="nav-tags" href="#">标签管理</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="nav-filesInfo" href="#">文件列表</a>
                     </li>
                 </ul>
@@ -110,6 +113,24 @@
                     </div>
                   </div>
 
+                </div>
+                <div id="tagsInfo">
+                  <h2>标签管理</h2>
+                  <h3 id="table-show-tags">
+                    <span class="badge badge-primary"><span aria-hidden="true" style="cursor: pointer;">&times;</span> &nbsp;平台</span>
+                    <span class="badge badge-success"><span aria-hidden="true">&times;</span> &nbsp;产品 v1.1</span>
+                    <span class="badge badge-info"><span aria-hidden="true">&times;</span> &nbsp;产品 v1.0</span>
+                    <span class="badge badge-warning"><span aria-hidden="true">&times;</span> &nbsp;pc</span>
+                    <span class="badge badge-danger"><span aria-hidden="true">&times;</span> &nbsp;移动</span>
+                    <span class="badge badge-default"><span aria-hidden="true">&times;</span> &nbsp;产品规划</span>
+                  </h3>
+                  <div class="row" style="margin-top: 1rem;">
+                    <div class="col-sm-12">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteTag">
+                        添加标签
+                      </button>
+                    </div>
+                  </div>
                 </div>
                 <div id="filesInfo">
                   <h2>文件列表</h2>

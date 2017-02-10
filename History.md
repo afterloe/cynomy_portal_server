@@ -1546,3 +1546,17 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/_util.html  
 > tools/lib/util.js  
 
+
+1.0.3 / 2017-2-10 15:31:38
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 版本升级，后端ws添加对标签功能的支持
+
+
+### modify files
+> errors/i18nError.json  
+> services/tagsService.js  
+> tools/_util.html  
+> tools/lib/util.js  
+

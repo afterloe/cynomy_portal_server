@@ -12,60 +12,62 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{tag_dao}, {throwLackParameters, throwTargetExist}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
+const [{tag_dao}, {throwLackParameters, throwNoThisTag, throwTargetExist}, {checkParameter}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities"))];
 
 /**
  * 构建标签对象
  *
- * @param  {Object} _target [基本标签信息]
+ * @param  {Object} tag [基本标签信息]
  * @return {Object}         [标签对象]
  */
-const buildTarget = _target => {
+const buildTag = tag => {
   const _ = {
     keyWord: [],
-    property: [],
+    pro: [],
     domain: [],
     state: 200,
   };
-  Object.assign(_, _target);
+  Object.assign(_, tag);
   return _;
 };
 
 /**
  * 创建标签
  *
- * @param  {Object}    _target  [标签信息]
+ * @param  {Object}    tag  [标签信息]
  * @throw  {Error}              [标签信息缺少name字段会抛出异常]
  * @throw  {Error}              [标签存在则会抛出异常]
  * @return {Generator}          [description]
  */
-function* createTag(_target){
-  const lackParameter = checkParameter(_target, "name");
+function* createTag(tag){
+  const lackParameter = checkParameter(tag, "name");
   if (lackParameter) {
     throwLackParameters(lackParameter);
   }
-  const _ = yield tag_dao.checkExist(_target);
+  const _ = yield tag_dao.checkExist(tag);
   if (true === _) {
     throwTargetExist();
   }
 
-  return yield tag_dao.insert(buildTarget(_target));
+  return yield tag_dao.insert(buildTag(tag));
 }
 
 function* getTagsList(number, page) {
-  return [
-    {name:"平台", count:8},
-    {name:"产品 v1.1", count:8},
-    {name:"产品 v1.0", count:8},
-    {name:"pc", count:8},
-    {name:"移动", count:8},
-    {name:"产品规划", count:8}
-  ];
-  // const _ = yield tag_dao.queryAll({}, number, page);
-  // return _;
+  const _ = yield tag_dao.queryAll({}, number, page);
+  return _;
+}
+
+function* deleteTag(tagId) {
+  const _ = yield tag_dao.queryById(tagId);
+  if (!_) {
+    throwNoThisTag();
+  }
+
+  return yield tag_dao.remove(tagId);
 }
 
 module.exports = {
   createTag,
+  deleteTag,
   getTagsList,
 };

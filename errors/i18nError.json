@@ -119,6 +119,11 @@
     "en-US": "unsupported identity",
     "zh-CN": "非法的用户标识"
   },
+  "NoThisTag": {
+    "code": "404",
+    "en-US": "no such this tag",
+    "zh-CN": "没有这个标签"
+  },
   "NoThisFunction": {
     "code": "404",
     "en-US": "no such this function",

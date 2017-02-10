@@ -369,7 +369,10 @@ $("#module-ok-updateNodeProduceList").click(() => {
 $("#module-ok-crearteTag").click(function() {
 	const form = $(this).parent().parent().find("form");
 	const data = getFormData(form);
-	websocket.send(`node-manager->tagsService->createTag(JSON.stringify(data))`);
+	data.keyWord = data.keyWord.split(",");
+	data.pro = data.pro.split(",");
+	data.domain = data.domain.split(",");
+	websocket.send(`node-manager->tagsService->createTag(${JSON.stringify(data)})`);
 });
 
 // 确认删除标签

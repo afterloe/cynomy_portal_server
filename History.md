@@ -1534,3 +1534,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > services/tagService.js  
 
+
+1.0.3 / 2017-2-10 15:1:44
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端完成删除标签，创建标签功能
+
+
+### modify files
+> tools/_util.html  
+> tools/lib/util.js  
+

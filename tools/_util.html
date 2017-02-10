@@ -230,7 +230,7 @@
             <form>
               <div class="form-group">
                 <label for="exampleInputEmail1">模板名</label>
-                <input type="email" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入模板名">
+                <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入模板名">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">选择节点</label>
@@ -266,7 +266,7 @@
             <form>
               <div class="form-group">
                 <label for="exampleInputEmail1">流程节点名</label>
-                <input type="email" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入节点名">
+                <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入节点名">
                 <small id="emailHelp" class="form-text text-muted">节点名用于标识流程进行到哪一步</small>
               </div>
             </form>
@@ -324,9 +324,24 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="exampleInputEmail1">标签</label>
-                <input type="email" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入标签名">
+                <label for="exampleInputEmail1">*标签名</label>
+                <input type="text" class="form-control" name="name" placeholder="输入标签名">
                 <small id="emailHelp" class="form-text text-muted">标签用于给工作流节点用户来进行分类</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">关键字</label>
+                <input type="text" class="form-control" name="keyWord" placeholder="输入关键字">
+                <small id="emailHelp" class="form-text text-muted">关键字用于给标签标识领域，可以使得标签能够通过搜索来获取，用`,`来分隔</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">特殊属性</label>
+                <input type="text" class="form-control" name="property" placeholder="输入特殊属性">
+                <small id="emailHelp" class="form-text text-muted">使得被标签贴上的对象拥有该属性，用`,`来分隔</small>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">访问域</label>
+                <input type="text" class="form-control" name="domain" placeholder="输入访问域">
+                <small id="emailHelp" class="form-text text-muted">依靠标签来决定用户的访问权限，用`,`来分隔</small>
               </div>
             </form>
           </div>

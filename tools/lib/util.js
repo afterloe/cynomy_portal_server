@@ -132,8 +132,13 @@ registry("getTagsList", (err, data) => {
     $("#table-show-tags").html(tagsTemplate.join("  "));
 });
 
+registry("createTag", (err, data) => {
+	websocket.send("node-manager->tagsService->getTagsList");
+	$("#crearteTag").modal("toggle");
+});
+
 registry("deleteTag", (err, data) => {
-	websocket.send(`node-manager->tagsService->getTagsList`);
+	websocket.send("node-manager->tagsService->getTagsList");
 	$("#askdeleteTag").modal("toggle");
 });
 
@@ -360,6 +365,14 @@ $("#module-ok-updateNodeProduceList").click(() => {
     };
 });
 
+// 创建标签
+$("#module-ok-crearteTag").click(function() {
+	const form = $(this).parent().parent().find("form");
+	const data = getFormData(form);
+	websocket.send(`node-manager->tagsService->createTag(JSON.stringify(data))`);
+});
+
+// 确认删除标签
 $("#module-ok-askdeleteTag").click(() => {
 	const id = $("#input-askdeleteTag").val();
 	websocket.send(`node-manager->tagsService->deleteTag("${id}")`);

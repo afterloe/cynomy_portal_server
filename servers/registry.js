@@ -11,20 +11,12 @@
   */
 "use strict";
 
-const [{resolve}, koa, bodyParser, router, Pug] = [require("path"), require("koa"), require("koa-bodyparser"), require("koa-router")(), require("koa-pug")];
-const [registration, session] = [require(resolve(__dirname, "..", "routers")), require(resolve(__dirname, "..", "interceptors", "session"))];
+const [{resolve}, koa, bodyParser, router] = [require("path"), require("koa"), require("koa-bodyparser"), require("koa-router")()];
+const interceptors = resolve(__dirname, "..", "interceptors");
+const [registration, session, smartNotFound] = [require(resolve(__dirname, "..", "routers")), require(resolve(interceptors, "session")), require(resolve(interceptors, "smartNotFound"))];
 const {setPugTemplatePath} = require(resolve(__dirname, "..", "tools", "buildPage"));
 
 const app = koa();
-new Pug({
-  viewPath: "./template",
-  debug: false,
-  noCache: true,
-  pretty: false,
-  compileDebug: false,
-  basedir: "./template",
-  app,
-});
 
 app.use(bodyParser());
 app.use(session);
@@ -47,6 +39,7 @@ app.use(function* (next) {
 
 app.use(router.routes());
 app.use(router.allowedMethods());
+app.use(smartNotFound);
 
 app.on("error", (err, ctx) => {
   process.emit("catch-error", err, ctx);

@@ -22,12 +22,13 @@ function* list(next) {
     const {number, page} = this.params;
     const userList = yield getUserList(number, page);
     if ("json" === this.way) {
-      this.set("Content-Type", "application/json");
+      this.set("Content-Type", "application/json; charset=utf-8");
       this.body = this.success(userList);
     }
   }catch(err) {
     this.error = err;
   }
+
   return yield next;
 }
 
@@ -39,7 +40,7 @@ function* permit(next) {
     const {mail} = this.params;
     yield obmitLoginPermit(mail);
     if ("json" === this.way) {
-      this.set("Content-Type", "application/json");
+      this.set("Content-Type", "application/json; charset=utf-8");
       this.body = this.success();
     }
   } catch (err) {
@@ -61,7 +62,7 @@ function* login(next) {
     }
     const sessionId = yield loginSystem(mail, permit);
     if ("json" === this.way) {
-      this.set("Content-Type", "application/json");
+      this.set("Content-Type", "application/json; charset=utf-8");
       this.body = this.success(sessionId);
     }
     this.forceSign(sessionId);

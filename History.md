@@ -1462,3 +1462,28 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/user.js  
 > services/userService.js  
 
+
+1.0.3 / 2017-2-10 9:58:40
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws模块升级，返回值标识字符编码，添加智能响应功能，不在出现系统原生提示信息，template添加404，500，提示的也面模板
+
+
+### new files
+> interceptors/smartNotFound.js  
+> template/404NotFound.pug  
+> template/journalError.pug  
+> template/systemError.pug  
+
+### modify files
+> package.json  
+> routers/goodses.js  
+> routers/user.js  
+> routers/workflow.js  
+> servers/registry.js  
+> test/funTest.js  
+
+### delete files
+> interceptors/jsonSmart.js  
+

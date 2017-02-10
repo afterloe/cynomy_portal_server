@@ -32,7 +32,6 @@
     "commander": "^2.9.0",
     "koa": "^1.2.4",
     "koa-bodyparser": "^2.3.0",
-    "koa-pug": "^3.0.0-1",
     "koa-router": "^5.0.0",
     "mongodb": "^2.2.21",
     "node-uuid": "^1.4.7",

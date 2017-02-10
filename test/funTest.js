@@ -15,9 +15,8 @@ const {resolve} = require("path");
 
 const {setPugTemplatePath, compileTemplate} = require(resolve(__dirname, "..", "tools", "buildPage"));
 setPugTemplatePath(resolve(__dirname, "..", "template"));
-const html = compileTemplate("pwdMail", {
-  time: new Date().toLocaleString(),
-  permit: "0a543e60eddc11e6b321c322b7ea7dc6",
+const html = compileTemplate("404NotFound", {
+  title: "page is not found"
 });
 
 console.log(html);

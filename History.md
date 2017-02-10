@@ -1514,3 +1514,23 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/_util.html  
 > tools/lib/util.js  
 
+
+1.0.3 / 2017-2-10 14:23:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加标签模块的 ws删除标签功能
+
+
+### new files
+> services/tagsService.js  
+
+### modify files
+> index.js  
+> servers/websocket.js  
+> tools/_util.html  
+> tools/lib/util.js  
+
+### delete files
+> services/tagService.js  
+

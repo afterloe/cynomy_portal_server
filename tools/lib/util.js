@@ -41,10 +41,17 @@ function resetPwd(btn) {
     console.log("123");
 }
 
+function deleteTag(btn) {
+	btn = $(btn).parent();
+	const [name, id] = [btn.attr("data-name"), btn.attr("data-id")];
+	$("#label-askdeleteTag").html(`删除 ${name}`);
+	$("#input-askdeleteTag").val(id);
+	$("#askdeleteTag").modal("show");
+}
+
 function uploadNode(btn) {
     btn = $(btn);
-    const [id,
-        nodeName] = [btn.attr("data-id"), btn.attr("data-name")];
+    const [id, nodeName] = [btn.attr("data-id"), btn.attr("data-name")];
     const processName = btn.parent().parent().attr("data-name");
     $("#label-updateNodeProduceList").html(`${processName} - ${nodeName} 节点更新`);
     $("#hidden-views").html(`<input type="hidden" name="workflowId" value="${id}" />`);
@@ -111,6 +118,25 @@ registry("getWorkflowNodeList", (err, data) => {
     });
 });
 
+registry("getTagsList", (err, data) => {
+    const tagsTemplate = [];
+	const colors = ["default", "info", "primary", "success", "warning", "danger"];
+    data.map(item => {
+		let color = item.count > 50 ? item.count % 50: 0;
+		if (color >= colors.length) {
+			color = colors.length - 1;
+		}
+		tagsTemplate.push(`<span class="badge badge-${colors[color]}" data-id="${item._id}" data-name="${item.name}">
+				<span aria-hidden="true" onClick="javascript:deleteTag(this);" class="deleteTags" style="cursor: pointer;">&times;</span> &nbsp;${item.name}</span>`);
+    });
+    $("#table-show-tags").html(tagsTemplate.join("  "));
+});
+
+registry("deleteTag", (err, data) => {
+	websocket.send(`node-manager->tagsService->getTagsList`);
+	$("#askdeleteTag").modal("toggle");
+});
+
 registry("createWorkflow", (err, data) => {
     selectedProcess.length = 0;
     buildSelectProcess();
@@ -148,10 +174,7 @@ registry("getGoodsList", (err, data) => {
 });
 
 registry("getUserList", (err, data) => {
-    const [showUser,
-        checkBoxUser] = [
-        [], []
-    ];
+    const [showUser, checkBoxUser] = [[], []];
     data.map(item => {
         showUser.push(`<tr scope="row">
       <td>${item._id}</td>
@@ -254,6 +277,7 @@ $("#nav-workflowInfo").click(function() {
 
 // 标签管理
 $("#nav-tags").click(function() {
+  websocket.send("node-manager->tagsService->getTagsList");
   clickFunction($(this));
   $("#userInfo").hide();
   $("#workflowInfo").hide();
@@ -334,4 +358,10 @@ $("#module-ok-updateNodeProduceList").click(() => {
         dataView.setUint32(0,2001);
         websocket.send(wsBuff);
     };
+});
+
+$("#module-ok-askdeleteTag").click(() => {
+	const id = $("#input-askdeleteTag").val();
+	websocket.send(`node-manager->tagsService->deleteTag("${id}")`);
+	$("inp-askdeleteTag").val(null);
 });

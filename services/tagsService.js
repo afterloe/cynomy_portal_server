@@ -1,5 +1,5 @@
 /**
-  * afterloe - cynomy_portal_server/services/tagService.js
+  * afterloe - cynomy_portal_server/services/tagsService.js
   *
   * Copyright(c) afterloe.
   * MIT Licensed
@@ -52,12 +52,20 @@ function* createTag(_target){
   return yield tag_dao.insert(buildTarget(_target));
 }
 
-function* obmitTagsList(number, page) {
-  const _ = yield tag_dao.queryAll({}, number, page);
-  return _;
+function* getTagsList(number, page) {
+  return [
+    {name:"平台", count:8},
+    {name:"产品 v1.1", count:8},
+    {name:"产品 v1.0", count:8},
+    {name:"pc", count:8},
+    {name:"移动", count:8},
+    {name:"产品规划", count:8}
+  ];
+  // const _ = yield tag_dao.queryAll({}, number, page);
+  // return _;
 }
 
 module.exports = {
   createTag,
-  obmitTagsList,
+  getTagsList,
 };

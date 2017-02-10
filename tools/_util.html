@@ -116,14 +116,7 @@
                 </div>
                 <div id="tagsInfo">
                   <h2>标签管理</h2>
-                  <h3 id="table-show-tags">
-                    <span class="badge badge-primary"><span aria-hidden="true" style="cursor: pointer;">&times;</span> &nbsp;平台</span>
-                    <span class="badge badge-success"><span aria-hidden="true">&times;</span> &nbsp;产品 v1.1</span>
-                    <span class="badge badge-info"><span aria-hidden="true">&times;</span> &nbsp;产品 v1.0</span>
-                    <span class="badge badge-warning"><span aria-hidden="true">&times;</span> &nbsp;pc</span>
-                    <span class="badge badge-danger"><span aria-hidden="true">&times;</span> &nbsp;移动</span>
-                    <span class="badge badge-default"><span aria-hidden="true">&times;</span> &nbsp;产品规划</span>
-                  </h3>
+                  <h3 id="table-show-tags"></h3>
                   <div class="row" style="margin-top: 1rem;">
                     <div class="col-sm-12">
                       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteTag">
@@ -313,6 +306,55 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             <button type="button" class="btn btn-primary" id="module-ok-updateNodeProduceList">更新</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="crearteTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="myModalLabel">创建标签</h4>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="exampleInputEmail1">标签</label>
+                <input type="email" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入标签名">
+                <small id="emailHelp" class="form-text text-muted">标签用于给工作流节点用户来进行分类</small>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" id="module-ok-crearteTag">创建</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="askdeleteTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content modal-sm">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title" id="label-askdeleteTag"></h4>
+          </div>
+          <div class="modal-body modal-sm">
+            <input type="hidden" name="tagetId" value="null" id="input-askdeleteTag"/>
+            <small>删除之后将无法显示标签相关内容，请谨慎选择!</small>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+            <button type="button" class="btn btn-primary" id="module-ok-askdeleteTag">确认</button>
           </div>
         </div>
       </div>

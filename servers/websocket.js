@@ -18,12 +18,13 @@ const [WSSERVER, ORIGIN] = [Symbol("WSSERVER"), Symbol("ORIGIN")];
 const [co, {resolve}, {writeFileSync}] = [require("co"), require("path"), require("fs")];
 const service = resolve(__dirname, "..", "services");
 const [{uuidCode}, {get}] = [require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config"))];
-const [userService, workflowService, goodsService] = [require(resolve(service, "userService")), require(resolve(service, "workflowService")), require(resolve(service, "goodsService"))];
+const [userService, workflowService, goodsService, tagsService] = [require(resolve(service, "userService")), require(resolve(service, "workflowService")), require(resolve(service, "goodsService")), require(resolve(service, "tagsService"))];
 
 const nodeManager = new Map();
 nodeManager.set("userService", userService);
 nodeManager.set("workflowService", workflowService);
 nodeManager.set("goodsService", goodsService);
+nodeManager.set("tagsService", tagsService);
 
 const receiveType = new Map();
 receiveType.set(1001, "userList-xlsx");

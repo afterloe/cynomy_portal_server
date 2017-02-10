@@ -35,6 +35,7 @@ const startSlave = socket => {
 };
 
 if (enable) {
+  console.log("portal server engine use cluster module, %s threads will startup", slaveNum);
   cluster.schedulingPolicy = cluster.SCHED_RR; // 启用轮叫调度策略
   const server = createServer();
   server.listen(registryPort, bindHost, () => {
@@ -44,8 +45,7 @@ if (enable) {
     }
   });
 } else {
-  // 单进程
-  console.log("sing thread runner");
+  console.log("portal server engine use sing thread module");
   require(resolve(__dirname, "distributed", "single"));
 }
 

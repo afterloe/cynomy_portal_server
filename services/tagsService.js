@@ -66,8 +66,22 @@ function* deleteTag(tagId) {
   return yield tag_dao.remove(tagId);
 }
 
+function* getTagsInfo(...args) {
+  if (0 === args.length) {
+    throwLackParameters();
+  }
+
+  const task = [];
+  for (let i = 0; i < args.length; i++) {
+    task.push(tag_dao.queryById(args[i]));
+  }
+
+  return Promise.all(task);
+}
+
 module.exports = {
   createTag,
   deleteTag,
   getTagsList,
+  getTagsInfo,
 };

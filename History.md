@@ -1572,3 +1572,14 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/public.js  
 > tools/lib/util.js  
 
+
+1.0.3 / 2017-2-11 15:48:12
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: tags 添加获取一组tag信息的方法，用于快速添加和处理tag
+
+
+### modify files
+> services/tagsService.js  
+

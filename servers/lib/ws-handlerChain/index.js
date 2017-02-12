@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const Chain = require(resolve(__dirname, "..", "tools", "chain"));
+const Chain = require(resolve(__dirname, "..", "..", "tools", "chain"));
 
 const [echo, manager] = [new Chain(require(resolve(__dirname, "echoChain"))),
   new Chain(require(resolve(__dirname, "managerChain")))];
@@ -20,5 +20,5 @@ const [echo, manager] = [new Chain(require(resolve(__dirname, "echoChain"))),
 manager.setNext(echo);
 
 module.exports = (...args) => {
-  manager.passRequest.apply(null, args);
+  manager.passRequest.apply(Chain, args);
 };

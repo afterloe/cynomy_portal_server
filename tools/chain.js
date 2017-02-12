@@ -7,7 +7,7 @@
   * Authors:
   *   afterloe <afterloeliu@jwis.cn> (https://github.com/afterloe)
   * Date:
-  *   2017-1-19 13:51:37
+  *   2017-2-12 14:55:00
   */
 "use strict";
 
@@ -27,7 +27,7 @@ class Chain {
     /**
      *  构造函数
      *
-     *  @param  {Function} fn [执行函数]
+     *  @param  {[Function]} fn [执行函数]
      */
     constructor(fn) {
         if (fn instanceof Function) {
@@ -42,7 +42,7 @@ class Chain {
     /**
      *  设置下一个节点
      *
-     *  @param  {Chain} chainObject [职责链条对象]
+     *  @param  {[Chain]} chainObject [职责链条对象]
      */
     setNext(chainObject) {
         if (chainObject instanceof Chain) {

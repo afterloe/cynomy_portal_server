@@ -252,4 +252,5 @@ module.exports = {
 
   findUsers,
   loaderFromXlsx,
+  findUsersByTag,
 };

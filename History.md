@@ -1596,3 +1596,18 @@ commit by afterloe (lm6289511@gmail.com)
 > interceptors/session.js  
 > services/userService.js  
 
+
+1.0.3 / 2017-2-12 16:15:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 职责链优化websocket链接
+
+
+### new files
+> servers/lib/  
+
+### modify files
+> services/userService.js  
+> tools/chain.js  
+

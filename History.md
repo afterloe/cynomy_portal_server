@@ -1583,3 +1583,16 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > services/tagsService.js  
 
+
+1.0.3 / 2017-2-12 14:48:22
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: userService 添加searchByTags方法
+
+
+### modify files
+> dao/public.js  
+> interceptors/session.js  
+> services/userService.js  
+

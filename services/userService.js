@@ -13,8 +13,8 @@
 
 const [{resolve}, xlsx, {unlinkSync}] = [require("path"), require("node-xlsx").default, require("fs")];
 const toolsPath = resolve(__dirname, "..", "tools");
-const [{compileTemplate}, {sendPromise}, {get}, {user_dao}, {sign, setSession}, {throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
-[require(resolve(toolsPath, "buildPage")), require(resolve(toolsPath, "mailHelper")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "sessionService")),
+const [{getTagsInfo}, {compileTemplate}, {sendPromise}, {get}, {user_dao}, {sign, setSession}, {throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
+[require(resolve(__dirname, "tagsService")), require(resolve(toolsPath, "buildPage")), require(resolve(toolsPath, "mailHelper")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "sessionService")),
 require(resolve(__dirname, "..", "errors")), require(resolve(toolsPath, "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
 
@@ -229,6 +229,16 @@ function* findUsers(users) {
   }
 
   return _;
+}
+
+function* findUsersByTag(...tags) {
+  const _ = yield getTagsInfo.apply(this, tags);
+  if (0 === _.length) {
+    throwLackParameters();
+  }
+
+  const result = yield user_dao.searchByTags(_);
+  return result ? result : [];
 }
 
 module.exports = {

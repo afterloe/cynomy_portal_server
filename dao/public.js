@@ -130,9 +130,11 @@ function* queryAll(filed = {}, number = 100, page = 0, order = "createTimestamp"
 }
 
 function* searchByTags(tags){
-  return this.find({
-    tags,
-    state: 200
+  return yield this.find({
+    tags: {
+      $all: tags
+    },
+    state: 200,
   }, {
     name : 1,
     tags: 1,

@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const Chain = require(resolve(__dirname, "..", "..", "tools", "chain"));
+const Chain = require(resolve(__dirname, "..", "..", "..", "tools", "chain"));
 
 module.exports = function(protocol, request, origin) {
   if ("echo-protocol" === protocol) {

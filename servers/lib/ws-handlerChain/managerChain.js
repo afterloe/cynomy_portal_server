@@ -12,9 +12,9 @@
 "use strict";
 
 const [co, {resolve}, {writeFileSync}] = [require("co"), require("path"), require("fs")];
-const Chain = require(resolve(__dirname, "..", "..", "tools", "chain"));
-const [{uuidCode}, {get}] = [require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config"))];
-const services = require(resolve(__dirname, "..", "servicesCenter"));
+const Chain = require(resolve(__dirname, "..", "..", "..", "tools", "chain"));
+const [{uuidCode}, {get}] = [require(resolve(__dirname, "..", "..", "..", "tools", "utilities")), require(resolve(__dirname, "..", "..", "..", "config"))];
+const {getService} = require(resolve(__dirname, "..", "servicesCenter"));
 
 const receiveType = new Map();
 receiveType.set(1001, "userList-xlsx");
@@ -25,7 +25,7 @@ function handlerMsg4Str(message, connection) {
     const [ldap, service, fun] = message.utf8Data.split("->");
     console.log("%s: %s %s", ldap, service, fun);
     const [_, __] = fun.split(/(?:\()(.*)(?:\))/i);
-    const _service = services.get(service);
+    const _service = getService(service);
     if (_service) {
       co(function* () {
         if (_service[_]) {
@@ -97,7 +97,7 @@ module.exports = function(protocol, request, origin) {
     connection.on("close", () => {
       console.log("client is hang-up.");
     });
-    connection.on("message", message => manager.passRequest(message, connection));
+    connection.on("message", message => utf8.passRequest(message, connection));
   } else {
     return Chain.next();
   }

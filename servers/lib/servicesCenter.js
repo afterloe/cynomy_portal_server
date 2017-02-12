@@ -10,3 +10,9 @@
   *   2017-2-12 16:33:53
   */
 "use strict";
+
+const getService = service => console.log(service);
+
+module.exports = {
+  getService,
+};

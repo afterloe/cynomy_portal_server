@@ -26,7 +26,6 @@ process.on("catch-error", (err, ctx) => {
 });
 
 process.on("uncaughtException", err => {
-  process.send({act: "suicide"});
   console.log(err);
   process.nextTick(() => process.exit(1));
 });

@@ -1641,3 +1641,18 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/lib/ws-handlerChain/index.js  
 > servers/lib/ws-handlerChain/managerChain.js  
 
+
+1.0.3 / 2017-2-12 17:19:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws职责链调优
+
+
+### modify files
+> distributed/single.js  
+> servers/lib/servicesCenter.js  
+> servers/lib/ws-handlerChain/echoChain.js  
+> servers/lib/ws-handlerChain/index.js  
+> servers/lib/ws-handlerChain/managerChain.js  
+

@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const Chain = require(resolve(__dirname, "..", "..", "tools", "chain"));
+const Chain = require(resolve(__dirname, "..", "..", "..", "tools", "chain"));
 
 const [echo, manager] = [new Chain(require(resolve(__dirname, "echoChain"))),
   new Chain(require(resolve(__dirname, "managerChain")))];

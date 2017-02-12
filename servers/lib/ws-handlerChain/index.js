@@ -20,5 +20,5 @@ const [echo, manager] = [new Chain(require(resolve(__dirname, "echoChain"))),
 manager.setNext(echo);
 
 module.exports = (...args) => {
-  manager.passRequest.apply(Chain, args);
+  manager.passRequest.apply(manager, args);
 };

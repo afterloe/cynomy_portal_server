@@ -11,6 +11,9 @@
   */
 "use strict";
 
+const {resolve} = require("path");
+const Chain = require(resolve(__dirname, "..", "..", "tools", "chain"));
+
 module.exports = function(protocol, request, origin) {
   if ("echo-protocol" === protocol) {
     const connection = request.accept(protocol, origin);
@@ -28,6 +31,6 @@ module.exports = function(protocol, request, origin) {
       console.log("%s Peer %s disconnected. code is %s, description: %s", new Date(), connection.remoteAddress, reasonCode, description);
     });
   } else {
-    return this.next();
+    return Chain.next();
   }
 };

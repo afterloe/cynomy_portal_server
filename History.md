@@ -1625,3 +1625,19 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/lib/ws-handlerChain/managerChain.js  
 > servers/websocket.js  
 
+
+1.0.3 / 2017-2-12 17:8:37
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws职责链调优
+
+
+### new files
+> servers/lib/servicesCenter.js  
+
+### modify files
+> servers/lib/ws-handlerChain/echoChain.js  
+> servers/lib/ws-handlerChain/index.js  
+> servers/lib/ws-handlerChain/managerChain.js  
+

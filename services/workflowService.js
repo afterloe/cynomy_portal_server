@@ -603,6 +603,16 @@ function* updateProcess(workflowId, {path, reason}) {
   return yield updateNodeProduceList(status._id, {produceList, reason});
 }
 
+function* exampleInfo(workflowId) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, 200);
+  if (!_) {
+    throwOperationFailed();
+  }
+
+  const {name, _id, tags} = _;
+  return {name, _id, tags};
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -621,4 +631,5 @@ module.exports = {
   getWorkflowList,
   getWorkflowTemplateList,
   updateProcess,
+  exampleInfo,
 };

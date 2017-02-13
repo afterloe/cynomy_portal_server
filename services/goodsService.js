@@ -89,10 +89,21 @@ function* structureProduceList(path, workflowId, nodeId) {
   return yield production(_, workflowId, nodeId, basename(path));
 }
 
+function* exampleInfo(goodsId) {
+  const _ = yield goods_dao.queryById(goodsId, 200);
+  if (!_) {
+    throwNotExistsFile();
+  }
+
+  const {name, _id, tags} = _;
+  return {name, _id, tags};
+}
+
 module.exports = {
   cleanDocuments,
   production,
   getGoodsList,
 
   structureProduceList,
+  exampleInfo,
 };

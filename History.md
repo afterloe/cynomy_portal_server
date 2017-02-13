@@ -1750,3 +1750,18 @@ commit by afterloe (lm6289511@gmail.com)
 > services/tagsService.js  
 > tools/webTools/lib/util.js  
 
+
+1.0.3 / 2017-2-13 18:35:3
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: server里全面部署exampleInfo方法，用于获取实例信息
+
+
+### modify files
+> services/goodsService.js  
+> services/userService.js  
+> services/workflowService.js  
+> tools/webTools/_util.html  
+> tools/webTools/lib/util.js  
+

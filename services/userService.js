@@ -231,6 +231,16 @@ function* findUsers(users) {
   return _;
 }
 
+function* findUsersByTag(...tags) {
+  const _ = yield getTagsInfo.apply(this, tags);
+  if (0 === _.length) {
+    throwLackParameters();
+  }
+
+  const result = yield user_dao.searchByTags(_); // 动态获取tag信息
+  return result ? result : [];
+}
+
 function* setTags(userId, ...tagIds) {
   const user = yield user_dao.queryById(userId, 200);
   if (!user) {
@@ -253,16 +263,6 @@ function* setTags(userId, ...tagIds) {
       }
     }
   });
-}
-
-function* findUsersByTag(...tags) {
-  const _ = yield getTagsInfo.apply(this, tags);
-  if (0 === _.length) {
-    throwLackParameters();
-  }
-
-  const result = yield user_dao.searchByTags(_); // 动态获取tag信息
-  return result ? result : [];
 }
 
 function* exampleInfo(userId) {

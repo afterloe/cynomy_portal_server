@@ -39,7 +39,10 @@ function appendTag(btn) {
     let html = $("#tags-exampleManager").html();
     html += ` <span class="badge badge-default" data-id="${id}" data-name="${name}"> &nbsp;${name}</span>`;
     $("#tags-exampleManager").html(html);
-    modalService = null;
+}
+
+function reflushTag() {
+	websocket.send("node-manager->tagsService->getTagsList");
 }
 
 function exampleManager(btn, modal) {
@@ -213,8 +216,9 @@ registry("getGoodsList", (err, data) => {
         <div class="card-block">
           <h4 class="card-title">${item.name}</h4>
           <p class="card-text">${item.author.name} - ${item.version}</p>
-          <a href="${item.path}" class="btn btn-primary">下载</a>
-          <a href="#" class="btn btn-danger">删除</a>
+          <a href="${item.path}" class="btn btn-outline-primary">下载</a>
+          <a href="#" class="btn btn-outline-danger">删除</a>
+		  <a href="#" data-id="${item._id}" class="btn btn-outline-warning" onClick="javascript:exampleManager(this, 'goods');">管理</a>
         </div>
       </div>`);
     });
@@ -267,6 +271,9 @@ registry("getWorkflowList", (err, data) => {
           <button type="button" data-id="${_id}" class="btn btn-outline-success btn-sm" onClick="javascript:promoteProcess(this);">
             推进流程
           </button>
+		  <button type="button" data-id="${_id}" class="btn btn-outline-warning btn-sm" onClick="javascript:exampleManager(this, 'workflow')">
+			管理
+		  </button>
         </div>
       </div>`);
         } else {

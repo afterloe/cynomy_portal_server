@@ -90,7 +90,7 @@ function startUpProcess(btn) {
 registry("exampleInfo", (err, data) => {
     const {tags, name, _id} = data;
     const tagsHtml = [];
-    tags.map(tag => tagsHtml.push(`<span class="badge badge-default">${tag}</span>>`));
+    tags.map(tag => tagsHtml.push(`<span class="badge badge-default">${tag}</span>`));
     $("#name-exampleManager").html(name);
     $("#exampleId-exampleManager").val(_id);
     $("#tags-exampleManager").html(tagsHtml.join(""));

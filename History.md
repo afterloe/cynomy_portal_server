@@ -1735,3 +1735,18 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/util.js  
 
+
+1.0.3 / 2017-2-13 18:11:40
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: tag添加service，修正之前导致的数据出现null的问题
+
+
+### new files
+> test/tagsService_test.js  
+
+### modify files
+> services/tagsService.js  
+> tools/webTools/lib/util.js  
+

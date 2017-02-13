@@ -71,13 +71,12 @@ function* getTagsInfo(...args) {
     throwLackParameters();
   }
 
-  const task = [];
+  const tasks = [];
   for (let i = 0; i < args.length; i++) {
-    task.push(tag_dao.queryById(args[i]));
+    tasks.push(yield tag_dao.queryById(args[i]));
   }
 
-  const tags = yield Promise.all(task);
-  const _ = Array.from(tags, tag => tag.name);
+  const _ = Array.from(tasks, task => task.name);
 
   return [...new Set(_)];
 }

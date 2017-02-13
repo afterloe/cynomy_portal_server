@@ -11,7 +11,36 @@
   */
 "use strict";
 
-const getService = service => console.log(service);
+const {resolve} = require("path");
+const services = resolve(resolve(__dirname, "..", "..", "services"));
+
+const [workflowService, userService, goodsService, tagsService] = [
+  require(resolve(services, "workflowService")), require(resolve(services, "userService")), require(resolve(services, "goodsService")), require(resolve(services, "tagsService"))];
+
+const REFISTRY = Symbol("REFISTRY");
+module[REFISTRY] = new Map();
+
+module[REFISTRY].set("workflowService", workflowService);
+module[REFISTRY].set("userService", userService);
+module[REFISTRY].set("goodsService", goodsService);
+module[REFISTRY].set("tagsService", tagsService);
+
+/**
+ * 获取执行方法
+ *
+ * @param  {[type]} serviceName [description]
+ * @param  {[type]} funcName    [description]
+ * @param  {[type]} user        [description]
+ * @return {[type]}             [description]
+ */
+const getService = (serviceName, funcName) => {
+  const service = module[REFISTRY].get(serviceName);
+  if (!service) {
+    return ;
+  }
+
+  return service[funcName];
+};
 
 module.exports = {
   getService,

@@ -1681,3 +1681,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/lib/util.js  
 > tools/lib/websocket.js  
 
+
+1.0.3 / 2017-2-13 11:17:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: WS server添加执行方法拦截器，用于权限验证
+
+
+### modify files
+> servers/lib/servicesCenter.js  
+> servers/lib/ws-handlerChain/managerChain.js  
+

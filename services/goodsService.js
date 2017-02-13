@@ -99,6 +99,30 @@ function* exampleInfo(goodsId) {
   return {name, _id, tags};
 }
 
+function* setTags(goodsId, ...tagIds) {
+  const goods = yield goods_dao.queryById(goodsId, 200);
+  if (!goods) {
+    throwNotExistsFile();
+  }
+
+  let _ = yield getTagsInfo.apply(this, tagIds); // 动态获取tag信息
+  if (0 === _.length) {
+    throwLackParameters();
+  }
+
+  const {tags} = goods;
+  _ = [...new Set(tags.concat(_))];
+
+  return yield goods_dao.update({
+    _id: goods._id,
+    upload: {
+      $set: {
+        tags: _,
+      }
+    }
+  });
+}
+
 module.exports = {
   cleanDocuments,
   production,
@@ -106,4 +130,5 @@ module.exports = {
 
   structureProduceList,
   exampleInfo,
+  setTags,
 };

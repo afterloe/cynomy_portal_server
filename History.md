@@ -1765,3 +1765,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/util.js  
 
+
+1.0.3 / 2017-2-13 18:43:26
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: server里全面部署setTags方法，用于给常用对象设置标签
+
+
+### modify files
+> services/goodsService.js  
+> services/workflowService.js  
+

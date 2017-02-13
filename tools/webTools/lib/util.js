@@ -17,6 +17,7 @@ $("#tagsInfo").hide();
 $("#filesInfo").hide();
 
 const selectedProcess = [];
+let modalService;
 
 const buildSelectProcess = () => {
     const _ = [];
@@ -31,11 +32,20 @@ const buildSelectProcess = () => {
     });
 };
 
+function appendTag(btn) {
+    const [id, name] = [$(btn).attr("data-id"), $(btn).attr("data-name")];
+    const exampleId = $("#exampleId-exampleManager").val();
+    websocket.send(`node-manager->${modalService}->setTags("${exampleId}"|"${id}")`);
+    let html = $("#tags-exampleManager").html();
+    html += ` <span class="badge badge-default" data-id="${id}" data-name="${name}"> &nbsp;${name}</span>`;
+    $("#tags-exampleManager").html(html);
+    modalService = null;
+}
+
 function exampleManager(btn, modal) {
-	const id = $(btn).attr("data-id");
-	websocket.send(`node-manager->${modal}Service->exampleInfo("${id}")`);
-	// TODO
-	// $("#exampleManager").modal("show");
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->${modal}Service->exampleInfo("${id}")`);
+    modalService = `${modal}Service`;
 }
 
 function deleteUser(btn) {
@@ -49,16 +59,18 @@ function resetPwd(btn) {
 }
 
 function deleteTag(btn) {
-	btn = $(btn).parent();
-	const [name, id] = [btn.attr("data-name"), btn.attr("data-id")];
-	$("#label-askdeleteTag").html(`删除 ${name}`);
-	$("#input-askdeleteTag").val(id);
-	$("#askdeleteTag").modal("show");
+    btn = $(btn).parent();
+    const [name,
+        id] = [btn.attr("data-name"), btn.attr("data-id")];
+    $("#label-askdeleteTag").html(`删除 ${name}`);
+    $("#input-askdeleteTag").val(id);
+    $("#askdeleteTag").modal("show");
 }
 
 function uploadNode(btn) {
     btn = $(btn);
-    const [id, nodeName] = [btn.attr("data-id"), btn.attr("data-name")];
+    const [id,
+        nodeName] = [btn.attr("data-id"), btn.attr("data-name")];
     const processName = btn.parent().parent().attr("data-name");
     $("#label-updateNodeProduceList").html(`${processName} - ${nodeName} 节点更新`);
     $("#hidden-views").html(`<input type="hidden" name="workflowId" value="${id}" />`);
@@ -76,13 +88,13 @@ function startUpProcess(btn) {
 }
 
 registry("exampleInfo", (err, data) => {
-	const {tags, name, _id} = data;
-	const tagsHtml = [];
-	tags.map(tag => tagsHtml.push(`<span class="badge badge-default">${tag}</span>>`));
-	$("#name-exampleManager").html(name);
-	$("#exampleId-exampleManager").val(_id);
-	$("#tags-exampleManager").html(tagsHtml.join(""));
-	$("#exampleManager").modal("show");
+    const {tags, name, _id} = data;
+    const tagsHtml = [];
+    tags.map(tag => tagsHtml.push(`<span class="badge badge-default">${tag}</span>>`));
+    $("#name-exampleManager").html(name);
+    $("#exampleId-exampleManager").val(_id);
+    $("#tags-exampleManager").html(tagsHtml.join(""));
+    $("#exampleManager").modal("show");
 });
 
 registry("getWorkflowTemplateList", (err, data) => {
@@ -102,11 +114,11 @@ registry("userList-xlsx", (err, data) => {
 });
 
 registry("goodsList-tar.gz", (err, data) => {
-  const form = $("#form-updateNodeProduceList");
-  const _data = getFormData(form);
-  Object.assign(_data, {path: data});
-  websocket.send(`node-manager->workflowService->updateProcess("${_data.workflowId}"|${JSON.stringify(_data)})`);
-  $("#updateNodeProduceList").modal("toggle");
+    const form = $("#form-updateNodeProduceList");
+    const _data = getFormData(form);
+    Object.assign(_data, {path: data});
+    websocket.send(`node-manager->workflowService->updateProcess("${_data.workflowId}"|${JSON.stringify(_data)})`);
+    $("#updateNodeProduceList").modal("toggle");
 });
 
 registry("buildProduct", (err, data) => {
@@ -136,29 +148,41 @@ registry("getWorkflowNodeList", (err, data) => {
 });
 
 registry("getTagsList", (err, data) => {
-    const [tagsTemplate, tagsList] = [[], []];
-	const colors = ["default", "info", "primary", "success", "warning", "danger"];
+    const [tagsTemplate,
+        tagsList] = [
+        [], []
+    ];
+    const colors = [
+        "default",
+        "info",
+        "primary",
+        "success",
+        "warning",
+        "danger"
+    ];
     data.map(item => {
-		let color = item.count > 50 ? item.count % 50: 0;
-		if (color >= colors.length) {
-			color = colors.length - 1;
-		}
-		tagsTemplate.push(`<span class="badge badge-${colors[color]}" data-id="${item._id}" data-name="${item.name}">
+        let color = item.count > 50
+            ? item.count % 50
+            : 0;
+        if (color >= colors.length) {
+            color = colors.length - 1;
+        }
+        tagsTemplate.push(`<span class="badge badge-${colors[color]}" data-id="${item._id}" data-name="${item.name}">
 				<span aria-hidden="true" onClick="javascript:deleteTag(this);" class="deleteTags" style="cursor: pointer;">&times;</span> &nbsp;${item.name}</span>`);
-		tagsList.push(`<span class="badge badge-${colors[color]}" data-id="${item._id}" data-name="${item.name}" onClick="javascript:appendTag(this);"> &nbsp;${item.name}</span>`);
+        tagsList.push(`<span class="badge badge-${colors[color]}" data-id="${item._id}" data-name="${item.name}" onClick="javascript:appendTag(this);"> &nbsp;${item.name}</span>`);
     });
     $("#table-show-tags").html(tagsTemplate.join("  "));
-	$("#addTags > p").html(tagsList.join(" "));
+    $("#addTags > p").html(tagsList.join(" "));
 });
 
 registry("createTag", (err, data) => {
-	websocket.send("node-manager->tagsService->getTagsList");
-	$("#crearteTag").modal("toggle");
+    websocket.send("node-manager->tagsService->getTagsList");
+    $("#crearteTag").modal("toggle");
 });
 
 registry("deleteTag", (err, data) => {
-	websocket.send("node-manager->tagsService->getTagsList");
-	$("#askdeleteTag").modal("toggle");
+    websocket.send("node-manager->tagsService->getTagsList");
+    $("#askdeleteTag").modal("toggle");
 });
 
 registry("createWorkflow", (err, data) => {
@@ -183,9 +207,9 @@ registry("updateProcess", (err, data) => {
 });
 
 registry("getGoodsList", (err, data) => {
-  const fileList = [];
-  data.map(item => {
-      fileList.push(`<div class="card" style="height: 11rem;">
+    const fileList = [];
+    data.map(item => {
+        fileList.push(`<div class="card" style="height: 11rem;">
         <div class="card-block">
           <h4 class="card-title">${item.name}</h4>
           <p class="card-text">${item.author.name} - ${item.version}</p>
@@ -193,12 +217,15 @@ registry("getGoodsList", (err, data) => {
           <a href="#" class="btn btn-danger">删除</a>
         </div>
       </div>`);
-  });
-  $("#table-show-files").html(fileList.join(""));
+    });
+    $("#table-show-files").html(fileList.join(""));
 });
 
 registry("getUserList", (err, data) => {
-    const [showUser, checkBoxUser] = [[], []];
+    const [showUser,
+        checkBoxUser] = [
+        [], []
+    ];
     data.map(item => {
         showUser.push(`<tr scope="row">
       <td>${item._id}</td>
@@ -302,12 +329,12 @@ $("#nav-workflowInfo").click(function() {
 
 // 标签管理
 $("#nav-tags").click(function() {
-  websocket.send("node-manager->tagsService->getTagsList");
-  clickFunction($(this));
-  $("#userInfo").hide();
-  $("#workflowInfo").hide();
-  $("#filesInfo").hide();
-  $("#tagsInfo").show();
+    websocket.send("node-manager->tagsService->getTagsList");
+    clickFunction($(this));
+    $("#userInfo").hide();
+    $("#workflowInfo").hide();
+    $("#filesInfo").hide();
+    $("#tagsInfo").show();
 });
 
 // 文件信息
@@ -327,12 +354,12 @@ $("#module-ok-importUserInfo").click(function() {
     const reader = new FileReader();
     reader.readAsArrayBuffer(xlsx);
     reader.onload = () => {
-      const fileBuff = reader.result;
-      const length = fileBuff.byteLength;
-      const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
-      const dataView = new DataView(wsBuff, length, 8);
-      dataView.setUint32(0,1001);
-      websocket.send(wsBuff);
+        const fileBuff = reader.result;
+        const length = fileBuff.byteLength;
+        const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
+        const dataView = new DataView(wsBuff, length, 8);
+        dataView.setUint32(0, 1001);
+        websocket.send(wsBuff);
     };
     $("#importUserInfo").modal("toggle");
 });
@@ -380,25 +407,31 @@ $("#module-ok-updateNodeProduceList").click(() => {
         const length = fileBuff.byteLength;
         const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
         const dataView = new DataView(wsBuff, length, 8);
-        dataView.setUint32(0,2001);
+        dataView.setUint32(0, 2001);
         websocket.send(wsBuff);
     };
 });
 
 // 创建标签
 $("#module-ok-crearteTag").click(function() {
-	const form = $(this).parent().parent().find("form");
-	const data = getFormData(form);
-	const {keyWord, pro, domain} = data;
-	data.keyWord = keyWord === "" ? []:keyWord.split(",");
-	data.pro = pro === "" ? []:pro.split(",");
-	data.domain = domain === "" ? []:domain.split(",");
-	websocket.send(`node-manager->tagsService->createTag(${JSON.stringify(data)})`);
+    const form = $(this).parent().parent().find("form");
+    const data = getFormData(form);
+    const {keyWord, pro, domain} = data;
+    data.keyWord = keyWord === ""
+        ? []
+        : keyWord.split(",");
+    data.pro = pro === ""
+        ? []
+        : pro.split(",");
+    data.domain = domain === ""
+        ? []
+        : domain.split(",");
+    websocket.send(`node-manager->tagsService->createTag(${JSON.stringify(data)})`);
 });
 
 // 确认删除标签
 $("#module-ok-askdeleteTag").click(() => {
-	const id = $("#input-askdeleteTag").val();
-	websocket.send(`node-manager->tagsService->deleteTag("${id}")`);
-	$("inp-askdeleteTag").val(null);
+    const id = $("#input-askdeleteTag").val();
+    websocket.send(`node-manager->tagsService->deleteTag("${id}")`);
+    $("inp-askdeleteTag").val(null);
 });

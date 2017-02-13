@@ -12,8 +12,10 @@
 "use strict";
 
 const [{resolve, basename, sep}, {statSync, existsSync}] = [require("path"), require("fs")];
-const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed, throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move}] = [
-  require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "fileSystem"))];
+const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed,
+throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move}, {getTagsInfo}] = [
+  require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
+  require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "fileSystem")), require(resolve(__dirname, "tagsService"))];
 
 const buildGoods = (goods, workflowId, nodeName) => {
   const lackParameter = checkParameter(goods, "name", "path", "version", "author");

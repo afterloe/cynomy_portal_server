@@ -96,7 +96,7 @@ registry("exampleInfo", (err, data) => {
     tags.map(tag => tagsHtml.push(`<span class="badge badge-default">${tag}</span>`));
     $("#name-exampleManager").html(name);
     $("#exampleId-exampleManager").val(_id);
-    $("#tags-exampleManager").html(tagsHtml.join(""));
+    $("#tags-exampleManager").html(tagsHtml.join(" "));
     $("#exampleManager").modal("show");
 });
 

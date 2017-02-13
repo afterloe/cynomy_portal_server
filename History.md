@@ -1777,3 +1777,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > services/workflowService.js  
 
+
+1.0.3 / 2017-2-13 18:55:8
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复添加标签出现异常
+
+
+### modify files
+> services/goodsService.js  
+> tools/webTools/lib/util.js  
+

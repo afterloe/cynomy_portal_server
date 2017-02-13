@@ -11,15 +11,21 @@
   */
 "use strict";
 
-const {resolve} = require("path");
+let _ = ["java", "python", "nodejs", "nodejs"];
+const tags = ["c++", "nodejs"];
+_ = [...new Set(tags.concat(_))];
 
-const {setPugTemplatePath, compileTemplate} = require(resolve(__dirname, "..", "tools", "buildPage"));
-setPugTemplatePath(resolve(__dirname, "..", "template"));
-const html = compileTemplate("404NotFound", {
-  title: "page is not found"
-});
+console.log(_);
 
-console.log(html);
+// const {resolve} = require("path");
+//
+// const {setPugTemplatePath, compileTemplate} = require(resolve(__dirname, "..", "tools", "buildPage"));
+// setPugTemplatePath(resolve(__dirname, "..", "template"));
+// const html = compileTemplate("404NotFound", {
+//   title: "page is not found"
+// });
+//
+// console.log(html);
 
 // const {spawn} = require("child_process");
 // const tarXZF = spawn("tar", ["xzf", "/tmp/9996e550eddc11e6a87d01486680478a"], {

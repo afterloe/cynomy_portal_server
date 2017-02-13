@@ -24,7 +24,7 @@ function handlerMsg4Str(message, connection) {
   if ("utf8" === message.type) {
     const [ldap, service, fun] = message.utf8Data.split("->");
     console.log("%s: %s %s", ldap, service, fun);
-    const [_, __] = fun.split(/(?:\()(.*)(?:\))/i);
+    const [_, __] = fun.split(/(?:\()(.*)(?:\))/i); // 获取小括号中的内容
     const _service = getService(service);
     if (_service) {
       co(function* () {

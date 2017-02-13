@@ -1,4 +1,9 @@
 {
+  "ObjectCanTAes": {
+    "code": "400",
+    "en-US": "object can't access now",
+    "zh-CN": "对象现在无法访问"
+  },
   "AccountOrPwdError": {
     "code": "400",
     "en-US": "account or password is Error",

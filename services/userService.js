@@ -13,7 +13,7 @@
 
 const [{resolve}, xlsx, {unlinkSync}] = [require("path"), require("node-xlsx").default, require("fs")];
 const toolsPath = resolve(__dirname, "..", "tools");
-const [{getTagsInfo}, {compileTemplate}, {sendPromise}, {get}, {user_dao}, {sign, setSession}, {throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
+const [{getTagsInfo}, {compileTemplate}, {sendPromise}, {get}, {user_dao}, {sign, setSession}, {throwObjectCanTAes, throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
 [require(resolve(__dirname, "tagsService")), require(resolve(toolsPath, "buildPage")), require(resolve(toolsPath, "mailHelper")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "sessionService")),
 require(resolve(__dirname, "..", "errors")), require(resolve(toolsPath, "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
@@ -231,13 +231,37 @@ function* findUsers(users) {
   return _;
 }
 
+function* setTags(userId, ...tagIds) {
+  const user = yield user_dao.queryById(userId, 200);
+  if (!user) {
+    throwObjectCanTAes();
+  }
+
+  let _ = yield getTagsInfo.apply(this, tagIds); // 动态获取tag信息
+  if (0 === _.length) {
+    throwLackParameters();
+  }
+
+  const {tags} = user;
+  _ = [...new Set(tags.concat(_))];
+
+  return yield user_dao.update({
+    _id: user._id,
+    upload: {
+      $set: {
+        tags: _,
+      }
+    }
+  });
+}
+
 function* findUsersByTag(...tags) {
   const _ = yield getTagsInfo.apply(this, tags);
   if (0 === _.length) {
     throwLackParameters();
   }
 
-  const result = yield user_dao.searchByTags(_);
+  const result = yield user_dao.searchByTags(_); // 动态获取tag信息
   return result ? result : [];
 }
 
@@ -253,4 +277,5 @@ module.exports = {
   findUsers,
   loaderFromXlsx,
   findUsersByTag,
+  setTags,
 };

@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const err = require(resolve(__dirname, "..", "errors"));
+const {throwLackParameters, throwParametersError} = require(resolve(__dirname, "..", "errors"));
 
 /**
  * 更新文档信息
@@ -26,9 +26,9 @@ function* update (_document) {
     if ("string" === typeof _id) {
       _id = this.newObjectId(_id);
     }
-    return this.updateOne({_id}, upload);
+    return yield this.updateOne({_id}, upload);
   }
-  err.throwParametersError();
+  throwParametersError();
 }
 
 /**
@@ -39,7 +39,7 @@ function* update (_document) {
  */
 function* insert (_) {
   if (!_.name) {
-    err.throwLackParameters("name");
+    throwLackParameters(null, "name");
     return ;
   }
 
@@ -51,7 +51,7 @@ function* insert (_) {
     _.createTimestamp = Date.now();
   }
 
-  return this.insertOne(_);
+  return yield this.insertOne(_);
 }
 
 /**
@@ -62,9 +62,9 @@ function* insert (_) {
  */
 function* insertMany (_) {
   if (_ instanceof Array) {
-    return _.length > 0 ? this.insertMany(_): null;
+    return _.length > 0 ? yield this.insertMany(_): null;
   }
-  err.throwParametersError();
+  throwParametersError();
 }
 
 /**
@@ -76,13 +76,14 @@ function* insertMany (_) {
 function* remove (_id) {
   if (this.valid(_id)) {
     _id = this.newObjectId(_id);
-    return this.updateOne({_id}, {
+    return yield this.updateOne({_id}, {
       $set: {
         state : 500,
         deleteTime: Date.now(),
       }
     });
   }
+  throwParametersError();
 }
 
 /**
@@ -102,15 +103,16 @@ function* checkExist ({name}){
  * @param  {ObjectId, String}    _ [id]
  * @return {Generator}   [数据库操作函数，使用co或next来驱动]
  */
-function* queryById(_) {
+function* queryById(_, state) {
   if (this.valid(_)) {
     _ = this.newObjectId(_);
-    return this.findOne({_id: _});
+    const queryBody = {_id: _};
+    if (state) {
+      Object.assign(queryBody, {state});
+    }
+    return this.findOne(queryBody);
   }
-}
-
-function* clean() {
-  return this.deleteMany({});
+  throwParametersError();
 }
 
 /**
@@ -127,6 +129,10 @@ function* queryAll(filed = {}, number = 100, page = 0, order = "createTimestamp"
   return yield this.find({
     state : 200
   }, filed).sort({[order]: -1}).skip(number * page).limit(number).toArray();
+}
+
+function* clean() {
+  return yield this.deleteMany({});
 }
 
 function* searchByTags(tags){

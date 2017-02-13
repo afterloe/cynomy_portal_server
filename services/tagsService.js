@@ -76,7 +76,10 @@ function* getTagsInfo(...args) {
     task.push(tag_dao.queryById(args[i]));
   }
 
-  return Promise.all(task);
+  const tags = yield Promise.all(task);
+  const _ = Array.from(tags, tag => tag.name);
+
+  return [...new Set(_)];
 }
 
 module.exports = {

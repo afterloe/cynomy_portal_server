@@ -1656,3 +1656,28 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/lib/ws-handlerChain/index.js  
 > servers/lib/ws-handlerChain/managerChain.js  
 
+
+1.0.3 / 2017-2-13 10:48:45
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: userService 添加tags系列服务，支持增加tags，查询。同时优化tools下web工具，添加系列辅助代码
+
+
+### new files
+> tools/webTools/  
+
+### modify files
+> Makefile  
+> dao/public.js  
+> errors/i18nError.json  
+> servers/lib/ws-handlerChain/managerChain.js  
+> services/tagsService.js  
+> services/userService.js  
+> test/funTest.js  
+
+### delete files
+> tools/_util.html  
+> tools/lib/util.js  
+> tools/lib/websocket.js  
+

@@ -1719,3 +1719,19 @@ commit by afterloe (lm6289511@gmail.com)
 > test/websocketCli  
 > tools/webTools/lib/websocket.js  
 
+
+1.0.3 / 2017-2-13 16:28:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加实例管理模态框，详细功能后续开发。后端userService添加方法支持实例信息查询
+
+
+### new files
+> tools/webTools/lib/.util.js.swp  
+
+### modify files
+> services/userService.js  
+> tools/webTools/_util.html  
+> tools/webTools/lib/util.js  
+

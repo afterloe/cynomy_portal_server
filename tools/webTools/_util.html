@@ -74,60 +74,60 @@
                 <h1>控制台输出</h1>
                 <p id="console">Connection to Cynomys node ...</p>
                 <div id="userInfo">
-                  <h2>人员信息</h2>
-                  <div class="float-right">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importUserInfo">
+                    <h2>人员信息</h2>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importUserInfo">
                       导入用户数据
                     </button>
-                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exportUserInfo">
+                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exportUserInfo">
                       导出用户数据
                     </button>
-                  </div>
-                  <table class="table table-striped">
-                    <thead class="thead-inverse">
-                      <tr>
-                        <th>#</th>
-                        <th>姓名</th>
-                        <th>邮箱</th>
-                        <th>操作</th>
-                      </tr>
-                    </thead>
-                    <tbody id="table-show-user">
-                    </tbody>
-                  </table>
+                    </div>
+                    <table class="table table-striped">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>#</th>
+                                <th>姓名</th>
+                                <th>邮箱</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-show-user">
+                        </tbody>
+                    </table>
                 </div>
                 <div id="workflowInfo">
-                  <h2>工作流信息</h2>
-                  <div id="table-show-workflow"></div>
-                  <div class="row" style="margin-top: 1rem;">
-                    <div class="col-sm-12">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteProcess">
+                    <h2>工作流信息</h2>
+                    <div id="table-show-workflow"></div>
+                    <div class="row" style="margin-top: 1rem;">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteProcess">
                         创建工作流
                       </button>
-                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#crearteProcessTemplate">
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#crearteProcessTemplate">
                         创建工作流模板
                       </button>
-                      <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#crearteProcessNodeTemplate">
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#crearteProcessNodeTemplate">
                         创建工作流节点模板
                       </button>
+                        </div>
                     </div>
-                  </div>
 
                 </div>
                 <div id="tagsInfo">
-                  <h2>标签管理</h2>
-                  <h3 id="table-show-tags"></h3>
-                  <div class="row" style="margin-top: 1rem;">
-                    <div class="col-sm-12">
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteTag">
+                    <h2>标签管理</h2>
+                    <h3 id="table-show-tags"></h3>
+                    <div class="row" style="margin-top: 1rem;">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteTag">
                         添加标签
                       </button>
+                        </div>
                     </div>
-                  </div>
                 </div>
                 <div id="filesInfo">
-                  <h2>文件列表</h2>
-                  <div class="row" id="table-show-files"></div>
+                    <h2>文件列表</h2>
+                    <div class="row" id="table-show-files"></div>
                 </div>
             </main>
         </div>
@@ -135,246 +135,282 @@
 
     <!-- Modal -->
     <div class="modal fade" id="importUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">导入用户数据</h4>
-          </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="exampleInputFile">选择xlsx文件导入</label>
-              <input type="file" class="form-control-file" placeholder="选择xlsx文件导入" id="exampleInputFile" aria-describedby="fileHelp">
-              <small id="fileHelp" class="form-text text-muted">上传用户相关的xlsx文件，如果有重复的这不会导入到数据库</small>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">导入用户数据</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="exampleInputFile">选择xlsx文件导入</label>
+                        <input type="file" class="form-control-file" placeholder="选择xlsx文件导入" id="exampleInputFile" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">上传用户相关的xlsx文件，如果有重复的这不会导入到数据库</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="module-ok-importUserInfo">导入</button>
+                </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary" id="module-ok-importUserInfo">导入</button>
-          </div>
         </div>
-      </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="exportUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">导出用户数据</h4>
-          </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">导出用户数据</h4>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="crearteProcess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">创建工作流</h4>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">产品名*</label>
-                <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="请输入产品名">
-                <small id="emailHelp" class="form-text text-muted">*为必须输入内容</small>
-              </div>
-              <div class="form-group">
-                <label for="formGroupExampleInput2">选择工作流模板</label>
-                <select class="form-control" name="template" id="select-workflowTemplate">
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="formGroupExampleInput2">选择参与人员</label>
-                <div class="form-check" id="checkbox-user"></div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary" id="module-ok-crearteProcess">创建</button>
-          </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">创建工作流</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">产品名*</label>
+                            <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="请输入产品名">
+                            <small id="emailHelp" class="form-text text-muted">*为必须输入内容</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">选择工作流模板</label>
+                            <select class="form-control" name="template" id="select-workflowTemplate"></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">选择参与人员</label>
+                            <div class="form-check" id="checkbox-user"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="module-ok-crearteProcess">创建</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="crearteProcessTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">创建工作流模板</h4>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">模板名</label>
-                <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入模板名">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">选择节点</label>
-                <div id="modal-nodeTemplate-show"></div>
-                <small id="emailHelp" class="form-text text-muted">单击添加到末尾</small>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">流程</label>
-                <div id="modal-nodeTemplate-selected"></div>
-                <small id="emailHelp" class="form-text text-muted">单击删除节点</small>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary" id="module-ok-crearteProcessTemplate">创建流程模板</button>
-          </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">创建工作流模板</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">模板名</label>
+                            <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入模板名">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">选择节点</label>
+                            <div id="modal-nodeTemplate-show"></div>
+                            <small id="emailHelp" class="form-text text-muted">单击添加到末尾</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">流程</label>
+                            <div id="modal-nodeTemplate-selected"></div>
+                            <small id="emailHelp" class="form-text text-muted">单击删除节点</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="module-ok-crearteProcessTemplate">创建流程模板</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="crearteProcessNodeTemplate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">创建工作流节点模板</h4>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">流程节点名</label>
-                <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入节点名">
-                <small id="emailHelp" class="form-text text-muted">节点名用于标识流程进行到哪一步</small>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary" id="module-ok-crearteProcessNodeTemplate">创建</button>
-          </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">创建工作流节点模板</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">流程节点名</label>
+                            <input type="text" class="form-control" name="name" aria-describedby="emailHelp" placeholder="输入节点名">
+                            <small id="emailHelp" class="form-text text-muted">节点名用于标识流程进行到哪一步</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="module-ok-crearteProcessNodeTemplate">创建</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="updateNodeProduceList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <h4 class="modal-title" id="label-updateNodeProduceList">更新节点</h4>
-          </div>
-          <div class="modal-body">
-            <form id="form-updateNodeProduceList">
-              <div id="hidden-views"></div>
-              <div class="form-group">
-                <label for="exampleInputFile">更新数据包</label>
-                <input type="file" class="form-control-file" placeholder="选择数据tar包" id="file-updateNodeProduceList" aria-describedby="fileHelp">
-                <small id="fileHelp" class="form-text text-muted">数据tart包来自服务器打包工具或自己的打包工具的更新数据包</small>
-              </div>
-              <div class="form-group">
-                <label for="exampleTextarea">更新理由</label>
-                <textarea class="form-control" name="reason" id="exampleTextarea" rows="3"></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-primary" id="module-ok-updateNodeProduceList">更新</button>
-          </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="label-updateNodeProduceList">更新节点</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form-updateNodeProduceList">
+                        <div id="hidden-views"></div>
+                        <div class="form-group">
+                            <label for="exampleInputFile">更新数据包</label>
+                            <input type="file" class="form-control-file" placeholder="选择数据tar包" id="file-updateNodeProduceList" aria-describedby="fileHelp">
+                            <small id="fileHelp" class="form-text text-muted">数据tart包来自服务器打包工具或自己的打包工具的更新数据包</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleTextarea">更新理由</label>
+                            <textarea class="form-control" name="reason" id="exampleTextarea" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="module-ok-updateNodeProduceList">更新</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="crearteTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <h4 class="modal-title" id="myModalLabel">创建标签</h4>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="form-group">
-                <label for="exampleInputEmail1">*标签名</label>
-                <input type="text" class="form-control" name="name" placeholder="输入标签名">
-                <small id="emailHelp" class="form-text text-muted">标签用于给工作流节点用户来进行分类</small>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">关键字</label>
-                <input type="text" class="form-control" name="keyWord" placeholder="输入关键字">
-                <small id="emailHelp" class="form-text text-muted">关键字用于给标签标识领域，可以使得标签能够通过搜索来获取，用`,`来分隔</small>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">特殊属性</label>
-                <input type="text" class="form-control" name="pro" placeholder="输入特殊属性">
-                <small id="emailHelp" class="form-text text-muted">使得被标签贴上的对象拥有该属性，用`,`来分隔</small>
-              </div>
-              <div class="form-group">
-                <label for="exampleInputEmail1">访问域</label>
-                <input type="text" class="form-control" name="domain" placeholder="输入访问域">
-                <small id="emailHelp" class="form-text text-muted">依靠标签来决定用户的访问权限，用`,`来分隔</small>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary" id="module-ok-crearteTag">创建</button>
-          </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">创建标签</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">*标签名</label>
+                            <input type="text" class="form-control" name="name" placeholder="输入标签名">
+                            <small id="emailHelp" class="form-text text-muted">标签用于给工作流节点用户来进行分类</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">关键字</label>
+                            <input type="text" class="form-control" name="keyWord" placeholder="输入关键字">
+                            <small id="emailHelp" class="form-text text-muted">关键字用于给标签标识领域，可以使得标签能够通过搜索来获取，用`,`来分隔</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">特殊属性</label>
+                            <input type="text" class="form-control" name="pro" placeholder="输入特殊属性">
+                            <small id="emailHelp" class="form-text text-muted">使得被标签贴上的对象拥有该属性，用`,`来分隔</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">访问域</label>
+                            <input type="text" class="form-control" name="domain" placeholder="输入访问域">
+                            <small id="emailHelp" class="form-text text-muted">依靠标签来决定用户的访问权限，用`,`来分隔</small>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="module-ok-crearteTag">创建</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="askdeleteTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content modal-sm">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-              <span class="sr-only">Close</span>
-            </button>
-            <h4 class="modal-title" id="label-askdeleteTag"></h4>
-          </div>
-          <div class="modal-body modal-sm">
-            <input type="hidden" name="tagetId" value="null" id="input-askdeleteTag"/>
-            <small>删除之后将无法显示标签相关内容，请谨慎选择!</small>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-            <button type="button" class="btn btn-primary" id="module-ok-askdeleteTag">确认</button>
-          </div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content modal-sm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="label-askdeleteTag"></h4>
+                </div>
+                <div class="modal-body modal-sm">
+                    <input type="hidden" name="tagetId" value="null" id="input-askdeleteTag" />
+                    <small>删除之后将无法显示标签相关内容，请谨慎选择!</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="module-ok-askdeleteTag">确认</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-
+    <!-- Modal -->
+    <div class="modal fade" id="exampleManager" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">实例信息</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <label class="col-3 col-form-label">实例名</label>
+                    <div class="col-9" id="name-exampleManager"></div>
+                    <input type="hidden" id="exampleId-exampleManager" value="" />
+                  </div>
+                  <div class="row">
+                    <label class="col-3 col-form-label">标签列表</label>
+                    <div class="col-7" id="tags-exampleManager"></div>
+                    <div class="col-2">
+                      <a class="btn btn-outline-success" data-toggle="collapse" href="#addTags" aria-expanded="false" aria-controls="collapseExample">
+                        +
+                      </a>
+                    </div>
+                    <div class="collapse" id="addTags">
+                      <label>贴标签</label>
+                      <p></p>
+                      <div class="float-right"><a href="#" class="btn btn-outline-danger">换一批</a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -383,4 +419,5 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 <script src="./lib/websocket.js"></script>
 <script src="./lib/util.js"></script>
+
 </html>

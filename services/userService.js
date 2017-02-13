@@ -265,6 +265,16 @@ function* findUsersByTag(...tags) {
   return result ? result : [];
 }
 
+function* exampleInfo(userId) {
+  const _ = yield user_dao.queryById(userId, 200);
+  if (!_) {
+    throwUserNotExist();
+  }
+
+  const {name, _id, tags} = _;
+  return {name, _id, tags};
+}
+
 module.exports = {
   loaderUserFromXlsx,
   createUsers,
@@ -278,4 +288,5 @@ module.exports = {
   loaderFromXlsx,
   findUsersByTag,
   setTags,
+  exampleInfo,
 };

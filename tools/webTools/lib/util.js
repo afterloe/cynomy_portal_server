@@ -31,6 +31,13 @@ const buildSelectProcess = () => {
     });
 };
 
+function exampleManager(btn, modal) {
+	const id = $(btn).attr("data-id");
+	websocket.send(`node-manager->${modal}Service->exampleInfo("${id}")`);
+	// TODO
+	// $("#exampleManager").modal("show");
+}
+
 function deleteUser(btn) {
     console.log($(btn).attr("data-id"));
     console.log("123");
@@ -67,6 +74,16 @@ function startUpProcess(btn) {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->workflowService->startUpWorkflow("${id}")`);
 }
+
+registry("exampleInfo", (err, data) => {
+	const {tags, name, _id} = data;
+	const tagsHtml = [];
+	tags.map(tag => tagsHtml.push(`<span class="badge badge-default">${tag}</span>>`));
+	$("#name-exampleManager").html(name);
+	$("#exampleId-exampleManager").val(_id);
+	$("#tags-exampleManager").html(tagsHtml.join(""));
+	$("#exampleManager").modal("show");
+});
 
 registry("getWorkflowTemplateList", (err, data) => {
     const workflowTemplate = [];
@@ -119,7 +136,7 @@ registry("getWorkflowNodeList", (err, data) => {
 });
 
 registry("getTagsList", (err, data) => {
-    const tagsTemplate = [];
+    const [tagsTemplate, tagsList] = [[], []];
 	const colors = ["default", "info", "primary", "success", "warning", "danger"];
     data.map(item => {
 		let color = item.count > 50 ? item.count % 50: 0;
@@ -128,8 +145,10 @@ registry("getTagsList", (err, data) => {
 		}
 		tagsTemplate.push(`<span class="badge badge-${colors[color]}" data-id="${item._id}" data-name="${item.name}">
 				<span aria-hidden="true" onClick="javascript:deleteTag(this);" class="deleteTags" style="cursor: pointer;">&times;</span> &nbsp;${item.name}</span>`);
+		tagsList.push(`<span class="badge badge-${colors[color]}" data-id="${item._id}" data-name="${item.name}" onClick="javascript:appendTag(this);"> &nbsp;${item.name}</span>`);
     });
     $("#table-show-tags").html(tagsTemplate.join("  "));
+	$("#addTags > p").html(tagsList.join(" "));
 });
 
 registry("createTag", (err, data) => {
@@ -188,6 +207,7 @@ registry("getUserList", (err, data) => {
       <td>
         <button type="button" data-id="${item._id}" class="btn btn-link" onClick="javascript:deleteUser(this);">删除</button>
         <button type="button" data-id="${item._id}" class="btn btn-link" onClick="javascript:resetPwd(this);">重置密码</button>
+		<button type="button" data-id="${item._id}" class="btn btn-link" onClick="javascript:exampleManager(this, 'user');">管理</button>
       </td>
     </tr>`);
         checkBoxUser.push(`<label class="form-check-label">
@@ -205,7 +225,7 @@ registry("getWorkflowList", (err, data) => {
         const {name, _id, nodeList, status} = item;
         if (status) {
             const speed = Math.ceil((status.index + 1) / nodeList.length * 100);
-            const reason = status.reason || "未更新节点";
+            const reason = status.reason || "未更新";
             showWorkflow.push(`<div class="row" style="margin-top: 1rem;" data-name="${name}">
         <div class="col-sm-6">
           <div class="progress">

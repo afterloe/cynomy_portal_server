@@ -41,7 +41,9 @@ function handlerMsg4Str(message, connection) {
           type: _,
           _: data,
         }));
-      }).catch(err => throw err);
+      }).catch(err => {
+        throw err
+      });
     } catch (err) {
       connection.sendUTF(JSON.stringify({
         info: `${Date().toLocaleString()}: [FAILED] ${err}`,

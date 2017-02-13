@@ -1706,3 +1706,16 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/lib/servicesCenter.js  
 > servers/lib/ws-handlerChain/managerChain.js  
 
+
+1.0.3 / 2017-2-13 11:45:13
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws protocol echo服务测试
+
+
+### modify files
+> servers/lib/ws-handlerChain/managerChain.js  
+> test/websocketCli  
+> tools/webTools/lib/websocket.js  
+

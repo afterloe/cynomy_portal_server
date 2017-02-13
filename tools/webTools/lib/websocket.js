@@ -67,6 +67,7 @@ if (!ArrayBuffer.transfer) {
 const siteConfig = new Map();
 siteConfig.set("host", "127.0.0.1");
 siteConfig.set("port", "15024");
+// siteConfig.set("protocol", "echo-protocol");
 siteConfig.set("protocol", "node-protocol");
 const registerList = new Map();
 const websocket = new WebSocket(`ws://${siteConfig.get("host")}:${siteConfig.get("port")}`, siteConfig.get("protocol"));

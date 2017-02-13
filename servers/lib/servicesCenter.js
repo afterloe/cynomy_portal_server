@@ -12,6 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
+const {throwNoThisFunction, throwNoThisServer, throwOperationFailed} = require(resolve(__dirname, "..", "..", "errors"));
 const services = resolve(resolve(__dirname, "..", "..", "services"));
 
 const [workflowService, userService, goodsService, tagsService] = [
@@ -33,10 +34,18 @@ module[REFISTRY].set("tagsService", tagsService);
  * @param  {[type]} user        [description]
  * @return {[type]}             [description]
  */
-const getService = (serviceName, funcName) => {
+const getService = (serviceName, funcName, user) => {
+  if (!user) {
+    throwOperationFailed();
+  }
+  
   const service = module[REFISTRY].get(serviceName);
   if (!service) {
-    return ;
+    throwNoThisServer();
+  }
+
+  if (!service[funcName]) {
+    throwNoThisFunction();
   }
 
   return service[funcName];

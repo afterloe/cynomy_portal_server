@@ -129,6 +129,11 @@
     "en-US": "no such this tag",
     "zh-CN": "没有这个标签"
   },
+  "NoThisServer": {
+    "code": "404",
+    "en-US": "no such this server",
+    "zh-CN": "没有这个服务"
+  },
   "NoThisFunction": {
     "code": "404",
     "en-US": "no such this function",

@@ -22,11 +22,13 @@ receiveType.set(2001, "goodsList-tar.gz");
 
 function handlerMsg4Str(message, connection) {
   if ("utf8" === message.type) {
-    const [ldap, service, fun] = message.utf8Data.split("->");
-    console.log("%s: %s %s", ldap, service, fun);
-    const [_, __] = fun.split(/(?:\()(.*)(?:\))/i); // 获取小括号中的内容
-    const example = getService(service, _, {}); // 执行方法 传入要执行的service 方法名。 获取方法实例
-    if (example) {
+    try {
+      const [ldap, service, fun] = message.utf8Data.split("->");
+      console.log("%s: %s %s", ldap, service, fun);
+      const [_, __] = fun.split(/(?:\()(.*)(?:\))/i); // 获取小括号中的内容
+
+      const example = getService(service, _, {}); // 执行方法 传入要执行的service 方法名。 获取方法实例
+
       co(function* () {
         const args = __? __.split("|"): null;
         if (args) {
@@ -39,16 +41,10 @@ function handlerMsg4Str(message, connection) {
           type: _,
           _: data,
         }));
-      }).catch(err => {
-        // TODO
-        console.log(err);
-        connection.sendUTF(JSON.stringify({
-          info: `${Date().toLocaleString()}: [FAILED] ${err}`,
-        }));
-      });
-    } else {
+      }).catch(err => throw err);
+    } catch (err) {
       connection.sendUTF(JSON.stringify({
-        info: `${Date().toLocaleString()}: [FAILED] exec func failed can't find this funcation or you don't have permise to exec this func`,
+        info: `${Date().toLocaleString()}: [FAILED] ${err}`,
       }));
     }
   } else {

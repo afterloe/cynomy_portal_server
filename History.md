@@ -1693,3 +1693,16 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/lib/servicesCenter.js  
 > servers/lib/ws-handlerChain/managerChain.js  
 
+
+1.0.3 / 2017-2-13 11:32:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: WS server添加用户权限拦截器，用于ws执行方法认证
+
+
+### modify files
+> errors/i18nError.json  
+> servers/lib/servicesCenter.js  
+> servers/lib/ws-handlerChain/managerChain.js  
+

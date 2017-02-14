@@ -1978,3 +1978,19 @@ commit by afterloe (lm6289511@gmail.com)
 > interceptors/template.js  
 > template/login.pug  
 
+
+1.0.3 / 2017-2-14 14:48:21
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成登录功能，编写拦截器
+
+
+### new files
+> interceptors/authentication.js  
+> routers/portal.js  
+
+### modify files
+> routers/index.js  
+> routers/user.js  
+

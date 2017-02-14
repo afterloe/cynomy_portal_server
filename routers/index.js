@@ -12,7 +12,10 @@
 "use strict";
 
 const {resolve} = require("path");
-const [user, workflow, goodses] = [require(resolve(__dirname, "user")), require(resolve(__dirname, "workflow")), require(resolve(__dirname, "goodses"))];
+const interceptors = resolve(__dirname, "..", "interceptors");
+const [user, workflow, goodses, portal] = [require(resolve(__dirname, "user")), require(resolve(__dirname, "workflow")),
+  require(resolve(__dirname, "goodses")), require(resolve(__dirname, "portal"))];
+const [authentication] = [require(resolve(interceptors, "authentication"))];
 
 module.exports = _ => {
   _.get("/test", function* (next) {
@@ -24,19 +27,32 @@ module.exports = _ => {
     return yield next;
   });
 
-  // 用户模块
+  /*
+   * portal 模块
+   */
+  _.get("/portal/login", portal.login); // *页面跳转 -> 登录页
+  _.get("/portal/home", authentication, portal.home); // *页面跳转 -> 首页
+
+  /*
+   *  用户模块
+   */
   _.get("/user/list", user.list); // 用户信息列表
   _.get("/user/:mail/loginPermit", user.permit); // 登录申请
-  _.get("/user/login", user.skipLogin);
   _.post("/user/login", user.login); // 登录
 
-  // 工作流模块
+  /*
+   *  工作流模块
+   */
   _.get("/workflow/list", workflow.list); // 工作流信息列表
 
-  // 文件系统模块
+  /*
+   *  文件系统模块
+   */
   _.get("/fs/list", goodses.list); // 更新文件信息列表
 
- // 测试：开发者信息
+  /*
+   *  测试：开发者信息
+   */
   _.get("/author", function* (next) {
     this.body = JSON.stringify({
         name: "afterloe",

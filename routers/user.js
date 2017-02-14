@@ -70,27 +70,8 @@ function* login(next) {
   return yield next;
 }
 
-function* skipLogin(next) {
-  if (this.error) {
-    return yield next;
-  }
-
-  try {
-    if ("web" === this.way) {
-      this.render("login", {
-        title: "R&D Portal login",
-      });
-    }
-  } catch (err) {
-    this.error = err;
-  }
-
-  return yield next;
-}
-
 module.exports = {
   list,
   permit,
   login,
-  skipLogin,
 };

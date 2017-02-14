@@ -2006,3 +2006,22 @@ commit by afterloe (lm6289511@gmail.com)
 > interceptors/authentication.js  
 > template/login.pug  
 
+
+1.0.3 / 2017-2-14 15:14:54
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加统一的header和footer信息，修改404，journal，systemError页面
+
+
+### new files
+> template/home.pug  
+
+### modify files
+> routers/portal.js  
+> template/404NotFound.pug  
+> template/footer.pug  
+> template/header.pug  
+> template/journalError.pug  
+> template/systemError.pug  
+

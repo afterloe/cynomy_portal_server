@@ -38,8 +38,8 @@ const home = function* (next) {
   }
   try {
     if ("web" === this.way) {
-      this.render("login", {
-        title: "R&D Portal login",
+      this.render("home", {
+        title: "R&D Portal",
       });
     }
   } catch (err) {

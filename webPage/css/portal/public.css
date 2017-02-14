@@ -1,0 +1,153 @@
+/**
+  * afterloe - cynomy_portal_server/webPage/css/home.css
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <afterloeliu@jwis.cn> (https://github.com/afterloe)
+  * Date:
+  *   2017-1-16 13:31:57
+  */
+
+html, body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    color: #333333;
+    background-color: #eee;
+    font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html {
+    -webkit-text-size-adjust: none;
+}
+
+.video embed, .video object, .video iframe {
+    width: 100%;
+    height: auto;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9;
+    /* ie8 */
+}
+
+
+/* 导航栏 */
+
+.tru_navbar {
+    background-color: #ffffff;
+    border-bottom: 0.1em solid #ccc;
+    margin-bottom: 0;
+}
+
+.portal-Logo {
+    width: 10em;
+    height: 5em;
+    background: url(../images/logo.png) no-repeat;
+}
+
+.navbar-nav {
+    margin: 1em 2em 0 1em;
+    color: #333333;
+    font-size: 18px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #3d9bff;
+    background-color: #ffffff;
+    border-bottom: 0.12em solid #3d9bff;
+}
+
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 1.4em 3em;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #333333;
+}
+
+.navbar-form {
+    margin-top: 2.7em;
+}
+
+.nav-search {
+    height: 2em
+}
+
+
+/**
+ * 公共底部
+ */
+
+footer {
+    color: #fff;
+}
+
+footer p {
+    margin-bottom: 20px;
+    display: block;
+}
+
+footer a {
+    color: #6ECADC;
+}
+
+footer a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+footer .wrap-footer {
+    padding-top: 50px;
+    background-color: #222;
+}
+
+footer .col-footer {
+    margin-bottom: 50px;
+}
+
+footer .col-footer .heading {
+    text-align: center;
+}
+
+footer .col-footer .heading h4 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+footer .col-footer .content {}
+
+footer .col-footer.footer-1 {}
+
+footer .col-footer.footer-1 img {
+    width: 40%;
+}
+
+footer .col-footer.footer-2 {}
+
+footer .col-footer.footer-3 {}
+
+footer .col-footer.footer-3 img {
+    margin: 10px 0;
+}
+
+footer .copyright {
+    padding: 15px 0;
+    background-color: #ddd;
+    color: #222;
+    text-align: center;
+}
+
+footer .copyright p, footer .copyright ul {
+    margin: 20px 0;
+}

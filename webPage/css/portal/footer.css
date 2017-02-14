@@ -1,0 +1,67 @@
+/**
+ * ¹«¹²µ×²¿
+ */
+
+footer {
+    color: #fff;width:100%;height:90px;
+}
+
+footer p {
+    margin-bottom: 20px;
+    display: block;
+}
+
+footer a {
+    color: #6ECADC;
+}
+
+footer a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+footer .wrap-footer {
+    padding-top: 50px;
+    background-color: #222;
+}
+
+footer .col-footer {
+    margin-bottom: 50px;
+}
+
+footer .col-footer .heading {
+    text-align: center;
+}
+
+footer .col-footer .heading h4 {
+    color: #fff;
+    font-size: 24px;
+    margin-bottom: 25px;
+}
+
+footer .col-footer .content {}
+
+footer .col-footer.footer-1 {}
+
+footer .col-footer.footer-1 img {
+    width: 40%;
+}
+
+footer .col-footer.footer-2 {}
+
+footer .col-footer.footer-3 {}
+
+footer .col-footer.footer-3 img {
+    margin: 10px 0;
+}
+
+footer .copyright {
+    padding: 15px 0;
+    background-color: #ddd;
+    color: #222;
+    text-align: center;
+}
+
+footer .copyright p, footer .copyright ul {
+    margin: 20px 0;
+}

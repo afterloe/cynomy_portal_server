@@ -2025,3 +2025,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/journalError.pug  
 > template/systemError.pug  
 
+
+1.0.3 / 2017-2-14 15:39:15
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加home.pug文件，修改公共头部和尾部信息
+
+
+### modify files
+> template/home.pug  
+

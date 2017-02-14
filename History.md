@@ -2114,3 +2114,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > config/index.js  
 
+
+1.0.3 / 2017-2-14 17:54:58
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 删除多余文件
+
+
+### delete files
+> platform.js  
+

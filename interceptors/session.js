@@ -40,18 +40,6 @@ module.exports = function* (next) {
   this.requestIp = requestIp; // 绑定请求Ip到 this对象上
   this.language = parseLanguage(header); // 绑定请求语言
 
-  this.success = ctx => ({
-    code: 200,
-    error: null,
-    result: ctx,
-  });
-
-  this.fail = (msg = "System error", code = 500) => ({
-    code,
-    error: msg,
-    result: null,
-  });
-
   this.cancel = function* () {
     return yield removeSession(cookie);
   };

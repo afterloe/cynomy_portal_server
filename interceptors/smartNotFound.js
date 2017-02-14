@@ -21,16 +21,16 @@ module.exports = function * (next) {
   if (this.body) {
       return;
   }
+
   yield next;
   const error = this.error;
+  
   if (error) {
     if (equal(error)) {
       if ("json" === this.way) {
-          this.set("Content-Type", "application/json; charset=utf-8");
           this.body = this.fail(error.message, error.code);
       } else {
-          this.set("Content-Type", "text/html; charset=utf-8");
-          this.body = compileTemplate("journalError", {
+          this.render("journalError", {
             title: "oh no!",
             msg: error.message,
             code: error.code
@@ -38,22 +38,18 @@ module.exports = function * (next) {
       }
     } else {
       if ("json" === this.way) {
-          this.set("Content-Type", "application/json; charset=utf-8");
           this.body = this.fail();
       } else {
-          this.set("Content-Type", "text/html; charset=utf-8");
-          this.body = compileTemplate("systemError", {
+          this.render("systemError", {
             title: "system Error"
           });
       }
     }
   } else {
     if ("json" === this.way) {
-        this.set("Content-Type", "application/json; charset=utf-8");
         this.body = this.fail("no this request", 404);
     } else {
-        this.set("Content-Type", "text/html; charset=utf-8");
-        this.body = compileTemplate("404NotFound", {
+        this.render("404NotFound", {
           title: "404 not found!",
         });
     }

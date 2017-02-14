@@ -27,6 +27,7 @@ module.exports = _ => {
   // 用户模块
   _.get("/user/list", user.list); // 用户信息列表
   _.get("/user/:mail/loginPermit", user.permit); // 登录申请
+  _.get("/user/login", user.skipLogin);
   _.post("/user/login", user.login); // 登录
 
   // 工作流模块

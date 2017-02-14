@@ -12,6 +12,7 @@
 "use strict";
 
 const [pug, {resolve, extname, basename}, {existsSync, statSync, readdirSync, writeFile}] = [require("pug"), require("path"), require("fs")];
+const {throwFileNotFind} = require(resolve(__dirname, "..", "errors"));
 const [PATH, DATA, SUFFIX] = [Symbol("PATH"), Symbol("DATA"), ".pug"];
 
 /**
@@ -102,6 +103,9 @@ const compileTemplate = (template, data) => {
     template += ".pug";
   }
   const _ = resolve(module[PATH], template);
+  if (!existsSync(_)) {
+    throwFileNotFind();
+  }
   return pug.renderFile(_, data);
 };
 

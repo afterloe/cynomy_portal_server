@@ -1789,3 +1789,24 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > tools/webTools/lib/util.js  
 
+
+1.0.3 / 2017-2-14 10:46:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 构建页面中间件，移除多余注入信息和方法
+
+
+### new files
+> interceptors/template.js  
+
+### modify files
+> interceptors/session.js  
+> interceptors/smartNotFound.js  
+> routers/goodses.js  
+> routers/index.js  
+> routers/user.js  
+> routers/workflow.js  
+> servers/registry.js  
+> tools/buildPage.js  
+

@@ -13,29 +13,18 @@
 
 const [{resolve}, koa, bodyParser, router] = [require("path"), require("koa"), require("koa-bodyparser"), require("koa-router")()];
 const interceptors = resolve(__dirname, "..", "interceptors");
-const [registration, session, smartNotFound] = [require(resolve(__dirname, "..", "routers")), require(resolve(interceptors, "session")), require(resolve(interceptors, "smartNotFound"))];
-const {setPugTemplatePath} = require(resolve(__dirname, "..", "tools", "buildPage"));
+const [registration, session, smartNotFound, template] = [require(resolve(__dirname, "..", "routers")), require(resolve(interceptors, "session")),
+  require(resolve(interceptors, "smartNotFound")), require(resolve(interceptors, "template"))];
 
 const app = koa();
 
 app.use(bodyParser());
 app.use(session);
+app.use(template);
 
 app.name = "portal";
 
 registration(router);
-
-app.use(function* (next) {
-  setPugTemplatePath(resolve(__dirname, "..", "template"));
-  const {accept = "web"} = this.request.header;
-  if ("application/json" === accept) {
-   this.way = "json";
-  } else {
-   this.way = "web";
-  }
-
-  return yield next;
-});
 
 app.use(router.routes());
 app.use(router.allowedMethods());

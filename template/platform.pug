@@ -1,0 +1,178 @@
+//- create by afterloe on 2017-2-14 16:03:26 - MIT
+
+include header
+
+link(href= static + "css/portal/platform.css" rel="stylesheet")
+link(href= static + "css/portal/mask.css" rel="stylesheet")
+
+div(class="popup")
+  div(class="mask")
+    div(class="box")
+      header
+        span My Research V1.1 输出资料
+        span(class="btn_close")
+      form(action="" class="form")
+        div(class="file")
+          span 上传文件为定位、价值、关键特性、路标、原型等资料
+          span
+            input(type="file" placeholder="" id="source")
+            input(type="button" value="上传文档" id="uploadFile")
+        div(class="description")
+          ul(class="dataFile")
+        div(class="last")
+          span 上传人：
+          span
+            input(type="text" placeholder="输入姓名")
+          span
+            button(class="submit_re") 开始上传
+
+div(class="container platform_content")
+  div(class="content_one")
+    div(class="truPC")
+      div(class="pcTitle") TRU Mate PC端
+      div(class="pc_content")
+        div(class="pcBox")
+          div 平台V1.0：
+          ul
+            li
+              span(class="aLink") TRU Mate V2.0
+            li
+              span(class="aLink") TRU Enterprise V1.0
+            li
+              span(class="aLink") TRU Marketplace V1.0
+    div(class="truAndroid")
+      div(class="androidTitle") TRU Mate 移动端
+      div(class="android_content")
+        div(class="androidBox")
+          div 平台V1.0：
+          ul
+            li
+              span(class="aLink") TRU Mate V2.0
+            li
+              span(class="aLink") TRU Enterprise V1.0
+            li
+              span(class="aLink") TRU Marketplace V1.0
+  div(class="proposal")
+  div(class="wrapper")
+    ul(id="myTab" class="nav nav-tabs")
+      li(class="active")
+        div(class="same")
+          a(href="#plan" data-toggle="tab" class="plan")
+          span &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+        span(class="product") 产品规划
+      li
+        div(class="same")
+          a(href="#design" data-toggle="tab" class="design")
+          span &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+        span(class="product") 产品设计
+      li
+        div(class="same")
+          a(href="#development" data-toggle="tab" class="development")
+          span &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+        span(class="product") 产品开发
+      li
+        div(class="same")
+          a(href="#test" data-toggle="tab" class="test")
+          span &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+        span(class="product") 产品测试
+      li(class="last")
+        div(class="same")
+          a(href="#release" data-toggle="tab" class="release")
+          span(class="product" style="color:transparent;") &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+        span(class="product") 产品发布
+    #myTabContent(class="tab-content")
+      #plan(class="tab-pane fade in active")
+        div(class="header")
+          span(class="titlePlan")
+          span &nbsp;&nbsp;产品规划辅助资料
+          span(class="upload")
+        ul(class="dataPlan data")
+          li
+            div
+              i
+              span(class="name") My Research 的产品定位.PPT
+              span(class="time") 2017-01-25
+              span 17:05:36
+              span afterloe
+              span(class="download")
+                img(src= static + "images/portal/下载.png" alt="")
+              span(class="dataClose")
+          li
+            div
+              i
+              span(class="name") My Research 的产品定位.PPT
+              span(class="time") 2017-01-25
+              span 17:05:36
+              span afterloe
+              span(class="download")
+                img(src= static + "images/portal/下载.png" alt="")
+              span(class="dataClose")
+      #design(class="tab-pane fade")
+        div(class="header")
+          span(class="titlePlan")
+          span &nbsp;&nbsp;产品规划辅助资料
+          span(class="upload")
+        ul(class="dataDesign data")
+          li
+            div
+              i
+              span(class="name") My Research 的产品定位.PPT
+              span(class="time") 2017-01-25
+              span 17:05:36
+              span afterloe
+              span(class="download")
+                img(src= static + "images/portal/下载.png" alt="")
+              span(class="dataClose")
+      #development(class="tab-pane fade")
+        div(class="header")
+          span(class="titlePlan")
+          span &nbsp;&nbsp;产品规划辅助资料
+          span(class="upload")
+        ul(class="dataPlan data")
+          li
+            div
+              i
+              span(class="name") My Research 的产品定位.PPT
+              span(class="time") 2017-01-25
+              span 17:05:36
+              span afterloe
+              span(class="download")
+                img(src= static + "images/portal/下载.png" alt="")
+              span(class="dataClose")
+      #test(class="tab-pane fade")
+        div(class="header")
+          span(class="header")
+            span(class="titlePlan")
+            span &nbsp;&nbsp;产品规划辅助资料
+            span(class="upload")
+        ul(class="dataPlan data")
+          li
+            div
+              i
+              span(class="name") My Research 的产品定位.PPT
+              span(class="time") 2017-01-25
+              span 17:05:36
+              span afterloe
+              span(class="download")
+                img(src= static + "images/portal/下载.png" alt="")
+              span(class="dataClose")
+      #release(class="tab-pane fade")
+        div(class="header")
+          span(class="header")
+            span(class="titlePlan")
+            span &nbsp;&nbsp;产品规划辅助资料
+            span(class="upload")
+        ul(class="dataPlan data")
+          li
+            div
+              i
+              span(class="name") My Research 的产品定位.PPT
+              span(class="time") 2017-01-25
+              span 17:05:36
+              span afterloe
+              span(class="download")
+                img(src= static + "images/portal/下载.png" alt="")
+              span(class="dataClose")
+include footer
+script(src= static + "js/portal/rem.js")
+script(src= static + "js/portal/platform.js")

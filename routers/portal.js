@@ -11,8 +11,7 @@
   */
 "use strict";
 
-const {resolve} = require("path");
-const goodsService = require(resolve(__dirname, "..", "services", "goodsService"));
+// const {resolve} = require("path");
 
 function* login(next) {
   if (this.error) {
@@ -32,7 +31,24 @@ function* login(next) {
   return yield next;
 }
 
-const home = function* (next) {
+function* platform(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    if ("web" === this.way) {
+      this.render("platform", {
+        title: "R&D Portal - platform",
+      });
+    }
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+}
+
+function* home(next) {
   if (this.error) {
     return yield next;
   }
@@ -47,9 +63,10 @@ const home = function* (next) {
   }
 
   return yield next;
-};
+}
 
 module.exports = {
   home,
+  platform,
   login
 };

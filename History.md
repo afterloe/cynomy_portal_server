@@ -2036,3 +2036,22 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/home.pug  
 
+
+1.0.3 / 2017-2-14 17:26:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: platform页面跳转
+
+
+### new files
+> template/platform.pug  
+> webPage/platform.js  
+
+### modify files
+> interceptors/authentication.js  
+> routers/index.js  
+> routers/portal.js  
+> template/header.pug  
+> webPage/platform.html  
+

@@ -15,6 +15,11 @@ const {resolve} = require("path");
 const {get} = require(resolve(__dirname, "..", "config"));
 const {setPugTemplatePath, compileTemplate} = require(resolve(__dirname, "..", "tools", "buildPage"));
 
+const defualt = {
+  title: "",
+  static: get("sourceHost"),
+};
+
 module.exports = function* (next) {
   setPugTemplatePath(resolve(__dirname, "..", "template"));
   const [{accept = "web"}, __self] = [this.request.header, this];
@@ -29,7 +34,7 @@ module.exports = function* (next) {
     });
 
     this.fail = (msg = "System error", code = 500) => ({
-      code,
+      code: Number.parseInt(code),
       error: msg,
       result: null,
     });
@@ -39,11 +44,9 @@ module.exports = function* (next) {
     this.set("Content-Type", "text/html; charset=utf-8");
 
     this.render = (template, _) => {
-      Object.assign(_, {
-        title: "",
-        static: get("sourceHost"),
-      });
-      __self.body = compileTemplate(template , _);
+      const _default = defualt;
+      Object.assign(_default, _);
+      __self.body = compileTemplate(template , _default);
     };
   }
 

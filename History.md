@@ -1994,3 +1994,15 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > routers/user.js  
 
+
+1.0.3 / 2017-2-14 14:54:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 权限拦截器编写完成
+
+
+### modify files
+> interceptors/authentication.js  
+> template/login.pug  
+

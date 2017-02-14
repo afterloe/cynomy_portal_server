@@ -11,13 +11,19 @@
   */
 "use strict";
 
+const {resolve} = require("path");
+const {throwNeedSignIn} = require(resolve(__dirname, "..", "errors"));
+
 module.exports = function* (next) {
   if (this.error) {
     return yield next;
   }
   try {
     const user = yield this.getSession();
-    console.log(user);
+    if (!user) {
+      throwNeedSignIn(this.language);
+    }
+    this.authorized = user;
   }catch(err) {
     this.error = err;
   }

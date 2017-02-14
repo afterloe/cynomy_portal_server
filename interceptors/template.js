@@ -12,6 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
+const {get} = require(resolve(__dirname, "..", "config"));
 const {setPugTemplatePath, compileTemplate} = require(resolve(__dirname, "..", "tools", "buildPage"));
 
 module.exports = function* (next) {
@@ -38,6 +39,10 @@ module.exports = function* (next) {
     this.set("Content-Type", "text/html; charset=utf-8");
 
     this.render = (template, _) => {
+      Object.assign(_, {
+        title: "",
+        static: get("sourceHost"),
+      });
       __self.body = compileTemplate(template , _);
     };
   }

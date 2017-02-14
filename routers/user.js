@@ -77,7 +77,9 @@ function* skipLogin(next) {
 
   try {
     if ("web" === this.way) {
-
+      this.render("login", {
+        title: "R&D Portal login",
+      });
     }
   } catch (err) {
     this.error = err;

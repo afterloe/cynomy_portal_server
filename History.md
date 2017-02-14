@@ -1810,3 +1810,159 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/registry.js  
 > tools/buildPage.js  
 
+
+1.0.3 / 2017-2-14 11:45:9
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 启动html转jade模板，去除css，js，images。将引用转到Nginx静态资源服务器
+
+
+### new files
+> template/login.pug  
+
+### modify files
+> config/index.js  
+> interceptors/template.js  
+> routers/user.js  
+> template/journalError.pug  
+
+### delete files
+> webPage/css/bootstrap.min.css  
+> webPage/css/directory.css  
+> webPage/css/footer.css  
+> webPage/css/header.css  
+> webPage/css/home.css  
+> webPage/css/login.css  
+> webPage/css/mask.css  
+> webPage/css/platform.css  
+> webPage/css/product.css  
+> webPage/css/public.css  
+> webPage/fonts/glyphicons-halflings-regular.eot  
+> webPage/fonts/glyphicons-halflings-regular.svg  
+> webPage/fonts/glyphicons-halflings-regular.ttf  
+> webPage/fonts/glyphicons-halflings-regular.woff  
+> webPage/fonts/glyphicons-halflings-regular.woff2  
+> webPage/fonts/ionicons.eot  
+> webPage/fonts/ionicons.svg  
+> webPage/fonts/ionicons.ttf  
+> webPage/fonts/ionicons.woff  
+> webPage/images/1-default.png  
+> webPage/images/1.1.png  
+> webPage/images/1.3.png  
+> webPage/images/1.4.png  
+> webPage/images/1.5.png  
+> webPage/images/1.6.png  
+> webPage/images/1.7.png  
+> webPage/images/1.png  
+> webPage/images/19.png  
+> webPage/images/2-selected.png  
+> webPage/images/2.2.png  
+> webPage/images/2.png  
+> webPage/images/3.1.1.png  
+> webPage/images/3.1.png  
+> webPage/images/3.2.2.png  
+> webPage/images/3.2.png  
+> webPage/images/3.3.1.png  
+> webPage/images/3.3.3.png  
+> webPage/images/3.3.png  
+> webPage/images/3.4.4.png  
+> webPage/images/3.4.png  
+> webPage/images/3.5.5.png  
+> webPage/images/3.5.png  
+> webPage/images/3.png  
+> webPage/images/4.4.png  
+> webPage/images/4.png  
+> webPage/images/5.5.png  
+> webPage/images/5.png  
+> webPage/images/6.png  
+> webPage/images/bg.png  
+> webPage/images/c4.png  
+> webPage/images/c44.png  
+> webPage/images/c5.png  
+> webPage/images/c55.png  
+> webPage/images/c6.png  
+> webPage/images/c66.png  
+> webPage/images/c7.png  
+> webPage/images/c77.png  
+> webPage/images/c8.png  
+> webPage/images/c88.png  
+> webPage/images/close-2.png  
+> webPage/images/close-bounced-default.png  
+> webPage/images/close-bounced-selected.png  
+> webPage/images/close1.png  
+> webPage/images/design.png  
+> webPage/images/development.png  
+> webPage/images/error.png  
+> webPage/images/feedback.png  
+> webPage/images/login-selected.png  
+> webPage/images/login.png  
+> webPage/images/logo.png  
+> webPage/images/logoin.png  
+> webPage/images/pc.png  
+> webPage/images/plaformCatalog.png  
+> webPage/images/plaformCatalogSel.png  
+> webPage/images/plan.png  
+> webPage/images/productCatalog.png  
+> webPage/images/productCatalogSel.png  
+> webPage/images/productDesignStatus.png  
+> webPage/images/productDesignStatus1.png  
+> webPage/images/productDesignStatus2.png  
+> webPage/images/productDesignStatus3.png  
+> webPage/images/productDesignStatus4.png  
+> webPage/images/productDevelopStatus.png  
+> webPage/images/productDevelopStatus1.png  
+> webPage/images/productDevelopStatus2.png  
+> webPage/images/productDevelopStatus3.png  
+> webPage/images/productDevelopStatus4.png  
+> webPage/images/productLink.png  
+> webPage/images/productPlanStatus.png  
+> webPage/images/productPlanStatus1.png  
+> webPage/images/productPlanStatus2.png  
+> webPage/images/productPlanStatus3.png  
+> webPage/images/productPlanStatus4.png  
+> webPage/images/productReleaseStatus.png  
+> webPage/images/productReleaseStatus1.png  
+> webPage/images/productReleaseStatus2.png  
+> webPage/images/productReleaseStatus3.png  
+> webPage/images/productReleaseStatus4.png  
+> webPage/images/productTestStatus.png  
+> webPage/images/productTestStatus1.png  
+> webPage/images/productTestStatus2.png  
+> webPage/images/productTestStatus3.png  
+> webPage/images/productTestStatus4.png  
+> webPage/images/publicCatalog.png  
+> webPage/images/publicCatalogSel.png  
+> webPage/images/release.png  
+> webPage/images/save.png  
+> webPage/images/save1.png  
+> webPage/images/searchIcon.png  
+> webPage/images/sj.png  
+> webPage/images/ss.png  
+> webPage/images/test.png  
+> webPage/images/upload.png  
+> webPage/images/upload1.png  
+> "webPage/images/\344\270\213\350\275\275.png"  
+> "webPage/images/\344\272\247\345\223\201\347\233\256\345\275\225-selected.png"  
+> "webPage/images/\344\272\247\345\223\201\347\233\256\345\275\225.png"  
+> "webPage/images/\345\205\254\345\205\261\347\233\256\345\275\225-selected.png"  
+> "webPage/images/\345\205\254\345\205\261\347\233\256\345\275\225.png"  
+> "webPage/images/\345\271\263\345\217\260\347\233\256\345\275\225-selected.png"  
+> "webPage/images/\345\271\263\345\217\260\347\233\256\345\275\225.png"  
+> "webPage/images/\346\265\213\350\257\225-1.png"  
+> "webPage/images/\351\223\276\346\216\245-default-.png"  
+> webPage/js/bootstrap.min.js  
+> webPage/js/directory.js  
+> webPage/js/footer.js  
+> webPage/js/header.js  
+> webPage/js/home.js  
+> webPage/js/jquery-2.1.1.js  
+> webPage/js/jquery.easing.min.js  
+> webPage/js/jquery.flexslider-min.js  
+> webPage/js/login.js  
+> webPage/js/masonry.pkgd.min.js  
+> webPage/js/platform.js  
+> webPage/js/product.js  
+> webPage/js/rem.js  
+> webPage/login.html  
+

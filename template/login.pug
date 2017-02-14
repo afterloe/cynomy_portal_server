@@ -1,0 +1,41 @@
+//- create by afterloe on 2017-2-14 10:53:52 - MIT
+
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width,initial-scale=1")
+    title #{title}
+    link(href= static + "css/portal/bootstrap.min.css" rel="stylesheet")
+    link(href= static + "css/portal/login.css" rel="stylesheet")
+    link(href= static + "font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
+
+  body
+    #wrap
+      div(class="container login_center")
+        div(class="row")
+          div(class="col-xs-12 col-sm-12 col-md-12")
+            img(src= static + "images/portal/logoin.png" alt="")
+      div(class="container container_login")
+        div(class="form-horizontal form_login" id="fm")
+          div(class="form-group")
+            div(class="col-md-12 col-sm-12 col-sm-12 radius")
+              input(type="text" id="userName" placeholder="请输入公司邮箱" autocomplete="off")
+          div(class="error")
+            span(style="display: none;") 错误提示语
+          div(class="form-group")
+            div(class="col-md-12 col-sm-12 col-sm-12 radius")
+              input(type="password" id="userPassword" placeholder="输入登录许可" autocomplete="off" name="password")
+          div(class="form-group")
+            div(class="col-md-12 col-sm-12 col-sm-12")
+              small(form-text text-muted)
+                a(href="#" class="pull-right" id="obmitLoginPermit") 获取登录许可
+          div(class="form-group")
+            div(class="col-md-12 col-sm-12 col-sm-12 radius last")
+              button(id="btn")
+
+  script(src= static + "js/portal/jquery-2.1.1.js")
+  script(src= static + "js/portal/bootstrap.min.js")
+  script(src= static + "js/portal/rem.js")
+  script(src= static + "js/portal/login.js")

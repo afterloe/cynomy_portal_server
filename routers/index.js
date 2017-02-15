@@ -31,9 +31,10 @@ module.exports = _ => {
    * portal 模块
    */
   _.get("/portal/login", portal.login); // *页面跳转 -> 登录页
-  _.get("/portal/platform", authentication, portal.platform); // *页面跳转 -> 平台
   _.get("/portal/home", authentication, portal.home); // *页面跳转 -> 首页
+  _.get("/portal/platform", authentication, portal.platform); // *页面跳转 -> 平台
   _.get("/portal/product", authentication, portal.product); // *页面跳转 -> 产品
+  _.get("/portal/directory", authentication, portal.directory); // *页面跳转 -> 公共目录
 
   /*
    *  用户模块

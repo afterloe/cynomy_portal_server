@@ -82,9 +82,27 @@ function* product(next) {
   return yield next;
 }
 
+function* directory(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    if ("web" === this.way) {
+      this.render("directory", {
+        title: "R&D directory",
+      });
+    }
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+}
+
 module.exports = {
   home,
   platform,
   login,
   product,
+  directory,
 };

@@ -2146,3 +2146,21 @@ commit by afterloe (lm6289511@gmail.com)
 > webPage/js/portal/product.js  
 > webPage/product.html  
 
+
+1.0.3 / 2017-2-15 11:42:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 公共目录html转pug
+
+
+### new files
+> template/directory.pug  
+
+### modify files
+> routers/index.js  
+> routers/portal.js  
+> template/header.pug  
+> webPage/css/portal/directory.css  
+> webPage/js/portal/directory.js  
+

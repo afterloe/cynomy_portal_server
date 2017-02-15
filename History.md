@@ -2232,3 +2232,19 @@ commit by afterloe (lm6289511@gmail.com)
 > interceptors/smartNotFound.js  
 > servers/registry.js  
 
+
+1.0.4 / 2017-2-15 14:55:13
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: tag 1.0.4 发布
+
+
+### modify files
+> .cynomy  
+> README.md  
+> package.json  
+
+### delete files
+> README.md  
+

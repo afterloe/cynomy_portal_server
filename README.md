@@ -1,2 +1,2 @@
-# cynomy_portal_server
-the config portal of server 
+# Cynomy Portal System
+本服务用于部署在git 或 svn 上，作为子节点。在公有云上部署一份作为父节点，父节点能够从子节点拉取信息，实现云端控制的效果.

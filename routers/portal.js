@@ -31,14 +31,15 @@ function* login(next) {
   return yield next;
 }
 
-function* platform(next) {
+function* home(next) {
   if (this.error) {
     return yield next;
   }
   try {
     if ("web" === this.way) {
-      this.render("platform", {
-        title: "R&D Portal - platform",
+      this.render("home", {
+        title: "R&D Portal",
+        index: 1,
       });
     }
   } catch (err) {
@@ -48,14 +49,15 @@ function* platform(next) {
   return yield next;
 }
 
-function* home(next) {
+function* platform(next) {
   if (this.error) {
     return yield next;
   }
   try {
     if ("web" === this.way) {
-      this.render("home", {
-        title: "R&D Portal",
+      this.render("platform", {
+        title: "R&D Portal - platform",
+        index: 2,
       });
     }
   } catch (err) {
@@ -73,6 +75,7 @@ function* product(next) {
     if ("web" === this.way) {
       this.render("product", {
         title: "R&D product",
+        index: 3,
       });
     }
   } catch (err) {
@@ -90,6 +93,7 @@ function* directory(next) {
     if ("web" === this.way) {
       this.render("directory", {
         title: "R&D directory",
+        index: 4,
       });
     }
   } catch (err) {

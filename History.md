@@ -2175,3 +2175,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > webPage/css/portal/mask.css  
 
+
+1.0.3 / 2017-2-15 14:13:16
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 动态header实现
+
+
+### modify files
+> routers/portal.js  
+> template/header.pug  
+

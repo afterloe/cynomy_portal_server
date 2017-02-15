@@ -2,15 +2,17 @@
 
 include header
 
-div(class="container-fluid" style="{float: none;display: block;margin-left: auto;margin-right: auto;}")
-  div(class="jumbotron")
-    p(class="lead") System is Busy
-    hr(class="my-4")
-    p System is busy
-    small try argin
-    p(class="lead")
-      a(class="btn btn-outline-success" href="#" role="button") reflush
+div(class="container content")
+  div(class="container structure")
+    div(class="container-fluid")
+      div(class="jumbotron")
+        p(class="lead") System is Busy
+        hr(class="my-4")
+        p System is busy
+        small try argin
+        p(class="lead")
+          a(class="btn btn-outline-success" href="#" onClick = "javascript:history.go(0);" role="button") reflush
 
-      a(class="btn btn-outline-danger" href="#" role="button") homePage
+          a(class="btn btn-outline-danger" href="/portal/home" role="button") homePage
 
 include footer

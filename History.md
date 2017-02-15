@@ -2248,3 +2248,30 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > README.md  
 
+
+1.0.5 / 2017-2-15 18:31:12
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 1.0.5开发开始，远程功能开始构建
+
+
+### new files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+> servers/lib/ws-handlerChain/remoteChain.js  
+
+### modify files
+> .cynomy  
+> config/index.js  
+> index.js  
+> package.json  
+> servers/lib/ws-handlerChain/index.js  
+> servers/lib/ws-handlerChain/managerChain.js  
+> servers/websocket.js  
+> template/login.pug  
+> tools/webTools/lib/websocket.js  
+
+### delete files
+> bin/remoteDaemon.js  
+

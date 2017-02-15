@@ -1,0 +1,57 @@
+#!/usr/bin/env node
+/**
+  * afterloe - cynomy_portal_server/bin/wsCli
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <lm6289511@gmail.com> (https://github.com/afterloe)
+  * Date:
+  *   2017-2-15 16:53:30
+  */
+"use strict";
+
+const {client} = require("websocket");
+const [, , host, port, origin] = process.argv;
+
+const WEBSOCKET = Symbol("WEBSOCKET");
+
+module[WEBSOCKET] = new client({
+  maxReceivedFrameSize: 1024 * 1024 * 400
+});
+
+module[WEBSOCKET].on("connectFailed", error => {
+  console.log("Connection Error: %s", error.toString());
+});
+
+module[WEBSOCKET].on("connect", connection => {
+  console.log("websocket client connected witeh %s:%s", host, port);
+
+  process.on("message", message => {
+    const {act, msg} = message;
+    if ("sendCynomyCommunication" === act) {
+        module[WEBSOCKET].send(msg);
+    }
+  });
+
+  connection.on("error", error => {
+    console.log("Connection Client Error: %s", error.toString());
+  });
+
+  connection.on("close", () => {
+    console.log("Connection Client Closed. bye %s:%s", host, port);
+  });
+
+  connection.on("message", message => {
+    if ("utf8" === message.type) {
+      console.log("[%s]: %s", new Date().toLocaleString(), message.utf8Data);
+      process.send({
+        act: "receiveCynomyCommunication",
+        msg: message.utf8Data,
+      });
+    }
+  });
+});
+
+module[WEBSOCKET].connect(`ws://${host}:${port}`, "echo-protocol", origin);

@@ -65,8 +65,26 @@ function* home(next) {
   return yield next;
 }
 
+function* product(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    if ("web" === this.way) {
+      this.render("product", {
+        title: "R&D product",
+      });
+    }
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+}
+
 module.exports = {
   home,
   platform,
-  login
+  login,
+  product,
 };

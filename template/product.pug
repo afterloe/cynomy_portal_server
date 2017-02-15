@@ -1,8 +1,8 @@
-//- create by afterloe on 2017-2-14 16:03:26 - MIT
+//- create by afterloe on 2017-2-15 10:29:37 - MIT
 
 include header
 
-link(href= static + "css/portal/platform.css" rel="stylesheet")
+link(href= static + "css/portal/product.css" rel="stylesheet")
 link(href= static + "css/portal/mask.css" rel="stylesheet")
 
 div(class="popup")
@@ -26,58 +26,87 @@ div(class="popup")
           span
             button(class="submit_re") 开始上传
 
-div(class="container platform_content")
+div(class="container product_content")
   div(class="content_one")
     div(class="truPC")
       div(class="pcTitle") TRU Mate PC端
       div(class="pc_content")
         div(class="pcBox")
-          div 平台V1.0：
+          div 产品V1.1：
           ul
             li
-              span(class="aLink") TRU Mate V2.0
+              span(class="aLink") My Research V1.1
             li
-              span(class="aLink") TRU Enterprise V1.0
+              span(class="aLink") My Social V1.1
             li
-              span(class="aLink") TRU Marketplace V1.0
+              span(class="aLink") My Process V1.1
+            li
+              span(class="aLink") 项目管理 V1.1
+            li
+              span(class="aLink") 我的聚合 V1.1
+            li
+              span(class="aLink") 销售选配 V1.1
+            li
+              span(class="aLink") 我的项目空间 V1.1
+            li
+              span(class="aLink") PLM数据融合 V1.1
+            li
+              span(class="aLink") APP推荐 V1.1
+            li
+              span(class="aLink") 用户画像 V1.1
+        div(class="pcBox")
+          div 产品V1.0：
+          ul
+            li
+              span(class="aLink") My Research V1.0
+            li
+              span(class="aLink") My Profile V1.0
+            li
+              span(class="aLink") My Process V1.0
+            li
+              span(class="aLink") My App V1.0
+            li
+              span(class="aLink") My Storage V1.0
+            li
+              span(class="aLink") My Social V1.0
     div(class="truAndroid")
       div(class="androidTitle") TRU Mate 移动端
       div(class="android_content")
         div(class="androidBox")
-          div 平台V1.0：
+          div 产品V1.0：
           ul
             li
-              span(class="aLink") TRU Mate V2.0
+              span(class="aLink") My Research V1.0
             li
-              span(class="aLink") TRU Enterprise V1.0
+              span(class="aLink") My Social V1.0
             li
-              span(class="aLink") TRU Marketplace V1.0
+              span(class="aLink") My Storage V1.0
   div(class="proposal")
   div(class="wrapper")
     ul(id="myTab" class="nav nav-tabs")
       li(class="active")
         div(class="same")
-          a(href="#plan" data-toggle="tab" class="plan")
+          a(href="#plan" data-toggle="tab"  class="plan")
           span &bull;&bull;&bull;&bull;&bull;&bull;&bull;
         span(class="product") 产品规划
       li
         div(class="same")
-          a(href="#design" data-toggle="tab" class="design")
+          a(href="#design" data-toggle="tab"  class="design")
           span &bull;&bull;&bull;&bull;&bull;&bull;&bull;
         span(class="product") 产品设计
       li
         div(class="same")
-          a(href="#development" data-toggle="tab" class="development")
+          a(href="#development" data-toggle="tab"  class="development")
           span &bull;&bull;&bull;&bull;&bull;&bull;&bull;
         span(class="product") 产品开发
       li
         div(class="same")
-          a(href="#test" data-toggle="tab" class="test")
+          a(href="#test" data-toggle="tab"  class="test")
           span &bull;&bull;&bull;&bull;&bull;&bull;&bull;
         span(class="product") 产品测试
       li(class="last")
         div(class="same")
-          a(href="#release" data-toggle="tab" class="release")
+          a(href="#release" data-toggle="tab"  class="release")
           span(class="product" style="color:transparent;") &bull;&bull;&bull;&bull;&bull;&bull;&bull;
         span(class="product") 产品发布
     #myTabContent(class="tab-content")
@@ -93,24 +122,14 @@ div(class="container platform_content")
               span(class="name") My Research 的产品定位.PPT
               span(class="time") 2017-01-25
               span 17:05:36
-              span afterloe
-              span(class="download")
-                img(src= static + "images/portal/下载.png" alt="")
-              span(class="dataClose")
-          li
-            div
-              i
-              span(class="name") My Research 的产品定位.PPT
-              span(class="time") 2017-01-25
-              span 17:05:36
-              span afterloe
-              span(class="download")
+              span 彭博
+              span(clas="download")
                 img(src= static + "images/portal/下载.png" alt="")
               span(class="dataClose")
       #design(class="tab-pane fade")
         div(class="header")
           span(class="titlePlan")
-          span &nbsp;&nbsp;产品规划辅助资料
+          span &nbsp;&nbsp;产品设计辅助资料
           span(class="upload")
         ul(class="dataDesign data")
           li
@@ -119,14 +138,14 @@ div(class="container platform_content")
               span(class="name") My Research 的产品定位.PPT
               span(class="time") 2017-01-25
               span 17:05:36
-              span afterloe
-              span(class="download")
+              span 彭博
+              span(clas="download")
                 img(src= static + "images/portal/下载.png" alt="")
               span(class="dataClose")
       #development(class="tab-pane fade")
         div(class="header")
           span(class="titlePlan")
-          span &nbsp;&nbsp;产品规划辅助资料
+          span &nbsp;&nbsp;产品开发辅助资料
           span(class="upload")
         ul(class="dataDevelopment data")
           li
@@ -135,14 +154,14 @@ div(class="container platform_content")
               span(class="name") My Research 的产品定位.PPT
               span(class="time") 2017-01-25
               span 17:05:36
-              span afterloe
-              span(class="download")
+              span 彭博
+              span(clas="download")
                 img(src= static + "images/portal/下载.png" alt="")
               span(class="dataClose")
       #test(class="tab-pane fade")
         div(class="header")
           span(class="titlePlan")
-          span &nbsp;&nbsp;产品规划辅助资料
+          span &nbsp;&nbsp;产品测试辅助资料
           span(class="upload")
         ul(class="dataTest data")
           li
@@ -151,14 +170,14 @@ div(class="container platform_content")
               span(class="name") My Research 的产品定位.PPT
               span(class="time") 2017-01-25
               span 17:05:36
-              span afterloe
-              span(class="download")
+              span 彭博
+              span(clas="download")
                 img(src= static + "images/portal/下载.png" alt="")
               span(class="dataClose")
       #release(class="tab-pane fade")
         div(class="header")
           span(class="titlePlan")
-          span &nbsp;&nbsp;产品规划辅助资料
+          span &nbsp;&nbsp;产品发布辅助资料
           span(class="upload")
         ul(class="dataRelease data")
           li
@@ -167,12 +186,12 @@ div(class="container platform_content")
               span(class="name") My Research 的产品定位.PPT
               span(class="time") 2017-01-25
               span 17:05:36
-              span afterloe
-              span(class="download")
+              span 彭博
+              span(clas="download")
                 img(src= static + "images/portal/下载.png" alt="")
               span(class="dataClose")
 
 include footer
 
 script(src= static + "js/portal/rem.js")
-script(src= static + "js/portal/platform.js")
+script(src= static + "js/portal/product.js")

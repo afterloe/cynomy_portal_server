@@ -24,7 +24,7 @@ module.exports = function * (next) {
 
   yield next;
   const error = this.error;
-  
+
   if (error) {
     if (equal(error)) {
       if ("json" === this.way) {
@@ -45,6 +45,8 @@ module.exports = function * (next) {
           });
       }
     }
+
+    console.log(error);
   } else {
     if ("json" === this.way) {
         this.body = this.fail("no this request", 404);

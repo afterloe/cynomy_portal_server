@@ -2125,3 +2125,24 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > platform.js  
 
+
+1.0.3 / 2017-2-15 11:14:4
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 产品页面html转jade完毕
+
+
+### new files
+> template/product.pug  
+
+### modify files
+> interceptors/smartNotFound.js  
+> routers/index.js  
+> routers/portal.js  
+> template/header.pug  
+> template/platform.pug  
+> webPage/css/portal/product.css  
+> webPage/js/portal/product.js  
+> webPage/product.html  
+

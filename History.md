@@ -2275,3 +2275,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > bin/remoteDaemon.js  
 
+
+1.0.5 / 2017-2-15 18:51:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 消息机制升级，接受发送信息待优化
+
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+
+### delete files
+> bin/remoteDaemon.js  
+

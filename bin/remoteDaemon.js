@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{execFile}, {resolve}] = [require("child_process"), require("path")];
+const [{fork}, {resolve}] = [require("child_process"), require("path")];
 
 module.exports = (...args) => {
   const [host, port] = args;
@@ -21,30 +21,16 @@ module.exports = (...args) => {
     return ;
   }
 
-  const wsCli = execFile(resolve(__dirname, "wsCli"), [host, port, "cynomy://"], (error, stdout, stderr) => {
-    if (error) {
-      console.log(error);
-    }
-    console.log(stdout.toString());
-
-    if (stderr) {
-      console.log("err");
-      console.log(stderr.toString());
-    }
-
-  });
-
-
-  setTimeout(() => {
-    wsCli.send({
-      act: "sendCynomyCommunication",
-      msg: "i'm afterloe "
-    });
-  }, 1000 * 10);
+  const wsCli = fork(resolve(__dirname, "wsCli"), [host, port, "cynomy://"]);
 
   wsCli.on("message", msg => {
     if ("receiveCynomyCommunication" === msg.act) {
         console.log("%s:%s", "main process", msg.msg);
+    } else if ("readyCynomyCommunication" === msg.act) {
+      wsCli.send({
+        act: "sendCynomyCommunication",
+        msg: "i'm afterloe "
+      });
     }
   });
 };

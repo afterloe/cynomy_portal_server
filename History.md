@@ -2215,3 +2215,20 @@ commit by afterloe (lm6289511@gmail.com)
 > interceptors/smartNotFound.js  
 > servers/lib/ws-handlerChain/managerChain.js  
 
+
+1.0.3 / 2017-2-15 14:49:50
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 调整代码位置，捕获SystemError
+
+
+### modify files
+> config/index.js  
+> distributed/single.js  
+> distributed/slave.js  
+> interceptors/authentication.js  
+> interceptors/session.js  
+> interceptors/smartNotFound.js  
+> servers/registry.js  
+

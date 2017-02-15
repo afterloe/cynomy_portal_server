@@ -20,14 +20,13 @@ const [bindHost, registryPort] = [get("bindHost"), get("registryPort")];
 const server = createServer(registry.callback());
 ws(server);
 
-process.on("catch-error", (err, ctx) => {
+process.on("systemError", (err, ctx) => {
   console.log("%s process catch err! %s", new Date(), err);
   console.dir(ctx);
 });
 
 process.on("uncaughtException", err => {
   console.log(err);
-  process.nextTick(() => process.exit(1));
 });
 
 server.listen(registryPort, bindHost, () => {

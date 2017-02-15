@@ -20,7 +20,7 @@ const [num, dataDir, logDir] = [cpus().length, resolve(defaultRoot, "data"), res
 
 siteConfig.set("tmpDir", "/tmp"); // 临时目录，用于存放上传的临时文件
 siteConfig.set("staticDir", "/tmp/staticDir"); // 静态资源目录，用于存放静态资源
-siteConfig.set("sourceHost", "http://almcloud.jwis.cn/"); // Nginx 静态资源目录
+siteConfig.set("sourceHost", "http://almcloud.jwis.cn/"); // Nginx 静态资源地址
 siteConfig.set("distributed", { // 多线程配置
   enable: false, // 是否开启多线程模式
   slaveNum : num // 奴隶数
@@ -62,8 +62,8 @@ siteConfig.set("mailSender", { // 邮件功能设置
  * @param  {String} key [配置项]
  * @return {Object, String}     [配置内容]
  */
-const get = key => siteConfig.has(key)? siteConfig.get(key) : ({});
+const getConfig = key => siteConfig.has(key)? siteConfig.get(key) : ({});
 
 module.exports = {
-  get,
+  get: getConfig,
 };

@@ -23,7 +23,6 @@ module.exports = function* (next) {
     if (!user) {
       throwNeedSignIn(this.language);
     }
-    console.log(user);
     this.authorized = user;
   }catch(err) {
     this.error = err;

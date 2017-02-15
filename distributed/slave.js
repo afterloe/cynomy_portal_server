@@ -28,7 +28,7 @@ process.on("message", (msg, handler) => {
   }
 });
 
-process.on("catch-error", (err, ctx) => {
+process.on("systemError", (err, ctx) => {
   console.log("%s process catch err! %s", new Date(), err);
   console.dir(ctx);
 });

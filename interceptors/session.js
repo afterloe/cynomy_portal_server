@@ -15,7 +15,7 @@ const {resolve} = require("path");
 const [key, {removeSession, getSession, upDateSession, setSession, sign}] = ["cynomys-portal", require(resolve(__dirname, "..", "services", "sessionService"))];
 
 const parseLanguage = header => {
-  let {language = header["accept-language"]} = header;
+  let {language} = header || header["accept-language"];
   try {
     language = language.split(";")[0];
     const value = language.split(",");
@@ -30,14 +30,14 @@ const parseLanguage = header => {
 };
 
 module.exports = function* (next) {
-  let [start, cookie, requestIp = "0.0.0.0", header] = [Date.now(), this.cookies.get(key), this.request.ip, this.request.header];
+  let [start, cookie, requestIp, header, __self] = [Date.now(), this.cookies.get(key), this.request.ip, this.request.header, this];
   const {token} = header;
   if (!cookie) {
     cookie = token;
   }
 
   this.token = cookie;
-  this.requestIp = requestIp; // 绑定请求Ip到 this对象上
+  this.requestIp = requestIp || "0.0.0.0"; // 绑定请求Ip到 this对象上
   this.language = parseLanguage(header); // 绑定请求语言
 
   this.cancel = function* () {
@@ -52,14 +52,14 @@ module.exports = function* (next) {
     return yield upDateSession(cookie, value);
   };
 
-  this.forceSign = function (sessionId) {
-    this.cookies.set(key, sessionId);
+  this.forceSign = sessionId => {
+    __self.cookies.set(key, sessionId);
     return sessionId;
   };
 
   this.sign = function* (to, permit) {
     cookie = sign(to, permit);
-    this.cookies.set(key, cookie);
+    __self.cookies.set(key, cookie);
     yield setSession(cookie, {});
     return cookie;
   };

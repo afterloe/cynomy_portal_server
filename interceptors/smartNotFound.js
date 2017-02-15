@@ -40,13 +40,12 @@ module.exports = function * (next) {
       if ("json" === this.way) {
           this.body = this.fail();
       } else {
+          process.emit("systemError", error);
           this.render("systemError", {
             title: "system Error"
           });
       }
     }
-
-    console.log(error);
   } else {
     if ("json" === this.way) {
         this.body = this.fail("no this request", 404);

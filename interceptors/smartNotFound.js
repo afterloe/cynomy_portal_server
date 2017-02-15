@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{equal}, {compileTemplate}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "buildPage"))];
+const {equal} = require(resolve(__dirname, "..", "errors"));
 
 module.exports = function * (next) {
   if (this.status && 404 !== this.status) {

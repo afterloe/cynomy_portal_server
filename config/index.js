@@ -20,7 +20,7 @@ const [num, dataDir, logDir] = [cpus().length, resolve(defaultRoot, "data"), res
 
 siteConfig.set("tmpDir", "/tmp"); // 临时目录，用于存放上传的临时文件
 siteConfig.set("staticDir", "/tmp/staticDir"); // 静态资源目录，用于存放静态资源
-siteConfig.set("sourceHost", "http://almcloud.jwis.cn/") // Nginx 静态资源目录
+siteConfig.set("sourceHost", "http://almcloud.jwis.cn/"); // Nginx 静态资源目录
 siteConfig.set("distributed", { // 多线程配置
   enable: false, // 是否开启多线程模式
   slaveNum : num // 奴隶数

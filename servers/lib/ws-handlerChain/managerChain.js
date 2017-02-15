@@ -42,7 +42,7 @@ function handlerMsg4Str(message, connection) {
           _: data,
         }));
       }).catch(err => {
-        throw err
+        throw err;
       });
     } catch (err) {
       connection.sendUTF(JSON.stringify({

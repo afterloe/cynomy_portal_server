@@ -31,5 +31,5 @@ process.on("uncaughtException", err => {
 });
 
 server.listen(registryPort, bindHost, () => {
-  console.log("TCP net socket is runnig in %s:%s", bindHost, registryPort)
+  console.log("TCP net socket is runnig in %s:%s", bindHost, registryPort);
 });

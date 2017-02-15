@@ -2201,3 +2201,17 @@ commit by afterloe (lm6289511@gmail.com)
 > template/journalError.pug  
 > template/systemError.pug  
 
+
+1.0.3 / 2017-2-15 14:38:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完善代码风格
+
+
+### modify files
+> config/index.js  
+> distributed/single.js  
+> interceptors/smartNotFound.js  
+> servers/lib/ws-handlerChain/managerChain.js  
+

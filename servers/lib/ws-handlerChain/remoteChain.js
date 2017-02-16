@@ -11,27 +11,54 @@
   */
 "use strict";
 
-const [{resolve}] = [require("path")];
+const [co, {resolve}] = [require("co"), require("path")];
 const root = resolve(__dirname, "..", "..", "..");
-const Chain = require(resolve(root, "tools", "chain"));
+const [Chain, {getScript}] = [require(resolve(root, "tools", "chain")), require(resolve(__dirname, "..", "scriptsCenter"))];
+const DATANODES = Symbol("DATANODES");
 
-function handlerMsg4Str(message, connection) {
+module[DATANODES] = new Map();
+
+function handlerMsg4Str(message, origin) {
   if ("utf8" === message.type) {
+  	const ws = module[DATANODES].get(origin);
     try {
-      console.log("Received Message: " + message.utf8Data);
-      connection.sendUTF(message.utf8Data);
+    	const [ladp, sh, command] = message.utf8Data.split("->");
+    	console.log("%s: %s %s", ladp, sh, command);
+    	const [_, __] = command.split(/(?:\()(.*)(?:\))/i);
+
+    	const script = getScript(sh, _);
+    	co(function* () {
+    		const args = __? __.split("|"):null;
+    		if (args) {
+    			args.map((p,i) => args[i] = JSON.parse(p));
+    		}
+
+    		return yield script.apply(null, args);
+    	}).then(data => {
+    		ws.connection.sendUTF(JSON.stringify({
+    			info: `${new Date().toLocaleString()}: [SUCCESS] receive message`,
+    			type: `${sh}->${_}`,
+    			_: data,
+    		}));
+    	}).catch(err => {
+    		throw err;
+    	});
     } catch (err) {
-      console.dir(err);
+    	ws.connection.sendUTF(JSON.stringify({
+    		info: `${new Date().toLocaleString()}: [FAILED] execute.`,
+    		type: "error",
+    		msg: err.message
+    	}));
     }
   } else {
     return Chain.next();
   }
 }
 
-function handlerMsg4Binary(message, connection) {
+function handlerMsg4Binary(message, origin) {
   if ("binary" === message.type) {
-    console.log("Received Binary Message of " + message.binaryData.length + " bytes");
-    connection.sendBytes(message.binaryData);
+	console.log("Received Binary Message from %s", origin);
+    console.log("Received Binary Message of %s bytes.", message.binaryData.length);
   } else {
     return Chain.next();
   }
@@ -43,11 +70,20 @@ utf8.setNext(binary);
 module.exports = function(protocol, request, origin) {
   if ("remote-protocol" === protocol) {
     const connection = request.accept(protocol, origin);
-    console.log("%s Welcome accept cynomy node manager!", new Date());
+	console.log("%s one node is connection. %s", new Date().toLocaleString(), request.remoteAddress);
+	console.log("%s now we have %s data node.", new Date().toLocaleString(), module[DATANODES].size);
+
+	module[DATANODES].set(origin, {
+		connection,
+		ip: request.remoteAddress,
+	});
+
     connection.on("close", () => {
-      console.log("client is hang-up.");
+      console.log("%s data node client is hang-up. %s", new Date().toLocaleString(), request.remoteAddress);
+	  module[DATANODES].delete(origin);
     });
-    connection.on("message", message => utf8.passRequest(message, connection));
+
+    connection.on("message", message => utf8.passRequest(message, origin));
   } else {
     return Chain.next();
   }

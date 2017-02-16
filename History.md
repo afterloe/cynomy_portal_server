@@ -2342,3 +2342,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > routers/index.js  
 
+
+1.0.5 / 2017-2-16 17:11:9
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: remote service 部署
+
+
+### new files
+> servers/lib/scriptsCenter.js  
+
+### modify files
+> config/index.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+

@@ -19,7 +19,7 @@ const defaultRoot = resolve(process.env.HOME, ".cynomys", "protal");
 const [num, dataDir, logDir] = [cpus().length, resolve(defaultRoot, "data"), resolve(defaultRoot, "logs")];
 
 siteConfig.set("remote", { // 远程节点设置
-  enable : false, // 是否开启远程
+  enable : true, // 是否开启远程
   host: "namo", // 远程服务器ip
   port: 15024 // 远程服务对外节点
 });

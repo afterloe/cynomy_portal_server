@@ -1,0 +1,66 @@
+#!/usr/bin/env node
+/**
+  * afterloe - cynomy_portal_server/bin/registryNodeServer
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <lm6289511@gmail.com> (https://github.com/afterloe)
+  * Date:
+  *   2017-2-16 14:03:39
+  */
+"use strict";
+
+const [{request}, {stringify}] = [require("http"), require("querystring")];
+const [, , host, port] = process.argv;
+
+if (!host || !port) {
+  console.log("err->Lack Parameters");
+  return ;
+}
+
+const postData = stringify({
+  name: "afterloe",
+  version: "v1.0.5",
+  ip: "192.168.1.90"
+});
+
+const req = request({
+  hostname: host,
+  port: port,
+  path: "/node",
+  method: "POST",
+  headers: {
+    "Accept": "application/json",
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Content-Length": Buffer.byteLength(postData)
+  }
+}, res => {
+  if (200 !== res.statusCode) {
+    console.log("err->registry failed");
+    return ;
+  }
+  let buff = new Buffer(0);
+  res.on("data", chunk => buff = Buffer.concat([buff, chunk], buff.length + chunk.length));
+
+  res.on("end", () => {
+    try {
+      buff = JSON.parse(buff.toString("utf8"));
+      if (buff.code !== 200) {
+        console.log("err->%s", buff.error);
+        return ;
+      }
+      console.log("permit->%s", buff.result);
+    } catch (error) {
+      console.log("err->%s", error.message);
+    }
+  });
+});
+
+req.on("error", error => {
+  console.log("err->%s", error.toString());
+});
+
+req.write(postData);
+req.end();

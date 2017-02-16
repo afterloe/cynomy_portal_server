@@ -71,4 +71,4 @@ module[WEBSOCKET].on("connect", connection => {
   });
 });
 
-module[WEBSOCKET].connect(`ws://${host}:${port}`, "echo-protocol", origin);
+module[WEBSOCKET].connect(`ws://${host}:${port}`, "remote-protocol", origin);

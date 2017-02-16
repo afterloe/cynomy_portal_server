@@ -2307,3 +2307,27 @@ commit by afterloe (lm6289511@gmail.com)
 > bin/remoteDaemon.js  
 > test/websocketCli  
 
+
+1.0.5 / 2017-2-16 15:5:20
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 远端管理，http注册活动
+
+
+### new files
+> bin/registryNodeServer  
+> routers/nodeManager.js  
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+> config/index.js  
+> routers/index.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+> test/funTest.js  
+> routers/nodeManager.js  
+
+### delete files
+> bin/remoteDaemon.js  
+

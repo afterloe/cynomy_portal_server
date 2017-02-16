@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{fork}, {resolve}] = [require("child_process"), require("path")];
+const [{fork, execFileSync}, {resolve}] = [require("child_process"), require("path")];
 const Chain = require(resolve(__dirname, "..", "tools", "chain"));
 const [FLAG, ARGS, _] = [Symbol("FLAG"), Symbol("ARGS"), []];
 
@@ -37,9 +37,29 @@ const cutLog = () => {
   return;
 };
 
+const obmitPermiInfo = (host, port) => {
+  const permitBuffer = execFileSync(resolve(__dirname, "registryNodeServer"), [host, port]);
+  const length = permitBuffer.length;
+  const rst = permitBuffer.slice(0, length - 1);
+  const [info, permit] = rst.toString().split("->");
+  if ("permit" === info) {
+    return permit;
+  } else {
+    throw new Error(permit);
+  }
+};
+
 function startDaemon(...args) {
   module[ARGS] = args;
   const [host, port] = args;
+  let permit;
+  try {
+    permit = obmitPermiInfo(host, port);
+  } catch (err) {
+    console.log("remote daemon thread can't connection this host, because %s", err.message);
+
+    return;
+  }
 
   if (!host) {
     console.log("remote daemon thread can't connection this host, auto exit.");
@@ -51,7 +71,7 @@ function startDaemon(...args) {
   });
   cutLog();
 
-  const wsCli = fork(resolve(__dirname, "wsCli"), [host, port, "cynomy://"]);
+  const wsCli = fork(resolve(__dirname, "wsCli"), [host, port, permit]);
   wsCli.on("message", message => {
     const {act, msg} = message;
     LAUNCH_ACTIVITY.passRequest(act, msg);

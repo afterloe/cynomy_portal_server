@@ -13,8 +13,8 @@
 
 const {resolve} = require("path");
 const interceptors = resolve(__dirname, "..", "interceptors");
-const [user, workflow, goodses, portal] = [require(resolve(__dirname, "user")), require(resolve(__dirname, "workflow")),
-  require(resolve(__dirname, "goodses")), require(resolve(__dirname, "portal"))];
+const [user, workflow, goodses, portal, node] = [require(resolve(__dirname, "user")), require(resolve(__dirname, "workflow")),
+  require(resolve(__dirname, "goodses")), require(resolve(__dirname, "portal")), require(resolve(__dirname, "nodeManager"))];
 const [authentication] = [require(resolve(interceptors, "authentication"))];
 
 module.exports = _ => {
@@ -26,6 +26,11 @@ module.exports = _ => {
 
     return yield next;
   });
+
+  /*
+   * 节点 模块
+   */
+  _.post("/node", node.registry);
 
   /*
    * portal 模块
@@ -56,6 +61,12 @@ module.exports = _ => {
   /*
    *  测试：开发者信息
    */
+  _.post("/test/echo", function* (next) {
+    const {info} = this.request.body;
+    process.emit("sendCynomyCommunication", info);
+    this.body = this.success("send success");
+    return yield next;
+  });
   _.get("/author", function* (next) {
     this.body = JSON.stringify({
         name: "afterloe",

@@ -10,12 +10,17 @@
   *   2017-1-11 23:01:15
   */
 "use strict";
+const {execFileSync} = require("child_process");
+const {resolve} = require("path");
 
-let _ = ["java", "python", "nodejs", "nodejs"];
-const tags = ["c++", "nodejs"];
-_ = [...new Set(tags.concat(_))];
+const permit = execFileSync(resolve(__dirname, "..", "bin", "registryNodeServer"), ["namo", "15024"]);
+console.log(permit.toString().length);
 
-console.log(_);
+// let _ = ["java", "python", "nodejs", "nodejs"];
+// const tags = ["c++", "nodejs"];
+// _ = [...new Set(tags.concat(_))];
+//
+// console.log(_);
 
 // const {resolve} = require("path");
 //

@@ -41,7 +41,7 @@ const [utf8, binary] = [new Chain(handlerMsg4Str), new Chain(handlerMsg4Binary)]
 utf8.setNext(binary);
 
 module.exports = function(protocol, request, origin) {
-  if ("node-protocol" === protocol) {
+  if ("remote-protocol" === protocol) {
     const connection = request.accept(protocol, origin);
     console.log("%s Welcome accept cynomy node manager!", new Date());
     connection.on("close", () => {

@@ -2369,3 +2369,20 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > servers/lib/ws-handlerChain/remoteChain.js  
 
+
+1.0.5 / 2017-2-16 18:26:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws bug WS 断开连接的时候无法自动重连,发送时容易出现太多异常，启动的时候有时连接不到ws
+
+
+### modify files
+> bin/remoteDaemon.js  
+> routers/index.js  
+> servers/lib/scriptsCenter.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+
+### delete files
+> bin/remoteDaemon.js  
+

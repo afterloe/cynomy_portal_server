@@ -13,6 +13,7 @@
 
 const getScript = (scriptName, arg) => {
   console.log("execute %s %s", scriptName, arg);
+  return () => Promise.resolve(2);
 };
 
 module.exports = {

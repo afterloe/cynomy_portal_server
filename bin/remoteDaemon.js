@@ -13,7 +13,7 @@
 
 const [{fork, execFileSync}, {resolve}] = [require("child_process"), require("path")];
 const Chain = require(resolve(__dirname, "..", "tools", "chain"));
-const [FLAG, ARGS, _] = [Symbol("FLAG"), Symbol("ARGS"), []];
+const [FLAG, ARGS, WS, _] = [Symbol("FLAG"), Symbol("ARGS"), Symbol("WS"), []];
 
 module[FLAG] = false;
 
@@ -69,21 +69,30 @@ function startDaemon(...args) {
   _.push({
     startTime: Date.now()
   });
+  
   cutLog();
 
-  const wsCli = fork(resolve(__dirname, "wsCli"), [host, port, permit]);
-  wsCli.on("message", message => {
+  module[WS] = fork(resolve(__dirname, "wsCli"), [host, port, permit]);
+  module[WS].on("message", message => {
     const {act, msg} = message;
     LAUNCH_ACTIVITY.passRequest(act, msg);
   });
+}
 
-  process.on("sendCynomyCommunication", (msg) => {
-    wsCli.send({
+process.on("sendCynomyCommunication", (msg) => {
+  if (module[FLAG]) {
+    module[WS].send({
       act: "receive",
       msg
     });
-  });
-}
+  } else {
+    tryReStartDaemon();
+
+    process.nextTick(() => {
+      process.emit("sendCynomyCommunication", msg);
+    });
+  }
+});
 
 const tryReStartDaemon = () => {
   if (isNormalStart()) {

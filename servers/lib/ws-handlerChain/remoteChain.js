@@ -57,7 +57,7 @@ function handlerMsg4Str(message, origin) {
 
 function handlerMsg4Binary(message, origin) {
   if ("binary" === message.type) {
-	console.log("Received Binary Message from %s", origin);
+    console.log("Received Binary Message from %s", origin);
     console.log("Received Binary Message of %s bytes.", message.binaryData.length);
   } else {
     return Chain.next();
@@ -96,7 +96,7 @@ process.on("sendOneRemoteInfo", (origin, message, callback) => {
     if (callback instanceof Function) {
       callback();
     }
-    
+
     return ;
   }
   if (callback instanceof Function) {

@@ -58,6 +58,12 @@ module.exports = _ => {
     this.body = this.success("send success");
     return yield next;
   });
+  _.post("test/call", function* (next) {
+    const {info} = this.request.body;
+    process.emit("sendRemotesInfo", info);
+    this.body = this.success("send " + info + "success");
+    return yield next;
+  });
   _.get("/author", function* (next) {
     this.body = JSON.stringify({
         name: "afterloe",

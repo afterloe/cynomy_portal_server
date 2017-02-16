@@ -67,6 +67,43 @@ function handlerMsg4Binary(message, origin) {
 const [utf8, binary] = [new Chain(handlerMsg4Str), new Chain(handlerMsg4Binary)];
 utf8.setNext(binary);
 
+process.on("sendRemotesInfo", (message, callback) => {
+  const {type, _} = message;
+  for (let ws of module[DATANODES].values()) {
+    ws.connection.sendUTF(JSON.stringify({
+      info: `${new Date().toLocaleString()}: push an new message`,
+      date: Date.now(),
+      type,
+      _,
+    }));
+  }
+
+  if (callback instanceof Function) {
+    callback();
+  }
+});
+
+process.on("sendOneRemoteInfo", (origin, message, callback) => {
+  const {type, _} = message;
+  if (module[DATANODES].has(origin)) {
+    const ws = module[DATANODES].get(origin);
+    ws.connection.sendUTF(JSON.stringify({
+      info: `${new Date().toLocaleString()}: push an new message`,
+      date: Date.now(),
+      type,
+      _,
+    }));
+    if (callback instanceof Function) {
+      callback();
+    }
+    
+    return ;
+  }
+  if (callback instanceof Function) {
+    callback(new Error("don't have this origin"));
+  }
+});
+
 module.exports = function(protocol, request, origin) {
   if ("remote-protocol" === protocol) {
     const connection = request.accept(protocol, origin);

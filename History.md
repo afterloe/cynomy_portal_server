@@ -2357,3 +2357,15 @@ commit by afterloe (lm6289511@gmail.com)
 > config/index.js  
 > servers/lib/ws-handlerChain/remoteChain.js  
 
+
+1.0.5 / 2017-2-16 17:31:38
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: remote serivce 丰富功能，添加测试
+
+
+### modify files
+> routers/index.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+

@@ -18,15 +18,6 @@ const [user, workflow, goodses, portal, node] = [require(resolve(__dirname, "use
 const [authentication] = [require(resolve(interceptors, "authentication"))];
 
 module.exports = _ => {
-  _.get("/test", function* (next) {
-    this.render("index", {
-      title: "首页",
-      static: "http://almcloud.jwis.cn/",
-    });
-
-    return yield next;
-  });
-
   /*
    * 节点 模块
    */

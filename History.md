@@ -2331,3 +2331,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > bin/remoteDaemon.js  
 
+
+1.0.5 / 2017-2-16 15:6:30
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 删除测试数据
+
+
+### modify files
+> routers/index.js  
+

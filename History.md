@@ -2290,3 +2290,20 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > bin/remoteDaemon.js  
 
+
+1.0.5 / 2017-2-16 11:30:8
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 消息组件组装完毕
+
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+> interceptors/template.js  
+
+### delete files
+> bin/remoteDaemon.js  
+> test/websocketCli  
+

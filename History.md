@@ -2386,3 +2386,21 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > bin/remoteDaemon.js  
 
+
+1.0.5 / 2017-2-17 11:28:5
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws切断重连机制
+
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+> index.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+> servers/registry.js  
+
+### delete files
+> bin/remoteDaemon.js  
+

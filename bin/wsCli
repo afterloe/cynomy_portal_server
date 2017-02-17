@@ -57,7 +57,7 @@ module[WEBSOCKET].on("connect", connection => {
       act: "launch close", // 发送关闭信息到主线程
     });
     console.log("Connection Client Closed.");
-    process.exit(0);
+    setTimeout(() => process.exit(0), 1000);
   });
 
   connection.on("message", message => {

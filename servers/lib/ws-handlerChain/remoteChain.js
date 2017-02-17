@@ -85,6 +85,7 @@ process.on("sendRemotesInfo", (message, callback) => {
 
 process.on("sendOneRemoteInfo", (origin, message, callback) => {
   const {type, _} = message;
+  
   if (module[DATANODES].has(origin)) {
     const ws = module[DATANODES].get(origin);
     ws.connection.sendUTF(JSON.stringify({
@@ -93,6 +94,7 @@ process.on("sendOneRemoteInfo", (origin, message, callback) => {
       type,
       _,
     }));
+
     if (callback instanceof Function) {
       callback();
     }
@@ -107,13 +109,14 @@ process.on("sendOneRemoteInfo", (origin, message, callback) => {
 module.exports = function(protocol, request, origin) {
   if ("remote-protocol" === protocol) {
     const connection = request.accept(protocol, origin);
-	console.log("%s one node is connection. %s", new Date().toLocaleString(), request.remoteAddress);
-	console.log("%s now we have %s data node.", new Date().toLocaleString(), module[DATANODES].size);
+  	console.log("%s one node is connection. %s", new Date().toLocaleString(), request.remoteAddress);
 
-	module[DATANODES].set(origin, {
-		connection,
-		ip: request.remoteAddress,
-	});
+  	module[DATANODES].set(origin, {
+  		connection,
+  		ip: request.remoteAddress,
+  	});
+
+    console.log("%s now we have %s data node.", new Date().toLocaleString(), module[DATANODES].size);
 
     connection.on("close", () => {
       console.log("%s data node client is hang-up. %s", new Date().toLocaleString(), request.remoteAddress);

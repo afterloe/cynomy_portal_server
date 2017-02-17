@@ -19,7 +19,7 @@ module[FLAG] = false;
 
 const isNormalStart = () => {
   const startCount = _.length;
-  if (startCount.length <= 2) {
+  if (startCount <= 2) {
     return true;
   }
   const [nowLog, lastLog] = [_[startCount - 1], _[startCount - 2]];
@@ -49,9 +49,7 @@ const obmitPermiInfo = (host, port) => {
   }
 };
 
-function startDaemon(...args) {
-  module[ARGS] = args;
-  const [host, port] = args;
+function startDaemon(host, port) {
   let permit;
   try {
     permit = obmitPermiInfo(host, port);
@@ -69,7 +67,7 @@ function startDaemon(...args) {
   _.push({
     startTime: Date.now()
   });
-  
+
   cutLog();
 
   module[WS] = fork(resolve(__dirname, "wsCli"), [host, port, permit]);
@@ -79,8 +77,18 @@ function startDaemon(...args) {
   });
 }
 
+const tryReStartDaemon = () => {
+  if (isNormalStart()) {
+    process.nextTick(() => {
+      startDaemon.apply(null, module[ARGS]);
+    });
+  } else {
+    return ;
+  }
+};
+
 process.on("sendCynomyCommunication", (msg) => {
-  if (module[FLAG]) {
+  if (module[FLAG] && module[WS].connected) {
     module[WS].send({
       act: "receive",
       msg
@@ -93,16 +101,6 @@ process.on("sendCynomyCommunication", (msg) => {
     });
   }
 });
-
-const tryReStartDaemon = () => {
-  if (isNormalStart()) {
-    process.nextTick(() => {
-      startDaemon.apply(null, module[ARGS]);
-    });
-  } else {
-    return ;
-  }
-};
 
 function readyCynomyCommunication(act, msg) {
   if ("launch activity" === act)  {
@@ -152,4 +150,8 @@ function suicideCynomyCommunication(act, msg) {
 const [LAUNCH_ACTIVITY, LAUNCH_OK, LAUNCH_CLOSE, SEND_RESULT, SUICIDE] = [new Chain(readyCynomyCommunication), new Chain(sendCynomyCommunicationSuccess), new Chain(closeCynomyCommunication), new Chain(receiveCynomyCommunication), new Chain(suicideCynomyCommunication)];
 LAUNCH_ACTIVITY.setNext(LAUNCH_OK).setNext(LAUNCH_CLOSE).setNext(SEND_RESULT).setNext(SUICIDE);
 
-module.exports = startDaemon;
+module.exports = (...args) => {
+  module[ARGS] = args;
+  const [host, port] = args;
+  startDaemon(host, port);
+};

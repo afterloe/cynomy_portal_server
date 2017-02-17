@@ -32,8 +32,8 @@ app.use(smartNotFound);
 
 app.on("error", (err, ctx) => {
   process.emit("systemError", err, ctx);
-  console.log(err);
-  console.log(ctx);
+  console.log(err.message);
+  console.log(ctx.request.ip);
 });
 
 module.exports = app;

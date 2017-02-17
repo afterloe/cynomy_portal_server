@@ -2450,3 +2450,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > bin/remoteDaemon.js  
 
+
+1.0.5 / 2017-2-17 17:30:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 内存查询扩展至linux平台
+
+
+### modify files
+> services/fileSystem.js  
+

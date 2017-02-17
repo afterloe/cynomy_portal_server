@@ -2404,3 +2404,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > bin/remoteDaemon.js  
 
+
+1.0.5 / 2017-2-17 14:35:16
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 优化ws重启活动，发送机制
+
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+
+### delete files
+> bin/remoteDaemon.js  
+

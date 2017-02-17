@@ -13,29 +13,9 @@
 
 const [{fork, execFileSync}, {resolve}] = [require("child_process"), require("path")];
 const Chain = require(resolve(__dirname, "..", "tools", "chain"));
-const [FLAG, ARGS, WS, _] = [Symbol("FLAG"), Symbol("ARGS"), Symbol("WS"), []];
+const [ARGS, WS, FLAG, SENDER, MSGLIST] = [Symbol("ARGS"), Symbol("WS"), Symbol("FLAG"), Symbol("SENDER"), []];
 
-module[FLAG] = false;
-
-const isNormalStart = () => {
-  const startCount = _.length;
-  if (startCount <= 2) {
-    return true;
-  }
-  const [nowLog, lastLog] = [_[startCount - 1], _[startCount - 2]];
-  return nowLog.startTime - lastLog.startTime > 500;
-};
-
-const cutLog = () => {
-  const startCount = _.length;
-  if (startCount > 25 ) {
-    const [nowLog, lastLog] = [_[startCount - 1], _[startCount - 2]];
-    _.length = 0;
-    _.push(lastLog, nowLog);
-  }
-
-  return;
-};
+module[SENDER] = false;
 
 const obmitPermiInfo = (host, port) => {
   const permitBuffer = execFileSync(resolve(__dirname, "registryNodeServer"), [host, port]);
@@ -55,57 +35,65 @@ function startDaemon(host, port) {
     permit = obmitPermiInfo(host, port);
   } catch (err) {
     console.log("remote daemon thread can't connection this host, because %s", err.message);
-
+    module[FLAG] = false;
     return;
   }
 
   if (!host) {
     console.log("remote daemon thread can't connection this host, auto exit.");
+    module[FLAG] = false;
     return ;
   }
 
-  _.push({
-    startTime: Date.now()
-  });
-
-  cutLog();
-
   module[WS] = fork(resolve(__dirname, "wsCli"), [host, port, permit]);
+
   module[WS].on("message", message => {
     const {act, msg} = message;
     LAUNCH_ACTIVITY.passRequest(act, msg);
   });
+
+  module[WS].on("disconnect", () => {
+    // tryReStartDaemon();
+  });
 }
 
 const tryReStartDaemon = () => {
-  if (isNormalStart()) {
-    process.nextTick(() => {
-      startDaemon.apply(null, module[ARGS]);
-    });
-  } else {
+  if (module[FLAG]) {
     return ;
   }
+  module[FLAG] = true;
+  startDaemon.apply(null, module[ARGS]);
 };
 
 process.on("sendCynomyCommunication", (msg) => {
-  if (module[FLAG] && module[WS].connected) {
+  if (module[WS] && module[WS].connected && module[SENDER]) {
+    console.log("try to send msg.");
     module[WS].send({
       act: "receive",
       msg
     });
   } else {
+    MSGLIST.push(msg);
     tryReStartDaemon();
-
-    process.nextTick(() => {
-      process.emit("sendCynomyCommunication", msg);
-    });
   }
 });
 
 function readyCynomyCommunication(act, msg) {
   if ("launch activity" === act)  {
-    module[FLAG] = true;
     console.log("communication daemon thread is ready. %s", msg || "");
+    module[FLAG] = false;
+    module[SENDER] = true;
+
+    if (MSGLIST.length > 0) {
+      for(let message of MSGLIST) {
+        module[WS].send({
+          act: "receive",
+          msg: message,
+        });
+      }
+
+      MSGLIST.length = 0;
+    }
   } else {
     Chain.next();
   }
@@ -123,7 +111,6 @@ function sendCynomyCommunicationSuccess(act, msg) {
 function closeCynomyCommunication(act, msg) {
   if ("launch close" === act)  {
     console.log("communication daemon thread is close. %s", msg);
-    module[FLAG] = false;
   } else {
     Chain.next();
   }
@@ -140,7 +127,6 @@ function receiveCynomyCommunication(act, msg) {
 function suicideCynomyCommunication(act, msg) {
   if ("suicide" === act)  {
     console.log("communication daemon thread is suicide. %s", msg);
-    module[FLAG] = false;
     tryReStartDaemon();
   } else {
     Chain.next();

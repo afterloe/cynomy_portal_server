@@ -29,6 +29,13 @@ const obmitPermiInfo = (host, port) => {
   }
 };
 
+const receiveNeedSendMsh = msg => {
+  if (MSGLIST.length > 100) {
+    MSGLIST.shift();
+  }
+  MSGLIST.push(msg);
+};
+
 function startDaemon(host, port) {
   let permit;
   try {
@@ -73,7 +80,7 @@ process.on("sendCynomyCommunication", (msg) => {
       msg
     });
   } else {
-    MSGLIST.push(msg);
+    receiveNeedSendMsh(msg);
     tryReStartDaemon();
   }
 });

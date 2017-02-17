@@ -2419,3 +2419,17 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > bin/remoteDaemon.js  
 
+
+1.0.5 / 2017-2-17 14:38:3
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 优化ws重启发送机制，只发送最近的100条离线消息
+
+
+### modify files
+> bin/remoteDaemon.js  
+
+### delete files
+> bin/remoteDaemon.js  
+

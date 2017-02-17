@@ -2433,3 +2433,20 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > bin/remoteDaemon.js  
 
+
+1.0.5 / 2017-2-17 17:4:48
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加查看内存的方法
+
+
+### modify files
+> bin/remoteDaemon.js  
+> index.js  
+> services/fileSystem.js  
+> test/funTest.js  
+
+### delete files
+> bin/remoteDaemon.js  
+

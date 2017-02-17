@@ -36,6 +36,8 @@ const startSlave = socket => {
 
 if (true === remote.enable) {
   require(resolve(__dirname, "bin", "remoteDaemon"))(remote.host, remote.port);
+
+  // process.on("ws");
 }
 
 if (enable) {

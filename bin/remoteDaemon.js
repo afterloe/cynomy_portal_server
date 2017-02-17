@@ -60,6 +60,8 @@ function startDaemon(host, port) {
   });
 
   module[WS].on("disconnect", () => {
+    module[FLAG] = false;
+    // process.emit(); 未做重连处理 TODO
     // tryReStartDaemon();
   });
 }

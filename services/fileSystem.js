@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{resolve, basename}, {spawn}, {statSync, writeFile, existsSync, readFile, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("fs")];
+const [{resolve, basename}, {spawn}, {EOL, platform}, {statSync, writeFile, existsSync, readFile, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("os"), require("fs")];
 const [{throwNotExistsFile, throwParametersError}, {uuidCode}, {get}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config"))];
 const CENTER = Symbol("CENTER");
 
@@ -44,6 +44,40 @@ const cp = (source, target) => new Promise((solve, reject) => {
     console.log(`cp file to ${targetPath} ... SUCCESS! `);
     solve(resolve(target, name));
   });
+});
+
+const realMem = () => new Promise((solve, reject) => {
+  const ps = spawn("ps", ["-caxm", "-orss,comm"]);
+  const awk = spawn("awk", ["{ sum += $1 } END { print sum/1024}"]);
+
+  let buf = new Buffer(0);
+
+  ps.stdout.on("data", chunk => awk.stdin.write(chunk));
+  ps.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  ps.on("error", err => reject(err));
+  ps.on("close", code => 0 === code ? awk.stdin.end(): reject(new Error("ps -caxm -orss,comm")));
+
+  awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  awk.stderr.on('data', err => reject(new Error(err.toString())));
+  awk.on("error", err => reject(err));
+  awk.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`ps -caxm -orss= | awk '{ sum += $1 } END { print sum/1024 }' is failed`)));
+});
+
+const getSystemMem = () => new Promise((solve, reject) => {
+  const vm_stat = spawn("vm_stat");
+  const awk = spawn("awk", ["-F", ":" , "{print$2}"]);
+
+  let buf = new Buffer(0);
+
+  vm_stat.stdout.on("data", chunk => awk.stdin.write(chunk));
+  vm_stat.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  vm_stat.on("error", err => reject(err));
+  vm_stat.on("close", code => 0 === code ? awk.stdin.end(): reject(new Error("vm_stat")));
+
+  awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  awk.stderr.on('data', err => reject(new Error(err.toString())));
+  awk.on("error", err => reject(err));
+  awk.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`vm_stat | awk -F ':' '{print$2}' is failed`)));
 });
 
 const readJSON = path => new Promise((solve, reject) => {
@@ -177,6 +211,28 @@ function* move(source, ...args) {
   }
 }
 
+function* darwinMemoryInfo() {
+  const _ = {};
+  let [str, str1] = yield [getSystemMem(), realMem()];
+  str = str.split(EOL);
+  const datas = str.map(data => Number.parseInt(data));
+
+  str1 = str1.split(EOL);
+  _["Wired Memory"] = datas[6]*4096/1024/1024;
+  _["Active Memory"] = datas[2]*4096/1024/1024;
+  _["Inactive Memory"] = datas[3]*4096/1024/1024;
+  _["Free Memory"] = datas[1]*4096/1024/1024;
+  _["Real Mem Total"] = str1[0];
+
+  return _;
+}
+
+function* memoryInfo() {
+  if ("darwin" === platform()) {
+    return yield darwinMemoryInfo();
+  }
+}
+
 module.exports = {
   decompression,
   compression,
@@ -184,4 +240,5 @@ module.exports = {
   cp,
   writeJSON,
   readJSON,
+  memoryInfo,
 };

@@ -10,11 +10,68 @@
   *   2017-1-11 23:01:15
   */
 "use strict";
-const {execFileSync} = require("child_process");
-const {resolve} = require("path");
 
-const permit = execFileSync(resolve(__dirname, "..", "bin", "registryNodeServer"), ["namo", "15024"]);
-console.log(permit.toString().length);
+// vm_stat | awk -F ':' {'print$2.'}
+// ps -caxm -orss,comm
+const {spawn} = require("child_process");
+const {EOL} = require("os");
+
+const realMem = () => new Promise((solve, reject) => {
+  const ps = spawn("ps", ["-caxm", "-orss,comm"]);
+  const awk = spawn("awk", ["{ sum += $1 } END { print sum/1024}"]);
+
+  let buf = new Buffer(0);
+
+  ps.stdout.on("data", chunk => awk.stdin.write(chunk));
+  ps.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  ps.on("error", err => reject(err));
+  ps.on("close", code => 0 === code ? awk.stdin.end(): reject(new Error("git remote -v maybe generator an error")));
+
+  awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  awk.stderr.on('data', err => reject(new Error(err.toString())));
+  awk.on("error", err => reject(err));
+  awk.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`git remote -v | grep push | awk '{print $1}' is failed`)));
+});
+
+const getSystemMem = () => new Promise((solve, reject) => {
+  // const ps =
+  const vm_stat = spawn("vm_stat");
+  const awk = spawn("awk", ["-F", ":" , "{print$2}"]);
+
+  let buf = new Buffer(0);
+
+  vm_stat.stdout.on("data", chunk => awk.stdin.write(chunk));
+  vm_stat.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  vm_stat.on("error", err => reject(err));
+  vm_stat.on("close", code => 0 === code ? awk.stdin.end(): reject(new Error("git remote -v maybe generator an error")));
+
+  awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  awk.stderr.on('data', err => reject(new Error(err.toString())));
+  awk.on("error", err => reject(err));
+  awk.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`git remote -v | grep push | awk '{print $1}' is failed`)));
+});
+
+getSystemMem().then(str => {
+  // console.log(str);
+  str = str.split(EOL);
+  const datas = str.map(data => Number.parseInt(data));
+  console.log("Wired Memory: %s MB", datas[6]*4096/1024/1024);
+  console.log("Active Memory: %s MB", datas[2]*4096/1024/1024);
+  console.log("Inactive Memory: %s MB", datas[3]*4096/1024/1024);
+  console.log("Free Memory: %s MB", datas[1]*4096/1024/1024);
+
+}).catch(err => console.log(err));
+
+realMem().then(str => {
+  str = str.split(EOL);
+  console.log("Real Mem Total %s MB", str[0]);
+}).catch(err => console.log(err));
+
+// const {execFileSync} = require("child_process");
+// const {resolve} = require("path");
+//
+// const permit = execFileSync(resolve(__dirname, "..", "bin", "registryNodeServer"), ["namo", "15024"]);
+// console.log(permit.toString().length);
 
 // let _ = ["java", "python", "nodejs", "nodejs"];
 // const tags = ["c++", "nodejs"];

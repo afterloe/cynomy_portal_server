@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{resolve, basename}, {spawn}, {EOL, platform}, {statSync, writeFile, existsSync, readFile, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("os"), require("fs")];
+const [{resolve, basename}, {spawn}, {EOL, platform, hostname, networkInterfaces, cpus}, {statSync, writeFile, existsSync, readFile, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("os"), require("fs")];
 const [{throwNotExistsFile, throwParametersError}, {uuidCode}, {get}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config"))];
 const CENTER = Symbol("CENTER");
 
@@ -46,6 +46,17 @@ const cp = (source, target) => new Promise((solve, reject) => {
   });
 });
 
+const uname = () => new Promise((solve, reject) => {
+  const uname = spawn("uname", ["-a"]);
+
+  let buf = new Buffer(0);
+
+  uname.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  uname.stderr.on('data', err => reject(new Error(err.toString())));
+  uname.on("error", err => reject(err));
+  uname.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`uname -a is failed`)));
+});
+
 const linuxRealMem = () => new Promise((solve, reject) => {
   const ps = spawn("ps", ["-aux"]);
   const awk = spawn("awk", ["{ sum += $6 } END { print sum/1024}"]);
@@ -60,7 +71,7 @@ const linuxRealMem = () => new Promise((solve, reject) => {
   awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
   awk.stderr.on('data', err => reject(new Error(err.toString())));
   awk.on("error", err => reject(err));
-  awk.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`ps -aux | awk '{ sum += $6 } END { print sum/1024 }'' is failed`)));
+  awk.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`ps -aux | awk '{ sum += $6 } END { print sum/1024 }' is failed`)));
 });
 
 const getLinuxSystemMem = () => new Promise((solve, reject) => {
@@ -288,6 +299,18 @@ function* memoryInfo() {
   return {};
 }
 
+function* systemInfo() {
+  const [hostName, network, platform, cpus] = [hostname(), networkInterfaces(), platform(), cpus()];
+  const uname = yield uname();
+  return {
+    hostName,
+    network,
+    platform,
+    cpus,
+    uname,
+  };
+}
+
 module.exports = {
   decompression,
   compression,
@@ -296,4 +319,5 @@ module.exports = {
   writeJSON,
   readJSON,
   memoryInfo,
+  systemInfo,
 };

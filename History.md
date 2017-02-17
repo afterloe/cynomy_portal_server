@@ -2461,3 +2461,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > services/fileSystem.js  
 
+
+1.0.5 / 2017-2-17 18:23:49
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: system添加系统信息方法
+
+
+### modify files
+> services/fileSystem.js  
+

@@ -46,6 +46,23 @@ const cp = (source, target) => new Promise((solve, reject) => {
   });
 });
 
+const hardDisk = num => new Promise((solve, reject) => {
+  const df = spawn("df", ["-h"]);
+  const awk = spawn("awk", [`{print$${num}}`]);
+
+  let buf = new Buffer(0);
+
+  df.stdout.on("data", chunk => awk.stdin.write(chunk));
+  df.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  df.on("error", err => reject(err));
+  df.on("close", code => 0 === code ? sed.stdin.end(): reject(new Error("ps -caxm -orss,comm")));
+
+  awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  awk.stderr.on('data', err => reject(new Error(err.toString())));
+  awk.on("error", err => reject(err));
+  awk.on("close", code => 0 === code ? solve(buf.toString().split(EOL)): reject(new Error(`df -h | awk '{print$${num}}' is failed`)));
+});
+
 const uname = () => new Promise((solve, reject) => {
   const uname = spawn("uname", ["-a"]);
 
@@ -297,6 +314,22 @@ function* memoryInfo() {
   }
 
   return {};
+}
+
+function* hardDiskInfo() {
+  const [diskName, diskSize, diskTotal, diskEnable, diskPercentage, where] = yield [hardDisk(1), hardDisk(2), hardDisk(3), hardDisk(4), hardDisk(5), hardDisk(6)];
+  const _ = {};
+  diskName.map((name, index) => {
+    _[name] = {
+      size: diskName[index],
+      total: diskTotal[index],
+      enable: diskEnable[index],
+      percentage: diskPercentage[index],
+      where: where[index],
+    };
+  });
+
+  return _;
 }
 
 function* systemInfo() {

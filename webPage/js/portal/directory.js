@@ -22,7 +22,7 @@ $(function(){
 			$(this).parent("li").remove();
 		});
 	}
-	//关闭zhezhaoc
+	//关闭遮罩层
 	$(".btn_close").on("click",function(){
 		$(".popup").css("display","none");
 	});
@@ -36,5 +36,18 @@ $(function(){
 		console.log($(this).parent("div").parent("li"))
 		$(this).parent("div").parent("li").remove();
 	});
+
+	
+
+	//tab切换
+	$("body .tab_process").find("dl").on("click",function(){
+		$(this).addClass("processActive").siblings("dl").removeClass("processActive");
+		//每次点击更换 dataBox中的内容
+	});
+
+
+
+
+	
 
 });

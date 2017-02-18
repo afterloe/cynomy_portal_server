@@ -52,96 +52,31 @@ $(function(){
 		$(".content_one").animate({"margin-top":0},1000,function(){
 			$(".content_one").css("margin-top",0);
 		});
-		//根据ul.data的内容，改变tab每个li的背景图片
-		if($(".dataPlan").find("li").length > 0){
-			$(".plan").css("background","url(images/3.1.1.png) no-repeat left center");
-
-		}
-		if($(".dataDesign").find("li").length > 0){
-			$(".design").css("background","url(images/3.2.2.png) no-repeat left center");
-
-		}
-		if($(".dataDevelopment").find("li").length > 0){
-			$(".development").css("background","url(images/3.3.3.png) no-repeat left center");
-
-		}
-		if($(".dataTest").find("li").length > 0){
-			$(".test").css("background","url(images/3.4.4.png) no-repeat left center");
-
-		}
-		if($(".dataRelease").find("li").length > 0){
-			$(".release").css("background","url(images/3.5.5.png) no-repeat left center")
-
-		};
-		//当每个ul下都有上传的文档时，更换产品菜单的背景图
-		if($(".dataRelease").find("li").length > 0 && $(".dataTest").find("li").length > 0 && $(".dataDevelopment").find("li").length > 0 &&　$(".dataDesign").find("li").length > 0　&& $(".dataPlan").find("li").length > 0){
-			$(".plan").css("background","url(images/plan.png) no-repeat left center");
-			$(".design").css("background","url(images/design.png) no-repeat left center");
-			$(".development").css("background","url(images/development.png) no-repeat left center");
-			$(".test").css("background","url(images/test.png) no-repeat left center");
-			$(".release").css("background","url(images/release.png) no-repeat left center")
-		}
+		
 	}else{
 		$(".content_one").css("margin-top",0);
-		//根据ul.data的内容，改变tab每个li的背景图片
-		if($(".dataPlan").find("li").length > 0){
-			$(".plan").css("background","url(images/c44.png) no-repeat left center");
-
-		}
-		if($(".dataDesign").find("li").length > 0){
-			$(".design").css("background","url(images/c55.png) no-repeat left center");
-
-		}
-		if($(".dataDevelopment").find("li").length > 0){
-			$(".development").css("background","url(images/1.5.png) no-repeat left center");
-
-		}
-		if($(".dataTest").find("li").length > 0){
-			$(".test").css("background","url(images/c77.png) no-repeat left center");
-
-		}
-		if($(".dataRelease").find("li").length > 0){
-			$(".release").css("background","url(images/c88.png) no-repeat left center")
-
-		};
-		//当每个ul下都有上传的文档时，更换产品菜单的背景图
-		if($(".dataRelease").find("li").length > 0 && $(".dataTest").find("li").length > 0 && $(".dataDevelopment").find("li").length > 0 &&　$(".dataDesign").find("li").length > 0　&& $(".dataPlan").find("li").length > 0){
-			$(".plan").css("background","url(images/1.3.png) no-repeat left center");
-			$(".design").css("background","url(images/1.4.png) no-repeat left center");
-			$(".development").css("background","url(images/1.5.png) no-repeat left center");
-			$(".test").css("background","url(images/1.6.png) no-repeat left center");
-			$(".release").css("background","url(images/1.7.png) no-repeat left center")
-		}
+		
 	}
 	
 	
 
-	//wrapper中默认显示第一个产品的第一个产品值
-	var element = $(".pc_content").find(".pcBox:first-child");
-	var li = element.find("ul li:first-child");
-	var val = li.find("span").html().trim();
-	console.log(val);
-	$(".titlePlan").html(val);
-	$(".titleDesign").html(val);
-	$(".titleDevelopment").html(val);
-	$(".titleTest").html(val);
-	$(".titleRelease").html(val);
-
-
-	//点击不同端的不同产品，相应的改变wrapper中的值
-	$(".aLink").on("click",function(){
-		//获取此时点击的产品的值
-		var $link = $(this).html().trim();
-		console.log($link);
-		$(".titlePlan").html($link);
-		$(".titleDesign").html($link);
-		$(".titleDevelopment").html($link);
-		$(".titleTest").html($link);
-		$(".titleRelease").html($link);
-		/*$(this).addClass("activeLink");
-		$(this).parent("li").siblings().find(".aLink").removeClass("activeLink");*/
-	});
 	
+
+	//点击不同端的不同产品，显示wrapper 默认显示第一个
+    $(".aLink").on("click", function() {
+        //动态wrapper
+        
+        //tab切换
+        $("body .tab_process").find("dl").on("click",function(){
+            $(this).addClass("processActive").siblings("dl").removeClass("processActive");
+            //每次点击更换 dataBox中的内容
+            //当data下都有上传的文档时，更换产品菜单的背景图
+            if ($("body .data").find("li").length > 0 ) {
+               $(this).find("dt .tabIcon").removeClass("tabIcon").addClass("tabIconActive");    
+            }
+
+        });
+    });
 	
 	
 });

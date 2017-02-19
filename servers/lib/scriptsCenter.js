@@ -11,9 +11,28 @@
   */
 "use strict";
 
-const getScript = (scriptName, arg) => {
-  console.log("execute %s %s", scriptName, arg);
-  return () => Promise.resolve(2);
+const {resolve} = require("path");
+const services = resolve(__dirname, "..", "..", "..", "services");
+const {throwNoThisFunction, throwNoThisServer} = require(resolve(__dirname, "..", "..", "errors"));
+const {memoryInfo, systemInfo} = require(resolve(services, "fileSystem"));
+
+const SCRIPTS = new Map();
+
+SCRIPTS.set("system", {
+  memoryInfo,
+  systemInfo,
+});
+
+const getScript = (scriptName, command) => {
+  if (SCRIPTS.has(scriptName)) {
+    const _ = SCRIPTS.get(scriptName);
+    if (_[command]) {
+      return _[command];
+    }
+
+    throwNoThisFunction();
+  }
+  throwNoThisServer();
 };
 
 module.exports = {

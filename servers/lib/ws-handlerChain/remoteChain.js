@@ -85,7 +85,7 @@ process.on("sendRemotesInfo", (message, callback) => {
 
 process.on("sendOneRemoteInfo", (origin, message, callback) => {
   const {type, _} = message;
-  
+
   if (module[DATANODES].has(origin)) {
     const ws = module[DATANODES].get(origin);
     ws.connection.sendUTF(JSON.stringify({
@@ -120,7 +120,7 @@ module.exports = function(protocol, request, origin) {
 
     connection.on("close", () => {
       console.log("%s data node client is hang-up. %s", new Date().toLocaleString(), request.remoteAddress);
-	  module[DATANODES].delete(origin);
+	    module[DATANODES].delete(origin);
     });
 
     connection.on("message", message => utf8.passRequest(message, origin));

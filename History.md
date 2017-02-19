@@ -2483,3 +2483,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > services/fileSystem.js  
 
+
+1.0.5 / 2017-2-19 21:5:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: script添加执行获取系统信息的方法
+
+
+### modify files
+> servers/lib/scriptsCenter.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+

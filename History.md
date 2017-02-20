@@ -2506,3 +2506,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > servers/lib/scriptsCenter.js  
 
+
+1.0.5 / 2017-2-20 11:11:31
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 更新platform 页面模板
+
+
+### modify files
+> template/platform.pug  
+

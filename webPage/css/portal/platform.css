@@ -45,12 +45,15 @@ input {
         border-bottom: 1px solid #dbdbdb;
         height: 49px;
         line-height: 65px;
-        background: url(../../images/portal/pc.png) no-repeat left 20px;
+        background-position:left 20px;
+        background-repeat: no-repeat;
         padding-left: 30px;
         color: #333333;
         font-weight: 600;
         font-size: 18px;
     }
+    .pc{background-image:url(../../images/portal/pc.png);}
+    .android{background-image:url(../../images/portal/android.png);}
     
     .truContent {
         width: 810px;
@@ -127,8 +130,13 @@ input {
     .tab_process dl dt span{display: inline-block;height:30px;font-size: 16px;color: #323232;cursor:pointer;line-height: 28px;width:100px;font-weight:500;}
     .tab_process dl dt:hover span{color:#00a1df}
 
-    .tabIcon{background-image:url(../../images/portal/plan.png);background-position:center;background-repeat: no-repeat;}
-    /* .tabIconActive{background-image:url(../../images/portal/3.1.1.png);background-position:center;background-repeat: no-repeat;} */
+    .tabIcon{background-position:center;background-repeat: no-repeat;}
+    .tabIcon_plan{background-image:url(../../images/portal/plan.png);}
+    .tabIcon_design{background-image:url(../../images/portal/design.png);}
+    .tabIcon_development{background-image:url(../../images/portal/development.png);}
+    .tabIcon_test{background-image:url(../../images/portal/test.png);}
+    .tabIcon_release{background-image:url(../../images/portal/release.png);}
+   
 
     .tab_process dl.processActive dt span{color:#00a1df}
 
@@ -187,17 +195,20 @@ input {
         width: 100%;
         margin: 0 auto;
     }
-    .tru div.truTitle {
+    .truTitle {
         border-bottom: 1px solid #dbdbdb;
         height: 0.8rem;
         line-height: 1rem;
-        background: url(../../images/portal/pc.png) no-repeat left 0.3rem;
+        background-position:left 0.3rem;
+        background-repeat: no-repeat;
         padding-left: 0.5rem;
         color: #333333;
         font-weight: 600;
         font-size: 18px;
         margin-left: 0.1rem;
     }
+    .pc{background-image:url(../../images/portal/pc.png);}
+    .android{background-image:url(../../images/portal/android.png);}
     
     .truContent {
         width: 100%;
@@ -267,7 +278,12 @@ input {
     .tab_process dl dt span{display: inline-block;height:0.3rem;font-size: 0.24rem;color: #323232;cursor:pointer;line-height: 0.28rem;width:100%;font-weight:500;}
     .tab_process dl dt:hover span{color:#00a1df}
 
-    .tabIcon{background-image:url(../../images/portal/plan.png);background-position:center;background-repeat: no-repeat;background-size:contain;}
+    .tabIcon{background-position:center;background-repeat: no-repeat;background-size:contain;}
+    .tabIcon_plan{background-image:url(../../images/portal/plan.png);}
+    .tabIcon_design{background-image:url(../../images/portal/design.png);}
+    .tabIcon_development{background-image:url(../../images/portal/development.png);}
+    .tabIcon_test{background-image:url(../../images/portal/test.png);}
+    .tabIcon_release{background-image:url(../../images/portal/release.png);}
 
     
 

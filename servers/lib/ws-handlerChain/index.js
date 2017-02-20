@@ -14,10 +14,10 @@
 const {resolve} = require("path");
 const Chain = require(resolve(__dirname, "..", "..", "..", "tools", "chain"));
 
-const [echo, manager] = [new Chain(require(resolve(__dirname, "echoChain"))),
-  new Chain(require(resolve(__dirname, "managerChain")))];
+const [echo, manager, remote] = [new Chain(require(resolve(__dirname, "echoChain"))),
+  new Chain(require(resolve(__dirname, "managerChain"))), new Chain(require(resolve(__dirname, "remoteChain")))];
 
-manager.setNext(echo);
+manager.setNext(remote).setNext(echo);
 
 module.exports = (...args) => {
   manager.passRequest.apply(manager, args);

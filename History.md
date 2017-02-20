@@ -2114,3 +2114,258 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > config/index.js  
 
+
+1.0.3 / 2017-2-14 17:54:58
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 删除多余文件
+
+
+### delete files
+> platform.js  
+
+
+1.0.3 / 2017-2-15 11:14:4
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 产品页面html转jade完毕
+
+
+### new files
+> template/product.pug  
+
+### modify files
+> interceptors/smartNotFound.js  
+> routers/index.js  
+> routers/portal.js  
+> template/header.pug  
+> template/platform.pug  
+> webPage/css/portal/product.css  
+> webPage/js/portal/product.js  
+> webPage/product.html  
+
+
+1.0.3 / 2017-2-15 11:42:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 公共目录html转pug
+
+
+### new files
+> template/directory.pug  
+
+### modify files
+> routers/index.js  
+> routers/portal.js  
+> template/header.pug  
+> webPage/css/portal/directory.css  
+> webPage/js/portal/directory.js  
+
+
+1.0.3 / 2017-2-15 11:46:12
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: mask样式丢失的问题
+
+
+### modify files
+> webPage/css/portal/mask.css  
+
+
+1.0.3 / 2017-2-15 14:13:16
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 动态header实现
+
+
+### modify files
+> routers/portal.js  
+> template/header.pug  
+
+
+1.0.3 / 2017-2-15 14:32:27
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 404, journalError, SystemError pug模板 按钮方法完善
+
+
+### modify files
+> template/404NotFound.pug  
+> template/header.pug  
+> template/journalError.pug  
+> template/systemError.pug  
+
+
+1.0.3 / 2017-2-15 14:38:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完善代码风格
+
+
+### modify files
+> config/index.js  
+> distributed/single.js  
+> interceptors/smartNotFound.js  
+> servers/lib/ws-handlerChain/managerChain.js  
+
+
+1.0.3 / 2017-2-15 14:49:50
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 调整代码位置，捕获SystemError
+
+
+### modify files
+> config/index.js  
+> distributed/single.js  
+> distributed/slave.js  
+> interceptors/authentication.js  
+> interceptors/session.js  
+> interceptors/smartNotFound.js  
+> servers/registry.js  
+
+
+1.0.4 / 2017-2-15 14:55:13
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: tag 1.0.4 发布
+
+
+### modify files
+> .cynomy  
+> README.md  
+> package.json  
+
+### delete files
+> README.md  
+
+
+1.0.5 / 2017-2-15 18:31:12
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 1.0.5开发开始，远程功能开始构建
+
+
+### new files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+> servers/lib/ws-handlerChain/remoteChain.js  
+
+### modify files
+> .cynomy  
+> config/index.js  
+> index.js  
+> package.json  
+> servers/lib/ws-handlerChain/index.js  
+> servers/lib/ws-handlerChain/managerChain.js  
+> servers/websocket.js  
+> template/login.pug  
+> tools/webTools/lib/websocket.js  
+
+### delete files
+> bin/remoteDaemon.js  
+
+
+1.0.5 / 2017-2-15 18:51:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 消息机制升级，接受发送信息待优化
+
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+
+### delete files
+> bin/remoteDaemon.js  
+
+
+1.0.5 / 2017-2-16 11:30:8
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 消息组件组装完毕
+
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+> interceptors/template.js  
+
+### delete files
+> bin/remoteDaemon.js  
+> test/websocketCli  
+
+
+1.0.5 / 2017-2-16 15:5:20
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 远端管理，http注册活动
+
+
+### new files
+> bin/registryNodeServer  
+> routers/nodeManager.js  
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+> config/index.js  
+> routers/index.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+> test/funTest.js  
+> routers/nodeManager.js  
+
+### delete files
+> bin/remoteDaemon.js  
+
+
+1.0.5 / 2017-2-16 15:6:30
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 删除测试数据
+
+
+### modify files
+> routers/index.js  
+
+
+1.0.5 / 2017-2-16 17:11:9
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: remote service 部署
+
+
+### new files
+> servers/lib/scriptsCenter.js  
+
+### modify files
+> config/index.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+
+
+1.0.5 / 2017-2-16 17:31:38
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: remote serivce 丰富功能，添加测试
+
+
+### modify files
+> routers/index.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+

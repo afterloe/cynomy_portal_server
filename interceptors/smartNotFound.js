@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{equal}, {compileTemplate}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "buildPage"))];
+const {equal} = require(resolve(__dirname, "..", "errors"));
 
 module.exports = function * (next) {
   if (this.status && 404 !== this.status) {
@@ -24,7 +24,7 @@ module.exports = function * (next) {
 
   yield next;
   const error = this.error;
-  
+
   if (error) {
     if (equal(error)) {
       if ("json" === this.way) {
@@ -40,6 +40,7 @@ module.exports = function * (next) {
       if ("json" === this.way) {
           this.body = this.fail();
       } else {
+          process.emit("systemError", error);
           this.render("systemError", {
             title: "system Error"
           });

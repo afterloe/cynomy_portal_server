@@ -1,8 +1,8 @@
-//- create by afterloe on 2017-2-14 16:03:26 - MIT
+//- create by afterloe on 2017-2-15 11:29:13 - MIT
 
 include header
 
-link(href= static + "css/portal/platform.css" rel="stylesheet")
+link(href= static + "css/portal/directory.css" rel="stylesheet")
 link(href= static + "css/portal/mask.css" rel="stylesheet")
 
 div(class="popup")
@@ -26,38 +26,13 @@ div(class="popup")
           span
             button(class="submit_re") 开始上传
 
-div(class="container platform_content")
-  div(class="content_one")
-    div(class="truPC")
-      div(class="pcTitle") TRU Mate PC端
-      div(class="pc_content")
-        div(class="pcBox")
-          div 平台V1.0：
-          ul
-            li
-              span(class="aLink") TRU Mate V2.0
-            li
-              span(class="aLink") TRU Enterprise V1.0
-            li
-              span(class="aLink") TRU Marketplace V1.0
-    div(class="truAndroid")
-      div(class="androidTitle") TRU Mate 移动端
-      div(class="android_content")
-        div(class="androidBox")
-          div 平台V1.0：
-          ul
-            li
-              span(class="aLink") TRU Mate V2.0
-            li
-              span(class="aLink") TRU Enterprise V1.0
-            li
-              span(class="aLink") TRU Marketplace V1.0
+div(class="container directory_content")
   div(class="proposal")
   div(class="wrapper")
     ul(id="myTab" class="nav nav-tabs")
       li(class="active")
         div(class="same")
-          a(href="#plan" data-toggle="tab" class="plan")
+          a(href="#plan" data-toggle="tab"  class="plan")
           span &bull;&bull;&bull;&bull;&bull;&bull;&bull;
         span(class="product") 产品规划
       li
@@ -175,4 +150,4 @@ div(class="container platform_content")
 include footer
 
 script(src= static + "js/portal/rem.js")
-script(src= static + "js/portal/platform.js")
+script(src= static + "js/portal/directory.js")

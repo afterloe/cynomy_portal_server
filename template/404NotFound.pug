@@ -2,15 +2,17 @@
 
 include header
 
-div(class="container-fluid" style="{float: none;display: block;margin-left: auto;margin-right: auto;}")
-  div(class="jumbotron")
-    p(class="lead") There is nothing here
-    hr(class="my-4")
-    p No web page for this address
-    small 404 Error
-    p(class="lead")
-      a(class="btn btn-outline-success" href="#" role="button") back
+div(class="container content")
+  div(class="container structure")
+    div(class="container-fluid")
+      div(class="jumbotron")
+        p(class="lead") There is nothing here
+        hr(class="my-4")
+        p No web page for this address
+        small 404 Error
+        p(class="lead")
+          a(class="btn btn-outline-success" href="#" onClick="javascript:history.go(-1);" role="button") back
 
-      a(class="btn btn-outline-danger" href="#" role="button") homePage
+          a(class="btn btn-outline-danger" href="/portal/home" role="button") homePage
 
 include footer

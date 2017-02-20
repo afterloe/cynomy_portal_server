@@ -34,6 +34,10 @@ const initWorkSocketServer = () => {
   });
 };
 
+module.registry = originInfo => {
+  module[ORIGIN].set(originInfo, true);
+};
+
 module.exports = httpServer => {
 
   module[WSSERVER] = new server({

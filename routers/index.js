@@ -13,26 +13,24 @@
 
 const {resolve} = require("path");
 const interceptors = resolve(__dirname, "..", "interceptors");
-const [user, workflow, goodses, portal] = [require(resolve(__dirname, "user")), require(resolve(__dirname, "workflow")),
-  require(resolve(__dirname, "goodses")), require(resolve(__dirname, "portal"))];
+const [user, workflow, goodses, portal, node] = [require(resolve(__dirname, "user")), require(resolve(__dirname, "workflow")),
+  require(resolve(__dirname, "goodses")), require(resolve(__dirname, "portal")), require(resolve(__dirname, "nodeManager"))];
 const [authentication] = [require(resolve(interceptors, "authentication"))];
 
 module.exports = _ => {
-  _.get("/test", function* (next) {
-    this.render("index", {
-      title: "首页",
-      static: "http://almcloud.jwis.cn/",
-    });
-
-    return yield next;
-  });
+  /*
+   * 节点 模块
+   */
+  _.post("/node", node.registry);
 
   /*
    * portal 模块
    */
   _.get("/portal/login", portal.login); // *页面跳转 -> 登录页
-  _.get("/portal/platform", authentication, portal.platform); // *页面跳转 -> 
   _.get("/portal/home", authentication, portal.home); // *页面跳转 -> 首页
+  _.get("/portal/platform", authentication, portal.platform); // *页面跳转 -> 平台
+  _.get("/portal/product", authentication, portal.product); // *页面跳转 -> 产品
+  _.get("/portal/directory", authentication, portal.directory); // *页面跳转 -> 公共目录
 
   /*
    *  用户模块
@@ -54,6 +52,18 @@ module.exports = _ => {
   /*
    *  测试：开发者信息
    */
+  _.post("/test/echo", function* (next) {
+    const {info} = this.request.body;
+    process.emit("sendCynomyCommunication", info);
+    this.body = this.success("send success");
+    return yield next;
+  });
+  _.post("test/call", function* (next) {
+    const {info} = this.request.body;
+    process.emit("sendRemotesInfo", info);
+    this.body = this.success("send " + info + "success");
+    return yield next;
+  });
   _.get("/author", function* (next) {
     this.body = JSON.stringify({
         name: "afterloe",

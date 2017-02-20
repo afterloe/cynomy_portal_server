@@ -14,7 +14,7 @@
 const [{createServer}, {fork}, {resolve}, cluster] = [require("net"), require("child_process"), require("path"), require("cluster")];
 const {get} = require(resolve(__dirname, "config"));
 
-const [threadManager, slavePath ,bindHost, registryPort, {enable, slaveNum = 1}] = [new Map(), resolve(__dirname, "distributed","slave"), get("bindHost"), get("registryPort"), get("distributed")];
+const [threadManager, slavePath ,bindHost, registryPort, {enable, slaveNum = 1}, remote] = [new Map(), resolve(__dirname, "distributed","slave"), get("bindHost"), get("registryPort"), get("distributed"), get("remote")];
 
 const startSlave = socket => {
   const worker = fork(slavePath);
@@ -33,6 +33,10 @@ const startSlave = socket => {
   worker.send("start-up", socket);
   threadManager.set(pid, worker);
 };
+
+if (true === remote.enable) {
+  require(resolve(__dirname, "bin", "remoteDaemon"))(remote.host, remote.port);
+}
 
 if (enable) {
   console.log("portal server engine use cluster module, %s threads will startup", slaveNum);

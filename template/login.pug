@@ -73,6 +73,7 @@ html(lang="en")
         $("#error").html("请输入邮箱！");
         return ;
       }
+
       $.ajax({
         url: "/user/" + email +"/loginPermit",
         type: "GET",

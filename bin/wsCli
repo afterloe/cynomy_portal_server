@@ -1,0 +1,74 @@
+#!/usr/bin/env node
+/**
+  * afterloe - cynomy_portal_server/bin/wsCli
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <lm6289511@gmail.com> (https://github.com/afterloe)
+  * Date:
+  *   2017-2-15 16:53:30
+  */
+"use strict";
+
+const {client} = require("websocket");
+const [, , host, port, origin] = process.argv;
+
+const WEBSOCKET = Symbol("WEBSOCKET");
+
+module[WEBSOCKET] = new client({
+  maxReceivedFrameSize: 1024 * 1024 * 400
+});
+
+module[WEBSOCKET].on("connectFailed", error => {
+  console.log("Connection Error: %s", error.toString());
+  process.send({
+    act: "suicide", // 线程退出
+    msg: error.toString()
+  });
+  process.exit(106);
+});
+
+module[WEBSOCKET].on("connect", connection => {
+
+  console.log("websocket client connected with %s:%s", host, port);
+
+  process.send({
+    act: "launch activity", // 后端线程准备完毕发送通知
+  });
+
+  process.on("message", message => { // 监听 domainsocket 获取message事件监听
+    const {act, msg} = message;
+    if ("receive" === act) { // 发送接收到的信息到主线程
+        connection.send(msg);
+        process.send({
+          act: "launch ok"
+        });
+    }
+  });
+
+  connection.on("error", error => {
+    console.log("Connection Client Error: %s", error.toString());
+  });
+
+  connection.on("close", () => {
+    process.send({
+      act: "launch close", // 发送关闭信息到主线程
+    });
+    console.log("Connection Client Closed.");
+    process.exit(0);
+  });
+
+  connection.on("message", message => {
+    if ("utf8" === message.type) {
+      console.log("[%s]: %s", new Date().toLocaleString(), message.utf8Data);
+      process.send({
+        act: "send result",
+        msg: message.utf8Data,
+      });
+    }
+  });
+});
+
+module[WEBSOCKET].connect(`ws://${host}:${port}`, "remote-protocol", origin);

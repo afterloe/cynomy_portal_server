@@ -12,8 +12,9 @@
 "use strict";
 
 const [co, {resolve}, {writeFileSync}] = [require("co"), require("path"), require("fs")];
-const Chain = require(resolve(__dirname, "..", "..", "..", "tools", "chain"));
-const [{uuidCode}, {get}] = [require(resolve(__dirname, "..", "..", "..", "tools", "utilities")), require(resolve(__dirname, "..", "..", "..", "config"))];
+const root = resolve(__dirname, "..", "..", "..");
+const Chain = require(resolve(root, "tools", "chain"));
+const [{uuidCode}, {get}] = [require(resolve(root, "tools", "utilities")), require(resolve(root, "config"))];
 const {getService} = require(resolve(__dirname, "..", "servicesCenter"));
 
 const receiveType = new Map();
@@ -42,7 +43,7 @@ function handlerMsg4Str(message, connection) {
           _: data,
         }));
       }).catch(err => {
-        throw err
+        throw err;
       });
     } catch (err) {
       connection.sendUTF(JSON.stringify({

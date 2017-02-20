@@ -25,7 +25,7 @@ module.exports = function* (next) {
   const [{accept = "web"}, __self] = [this.request.header, this];
   if ("application/json" === accept) {
     this.way = "json";
-    this.set("Content-Type", "application/json; charset=utf-8");
+    this.set("Content-Type", "application/json;charset=utf-8");
 
     this.success = ctx => ({
       code: 200,
@@ -41,7 +41,7 @@ module.exports = function* (next) {
 
   } else {
     this.way = "web";
-    this.set("Content-Type", "text/html; charset=utf-8");
+    this.set("Content-Type", "text/html;charset=utf-8");
 
     this.render = (template, _) => {
       const _default = defualt;

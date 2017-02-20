@@ -29,60 +29,56 @@ div(class="popup")
 div(class="container platform_content")
   div(class="content_one")
     div(class="tru")
-      div(class="truTitle") TRU Mate PC端
+      div(class="truTitle pc") TRU Mate PC端
       div(class="truContent")
         div(class="truBox")
           div 平台V1.0：
+          - const _pc_products = locals.products.pc || [];
           ul
-            li
-              span(class="aLink") TRU Mate V2.0
-            li
-              span(class="aLink") TRU Enterprise V1.0
-            li
-              span(class="aLink") TRU Marketplace V1.0
+            each _p in _pc_products
+              li(data-id=_p._id)
+                span(class="aLink")= _p.name
     div(class="tru")
       div(class="truTitle android") TRU Mate 移动端
       div(class="truContent")
         div(class="truBox")
           div 平台V1.0：
+          - const _android_products = locals.products.android || [];
           ul
-            li
-              span(class="aLink") TRU Mate V2.0
-            li
-              span(class="aLink") TRU Enterprise V1.0
-            li
-              span(class="aLink") TRU Marketplace V1.0
+            each _p in _android_products
+              li(data-id=_p._id)
+                span(class="aLink")= _p.name
 
   div(class="proposal")
 
   div(class="wrapper")
+    - const _product = locals.product || {};
     div(class="tab_process")
-      dl(class="processActive")
-        dt
-          a(href="javascript:void(0);" class="tabIcon")
-          span 产品规划
-        dd &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
-        div(class="clear")
-      dl
-        dt
-          a(href="javascript:void(0);" class="tabIcon")
-          span 产品设计
-        dd &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
-        div(class="clear")
+      - const _process = _product.nodeList || [];
+      - const _activeNode = _product.status || {};
+      each _p,index in _process
+        dl(class= _activeNode.index === _p.index? "processActive": "")
+          dt
+            a(href="javascript:void(0);" class="tabIcon" data-id=_p._id)
+            span=_p.name
+          dd &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+          div(class="clear")
     div(class="tab_content")
       div(class="dataBox")
-        div(class="header") 产品规划辅助资料
+        div(class="header")=`${_activeNode.name}资料`
           span(class="upload")
+        - const _files = _activeNode.produceList || [];
         ul(class="data")
-          li
-            div
-              i
-              span(class="name") My Research 的产品定位.PPT
-              span(class="time") 2017-01-25
-              span 17:05:36
-              span afterloe
-              span(class="download")
-              span(class="dataClose")
+          each _file in _files
+            li
+              div
+                i
+                span(class="name")=_file.name
+                span(class="time") 2017-01-25
+                span 17:05:36
+                span=_file.author.name
+                span(data-id=_file._id class="download")
+                span(class="dataClose")
 
 include footer
 

@@ -2576,3 +2576,14 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/user.js  
 > routers/workflow.js  
 
+
+1.0.5 / 2017-2-20 16:57:50
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: platform页面数据动态化完毕
+
+
+### modify files
+> template/platform.pug  
+

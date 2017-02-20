@@ -2369,3 +2369,174 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > servers/lib/ws-handlerChain/remoteChain.js  
 
+
+1.0.5 / 2017-2-16 18:26:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws bug WS 断开连接的时候无法自动重连,发送时容易出现太多异常，启动的时候有时连接不到ws
+
+
+### modify files
+> bin/remoteDaemon.js  
+> routers/index.js  
+> servers/lib/scriptsCenter.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+
+### delete files
+> bin/remoteDaemon.js  
+
+
+1.0.5 / 2017-2-17 11:28:5
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: ws切断重连机制
+
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+> index.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+> servers/registry.js  
+
+### delete files
+> bin/remoteDaemon.js  
+
+
+1.0.5 / 2017-2-17 14:35:16
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 优化ws重启活动，发送机制
+
+
+### modify files
+> bin/remoteDaemon.js  
+> bin/wsCli  
+
+### delete files
+> bin/remoteDaemon.js  
+
+
+1.0.5 / 2017-2-17 14:38:3
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 优化ws重启发送机制，只发送最近的100条离线消息
+
+
+### modify files
+> bin/remoteDaemon.js  
+
+### delete files
+> bin/remoteDaemon.js  
+
+
+1.0.5 / 2017-2-17 17:4:48
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加查看内存的方法
+
+
+### modify files
+> bin/remoteDaemon.js  
+> index.js  
+> services/fileSystem.js  
+> test/funTest.js  
+
+### delete files
+> bin/remoteDaemon.js  
+
+
+1.0.5 / 2017-2-17 17:30:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 内存查询扩展至linux平台
+
+
+### modify files
+> services/fileSystem.js  
+
+
+1.0.5 / 2017-2-17 18:23:49
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: system添加系统信息方法
+
+
+### modify files
+> services/fileSystem.js  
+
+
+1.0.5 / 2017-2-18 23:10:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: system 添加方法hardDiskInfo
+
+
+### modify files
+> services/fileSystem.js  
+
+
+1.0.5 / 2017-2-19 21:5:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: script添加执行获取系统信息的方法
+
+
+### modify files
+> servers/lib/scriptsCenter.js  
+> servers/lib/ws-handlerChain/remoteChain.js  
+
+
+1.0.5 / 2017-2-20 10:55:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改fileSystem脚本启动异常
+
+
+### modify files
+> servers/lib/scriptsCenter.js  
+
+
+1.0.5 / 2017-2-20 11:11:31
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 更新platform 页面模板
+
+
+### modify files
+> template/platform.pug  
+
+
+1.0.5 / 2017-2-20 11:17:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 更新产品页面
+
+
+### modify files
+> template/product.pug  
+
+
+1.0.5 / 2017-2-20 11:27:57
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 公共目录升级优化
+
+
+### modify files
+> template/directory.pug  
+> webPage/css/portal/directory.css  
+

@@ -36,6 +36,8 @@ const startSlave = socket => {
 
 if (true === remote.enable) {
   require(resolve(__dirname, "bin", "remoteDaemon"))(remote.host, remote.port);
+
+  // process.on("ws");
 }
 
 if (enable) {
@@ -63,8 +65,7 @@ process.on("exit", () => {
 });
 
 process.on('uncaughtException', err => {
-  console.log(`${new Date().toLocaleString()} catch express :
+  console.log(`[${new Date().toLocaleString()}] catch express :
     ${err.message}
-    ${err.stack}
   `);
 });

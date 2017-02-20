@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{resolve, basename}, {spawn}, {statSync, writeFile, existsSync, readFile, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("fs")];
+const [{resolve, basename}, {spawn}, {EOL, platform, hostname, networkInterfaces, cpus}, {statSync, writeFile, existsSync, readFile, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("os"), require("fs")];
 const [{throwNotExistsFile, throwParametersError}, {uuidCode}, {get}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config"))];
 const CENTER = Symbol("CENTER");
 
@@ -44,6 +44,102 @@ const cp = (source, target) => new Promise((solve, reject) => {
     console.log(`cp file to ${targetPath} ... SUCCESS! `);
     solve(resolve(target, name));
   });
+});
+
+const hardDisk = num => new Promise((solve, reject) => {
+  const df = spawn("df", ["-h"]);
+  const awk = spawn("awk", [`{print$${num}}`]);
+
+  let buf = new Buffer(0);
+
+  df.stdout.on("data", chunk => awk.stdin.write(chunk));
+  df.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  df.on("error", err => reject(err));
+  df.on("close", code => 0 === code ? sed.stdin.end(): reject(new Error("ps -caxm -orss,comm")));
+
+  awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  awk.stderr.on('data', err => reject(new Error(err.toString())));
+  awk.on("error", err => reject(err));
+  awk.on("close", code => 0 === code ? solve(buf.toString().split(EOL)): reject(new Error(`df -h | awk '{print$${num}}' is failed`)));
+});
+
+const uname = () => new Promise((solve, reject) => {
+  const uname = spawn("uname", ["-a"]);
+
+  let buf = new Buffer(0);
+
+  uname.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  uname.stderr.on('data', err => reject(new Error(err.toString())));
+  uname.on("error", err => reject(err));
+  uname.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`uname -a is failed`)));
+});
+
+const linuxRealMem = () => new Promise((solve, reject) => {
+  const ps = spawn("ps", ["-aux"]);
+  const awk = spawn("awk", ["{ sum += $6 } END { print sum/1024}"]);
+
+  let buf = new Buffer(0);
+
+  ps.stdout.on("data", chunk => awk.stdin.write(chunk));
+  ps.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  ps.on("error", err => reject(err));
+  ps.on("close", code => 0 === code ? awk.stdin.end(): reject(new Error("ps -caxm -orss,comm")));
+
+  awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  awk.stderr.on('data', err => reject(new Error(err.toString())));
+  awk.on("error", err => reject(err));
+  awk.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`ps -aux | awk '{ sum += $6 } END { print sum/1024 }' is failed`)));
+});
+
+const getLinuxSystemMem = () => new Promise((solve, reject) => {
+  const free = spawn("free", ["-m"]);
+  const sed = spawn("sed", ["-n 2p"]);
+
+  let buf = new Buffer(0);
+
+  free.stdout.on("data", chunk => sed.stdin.write(chunk));
+  free.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  free.on("error", err => reject(err));
+  free.on("close", code => 0 === code ? sed.stdin.end(): reject(new Error("ps -caxm -orss,comm")));
+
+  sed.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  sed.stderr.on('data', err => reject(new Error(err.toString())));
+  sed.on("error", err => reject(err));
+  sed.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`free -m | sed -n '2p' is failed`)));
+});
+
+const darwinRealMem = () => new Promise((solve, reject) => {
+  const ps = spawn("ps", ["-caxm", "-orss,comm"]);
+  const awk = spawn("awk", ["{ sum += $1 } END { print sum/1024}"]);
+
+  let buf = new Buffer(0);
+
+  ps.stdout.on("data", chunk => awk.stdin.write(chunk));
+  ps.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  ps.on("error", err => reject(err));
+  ps.on("close", code => 0 === code ? awk.stdin.end(): reject(new Error("ps -caxm -orss,comm")));
+
+  awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  awk.stderr.on('data', err => reject(new Error(err.toString())));
+  awk.on("error", err => reject(err));
+  awk.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`ps -caxm -orss= | awk '{ sum += $1 } END { print sum/1024 }' is failed`)));
+});
+
+const getDarwinSystemMem = () => new Promise((solve, reject) => {
+  const vm_stat = spawn("vm_stat");
+  const awk = spawn("awk", ["-F", ":" , "{print$2}"]);
+
+  let buf = new Buffer(0);
+
+  vm_stat.stdout.on("data", chunk => awk.stdin.write(chunk));
+  vm_stat.stderr.on("data", chunk => reject(new Error(chunk.toString())));
+  vm_stat.on("error", err => reject(err));
+  vm_stat.on("close", code => 0 === code ? awk.stdin.end(): reject(new Error("vm_stat")));
+
+  awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
+  awk.stderr.on('data', err => reject(new Error(err.toString())));
+  awk.on("error", err => reject(err));
+  awk.on("close", code => 0 === code ? solve(buf.toString()): reject(new Error(`vm_stat | awk -F ':' '{print$2}' is failed`)));
 });
 
 const readJSON = path => new Promise((solve, reject) => {
@@ -177,6 +273,77 @@ function* move(source, ...args) {
   }
 }
 
+function* linuxMemoryInfo() {
+  const _ = {};
+  let [str, str1] = yield [getLinuxSystemMem(), linuxRealMem()];
+  str = str.split(EOL);
+  const datas = str.map(data => Number.parseInt(data));
+  _["Used Memory"] = datas[2];
+  _["Shared Memory"] = datas[4];
+  _["Free Memory"] = datas[3];
+  _["Available Memory"] = datas[6];
+
+  str1 = str1.split(EOL);
+  _["Real Mem Total"] = str1[0];
+
+  return _;
+}
+
+function* darwinMemoryInfo() {
+  const _ = {};
+  let [str, str1] = yield [getDarwinSystemMem(), darwinRealMem()];
+  str = str.split(EOL);
+  const datas = str.map(data => Number.parseInt(data));
+
+  str1 = str1.split(EOL);
+  _["Wired Memory"] = datas[6]*4096/1024/1024;
+  _["Active Memory"] = datas[2]*4096/1024/1024;
+  _["Inactive Memory"] = datas[3]*4096/1024/1024;
+  _["Free Memory"] = datas[1]*4096/1024/1024;
+  _["Real Mem Total"] = str1[0];
+
+  return _;
+}
+
+function* memoryInfo() {
+  const platform = platform();
+  if ("darwin" === platform) {
+    return yield darwinMemoryInfo();
+  } else if ("linux" === platform) {
+    return yield linuxMemoryInfo();
+  }
+
+  return {};
+}
+
+function* hardDiskInfo() {
+  const [diskName, diskSize, diskTotal, diskEnable, diskPercentage, where] = yield [hardDisk(1), hardDisk(2), hardDisk(3), hardDisk(4), hardDisk(5), hardDisk(6)];
+  const _ = {};
+  diskName.map((name, index) => {
+    _[name] = {
+      size: diskName[index],
+      total: diskTotal[index],
+      enable: diskEnable[index],
+      percentage: diskPercentage[index],
+      where: where[index],
+    };
+  });
+
+  return _;
+}
+
+function* systemInfo() {
+  const [hostName, network, platform, cpus] = [hostname(), networkInterfaces(), platform(), cpus()];
+  const uname = yield uname();
+  return {
+    hostName,
+    network,
+    platform,
+    cpus,
+    uname,
+  };
+}
+
 module.exports = {
   decompression,
   compression,
@@ -184,4 +351,6 @@ module.exports = {
   cp,
   writeJSON,
   readJSON,
+  memoryInfo,
+  systemInfo,
 };

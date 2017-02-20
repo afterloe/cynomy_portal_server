@@ -35,7 +35,7 @@ module[WEBSOCKET].on("connect", connection => {
   console.log("websocket client connected with %s:%s", host, port);
 
   process.send({
-    act: "launch activity", // 后端线程准备完毕发送通知
+    act: "launch activity", // ws后端线程准备完毕发送通知
   });
 
   process.on("message", message => { // 监听 domainsocket 获取message事件监听
@@ -57,7 +57,7 @@ module[WEBSOCKET].on("connect", connection => {
       act: "launch close", // 发送关闭信息到主线程
     });
     console.log("Connection Client Closed.");
-    process.exit(0);
+    setTimeout(() => process.exit(0), 1000);
   });
 
   connection.on("message", message => {

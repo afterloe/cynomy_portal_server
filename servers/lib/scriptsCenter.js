@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const services = resolve(__dirname, "..", "..", "..", "services");
+const services = resolve(__dirname, "..", "..", "services");
 const {throwNoThisFunction, throwNoThisServer} = require(resolve(__dirname, "..", "..", "errors"));
 const {memoryInfo, systemInfo} = require(resolve(services, "fileSystem"));
 

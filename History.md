@@ -2495,3 +2495,14 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/lib/scriptsCenter.js  
 > servers/lib/ws-handlerChain/remoteChain.js  
 
+
+1.0.5 / 2017-2-20 10:55:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改fileSystem脚本启动异常
+
+
+### modify files
+> servers/lib/scriptsCenter.js  
+

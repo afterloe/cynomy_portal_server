@@ -12,7 +12,7 @@ input{border:0;}
 	.proposal{width:140px;height:40px;background:url(../../images/portal/1-default.png) no-repeat center;height:40px;cursor: pointer;margin-left:1025px;margin-top:15px;}
 	.proposal:hover{background:url(../../images/portal/2-selected.png) no-repeat center;}
 
-	
+
 	.tab_process{margin-left:100px;margin-right:100px;width:940px;overflow: hidden;}
 	.clear{width:100%;height:0;float:right;}
 	.tab_process dl{height:120px;width:180px;float:left;margin-right:5px;}
@@ -46,8 +46,8 @@ input{border:0;}
     .data li div span.dataClose:hover{background:url(../../images/portal/close-bounced-selected.png) no-repeat  center;}
 	.data li:last-child{border-left:0;}
     .data li:first-child div i{background:#3d9bff;}
-    
-    
+
+
 
 
 }
@@ -58,7 +58,7 @@ input{border:0;}
 	.directory_content{width: 100%;padding-bottom:500px;}
 	.container{padding-right: 15px;padding-left: 15px;margin-right: 0;margin-left: 0;}
 
-	
+
 	.proposal{display: none;}
 	.tab_process{width: 100%;margin-left: 0;margin-right: 0;margin: 0 auto;overflow: hidden;padding-top:0.5rem;}
 	.clear{width:100%;height:0;float:right;}

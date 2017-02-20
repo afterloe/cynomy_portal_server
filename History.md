@@ -2528,3 +2528,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/product.pug  
 
+
+1.0.5 / 2017-2-20 11:27:57
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 公共目录升级优化
+
+
+### modify files
+> template/directory.pug  
+> webPage/css/portal/directory.css  
+

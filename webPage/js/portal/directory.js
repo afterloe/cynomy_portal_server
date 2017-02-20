@@ -42,7 +42,7 @@ $(function(){
 	//tab切换
 	$("body .tab_process").find("dl").on("click",function(){
 		$(this).addClass("processActive").siblings("dl").removeClass("processActive");
-		//每次点击更换 dataBox中的内容
+		//每次点击 更换dataBox中的内容
 	});
 
 

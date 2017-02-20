@@ -34,16 +34,6 @@ input{border:0;}
         font-weight: 600;
         font-size: 18px;
     }
-    .tru div.androidTitle {
-        border-bottom: 1px solid #dbdbdb;
-        height: 49px;
-        line-height: 65px;
-        background: url(../../images/portal/sj.png) no-repeat left 20px;
-        padding-left: 30px;
-        color: #333333;
-        font-weight: 600;
-        font-size: 18px;
-    }
     .truContent {
         width: 810px;
         overflow: hidden;
@@ -119,8 +109,8 @@ input{border:0;}
     .tab_process dl dt span{display: inline-block;height:30px;font-size: 16px;color: #323232;cursor:pointer;line-height: 28px;width:100px;font-weight:500;}
     .tab_process dl dt:hover span{color:#00a1df}
 
-    .tabIcon{background-image:url(../../images/portal/3.1.png);background-position:center;background-repeat: no-repeat;}
-    .tabIconActive{background-image:url(../../images/portal/3.1.1.png);background-position:center;background-repeat: no-repeat;}
+    .tabIcon{background-image:url(../../images/portal/plan.png);background-position:center;background-repeat: no-repeat;}
+    
 
     .tab_process dl.processActive dt span{color:#00a1df}
 
@@ -238,9 +228,9 @@ input{border:0;}
     .tab_process dl dt span{display: inline-block;height:0.3rem;font-size: 0.24rem;color: #323232;cursor:pointer;line-height: 0.28rem;width:100%;font-weight:500;}
     .tab_process dl dt:hover span{color:#00a1df}
 
-    .tabIcon{background-image:url(../../images/portal/3.1.png);background-position:center;background-repeat: no-repeat;background-size:contain;}
+    .tabIcon{background-image:url(../../images/portal/plan.png);background-position:center;background-repeat: no-repeat;background-size:contain;}
 
-    .tabIconActive{background-image:url(../../images/portal/3.1.1.png);background-position:center;background-repeat: no-repeat;background-size:contain;}
+    
 
     .tab_process dl.processActive dt span{color:#00a1df}
 

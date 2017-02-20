@@ -22,7 +22,7 @@ $(function() {
             $(this).parent("li").remove();
         });
     }
-    //关闭zhezhaoc
+    //关闭遮罩层
     $(".btn_close").on("click", function() {
         $(".popup").css("display", "none");
     });
@@ -61,11 +61,6 @@ $(function() {
         $("body .tab_process").find("dl").on("click",function(){
             $(this).addClass("processActive").siblings("dl").removeClass("processActive");
             //每次点击更换 dataBox中的内容
-            //当data下都有上传的文档时，更换产品菜单的背景图
-            if ($("body .data").find("li").length > 0 ) {
-               $(this).find("dt .tabIcon").removeClass("tabIcon").addClass("tabIconActive");    
-            }
-
         });
     });
 

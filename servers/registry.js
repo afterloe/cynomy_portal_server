@@ -31,7 +31,8 @@ app.use(router.allowedMethods());
 app.use(smartNotFound);
 
 app.on("error", (err, ctx) => {
-  process.emit("systemError", err, ctx);
+  // process.emit("systemError", err, ctx);
+  console.error(err);
   console.log(err.message);
   console.log(ctx.request.ip);
 });

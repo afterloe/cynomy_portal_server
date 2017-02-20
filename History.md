@@ -2540,3 +2540,22 @@ commit by afterloe (lm6289511@gmail.com)
 > template/directory.pug  
 > webPage/css/portal/directory.css  
 
+
+1.0.5 / 2017-2-20 15:40:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端数据升级，提供产品真实数据
+
+
+### modify files
+> config/index.js  
+> dao/public.js  
+> doc/user.xlsx  
+> interceptors/smartNotFound.js  
+> routers/portal.js  
+> servers/registry.js  
+> services/workflowService.js  
+> template/platform.pug  
+> test/funTest.js  
+

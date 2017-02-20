@@ -135,17 +135,21 @@ function* clean() {
   return yield this.deleteMany({});
 }
 
-function* searchByTags(tags){
-  return yield this.find({
-    tags: {
-      $all: tags
-    },
-    state: 200,
-  }, {
-    name : 1,
-    tags: 1,
-    beginTimestamp: 1,
-  });
+function* searchByTags(tags) {
+  if (tags instanceof Array) {
+    return yield this.find({
+      tags: {
+        $all: tags
+      },
+      state: 200,
+    }, {
+      name : 1,
+      tags: 1,
+      beginTimestamp: 1,
+    }).toArray();
+  }
+
+  return [];
 }
 
 module.exports = {

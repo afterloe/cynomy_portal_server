@@ -545,12 +545,8 @@ function* cleanDocuments() {
   return {a,b,c,d};
 }
 
-function* searchProduct(tag) {
-  if ("string" !== typeof tag) {
-    throwParametersError();
-  }
-
-  const _ = yield workFlow_instance_dao.searchByTags(tag);
+function* searchProduct(...tags) {
+  const _ = yield workFlow_instance_dao.searchByTags(tags);
   return _;
 }
 

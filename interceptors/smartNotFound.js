@@ -26,6 +26,7 @@ module.exports = function * (next) {
   const error = this.error;
 
   if (error) {
+    console.log(error);
     if (equal(error)) {
       if ("json" === this.way) {
           this.body = this.fail(error.message, error.code);

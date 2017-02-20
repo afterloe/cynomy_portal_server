@@ -11,7 +11,8 @@
   */
 "use strict";
 
-// const {resolve} = require("path");
+const {resolve} = require("path");
+const {searchProduct} = require(resolve(__dirname, "..", "services", "workflowService"));
 
 function* login(next) {
   if (this.error) {
@@ -49,16 +50,30 @@ function* home(next) {
   return yield next;
 }
 
+/**
+ * 跳转 - 平台页
+ *
+ * @param  {Function}  next [koa context]
+ * @return {Generator}      [next middleware]
+ */
 function* platform(next) {
   if (this.error) {
     return yield next;
   }
   try {
+    const [pcList, androidList] = yield [searchProduct("pc", "平台V1.0"), searchProduct("android", "平台V1.0")];
+    const _ = {
+      title: "R&D Portal - platform",
+      index: 2,
+      products: {
+        pc: pcList,
+        android: androidList
+      },
+    };
     if ("web" === this.way) {
-      this.render("platform", {
-        title: "R&D Portal - platform",
-        index: 2,
-      });
+      this.render("platform", _);
+    } else if ("json" === this.way) {
+      this.body = this.success(_);
     }
   } catch (err) {
     this.error = err;

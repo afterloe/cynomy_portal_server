@@ -59,7 +59,7 @@ div(class="container platform_content")
       each _p,index in _process
         dl(class= _activeNode.index === _p.index? "processActive": "")
           dt
-            a(href="javascript:void(0);" class="tabIcon" data-id=_p._id)
+            a(href="javascript:void(0);" class="tabIcon tabIcon_plan" data-id=_p._id)
             span=_p.name
           dd &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
           div(class="clear")

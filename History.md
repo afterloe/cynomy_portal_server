@@ -2587,3 +2587,17 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-20 18:28:40
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改三个点导致消息益处
+
+
+### modify files
+> template/platform.pug  
+> webPage/css/portal/directory.css  
+> webPage/css/portal/platform.css  
+> webPage/css/portal/product.css  
+

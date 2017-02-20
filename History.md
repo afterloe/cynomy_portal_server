@@ -2559,3 +2559,20 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > test/funTest.js  
 
+
+1.0.5 / 2017-2-20 16:16:44
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 提升中间件smartNotFound功能，自动匹配页面和json文件
+
+
+### modify files
+> interceptors/smartNotFound.js  
+> routers/goodses.js  
+> routers/index.js  
+> routers/nodeManager.js  
+> routers/portal.js  
+> routers/user.js  
+> routers/workflow.js  
+

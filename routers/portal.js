@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const {searchProduct} = require(resolve(__dirname, "..", "services", "workflowService"));
+const {searchProduct, workflowInfo} = require(resolve(__dirname, "..", "services", "workflowService"));
 
 function* login(next) {
   if (this.error) {
@@ -20,11 +20,10 @@ function* login(next) {
   }
 
   try {
-    if ("web" === this.way) {
-      this.render("login", {
-        title: "R&D Portal login",
-      });
-    }
+    this.pageName = "login";
+    this.data = {
+      title: "R&D Portal login",
+    };
   } catch (err) {
     this.error = err;
   }
@@ -37,12 +36,11 @@ function* home(next) {
     return yield next;
   }
   try {
-    if ("web" === this.way) {
-      this.render("home", {
-        title: "R&D Portal",
-        index: 1,
-      });
-    }
+    this.pageName = "home";
+    this.data = {
+      title: "R&D Portal",
+      index: 1,
+    };
   } catch (err) {
     this.error = err;
   }
@@ -62,19 +60,20 @@ function* platform(next) {
   }
   try {
     const [pcList, androidList] = yield [searchProduct("pc", "平台V1.0"), searchProduct("android", "平台V1.0")];
-    const _ = {
+    let product = null;
+    if (pcList.length > 0) {
+      product = yield workflowInfo(pcList[0]._id);
+    }
+    this.pageName = "platform";
+    this.data = {
       title: "R&D Portal - platform",
       index: 2,
+      product,
       products: {
         pc: pcList,
         android: androidList
       },
     };
-    if ("web" === this.way) {
-      this.render("platform", _);
-    } else if ("json" === this.way) {
-      this.body = this.success(_);
-    }
   } catch (err) {
     this.error = err;
   }
@@ -87,12 +86,11 @@ function* product(next) {
     return yield next;
   }
   try {
-    if ("web" === this.way) {
-      this.render("product", {
-        title: "R&D product",
-        index: 3,
-      });
-    }
+    this.pageName = "product";
+    this.data = {
+      title: "R&D Portal - product",
+      index: 3,
+    };
   } catch (err) {
     this.error = err;
   }
@@ -105,12 +103,11 @@ function* directory(next) {
     return yield next;
   }
   try {
-    if ("web" === this.way) {
-      this.render("directory", {
-        title: "R&D directory",
-        index: 4,
-      });
-    }
+    this.pageName = "directory";
+    this.data = {
+      title: "R&D Portal - directory",
+      index: 4,
+    };
   } catch (err) {
     this.error = err;
   }

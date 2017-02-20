@@ -16,10 +16,7 @@ const goodsService = require(resolve(__dirname, "..", "services", "goodsService"
 
 const list = function* (next) {
   const {number, page} = this.params;
-  const userList = yield goodsService.getGoodsList(number, page);
-  if ("json" === this.way) {
-    this.body = this.success(userList);
-  }
+  this.data = yield goodsService.getGoodsList(number, page);
   return yield next;
 };
 

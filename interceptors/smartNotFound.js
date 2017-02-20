@@ -23,7 +23,7 @@ module.exports = function * (next) {
   }
 
   yield next;
-  const error = this.error;
+  const {error, pageName, data} = this;
 
   if (error) {
     console.log(error);
@@ -46,6 +46,12 @@ module.exports = function * (next) {
             title: "system Error"
           });
       }
+    }
+  } else if (pageName || data) {
+    if ("web" === this.way) {
+      this.render(pageName, data);
+    } else if ("json" === this.way) {
+      this.body = this.success(data);
     }
   } else {
     if ("json" === this.way) {

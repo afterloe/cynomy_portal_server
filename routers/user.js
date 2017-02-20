@@ -20,10 +20,7 @@ function* list(next) {
   }
   try {
     const {number, page} = this.params;
-    const userList = yield getUserList(number, page);
-    if ("json" === this.way) {
-      this.body = this.success(userList);
-    }
+    this.data = yield getUserList(number, page);
   }catch(err) {
     this.error = err;
   }
@@ -38,9 +35,7 @@ function* permit(next) {
   try {
     const {mail} = this.params;
     yield obmitLoginPermit(mail);
-    if ("json" === this.way) {
-      this.body = this.success();
-    }
+    this.data = true;
   } catch (err) {
     this.error = err;
   }
@@ -59,9 +54,7 @@ function* login(next) {
       throwLackParameters();
     }
     const sessionId = yield loginSystem(mail, permit);
-    if ("json" === this.way) {
-      this.body = this.success(sessionId);
-    }
+    this.data = sessionId;
     this.forceSign(sessionId);
   } catch (err) {
     this.error = err;

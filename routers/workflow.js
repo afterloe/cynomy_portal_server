@@ -16,10 +16,7 @@ const workflowService = require(resolve(__dirname, "..", "services", "workflowSe
 
 const list = function* (next) {
   const {number, page} = this.params;
-  const userList = yield workflowService.getWorkflowList(number, page);
-  if ("json" === this.way) {
-    this.body = this.success(userList);
-  }
+  this.data = yield workflowService.getWorkflowList(number, page);
   return yield next;
 };
 

@@ -26,10 +26,7 @@ function* registry(next) {
       throwLackParameters();
     }
 
-    if ("json" === this.way) {
-      this.body = this.success("cynomy://");
-    }
-
+    this.data = "cynomy://";
   } catch (err) {
     this.error = err;
   }

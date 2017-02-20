@@ -2601,3 +2601,15 @@ commit by afterloe (lm6289511@gmail.com)
 > webPage/css/portal/platform.css  
 > webPage/css/portal/product.css  
 
+
+1.0.5 / 2017-2-20 18:39:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 扩展css
+
+
+### modify files
+> template/directory.pug  
+> template/product.pug  
+

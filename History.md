@@ -2681,3 +2681,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > routers/portal.js  
 
+
+1.0.5 / 2017-2-21 14:28:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 优化product模板，与plotform共用同一个模板
+
+
+### modify files
+> routers/portal.js  
+

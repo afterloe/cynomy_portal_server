@@ -136,7 +136,7 @@ function* product(next) {
       product: yield findActiveWorkflowExample(__),
     });
 
-    this.pageName = "product";
+    this.pageName = "platform";
     this.data = _;
   } catch (err) {
     this.error = err;

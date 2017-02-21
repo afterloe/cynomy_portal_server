@@ -50,6 +50,7 @@ module.exports = _ => {
    *  文件系统模块
    */
   _.get("/fs/list", authentication, goodses.list); // 更新文件信息列表
+  _.get("/fs/download/:id", authentication, goodses.download);
 
   /*
    *  测试：开发者信息

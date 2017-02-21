@@ -13,9 +13,24 @@
 
 const [{resolve, basename}, {spawn}, {EOL, platform, hostname, networkInterfaces, cpus}, {statSync, writeFile, existsSync, readFile, readdirSync, mkdirSync, createReadStream, createWriteStream}] = [require("path"), require("child_process"), require("os"), require("fs")];
 const [{throwNotExistsFile, throwParametersError}, {uuidCode}, {get}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "..", "config"))];
-const CENTER = Symbol("CENTER");
+const [CENTER, MINIMUM] = [Symbol("CENTER"), Symbol("MINIMUM")];
 
 module[CENTER] = {};
+module[MINIMUM] = new Map();
+
+module[MINIMUM].set(".doc", "application/msword");
+module[MINIMUM].set(".ppt", "application/x-ppt");
+module[MINIMUM].set(".pdf", "application/pdf");
+module[MINIMUM].set(".xls", "application/vnd.ms-excel");
+module[MINIMUM].set(".dotx", "application/vnd.openxmlformats-officedocument.wordprocessingml.template");
+module[MINIMUM].set(".pptx", "application/vnd.openxmlformats-officedocument.presentationml.presentation");
+module[MINIMUM].set(".ppsx", "application/vnd.openxmlformats-officedocument.presentationml.slideshow");
+module[MINIMUM].set(".potx", "application/vnd.openxmlformats-officedocument.presentationml.template");
+module[MINIMUM].set(".xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+module[MINIMUM].set(".xltx", "application/vnd.openxmlformats-officedocument.spreadsheetml.template");
+module[MINIMUM].set(".js", "application/x-javascript");
+module[MINIMUM].set(".rar", "application/x-zip-compressed");
+module[MINIMUM].set(".zip", "application/x-zip-compressed");
 
 /**
  * 复制文件
@@ -241,6 +256,24 @@ const compression = (name, path, ...args) => {
   });
 };
 
+const getGoodsFileInfo = goods => {
+  const {name, path, type, size} = goods;
+  const goodsFilePath = resolve(get("staticDir"), path);
+
+  if(!existsSync(goodsFilePath)) {
+    throwNotExistsFile();
+  }
+
+  const mimeType = module[MINIMUM].has(type)? module[MINIMUM].get(type): "application/octet-stream";
+
+  return {
+    fileName: encodeURI(name),
+    size,
+    mimeType,
+    path: goodsFilePath
+  }
+};
+
 const checkTargetPath = target => {
   if (!existsSync(target)) {
     mkdirSync(target);
@@ -347,6 +380,7 @@ function* systemInfo() {
 module.exports = {
   decompression,
   compression,
+  getGoodsFileInfo,
   move,
   cp,
   writeJSON,

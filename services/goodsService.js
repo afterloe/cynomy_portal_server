@@ -125,6 +125,16 @@ function* setTags(goodsId, ...tagIds) {
   });
 }
 
+function* getGoodsInfo(goodsId) {
+  const goods = yield goods_dao.queryById(goodsId, 200);
+  if (!goods) {
+    throwNotExistsFile();
+  }
+
+  const {name, path, type, size} = goods;
+  return {name, path, type, size};
+}
+
 module.exports = {
   cleanDocuments,
   production,
@@ -133,4 +143,5 @@ module.exports = {
   structureProduceList,
   exampleInfo,
   setTags,
+  getGoodsInfo,
 };

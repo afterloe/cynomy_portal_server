@@ -2755,3 +2755,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-21 18:22:7
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 文件下载接口
+
+
+### modify files
+> routers/goodses.js  
+> routers/index.js  
+> services/fileSystem.js  
+> services/goodsService.js  
+> template/platform.pug  
+

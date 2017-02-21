@@ -2670,3 +2670,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-21 14:23:31
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端完成product页面数据
+
+
+### modify files
+> routers/portal.js  
+

@@ -49,10 +49,11 @@ function* home(next) {
   return yield next;
 }
 
-const findWorkflowByTags = function* (equipment, tags) {
+const findWorkflowByTags = function* (equipment, tags, ...hooks) {
   const _ = {};
   for(let tag of tags) {
-    const result = yield searchProduct(equipment, tag);
+    hooks.unshift(equipment, tag);
+    const result = yield searchProduct.apply(null, hooks);
     Object.assign(_, {
       [tag]: result
     });
@@ -116,11 +117,27 @@ function* product(next) {
     return yield next;
   }
   try {
-    this.pageName = "product";
-    this.data = {
+    const [equipmentTags, platformTags] = yield [findTags("设备"), findTags("平台")];
+    const _ = {
       title: "R&D Portal - product",
       index: 3,
     };
+
+    const __ = {};
+
+    for(let equipment of equipmentTags) {
+      Object.assign(__, {
+        [equipment]: yield findWorkflowByTags(equipment, platformTags, "app"),
+      });
+    }
+
+    Object.assign(_, {
+      products: __,
+      product: yield findActiveWorkflowExample(__),
+    });
+
+    this.pageName = "product";
+    this.data = _;
   } catch (err) {
     this.error = err;
   }

@@ -60,6 +60,16 @@ const findWorkflowByTags = function* (equipment, tags) {
   return _;
 };
 
+const findActiveWorkflowExample = function* (data) {
+  for (let equipment in data) {
+    for(let list in data[equipment]) {
+      if (data[equipment][list].length > 0) {
+        return yield workflowInfo(data[equipment][list][0]._id);
+      }
+    }
+  }
+};
+
 /**
  * 跳转 - 平台页
  *
@@ -81,21 +91,15 @@ function* platform(next) {
     const __ = {};
 
     for(let equipment of equipmentTags) {
-      const list = yield findWorkflowByTags(equipment, platformTags);
-      Object.assign( __, {
-        [equipment]: list
+      Object.assign(__, {
+        [equipment]: yield findWorkflowByTags(equipment, platformTags),
       });
     }
 
     Object.assign(_, {
-      products: __
+      products: __,
+      product: yield findActiveWorkflowExample(__),
     });
-
-    // if (_[equipmentTags[0]].length > 0) {
-    //   Object.assign( _, {
-    //     product: yield workflowInfo(_[equipmentTags[0]][0]._id)
-    //   });
-    // }
 
     this.pageName = "platform";
     this.data = _;

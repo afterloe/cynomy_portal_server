@@ -2637,3 +2637,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > template/product.pug  
 
+
+1.0.5 / 2017-2-21 11:56:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 平台页面添加默认活动节点信息
+
+
+### modify files
+> routers/portal.js  
+

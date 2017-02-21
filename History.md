@@ -2733,3 +2733,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-21 16:54:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 补全模板
+
+
+### modify files
+> template/platform.pug  
+

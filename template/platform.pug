@@ -71,8 +71,7 @@ div(class="container platform_content")
                   span(class="time") 2017-01-25
                   span 17:05:36
                   span=_file.author.name
-                  span(data-id=_file._id class="download")
-                  span(class="dataClose")
+                  span(data-id=_file._id class="download" onClick="javascript:downLoadFile(this);")
 
 include footer
 
@@ -80,6 +79,9 @@ script(src= static + "js/portal/rem.js")
 script(src= static + "js/portal/platform.js")
 
 script.
+  const downLoadFile = (btn) => {
+    alert("下载文件！" + $(btn).attr("data-id"));
+  };
 
   const cleanSelect = () => {
     $(".aLink").each(function() {
@@ -87,8 +89,12 @@ script.
     });
   };
 
+  const cleanSelectd = () => {
+    $("dl").attr("class", "");
+  }
+
   const buildProcess = (nodeList, actionNum) => {
-    const info = nodeList.map((node, index) => `<dl class=${actionNum === index? "processActive":""}>
+    const html = nodeList.map((node, index) => `<dl class=${actionNum === index? "processActive":""}>
       <dt data-id=${node._id} onClick="javascript:showFiles(this);">
         <a class="tabIcon tabIcon_plan" href="javascript:void(0);"></a>
         <span>${node.name}</span>
@@ -96,23 +102,37 @@ script.
       <dd>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</dd>
       <div class="clear"></div>
     </dl>`);
-    $(".tab_process:first").html(info.join(""));
+    $(".tab_process:first").html(html.join(""));
+  };
+
+  const buildFiles = (files) => {
+    const html = files.map((file) => `<li>
+      <div>
+        <i></i>
+        <span class="name">${file.name}</span>
+        <span class="time">2017-01-25</span>
+        <span>17:05:36</span>
+        <span>${file.author.name}</span>
+        <span data-id=${file._id} class="download" onClick="javascript:downLoadFile(this);"></span>
+      </div>
+    </li>`);
+    $(".data:last").html(html.join(""));
   };
 
   const showFiles = btn => {
     const id = $(btn).attr("data-id");
     $.ajax({
       type: "GET",
-      url: `/workflow/${_id}/simple`,
+      url: `/workflow/${id}/files`,
       dataType: "json",
       beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
       success: result => {
         if (200 !== result.code) {
           alert("服务器繁忙");
         } else {
-          cleanSelect();
-          $(btn).find("span").css({color: "#3d9bff"});
-          buildProcess(result.result.nodeList, result.result.status.index);
+          cleanSelectd();
+          $(btn).parent().attr("class", "processActive");
+          buildFiles(result.result.produceList);
         }
       }
     });
@@ -132,6 +152,7 @@ script.
           cleanSelect();
           $(btn).find("span").css({color: "#3d9bff"});
           buildProcess(result.result.nodeList, result.result.status.index);
+          buildFiles(result.result.status.produceList);
         }
       }
     });

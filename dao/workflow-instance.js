@@ -12,7 +12,11 @@
 "use strict";
 
 const {resolve} = require("path");
+const {throwParametersError} = require(resolve(__dirname, "..", "errors"));
 const commonsLib = require(resolve(__dirname, "public"))();
+
+const simpleInfo = {
+};
 
 /**
  * 通过工作流名字来查询工作流实例 - 精确匹配
@@ -20,17 +24,32 @@ const commonsLib = require(resolve(__dirname, "public"))();
  * @param  {String}    name [工作流实例名字]
  * @return {Object}         [工作流实例对象]
  */
-const queryByName = function* (name) {
+const queryByName = function* (name, hooks = {}) {
+  if (hooks) {
+    Object.assign(hooks, simpleInfo);
+  }
   const _ = yield this.findOne({
     name,
     state: 200
-  });
+  }, hooks);
 
   return _ ? _ : undefined;
 };
 
+const queryById = function* (id, hooks = {}) {
+  if (this.valid(id)) {
+    id = this.newObjectId(id);
+    if (hooks) {
+      Object.assign(hooks, simpleInfo);
+    }
+    return this.findOne({_id: id}, hooks);
+  }
+  throwParametersError();
+};
+
 const classMethod = {
   queryByName,
+  queryById,
 };
 
 Object.assign(commonsLib, classMethod);

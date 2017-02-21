@@ -43,6 +43,7 @@ module.exports = _ => {
    *  工作流模块
    */
   _.get("/workflow/list", authentication, workflow.list); // 工作流信息列表
+  _.get("/workflow/:id/simple", authentication, workflow.simpleInfo); // 获取工作流实例简单信息
 
   /*
    *  文件系统模块

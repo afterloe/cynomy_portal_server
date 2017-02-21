@@ -524,10 +524,10 @@ function* updateNodeProduceList(nodeId, {produceList, reason}) {
  * @param  {String}    workflow [工作流实例名 或 工作流id]
  * @return {Object}          [工作流对象]
  */
-function* workflowInfo(workflow) {
-  let _ = yield workFlow_instance_dao.queryById(workflow);
+function* workflowInfo(workflow, hooks) {
+  let _ = yield workFlow_instance_dao.queryById(workflow, hooks);
   if (!_) {
-    _ = yield workFlow_instance_dao.queryByName(workflow);
+    _ = yield workFlow_instance_dao.queryByName(workflow, hooks);
   }
   if (!_) {
     throwNosuchThisWorkFlow();

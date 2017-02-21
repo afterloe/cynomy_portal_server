@@ -2692,3 +2692,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > routers/portal.js  
 
+
+1.0.5 / 2017-2-21 15:9:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加获取工作流简单信息的方法
+
+
+### modify files
+> dao/workflow-instance.js  
+> routers/index.js  
+> routers/workflow.js  
+> services/workflowService.js  
+> template/platform.pug  
+

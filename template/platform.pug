@@ -41,7 +41,7 @@ div(class="container platform_content")
               div= _platformIndex
               ul
                 each _p in _platform
-                  li(data-id=_p._id)
+                  li(data-id=_p._id onClick="javascript:selectWorkflow(this);")
                     span(class="aLink" style=_product_id == _p._id? "color:#3d9bff":"")= _p.name
 
   div(class="proposal")
@@ -78,3 +78,22 @@ include footer
 
 script(src= static + "js/portal/rem.js")
 script(src= static + "js/portal/platform.js")
+
+script.
+  const selectWorkflow = btn => {
+    const _id = $(btn).attr("data-id");
+    $.ajax({
+      type: "GET",
+      url: `/workflow/${_id}/simple`,
+      dataType: "json",
+      beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
+      success: result => {
+        console.log(result);
+        if (200 !== result.code) {
+
+        } else {
+
+        }
+      }
+    });
+  }

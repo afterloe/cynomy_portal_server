@@ -12,14 +12,39 @@
 "use strict";
 
 const {resolve} = require("path");
-const workflowService = require(resolve(__dirname, "..", "services", "workflowService"));
+const {getWorkflowList, workflowInfo} = require(resolve(__dirname, "..", "services", "workflowService"));
 
 const list = function* (next) {
-  const {number, page} = this.params;
-  this.data = yield workflowService.getWorkflowList(number, page);
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const {number, page} = this.params;
+    this.data = yield getWorkflowList(number, page);
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
+const simpleInfo = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const {id} = this.params;
+    this.data = yield workflowInfo(id, {name : 1, nodeList: 1, status: 1});
+  } catch (err) {
+    this.error = err;
+  }
+
   return yield next;
 };
 
 module.exports = {
   list,
+  simpleInfo,
 };

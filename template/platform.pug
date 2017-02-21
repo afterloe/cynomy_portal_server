@@ -80,7 +80,7 @@ script(src= static + "js/portal/platform.js")
 
 script.
   const downLoadFile = (btn) => {
-    alert("下载文件！" + $(btn).attr("data-id"));
+    window.open("/files/download/" + $(btn).attr("data-id"));
   };
 
   const cleanSelect = () => {
@@ -105,13 +105,19 @@ script.
     $(".tab_process:first").html(html.join(""));
   };
 
+  const timeToDate = time => {
+    if (!time) {
+      return new Date().toLocaleString();
+    }
+  };
+
   const buildFiles = (files) => {
     const html = files.map((file) => `<li>
       <div>
         <i></i>
         <span class="name">${file.name}</span>
-        <span class="time">2017-01-25</span>
-        <span>17:05:36</span>
+        <span class="time">${timeToDate(file.uploadTime)}</span>
+        <span>${file.downloadCount}</span>
         <span>${file.author.name}</span>
         <span data-id=${file._id} class="download" onClick="javascript:downLoadFile(this);"></span>
       </div>

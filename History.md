@@ -2744,3 +2744,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-21 17:5:33
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 平台页面和产品页面基本完成，后端缺少下载文件方法
+
+
+### modify files
+> template/platform.pug  
+

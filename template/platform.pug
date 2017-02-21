@@ -27,27 +27,19 @@ div(class="popup")
             button(class="submit_re") 开始上传
 
 div(class="container platform_content")
+  - const _products = locals.products || {};
   div(class="content_one")
-    div(class="tru")
-      div(class="truTitle pc") TRU Mate PC端
-      div(class="truContent")
-        div(class="truBox")
-          div 平台V1.0：
-          - const _pc_products = locals.products.pc || [];
-          ul
-            each _p in _pc_products
-              li(data-id=_p._id)
-                span(class="aLink")= _p.name
-    div(class="tru")
-      div(class="truTitle android") TRU Mate 移动端
-      div(class="truContent")
-        div(class="truBox")
-          div 平台V1.0：
-          - const _android_products = locals.products.android || [];
-          ul
-            each _p in _android_products
-              li(data-id=_p._id)
-                span(class="aLink")= _p.name
+    each _product,_productIndex in _products
+      div(class="tru")
+        div(class="truTitle " + _productIndex)=`TRU Mate ${_productIndex}端`
+        div(class="truContent")
+          each _platform,_platformIndex in _product
+            div(class="truBox")
+              div= _platformIndex
+              ul
+                each _p in _platform
+                  li(data-id=_p._id)
+                    span(class="aLink")= _p.name
 
   div(class="proposal")
 

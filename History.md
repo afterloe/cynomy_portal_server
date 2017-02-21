@@ -2648,3 +2648,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > routers/portal.js  
 
+
+1.0.5 / 2017-2-21 13:52:44
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 优化platform页面，添加命令行控制面板
+
+
+### modify files
+> template/platform.pug  
+

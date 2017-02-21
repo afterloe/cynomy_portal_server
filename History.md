@@ -2659,3 +2659,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-21 14:5:18
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 优化platform模板，自带点击高亮效果
+
+
+### modify files
+> template/platform.pug  
+

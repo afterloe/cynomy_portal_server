@@ -28,6 +28,9 @@ div(class="popup")
 
 div(class="container platform_content")
   - const _products = locals.products || {};
+  - const _product = locals.product || {};
+  - const _product_id = _product._id.toString();
+  - const _activeNode = _product.status;
   div(class="content_one")
     each _product,_productIndex in _products
       div(class="tru")
@@ -39,14 +42,12 @@ div(class="container platform_content")
               ul
                 each _p in _platform
                   li(data-id=_p._id)
-                    span(class="aLink")= _p.name
+                    span(class="aLink" style=_product_id == _p._id? "color:#3d9bff":"")= _p.name
 
   div(class="proposal")
 
   div(class="wrapper")
-    - const _product = locals.product || {};
     - const _process = _product.nodeList || [];
-    - const _activeNode = _product.status;
     if _activeNode
       div(class="tab_process")
         each _p,index in _process

@@ -2707,3 +2707,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-21 15:38:27
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 自动切换工作流，显示工作流节点信息
+
+
+### modify files
+> template/platform.pug  
+

@@ -80,6 +80,25 @@ script(src= static + "js/portal/rem.js")
 script(src= static + "js/portal/platform.js")
 
 script.
+
+  function cleanSelect() {
+    $(".aLink").each(function() {
+      $(this).css({color: "#333"});
+    });
+  }
+
+  function buildProcess(nodeList, actionNum) {
+    const info = nodeList.map((node, index) => `<dl class=${actionNum === index? "processActive":""}>
+      <dt>
+        <a class="tabIcon tabIcon_plan" href="javascript:void(0);" data-id=${node._id}></a>
+        <span>${node.name}</span>
+      </dt>
+      <dd>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</dd>
+      <div class="clear"></div>
+    </dl>`);
+    $(".tab_process:first").html(info.join(""));
+  }
+  
   const selectWorkflow = btn => {
     const _id = $(btn).attr("data-id");
     $.ajax({
@@ -88,11 +107,12 @@ script.
       dataType: "json",
       beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
       success: result => {
-        console.log(result);
         if (200 !== result.code) {
-
+          alert("服务器繁忙");
         } else {
-
+          cleanSelect();
+          $(btn).find("span").css({color: "#3d9bff"});
+          buildProcess(result.result.nodeList, result.result.status.index);
         }
       }
     });

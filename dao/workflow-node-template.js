@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const commonsLib = require(resolve(__dirname, "public"));
+const commonsLib = require(resolve(__dirname, "public"))();
 
 const classMethod = {
 };

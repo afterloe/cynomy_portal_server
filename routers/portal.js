@@ -12,7 +12,8 @@
 "use strict";
 
 const {resolve} = require("path");
-const {searchProduct, workflowInfo} = require(resolve(__dirname, "..", "services", "workflowService"));
+const services = resolve(__dirname, "..", "services");
+const [{searchProduct, workflowInfo}, {findTags}] = [require(resolve(services, "workflowService")), require(resolve(services, "tagsService"))];
 
 function* login(next) {
   if (this.error) {
@@ -48,6 +49,17 @@ function* home(next) {
   return yield next;
 }
 
+const findWorkflowByTags = function* (equipment, tags) {
+  const _ = {};
+  for(let tag of tags) {
+    const result = yield searchProduct(equipment, tag);
+    Object.assign(_, {
+      [tag]: result
+    });
+  }
+  return _;
+};
+
 /**
  * 跳转 - 平台页
  *
@@ -59,22 +71,36 @@ function* platform(next) {
     return yield next;
   }
   try {
-    const [pcList, androidList] = yield [searchProduct("pc", "平台V1.0"), searchProduct("android", "平台V1.0")];
-    let product = null;
-    if (pcList.length > 0) {
-      product = yield workflowInfo(pcList[0]._id);
-    }
-    this.pageName = "platform";
-    this.data = {
+    const [equipmentTags, platformTags] = yield [findTags("设备"), findTags("平台")];
+
+    const _ = {
       title: "R&D Portal - platform",
       index: 2,
-      product,
-      products: {
-        pc: pcList,
-        android: androidList
-      },
     };
+
+    const __ = {};
+
+    for(let equipment of equipmentTags) {
+      const list = yield findWorkflowByTags(equipment, platformTags);
+      Object.assign( __, {
+        [equipment]: list
+      });
+    }
+
+    Object.assign(_, {
+      products: __
+    });
+
+    // if (_[equipmentTags[0]].length > 0) {
+    //   Object.assign( _, {
+    //     product: yield workflowInfo(_[equipmentTags[0]][0]._id)
+    //   });
+    // }
+
+    this.pageName = "platform";
+    this.data = _;
   } catch (err) {
+    console.log(err);
     this.error = err;
   }
 

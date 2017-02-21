@@ -12,9 +12,26 @@
 "use strict";
 
 const {resolve} = require("path");
-const commonsLib = require(resolve(__dirname, "public"));
+const commonsLib = require(resolve(__dirname, "public"))();
+
+const searchByTags = function* (keywords) {
+  if (keywords instanceof Array) {
+    return yield this.find({
+      keyWord: {
+        $all: keywords
+      },
+      state: 200,
+    }, {
+      name : 1,
+      beginTimestamp: 1,
+    }).toArray();
+  }
+
+  return [];
+};
 
 const classMethod = {
+  searchByTags,
 };
 
 Object.assign(commonsLib, classMethod);

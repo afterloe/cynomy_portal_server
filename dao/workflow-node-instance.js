@@ -11,14 +11,14 @@
   */
   "use strict";
 
-  const {resolve} = require("path");
-  const commonsLib = require(resolve(__dirname, "public"));
+const {resolve} = require("path");
+const commonsLib = require(resolve(__dirname, "public"))();
 
-  const classMethod = {
-  };
+const classMethod = {
+};
 
-  Object.assign(commonsLib, classMethod);
+Object.assign(commonsLib, classMethod);
 
-  const className = "workflow_node_instance";
+const className = "workflow_node_instance";
 
-  module.exports = _ => _.definition({classMethod: commonsLib, className});
+module.exports = _ => _.definition({classMethod: commonsLib, className});

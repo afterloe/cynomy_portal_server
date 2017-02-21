@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const commonsLib = require(resolve(__dirname, "public"));
+const commonsLib = require(resolve(__dirname, "public"))();
 
 /**
  * 通过工作流名字来查询工作流实例 - 精确匹配

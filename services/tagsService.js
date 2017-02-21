@@ -81,9 +81,19 @@ function* getTagsInfo(...args) {
   return [...new Set(_)];
 }
 
+function* findTags(...keywords) {
+  if (0 === keywords.length) {
+    throwLackParameters();
+  }
+
+  const _ = yield tag_dao.searchByTags(keywords);
+  return _.map(__ => __.name);
+}
+
 module.exports = {
   createTag,
   deleteTag,
   getTagsList,
   getTagsInfo,
+  findTags,
 };

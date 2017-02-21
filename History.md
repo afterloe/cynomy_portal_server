@@ -2613,3 +2613,27 @@ commit by afterloe (lm6289511@gmail.com)
 > template/directory.pug  
 > template/product.pug  
 
+
+1.0.5 / 2017-2-21 11:36:32
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复巨大bug dao层后续方法会覆盖之前的方法导致查询结果出现偏差
+
+
+### modify files
+> dao/goods.js  
+> dao/produce.js  
+> dao/public.js  
+> dao/sequel.js  
+> dao/tag.js  
+> dao/user.js  
+> dao/workflow-instance.js  
+> dao/workflow-node-instance.js  
+> dao/workflow-node-template.js  
+> dao/workflow-template.js  
+> routers/portal.js  
+> services/tagsService.js  
+> template/platform.pug  
+> template/product.pug  
+

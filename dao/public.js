@@ -152,7 +152,7 @@ function* searchByTags(tags) {
   return [];
 }
 
-module.exports = {
+module.exports = () => ({
   insert,
   update,
   checkExist,
@@ -162,4 +162,4 @@ module.exports = {
   remove,
   insertMany,
   searchByTags,
-};
+});

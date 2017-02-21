@@ -76,7 +76,16 @@ const valid = _id => {
 const definition = _obj => {
   const moduleDefine = {};
   const {classMethod, className} = _obj;
+
+  Object.assign(moduleDefine, {
+    moduleName: className,
+    query,
+    queryOne,
+    closeConnection,
+  });
+
   moduleDefine.moduleName = className;
+
   Object.keys(classMethod).map(method => {
     if (!classMethod[method].apply) {
       return;
@@ -90,9 +99,7 @@ const definition = _obj => {
       return yield* classMethod[method].apply(col, args);
     };
   });
-  moduleDefine.query = query;
-  moduleDefine.queryOne = queryOne;
-  moduleDefine.close = closeConnection;
+
   return moduleDefine;
 };
 

@@ -562,6 +562,15 @@ function* getWorkflowNodeList(number, page) {
   return yield workFlow_node_template_dao.queryAll({}, number, page);
 }
 
+function* getWorkflowNode(id, hooks) {
+  const _ = yield workFlow_node_instance_dao.queryById(id, hooks);
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  return _;
+}
+
 function* updateProcess(workflowId, {path, reason}) {
   const _ = yield obmitStartWorkflow(workflowId);
   const {status} = _;
@@ -623,6 +632,7 @@ module.exports = {
   searchProduct,
   cleanDocuments,
   getWorkflowNodeList,
+  getWorkflowNode,
   getWorkflowList,
   getWorkflowTemplateList,
   updateProcess,

@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const {getWorkflowList, workflowInfo} = require(resolve(__dirname, "..", "services", "workflowService"));
+const {getWorkflowList, workflowInfo, getWorkflowNode} = require(resolve(__dirname, "..", "services", "workflowService"));
 
 const list = function* (next) {
   if (this.error) {
@@ -44,7 +44,23 @@ const simpleInfo = function* (next) {
   return yield next;
 };
 
+const nodeFiles = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const {nodeId} = this.params;
+    this.data = yield getWorkflowNode(nodeId, {produceList: 1});
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
 module.exports = {
   list,
+  nodeFiles,
   simpleInfo,
 };

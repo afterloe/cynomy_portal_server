@@ -2718,3 +2718,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-21 16:9:39
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 增加接口，获取工具流文件快照接口
+
+
+### modify files
+> dao/workflow-node-instance.js  
+> routers/index.js  
+> routers/workflow.js  
+> services/workflowService.js  
+> template/platform.pug  
+

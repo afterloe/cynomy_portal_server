@@ -69,7 +69,7 @@ const overviewsPlatform = function* (next) {
     const platformTags = yield findTags("平台");// 获取平台标签
     const data = [];
     for (let tag of platformTags) {
-      const products = yield searchProduct(tag);
+      const products = yield searchProduct(tag, "平台");
       data.push({
         platformName: tag,
         products: products.map(product => ({

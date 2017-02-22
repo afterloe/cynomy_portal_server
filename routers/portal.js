@@ -93,7 +93,7 @@ function* platform(next) {
 
     for(let equipment of equipmentTags) {
       Object.assign(__, {
-        [equipment]: yield findWorkflowByTags(equipment, platformTags),
+        [equipment]: yield findWorkflowByTags(equipment, platformTags, "平台"),
       });
     }
 

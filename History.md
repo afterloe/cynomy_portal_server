@@ -2834,3 +2834,15 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/workflow.js  
 > services/workflowService.js  
 
+
+1.0.5 / 2017-2-22 15:9:30
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 标签添加平台标签和app标签
+
+
+### modify files
+> routers/portal.js  
+> routers/workflow.js  
+

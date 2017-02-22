@@ -13,14 +13,14 @@
 
 const {resolve} = require("path");
 const tools = resolve(__dirname, "..", "tools");
-const [{decipher, cipher}, redisService, {uuidCode}, {throwLackParameters, throwTokenError}] = [require(resolve(tools, "security")), require(resolve(__dirname, "redisService")),
+const [{decipher, cipher}, redisService, {uuidCode}, {throwNeedSignIn, throwTokenError}] = [require(resolve(tools, "security")), require(resolve(__dirname, "redisService")),
   require(resolve(tools, "utilities")), require(resolve(__dirname, "..", "errors"))];
 
 const sign = (to, permit) => cipher(`${permit}:${to}`);
 
 function* removeSession(token) {
   if (!token) {
-    throwLackParameters();
+    throwNeedSignIn();
   }
   try {
     const [permit, to] = decipher(token).split(":");
@@ -32,7 +32,7 @@ function* removeSession(token) {
 
 function* getSession(token) {
   if (!token) {
-    throwLackParameters();
+    throwNeedSignIn();
   }
   try {
     const [permit, to] = decipher(token).split(":");
@@ -45,7 +45,7 @@ function* getSession(token) {
 
 function* upDateSession(token, value) {
   if (!token) {
-    throwLackParameters();
+    throwNeedSignIn();
   }
   try {
     const [permit, to] = decipher(token).split(":");
@@ -59,7 +59,7 @@ function* upDateSession(token, value) {
 
 function* setSession(token, seems = {}) {
   if (!token) {
-    throwLackParameters();
+    throwNeedSignIn();
   }
   try {
     const [permit, to] = decipher(token).split(":");
@@ -76,7 +76,7 @@ function* setSession(token, seems = {}) {
 
 function* flushSession(token) {
   if (!token) {
-    throwLackParameters();
+    throwNeedSignIn();
   }
   try {
     const [, to] = decipher(token).split(":");

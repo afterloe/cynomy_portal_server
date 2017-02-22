@@ -12,8 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const {get} = require(resolve(__dirname, "..", "config"));
-const {setPugTemplatePath, compileTemplate} = require(resolve(__dirname, "..", "tools", "buildPage"));
+const [{get}, {setPugTemplatePath, compileTemplate}] = [require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "tools", "buildPage"))];
 
 const defualt = {
   title: "",

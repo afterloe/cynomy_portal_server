@@ -26,6 +26,13 @@ module.exports = function * (next) {
   const {error, pageName, data} = this;
 
   if (error) {
+    if("401.5" === error.code) {
+      this.status = 302;
+      this.set("Location", "/portal/login");
+
+      return ;
+    }
+    
     console.log(error);
     if (equal(error)) {
       if ("json" === this.way) {

@@ -14,9 +14,7 @@
 const {resolve} = require("path");
 const {getWorkflowList, workflowInfo, getWorkflowNode} = require(resolve(__dirname, "..", "services", "workflowService"));
 
-/*
-
-[
+const data = [
     {
         platformName:'平台1',
         products:[
@@ -62,9 +60,7 @@ const {getWorkflowList, workflowInfo, getWorkflowNode} = require(resolve(__dirna
             }
         ]
     }
-]
-
- */
+];
 
 const list = function* (next) {
   if (this.error) {
@@ -111,6 +107,47 @@ const nodeFiles = function* (next) {
   return yield next;
 };
 
+const overviewsPlatform = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    this.data = data;
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
+const overviewsProduct = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    this.data = data;
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
+const overviewsDirectory = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    this.data = data;
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
 module.exports = {
   list,
   nodeFiles,

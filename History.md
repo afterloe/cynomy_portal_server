@@ -2795,3 +2795,17 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/workflow.js  
 > template/home.pug  
 
+
+1.0.5 / 2017-2-22 14:0:5
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 出现401.5的时候自动跳转登录页面
+
+
+### modify files
+> interceptors/smartNotFound.js  
+> interceptors/template.js  
+> routers/workflow.js  
+> services/sessionService.js  
+

@@ -2809,3 +2809,14 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/workflow.js  
 > services/sessionService.js  
 
+
+1.0.5 / 2017-2-22 14:2:32
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复前端进入home页的时候需要手动获取数据
+
+
+### modify files
+> template/home.pug  
+

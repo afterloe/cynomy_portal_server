@@ -2846,3 +2846,15 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > routers/workflow.js  
 
+
+1.0.5 / 2017-2-22 16:14:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: home页补全state的状态暂时
+
+
+### modify files
+> template/home.pug  
+> webPage/css/portal/home.css  
+

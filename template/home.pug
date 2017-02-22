@@ -21,20 +21,9 @@ table(class="table" style="display:none")
             span(class="productLink")
             input(class="linkURL" type="text" value="" placeholder="下载地址或官网地址")
           ul(class="nav nav-tabs productStatus")
-            li( class="planStatus1")
+            li( style="display:none;")
               span(class="icon")
               span(class="line") &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
-            li( class="planStatus1")
-              span(class="icon")
-              span(class="line") &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
-            li( class="planStatus1")
-              span(class="icon")
-              span(class="line") &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
-            li( class="planStatus1")
-              span(class="icon")
-              span(class="line") &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
-            li( class="planStatus1")
-              span(class="icon")
 
 div(class="container content")
   div(class="container structure")
@@ -212,10 +201,11 @@ script.
                     $product.find(".productLink").attr("data-link", product.productLink);
 
                     let status = product.status;
-                    $product.find(".productStatus>li:nth-child(1)").attr("class", "planStatus" + status[0]);
-                    $product.find(".productStatus>li:nth-child(2)").attr("class", "planStatus" + status[1]);
-                    $product.find(".productStatus>li:nth-child(3)").attr("class", "planStatus" + status[2]);
-                    $product.find(".productStatus>li:nth-child(4)").attr("class", "planStatus" + status[3]);
+                    for(let sta of status){
+                      let $newStatus = $(".productStatus>li:first").clone();
+                      $newStatus.addClass("planStatus" + sta.index).show();
+                      $product.find(".productStatus").append($newStatus);
+                    }
                     $products.append($product);
                 }
                 $("tbody").append($platform);

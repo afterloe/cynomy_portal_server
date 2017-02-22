@@ -35,9 +35,9 @@
    background: url('../../images/portal/feedback.png') no-repeat center;
    cursor:pointer;
    background-size:contain; */
-    
+
     background: url('../../images/portal/2-selected.png') no-repeat center;
-    
+
 }
 
 .dir-menu {
@@ -101,7 +101,7 @@
        display: none;
     }
     .catalogShadow{
-        
+
         margin-left:0;
         margin-right:0;
     }

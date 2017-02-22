@@ -14,6 +14,58 @@
 const {resolve} = require("path");
 const {getWorkflowList, workflowInfo, getWorkflowNode} = require(resolve(__dirname, "..", "services", "workflowService"));
 
+/*
+
+[
+    {
+        platformName:'平台1',
+        products:[
+            {
+                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                productLink:'tru.jwis.cn',
+                status:[1,2,3,4]
+            },
+            {
+                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                productLink:'tru.jwis.cn',
+                status:[1,2,3,4]
+            }
+        ]
+    },
+    {
+        platformName:'平台1',
+        products:[
+            {
+                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                productLink:'tru.jwis.cn',
+                status:[1,2,3,4]
+            },
+            {
+                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                productLink:'tru.jwis.cn',
+                status:[1,2,3,4]
+            }
+        ]
+    },
+    {
+        platformName:'平台1',
+        products:[
+            {
+                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                productLink:'tru.jwis.cn',
+                status:[1,2,3,4]
+            },
+            {
+                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                productLink:'tru.jwis.cn',
+                status:[1,2,3,4]
+            }
+        ]
+    }
+]
+
+ */
+
 const list = function* (next) {
   if (this.error) {
     return yield next;
@@ -63,4 +115,7 @@ module.exports = {
   list,
   nodeFiles,
   simpleInfo,
+  overviewsPlatform,
+  overviewsProduct,
+  overviewsDirectory,
 };

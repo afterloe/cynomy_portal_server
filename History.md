@@ -2782,3 +2782,16 @@ commit by afterloe (lm6289511@gmail.com)
 > template/home.pug  
 > webPage/js/portal/home.js  
 
+
+1.0.5 / 2017-2-22 13:46:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端接口联调准备完成，后端获取工作流预览接口开发开始
+
+
+### modify files
+> routers/index.js  
+> routers/workflow.js  
+> template/home.pug  
+

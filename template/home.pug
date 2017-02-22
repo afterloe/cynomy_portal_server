@@ -200,7 +200,7 @@ script.
                     $product.find(".productName").val(product.productName).attr("readonly", "true");
                     $product.find(".productLink").attr("data-link", product.productLink);
 
-                    let status = product.status;
+                    let status = product.status || [];
                     for(let sta of status){
                       let $newStatus = $(".productStatus>li:first").clone();
                       $newStatus.addClass("planStatus" + sta.index).show();

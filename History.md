@@ -2894,3 +2894,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > template/directory.pug  
 
+
+1.0.5 / 2017-2-22 18:7:13
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 工用文件目录页面功能开发完毕
+
+
+### modify files
+> routers/workflow.js  
+> template/home.pug  
+

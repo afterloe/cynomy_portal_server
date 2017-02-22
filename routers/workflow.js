@@ -13,7 +13,8 @@
 
 const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
-const [{getWorkflowList, workflowInfo, getWorkflowNode, searchProduct}, {findTags}] = [require(resolve(services, "workflowService")), require(resolve(services, "tagsService"))];
+const [{getWorkflowList, workflowInfo, getWorkflowNode, searchProduct}, {findTags}, {getPublicGoodsesList}] =
+[require(resolve(services, "workflowService")), require(resolve(services, "tagsService")), require(resolve(services, "goodsService"))];
 
 const list = function* (next) {
   if (this.error) {
@@ -120,53 +121,14 @@ const overviewsDirectory = function* (next) {
   }
 
   try {
-    this.data = [
-        {
-            platformName:'平台1',
-            products:[
-                {
-                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                    productLink:'tru.jwis.cn',
-                    status:[1,2,3,4]
-                },
-                {
-                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                    productLink:'tru.jwis.cn',
-                    status:[1,2,3,4]
-                }
-            ]
-        },
-        {
-            platformName:'平台1',
-            products:[
-                {
-                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                    productLink:'tru.jwis.cn',
-                    status:[1,2,3,4]
-                },
-                {
-                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                    productLink:'tru.jwis.cn',
-                    status:[1,2,3,4]
-                }
-            ]
-        },
-        {
-            platformName:'平台1',
-            products:[
-                {
-                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                    productLink:'tru.jwis.cn',
-                    status:[1,2,3,4]
-                },
-                {
-                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                    productLink:'tru.jwis.cn',
-                    status:[1,2,3,4]
-                }
-            ]
-        }
-    ];
+    const _ = yield getPublicGoodsesList();
+    this.data = [{
+      platformName: "公用文件",
+      products: _.map(file => ({
+        productName: file.name,
+        productLink: `/fs/download/${file._id}`,
+      }))
+    }];
   } catch (err) {
     this.error = err;
   }

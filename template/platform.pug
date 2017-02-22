@@ -68,8 +68,8 @@ div(class="container platform_content")
                 div
                   i
                   span(class="name")=_file.name
-                  span(class="time") 2017-01-25
-                  span 17:05:36
+                  span(class="time")=_file.uploadTime? new Date(_file.uploadTime).toLocaleString() : new Date().toLocaleString()
+                  span=_file.downloadCount || 0
                   span=_file.author.name
                   span(data-id=_file._id class="download" onClick="javascript:downLoadFile(this);")
 
@@ -109,6 +109,8 @@ script.
     if (!time) {
       return new Date().toLocaleString();
     }
+    const data = new Date(time);
+    return data.toLocaleString();
   };
 
   const buildFiles = (files) => {

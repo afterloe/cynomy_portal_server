@@ -2869,3 +2869,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > servers/websocket.js  
 
+
+1.0.5 / 2017-2-22 17:12:5
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复传递进time的时候没有转换内容
+
+
+### modify files
+> template/platform.pug  
+

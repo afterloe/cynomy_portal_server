@@ -2770,3 +2770,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-22 10:32:31
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: home页前端模板化
+
+
+### modify files
+> template/home.pug  
+> webPage/js/portal/home.js  
+

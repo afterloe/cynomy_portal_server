@@ -4,6 +4,7 @@
 (function($){
     $(function(){
         let $save = $(".save");
+
         //目录点击
         $(".dir-menu>li").bind('click',function(){
             let $this = $(this);
@@ -15,6 +16,7 @@
                 $currentCataMark.siblings().hide();
             }
         });
+
         //点击平台
         $(".content").on("mousedown",'.platformName',function(e){
             if(e.button != "2") {
@@ -33,10 +35,12 @@
             }).show();
             return false;
         });
+
         //点击弹出菜单
         $(".content").on("click",'.menu>p',function(){
             $(this).parent().hide();
         });
+
         $("body").bind("click",function(e){
             //取消弹出菜单
             let $target = $(e.target);
@@ -49,6 +53,7 @@
         $(".content").on("click",'.productName',function(){
             //跳转到TRU平台导航栏中对应的该产品的信息
         });
+
         /**点击产品链接
          * TRU Mate 超链：market portal上pc mate的下载地址
          *TRU Enterprise超链：API Server首页地址
@@ -57,10 +62,12 @@
         $(".content").on("click",'.productLink',function(){
 
         });
+
         //删除平台
         $(".content").on("click",'.del',function(){
             $(this).parent().parent().parent().remove();
         });
+
         //增加同级
         $(".content").on("click",'.addNext',function(){
             let  $firstPlatform = $(".platform:first");
@@ -71,6 +78,7 @@
             }
 
         });
+
         //增加子级
         $(".content").on("click",'.addSub',function(){
             let  [$firstProduct,$platform]= [$(".product:first"),$(this).parent().parent().parent()];
@@ -80,6 +88,7 @@
               $save.show();
             }
         });
+
         //点击保存，console输入的值
         $(".save").bind('click',function(){
             let $platformEdit = $(".platformEdit"); //编辑的同级
@@ -163,7 +172,9 @@
                 ]
             }
         ];
+
         let  [$firstPlatform,$firstProduct,$platform,$product] = [$(".platform:first")];
+
         for(let platform of data){
             $platform = $firstPlatform.clone();
             $platform.find(".platformName>input").val(platform.platformName).attr('readonly','true');
@@ -186,6 +197,6 @@
                 $products.append($product);
             }
             $("tbody").append($platform);
-        }
+      }
     });
 })(jQuery);

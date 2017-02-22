@@ -2880,3 +2880,17 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-22 17:47:52
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 文件目录完成
+
+
+### modify files
+> dao/goods.js  
+> routers/portal.js  
+> services/goodsService.js  
+> template/directory.pug  
+

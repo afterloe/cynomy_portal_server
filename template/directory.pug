@@ -62,19 +62,26 @@ div(class="container directory_content")
 
   div(class="tab_content")
     div(class="dataBox")
-      div(class="header") 产品规划辅助资料
+      div(class="header")= locals.produceName + "资料"
         span(class="upload")
+      - const _files = locals.produceList || [];
       ul(class="data")
-        li
-          div
-            i
-            span(class="name") My Research 的产品定位.PPT
-            span(class="time") 2017-01-25
-            span 17:05:36
-            span afterloe
-            span(class="download")
-            span(class="dataClose")
+        each _file in _files
+          li
+            div
+              i
+              span(class="name")=_file.name
+              span(class="time")=_file.uploadTime? new Date(_file.uploadTime).toLocaleString() : new Date().toLocaleString()
+              span=_file.downloadCount || 0
+              span=_file.author.name
+              span(data-id=_file._id class="download" onClick="javascript:downLoadFile(this);")
+
 include footer
 
 script(src= static + "js/portal/rem.js")
 script(src= static + "js/portal/directory.js")
+
+script.
+  const downLoadFile = (btn) => {
+    window.open("/fs/download/" + $(btn).attr("data-id"));
+  };

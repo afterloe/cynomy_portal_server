@@ -13,7 +13,29 @@
 
 const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
-const [{searchProduct, workflowInfo}, {findTags}] = [require(resolve(services, "workflowService")), require(resolve(services, "tagsService"))];
+const [{getPublicGoodsesList}, {searchProduct, workflowInfo}, {findTags}] = [require(resolve(services, "goodsService")), require(resolve(services, "workflowService")), require(resolve(services, "tagsService"))];
+
+const findWorkflowByTags = function* (equipment, tags, ...hooks) {
+  const _ = {};
+  for(let tag of tags) {
+    hooks.unshift(equipment, tag);
+    const result = yield searchProduct.apply(null, hooks);
+    Object.assign(_, {
+      [tag]: result
+    });
+  }
+  return _;
+};
+
+const findActiveWorkflowExample = function* (data) {
+  for (let equipment in data) {
+    for(let list in data[equipment]) {
+      if (data[equipment][list].length > 0) {
+        return yield workflowInfo(data[equipment][list][0]._id);
+      }
+    }
+  }
+};
 
 function* login(next) {
   if (this.error) {
@@ -48,28 +70,6 @@ function* home(next) {
 
   return yield next;
 }
-
-const findWorkflowByTags = function* (equipment, tags, ...hooks) {
-  const _ = {};
-  for(let tag of tags) {
-    hooks.unshift(equipment, tag);
-    const result = yield searchProduct.apply(null, hooks);
-    Object.assign(_, {
-      [tag]: result
-    });
-  }
-  return _;
-};
-
-const findActiveWorkflowExample = function* (data) {
-  for (let equipment in data) {
-    for(let list in data[equipment]) {
-      if (data[equipment][list].length > 0) {
-        return yield workflowInfo(data[equipment][list][0]._id);
-      }
-    }
-  }
-};
 
 /**
  * 跳转 - 平台页
@@ -150,10 +150,13 @@ function* directory(next) {
     return yield next;
   }
   try {
+    const produceList = yield getPublicGoodsesList();
     this.pageName = "directory";
     this.data = {
       title: "R&D Portal - directory",
       index: 4,
+      produceName: "",
+      produceList,
     };
   } catch (err) {
     this.error = err;

@@ -135,6 +135,13 @@ function* getGoodsInfo(goodsId) {
   return {name, path, type, size};
 }
 
+function* getPublicGoodsesList(...tags) {
+  tags.unshift("public");
+  const _ = yield goods_dao.searchByTags(tags);
+
+  return _;
+}
+
 module.exports = {
   cleanDocuments,
   production,
@@ -144,4 +151,5 @@ module.exports = {
   exampleInfo,
   setTags,
   getGoodsInfo,
+  getPublicGoodsesList,
 };

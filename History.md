@@ -2858,3 +2858,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/home.pug  
 > webPage/css/portal/home.css  
 
+
+1.0.5 / 2017-2-22 16:34:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改websocket最大消息限制
+
+
+### modify files
+> servers/websocket.js  
+

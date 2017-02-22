@@ -43,6 +43,7 @@ module.exports = httpServer => {
   module[WSSERVER] = new server({
       httpServer,
       maxReceivedFrameSize: 1024 * 1024 * 400, // FUCK 最大文件大小限制！ 400MB
+      maxReceivedMessageSize: 1024 * 1024 * 400, // FUCK 最大消息大小限制 400MB
       autoAcceptConnections: false
   });
 

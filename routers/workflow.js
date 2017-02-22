@@ -12,55 +12,8 @@
 "use strict";
 
 const {resolve} = require("path");
-const {getWorkflowList, workflowInfo, getWorkflowNode} = require(resolve(__dirname, "..", "services", "workflowService"));
-
-const data = [
-    {
-        platformName:'平台1',
-        products:[
-            {
-                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                productLink:'tru.jwis.cn',
-                status:[1,2,3,4]
-            },
-            {
-                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                productLink:'tru.jwis.cn',
-                status:[1,2,3,4]
-            }
-        ]
-    },
-    {
-        platformName:'平台1',
-        products:[
-            {
-                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                productLink:'tru.jwis.cn',
-                status:[1,2,3,4]
-            },
-            {
-                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                productLink:'tru.jwis.cn',
-                status:[1,2,3,4]
-            }
-        ]
-    },
-    {
-        platformName:'平台1',
-        products:[
-            {
-                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                productLink:'tru.jwis.cn',
-                status:[1,2,3,4]
-            },
-            {
-                productName:'TRU Matsfsdfsdfsdsde V1.0.1',
-                productLink:'tru.jwis.cn',
-                status:[1,2,3,4]
-            }
-        ]
-    }
-];
+const services = resolve(__dirname, "..", "services");
+const [{getWorkflowList, workflowInfo, getWorkflowNode, searchProduct}, {findTags}] = [require(resolve(services, "workflowService")), require(resolve(services, "tagsService"))];
 
 const list = function* (next) {
   if (this.error) {
@@ -113,6 +66,19 @@ const overviewsPlatform = function* (next) {
   }
 
   try {
+    const platformTags = yield findTags("平台");// 获取平台标签
+    const data = [];
+    for (let tag of platformTags) {
+      const products = yield searchProduct(tag);
+      data.push({
+        platformName: tag,
+        products: products.map(product => ({
+          productName: product.name,
+          productLink:"https://www.baidu.com",
+          status: product.process
+        })),
+      });
+    }
     this.data = data;
   } catch (err) {
     this.error = err;
@@ -127,6 +93,19 @@ const overviewsProduct = function* (next) {
   }
 
   try {
+    const platformTags = yield findTags("平台");// 获取平台标签
+    const data = [];
+    for (let tag of platformTags) {
+      const products = yield searchProduct(tag, "app");
+      data.push({
+        platformName: tag,
+        products: products.map(product => ({
+          productName: product.name,
+          productLink:"https://www.baidu.com",
+          status: product.process
+        })),
+      });
+    }
     this.data = data;
   } catch (err) {
     this.error = err;
@@ -141,7 +120,53 @@ const overviewsDirectory = function* (next) {
   }
 
   try {
-    this.data = data;
+    this.data = [
+        {
+            platformName:'平台1',
+            products:[
+                {
+                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                    productLink:'tru.jwis.cn',
+                    status:[1,2,3,4]
+                },
+                {
+                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                    productLink:'tru.jwis.cn',
+                    status:[1,2,3,4]
+                }
+            ]
+        },
+        {
+            platformName:'平台1',
+            products:[
+                {
+                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                    productLink:'tru.jwis.cn',
+                    status:[1,2,3,4]
+                },
+                {
+                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                    productLink:'tru.jwis.cn',
+                    status:[1,2,3,4]
+                }
+            ]
+        },
+        {
+            platformName:'平台1',
+            products:[
+                {
+                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                    productLink:'tru.jwis.cn',
+                    status:[1,2,3,4]
+                },
+                {
+                    productName:'TRU Matsfsdfsdfsdsde V1.0.1',
+                    productLink:'tru.jwis.cn',
+                    status:[1,2,3,4]
+                }
+            ]
+        }
+    ];
   } catch (err) {
     this.error = err;
   }

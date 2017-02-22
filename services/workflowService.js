@@ -547,7 +547,17 @@ function* cleanDocuments() {
 
 function* searchProduct(...tags) {
   const _ = yield workFlow_instance_dao.searchByTags(tags);
-  return _;
+  return _.map(__ => {
+    const {nodeList} = __;
+    __.process = nodeList.map(node => ({
+      name: node.name,
+      stat: node.stat,
+      index: node.index + 1,
+    }));
+    delete __.nodeList;
+    delete __.status;
+    return __;
+  });
 }
 
 function* getWorkflowList(number, page) {

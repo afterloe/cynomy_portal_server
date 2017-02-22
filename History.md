@@ -2820,3 +2820,17 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/home.pug  
 
+
+1.0.5 / 2017-2-22 14:55:41
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端接口准备完毕，等待前端联调
+
+
+### modify files
+> dao/workflow-instance.js  
+> interceptors/smartNotFound.js  
+> routers/workflow.js  
+> services/workflowService.js  
+

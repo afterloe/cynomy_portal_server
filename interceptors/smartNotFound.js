@@ -26,13 +26,19 @@ module.exports = function * (next) {
   const {error, pageName, data} = this;
 
   if (error) {
+    /**
+     * 出现401.5 直接跳转 登录页
+     */
     if("401.5" === error.code) {
-      this.status = 302;
-      this.set("Location", "/portal/login");
-
+      if ("json" === this.way) {
+        this.body = this.fail(error.message, error.code);
+      } else {
+        this.status = 302;
+        this.set("Location", "/portal/login");
+      }
       return ;
     }
-    
+
     console.log(error);
     if (equal(error)) {
       if ("json" === this.way) {

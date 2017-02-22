@@ -47,9 +47,29 @@ const queryById = function* (id, hooks = {}) {
   throwParametersError();
 };
 
+function* searchByTags(tags) {
+  if (tags instanceof Array) {
+    return yield this.find({
+      tags: {
+        $all: tags
+      },
+      state: 200,
+    }, {
+      name : 1,
+      tags: 1,
+      nodeList: 1,
+      status: 1,
+      beginTimestamp: 1,
+    }).toArray();
+  }
+
+  return [];
+}
+
 const classMethod = {
   queryByName,
   queryById,
+  searchByTags,
 };
 
 Object.assign(commonsLib, classMethod);

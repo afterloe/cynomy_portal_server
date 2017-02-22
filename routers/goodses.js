@@ -11,9 +11,9 @@
   */
 "use strict";
 
-const [{resolve}, {existsSync}] = [require("path"), require("fs")];
+const [{resolve}] = [require("path")];
 const services = resolve(__dirname, "..", "services");
-const [{getGoodsList, getGoodsInfo}, {throwFileNotFind, createReadStream}, {getGoodsFileInfo}] = [require(resolve(services, "goodsService")), require(resolve(__dirname, "..", "errors")), require(resolve(services, "fileSystem"))];
+const [{getGoodsList, getGoodsInfo}, {createReadStream}, {getGoodsFileInfo}] = [require(resolve(services, "goodsService")), require(resolve(__dirname, "..", "errors")), require(resolve(services, "fileSystem"))];
 
 const list = function* (next) {
   if (this.error) {

@@ -257,8 +257,8 @@ const compression = (name, path, ...args) => {
 };
 
 const getGoodsFileInfo = goods => {
-  const {name, path, type, size} = goods;
-  const goodsFilePath = resolve(get("staticDir"), path);
+  const {name, type, size, batch} = goods;
+  const goodsFilePath = resolve(get("staticDir"), batch, name);
 
   if(!existsSync(goodsFilePath)) {
     throwNotExistsFile();

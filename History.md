@@ -2906,3 +2906,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/workflow.js  
 > template/home.pug  
 
+
+1.0.5 / 2017-2-22 18:40:39
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改上传文件存储逻辑
+
+
+### modify files
+> routers/goodses.js  
+> services/fileSystem.js  
+> services/goodsService.js  
+

@@ -18,7 +18,7 @@ throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}
   require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "fileSystem")), require(resolve(__dirname, "tagsService"))];
 
 const buildGoods = (goods, workflowId, nodeName) => {
-  const lackParameter = checkParameter(goods, "name", "path", "version", "author");
+  const lackParameter = checkParameter(goods, "name", "batch", "version", "author");
   if (lackParameter) {
     throwLackParameters("", lackParameter);
   }
@@ -61,6 +61,7 @@ function* production(tmp, workflowId, nodeId, uuidCode) {
 
   if (productionList instanceof Array) {
     for(let i = 0; i < productionList.length; i++) {
+      productionList[i].batch = uuidCode;
       productionList[i].path = uuidCode + sep + productionList[i].path;
       productionList[i] = buildGoods(productionList[i], workflowId._id, nodeInstance.name);
     }
@@ -131,8 +132,8 @@ function* getGoodsInfo(goodsId) {
     throwNotExistsFile();
   }
 
-  const {name, path, type, size} = goods;
-  return {name, path, type, size};
+  const {name, path, type, size, batch} = goods;
+  return {name, path, type, size, batch};
 }
 
 function* getPublicGoodsesList(...tags) {

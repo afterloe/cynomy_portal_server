@@ -31,7 +31,8 @@ test-cov: $(MOCHA_FILES)
 
 # 移动文件
 move:
-	@[ -d /tmp/portal-server ] || mkdir -p /tmp/portal-server
+	@[ -d /tmp/portal-server ] && rm -rf  /tmp/portal-server
+	@mkdir -p /tmp/portal-server
 	@cp -R bin config dao distributed doc errors interceptors lib routers servers services template tools webPage History.md index.js INSTALL.md LICENSE package.json README.md /tmp/portal-server
 
 # 编译js

@@ -22,10 +22,17 @@ $(function() {
             $(this).parent("li").remove();
         });
     }
+
+    // 点击反馈跳转到bbs
+    $(".proposal").bind("click", function() {
+        window.open("http://bbs.jwis.cn");
+    });
+
     //关闭遮罩层
     $(".btn_close").on("click", function() {
         $(".popup").css("display", "none");
     });
+
     //打开遮罩层
     $(".upload").on("click", function() {
         $(".popup").css("display", "block");
@@ -44,3 +51,7 @@ $(function() {
     });
 
 });
+
+const downLoadFile = (btn) => {
+    window.open("/fs/download/" + $(btn).attr("data-id"));
+};

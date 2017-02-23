@@ -3065,3 +3065,22 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > Makefile  
 
+
+1.0.5 / 2017-2-23 17:38:33
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改脚本并且修改内容
+
+
+### modify files
+> Makefile  
+> template/directory.pug  
+> template/home.pug  
+> template/login.pug  
+> template/platform.pug  
+> webPage/js/portal/src/directory.js  
+> webPage/js/portal/src/home.js  
+> webPage/js/portal/src/login.js  
+> webPage/js/portal/src/platform.js  
+

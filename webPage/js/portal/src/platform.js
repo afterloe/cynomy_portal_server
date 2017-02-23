@@ -22,6 +22,12 @@ $(function() {
             $(this).parent("li").remove();
         });
     }
+
+    // 点击反馈跳转到bbs
+    $(".proposal").bind("click", function() {
+        window.open("http://bbs.jwis.cn");
+    });
+
     //关闭遮罩层
     $(".btn_close").on("click", function() {
         $(".popup").css("display", "none");
@@ -63,3 +69,90 @@ $(function() {
     });
 
 });
+
+const downLoadFile = (btn) => {
+  window.open("/fs/download/" + $(btn).attr("data-id"));
+};
+
+const cleanSelect = () => {
+  $(".aLink").each(function() {
+    $(this).css({color: "#333"});
+  });
+};
+
+const cleanSelectd = () => {
+  $("dl").attr("class", "");
+}
+
+const buildProcess = (nodeList, actionNum) => {
+  const html = nodeList.map((node, index) => `<dl class=${actionNum === index? "processActive":""}>
+    <dt data-id=${node._id} onClick="javascript:showFiles(this);">
+      <a class="tabIcon tabIcon_plan" href="javascript:void(0);"></a>
+      <span>${node.name}</span>
+    </dt>
+    <dd>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</dd>
+    <div class="clear"></div>
+  </dl>`);
+  $(".tab_process:first").html(html.join(""));
+};
+
+const timeToDate = time => {
+  if (!time) {
+    return new Date().toLocaleString();
+  }
+  const data = new Date(time);
+  return data.toLocaleString();
+};
+
+const buildFiles = (files) => {
+  const html = files.map((file) => `<li>
+    <div>
+      <i></i>
+      <span class="name">${file.name}</span>
+      <span class="time">${timeToDate(file.uploadTime)}</span>
+      <span>${file.downloadCount || 0}</span>
+      <span>${file.author ? file.author.name : "admin"}</span>
+      <span data-id=${file._id} class="download" onClick="javascript:downLoadFile(this);"></span>
+    </div>
+  </li>`);
+  $(".data:last").html(html.join(""));
+};
+
+const showFiles = btn => {
+  const id = $(btn).attr("data-id");
+  $.ajax({
+    type: "GET",
+    url: `/workflow/${id}/files`,
+    dataType: "json",
+    beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
+    success: result => {
+      if (200 !== result.code) {
+        alert("服务器繁忙");
+      } else {
+        cleanSelectd();
+        $(btn).parent().attr("class", "processActive");
+        buildFiles(result.result.produceList);
+      }
+    }
+  });
+};
+
+const selectWorkflow = btn => {
+  const _id = $(btn).attr("data-id");
+  $.ajax({
+    type: "GET",
+    url: `/workflow/${_id}/simple`,
+    dataType: "json",
+    beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
+    success: result => {
+      if (200 !== result.code) {
+        alert("服务器繁忙");
+      } else {
+        cleanSelect();
+        $(btn).find("span").css({color: "#3d9bff"});
+        buildProcess(result.result.nodeList, result.result.status.index);
+        buildFiles(result.result.status.produceList);
+      }
+    }
+  });
+};

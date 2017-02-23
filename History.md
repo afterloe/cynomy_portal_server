@@ -2996,3 +2996,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/directory.pug  
 > template/footer.pug  
 
+
+1.0.5 / 2017-2-23 16:0:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复make出现的问题
+
+
+### modify files
+> services/fileSystem.js  
+

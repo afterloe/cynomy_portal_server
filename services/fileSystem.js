@@ -70,7 +70,7 @@ const hardDisk = num => new Promise((solve, reject) => {
   df.stdout.on("data", chunk => awk.stdin.write(chunk));
   df.stderr.on("data", chunk => reject(new Error(chunk.toString())));
   df.on("error", err => reject(err));
-  df.on("close", code => 0 === code ? sed.stdin.end(): reject(new Error("ps -caxm -orss,comm")));
+  df.on("close", code => 0 === code ? awk.stdin.end(): reject(new Error("ps -caxm -orss,comm")));
 
   awk.stdout.on("data", chunk => buf = Buffer.concat([buf, chunk], buf.length + chunk.length));
   awk.stderr.on('data', err => reject(new Error(err.toString())));
@@ -271,7 +271,7 @@ const getGoodsFileInfo = goods => {
     size,
     mimeType,
     path: goodsFilePath
-  }
+  };
 };
 
 const checkTargetPath = target => {
@@ -339,10 +339,10 @@ function* darwinMemoryInfo() {
 }
 
 function* memoryInfo() {
-  const platform = platform();
-  if ("darwin" === platform) {
+  const _platform = platform();
+  if ("darwin" === _platform) {
     return yield darwinMemoryInfo();
-  } else if ("linux" === platform) {
+  } else if ("linux" === _platform) {
     return yield linuxMemoryInfo();
   }
 
@@ -354,7 +354,7 @@ function* hardDiskInfo() {
   const _ = {};
   diskName.map((name, index) => {
     _[name] = {
-      size: diskName[index],
+      size: diskSize[index],
       total: diskTotal[index],
       enable: diskEnable[index],
       percentage: diskPercentage[index],
@@ -366,14 +366,14 @@ function* hardDiskInfo() {
 }
 
 function* systemInfo() {
-  const [hostName, network, platform, cpus] = [hostname(), networkInterfaces(), platform(), cpus()];
-  const uname = yield uname();
+  const [hostName, network, _platform, _cpus] = [hostname(), networkInterfaces(), platform(), cpus()];
+  const _uname = yield uname();
   return {
     hostName,
     network,
-    platform,
-    cpus,
-    uname,
+    platform: _platform,
+    cpus: _cpus,
+    uname: _uname,
   };
 }
 
@@ -387,4 +387,5 @@ module.exports = {
   readJSON,
   memoryInfo,
   systemInfo,
+  hardDiskInfo,
 };

@@ -3084,3 +3084,14 @@ commit by afterloe (lm6289511@gmail.com)
 > webPage/js/portal/src/login.js  
 > webPage/js/portal/src/platform.js  
 
+
+1.0.5 / 2017-2-23 17:56:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 重置makefile 支持build和安装
+
+
+### modify files
+> Makefile  
+

@@ -3037,3 +3037,20 @@ commit by afterloe (lm6289511@gmail.com)
 > webPage/js/portal/platform.js  
 > webPage/js/portal/product.js  
 
+
+1.0.5 / 2017-2-23 17:13:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 复制文件夹
+
+
+### new files
+> doc/db_design.md  
+
+### modify files
+> Makefile  
+
+### delete files
+> "doc/db  
+

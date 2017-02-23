@@ -29,6 +29,11 @@ clean: lib-cov
 test-cov: $(MOCHA_FILES)
 	@istanbul cover node_modules/.bin/_mocha $^ -R spec
 
+# 移动文件
+move:
+	@mkdir /tmp/portal-server
+	@cp -R /tmp/portal-server
+
 # 编译js
 compile-js:
 	@babel webPage/js/portal/src -d webPage/js/portal/bin

@@ -2984,3 +2984,15 @@ commit by afterloe (lm6289511@gmail.com)
 > webPage/js/portal/platform.js  
 > webPage/js/portal/product.js  
 
+
+1.0.5 / 2017-2-23 15:55:16
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 清除header模板上的脚本信息
+
+
+### modify files
+> template/directory.pug  
+> template/footer.pug  
+

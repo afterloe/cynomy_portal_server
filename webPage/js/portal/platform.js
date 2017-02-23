@@ -48,17 +48,15 @@ $(function() {
             $(".content_one").css("margin-top", 0);
         });
     } else {
-        $(".content_one").css("margin-top", 0);   
+        $(".content_one").css("margin-top", 0);
     }
-
-   
 
     //点击不同端的不同产品，显示wrapper 默认显示第一个
     $(".aLink").on("click", function() {
         //动态wrapper
 
         //tab切换
-        $("body .tab_process").find("dl").on("click",function(){
+        $("body .tab_process").find("dl").on("click", function() {
             $(this).addClass("processActive").siblings("dl").removeClass("processActive");
             //每次点击更换 dataBox中的内容
         });

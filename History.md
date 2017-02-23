@@ -2961,3 +2961,26 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > template/platform.pug  
 
+
+1.0.5 / 2017-2-23 15:49:51
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 丢弃前端脚本改成内联脚本
+
+
+### modify files
+> routers/index.js  
+> routers/workflow.js  
+> template/directory.pug  
+> template/home.pug  
+> template/login.pug  
+> template/platform.pug  
+> webPage/js/portal/directory.js  
+> webPage/js/portal/footer.js  
+> webPage/js/portal/header.js  
+> webPage/js/portal/home.js  
+> webPage/js/portal/login.js  
+> webPage/js/portal/platform.js  
+> webPage/js/portal/product.js  
+

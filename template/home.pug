@@ -64,6 +64,11 @@ script.
             });
           };
 
+          // 点击反馈跳转到bbs
+          $(".feedback").bind("click", function() {
+              window.open("http://bbs.jwis.cn");
+          });
+
           // 目录点击
           $(".dir-menu>li").bind("click",function(){
               let $this = $(this);
@@ -115,13 +120,15 @@ script.
           // 点击产品名
           $(".content").on("click",'.productName',function(){
               // 跳转到TRU平台导航栏中对应的该产品的信息
-              alert("click 产品名");
+              const id = $(this).attr("data-id");
+              window.location.href = `/workflow/${id}`;
           });
 
           // 点击产品链接
           $(".content").on("click",'.productLink',function(){
               // 跳转到产品对应的主页信息
-              alert("will change homePage");
+              const url = $(this).attr("data-link");
+              window.open(url);
           });
 
           // 删除平台
@@ -197,7 +204,7 @@ script.
                 let $products = $platform.find(".platformDetail");
                 for(let product of platform.products){
                     $product = $firstProduct.clone();
-                    $product.find(".productName").val(product.productName).attr("readonly", "true");
+                    $product.find(".productName").val(product.productName).attr("readonly", "true").attr("data-id", product.produceId);
                     $product.find(".productLink").attr("data-link", product.productLink);
 
                     let status = product.status || [];

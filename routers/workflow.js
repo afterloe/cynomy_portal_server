@@ -74,6 +74,7 @@ const overviewsPlatform = function* (next) {
       data.push({
         platformName: tag,
         products: products.map(product => ({
+          produceId: product._id,
           productName: product.name,
           productLink:"https://www.baidu.com",
           status: product.process
@@ -101,6 +102,7 @@ const overviewsProduct = function* (next) {
       data.push({
         platformName: tag,
         products: products.map(product => ({
+          produceId: product._id,
           productName: product.name,
           productLink:"https://www.baidu.com",
           status: product.process
@@ -125,6 +127,7 @@ const overviewsDirectory = function* (next) {
     this.data = [{
       platformName: "公用文件",
       products: _.map(file => ({
+        produceId: file._id,
         productName: file.name,
         productLink: `/fs/download/${file._id}`,
       }))
@@ -135,10 +138,27 @@ const overviewsDirectory = function* (next) {
 
   return yield next;
 };
+
+const detail = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const {id} = this.params;
+    this.data = yield workflowInfo(id, {name : 1, nodeList: 1, status: 1});
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
 module.exports = {
   list,
   nodeFiles,
   simpleInfo,
+  detail,
   overviewsPlatform,
   overviewsProduct,
   overviewsDirectory,

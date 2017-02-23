@@ -43,6 +43,7 @@ module.exports = _ => {
    *  工作流模块
    */
   _.get("/workflow/list", authentication, workflow.list); // 工作流信息列表
+  _.get("//workflow/:id", authentication, workflow.detail);// 工作流详细信息
   _.get("/workflow/:id/simple", authentication, workflow.simpleInfo); // 获取工作流实例简单信息
   _.get("/workflow/:nodeId/files", authentication, workflow.nodeFiles); // 获取工作流某实例下的文件列表
   _.get("/workflow/overviews/platform", authentication, workflow.overviewsPlatform); // 总览 - 平台工作流

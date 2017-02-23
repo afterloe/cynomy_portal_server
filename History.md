@@ -2947,3 +2947,17 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/goodses.js  
 > services/fileSystem.js  
 
+
+1.0.5 / 2017-2-23 14:59:6
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 跟踪下载次数，前后端统一显示
+
+
+### modify files
+> routers/goodses.js  
+> services/goodsService.js  
+> services/workflowService.js  
+> template/platform.pug  
+

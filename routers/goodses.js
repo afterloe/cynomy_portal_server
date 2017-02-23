@@ -13,7 +13,8 @@
 
 const [{resolve}, {createReadStream}] = [require("path"), require(("fs"))];
 const services = resolve(__dirname, "..", "services");
-const [{getGoodsList, getGoodsInfo}, {getGoodsFileInfo}] = [require(resolve(services, "goodsService")), require(resolve(services, "fileSystem"))];
+const [{getGoodsList, getGoodsDetailed, increaseCount}, {getGoodsFileInfo}, {updateNodeProduceFile}] = [require(resolve(services, "goodsService")),
+  require(resolve(services, "fileSystem")), require(resolve(services, "workflowService"))];
 
 const list = function* (next) {
   if (this.error) {
@@ -35,12 +36,15 @@ const download = function* (next) {
   }
   try {
     const {id} = this.params;
-    const goods = yield getGoodsInfo(id);
+    const goods = yield getGoodsDetailed(id);
     const {fileName, mimeType, size, path} = yield getGoodsFileInfo(goods);
     this.res.setHeader("Content-disposition", `attachment;filename=${fileName};filename*=utf-8${fileName}`);
     this.res.setHeader("Content-type", mimeType);
     this.res.setHeader("Content-Length", Number(size).toString());
     this.body = createReadStream(path);
+    yield increaseCount(id);
+    goods.downloadCount += 1;
+    yield updateNodeProduceFile(goods.instanceNode, goods);
   }catch(err) {
     this.error = err;
   }

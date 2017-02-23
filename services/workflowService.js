@@ -482,6 +482,36 @@ function* promoteProcess(id) {
   });
 }
 
+function* updateNodeProduceFile(nodeId, goods) {
+  const _ = yield workFlow_node_instance_dao.queryById(nodeId);
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  const {produceList} = _;
+  const index = produceList.findIndex(_goods => _goods._id.toString() === goods._id.toString());
+  if (-1 === index) {
+    return ;
+  }
+
+  produceList[index] = goods;
+
+  yield workFlow_node_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        produceList,
+      }
+    }
+  });
+
+  Object.assign(_, {
+    produceList,
+  });
+
+  return yield syncNodeToWorkflow(_);
+}
+
 /**
  * 更新节点产出信息
  *
@@ -641,6 +671,7 @@ module.exports = {
 
   searchProduct,
   cleanDocuments,
+  updateNodeProduceFile,
   getWorkflowNodeList,
   getWorkflowNode,
   getWorkflowList,

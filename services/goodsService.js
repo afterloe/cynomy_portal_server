@@ -62,6 +62,7 @@ function* production(tmp, workflowId, nodeId, uuidCode) {
   if (productionList instanceof Array) {
     for(let i = 0; i < productionList.length; i++) {
       productionList[i].batch = uuidCode;
+      productionList[i].instanceNode = nodeId;
       productionList[i].path = uuidCode + sep + productionList[i].path;
       productionList[i] = buildGoods(productionList[i], workflowId, nodeInstance.name);
     }
@@ -126,14 +127,23 @@ function* setTags(goodsId, ...tagIds) {
   });
 }
 
+function* getGoodsDetailed(goodsId){
+  const goods = yield goods_dao.queryById(goodsId, 200);
+  if (!goods) {
+    throwNotExistsFile();
+  }
+
+  return goods;
+}
+
 function* getGoodsInfo(goodsId) {
   const goods = yield goods_dao.queryById(goodsId, 200);
   if (!goods) {
     throwNotExistsFile();
   }
 
-  const {name, path, type, size, batch} = goods;
-  return {name, path, type, size, batch};
+  const {name, path, type, size, batch, instanceNode, downloadCount, author} = goods;
+  return {name, path, type, size, batch, instanceNode, downloadCount, author};
 }
 
 function* getPublicGoodsesList(...tags) {
@@ -141,6 +151,16 @@ function* getPublicGoodsesList(...tags) {
   const _ = yield goods_dao.searchByTags(tags);
 
   return _;
+}
+
+function* increaseCount(id) {
+  return yield goods_dao.update({
+    _id: id, upload: {
+      $inc: {
+        downloadCount: 1
+      }
+    }
+  });
 }
 
 module.exports = {
@@ -152,5 +172,7 @@ module.exports = {
   exampleInfo,
   setTags,
   getGoodsInfo,
+  getGoodsDetailed,
   getPublicGoodsesList,
+  increaseCount,
 };

@@ -70,7 +70,7 @@ div(class="container platform_content")
                   span(class="name")=_file.name
                   span(class="time")=_file.uploadTime? new Date(_file.uploadTime).toLocaleString() : new Date().toLocaleString()
                   span=_file.downloadCount || 0
-                  span=_file.author.name
+                  span=_file.author?_file.author.name : "admin"
                   span(data-id=_file._id class="download" onClick="javascript:downLoadFile(this);")
 
 include footer
@@ -119,8 +119,8 @@ script.
         <i></i>
         <span class="name">${file.name}</span>
         <span class="time">${timeToDate(file.uploadTime)}</span>
-        <span>${file.downloadCount}</span>
-        <span>${file.author.name}</span>
+        <span>${file.downloadCount || 0}</span>
+        <span>${file.author ? file.author.name : "admin"}</span>
         <span data-id=${file._id} class="download" onClick="javascript:downLoadFile(this);"></span>
       </div>
     </li>`);

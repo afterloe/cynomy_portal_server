@@ -2919,3 +2919,19 @@ commit by afterloe (lm6289511@gmail.com)
 > services/fileSystem.js  
 > services/goodsService.js  
 
+
+1.0.5 / 2017-2-23 11:4:30
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复首页查询工作流失败的问题
+
+
+### modify files
+> routers/goodses.js  
+> routers/portal.js  
+> services/goodsService.js  
+> services/workflowService.js  
+> template/platform.pug  
+> tools/webTools/lib/websocket.js  
+

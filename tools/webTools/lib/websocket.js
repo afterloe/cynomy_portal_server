@@ -65,8 +65,8 @@ if (!ArrayBuffer.transfer) {
 }
 
 const siteConfig = new Map();
-// siteConfig.set("host", "127.0.0.1");
-siteConfig.set("host", "namo");
+siteConfig.set("host", "127.0.0.1");
+// siteConfig.set("host", "namo");
 siteConfig.set("port", "15024");
 // siteConfig.set("protocol", "echo-protocol");
 siteConfig.set("protocol", "node-protocol");

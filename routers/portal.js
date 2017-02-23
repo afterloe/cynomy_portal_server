@@ -18,8 +18,8 @@ const [{getPublicGoodsesList}, {searchProduct, workflowInfo}, {findTags}] = [req
 const findWorkflowByTags = function* (equipment, tags, ...hooks) {
   const _ = {};
   for(let tag of tags) {
-    hooks.unshift(equipment, tag);
-    const result = yield searchProduct.apply(null, hooks);
+    const __ = [equipment, tag].concat(hooks);
+    const result = yield searchProduct.apply(null, __);
     Object.assign(_, {
       [tag]: result
     });

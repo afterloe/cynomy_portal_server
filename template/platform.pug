@@ -29,7 +29,7 @@ div(class="popup")
 div(class="container platform_content")
   - const _products = locals.products || {};
   - const _product = locals.product || {};
-  - const _product_id = _product._id.toString();
+  - const _product_id = _product._id? _product._id.toString(): "";
   - const _activeNode = _product.status;
   div(class="content_one")
     each _product,_productIndex in _products

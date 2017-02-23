@@ -63,7 +63,7 @@ function* production(tmp, workflowId, nodeId, uuidCode) {
     for(let i = 0; i < productionList.length; i++) {
       productionList[i].batch = uuidCode;
       productionList[i].path = uuidCode + sep + productionList[i].path;
-      productionList[i] = buildGoods(productionList[i], workflowId._id, nodeInstance.name);
+      productionList[i] = buildGoods(productionList[i], workflowId, nodeInstance.name);
     }
 
     const _ = yield goods_dao.insertMany(productionList);

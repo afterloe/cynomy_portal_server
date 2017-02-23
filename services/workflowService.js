@@ -595,7 +595,7 @@ function* updateProcess(workflowId, {path, reason}) {
 
 
 function* exampleInfo(workflowId) {
-  const _ = yield workFlow_instance_dao.queryById(workflowId, 200);
+  const _ = yield workFlow_instance_dao.queryById(workflowId);
   if (!_) {
     throwOperationFailed();
   }
@@ -605,7 +605,7 @@ function* exampleInfo(workflowId) {
 }
 
 function* setTags(workflowId, ...tagIds) {
-  const workflow = yield workFlow_instance_dao.queryById(workflowId, 200);
+  const workflow = yield workFlow_instance_dao.queryById(workflowId);
   if (!workflow) {
     throwNosuchThisWorkFlow();
   }

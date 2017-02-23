@@ -11,7 +11,7 @@ all: check mocha-test
 test: mocha-test test-cov
 
 # 构建指令
-build: check move compile-js
+build: check move compile-js cleanCompile
 
 # 检测代码是否符合标准
 check: $(shell find . -name '*.js' ! -path './node_modules/*' ! -path './coverage/*' ! -path './mochawesome-reports/*' ! -path './webPage/*' ! -path './tools/webTools/*')
@@ -31,10 +31,14 @@ test-cov: $(MOCHA_FILES)
 
 # 移动文件
 move:
-	@mkdir /tmp/portal-server
-	@cp -R /tmp/portal-server
+	@[ -d /tmp/portal-server ] || mkdir -p /tmp/portal-server
+	@cp -R bin config dao distributed doc errors interceptors lib routers servers services template tools webPage History.md index.js INSTALL.md LICENSE package.json README.md /tmp/portal-server
 
 # 编译js
 compile-js:
-	@babel webPage/js/portal/src -d webPage/js/portal/bin
-	@babel tools/webTools/lib/src -d tools/webTools/lib/bin
+	@babel webPage/js/portal/src -d /tmp/portal-server/webPage/js/portal/bin
+	@babel tools/webTools/lib/src -d /tmp/portal-server/tools/webTools/lib/bin
+
+cleanCompile:
+	@rm -rf /tmp/portal-server/webPage/js/portal/src
+	@rm -rf /tmp/portal-server/tools/webTools/lib/src

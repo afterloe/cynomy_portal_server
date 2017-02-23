@@ -3054,3 +3054,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > "doc/db  
 
+
+1.0.5 / 2017-2-23 17:28:39
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 构建命令升级
+
+
+### modify files
+> Makefile  
+

@@ -2935,3 +2935,15 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > tools/webTools/lib/websocket.js  
 
+
+1.0.5 / 2017-2-23 13:45:4
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复附件下载异常
+
+
+### modify files
+> routers/goodses.js  
+> services/fileSystem.js  
+

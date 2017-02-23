@@ -257,7 +257,7 @@ const compression = (name, path, ...args) => {
 };
 
 const getGoodsFileInfo = goods => {
-  const {name, type, size, batch} = goods;
+  const {name, type, batch} = goods;
   const goodsFilePath = resolve(get("staticDir"), batch, name);
 
   if(!existsSync(goodsFilePath)) {
@@ -265,7 +265,7 @@ const getGoodsFileInfo = goods => {
   }
 
   const mimeType = module[MINIMUM].has(type)? module[MINIMUM].get(type): "application/octet-stream";
-
+  const size = statSync(goodsFilePath).size;
   return {
     fileName: encodeURI(name),
     size,

@@ -37,12 +37,10 @@ const download = function* (next) {
     const {id} = this.params;
     const goods = yield getGoodsInfo(id);
     const {fileName, mimeType, size, path} = yield getGoodsFileInfo(goods);
-
     this.res.setHeader("Content-disposition", `attachment;filename=${fileName};filename*=utf-8${fileName}`);
     this.res.setHeader("Content-type", mimeType);
     this.res.setHeader("Content-Length", Number(size).toString());
     this.body = createReadStream(path);
-    // yield* appService.downLoadComplete(params, language);
   }catch(err) {
     this.error = err;
   }

@@ -3007,3 +3007,33 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > services/fileSystem.js  
 
+
+1.0.5 / 2017-2-23 16:36:18
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改了js存放位置，添加构建命令
+
+
+### new files
+> .babelrc  
+> tools/webTools/lib/src/  
+> webPage/js/portal/src/  
+
+### modify files
+> .gitignore  
+> Makefile  
+> package.json  
+> tools/webTools/_util.html  
+
+### delete files
+> tools/webTools/lib/util.js  
+> tools/webTools/lib/websocket.js  
+> webPage/js/portal/directory.js  
+> webPage/js/portal/footer.js  
+> webPage/js/portal/header.js  
+> webPage/js/portal/home.js  
+> webPage/js/portal/login.js  
+> webPage/js/portal/platform.js  
+> webPage/js/portal/product.js  
+

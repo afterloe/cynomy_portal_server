@@ -1,4 +1,4 @@
-.PHONY: check,mocha-test,test
+.PHONY: check,mocha-test,test,compile-js,build,move
 
 PATH := ./node_modules/.bin:$(PATH)
 SHELL := /bin/bash
@@ -9,6 +9,9 @@ all: check mocha-test
 
 # 测试指令
 test: mocha-test test-cov
+
+# 构建指令
+build: check move compile-js
 
 # 检测代码是否符合标准
 check: $(shell find . -name '*.js' ! -path './node_modules/*' ! -path './coverage/*' ! -path './mochawesome-reports/*' ! -path './webPage/*' ! -path './tools/webTools/*')
@@ -25,3 +28,8 @@ clean: lib-cov
 # 测试覆盖率
 test-cov: $(MOCHA_FILES)
 	@istanbul cover node_modules/.bin/_mocha $^ -R spec
+
+# 编译js
+compile-js:
+	@babel webPage/js/portal/src -d webPage/js/portal/bin
+	@babel tools/webTools/lib/src -d tools/webTools/lib/bin

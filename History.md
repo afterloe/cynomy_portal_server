@@ -3117,3 +3117,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > Makefile  
 
+
+1.0.5 / 2017-2-24 11:15:11
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改并添加部分标签显示问题，修改android为mobile，同时添加对应的样式
+
+
+### modify files
+> template/platform.pug  
+> webPage/css/portal/platform.css  
+

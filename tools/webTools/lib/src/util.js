@@ -288,6 +288,9 @@ registry("getWorkflowList", (err, data) => {
           <button type="button" data-id="${_id}" class="btn btn-outline-danger btn-sm" onClick="javascript:startUpProcess(this);">
             启动流程
           </button>
+          <button type="button" data-id="${_id}" class="btn btn-outline-warning btn-sm" onClick="javascript:exampleManager(this, 'workflow')">
+    			管理
+    		  </button>
         </div>
       </div>`);
         }

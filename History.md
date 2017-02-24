@@ -3157,3 +3157,17 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/src/websocket.js  
 
+
+1.0.6 / 2017-2-24 15:19:5
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加基础设置修正部分工作流信息
+
+
+### modify files
+> routers/portal.js  
+> routers/workflow.js  
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+

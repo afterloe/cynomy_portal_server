@@ -100,7 +100,7 @@ function* exampleInfo(goodsId) {
   }
 
   const {name, _id, tags} = _;
-  return {name, _id, tags};
+  return {name, _id, tags, type: "goods"};
 }
 
 function* setTags(goodsId, ...tagIds) {

@@ -632,7 +632,7 @@ function* exampleInfo(workflowId) {
   }
 
   const {name, _id, tags} = _;
-  return {name, _id, tags};
+  return {name, _id, tags, type: "workflow"};
 }
 
 function* setTags(workflowId, ...tagIds) {

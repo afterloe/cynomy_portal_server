@@ -90,10 +90,18 @@ function startUpProcess(btn) {
     websocket.send(`node-manager->workflowService->startUpWorkflow("${id}")`);
 }
 
+function deleteExampleTag(btn) {
+    const id = $(btn).attr("data-id");
+    const tag = $(btn).text();
+    const service = $(btn).attr("data-type");
+    websocket.send(`node-manager->${service}Service->deleteExampleTag("${id}"|"${tag}")`);
+    $("#exampleManager").modal("toggle");
+}
+
 registry("exampleInfo", (err, data) => {
-    const {tags, name, _id} = data;
+    const {tags, name, _id, type} = data;
     const tagsHtml = [];
-    tags.map(tag => tagsHtml.push(`<span class="badge badge-default">${tag}</span>`));
+    tags.map(tag => tagsHtml.push(`<span class="badge badge-default" data-type="${type}" data-id="${_id}" onClick="javascript:deleteExampleTag(this);">${tag}</span>`));
     $("#name-exampleManager").html(name);
     $("#exampleId-exampleManager").val(_id);
     $("#tags-exampleManager").html(tagsHtml.join(" "));
@@ -307,6 +315,7 @@ const clickFunction = _ => {
 };
 
 $("#overwrite").click(function() {
+    websocket.send("node-manager->systemService->systemInfo");
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").hide();
@@ -422,6 +431,7 @@ $("#module-ok-updateNodeProduceList").click(() => {
     };
 });
 
+// 连接节点
 $("#module-ok-linkNode").click(function() {
     const form = $(this).parent().parent().find("form");
     const data = getFormData(form);

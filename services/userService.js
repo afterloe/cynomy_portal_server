@@ -272,7 +272,7 @@ function* exampleInfo(userId) {
   }
 
   const {name, _id, tags} = _;
-  return {name, _id, tags};
+  return {name, _id, tags, type: "user"};
 }
 
 module.exports = {

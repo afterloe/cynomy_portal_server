@@ -3171,3 +3171,17 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-2-24 15:36:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端添加标签删除功能
+
+
+### modify files
+> services/goodsService.js  
+> services/userService.js  
+> services/workflowService.js  
+> tools/webTools/lib/src/util.js  
+

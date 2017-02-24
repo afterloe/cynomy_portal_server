@@ -3129,3 +3129,18 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > webPage/css/portal/platform.css  
 
+
+1.0.6 / 2017-2-24 14:10:34
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: webTools 页面1.1
+
+
+### modify files
+> .cynomy  
+> package.json  
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+> tools/webTools/lib/src/websocket.js  
+

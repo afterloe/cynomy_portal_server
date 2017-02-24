@@ -419,6 +419,16 @@ $("#module-ok-updateNodeProduceList").click(() => {
     };
 });
 
+$("#module-ok-linkNode").click(function() {
+    const form = $(this).parent().parent().find("form");
+    const data = getFormData(form);
+    const {remote, port} = data;
+    setLinkInfo(remote, port);
+    tryToLink();
+
+    $("#linkNode").modal("toggle");
+});
+
 // 创建标签
 $("#module-ok-crearteTag").click(function() {
     const form = $(this).parent().parent().find("form");

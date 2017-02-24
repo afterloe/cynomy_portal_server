@@ -20,7 +20,13 @@ siteConfig.set("protocol", "node-protocol");
 const setLinkInfo = (host, port) => {
   siteConfig.set("host", host);
   siteConfig.set("port", port);
-  $("#control-small-info").html(`linked Node ${host}: ${port}`);
+  $("#control-small-info").html(`linked Node ${host}: ${port} <button type="button" class="btn btn-outline-danger btn-sm" onClick="javascript:disconnectionWS();">断开连接</button>`);
+};
+
+const disconnectionWS = () => {
+  if (websocket) {
+    websocket.close();
+  }
 };
 
 const tryToLink = () => {
@@ -42,7 +48,7 @@ const tryToLink = () => {
 
   websocket.addEventListener("close", (evt) => {
     console.log(evt);
-    $("#control-small-info").html("");
+    $("#control-small-info").html(`未连接节点 <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#linkNode">链接节点</button>`);
     $("#linkNode").modal("show");
     $("#console").html(`<div class="alert alert-danger" role="alert">
     <strong>出错了!</strong> 节点链接失败.

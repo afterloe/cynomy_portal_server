@@ -262,6 +262,7 @@ function* buildProduct(_workFlow, autoStart) {
    };
    Object.assign(_, {
      name: _workFlow.name,
+     link: _workFlow.link || "http://tru.jwis.cn",
      template: _workFlow.template,
      members,
    });

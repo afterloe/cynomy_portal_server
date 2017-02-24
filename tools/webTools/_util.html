@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">节点管理 <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">系统设置</a>
@@ -71,9 +71,9 @@
             </nav>
 
             <main class="col-sm-9">
-                <h1>控制台: <small id="control-small-info"><small> </h1>
+                <h1>控制台: <small id="control-small-info">未连接节点<small> </h1>
                 <p id="console">
-                  Connection to Cynomys node ... <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#linkNode">链接节点</button>
+                  ...请先 <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#linkNode">链接节点</button> 才能进行后续的操作
                 </p>
                 <div id="userInfo">
                     <h2>人员信息</h2>
@@ -169,7 +169,6 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary" id="module-ok-linkNode">连接</button>
                 </div>
             </div>
@@ -241,7 +240,7 @@
                         </div>
                         <div class="form-group">
                             <label>产品主页</label>
-                            <input type="text" name="linked" class="form-control" aria-describedby="emailHelp" placeholder="请输入产品主页" value="http://tru.jwis.cn">
+                            <input type="text" name="link" class="form-control" aria-describedby="emailHelp" placeholder="请输入产品主页" value="http://tru.jwis.cn">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">选择工作流模板</label>

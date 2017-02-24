@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-light bg-faded" style="background-color: rgba(255,255,255,.15);">
+    <nav class="navbar fixed-top navbar-toggleable-md navbar-light bg-faded" style="background-color: #f7f7f9;">
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">首页 <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">节点管理 <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">系统设置</a>
@@ -71,18 +71,151 @@
             </nav>
 
             <main class="col-sm-9">
-                <h1>控制台输出</h1>
-                <p id="console">Connection to Cynomys node ...</p>
+                <h1>控制台: <small id="control-small-info">未连接节点<small> </h1>
+                <p id="console">
+                  ...请先 <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#linkNode">链接节点</button> 才能进行后续的操作
+                </p>
+                <div id="overwriteInfo">
+                  <div class="card">
+                    <h3 class="card-header">系统信息</h3>
+                    <div class="card-block" id="overwriteInfo-systemInfo">
+                      <h4 class="card-title">主机名: afterloe</h4>
+                      <h4 class="card-title">主机平台: Linux</h4>
+                      <h4 class="card-title">uname: Darwin afterloe-macPro.local 16.4.0 Darwin Kernel Version 16.4.0</h4>
+                      <h4 class="card-title">网卡信息: </h4>
+                      <p class="card-text">
+                        <div class="card-deck">
+                          <div class="card">
+                            <div class="card-block">
+                              <h4 class="card-title">awdl0</h4>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-block">
+                              <h4 class="card-title">awdl0</h4>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-block">
+                              <h4 class="card-title">awdl0</h4>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-block">
+                              <h4 class="card-title">awdl0</h4>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                          </div>
+                        </div>
+                      </p>
+                      <h4 class="card-title">CPU信息: </h4>
+                      <p class="card-text">
+                        <div class="card card-inverse card-primary mb-3 text-center">
+                          <div class="card-block">
+                            <blockquote class="card-blockquote">
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                              <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                            </blockquote>
+                          </div>
+                        </div>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <h3 class="card-header">内存信息</h3>
+                    <div class="card-block">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <h3 class="card-header">硬盘信息</h3>
+                    <div class="card-block">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </div>
                 <div id="userInfo">
                     <h2>人员信息</h2>
                     <div class="float-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#importUserInfo">
+                        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#importUserInfo">
                       导入用户数据
                     </button>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exportUserInfo">
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exportUserInfo">
                       导出用户数据
                     </button>
                     </div>
+                    <br/>
                     <table class="table table-striped">
                         <thead class="thead-inverse">
                             <tr>
@@ -98,28 +231,27 @@
                 </div>
                 <div id="workflowInfo">
                     <h2>工作流信息</h2>
-                    <div id="table-show-workflow"></div>
                     <div class="row" style="margin-top: 1rem;">
                         <div class="col-sm-12">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteProcess">
+                            <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#crearteProcess">
                         创建工作流
                       </button>
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#crearteProcessTemplate">
+                            <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#crearteProcessTemplate">
                         创建工作流模板
                       </button>
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#crearteProcessNodeTemplate">
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#crearteProcessNodeTemplate">
                         创建工作流节点模板
                       </button>
                         </div>
                     </div>
-
+                    <div id="table-show-workflow"></div>
                 </div>
                 <div id="tagsInfo">
                     <h2>标签管理</h2>
                     <h3 id="table-show-tags"></h3>
                     <div class="row" style="margin-top: 1rem;">
                         <div class="col-sm-12">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crearteTag">
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#crearteTag">
                         添加标签
                       </button>
                         </div>
@@ -133,6 +265,45 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="linkNode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">链接远程节点</h4>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group row">
+                      <label for="linkNode-input-remote" class="col-sm-2 col-form-label">Remote</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="remote" class="form-control" id="linkNode-input-remote" placeholder="远程节点ip/host" value="127.0.0.1">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="linkNode-input-port" class="col-sm-2 col-form-label">Port</label>
+                      <div class="col-sm-10">
+                        <input type="number" name="port" class="form-control" id="linkNode-input-port" placeholder="远程节点端口" value="15024">
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label for="linkNode-input-author" class="col-sm-2 col-form-label">Author</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control" id="linkNode-input-author" placeholder="授权码">
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="module-ok-linkNode">连接</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="importUserInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -196,6 +367,10 @@
                             <label for="exampleInputEmail1">产品名*</label>
                             <input type="text" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="请输入产品名">
                             <small id="emailHelp" class="form-text text-muted">*为必须输入内容</small>
+                        </div>
+                        <div class="form-group">
+                            <label>产品主页</label>
+                            <input type="text" name="link" class="form-control" aria-describedby="emailHelp" placeholder="请输入产品主页" value="http://tru.jwis.cn">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput2">选择工作流模板</label>
@@ -329,7 +504,16 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleInputEmail1">关键字</label>
-                            <input type="text" class="form-control" name="keyWord" placeholder="输入关键字">
+                            <select class="form-control" name="keyWord">
+                              <option value="平台">平台</option>
+                              <option value="产品">产品</option>
+                              <option value="应用">应用</option>
+                              <option value="类型">类型</option>
+                              <option value="用户">用户</option>
+                              <option value="设备">设备</option>
+                              <option value="权限">权限</option>
+                              <option value="公共">公共</option>
+                            </select>
                             <small id="emailHelp" class="form-text text-muted">关键字用于给标签标识领域，可以使得标签能够通过搜索来获取，用`,`来分隔</small>
                         </div>
                         <div class="form-group">
@@ -401,7 +585,7 @@
                     <div class="collapse" id="addTags">
                       <label>贴标签</label>
                       <p></p>
-                      <div class="float-right"><a href="#" class="btn btn-outline-danger" onClick="javascript:reflushTag(this);">换一批</a></div>
+                      <div class="float-right"><a href="#" class="btn btn-outline-danger btn-sm" onClick="javascript:reflushTag(this);">换一批</a></div>
                     </div>
                   </div>
                 </div>

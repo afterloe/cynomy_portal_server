@@ -272,7 +272,35 @@ function* exampleInfo(userId) {
   }
 
   const {name, _id, tags} = _;
-  return {name, _id, tags};
+  return {name, _id, tags, type: "user"};
+}
+
+function* deleteExampleTag(userId, ..._tags) {
+  const user = yield user_dao.queryById(userId);
+  
+  if (!user) {
+    throwUserNotExist();
+  }
+
+  const {tags} = user;
+  const _ = [];
+  for (let t of _tags) {
+    for (let _t of tags) {
+      if (t === _t) {
+        continue;
+      }
+      _.push(_t);
+    }
+  }
+
+  return yield user_dao.update({
+    _id: user._id,
+    upload: {
+      $set: {
+        tags: _,
+      }
+    }
+  });
 }
 
 module.exports = {
@@ -289,4 +317,5 @@ module.exports = {
   findUsersByTag,
   setTags,
   exampleInfo,
+  deleteExampleTag,
 };

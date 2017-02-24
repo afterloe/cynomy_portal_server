@@ -90,14 +90,34 @@ function startUpProcess(btn) {
     websocket.send(`node-manager->workflowService->startUpWorkflow("${id}")`);
 }
 
+function deleteExampleTag(btn) {
+    const id = $(btn).attr("data-id");
+    const tag = $(btn).text();
+    const service = $(btn).attr("data-type");
+    websocket.send(`node-manager->${service}Service->deleteExampleTag("${id}"|"${tag}")`);
+    $("#exampleManager").modal("toggle");
+}
+
 registry("exampleInfo", (err, data) => {
-    const {tags, name, _id} = data;
+    const {tags, name, _id, type} = data;
     const tagsHtml = [];
-    tags.map(tag => tagsHtml.push(`<span class="badge badge-default">${tag}</span>`));
+    tags.map(tag => tagsHtml.push(`<span class="badge badge-default" data-type="${type}" data-id="${_id}" onClick="javascript:deleteExampleTag(this);">${tag}</span>`));
     $("#name-exampleManager").html(name);
     $("#exampleId-exampleManager").val(_id);
     $("#tags-exampleManager").html(tagsHtml.join(" "));
     $("#exampleManager").modal("show");
+});
+
+registry("systemInfo", (err, data) => {
+    const {} = data;
+});
+
+registry("memoryInfo", (err, data) => {
+    console.log(data);
+});
+
+registry("hardDiskInfo", (err, data) => {
+    console.log(data);
 });
 
 registry("getWorkflowTemplateList", (err, data) => {
@@ -288,6 +308,9 @@ registry("getWorkflowList", (err, data) => {
           <button type="button" data-id="${_id}" class="btn btn-outline-danger btn-sm" onClick="javascript:startUpProcess(this);">
             启动流程
           </button>
+          <button type="button" data-id="${_id}" class="btn btn-outline-warning btn-sm" onClick="javascript:exampleManager(this, 'workflow')">
+    			管理
+    		  </button>
         </div>
       </div>`);
         }
@@ -304,11 +327,15 @@ const clickFunction = _ => {
 };
 
 $("#overwrite").click(function() {
+    websocket.send("node-manager->systemService->systemInfo");
+    websocket.send("node-manager->systemService->memoryInfo");
+    websocket.send("node-manager->systemService->hardDiskInfo");
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").hide();
     $("#filesInfo").hide();
     $("#tagsInfo").hide();
+    $("#overwriteInfo").show();
 });
 
 // 用户数据链接
@@ -319,6 +346,7 @@ $("#nav-userInfo").click(function() {
     $("#workflowInfo").hide();
     $("#tagsInfo").hide();
     $("#filesInfo").hide();
+    $("#overwriteInfo").hide();
 });
 
 // 工作流数据
@@ -332,6 +360,7 @@ $("#nav-workflowInfo").click(function() {
     $("#workflowInfo").show();
     $("#tagsInfo").hide();
     $("#filesInfo").hide();
+    $("#overwriteInfo").hide();
 });
 
 // 标签管理
@@ -342,6 +371,7 @@ $("#nav-tags").click(function() {
     $("#workflowInfo").hide();
     $("#filesInfo").hide();
     $("#tagsInfo").show();
+    $("#overwriteInfo").hide();
 });
 
 // 文件信息
@@ -352,6 +382,7 @@ $("#nav-filesInfo").click(function() {
     $("#tagsInfo").hide();
     $("#workflowInfo").hide();
     $("#filesInfo").show();
+    $("#overwriteInfo").hide();
 });
 
 // 导入用户数据功能 实现
@@ -417,6 +448,17 @@ $("#module-ok-updateNodeProduceList").click(() => {
         dataView.setUint32(0, 2001);
         websocket.send(wsBuff);
     };
+});
+
+// 连接节点
+$("#module-ok-linkNode").click(function() {
+    const form = $(this).parent().parent().find("form");
+    const data = getFormData(form);
+    const {remote, port} = data;
+    setLinkInfo(remote, port);
+    tryToLink();
+
+    $("#linkNode").modal("toggle");
 });
 
 // 创建标签

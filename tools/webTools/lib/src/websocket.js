@@ -11,6 +11,51 @@
   */
 "use strict";
 
+const [siteConfig, registerList, WEBSOCKET] = [new Map(), new Map(), Symbol("WEBSOCKET")];
+
+let websocket = null;
+
+siteConfig.set("protocol", "node-protocol");
+
+const setLinkInfo = (host, port) => {
+  siteConfig.set("host", host);
+  siteConfig.set("port", port);
+  $("#control-small-info").html(`linked Node ${host}: ${port} <button type="button" class="btn btn-outline-danger btn-sm" onClick="javascript:disconnectionWS();">断开连接</button>`);
+};
+
+const disconnectionWS = () => {
+  if (websocket) {
+    websocket.close();
+  }
+};
+
+const tryToLink = () => {
+  websocket = new WebSocket(`ws://${siteConfig.get("host")}:${siteConfig.get("port")}`, siteConfig.get("protocol"));
+
+  websocket.addEventListener("open", () => $("#console").html(`<div class="alert alert-success" role="alert">
+  <strong>成功!</strong> 链接节点成功.
+  </div>`));
+
+  websocket.addEventListener("message", evt => {
+      const {data} = evt;
+      const {info, type, _} = JSON.parse(data);
+      $("#console").html(info);
+      const callback = registerList.get(type);
+      if (callback && callback.call) {
+          callback(null, _);
+      }
+  });
+
+  websocket.addEventListener("close", (evt) => {
+    console.log(evt);
+    $("#control-small-info").html(`未连接节点 <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#linkNode">链接节点</button>`);
+    $("#linkNode").modal("show");
+    $("#console").html(`<div class="alert alert-danger" role="alert">
+    <strong>出错了!</strong> 节点链接失败.
+  </div>`);
+  });
+};
+
 // 扩展webSocket 的 ArrayBuffer的 扩展ArrayBuffer的方法
 if (!ArrayBuffer.transfer) {
     ArrayBuffer.transfer = function(source, length) {
@@ -63,36 +108,6 @@ if (!ArrayBuffer.transfer) {
         }
     };
 }
-
-const siteConfig = new Map();
-siteConfig.set("host", "127.0.0.1");
-// siteConfig.set("host", "namo");
-siteConfig.set("port", "15024");
-// siteConfig.set("protocol", "echo-protocol");
-siteConfig.set("protocol", "node-protocol");
-const registerList = new Map();
-const websocket = new WebSocket(`ws://${siteConfig.get("host")}:${siteConfig.get("port")}`, siteConfig.get("protocol"));
-
-websocket.addEventListener("open", () => $("#console").html(`<div class="alert alert-success" role="alert">
-<strong>成功!</strong> 链接节点成功.
-</div>`));
-
-websocket.addEventListener("message", evt => {
-    const {data} = evt;
-    const {info, type, _} = JSON.parse(data);
-    $("#console").html(info);
-    const callback = registerList.get(type);
-    if (callback && callback.call) {
-        callback(null, _);
-    }
-});
-
-websocket.addEventListener("close", (evt) => {
-  console.log(evt);
-  $("#console").html(`<div class="alert alert-danger" role="alert">
-  <strong>出错了!</strong> 节点链接失败.
-</div>`);
-});
 
 const registry = (type, callback) => {
     if (registerList.has(type)) {

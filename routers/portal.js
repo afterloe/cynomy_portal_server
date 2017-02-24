@@ -93,7 +93,7 @@ function* platform(next) {
 
     for(let equipment of equipmentTags) {
       Object.assign(__, {
-        [equipment]: yield findWorkflowByTags(equipment, platformTags, "平台"),
+        [equipment]: yield findWorkflowByTags(equipment, platformTags),
       });
     }
 
@@ -117,7 +117,7 @@ function* product(next) {
     return yield next;
   }
   try {
-    const [equipmentTags, platformTags] = yield [findTags("设备"), findTags("平台")];
+    const [equipmentTags, platformTags] = yield [findTags("设备"), findTags("产品")];
     const _ = {
       title: "R&D Portal - product",
       index: 3,
@@ -127,7 +127,7 @@ function* product(next) {
 
     for(let equipment of equipmentTags) {
       Object.assign(__, {
-        [equipment]: yield findWorkflowByTags(equipment, platformTags, "app"),
+        [equipment]: yield findWorkflowByTags(equipment, platformTags, "应用"),
       });
     }
 

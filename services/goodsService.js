@@ -100,7 +100,7 @@ function* exampleInfo(goodsId) {
   }
 
   const {name, _id, tags} = _;
-  return {name, _id, tags};
+  return {name, _id, tags, type: "goods"};
 }
 
 function* setTags(goodsId, ...tagIds) {
@@ -163,6 +163,34 @@ function* increaseCount(id) {
   });
 }
 
+function* deleteExampleTag(goodsId, ..._tags) {
+  const goods = yield goods_dao.queryById(goodsId);
+
+  if (!goods) {
+    throwNotExistsFile();
+  }
+
+  const {tags} = goods;
+  const _ = [];
+  for (let t of _tags) {
+    for (let _t of tags) {
+      if (t === _t) {
+        continue;
+      }
+      _.push(_t);
+    }
+  }
+
+  return yield goods_dao.update({
+    _id: goods._id,
+    upload: {
+      $set: {
+        tags: _,
+      }
+    }
+  });
+}
+
 module.exports = {
   cleanDocuments,
   production,
@@ -175,4 +203,5 @@ module.exports = {
   getGoodsDetailed,
   getPublicGoodsesList,
   increaseCount,
+  deleteExampleTag,
 };

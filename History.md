@@ -3116,3 +3116,109 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/webTools/_util.html  
 
+
+1.0.5 / 2017-2-24 11:15:11
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改并添加部分标签显示问题，修改android为mobile，同时添加对应的样式
+
+
+### modify files
+> template/platform.pug  
+> webPage/css/portal/platform.css  
+
+
+1.0.6 / 2017-2-24 14:10:34
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: webTools 页面1.1
+
+
+### modify files
+> .cynomy  
+> package.json  
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+> tools/webTools/lib/src/websocket.js  
+
+
+1.0.6 / 2017-2-24 14:36:53
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改底层信息，添加基础设置建设
+
+
+### modify files
+> services/workflowService.js  
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/websocket.js  
+
+
+1.0.6 / 2017-2-24 15:19:5
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加基础设置修正部分工作流信息
+
+
+### modify files
+> routers/portal.js  
+> routers/workflow.js  
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+
+
+1.0.6 / 2017-2-24 15:36:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端添加标签删除功能
+
+
+### modify files
+> services/goodsService.js  
+> services/userService.js  
+> services/workflowService.js  
+> tools/webTools/lib/src/util.js  
+
+
+1.0.6 / 2017-2-24 16:35:33
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加基础功能，删除已添加的标签
+
+
+### modify files
+> services/goodsService.js  
+> services/userService.js  
+> services/workflowService.js  
+
+
+1.0.6 / 2017-2-24 16:36:58
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复删除标签的时候部分方法没有作用
+
+
+### modify files
+> services/goodsService.js  
+> services/userService.js  
+
+
+1.0.6 / 2017-2-24 18:13:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 编写启动流程时消息组件获取的系统信息
+
+
+### modify files
+> servers/lib/servicesCenter.js  
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+

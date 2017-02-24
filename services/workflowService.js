@@ -262,6 +262,7 @@ function* buildProduct(_workFlow, autoStart) {
    };
    Object.assign(_, {
      name: _workFlow.name,
+     link: _workFlow.link || "http://tru.jwis.cn",
      template: _workFlow.template,
      members,
    });
@@ -631,7 +632,7 @@ function* exampleInfo(workflowId) {
   }
 
   const {name, _id, tags} = _;
-  return {name, _id, tags};
+  return {name, _id, tags, type: "workflow"};
 }
 
 function* setTags(workflowId, ...tagIds) {
@@ -647,6 +648,33 @@ function* setTags(workflowId, ...tagIds) {
 
   const {tags} = workflow;
   _ = [...new Set(tags.concat(_))];
+
+  return yield workFlow_instance_dao.update({
+    _id: workflow._id,
+    upload: {
+      $set: {
+        tags: _,
+      }
+    }
+  });
+}
+
+function* deleteExampleTag(workflowId, ..._tags) {
+  const workflow = yield workFlow_instance_dao.queryById(workflowId);
+  if (!workflow) {
+    throwNosuchThisWorkFlow();
+  }
+
+  const {tags} = workflow;
+  const _ = [];
+  for (let t of _tags) {
+    for (let _t of tags) {
+      if (t === _t) {
+        continue;
+      }
+      _.push(_t);
+    }
+  }
 
   return yield workFlow_instance_dao.update({
     _id: workflow._id,
@@ -679,4 +707,5 @@ module.exports = {
   updateProcess,
   exampleInfo,
   setTags,
+  deleteExampleTag,
 };

@@ -76,7 +76,7 @@ const overviewsPlatform = function* (next) {
         products: products.map(product => ({
           produceId: product._id,
           productName: product.name,
-          productLink:"https://www.baidu.com",
+          productLink: product.link || "http://tru.jwis.cn",
           status: product.process
         })),
       });
@@ -95,10 +95,10 @@ const overviewsProduct = function* (next) {
   }
 
   try {
-    const platformTags = yield findTags("平台");// 获取平台标签
+    const platformTags = yield findTags("产品");// 获取平台标签
     const data = [];
     for (let tag of platformTags) {
-      const products = yield searchProduct(tag, "app");
+      const products = yield searchProduct(tag, "应用");
       data.push({
         platformName: tag,
         products: products.map(product => ({

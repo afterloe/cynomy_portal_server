@@ -276,7 +276,8 @@ function* exampleInfo(userId) {
 }
 
 function* deleteExampleTag(userId, ..._tags) {
-  const user = yield user_dao.queryById(workflowId);
+  const user = yield user_dao.queryById(userId);
+  
   if (!user) {
     throwUserNotExist();
   }

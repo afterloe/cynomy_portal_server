@@ -164,7 +164,7 @@ function* increaseCount(id) {
 }
 
 function* deleteExampleTag(goodsId, ..._tags) {
-  const goods = yield goods_dao.queryById(workflowId);
+  const goods = yield goods_dao.queryById(goodsId);
 
   if (!goods) {
     throwNotExistsFile();

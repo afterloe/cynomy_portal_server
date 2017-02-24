@@ -3198,3 +3198,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/userService.js  
 > services/workflowService.js  
 
+
+1.0.6 / 2017-2-24 16:36:58
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复删除标签的时候部分方法没有作用
+
+
+### modify files
+> services/goodsService.js  
+> services/userService.js  
+

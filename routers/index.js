@@ -19,6 +19,11 @@ const [authentication] = [require(resolve(interceptors, "authentication"))];
 
 module.exports = _ => {
   /*
+   * 默认首页
+   */
+  _.get("/", authentication, portal.home); // 默认首页
+
+  /*
    * 节点 模块
    */
   _.post("/node", node.registry);

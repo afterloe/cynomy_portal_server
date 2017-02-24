@@ -109,7 +109,9 @@ registry("exampleInfo", (err, data) => {
 });
 
 registry("systemInfo", (err, data) => {
-    const {} = data;
+    const _ = [];
+    const {hostName, cpus, platform, network, uname} = data;
+    
 });
 
 registry("memoryInfo", (err, data) => {

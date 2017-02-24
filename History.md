@@ -3223,3 +3223,18 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-2-25 0:57:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复切换分辨率的时候登录按钮无法点击的问题，修复默认首页的时候出现404，优化发送验证码功能
+
+
+### modify files
+> routers/index.js  
+> services/userService.js  
+> template/login.pug  
+> tools/webTools/lib/src/util.js  
+> webPage/js/portal/src/login.js  
+

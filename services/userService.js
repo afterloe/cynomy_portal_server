@@ -275,6 +275,33 @@ function* exampleInfo(userId) {
   return {name, _id, tags, type: "user"};
 }
 
+function* deleteExampleTag(userId, ..._tags) {
+  const user = yield user_dao.queryById(workflowId);
+  if (!user) {
+    throwUserNotExist();
+  }
+
+  const {tags} = user;
+  const _ = [];
+  for (let t of _tags) {
+    for (let _t of tags) {
+      if (t === _t) {
+        continue;
+      }
+      _.push(_t);
+    }
+  }
+
+  return yield user_dao.update({
+    _id: user._id,
+    upload: {
+      $set: {
+        tags: _,
+      }
+    }
+  });
+}
+
 module.exports = {
   loaderUserFromXlsx,
   createUsers,
@@ -289,4 +316,5 @@ module.exports = {
   findUsersByTag,
   setTags,
   exampleInfo,
+  deleteExampleTag,
 };

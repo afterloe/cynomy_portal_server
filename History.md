@@ -3185,3 +3185,16 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-2-24 16:35:33
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加基础功能，删除已添加的标签
+
+
+### modify files
+> services/goodsService.js  
+> services/userService.js  
+> services/workflowService.js  
+

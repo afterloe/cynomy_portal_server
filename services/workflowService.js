@@ -659,6 +659,33 @@ function* setTags(workflowId, ...tagIds) {
   });
 }
 
+function* deleteExampleTag(workflowId, ..._tags) {
+  const workflow = yield workFlow_instance_dao.queryById(workflowId);
+  if (!workflow) {
+    throwNosuchThisWorkFlow();
+  }
+
+  const {tags} = workflow;
+  const _ = [];
+  for (let t of _tags) {
+    for (let _t of tags) {
+      if (t === _t) {
+        continue;
+      }
+      _.push(_t);
+    }
+  }
+
+  return yield workFlow_instance_dao.update({
+    _id: workflow._id,
+    upload: {
+      $set: {
+        tags: _,
+      }
+    }
+  });
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -680,4 +707,5 @@ module.exports = {
   updateProcess,
   exampleInfo,
   setTags,
+  deleteExampleTag,
 };

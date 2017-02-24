@@ -3094,3 +3094,14 @@ commit by afterloe (lm6289511@gmail.com)
 
 ### modify files
 > Makefile  
+
+1.0.5 / 2017-2-24 9:52:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * release: 修复_util.html 启动时自动读取src内容导致报错
+
+
+### modify files
+> tools/webTools/_util.html  
+

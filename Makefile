@@ -39,6 +39,7 @@ install:
 # 移动文件
 .ONESHELL:
 move:
+	rm -rf $(TMPDIR)
 	mkdir -p $(TMPDIR)
 	cp -R $(FILELIST) $(TMPDIR)
 

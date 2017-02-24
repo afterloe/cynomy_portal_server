@@ -3105,3 +3105,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/webTools/_util.html  
 
+
+1.0.5 / 2017-2-24 10:6:28
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * release: 去除公钥限制
+
+
+### modify files
+> tools/webTools/_util.html  
+

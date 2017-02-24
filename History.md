@@ -3210,3 +3210,16 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > services/userService.js  
 
+
+1.0.6 / 2017-2-24 18:13:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 编写启动流程时消息组件获取的系统信息
+
+
+### modify files
+> servers/lib/servicesCenter.js  
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+

@@ -108,6 +108,18 @@ registry("exampleInfo", (err, data) => {
     $("#exampleManager").modal("show");
 });
 
+registry("systemInfo", (err, data) => {
+    const {} = data;
+});
+
+registry("memoryInfo", (err, data) => {
+    console.log(data);
+});
+
+registry("hardDiskInfo", (err, data) => {
+    console.log(data);
+});
+
 registry("getWorkflowTemplateList", (err, data) => {
     const workflowTemplate = [];
     data.map(item => {
@@ -316,11 +328,14 @@ const clickFunction = _ => {
 
 $("#overwrite").click(function() {
     websocket.send("node-manager->systemService->systemInfo");
+    websocket.send("node-manager->systemService->memoryInfo");
+    websocket.send("node-manager->systemService->hardDiskInfo");
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").hide();
     $("#filesInfo").hide();
     $("#tagsInfo").hide();
+    $("#overwriteInfo").show();
 });
 
 // 用户数据链接
@@ -331,6 +346,7 @@ $("#nav-userInfo").click(function() {
     $("#workflowInfo").hide();
     $("#tagsInfo").hide();
     $("#filesInfo").hide();
+    $("#overwriteInfo").hide();
 });
 
 // 工作流数据
@@ -344,6 +360,7 @@ $("#nav-workflowInfo").click(function() {
     $("#workflowInfo").show();
     $("#tagsInfo").hide();
     $("#filesInfo").hide();
+    $("#overwriteInfo").hide();
 });
 
 // 标签管理
@@ -354,6 +371,7 @@ $("#nav-tags").click(function() {
     $("#workflowInfo").hide();
     $("#filesInfo").hide();
     $("#tagsInfo").show();
+    $("#overwriteInfo").hide();
 });
 
 // 文件信息
@@ -364,6 +382,7 @@ $("#nav-filesInfo").click(function() {
     $("#tagsInfo").hide();
     $("#workflowInfo").hide();
     $("#filesInfo").show();
+    $("#overwriteInfo").hide();
 });
 
 // 导入用户数据功能 实现

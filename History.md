@@ -3095,3 +3095,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > Makefile  
 
+
+1.0.5 / 2017-2-24 9:46:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复makefile
+
+
+### modify files
+> Makefile  
+

@@ -37,10 +37,11 @@ install:
 	cnpm install --production
 
 # 移动文件
+.ONESHELL:
 move:
-	@[ -d $(TMPDIR) ] && rm -rf $(TMPDIR)
-	@mkdir -p $(TMPDIR)
-	@cp -R $(FILELIST) $(TMPDIR)
+	rm -rf $(TMPDIR)
+	mkdir -p $(TMPDIR)
+	cp -R $(FILELIST) $(TMPDIR)
 
 # 编译js
 compile-js:

@@ -3094,15 +3094,3 @@ commit by afterloe (lm6289511@gmail.com)
 
 ### modify files
 > Makefile  
-
-
-1.0.5 / 2017-2-23 18:10:13
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * release: 修改配置需要自己补全***的内容
-
-
-### modify files
-> config/index.js  
-

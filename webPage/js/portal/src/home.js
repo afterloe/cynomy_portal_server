@@ -1,6 +1,7 @@
 (function($){
     $(function(){
         let $save = $(".save");
+        let targetPage = "platform";
 
         const ajaxData = path => {
           $.ajax({
@@ -33,6 +34,7 @@
                 $currentCataMark.show();
                 $currentCataMark.siblings().hide();
             }
+            targetPage=$(this).attr("data-type");
             ajaxData($this.attr("data-path"));
         });
 
@@ -74,8 +76,9 @@
         // 点击产品名
         $(".content").on("click",'.productName',function(){
             // 跳转到TRU平台导航栏中对应的该产品的信息
-            const id = $(this).attr("data-id");
-            window.location.href = `/workflow/${id}`;
+            // const id = $(this).attr("data-id");
+            // window.location.href = `/workflow/${id}`;
+            window.location.href = "/portal/" + targetPage;
         });
 
         // 点击产品链接

@@ -302,6 +302,7 @@ input {
     .data li div i{display: inline-block;width: 0.16rem;height: 0.16rem;border-radius: 50%;background: #dbdbdb;float: left;margin-left: -0.08rem;/* margin-top: 0.08rem;/* margin-top: 0.08rem; */}
     .data li div span{margin-top: -0.05rem;display: inline-block;float: left;width: 1.85rem;text-align: center;height: 0.5rem;
     }
+    .data li div span.download{dispalay:none};
     .data li div span.name{margin-top: -0.05rem; width: 3.5rem;margin-left: 0.09rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
     .data li div span.time{width: 2rem;margin-left: 0;}
     .data li div span.dataClose{width: 0;

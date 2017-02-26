@@ -25,7 +25,7 @@ $(function() {
 
     // 点击反馈跳转到bbs
     $(".proposal").bind("click", function() {
-        window.open("http://bbs.jwis.cn");
+        window.open("http://bbs.jwis.cn/forum.php?mod=forumdisplay&fid=37");
     });
 
     //关闭遮罩层
@@ -108,7 +108,9 @@ const buildFiles = (files) => {
   const html = files.map((file) => `<li>
     <div>
       <i></i>
-      <span class="name">${file.name}</span>
+      <span class="name" data-id=${file._id} onClick="javascript:downLoadFile(this);">
+        <a href="javascript:void(0)">${file.name}</a>
+      </span>
       <span class="time">${timeToDate(file.uploadTime)}</span>
       <span>${file.downloadCount || 0}</span>
       <span>${file.author ? file.author.name : "admin"}</span>

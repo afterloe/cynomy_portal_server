@@ -25,7 +25,7 @@ $(function() {
 
     // 点击反馈跳转到bbs
     $(".proposal").bind("click", function() {
-        window.open("http://bbs.jwis.cn");
+        window.open("http://bbs.jwis.cn/forum.php?mod=forumdisplay&fid=37");
     });
 
     //关闭遮罩层

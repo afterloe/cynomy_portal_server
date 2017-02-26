@@ -3238,3 +3238,22 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/util.js  
 > webPage/js/portal/src/login.js  
 
+
+1.0.6 / 2017-2-26 14:26:45
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 详细请见history
+
+
+### modify files
+> dao/tag.js  
+> routers/index.js  
+> template/home.pug  
+> template/platform.pug  
+> webPage/css/portal/platform.css  
+> webPage/css/portal/product.css  
+> webPage/js/portal/src/directory.js  
+> webPage/js/portal/src/home.js  
+> webPage/js/portal/src/platform.js  
+

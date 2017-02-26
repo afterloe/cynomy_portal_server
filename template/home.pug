@@ -2,7 +2,9 @@
 
 include header
 
-link(href= static + "css/portal/home.css" rel="stylesheet")
+- const __time = Date.now();
+
+link(href= static + "css/portal/home.css?time=" + __time rel="stylesheet")
 
 div(class="menu" style="display: none;")
   p(class="addNext") 新增同级
@@ -29,9 +31,9 @@ div(class="container content")
   div(class="container structure")
     ul(class="dir-menu")
       div(class="feedback")
-      li(data-path="overviews/platform" class="first dir-platform selected")
-      li(data-path="overviews/product" class="dir-product")
-      li(data-path="overviews/directory" class="dir-public")
+      li(data-path="overviews/platform" data-type="platform" class="first dir-platform selected")
+      li(data-path="overviews/product" data-type="product" class="dir-product")
+      li(data-path="overviews/directory" data-type="directory" class="dir-public")
     div(class="catalogShadow")
       div(class="catalogMark currentCataMark1")
       div(class="catalogMark currentCataMark2")
@@ -43,4 +45,4 @@ div(class="container content")
 
 include footer
 
-script(src= static + "js/portal/bin/home.js")
+script(src= static + "js/portal/bin/home.js?time=" + __time)

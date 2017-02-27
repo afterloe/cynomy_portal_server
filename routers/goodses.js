@@ -34,6 +34,7 @@ const download = function* (next) {
   if (this.error) {
     return yield next;
   }
+
   try {
     const {id} = this.params;
     const goods = yield getGoodsDetailed(id);
@@ -52,7 +53,25 @@ const download = function* (next) {
   return yield next;
 };
 
+const updateNode = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const workflowNodeId = this.params.nodeId;
+    this.data = {
+      workflowNodeId,
+    };
+  } catch (err) {
+
+  }
+
+  return yield next;
+};
+
 module.exports = {
   list,
   download,
+  updateNode,
 };

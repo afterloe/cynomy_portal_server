@@ -152,3 +152,16 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > webPage/js/portal/src/platform.js  
 
+
+1.0.6 / 2017-2-27 15:3:41
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端开启访问接口，修改工作流进度
+
+
+### modify files
+> routers/goodses.js  
+> routers/index.js  
+> template/platform.pug  
+

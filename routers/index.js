@@ -60,6 +60,7 @@ module.exports = _ => {
    */
   _.get("/fs/list", authentication, goodses.list); // 更新文件信息列表
   _.get("/fs/download/:id", authentication, goodses.download); // 文件下载
+  _.post("/fs/update/:nodeId", authentication, goodses.updateNode); // 节点更新
 
   /*
    *  测试：开发者信息

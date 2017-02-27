@@ -37,6 +37,14 @@ const buildGoods = (goods, workflowId, nodeName) => {
   return _;
 };
 
+const getGoodesHouseAddress = workflowNode => {
+  const path = resolve(get("staticDir"), workflowNode._id);
+  if (!existsSync(path)) {
+    mkdirSync(path);
+  }
+  return path;
+};
+
 function* production(tmp, workflowId, nodeId, uuidCode) {
   if (!existsSync(tmp)) {
     throwNotExistsFile();
@@ -163,12 +171,20 @@ function* increaseCount(id) {
   });
 }
 
-function* obmitGoodesHouseAddress(goods) {
-  const path = resolve(get("staticDir"), goods._id);
-  if (!existsSync(path)) {
-    mkdirSync(path);
-  }
-  return path;
+function* createGoods(workflow, {fileName, savePath, mimeType}, author) {
+  const _ = buildGoods({
+    instanceNode: workflow._id,
+    nodeName: workflow.name,
+    uploadTime: Date.now(),
+    name: fileName,
+    path: savePath,
+    author,
+    batch: new Date().toDateString(),
+    version: new Date().toLocaleString(),
+  });
+
+  yield goods_dao(_);
+  return _;
 }
 
 function* deleteExampleTag(goodsId, ..._tags) {
@@ -199,6 +215,14 @@ function* deleteExampleTag(goodsId, ..._tags) {
   });
 }
 
+function* checkGoodsExist(pathOfgoods) {
+  if (!existsSync(pathOfgoods)) {
+    return ;
+  }
+
+  return yield cp(pathOfgoods, pathOfgoods + "-same-" + Date.now());
+}
+
 module.exports = {
   cleanDocuments,
   production,
@@ -212,5 +236,7 @@ module.exports = {
   getPublicGoodsesList,
   increaseCount,
   deleteExampleTag,
-  obmitGoodesHouseAddress,
+  getGoodesHouseAddress,
+  createGoods,
+  checkGoodsExist,
 };

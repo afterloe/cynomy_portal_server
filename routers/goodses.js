@@ -11,10 +11,11 @@
   */
 "use strict";
 
-const [{resolve}, {createReadStream, createWriteStream}, parse] = [require("path"), require(("fs")), require("co-busboy")];
+const [{resolve, join}, {createReadStream, createWriteStream}, parse] = [require("path"), require(("fs")), require("co-busboy")];
 const services = resolve(__dirname, "..", "services");
-const [{getGoodsList, getGoodsDetailed, increaseCount}, {getGoodsFileInfo, obmitGoodesHouseAddress}, {updateNodeProduceFile}, {throwLackParameters}] = [require(resolve(services, "goodsService")),
-  require(resolve(services, "fileSystem")), require(resolve(services, "workflowService")), require(resolve(__dirname, "..", "errors"))];
+const [{getGoodsList, getGoodsDetailed, increaseCount, checkGoodsExist}, {getGoodsFileInfo}, {getWorkflowNode, appendGoods2Node, updateNodeProduceFile}, {createGoods, getGoodesHouseAddress},
+  {throwLackParameters}] = [require(resolve(services, "goodsService")), require(resolve(services, "fileSystem")), require(resolve(services, "workflowService")),
+  require(resolve(services, "goodsService")), require(resolve(__dirname, "..", "errors"))];
 
 const list = function* (next) {
   if (this.error) {
@@ -59,11 +60,17 @@ const updateNode = function* (next) {
   }
 
   try {
-    const [fields,workflowNodeId] = [parse(this.req), this.params.nodeId];
-    const field = yield fields;
-    
-    if (Array.isArray(field)) {
+    const [fields, workflowNodeId, authorized] = [parse(this.req), this.params.nodeId, this.authorized];
 
+    const _ = yield getWorkflowNode(workflowNodeId);
+
+    if (!_) {
+      throwLackParameters();
+    }
+
+    const field = yield fields;
+
+    if (Array.isArray(field)) {
       throwLackParameters();
     }
 
@@ -72,18 +79,23 @@ const updateNode = function* (next) {
     if (!filename) {
       throwLackParameters();
     }
+    const address = getGoodesHouseAddress(_);
+    const streamName = resolve(address, filename);
 
-    console.log(mimeType);
+    yield checkGoodsExist(streamName);
 
-    // const streamName = resolve(obmitGoodesHouseAddress(), filename);
-    const streamName = resolve("/tmp", filename);
+    const goods = createGoods(_, {
+      fileName: filename,
+      savePath: join(_._id, filename),
+      mimeType,
+    }, authorized);
+
     field.pipe(createWriteStream(streamName));
+    yield appendGoods2Node(_._id, goods);
 
-    this.data = {
-      workflowNodeId,
-    };
+    this.data = {goods};
   } catch (err) {
-
+    this.error = err;
   }
 
   return yield next;

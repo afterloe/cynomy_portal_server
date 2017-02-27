@@ -178,3 +178,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/goodses.js  
 > services/goodsService.js  
 
+
+1.0.6 / 2017-2-27 16:20:40
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 上传文件接口ready
+
+
+### modify files
+> routers/goodses.js  
+> services/goodsService.js  
+> services/workflowService.js  
+

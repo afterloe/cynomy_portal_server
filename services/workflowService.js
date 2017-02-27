@@ -483,6 +483,37 @@ function* promoteProcess(id) {
   });
 }
 
+function* appendGoods2Node(nodeId, goods) {
+  const _ = yield workFlow_node_instance_dao.queryById(nodeId);
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  const {produceList} = _;
+
+  const index = produceList.findIndex(_goods => _goods.name === goods.name);
+  if (-1 === index) {
+    produceList.push(goods);
+  } else {
+    produceList[index] = goods;
+  }
+
+  yield workFlow_node_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        produceList,
+      }
+    }
+  });
+
+  Object.assign(_, {
+    produceList,
+  });
+
+  return yield syncNodeToWorkflow(_);
+}
+
 function* updateNodeProduceFile(nodeId, goods) {
   const _ = yield workFlow_node_instance_dao.queryById(nodeId);
   if (!_) {
@@ -708,4 +739,5 @@ module.exports = {
   exampleInfo,
   setTags,
   deleteExampleTag,
+  appendGoods2Node,
 };

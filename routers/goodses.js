@@ -80,13 +80,14 @@ const updateNode = function* (next) {
       throwLackParameters();
     }
     const address = getGoodesHouseAddress(_);
+
     const streamName = resolve(address, filename);
 
-    yield checkGoodsExist(streamName);
+    checkGoodsExist(streamName);
 
-    const goods = createGoods(_, {
+    const goods = yield createGoods(_, {
       fileName: filename,
-      savePath: join(_._id, filename),
+      savePath: join(_._id.toString(), filename),
       mimeType,
     }, authorized);
 

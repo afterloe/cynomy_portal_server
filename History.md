@@ -191,3 +191,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > services/workflowService.js  
 
+
+1.0.6 / 2017-2-27 16:51:3
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端单文件上传功能ready
+
+
+### modify files
+> routers/goodses.js  
+> services/goodsService.js  
+

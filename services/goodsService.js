@@ -11,9 +11,9 @@
   */
 "use strict";
 
-const [{resolve, basename, sep}, {statSync, existsSync, mkdirSync}] = [require("path"), require("fs")];
+const [{resolve, basename, sep}, {statSync, existsSync, mkdirSync, renameSync}] = [require("path"), require("fs")];
 const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed,
-throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move}, {getTagsInfo}] = [
+throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move, cp}, {getTagsInfo}] = [
   require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
   require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "fileSystem")), require(resolve(__dirname, "tagsService"))];
 
@@ -38,11 +38,13 @@ const buildGoods = (goods, workflowId, nodeName) => {
 };
 
 const getGoodesHouseAddress = workflowNode => {
-  const path = resolve(get("staticDir"), workflowNode._id);
-  if (!existsSync(path)) {
-    mkdirSync(path);
+  const __path = resolve(get("staticDir"), workflowNode._id.toString());
+
+  if (!existsSync(__path)) {
+    mkdirSync(__path);
   }
-  return path;
+
+  return __path;
 };
 
 function* production(tmp, workflowId, nodeId, uuidCode) {
@@ -183,7 +185,7 @@ function* createGoods(workflow, {fileName, savePath, mimeType}, author) {
     version: new Date().toLocaleString(),
   });
 
-  yield goods_dao(_);
+  yield goods_dao.insert(_);
   return _;
 }
 
@@ -215,13 +217,15 @@ function* deleteExampleTag(goodsId, ..._tags) {
   });
 }
 
-function* checkGoodsExist(pathOfgoods) {
+const checkGoodsExist = pathOfgoods => {
   if (!existsSync(pathOfgoods)) {
     return ;
   }
 
-  return yield cp(pathOfgoods, pathOfgoods + "-same-" + Date.now());
-}
+  const [fileName, whhosePath] = [basename(pathOfgoods), resolve(pathOfgoods, "..")];
+
+  renameSync(pathOfgoods, resolve(whhosePath, fileName + "-same-" + Date.now()));
+};
 
 module.exports = {
   cleanDocuments,

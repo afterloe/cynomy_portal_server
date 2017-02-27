@@ -32,6 +32,7 @@ $(function() {
     $(".btn_close").on("click", function() {
         $(".popup").css("display", "none");
     });
+    
     //打开遮罩层
     $(".upload").on("click", function() {
         $(".popup").css("display", "block");

@@ -43,7 +43,7 @@ siteConfig.set("logDir", logDir); // 日志存储目录
 siteConfig.set("redisConfig", { // redis 设置
   host: "namo", // redis服务器地址
   port: "6379", // redis端口
-  timeout: 172800 // 超时设置 秒
+  timeout: 604800 // 超时设置 秒
 });
 siteConfig.set("security", { // 安全设置
   securityKey: "APP://cynomy-portal/oauth", // 安全密钥

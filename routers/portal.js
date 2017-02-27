@@ -87,6 +87,7 @@ function* platform(next) {
     const _ = {
       title: "R&D Portal - platform",
       index: 2,
+      user: this.authorized,
     };
 
     const __ = {};
@@ -121,6 +122,7 @@ function* product(next) {
     const _ = {
       title: "R&D Portal - product",
       index: 3,
+      user: this.authorized,
     };
 
     const __ = {};

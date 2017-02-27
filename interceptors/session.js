@@ -30,7 +30,9 @@ const parseLanguage = header => {
 };
 
 module.exports = function* (next) {
-  let [start, cookie, requestIp, header, __self] = [Date.now(), this.cookies.get(key), this.request.ip, this.request.header, this];
+  let [start, cookie, requestIp, header, __self] = [Date.now(), this.cookies.get(key), this.request.ip,
+    this.request.header, this];
+    
   const {token} = header;
   if (!cookie) {
     cookie = token;
@@ -66,5 +68,5 @@ module.exports = function* (next) {
 
   yield next;
 
-  console.log("[%s][%s] %s %s - %s ms", new Date().toLocaleString(), requestIp, this.method, this.url, Date.now() - start);
+  console.log("[%s][%s] %s %s - %s ms by %s", new Date().toLocaleString(), requestIp, this.method, this.url, Date.now() - start, process.pid);
 };

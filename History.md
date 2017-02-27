@@ -137,3 +137,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > History.md  
 
+
+1.0.6 / 2017-2-27 14:57:21
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 开启外网访问权限，修改了requestIP的获取方式，platform，portal添加了user返回，前端页面添加了上传文件列表的方法。
+
+
+### modify files
+> config/index.js  
+> interceptors/session.js  
+> routers/portal.js  
+> template/platform.pug  
+> webPage/js/portal/src/platform.js  
+

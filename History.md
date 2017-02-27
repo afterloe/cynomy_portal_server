@@ -165,3 +165,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > template/platform.pug  
 
+
+1.0.6 / 2017-2-27 15:29:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 上传文件接口
+
+
+### modify files
+> package.json  
+> routers/goodses.js  
+> services/goodsService.js  
+

@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{resolve, basename, sep}, {statSync, existsSync}] = [require("path"), require("fs")];
+const [{resolve, basename, sep}, {statSync, existsSync, mkdirSync}] = [require("path"), require("fs")];
 const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed,
 throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move}, {getTagsInfo}] = [
   require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
@@ -163,6 +163,14 @@ function* increaseCount(id) {
   });
 }
 
+function* obmitGoodesHouseAddress(goods) {
+  const path = resolve(get("staticDir"), goods._id);
+  if (!existsSync(path)) {
+    mkdirSync(path);
+  }
+  return path;
+}
+
 function* deleteExampleTag(goodsId, ..._tags) {
   const goods = yield goods_dao.queryById(goodsId);
 
@@ -204,4 +212,5 @@ module.exports = {
   getPublicGoodsesList,
   increaseCount,
   deleteExampleTag,
+  obmitGoodesHouseAddress,
 };

@@ -11,10 +11,10 @@
   */
 "use strict";
 
-const [{resolve}, {createReadStream}] = [require("path"), require(("fs"))];
+const [{resolve}, {createReadStream, createWriteStream}, parse] = [require("path"), require(("fs")), require("co-busboy")];
 const services = resolve(__dirname, "..", "services");
-const [{getGoodsList, getGoodsDetailed, increaseCount}, {getGoodsFileInfo}, {updateNodeProduceFile}] = [require(resolve(services, "goodsService")),
-  require(resolve(services, "fileSystem")), require(resolve(services, "workflowService"))];
+const [{getGoodsList, getGoodsDetailed, increaseCount}, {getGoodsFileInfo, obmitGoodesHouseAddress}, {updateNodeProduceFile}, {throwLackParameters}] = [require(resolve(services, "goodsService")),
+  require(resolve(services, "fileSystem")), require(resolve(services, "workflowService")), require(resolve(__dirname, "..", "errors"))];
 
 const list = function* (next) {
   if (this.error) {
@@ -59,7 +59,26 @@ const updateNode = function* (next) {
   }
 
   try {
-    const workflowNodeId = this.params.nodeId;
+    const [fields,workflowNodeId] = [parse(this.req), this.params.nodeId];
+    const field = yield fields;
+    
+    if (Array.isArray(field)) {
+
+      throwLackParameters();
+    }
+
+    let {filename, mimeType} = field;
+
+    if (!filename) {
+      throwLackParameters();
+    }
+
+    console.log(mimeType);
+
+    // const streamName = resolve(obmitGoodesHouseAddress(), filename);
+    const streamName = resolve("/tmp", filename);
+    field.pipe(createWriteStream(streamName));
+
     this.data = {
       workflowNodeId,
     };

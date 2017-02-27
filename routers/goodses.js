@@ -92,6 +92,7 @@ const updateNode = function* (next) {
     }, authorized);
     field.pipe(createWriteStream(streamName));
 
+    // 加锁
     process.emit("hasLock", lock, flag => {
       if (flag) {
         process.emit("tryObmitLock", lock, appendGoods2Node(_._id, goods));

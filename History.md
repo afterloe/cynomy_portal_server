@@ -216,3 +216,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/goodses.js  
 > services/workflowService.js  
 
+
+1.0.6 / 2017-2-27 20:57:13
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 支持新版下载功能
+
+
+### modify files
+> routers/goodses.js  
+> services/fileSystem.js  
+> services/goodsService.js  
+

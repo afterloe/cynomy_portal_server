@@ -257,19 +257,37 @@ const compression = (name, path, ...args) => {
 };
 
 const getGoodsFileInfo = goods => {
-  const {name, type, batch} = goods;
+  const {name, type, batch, mimeType, path} = goods;
+
+  if (mimeType) {
+    const _path = resolve(get("staticDir"), path);
+
+    if(!existsSync(_path)) {
+      throwNotExistsFile();
+    }
+
+    const size = statSync(_path).size;
+
+    return {
+      fileName: encodeURI(name),
+      size,
+      mimeType,
+      path: _path
+    };
+  }
+
   const goodsFilePath = resolve(get("staticDir"), batch, name);
 
   if(!existsSync(goodsFilePath)) {
     throwNotExistsFile();
   }
 
-  const mimeType = module[MINIMUM].has(type)? module[MINIMUM].get(type): "application/octet-stream";
+  const _mimeType = module[MINIMUM].has(type)? module[MINIMUM].get(type): "application/octet-stream";
   const size = statSync(goodsFilePath).size;
   return {
     fileName: encodeURI(name),
     size,
-    mimeType,
+    mimeType: _mimeType,
     path: goodsFilePath
   };
 };

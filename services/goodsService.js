@@ -179,6 +179,7 @@ function* createGoods(workflow, {fileName, savePath, mimeType}, author) {
     nodeName: workflow.name,
     uploadTime: Date.now(),
     name: fileName,
+    mimeType,
     path: savePath,
     author,
     batch: new Date().toDateString(),

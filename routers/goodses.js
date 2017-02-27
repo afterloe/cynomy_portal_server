@@ -11,6 +11,8 @@
   */
 "use strict";
 
+const co = require("co");
+
 const [{resolve, join}, {createReadStream, createWriteStream}, parse] = [require("path"), require(("fs")), require("co-busboy")];
 const services = resolve(__dirname, "..", "services");
 const [{getGoodsList, getGoodsDetailed, increaseCount, checkGoodsExist}, {getGoodsFileInfo}, {getWorkflowNode, appendGoods2Node, updateNodeProduceFile}, {createGoods, getGoodesHouseAddress},
@@ -61,7 +63,6 @@ const updateNode = function* (next) {
 
   try {
     const [fields, workflowNodeId, authorized] = [parse(this.req), this.params.nodeId, this.authorized];
-
     const _ = yield getWorkflowNode(workflowNodeId);
 
     if (!_) {
@@ -79,22 +80,30 @@ const updateNode = function* (next) {
     if (!filename) {
       throwLackParameters();
     }
+
     const address = getGoodesHouseAddress(_);
-
     const streamName = resolve(address, filename);
-
     checkGoodsExist(streamName);
-
+    const lock = _._id.toString();
     const goods = yield createGoods(_, {
       fileName: filename,
-      savePath: join(_._id.toString(), filename),
+      savePath: join(lock, filename),
       mimeType,
     }, authorized);
-
     field.pipe(createWriteStream(streamName));
-    yield appendGoods2Node(_._id, goods);
+
+    process.emit("hasLock", lock, flag => {
+      if (flag) {
+        process.emit("tryObmitLock", lock, appendGoods2Node(_._id, goods));
+      } else {
+        process.emit("lock", lock, () => {
+          process.emit("tryObmitLock", lock, appendGoods2Node(_._id, goods), true);
+        });
+      }
+    });
 
     this.data = {goods};
+
   } catch (err) {
     this.error = err;
   }

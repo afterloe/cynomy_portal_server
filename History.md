@@ -203,3 +203,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/goodses.js  
 > services/goodsService.js  
 
+
+1.0.6 / 2017-2-27 20:43:20
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 增加锁机制
+
+
+### modify files
+> index.js  
+> routers/goodses.js  
+> services/workflowService.js  
+

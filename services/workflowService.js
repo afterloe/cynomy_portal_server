@@ -19,6 +19,9 @@ const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao
   require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "userService")), require(resolve(__dirname, "goodsService")),
   require(resolve(__dirname, "tagsService"))];
 
+const UPDATELIST = Symbol("UPDATELIST");
+module[UPDATELIST] = {};
+
 /**
  * 构建工作流节点模板
  *
@@ -494,9 +497,9 @@ function* appendGoods2Node(nodeId, goods) {
   const index = produceList.findIndex(_goods => _goods.name === goods.name);
   if (-1 === index) {
     produceList.push(goods);
-  } else {
-    produceList[index] = goods;
   }
+
+  produceList[index] = goods;
 
   yield workFlow_node_instance_dao.update({
     _id: _._id,
@@ -511,7 +514,7 @@ function* appendGoods2Node(nodeId, goods) {
     produceList,
   });
 
-  return yield syncNodeToWorkflow(_);
+  yield syncNodeToWorkflow(_);
 }
 
 function* updateNodeProduceFile(nodeId, goods) {

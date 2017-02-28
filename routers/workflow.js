@@ -13,7 +13,7 @@
 
 const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
-const [{getWorkflowList, workflowInfo, getWorkflowNode, searchProduct}, {findTags}, {getPublicGoodsesList}] =
+const [{getWorkflowList, workflowInfo, getWorkflowNode, searchProduct}, {findTags}, {getPublicGoodsesList, findGoodsByNode}] =
 [require(resolve(services, "workflowService")), require(resolve(services, "tagsService")), require(resolve(services, "goodsService"))];
 
 const list = function* (next) {
@@ -53,7 +53,8 @@ const nodeFiles = function* (next) {
 
   try {
     const {nodeId} = this.params;
-    this.data = yield getWorkflowNode(nodeId, {produceList: 1});
+    const data = yield findGoodsByNode(nodeId);
+    this.data = {produceList: data};
   } catch (err) {
     this.error = err;
   }

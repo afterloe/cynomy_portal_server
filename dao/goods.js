@@ -12,9 +12,10 @@
 "use strict";
 
 const {resolve} = require("path");
+const {throwParametersError} = require(resolve(__dirname, "..", "errors"));
 const commonsLib = require(resolve(__dirname, "public"))();
 
-const searchByTags = function*(tags, number = 100, page = 0, order = "uploadTime") {
+const searchByTags = function* (tags, number = 100, page = 0, order = "uploadTime") {
   if (tags instanceof Array) {
     page < 1 ? page = 0 : page--;
     return yield this.find({
@@ -33,8 +34,18 @@ const searchByTags = function*(tags, number = 100, page = 0, order = "uploadTime
   return [];
 };
 
+const searchByWehouse = function* (wehouseId) {
+  if (this.valid(wehouseId)) {
+    wehouseId = this.newObjectId(wehouseId);
+    const queryBody = {instanceNode: wehouseId, state: 200};
+    return this.find(queryBody).sort({"uploadTime": -1}).toArray();
+  }
+  throwParametersError();
+};
+
 const classMethod = {
   searchByTags,
+  searchByWehouse,
 };
 
 Object.assign(commonsLib, classMethod);

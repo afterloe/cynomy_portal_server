@@ -91,18 +91,6 @@ const updateNode = function* (next) {
       mimeType,
     }, authorized);
     field.pipe(createWriteStream(streamName));
-
-    // 加锁
-    process.emit("hasLock", lock, flag => {
-      if (flag) {
-        process.emit("tryObmitLock", lock, appendGoods2Node(_._id, goods));
-      } else {
-        process.emit("lock", lock, () => {
-          process.emit("tryObmitLock", lock, appendGoods2Node(_._id, goods), true);
-        });
-      }
-    });
-
     this.data = {goods};
 
   } catch (err) {

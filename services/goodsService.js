@@ -186,8 +186,8 @@ function* createGoods(workflow, {fileName, savePath, mimeType}, author) {
     version: new Date().toLocaleString(),
   });
 
-  yield goods_dao.insert(_);
-  return _;
+  const value = yield goods_dao.insert(_);
+  return value.ops[0];
 }
 
 function* deleteExampleTag(goodsId, ..._tags) {
@@ -218,6 +218,18 @@ function* deleteExampleTag(goodsId, ..._tags) {
   });
 }
 
+function* findGoodsByNode(goodsId) {
+  const _ = yield goods_dao.searchByWehouse(goodsId);
+  const result = [];
+  for (let file of _) {
+    const index = result.findIndex(_file => _file.name === file.name);
+    if (-1 === index) {
+      result.push(file);
+    }
+  }
+  return result;
+}
+
 const checkGoodsExist = pathOfgoods => {
   if (!existsSync(pathOfgoods)) {
     return ;
@@ -244,4 +256,5 @@ module.exports = {
   getGoodesHouseAddress,
   createGoods,
   checkGoodsExist,
+  findGoodsByNode,
 };

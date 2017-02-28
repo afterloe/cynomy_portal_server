@@ -27,7 +27,7 @@ siteConfig.set("tmpDir", "/tmp"); // 临时目录，用于存放上传的临时�
 siteConfig.set("staticDir", "/tmp/staticDir"); // 静态资源目录，用于存放静态资源
 siteConfig.set("sourceHost", "http://almcloud.jwis.cn/"); // Nginx 静态资源地址
 siteConfig.set("distributed", { // 多线程配置
-  enable: false, // 是否开启多线程模式
+  enable: true, // 是否开启多线程模式
   slaveNum : num // 奴隶数
 });
 siteConfig.set("bindHost", "0.0.0.0"); // 监听IP

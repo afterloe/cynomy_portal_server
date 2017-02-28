@@ -15,7 +15,7 @@ const {resolve} = require("path");
 const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
   {throwLackParameters, throwParametersError, throwObjectExists, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn,
   throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}, {findUsers},
-  {structureProduceList}, {getTagsInfo}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")),
+  {structureProduceList, findGoodsByNode}, {getTagsInfo}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")),
   require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "userService")), require(resolve(__dirname, "goodsService")),
   require(resolve(__dirname, "tagsService"))];
 
@@ -597,6 +597,20 @@ function* workflowInfo(workflow, hooks) {
   if (!_) {
     throwNosuchThisWorkFlow();
   }
+
+  const {status} = _;
+
+  if (!status) {
+    return _;
+  }
+
+  const produceList = yield findGoodsByNode(status._id);
+  Object.assign(status, {
+    produceList,
+  });
+  Object.assign(_, {
+    status
+  });
 
   return _;
 }

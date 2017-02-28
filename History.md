@@ -229,3 +229,21 @@ commit by afterloe (lm6289511@gmail.com)
 > services/fileSystem.js  
 > services/goodsService.js  
 
+
+1.0.6 / 2017-2-28 14:49:45
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 去除加锁机制，修改查询策略
+
+
+### modify files
+> config/index.js  
+> dao/goods.js  
+> distributed/slave.js  
+> index.js  
+> routers/goodses.js  
+> routers/workflow.js  
+> services/goodsService.js  
+> services/workflowService.js  
+

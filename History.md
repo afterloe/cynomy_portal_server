@@ -292,3 +292,18 @@ commit by afterloe (lm6289511@gmail.com)
 > template/product.pug  
 > template/pwdMail.pug  
 
+
+1.0.6 / 2017-2-28 16:9:59
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复上传文件精简问题导致的显示信息过多，优化操作失败提示401.5直接返回登录页面
+
+
+### modify files
+> routers/goodses.js  
+> routers/portal.js  
+> routers/workflow.js  
+> services/goodsService.js  
+> template/platform.pug  
+

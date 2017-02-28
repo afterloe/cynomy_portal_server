@@ -11,11 +11,9 @@
   */
 "use strict";
 
-const co = require("co");
-
 const [{resolve, join}, {createReadStream, createWriteStream}, parse] = [require("path"), require(("fs")), require("co-busboy")];
 const services = resolve(__dirname, "..", "services");
-const [{getGoodsList, getGoodsDetailed, increaseCount, checkGoodsExist}, {getGoodsFileInfo}, {getWorkflowNode, appendGoods2Node, updateNodeProduceFile}, {createGoods, getGoodesHouseAddress},
+const [{getGoodsList, getGoodsDetailed, increaseCount, checkGoodsExist}, {getGoodsFileInfo}, {getWorkflowNode, updateNodeProduceFile}, {createGoods, getGoodesHouseAddress},
   {throwLackParameters}] = [require(resolve(services, "goodsService")), require(resolve(services, "fileSystem")), require(resolve(services, "workflowService")),
   require(resolve(services, "goodsService")), require(resolve(__dirname, "..", "errors"))];
 

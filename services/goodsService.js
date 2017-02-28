@@ -173,7 +173,7 @@ function* increaseCount(id) {
   });
 }
 
-function* createGoods(workflow, {fileName, savePath, mimeType}, author) {
+function* createGoods(workflow, {fileName, savePath, mimeType}, {mail, name, id}) {
   const _ = buildGoods({
     instanceNode: workflow._id,
     nodeName: workflow.name,
@@ -181,7 +181,7 @@ function* createGoods(workflow, {fileName, savePath, mimeType}, author) {
     name: fileName,
     mimeType,
     path: savePath,
-    author,
+    author: {mail, name, id},
     batch: new Date().toDateString(),
     version: new Date().toLocaleString(),
   });

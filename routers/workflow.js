@@ -37,8 +37,16 @@ const simpleInfo = function* (next) {
   }
 
   try {
-    const {id} = this.params;
-    this.data = yield workflowInfo(id, {name : 1, nodeList: 1, status: 1});
+    const [{id}, user] = [this.params, this.authorized];
+    const _ = yield workflowInfo(id, {name : 1, nodeList: 1, status: 1, members: 1});
+
+    const {members} = _;
+
+    const index = members.findIndex(member => member.mail === user.mail);
+
+    Object.assign(_, {allowedUpload: index === -1 ? false:true,});
+
+    this.data = _;
   } catch (err) {
     this.error = err;
   }

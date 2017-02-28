@@ -206,13 +206,31 @@ script.
   };
 
   const beginUpload = () => {
-      uploadTasks($(".processActive").find("dt").attr("data-id")).then(data => {
-          console.log(data);
+      const nodeId = $(".processActive").find("dt").attr("data-id");
+      uploadTasks(nodeId).then(data => {
           window[UpLoadList].length = 0;
           $(".popup").css("display", "none");
           $(".dataFile").html("");
+          $.ajax({
+            type: "GET",
+            url: `/workflow/${nodeId}/files`,
+            dataType: "json",
+            beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
+            success: result => {
+              if (401.5 === result.code) {
+                alert("登录许可已失效，请重新获取登录许可");
+                location.href = "/portal/login";
+                return ;
+              }
+              if (200 !== result.code) {
+                alert("服务器繁忙");
+              } else {
+                buildFiles(result.result.produceList);
+              }
+            }
+          });
       }).catch(err => {
-          console.log(err);
+          alert("上传失败 " + err.message);
       });
   };
 
@@ -289,6 +307,11 @@ script.
       dataType: "json",
       beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
       success: result => {
+        if (401.5 === result.code) {
+          alert("登录许可已失效，请重新获取登录许可");
+          location.href = "/portal/login";
+          return ;
+        }
         if (200 !== result.code) {
           alert("服务器繁忙");
         } else {
@@ -309,6 +332,11 @@ script.
       dataType: "json",
       beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
       success: result => {
+        if (401.5 === result.code) {
+          alert("登录许可已失效，请重新获取登录许可");
+          location.href = "/portal/login";
+          return ;
+        }
         if (200 !== result.code) {
           alert("服务器繁忙");
         } else {

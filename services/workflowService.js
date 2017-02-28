@@ -12,12 +12,21 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
-  {throwLackParameters, throwParametersError, throwObjectExists, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn,
-  throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}, {findUsers},
-  {structureProduceList, findGoodsByNode}, {getTagsInfo}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")),
-  require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "userService")), require(resolve(__dirname, "goodsService")),
-  require(resolve(__dirname, "tagsService"))];
+const [
+  {workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
+  {throwLackParameters, throwParametersError, throwOauthError, throwObjectExists, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate},
+  {checkParameter},
+  {findUsers},
+  {structureProduceList, findGoodsByNode},
+  {getTagsInfo}
+] = [
+  require(resolve(__dirname, "..", "dao")),
+  require(resolve(__dirname, "..", "errors")),
+  require(resolve(__dirname, "..", "tools", "utilities")),
+  require(resolve(__dirname, "userService")),
+  require(resolve(__dirname, "goodsService")),
+  require(resolve(__dirname, "tagsService"))
+];
 
 const UPDATELIST = Symbol("UPDATELIST");
 module[UPDATELIST] = {};
@@ -583,12 +592,6 @@ function* updateNodeProduceList(nodeId, {produceList, reason}) {
   return yield syncNodeToWorkflow(_);
 }
 
-/**
- * 获取工作信息
- *
- * @param  {String}    workflow [工作流实例名 或 工作流id]
- * @return {Object}          [工作流对象]
- */
 function* workflowInfo(workflow, hooks) {
   let _ = yield workFlow_instance_dao.queryById(workflow, hooks);
   if (!_) {
@@ -709,6 +712,7 @@ function* setTags(workflowId, ...tagIds) {
 
 function* deleteExampleTag(workflowId, ..._tags) {
   const workflow = yield workFlow_instance_dao.queryById(workflowId);
+
   if (!workflow) {
     throwNosuchThisWorkFlow();
   }
@@ -734,6 +738,20 @@ function* deleteExampleTag(workflowId, ..._tags) {
   });
 }
 
+function* obmitUploadFileAuthorize(workflowId, {mail}) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  const {members} = _;
+
+  const flag = members.findIndex(member => member.mail === mail);
+  if (-1 === flag) {
+    throwOauthError();
+  }
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -757,4 +775,5 @@ module.exports = {
   setTags,
   deleteExampleTag,
   appendGoods2Node,
+  obmitUploadFileAuthorize,
 };

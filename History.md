@@ -330,3 +330,17 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > template/platform.pug  
 
+
+1.0.6 / 2017-2-28 16:40:57
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 上传文件需要获取权限
+
+
+### modify files
+> config/index.js  
+> errors/i18nError.json  
+> routers/goodses.js  
+> services/workflowService.js  
+

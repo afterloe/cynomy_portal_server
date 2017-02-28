@@ -74,11 +74,6 @@
     "en-US": "too often, please try again later",
     "zh-CN": "请求过于频繁，请稍后再试"
   },
-  "OauthError": {
-    "code": "401.4",
-    "en-US": "authentication fail",
-    "zh-CN": "授权失败"
-  },
   "SessionError": {
     "code": "401.5",
     "en-US": "token validation failure",
@@ -93,6 +88,11 @@
     "code": "401.4",
     "en-US": "security code error",
     "zh-CN": "安全码错误"
+  },  
+  "OauthError": {
+    "code": "403",
+    "en-US": "authentication fail",
+    "zh-CN": "授权不足"
   },
   "NotExistsFile": {
     "code": "404",

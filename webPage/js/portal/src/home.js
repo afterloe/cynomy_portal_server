@@ -10,6 +10,11 @@
             dataType: "json",
             beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
             success: result => {
+              if (401.5 === result.code) {
+                alert("登录许可已失效，请重新获取登录许可");
+                location.href = "/portal/login";
+                return ;
+              }
               if (200 !== result.code) {
                 alert("服务器繁忙");
               } else {

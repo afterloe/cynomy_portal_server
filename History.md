@@ -307,3 +307,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > template/platform.pug  
 
+
+1.0.6 / 2017-2-28 16:11:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复home页面没有重新登录提示
+
+
+### modify files
+> webPage/js/portal/src/home.js  
+

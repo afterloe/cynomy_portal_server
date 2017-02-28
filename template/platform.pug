@@ -2,9 +2,10 @@
 
 include header
 
-- const __time = Date.now();
+- const __time = locals.version || "";
 - const _products = locals.products || {};
 - const _product = locals.product || {};
+- const _allowedUpload = locals.allowedUpload || false;
 - const _user = locals.user || {};
 - const _product_id = _product._id? _product._id.toString(): "";
 - const _activeNode = _product.status;
@@ -65,7 +66,7 @@ div(class="container platform_content")
         div(class="dataBox")
           div(class="header")
             span(class="data_title")=`${_activeNode.name} 资料`
-            span(class="upload")
+            span(class=_allowedUpload? "upload":"" id="uploadButton")
           - const _files = _activeNode.produceList || [];
           ul(class="data")
             each _file in _files
@@ -85,7 +86,7 @@ script(src= static + "js/portal/rem.js")
 // - script(src= static + "js/portal/bin/platform.js?time=" + __time)
 
 script.
-  console.log("new Function.");
+
   const [workflowName,UpLoadList, UploadIndex] = [Symbol("workflowName"), Symbol("UpLoadList"), Symbol("UploadIndex")];
   window[UpLoadList] = [];
 

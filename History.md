@@ -258,3 +258,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/platform.pug  
 
+
+1.0.6 / 2017-2-28 15:26:42
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 响应添加了系统版本号，同时前端资料也改成了version格式，不再是系统时间，非项目组成员禁止上传资料
+
+
+### modify files
+> config/index.js  
+> interceptors/smartNotFound.js  
+> interceptors/template.js  
+> routers/portal.js  
+> template/platform.pug  
+

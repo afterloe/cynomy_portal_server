@@ -247,3 +247,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > services/workflowService.js  
 
+
+1.0.6 / 2017-2-28 15:5:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前段细节优化，切换的时候同步节点名和流程名
+
+
+### modify files
+> template/platform.pug  
+

@@ -63,7 +63,8 @@ div(class="container platform_content")
             div(class="clear")
       div(class="tab_content")
         div(class="dataBox")
-          div(class="header")=`${_activeNode.name}资料`
+          div(class="header")
+            span(class="data_title")=`${_activeNode.name} 资料`
             span(class="upload")
           - const _files = _activeNode.produceList || [];
           ul(class="data")
@@ -134,7 +135,7 @@ script.
       });
 
       //进入该页面，content_one从上往下运动
-      var width = $(window).width();
+      const width = $(window).width();
       if (width > 768) {
           var contentOne = $(".content_one").height();
           var height = -contentOne;
@@ -237,11 +238,13 @@ script.
     });
   };
 
-  const cleanSelectd = () => {
+  const cleanSelectd = (nodeName) => {
     $("dl").attr("class", "");
+    $(".data_title").html(`${nodeName} 资料`);
   }
 
   const buildProcess = (nodeList, actionNum) => {
+    $(".data_title").html(`${nodeList[actionNum].name} 资料`);
     const html = nodeList.map((node, index) => `<dl class=${actionNum === index? "processActive":""}>
       <dt data-id=${node._id} onClick="javascript:showFiles(this);">
         <a class="tabIcon tabIcon_plan" href="javascript:void(0);"></a>
@@ -279,6 +282,7 @@ script.
 
   const showFiles = btn => {
     const id = $(btn).attr("data-id");
+    const nodeName = $(btn).find("span").html();
     $.ajax({
       type: "GET",
       url: `/workflow/${id}/files`,
@@ -288,7 +292,7 @@ script.
         if (200 !== result.code) {
           alert("服务器繁忙");
         } else {
-          cleanSelectd();
+          cleanSelectd(nodeName);
           $(btn).parent().attr("class", "processActive");
           buildFiles(result.result.produceList);
         }

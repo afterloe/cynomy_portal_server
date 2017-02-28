@@ -318,3 +318,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > webPage/js/portal/src/home.js  
 
+
+1.0.6 / 2017-2-28 16:24:55
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加切换节点的时候也能重新构建是否出现上传按钮
+
+
+### modify files
+> routers/portal.js  
+> template/platform.pug  
+

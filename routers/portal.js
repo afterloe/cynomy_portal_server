@@ -141,7 +141,7 @@ function* product(next) {
     const product = yield findActiveWorkflowExample(__);
     const {members} = product;
 
-    const index = members.findIndex(member => member.maill === user.mail);
+    const index = members.findIndex(member => member.mail === user.mail);
 
     Object.assign(_, {
       products: __,

@@ -261,6 +261,15 @@ script.
     $(".data_title").html(`${nodeName} 资料`);
   }
 
+  const buildUploadItem = (allowedUpload = false) => {
+    const uploadButton = $("#uploadButton");
+    if (allowedUpload) {
+      uploadButton.hasClass("upload") ? "": uploadButton.addClass("upload");
+    } else {
+      uploadButton.hasClass("upload") ? uploadButton.removeClass("upload"): "";
+    }
+  };
+
   const buildProcess = (nodeList, actionNum) => {
     $(".data_title").html(`${nodeList[actionNum].name} 资料`);
     const html = nodeList.map((node, index) => `<dl class=${actionNum === index? "processActive":""}>
@@ -344,6 +353,7 @@ script.
           $(btn).find("span").css({color: "#3d9bff"});
           buildProcess(result.result.nodeList, result.result.status.index);
           buildFiles(result.result.status.produceList);
+          buildUploadItem(result.result.allowedUpload);
         }
       }
     });

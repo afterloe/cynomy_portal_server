@@ -273,3 +273,22 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > template/platform.pug  
 
+
+1.0.6 / 2017-2-28 15:46:39
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 全面修改template中关于版本的信息
+
+
+### modify files
+> config/index.js  
+> routers/portal.js  
+> template/directory.pug  
+> template/header.pug  
+> template/home.pug  
+> template/login.pug  
+> template/platform.pug  
+> template/product.pug  
+> template/pwdMail.pug  
+

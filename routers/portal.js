@@ -112,7 +112,6 @@ function* platform(next) {
     this.pageName = "platform";
     this.data = _;
   } catch (err) {
-    console.log(err);
     this.error = err;
   }
 

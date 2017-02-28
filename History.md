@@ -344,3 +344,15 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/goodses.js  
 > services/workflowService.js  
 
+
+1.0.6 / 2017-2-28 17:32:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 重构成员管理页面
+
+
+### modify files
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+

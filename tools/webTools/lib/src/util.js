@@ -32,71 +32,80 @@ const buildSelectProcess = () => {
     });
 };
 
-function appendTag(btn) {
+const appendTag = btn => {
     const [id, name] = [$(btn).attr("data-id"), $(btn).attr("data-name")];
     const exampleId = $("#exampleId-exampleManager").val();
     websocket.send(`node-manager->${modalService}->setTags("${exampleId}"|"${id}")`);
     let html = $("#tags-exampleManager").html();
     html += ` <span class="badge badge-default" data-id="${id}" data-name="${name}"> &nbsp;${name}</span>`;
     $("#tags-exampleManager").html(html);
-}
+};
 
-function reflushTag() {
+const reflushTag = () => {
 	websocket.send("node-manager->tagsService->getTagsList");
-}
+};
 
-function exampleManager(btn, modal) {
+const exampleManager = (btn, modal) => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->${modal}Service->exampleInfo("${id}")`);
     modalService = `${modal}Service`;
-}
+};
 
-function deleteUser(btn) {
+const deleteUser = btn => {
     console.log($(btn).attr("data-id"));
     console.log("123");
-}
+};
 
-function resetPwd(btn) {
+const resetPwd = btn => {
     console.log($(btn).attr("data-id"));
     console.log("123");
-}
+};
 
-function deleteTag(btn) {
+const deleteTag = btn => {
     btn = $(btn).parent();
     const [name,
         id] = [btn.attr("data-name"), btn.attr("data-id")];
     $("#label-askdeleteTag").html(`删除 ${name}`);
     $("#input-askdeleteTag").val(id);
     $("#askdeleteTag").modal("show");
-}
+};
 
-function uploadNode(btn) {
+const uploadNode = btn =>  {
     btn = $(btn);
-    const [id,
-        nodeName] = [btn.attr("data-id"), btn.attr("data-name")];
+    const [id, nodeName] = [btn.attr("data-id"), btn.attr("data-name")];
     const processName = btn.parent().parent().attr("data-name");
     $("#label-updateNodeProduceList").html(`${processName} - ${nodeName} 节点更新`);
     $("#hidden-views").html(`<input type="hidden" name="workflowId" value="${id}" />`);
     $("#updateNodeProduceList").modal("show");
-}
+};
 
-function promoteProcess(btn) {
+const promoteProcess = btn => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->workflowService->promoteProcess("${id}")`);
-}
+};
 
-function startUpProcess(btn) {
+const retroversionProcess = btn => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->retroversion("${id}")`);
+};
+
+const startUpProcess = btn => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->workflowService->startUpWorkflow("${id}")`);
-}
+};
 
-function deleteExampleTag(btn) {
+const membersManager = btn => {
+    const id = $(btn).attr("data-id");
+    $("#membersManager").modal("toggle");
+};
+
+const deleteExampleTag  = btn => {
     const id = $(btn).attr("data-id");
     const tag = $(btn).text();
     const service = $(btn).attr("data-type");
     websocket.send(`node-manager->${service}Service->deleteExampleTag("${id}"|"${tag}")`);
     $("#exampleManager").modal("toggle");
-}
+};
 
 registry("exampleInfo", (err, data) => {
     const {tags, name, _id, type} = data;
@@ -111,7 +120,7 @@ registry("exampleInfo", (err, data) => {
 registry("systemInfo", (err, data) => {
     const _ = [];
     const {hostName, cpus, platform, network, uname} = data;
-    
+
 });
 
 registry("memoryInfo", (err, data) => {
@@ -223,6 +232,10 @@ registry("promoteProcess", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
 });
 
+registry("retroversion", (err, data) => {
+    websocket.send("node-manager->workflowService->getWorkflowList");
+});
+
 registry("startUpWorkflow", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
 });
@@ -280,22 +293,34 @@ registry("getWorkflowList", (err, data) => {
             const speed = Math.ceil((status.index + 1) / nodeList.length * 100);
             const reason = status.reason || "未更新";
             showWorkflow.push(`<div class="row" style="margin-top: 1rem;" data-name="${name}">
-        <div class="col-sm-6">
+        <div class="col-sm-5">
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: ${speed}%" aria-valuenow="${speed}" aria-valuemin="0" aria-valuemax="100">${speed} % ${status.name}</div>
           </div>
           ${name} - ${reason}
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-7">
           <button type="button" data-id="${_id}" data-name="${status.name}" class="btn btn-outline-primary btn-sm" onClick="javascript:uploadNode(this);">
-            更新当前节点
+            更新节点
           </button>
           <button type="button" data-id="${_id}" class="btn btn-outline-success btn-sm" onClick="javascript:promoteProcess(this);">
             推进流程
           </button>
-		  <button type="button" data-id="${_id}" class="btn btn-outline-warning btn-sm" onClick="javascript:exampleManager(this, 'workflow')">
-			管理
-		  </button>
+          <button type="button" data-id="${_id}" class="btn btn-outline-danger btn-sm" onClick="javascript:retroversionProcess(this);">
+    			  回退流程
+    		  </button>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              管理
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:exampleManager(this, 'workflow')">贴标签</a>
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:membersManager(this, 'workflow')">成员管理</a>
+              <a class="dropdown-item" href="#">删除工作流</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">文件仓库管理</a>
+            </div>
+          </div>
         </div>
       </div>`);
         } else {

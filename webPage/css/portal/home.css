@@ -347,7 +347,12 @@
 .releaseStatus3>.icon{
     background: url('../../images/portal/productReleaseStatus3.png') no-repeat center;
 }
-
+.productStatus > li > .icon {
+    background: url('../../images/portal/productPlanStatus4.png') no-repeat center;
+}
+.productStatus > li:last-child > .line {
+    display:none;
+}
 .planStatus4>.icon{
     background: url('../../images/portal/productPlanStatus4.png') no-repeat center;
 }

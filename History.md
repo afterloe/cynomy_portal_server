@@ -356,3 +356,19 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-2-28 19:14:33
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 提升功能列表，修改css
+
+
+### new files
+> tools/webTools/test.html  
+
+### modify files
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+> webPage/css/portal/home.css  
+

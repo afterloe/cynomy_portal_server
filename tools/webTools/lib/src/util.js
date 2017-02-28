@@ -261,10 +261,7 @@ registry("getGoodsList", (err, data) => {
 });
 
 registry("getUserList", (err, data) => {
-    const [showUser,
-        checkBoxUser] = [
-        [], []
-    ];
+    const [showUser, checkBoxUser] = [[], []];
     data.map(item => {
         showUser.push(`<tr scope="row">
       <td>${item._id}</td>

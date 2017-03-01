@@ -397,3 +397,18 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-3-1 10:36:6
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端完成工作流已有用户检索
+
+
+### modify files
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+
+### delete files
+> tools/webTools/test.html  
+

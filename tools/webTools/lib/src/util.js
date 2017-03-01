@@ -96,6 +96,7 @@ const startUpProcess = btn => {
 
 const membersManager = btn => {
     const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowMemberList("${id}")`);
     $("#membersManager").modal("toggle");
 };
 
@@ -106,6 +107,14 @@ const deleteExampleTag  = btn => {
     websocket.send(`node-manager->${service}Service->deleteExampleTag("${id}"|"${tag}")`);
     $("#exampleManager").modal("toggle");
 };
+
+registry("workflowMemberList", (err, data) => {
+    const {members, workflowId} = data;
+    const html = [];
+    members.map(member => html.push(`<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMember(this, ${workflowId});">${member.name}(${member.mail})</span>`));
+    $(".memberList").html(html.join(""));
+    $("#membersManager").modal("toggle");
+});
 
 registry("exampleInfo", (err, data) => {
     const {tags, name, _id, type} = data;

@@ -425,3 +425,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-3-1 13:39:30
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端实现添加删除members功能
+
+
+### modify files
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+

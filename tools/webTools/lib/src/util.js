@@ -11,6 +11,10 @@
   */
 "use strict";
 
+const [MEMBERS, TAGS, TEMPORARY, TEMPORARYSELECT] = [Symbol("MEMBERS"), Symbol("TAGS"), Symbol("TEMPORARY"), Symbol("TEMPORARYSELECT")];
+
+$("#linkNode").modal("show");
+
 $("#userInfo").hide();
 $("#workflowInfo").hide();
 $("#tagsInfo").hide();
@@ -97,7 +101,6 @@ const startUpProcess = btn => {
 const membersManager = btn => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->workflowService->workflowMemberList("${id}")`);
-    $("#membersManager").modal("toggle");
 };
 
 const deleteExampleTag  = btn => {
@@ -108,12 +111,57 @@ const deleteExampleTag  = btn => {
     $("#exampleManager").modal("toggle");
 };
 
+const removeMember = (btn,workflowId) => {
+    const id = $(btn).attr("data-id");
+    const content = $(btn).text();
+    const index = window[TEMPORARYSELECT].findIndex(temporary => temporary._id === id);
+    if (-1 !== index) {
+      const member = window[TEMPORARYSELECT][index];
+      window[TEMPORARY].push(member);
+      window[TEMPORARYSELECT].splice(index, 1);
+
+      $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+      $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    }
+};
+
+const appendMembers = (btn,workflowId) => {
+    const id = $(btn).attr("data-id");
+    const content = $(btn).text();
+    const index = window[TEMPORARY].findIndex(temporary => temporary._id === id);
+    if (-1 !== index) {
+      const member = window[TEMPORARY][index];
+      window[TEMPORARYSELECT].push(member);
+      window[TEMPORARY].splice(index, 1);
+
+      $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+      $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    }
+};
+
 registry("workflowMemberList", (err, data) => {
-    console.log(data);
+    if (!window[MEMBERS]) {
+      websocket.send("node-manager->userService->getUserList");
+      return ;
+    }
     const {members, workflowId} = data;
-    const html = [];
-    members.map(member => html.push(`<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMember(this, ${workflowId});">${member.name}(${member.mail})</span>`));
-    $(".memberList").html(html.join(""));
+    window[TEMPORARYSELECT] = members;
+    window[TEMPORARY] = [];
+    let flag = true;
+    for(let member of window[MEMBERS]) {
+      for (let _member of members) {
+        if (member.name === _member.name && member.mail === _member.mail) {
+          flag = false;
+        }
+      }
+
+      if (flag) {
+        window[TEMPORARY].push(member);
+      }
+    }
+
+    $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
     $("#membersManager").modal("toggle");
 });
 
@@ -131,7 +179,7 @@ registry("exampleInfo", (err, data) => {
 registry("systemInfo", (err, data) => {
     const _ = [];
     const {hostName, cpus, platform, network, uname} = data;
-
+    // TODO
 });
 
 registry("memoryInfo", (err, data) => {
@@ -193,18 +241,9 @@ registry("getWorkflowNodeList", (err, data) => {
 });
 
 registry("getTagsList", (err, data) => {
-    const [tagsTemplate,
-        tagsList] = [
-        [], []
-    ];
-    const colors = [
-        "default",
-        "info",
-        "primary",
-        "success",
-        "warning",
-        "danger"
-    ];
+    const [tagsTemplate, tagsList] = [[], []];
+    window[TAGS] = true;
+    const colors = ["default", "info", "primary", "success", "warning", "danger"];
     data.map(item => {
         let color = item.count > 50
             ? item.count % 50
@@ -273,6 +312,7 @@ registry("getGoodsList", (err, data) => {
 
 registry("getUserList", (err, data) => {
     const [showUser, checkBoxUser] = [[], []];
+    window[MEMBERS] = data;
     data.map(item => {
         showUser.push(`<tr scope="row">
       <td>${item._id}</td>
@@ -291,6 +331,7 @@ registry("getUserList", (err, data) => {
     });
     $("#table-show-user").html(showUser.join(""));
     $("#checkbox-user").html(checkBoxUser.join(""));
+
 });
 
 registry("getWorkflowList", (err, data) => {

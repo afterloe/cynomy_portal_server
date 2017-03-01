@@ -752,6 +752,21 @@ function* obmitUploadFileAuthorize(workflowId, {mail}) {
   }
 }
 
+function* workflowMemberList(workflowId) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1, name: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  delete _._id;
+
+  Object.assign(_, {
+    workflowId: workflowId,
+  });
+
+  return _;
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -776,4 +791,5 @@ module.exports = {
   deleteExampleTag,
   appendGoods2Node,
   obmitUploadFileAuthorize,
+  workflowMemberList,
 };

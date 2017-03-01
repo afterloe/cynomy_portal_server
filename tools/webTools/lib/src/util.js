@@ -109,6 +109,7 @@ const deleteExampleTag  = btn => {
 };
 
 registry("workflowMemberList", (err, data) => {
+    console.log(data);
     const {members, workflowId} = data;
     const html = [];
     members.map(member => html.push(`<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMember(this, ${workflowId});">${member.name}(${member.mail})</span>`));

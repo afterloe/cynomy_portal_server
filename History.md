@@ -412,3 +412,16 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > tools/webTools/test.html  
 
+
+1.0.6 / 2017-3-1 10:44:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端完成工作流成员检索
+
+
+### modify files
+> services/workflowService.js  
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+

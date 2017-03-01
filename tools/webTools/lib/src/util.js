@@ -37,7 +37,7 @@ const appendTag = btn => {
     const exampleId = $("#exampleId-exampleManager").val();
     websocket.send(`node-manager->${modalService}->setTags("${exampleId}"|"${id}")`);
     let html = $("#tags-exampleManager").html();
-    html += ` <span class="badge badge-default" data-id="${id}" data-name="${name}"> &nbsp;${name}</span>`;
+    html += `<span class="badge badge-default" data-id="${id}" data-name="${name}"> &nbsp;${name}</span>`;
     $("#tags-exampleManager").html(html);
 };
 
@@ -113,6 +113,7 @@ registry("exampleInfo", (err, data) => {
     tags.map(tag => tagsHtml.push(`<span class="badge badge-default" data-type="${type}" data-id="${_id}" onClick="javascript:deleteExampleTag(this);">${tag}</span>`));
     $("#name-exampleManager").html(name);
     $("#exampleId-exampleManager").val(_id);
+    $("#addTags").hasClass("show")? $("#addTags").removeClass("show"):null;
     $("#tags-exampleManager").html(tagsHtml.join(" "));
     $("#exampleManager").modal("show");
 });

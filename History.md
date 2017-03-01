@@ -385,3 +385,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/util.js  
 > tools/webTools/test.html  
 
+
+1.0.6 / 2017-3-1 10:26:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复开启标签后不自动隐藏
+
+
+### modify files
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+

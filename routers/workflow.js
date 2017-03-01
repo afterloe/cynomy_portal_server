@@ -13,7 +13,7 @@
 
 const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
-const [{getWorkflowList, workflowInfo, getWorkflowNode, searchProduct}, {findTags}, {getPublicGoodsesList, findGoodsByNode}] =
+const [{getWorkflowList, workflowInfo, searchProduct}, {findTags}, {getPublicGoodsesList, findGoodsByNode}] =
 [require(resolve(services, "workflowService")), require(resolve(services, "tagsService")), require(resolve(services, "goodsService"))];
 
 const list = function* (next) {

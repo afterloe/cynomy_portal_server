@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{createServer}, {fork}, {resolve}, cluster, co] = [require("net"), require("child_process"), require("path"), require("cluster"), require("co")];
+const [{createServer}, {fork}, {resolve}, cluster] = [require("net"), require("child_process"), require("path"), require("cluster")];
 const {get} = require(resolve(__dirname, "config"));
 const [threadManager, slavePath ,bindHost, registryPort, {enable, slaveNum = 1}, remote] = [new Map(), resolve(__dirname, "distributed","slave"), get("bindHost"), get("registryPort"), get("distributed"), get("remote")];
 

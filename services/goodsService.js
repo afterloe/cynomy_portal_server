@@ -13,7 +13,7 @@
 
 const [{resolve, basename, sep}, {statSync, existsSync, mkdirSync, renameSync}] = [require("path"), require("fs")];
 const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed,
-throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move, cp}, {getTagsInfo}] = [
+throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move}, {getTagsInfo}] = [
   require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
   require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "fileSystem")), require(resolve(__dirname, "tagsService"))];
 
@@ -231,12 +231,19 @@ function* deleteExampleTag(goodsId, ..._tags) {
 function* findGoodsByNode(goodsId) {
   const _ = yield goods_dao.searchByWehouse(goodsId);
   const result = [];
+  let flag;
   for (let file of _) {
-    const index = result.findIndex(_file => _file.name === file.name);
-    if (-1 === index) {
+    flag = false;
+    for (let _file of result) {
+      if (_file.name === file.name) {
+        flag = true;
+      }
+    }
+    if (!flag) {
       result.push(file);
     }
   }
+  
   return result;
 }
 

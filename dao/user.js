@@ -41,7 +41,7 @@ const deleteUser = function* (userId) {
     userId = this.newObjectId(userId);
     return yield this.deleteOne({_id: userId});
   }
-}
+};
 
 const classMethod = {
   checkExist,

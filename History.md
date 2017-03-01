@@ -489,3 +489,17 @@ commit by afterloe (lm6289511@gmail.com)
 > services/goodsService.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-3-1 19:57:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复make check功能
+
+
+### modify files
+> dao/user.js  
+> index.js  
+> routers/workflow.js  
+> services/goodsService.js  
+

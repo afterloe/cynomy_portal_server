@@ -437,3 +437,17 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-3-1 14:19:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端支持给工作流添加用户
+
+
+### modify files
+> services/userService.js  
+> services/workflowService.js  
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+

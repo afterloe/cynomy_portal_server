@@ -767,6 +767,78 @@ function* workflowMemberList(workflowId) {
   return _;
 }
 
+function* appendUser2Members(workflowId, ...userIds) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  const users = yield findUsers(userIds);
+  if (users.length === 0) {
+    return ;
+  }
+
+  const modifyMembers = [];
+  let flag;
+
+  for (let user of users) {
+    flag = false;
+    for (let _user of _.members) {
+        if (_user._id.toString() === user._id.toString()) {
+          flag = true;
+        }
+    }
+
+    if (!flag) {
+      modifyMembers.push(user);
+    }
+  }
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        members: _.members.concat(modifyMembers),
+      }
+    }
+  });
+}
+
+function* removeUserFromMembers(workflowId, ...userId) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  const users = yield findUsers(userIds);
+  if (users.length === 0) {
+    return ;
+  }
+
+  const modifyMembers = [];
+  let flag;
+
+  for (let _user of _.members) {
+    flag = false;
+    for (let user of users) {
+        if (user._id.toString() === _user._id.toString()) {
+          flag = true;
+        }
+    }
+
+    if (!flag) {
+      modifyMembers.push(user);
+    }
+  }
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        members: modifyMembers,
+      }
+    }
+  });
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -792,4 +864,6 @@ module.exports = {
   appendGoods2Node,
   obmitUploadFileAuthorize,
   workflowMemberList,
+  appendUser2Members,
+  removeUserFromMembers,
 };

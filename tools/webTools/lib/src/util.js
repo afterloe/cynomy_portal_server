@@ -116,12 +116,10 @@ const removeMember = (btn,workflowId) => {
     const content = $(btn).text();
     const index = window[TEMPORARYSELECT].findIndex(temporary => temporary._id === id);
     if (-1 !== index) {
+      websocket.send(`node-manager->workflowService->removeUserFromMembers("${workflowId}"|"${id}")`);
       const member = window[TEMPORARYSELECT][index];
       window[TEMPORARY].push(member);
       window[TEMPORARYSELECT].splice(index, 1);
-
-      $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
-      $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
     }
 };
 
@@ -130,14 +128,22 @@ const appendMembers = (btn,workflowId) => {
     const content = $(btn).text();
     const index = window[TEMPORARY].findIndex(temporary => temporary._id === id);
     if (-1 !== index) {
+      websocket.send(`node-manager->workflowService->appendUser2Members("${workflowId}"|"${id}")`);
       const member = window[TEMPORARY][index];
       window[TEMPORARYSELECT].push(member);
       window[TEMPORARY].splice(index, 1);
-
-      $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
-      $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
     }
 };
+
+registry("removeUserFromMembers", (err, data) => {
+    $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+});
+
+registry("appendUser2Members", (err, data) => {
+    $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+});
 
 registry("workflowMemberList", (err, data) => {
     if (!window[MEMBERS]) {

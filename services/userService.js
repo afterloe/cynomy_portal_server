@@ -218,10 +218,10 @@ function* loaderFromXlsx(name) {
   }
 }
 
-function* findUsers(users) {
+function* findUsers(userIds) {
   const _ = [];
-  for (let i = 0; i < users.length; i++) {
-    const user = yield user_dao.queryById(users[i]);
+  for (let i = 0; i < userIds.length; i++) {
+    const user = yield user_dao.queryById(userIds[i]);
     if (!user) {
       continue;
     }

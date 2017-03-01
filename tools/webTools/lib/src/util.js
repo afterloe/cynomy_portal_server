@@ -139,6 +139,11 @@ const appendMembers = (btn,workflowId) => {
     }
 };
 
+const deleteFile = btn => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->goodsService->deleteFile("${id}")`);
+};
+
 registry("workflowMemberList", (err, data) => {
     if (!window[MEMBERS]) {
       websocket.send("node-manager->userService->getUserList");
@@ -302,13 +307,17 @@ registry("getGoodsList", (err, data) => {
         <div class="card-block">
           <h4 class="card-title">${item.name}</h4>
           <p class="card-text">${item.author.name} - ${item.version}</p>
-          <a href="${item.path}" class="btn btn-outline-primary">下载</a>
-          <a href="#" class="btn btn-outline-danger">删除</a>
-		  <a href="#" data-id="${item._id}" class="btn btn-outline-warning" onClick="javascript:exampleManager(this, 'goods');">管理</a>
+          <a href="javascript:void(0);" class="btn btn-outline-primary">下载</a>
+          <a data-id="${item._id}" href="javascript:void(0);" class="btn btn-outline-danger" onClick="javascript:deleteFile(this);">删除</a>
+		      <a href="#" data-id="${item._id}" class="btn btn-outline-warning" onClick="javascript:exampleManager(this, 'goods');">管理</a>
         </div>
       </div>`);
     });
     $("#table-show-files").html(fileList.join(""));
+});
+
+registry("deleteFile", (err, data) => {
+    websocket.send("node-manager->goodsService->getGoodsList");
 });
 
 registry("deleteUser", (err, data) => {

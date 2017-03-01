@@ -37,6 +37,16 @@ const buildGoods = (goods, workflowId, nodeName) => {
   return _;
 };
 
+const checkGoodsExist = pathOfgoods => {
+  if (!existsSync(pathOfgoods)) {
+    return ;
+  }
+
+  const [fileName, whhosePath] = [basename(pathOfgoods), resolve(pathOfgoods, "..")];
+
+  renameSync(pathOfgoods, resolve(whhosePath, fileName + "-same-" + Date.now()));
+};
+
 const getGoodesHouseAddress = workflowNode => {
   const __path = resolve(get("staticDir"), workflowNode._id.toString());
 
@@ -230,15 +240,15 @@ function* findGoodsByNode(goodsId) {
   return result;
 }
 
-const checkGoodsExist = pathOfgoods => {
-  if (!existsSync(pathOfgoods)) {
-    return ;
+function* deleteFile(goodsId) {
+  const goods = yield goods_dao.queryById(goodsId);
+
+  if (!goods) {
+    throwNotExistsFile();
   }
 
-  const [fileName, whhosePath] = [basename(pathOfgoods), resolve(pathOfgoods, "..")];
-
-  renameSync(pathOfgoods, resolve(whhosePath, fileName + "-same-" + Date.now()));
-};
+  return yield goods_dao.remove(goods._id);
+}
 
 module.exports = {
   cleanDocuments,
@@ -257,4 +267,5 @@ module.exports = {
   createGoods,
   checkGoodsExist,
   findGoodsByNode,
+  deleteFile,
 };

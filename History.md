@@ -477,3 +477,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/userService.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-3-1 15:32:32
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 删除用户功能实现
+
+
+### modify files
+> services/goodsService.js  
+> tools/webTools/lib/src/util.js  
+

@@ -120,6 +120,8 @@ const removeMember = (btn,workflowId) => {
       const member = window[TEMPORARYSELECT][index];
       window[TEMPORARY].push(member);
       window[TEMPORARYSELECT].splice(index, 1);
+      $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+      $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
     }
 };
 
@@ -132,18 +134,10 @@ const appendMembers = (btn,workflowId) => {
       const member = window[TEMPORARY][index];
       window[TEMPORARYSELECT].push(member);
       window[TEMPORARY].splice(index, 1);
+      $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+      $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
     }
 };
-
-registry("removeUserFromMembers", (err, data) => {
-    $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
-    $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
-});
-
-registry("appendUser2Members", (err, data) => {
-    $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
-    $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
-});
 
 registry("workflowMemberList", (err, data) => {
     if (!window[MEMBERS]) {
@@ -153,15 +147,16 @@ registry("workflowMemberList", (err, data) => {
     const {members, workflowId} = data;
     window[TEMPORARYSELECT] = members;
     window[TEMPORARY] = [];
-    let flag = true;
+    let flag;
     for(let member of window[MEMBERS]) {
+      flag = false;
       for (let _member of members) {
         if (member.name === _member.name && member.mail === _member.mail) {
-          flag = false;
+          flag = true;
         }
       }
 
-      if (flag) {
+      if (!flag) {
         window[TEMPORARY].push(member);
       }
     }

@@ -451,3 +451,16 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.6 / 2017-3-1 14:41:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成项目成员添加删除功能
+
+
+### modify files
+> services/workflowService.js  
+> template/platform.pug  
+> tools/webTools/lib/src/util.js  
+

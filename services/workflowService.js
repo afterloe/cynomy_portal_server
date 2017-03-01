@@ -803,7 +803,7 @@ function* appendUser2Members(workflowId, ...userIds) {
   });
 }
 
-function* removeUserFromMembers(workflowId, ...userId) {
+function* removeUserFromMembers(workflowId, ...userIds) {
   const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1});
   if (!_) {
     throwNosuchThisWorkFlow();
@@ -825,7 +825,7 @@ function* removeUserFromMembers(workflowId, ...userId) {
     }
 
     if (!flag) {
-      modifyMembers.push(user);
+      modifyMembers.push(_user);
     }
   }
 

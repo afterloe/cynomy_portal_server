@@ -181,7 +181,10 @@ script.
                   const result = JSON.parse(xhr.responseText);
 
                   if (200 !== result.code) {
-                    reject(result.error);
+                    reject({
+                      msg: result.error,
+                      code: result.code,
+                    });
                     return ;
                   }
 
@@ -230,7 +233,7 @@ script.
             }
           });
       }).catch(err => {
-          alert("上传失败 " + err.message);
+          err.code === 403? alert("非该项目组成员禁止上传文件") : alert("上传失败 " + err.msg);
       });
   };
 

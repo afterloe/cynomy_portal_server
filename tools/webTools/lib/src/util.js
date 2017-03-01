@@ -56,8 +56,8 @@ const exampleManager = (btn, modal) => {
 };
 
 const deleteUser = btn => {
-    console.log($(btn).attr("data-id"));
-    console.log("123");
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->userService->deleteUser("${id}")`);
 };
 
 const resetPwd = btn => {
@@ -309,6 +309,10 @@ registry("getGoodsList", (err, data) => {
       </div>`);
     });
     $("#table-show-files").html(fileList.join(""));
+});
+
+registry("deleteUser", (err, data) => {
+    websocket.send("node-manager->userService->getUserList");
 });
 
 registry("getUserList", (err, data) => {

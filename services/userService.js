@@ -303,6 +303,15 @@ function* deleteExampleTag(userId, ..._tags) {
   });
 }
 
+function* deleteUser(userId) {
+  const user = yield user_dao.queryById(userId);
+  if (!user) {
+    throwUserNotExist();
+  }
+
+  return yield user_dao.deleteUser(user._id);
+}
+
 module.exports = {
   loaderUserFromXlsx,
   createUsers,
@@ -318,4 +327,5 @@ module.exports = {
   setTags,
   exampleInfo,
   deleteExampleTag,
+  deleteUser,
 };

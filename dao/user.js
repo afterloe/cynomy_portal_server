@@ -36,10 +36,18 @@ const login = function* (mail, permit) {
   return _;
 };
 
+const deleteUser = function* (userId) {
+  if (this.valid(userId)) {
+    userId = this.newObjectId(userId);
+    return yield this.deleteOne({_id: userId});
+  }
+}
+
 const classMethod = {
   checkExist,
   login,
   findByMail,
+  deleteUser,
 };
 
 Object.assign(commonsLib, classMethod);

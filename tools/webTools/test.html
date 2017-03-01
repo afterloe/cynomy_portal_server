@@ -8,6 +8,16 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>cynomys config page</title>
+    <style>
+      .memberList > span.badge {
+        cursor: pointer;
+        margin: 0.1rem;
+      }
+      .card-text > span {
+        margin: 0.1rem;
+        cursor: pointer;
+      }
+    </style>
 </head>
 
 <body>
@@ -24,8 +34,8 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <label class="col-3 col-form-label">已有成员</label>
-            <div class="col-9">
+            <label class="col-3 col-form-label">已有成员:</label>
+            <div class="col-8 memberList" id="tags-exampleManager">
               <span class="badge badge-primary">周杰伦</span>
               <span class="badge badge-primary">周杰伦</span>
               <span class="badge badge-primary">周杰伦</span>
@@ -34,15 +44,20 @@
               <span class="badge badge-primary">周杰伦</span>
               <span class="badge badge-primary">周杰伦</span>
             </div>
-          </div>
-          <div>
-            <a class="btn btn-outline-success" data-toggle="collapse" href="#addUserToMembers" aria-expanded="false" aria-controls="collapseExample">
+            <a class="btn btn-outline-success btn-sm" data-toggle="collapse" href="#addUserToMembers" aria-expanded="false" aria-controls="collapseExample">
               +
             </a>
-            <div class="collapse" id="addUserToMembers">
-              <div class="card card-block" style="display:block;">
-    Anim
-  </div>
+          </div>
+          </br>
+          <div class="collapse" id="addUserToMembers">
+            <div class="card card-block" style="display:block;">
+             <label calss="card-title">已导入成员：</label>
+             <p class="card-text">
+               <span class="badge badge-primary">林俊杰</span>
+               <span class="badge badge-primary">蔡依林</span>
+               <span class="badge badge-primary">陈信宏</span>
+               <span class="badge badge-primary">彭于晏</span>
+             </p>
             </div>
           </div>
         </div>

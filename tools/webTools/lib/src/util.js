@@ -206,7 +206,7 @@ registry("getTagsList", (err, data) => {
         tagsList.push(`<span class="badge badge-${colors[color]}" data-id="${item._id}" data-name="${item.name}" onClick="javascript:appendTag(this);"> &nbsp;${item.name}</span>`);
     });
     $("#table-show-tags").html(tagsTemplate.join("  "));
-    $("#addTags > p").html(tagsList.join(" "));
+    $("#addTags").find("p.card-text").html(tagsList.join(" "));
 });
 
 registry("createTag", (err, data) => {

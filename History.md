@@ -372,3 +372,16 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/util.js  
 > webPage/css/portal/home.css  
 
+
+1.0.6 / 2017-3-1 10:15:31
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改样式
+
+
+### modify files
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+> tools/webTools/test.html  
+

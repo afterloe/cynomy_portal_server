@@ -14,6 +14,12 @@
     <meta name="renderer" content="webkit|ie-comp|ie-stand" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>cynomys config page</title>
+    <style>
+      .card-text > span {
+        margin: 0.1rem;
+        cursor: pointer;
+      }
+    </style>
 </head>
 
 <body>
@@ -595,17 +601,18 @@
                     <input type="hidden" id="exampleId-exampleManager" value="" />
                   </div>
                   <div class="row">
-                    <label class="col-3 col-form-label">标签列表</label>
-                    <div class="col-7" id="tags-exampleManager"></div>
-                    <div class="col-2">
-                      <a class="btn btn-outline-success" data-toggle="collapse" href="#addTags" aria-expanded="false" aria-controls="collapseExample">
-                        +
-                      </a>
-                    </div>
-                    <div class="collapse" id="addTags">
-                      <label>贴标签</label>
-                      <p></p>
-                      <div class="float-right"><a href="#" class="btn btn-outline-danger btn-sm" onClick="javascript:reflushTag(this);">换一批</a></div>
+                    <label class="col-2 col-form-label">标签列表</label>
+                    <div class="col-8" id="tags-exampleManager"></div>
+                    <a class="btn btn-outline-success" data-toggle="collapse" href="#addTags" aria-expanded="false" aria-controls="collapseExample">
+                      +
+                    </a>
+                  </div>
+                  </br>
+                  <div class="collapse" id="addTags" aria-expanded="true">
+                    <div class="card card-block" style="display:block;">
+                     <label calss="card-title">贴标签</label>
+                     <p class="card-text"></p>
+                     <a href="#" class="btn btn-outline-danger btn-sm" onclick="javascript:reflushTag(this);">换一批</a>
                     </div>
                   </div>
                 </div>

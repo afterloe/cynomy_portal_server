@@ -503,3 +503,18 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/workflow.js  
 > services/goodsService.js  
 
+
+1.0.7 / 2017-3-1 20:6:51
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 2017-3-1 20:06:51 commit change.
+
+
+### modify files
+> .cynomy  
+> config/index.js  
+> package.json  
+> template/platform.pug  
+> webPage/js/portal/src/platform.js  
+

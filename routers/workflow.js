@@ -163,6 +163,21 @@ const detail = function* (next) {
   return yield next;
 };
 
+const nodeInstance = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const {id} = this.params;
+    this.data = id;
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
 module.exports = {
   list,
   nodeFiles,
@@ -171,4 +186,5 @@ module.exports = {
   overviewsPlatform,
   overviewsProduct,
   overviewsDirectory,
+  nodeInstance,
 };

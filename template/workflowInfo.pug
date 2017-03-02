@@ -154,7 +154,7 @@ script.
     const instanceId = $(btn).attr("data-id");
     $.ajax({
       type: "GET",
-      url: `/workflow/${_id}/simple`,
+      url: `/workflow/nodeInstance/${instanceId}`,
       dataType: "json",
       beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
       success: result => {
@@ -166,8 +166,8 @@ script.
         if (200 !== result.code) {
           alert("服务器繁忙");
         } else {
-          cleanSelect();
-          $(btn).find("span").css({color: "#3d9bff"});
+          cleanSelectd();
+          $(btn).parent().attr("class", "processActive");
           console.log(result);
         }
       }

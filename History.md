@@ -436,3 +436,16 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > template/workflowInfo.pug  
 
+
+1.0.7 / 2017-3-2 17:56:12
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成前端节点切换功能
+
+
+### modify files
+> routers/index.js  
+> routers/workflow.js  
+> template/workflowInfo.pug  
+

@@ -8,34 +8,44 @@ link(href= static + "css/portal/platform.css?time=" + __time rel="stylesheet")
 style.
   @media (min-width:769px) {
     .change {
-        display: inline-block;
-        width: 50px;
-        height: 50px;
-        cursor: pointer;
-        float: right;
+      display: inline-block;
+      width: 100px;
+      height: 50px;
+      cursor: pointer;
+      float: right;
     }
 
     .data li div span.local {
       width: 650px;
     }
+
+    .svn {
+        background: url(http://almcloud.jwis.cn/images/portal/productTestStatus2.png) no-repeat center 13px;
+    }
+
+    .cloud {
+        background: url(http://almcloud.jwis.cn/images/portal/productTestStatus4.png) no-repeat center 13px;
+    }
   }
 
   @media (max-width:768px) {
     .change {
-      display: inline-block;
-      width: 38px;
-      height: 35px;
       cursor: pointer;
       float: right;
+      height: 0.5rem;
+      line-height: 0.5rem;
+      width: 0.4rem;
+      background-size: contain;
+      margin-right: 0.4rem
     }
-  }
 
-  .svn {
-      background: url(http://almcloud.jwis.cn/images/portal/productTestStatus2.png) no-repeat center;
-  }
+    .svn {
+        background: url(http://almcloud.jwis.cn/images/portal/productTestStatus2.png) no-repeat center 0.05rem;
+    }
 
-  .cloud {
-      background: url(http://almcloud.jwis.cn/images/portal/productTestStatus4.png) no-repeat center;
+    .cloud {
+        background: url(http://almcloud.jwis.cn/images/portal/productTestStatus4.png) no-repeat center 0.05rem;
+    }
   }
 
 div(class="container platform_content")

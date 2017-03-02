@@ -388,3 +388,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/home.pug  
 > template/platform.pug  
 
+
+1.0.7 / 2017-3-2 16:51:45
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改显示样式
+
+
+### modify files
+> template/workflowInfo.pug  
+

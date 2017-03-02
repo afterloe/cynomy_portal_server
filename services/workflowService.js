@@ -851,6 +851,52 @@ function* getNodeInstance(nodeId) {
   return _;
 }
 
+function* setOwner(workflowId, userId) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {_id: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  const user = yield findUsers(userIds);
+
+  if (users.length === 0) {
+    return ;
+  }
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        owner: user[0],
+      }
+    }
+  });
+}
+
+function* cancelOwner(workflowId, userId) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {owner: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  const user = yield findUsers(userIds);
+
+  if (users.length === 0) {
+    return ;
+  }
+
+  if (owner._id.toString() === user[0]._id.toString()) {
+    return yield workFlow_instance_dao.update({
+      _id: _._id,
+      upload: {
+        $set: {
+          owner: "",
+        }
+      }
+    });
+  }
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -879,4 +925,6 @@ module.exports = {
   appendUser2Members,
   removeUserFromMembers,
   getNodeInstance,
+  setOwner,
+  cancelOwner,
 };

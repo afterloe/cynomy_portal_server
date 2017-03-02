@@ -146,13 +146,13 @@ const deleteFile = btn => {
 
 const setOwner = (btn,workflowId) => {
     const id = $(btn).attr("data-id");
-    websocket.send(`node-manager->goodsService->setOwner("${workflowId}"|"${id}")`);
+    websocket.send(`node-manager->workflowService->setOwner("${workflowId}"|"${id}")`);
     $(".owner").html(`<span data-id="${id}" class="badge badge-danger" onClick="javascript:cancelOwner(this, '${workflowId}');">${$(btn).text()}</span>`);
 };
 
 const cancelOwner = (btn,workflowId) => {
     const id = $(btn).attr("data-id");
-    websocket.send(`node-manager->goodsService->cancelOwner("${workflowId}"|"${id}")`);
+    websocket.send(`node-manager->workflowService->cancelOwner("${workflowId}"|"${id}")`);
     $(".owner").html("未设置负责人");
 };
 

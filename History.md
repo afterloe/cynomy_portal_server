@@ -484,3 +484,16 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/_util.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.7 / 2017-3-2 20:15:57
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端完成工作流设置主负责人方法
+
+
+### modify files
+> services/userService.js  
+> services/workflowService.js  
+> tools/webTools/lib/src/util.js  
+

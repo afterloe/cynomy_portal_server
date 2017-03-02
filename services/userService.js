@@ -219,6 +219,9 @@ function* loaderFromXlsx(name) {
 }
 
 function* findUsers(userIds) {
+  if (!userIds.length) {
+    userIds = [userIds];
+  }
   const _ = [];
   for (let i = 0; i < userIds.length; i++) {
     const user = yield user_dao.queryById(userIds[i]);

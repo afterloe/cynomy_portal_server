@@ -144,12 +144,24 @@ const deleteFile = btn => {
     websocket.send(`node-manager->goodsService->deleteFile("${id}")`);
 };
 
+const setOwner = (btn,workflowId) => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->goodsService->setOwner("${workflowId}"|"${id}")`);
+    $(".owner").html(`<span data-id="${id}" class="badge badge-danger" onClick="javascript:cancelOwner(this, '${workflowId}');">${$(btn).text()}</span>`);
+};
+
+const cancelOwner = (btn,workflowId) => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->goodsService->cancelOwner("${workflowId}"|"${id}")`);
+    $(".owner").html("未设置负责人");
+};
+
 registry("workflowMemberList", (err, data) => {
     if (!window[MEMBERS]) {
       websocket.send("node-manager->userService->getUserList");
       return ;
     }
-    const {members, workflowId} = data;
+    const {members, workflowId, owner} = data;
     window[TEMPORARYSELECT] = members;
     window[TEMPORARY] = [];
     let flag;
@@ -167,7 +179,13 @@ registry("workflowMemberList", (err, data) => {
     }
 
     $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    $(".memberList.setOwner").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-success" onClick="javascript:setOwner(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
     $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    if (owner) {
+      $(".owner").html(`<span data-id="${owner._id}" class="badge badge-danger" onClick="javascript:cancelOwner(this, '${workflowId}');">${owner.name}(${owner.mail})</span>`);
+    } else {
+      $(".owner").html("未设置负责人");
+    }
     $("#membersManager").modal("toggle");
 });
 
@@ -531,12 +549,12 @@ $("#module-ok-updateNodeProduceList").click(() => {
     const reader = new FileReader();
     reader.readAsArrayBuffer(tar);
     reader.onload = () => {
-        const fileBuff = reader.result;
-        const length = fileBuff.byteLength;
-        const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
-        const dataView = new DataView(wsBuff, length, 8);
-        dataView.setUint32(0, 2001);
-        websocket.send(wsBuff);
+      const fileBuff = reader.result;
+      const length = fileBuff.byteLength;
+      const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
+      const dataView = new DataView(wsBuff, length, 8);
+      dataView.setUint32(0, 2001);
+      websocket.send(wsBuff);
     };
 });
 
@@ -556,15 +574,9 @@ $("#module-ok-crearteTag").click(function() {
     const form = $(this).parent().parent().find("form");
     const data = getFormData(form);
     const {keyWord, pro, domain} = data;
-    data.keyWord = keyWord === ""
-        ? []
-        : keyWord.split(",");
-    data.pro = pro === ""
-        ? []
-        : pro.split(",");
-    data.domain = domain === ""
-        ? []
-        : domain.split(",");
+    data.keyWord = keyWord === "" ? [] : keyWord.split(",");
+    data.pro = pro === "" ? [] : pro.split(",");
+    data.domain = domain === "" ? [] : domain.split(",");
     websocket.send(`node-manager->tagsService->createTag(${JSON.stringify(data)})`);
 });
 

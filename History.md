@@ -472,3 +472,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/workflowInfo.pug  
 
+
+1.0.7 / 2017-3-2 20:9:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端完成工作流设置主负责人方法
+
+
+### modify files
+> tools/webTools/_util.html  
+> tools/webTools/lib/src/util.js  
+

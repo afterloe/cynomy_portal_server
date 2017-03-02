@@ -4,7 +4,7 @@ PATH := ./node_modules/.bin:$(PATH)
 SHELL := /bin/bash
 MOCHA_FILES := $(shell find ./test -name '*_test.js')
 LIB := node_modules
-FILELIST := bin config dao distributed doc errors interceptors lib routers servers services template tools webPage History.md index.js INSTALL.md LICENSE package.json README.md Makefile
+FILELIST := bin config dao distributed doc errors interceptors lib routers servers services template tools staticFiles History.md index.js INSTALL.md LICENSE package.json README.md Makefile
 TMPDIR := /tmp/portal-server
 
 # 轮询指令
@@ -17,7 +17,7 @@ test: mocha-test test-cov
 build: check move compile-js cleanCompile
 
 # 检测代码是否符合标准
-check: $(shell find . -name '*.js' ! -path './node_modules/*' ! -path './coverage/*' ! -path './mochawesome-reports/*' ! -path './webPage/*' ! -path './tools/webTools/*')
+check: $(shell find . -name '*.js' ! -path './node_modules/*' ! -path './coverage/*' ! -path './mochawesome-reports/*' ! -path './staticFiles/*' ! -path './tools/webTools/*')
 	@jshint $^
 
 # mocha测试
@@ -45,9 +45,9 @@ move:
 
 # 编译js
 compile-js:
-	@babel webPage/js/portal/src -d $(TMPDIR)/webPage/js/portal/bin
+	@babel staticFiles/js/portal/src -d $(TMPDIR)/staticFiles/js/portal/bin
 	@babel tools/webTools/lib/src -d $(TMPDIR)/tools/webTools/lib/bin
 
 cleanCompile:
-	@rm -rf $(TMPDIR)/webPage/js/portal/src
+	@rm -rf $(TMPDIR)/staticFiles/js/portal/src
 	@rm -rf $(TMPDIR)/tools/webTools/lib/src

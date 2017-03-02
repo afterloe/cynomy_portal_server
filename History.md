@@ -163,3 +163,150 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > History.md  
 
+
+1.0.7 / 2017-3-2 10:22:8
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改文件目录
+
+
+### new files
+> staticFiles/  
+
+### modify files
+> Makefile  
+
+### delete files
+> webPage/css/portal/bootstrap.min.css  
+> webPage/css/portal/directory.css  
+> webPage/css/portal/footer.css  
+> webPage/css/portal/header.css  
+> webPage/css/portal/home.css  
+> webPage/css/portal/login.css  
+> webPage/css/portal/mask.css  
+> webPage/css/portal/platform.css  
+> webPage/css/portal/product.css  
+> webPage/css/portal/public.css  
+> webPage/directory.html  
+> webPage/home.html  
+> webPage/images/portal/1-default.png  
+> webPage/images/portal/1.1.png  
+> webPage/images/portal/1.3.png  
+> webPage/images/portal/1.4.png  
+> webPage/images/portal/1.5.png  
+> webPage/images/portal/1.6.png  
+> webPage/images/portal/1.7.png  
+> webPage/images/portal/1.png  
+> webPage/images/portal/19.png  
+> webPage/images/portal/2-selected.png  
+> webPage/images/portal/2.2.png  
+> webPage/images/portal/2.png  
+> webPage/images/portal/3.1.1.png  
+> webPage/images/portal/3.1.png  
+> webPage/images/portal/3.2.2.png  
+> webPage/images/portal/3.2.png  
+> webPage/images/portal/3.3.1.png  
+> webPage/images/portal/3.3.3.png  
+> webPage/images/portal/3.3.png  
+> webPage/images/portal/3.4.4.png  
+> webPage/images/portal/3.4.png  
+> webPage/images/portal/3.5.5.png  
+> webPage/images/portal/3.5.png  
+> webPage/images/portal/3.png  
+> webPage/images/portal/4.4.png  
+> webPage/images/portal/4.png  
+> webPage/images/portal/5.5.png  
+> webPage/images/portal/5.png  
+> webPage/images/portal/6.png  
+> webPage/images/portal/android.png  
+> webPage/images/portal/bg.png  
+> webPage/images/portal/c4.png  
+> webPage/images/portal/c44.png  
+> webPage/images/portal/c5.png  
+> webPage/images/portal/c55.png  
+> webPage/images/portal/c6.png  
+> webPage/images/portal/c66.png  
+> webPage/images/portal/c7.png  
+> webPage/images/portal/c77.png  
+> webPage/images/portal/c8.png  
+> webPage/images/portal/c88.png  
+> webPage/images/portal/close-2.png  
+> webPage/images/portal/close-bounced-default.png  
+> webPage/images/portal/close-bounced-selected.png  
+> webPage/images/portal/close1.png  
+> webPage/images/portal/design.png  
+> webPage/images/portal/development.png  
+> webPage/images/portal/down.png  
+> webPage/images/portal/error.png  
+> webPage/images/portal/feedback.png  
+> webPage/images/portal/login-selected.png  
+> webPage/images/portal/login.png  
+> webPage/images/portal/logo.png  
+> webPage/images/portal/logoin.png  
+> webPage/images/portal/pc.png  
+> webPage/images/portal/plaformCatalog.png  
+> webPage/images/portal/plaformCatalogSel.png  
+> webPage/images/portal/plan.png  
+> webPage/images/portal/productCatalog.png  
+> webPage/images/portal/productCatalogSel.png  
+> webPage/images/portal/productDesignStatus.png  
+> webPage/images/portal/productDesignStatus1.png  
+> webPage/images/portal/productDesignStatus2.png  
+> webPage/images/portal/productDesignStatus3.png  
+> webPage/images/portal/productDesignStatus4.png  
+> webPage/images/portal/productDevelopStatus.png  
+> webPage/images/portal/productDevelopStatus1.png  
+> webPage/images/portal/productDevelopStatus2.png  
+> webPage/images/portal/productDevelopStatus3.png  
+> webPage/images/portal/productDevelopStatus4.png  
+> webPage/images/portal/productLink.png  
+> webPage/images/portal/productPlanStatus.png  
+> webPage/images/portal/productPlanStatus1.png  
+> webPage/images/portal/productPlanStatus2.png  
+> webPage/images/portal/productPlanStatus3.png  
+> webPage/images/portal/productPlanStatus4.png  
+> webPage/images/portal/productReleaseStatus.png  
+> webPage/images/portal/productReleaseStatus1.png  
+> webPage/images/portal/productReleaseStatus2.png  
+> webPage/images/portal/productReleaseStatus3.png  
+> webPage/images/portal/productReleaseStatus4.png  
+> webPage/images/portal/productTestStatus.png  
+> webPage/images/portal/productTestStatus1.png  
+> webPage/images/portal/productTestStatus2.png  
+> webPage/images/portal/productTestStatus3.png  
+> webPage/images/portal/productTestStatus4.png  
+> webPage/images/portal/publicCatalog.png  
+> webPage/images/portal/publicCatalogSel.png  
+> webPage/images/portal/release.png  
+> webPage/images/portal/save.png  
+> webPage/images/portal/save1.png  
+> webPage/images/portal/searchIcon.png  
+> webPage/images/portal/ss.png  
+> webPage/images/portal/test.png  
+> webPage/images/portal/upload.png  
+> webPage/images/portal/upload1.png  
+> "webPage/images/portal/\344\272\247\345\223\201\347\233\256\345\275\225-selected.png"  
+> "webPage/images/portal/\344\272\247\345\223\201\347\233\256\345\275\225.png"  
+> "webPage/images/portal/\345\205\254\345\205\261\347\233\256\345\275\225-selected.png"  
+> "webPage/images/portal/\345\205\254\345\205\261\347\233\256\345\275\225.png"  
+> "webPage/images/portal/\345\271\263\345\217\260\347\233\256\345\275\225-selected.png"  
+> "webPage/images/portal/\345\271\263\345\217\260\347\233\256\345\275\225.png"  
+> "webPage/images/portal/\346\265\213\350\257\225-1.png"  
+> "webPage/images/portal/\351\223\276\346\216\245-default-.png"  
+> webPage/js/portal/bootstrap.min.js  
+> webPage/js/portal/jquery-2.1.1.js  
+> webPage/js/portal/jquery.easing.min.js  
+> webPage/js/portal/jquery.flexslider-min.js  
+> webPage/js/portal/masonry.pkgd.min.js  
+> webPage/js/portal/rem.js  
+> webPage/js/portal/src/directory.js  
+> webPage/js/portal/src/footer.js  
+> webPage/js/portal/src/header.js  
+> webPage/js/portal/src/home.js  
+> webPage/js/portal/src/login.js  
+> webPage/js/portal/src/platform.js  
+> webPage/js/portal/src/product.js  
+> webPage/platform.html  
+> webPage/product.html  
+

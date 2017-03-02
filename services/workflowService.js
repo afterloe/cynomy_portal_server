@@ -608,9 +608,11 @@ function* workflowInfo(workflow, hooks) {
   }
 
   const produceList = yield findGoodsByNode(status._id);
+
   Object.assign(status, {
     produceList,
   });
+  
   Object.assign(_, {
     status
   });

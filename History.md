@@ -411,3 +411,16 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/js/portal/src/platform.js  
 > template/platform.pug  
 
+
+1.0.7 / 2017-3-2 17:38:37
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: workflow 详情页面开发
+
+
+### modify files
+> routers/portal.js  
+> services/workflowService.js  
+> template/workflowInfo.pug  
+

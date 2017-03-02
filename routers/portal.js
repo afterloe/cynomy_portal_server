@@ -184,10 +184,18 @@ function* info(next) {
   }
   try {
     const {id} = this.params;
-    console.log(id);
+    const {name, createTimestamp, nodeList, status, owner, members} = yield workflowInfo(id);
+
     this.data = {
       title: "R&D Portal - info",
       index: 8,
+      name,
+      createTimestamp,
+      status,
+      owner,
+      nodeList,
+      members,
+      status,
     };
 
     this.pageName = "workflowInfo";

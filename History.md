@@ -424,3 +424,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > template/workflowInfo.pug  
 
+
+1.0.7 / 2017-3-2 17:50:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 补全workflow信息
+
+
+### modify files
+> template/platform.pug  
+> template/workflowInfo.pug  
+

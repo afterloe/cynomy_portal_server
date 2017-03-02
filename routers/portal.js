@@ -178,10 +178,31 @@ function* directory(next) {
   return yield next;
 }
 
+function* info(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    const {id} = this.params;
+    console.log(id);
+    this.data = {
+      title: "R&D Portal - info",
+      index: 8,
+    };
+
+    this.pageName = "workflowInfo";
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+}
+
 module.exports = {
   home,
   platform,
   login,
   product,
   directory,
+  info,
 };

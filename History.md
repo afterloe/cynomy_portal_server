@@ -310,3 +310,18 @@ commit by afterloe (lm6289511@gmail.com)
 > webPage/platform.html  
 > webPage/product.html  
 
+
+1.0.7 / 2017-3-2 14:52:58
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加新页面 工作流详情
+
+
+### new files
+> template/workflowInfo.pug  
+
+### modify files
+> routers/index.js  
+> routers/portal.js  
+

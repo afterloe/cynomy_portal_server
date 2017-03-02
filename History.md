@@ -461,3 +461,14 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/workflow.js  
 > services/workflowService.js  
 
+
+1.0.7 / 2017-3-2 18:23:58
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端初步完成节点单击⌚事件
+
+
+### modify files
+> template/workflowInfo.pug  
+

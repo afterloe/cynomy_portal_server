@@ -95,22 +95,22 @@ div(class="container platform_content")
             div
               i
               span(class="name") 节点名
-              span(class="local")=_activeNode.name
+              span(class="local" id="nodeName")=_activeNode.name
           li
             div
               i
               span(class="name") 该节点负责人
-              span(class="local")=_activeNode.owner
+              span(class="local" id="nodeOwner")=_activeNode.owner
           li
             div
               i
               span(class="name") 进入节点时间
-              span(class="local")=new Date(_activeNode.beginTimestamp).toLocaleString()
+              span(class="local" id="nodeBeginTime")=new Date(_activeNode.beginTimestamp).toLocaleString()
           li
             div
               i
               span(class="name") 节点更新次数
-              span(class="local")=_activeNode.uploadCount
+              span(class="local" id="nodeUpdateCount")=_activeNode.uploadCount
         div(class="header")
           span(class="data_title") 资料仓库
           span(class="change cloud")
@@ -119,7 +119,7 @@ div(class="container platform_content")
             div
               i
               span(class="name") svn地址
-              span(class="local")
+              span(class="local" id="nodeSvnInfo")
                 a(href=_activeNode.svn)=_activeNode.svn
 
 include footer
@@ -150,6 +150,24 @@ script.
     $("dl").attr("class", "");
   };
 
+  const buildInstancePage = ({name, _id, beginTimestamp, owner, svn, uploadCount}) => {
+    $("#nodeName").html(name);
+    if (owner) {
+      $("#nodeOwner").html(owner);
+    } else {
+      $("#nodeOwner").html("未设置负责人");
+    }
+
+    $("#nodeBeginTime").html(beginTimestamp === "" ? "未进入该节点": new Date(beginTimestamp).toLocaleString());
+    $("#nodeUpdateCount").html(uploadCount);
+    if (svn) {
+      $("#nodeSvnInfo").html(`<a href="${svn}">${svn}</a>`);
+    } else {
+      $("#nodeSvnInfo").html(`<a href="javascript:void(0)">-</a>`);
+    }
+    $(".change").attr("data-id", _id);
+  };
+
   const loadNodeInstance = btn => {
     const instanceId = $(btn).attr("data-id");
     $.ajax({
@@ -168,7 +186,7 @@ script.
         } else {
           cleanSelectd();
           $(btn).parent().attr("class", "processActive");
-          console.log(result);
+          buildInstancePage(result.result);
         }
       }
     });

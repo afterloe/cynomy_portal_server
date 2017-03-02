@@ -349,3 +349,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/workflowInfo.pug  
 
+
+1.0.7 / 2017-3-2 15:17:37
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 优化切换方案
+
+
+### modify files
+> template/workflowInfo.pug  
+

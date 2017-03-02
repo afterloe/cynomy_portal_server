@@ -2,8 +2,8 @@ Portal build历史
 ###
 > MIT Licensed  
 > author: afterloe <lm6289511@gmail.com> (https://github.com/afterloe)  
-> mail:   
-> webSite:   
+> mail: lm6289511@gmail.com  
+> webSite: https://github.com/afterloe  
 
 Portal build历史
 ===
@@ -126,383 +126,6 @@ portal 产品页
 	3）公共页面的内容需要项目上对应的负责人进行管理，所以目前是没有内容的。  
 	4）部分浏览器可能存在兼容问题，如果出现兼容问题可以邮件联系我(afterloeliu@jwis.cn)，目前不支持ie，如果想获取更好的体验请使用最新版本的google浏览器。  
 	5）如果有什么建议或许吐槽可以点击页面上的 联系我们 进行留言或发邮件联系我(afterloeliu@jwis.cn)。  
-  
-1.0.6 / 2017-2-26 14:30:35
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修改项目构建History
-
-
-### modify files
-> History.md  
-
-
-1.0.6 / 2017-2-27 14:57:21
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 开启外网访问权限，修改了requestIP的获取方式，platform，portal添加了user返回，前端页面添加了上传文件列表的方法。
-
-
-### modify files
-> config/index.js  
-> interceptors/session.js  
-> routers/portal.js  
-> template/platform.pug  
-> webPage/js/portal/src/platform.js  
-
-
-1.0.6 / 2017-2-27 15:3:41
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 后端开启访问接口，修改工作流进度
-
-
-### modify files
-> routers/goodses.js  
-> routers/index.js  
-> template/platform.pug  
-
-
-1.0.6 / 2017-2-27 15:29:2
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 上传文件接口
-
-
-### modify files
-> package.json  
-> routers/goodses.js  
-> services/goodsService.js  
-
-
-1.0.6 / 2017-2-27 16:20:40
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 上传文件接口ready
-
-
-### modify files
-> routers/goodses.js  
-> services/goodsService.js  
-> services/workflowService.js  
-
-
-1.0.6 / 2017-2-27 16:51:3
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 前端单文件上传功能ready
-
-
-### modify files
-> routers/goodses.js  
-> services/goodsService.js  
-
-
-1.0.6 / 2017-2-27 20:43:20
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 增加锁机制
-
-
-### modify files
-> index.js  
-> routers/goodses.js  
-> services/workflowService.js  
-
-
-1.0.6 / 2017-2-27 20:57:13
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 支持新版下载功能
-
-
-### modify files
-> routers/goodses.js  
-> services/fileSystem.js  
-> services/goodsService.js  
-
-
-1.0.6 / 2017-2-28 14:49:45
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 去除加锁机制，修改查询策略
-
-
-### modify files
-> config/index.js  
-> dao/goods.js  
-> distributed/slave.js  
-> index.js  
-> routers/goodses.js  
-> routers/workflow.js  
-> services/goodsService.js  
-> services/workflowService.js  
-
-
-1.0.6 / 2017-2-28 15:5:1
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 前段细节优化，切换的时候同步节点名和流程名
-
-
-### modify files
-> template/platform.pug  
-
-
-1.0.6 / 2017-2-28 15:26:42
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 响应添加了系统版本号，同时前端资料也改成了version格式，不再是系统时间，非项目组成员禁止上传资料
-
-
-### modify files
-> config/index.js  
-> interceptors/smartNotFound.js  
-> interceptors/template.js  
-> routers/portal.js  
-> template/platform.pug  
-
-
-1.0.6 / 2017-2-28 15:46:39
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 全面修改template中关于版本的信息
-
-
-### modify files
-> config/index.js  
-> routers/portal.js  
-> template/directory.pug  
-> template/header.pug  
-> template/home.pug  
-> template/login.pug  
-> template/platform.pug  
-> template/product.pug  
-> template/pwdMail.pug  
-
-
-1.0.6 / 2017-2-28 16:9:59
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修复上传文件精简问题导致的显示信息过多，优化操作失败提示401.5直接返回登录页面
-
-
-### modify files
-> routers/goodses.js  
-> routers/portal.js  
-> routers/workflow.js  
-> services/goodsService.js  
-> template/platform.pug  
-
-
-1.0.6 / 2017-2-28 16:11:56
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修复home页面没有重新登录提示
-
-
-### modify files
-> webPage/js/portal/src/home.js  
-
-
-1.0.6 / 2017-2-28 16:24:55
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 添加切换节点的时候也能重新构建是否出现上传按钮
-
-
-### modify files
-> routers/portal.js  
-> template/platform.pug  
-
-
-1.0.6 / 2017-2-28 16:40:57
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 上传文件需要获取权限
-
-
-### modify files
-> config/index.js  
-> errors/i18nError.json  
-> routers/goodses.js  
-> services/workflowService.js  
-
-
-1.0.6 / 2017-2-28 17:32:36
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 重构成员管理页面
-
-
-### modify files
-> tools/webTools/_util.html  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.6 / 2017-2-28 19:14:33
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 提升功能列表，修改css
-
-
-### new files
-> tools/webTools/test.html  
-
-### modify files
-> tools/webTools/_util.html  
-> tools/webTools/lib/src/util.js  
-> webPage/css/portal/home.css  
-
-
-1.0.6 / 2017-3-1 10:15:31
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修改样式
-
-
-### modify files
-> tools/webTools/_util.html  
-> tools/webTools/lib/src/util.js  
-> tools/webTools/test.html  
-
-
-1.0.6 / 2017-3-1 10:26:46
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修复开启标签后不自动隐藏
-
-
-### modify files
-> tools/webTools/_util.html  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.6 / 2017-3-1 10:36:6
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 前端完成工作流已有用户检索
-
-
-### modify files
-> tools/webTools/_util.html  
-> tools/webTools/lib/src/util.js  
-
-### delete files
-> tools/webTools/test.html  
-
-
-1.0.6 / 2017-3-1 10:44:43
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 后端完成工作流成员检索
-
-
-### modify files
-> services/workflowService.js  
-> tools/webTools/_util.html  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.6 / 2017-3-1 13:39:30
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 前端实现添加删除members功能
-
-
-### modify files
-> tools/webTools/_util.html  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.6 / 2017-3-1 14:19:43
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 后端支持给工作流添加用户
-
-
-### modify files
-> services/userService.js  
-> services/workflowService.js  
-> tools/webTools/_util.html  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.6 / 2017-3-1 14:41:43
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 完成项目成员添加删除功能
-
-
-### modify files
-> services/workflowService.js  
-> template/platform.pug  
-> tools/webTools/lib/src/util.js  
-
-1.0.6 / 2017-3-1 15:7:46
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 添加功能删除用户
-
-
-### modify files
-> History.md  
-> dao/user.js  
-> services/userService.js  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.6 / 2017-3-1 15:32:32
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 删除用户功能实现
-
-
-### modify files
-> services/goodsService.js  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.6 / 2017-3-1 19:57:29
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修复make check功能
-
-
-### modify files
-> dao/user.js  
-> index.js  
-> routers/workflow.js  
-> services/goodsService.js  
-
 
 1.0.7 / 2017-3-1 20:6:51
 ==================
@@ -517,4 +140,26 @@ commit by afterloe (lm6289511@gmail.com)
 > package.json  
 > template/platform.pug  
 > webPage/js/portal/src/platform.js  
+
+2017-3-2 更新公告 更新内容  
+
+1）优化 util工具页面工作流管理页面，人员管理页面布局优化。  
+2）优化 util工具页面工作流管理页面，标签添加页面布局优化。  
+3）新功能 全局开放工作流文件上传功能。只有本项目组成员才能进行文件上传操作，上传支持多文件并发上传。非项目组成员无法查看上传文件的按钮，当前节点管理员或工作流总负责人拥有删除文件的按钮。  
+4）新功能 util工具页面开放删除用户功能。  
+5）新功能 util工具页面开放删除删除文件功能。  
+6）新功能 util工具页面开放工作流添加项目成员功能。  
+7）修复 portal home 页面的工作流图标不显示或显示错误的异常。  
+8）修复 portal home 页面最后一个工作流出现延长线的异常。  
+9）修复 util工具页面获取概况功能时websocket自动断开的异常。  
+
+1.0.7 / 2017-3-2 10:16:33
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改build log History
+
+
+### modify files
+> History.md  
 

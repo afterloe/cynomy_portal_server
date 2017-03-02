@@ -338,3 +338,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > template/workflowInfo.pug  
 
+
+1.0.7 / 2017-3-2 15:9:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成workflowInfo页面
+
+
+### modify files
+> template/workflowInfo.pug  
+

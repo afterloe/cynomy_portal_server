@@ -101,6 +101,24 @@ script(src= static + "js/portal/rem.js?time=" + __time)
 //- script(src= static + "js/portal/bin/workflowInfo.js?time=" + __time)
 
 script.
+
+  $(function() {
+      //进入该页面，content_one从上往下运动
+      const width = $(window).width();
+      if (width > 768) {
+          var contentOne = $(".content_one").height();
+          var height = -contentOne;
+          $(".content_one").css("margin-top", height);
+          $(".content_one").animate({
+              "margin-top": 0
+          }, 1000, function() {
+              $(".content_one").css("margin-top", 0);
+          });
+      } else {
+          $(".content_one").css("margin-top", 0);
+      }
+  });
+
   // 点击反馈跳转到bbs
   $(".proposal").bind("click", function() {
       window.open("http://bbs.jwis.cn/forum.php?mod=forumdisplay&fid=37");

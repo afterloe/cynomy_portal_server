@@ -612,7 +612,7 @@ function* workflowInfo(workflow, hooks) {
   Object.assign(status, {
     produceList,
   });
-  
+
   Object.assign(_, {
     status
   });
@@ -841,6 +841,16 @@ function* removeUserFromMembers(workflowId, ...userIds) {
   });
 }
 
+function* getNodeInstance(nodeId) {
+  const _ = yield workFlow_node_instance_dao.queryById(nodeId);
+
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  return _;
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -868,4 +878,5 @@ module.exports = {
   workflowMemberList,
   appendUser2Members,
   removeUserFromMembers,
+  getNodeInstance,
 };

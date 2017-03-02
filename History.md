@@ -449,3 +449,15 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/workflow.js  
 > template/workflowInfo.pug  
 
+
+1.0.7 / 2017-3-2 18:4:9
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端完成工作流节点检索功能
+
+
+### modify files
+> routers/workflow.js  
+> services/workflowService.js  
+

@@ -325,3 +325,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > routers/portal.js  
 
+
+1.0.7 / 2017-3-2 15:6:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复点击上传按钮失效的问题
+
+
+### modify files
+> staticFiles/js/portal/src/platform.js  
+> template/platform.pug  
+> template/workflowInfo.pug  
+

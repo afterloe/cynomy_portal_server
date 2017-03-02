@@ -65,7 +65,7 @@ div(class="container platform_content")
         div(class="dataBox")
           div(class="header")
             span(class="data_title")=`${_activeNode.name} 资料`
-            span(class=_allowedUpload? "upload":"" id="uploadButton")
+            span(class=_allowedUpload? "upload":"" onClick="javascript:openUploadView(this);")
           - const _files = _activeNode.produceList || [];
           ul(class="data")
             each _file in _files

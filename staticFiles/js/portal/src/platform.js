@@ -29,17 +29,6 @@ $(function() {
         $(".popup").css("display", "none");
     });
 
-    //打开遮罩层
-    $(".upload").on("click", function() {
-        const __self = $(".processActive").find("dt");
-        if (undefined === window[workflowName]) {
-          window[workflowName] = $(".aLink.Active").html();
-        }
-        const [nodeId, nodeName] = [__self.attr("data-id"), __self.find("span").html()];
-        $(".popup").find(".name").html(`${window[workflowName]} - ${nodeName} 更新`);
-        $(".popup").css("display", "block");
-    });
-
     //点击关闭按钮，取消该项文档的添加
     $(".dataClose").on("click", function() {
         console.log($(this).parent("div").parent("li"))
@@ -183,6 +172,16 @@ const buildUploadItem = (allowedUpload = false) => {
   } else {
     uploadButton.hasClass("upload") ? uploadButton.removeClass("upload"): "";
   }
+};
+
+const openUploadView = btn => {
+  const __self = $(".processActive").find("dt");
+  if (undefined === window[workflowName]) {
+    window[workflowName] = $(".aLink.Active").html();
+  }
+  const [nodeId, nodeName] = [__self.attr("data-id"), __self.find("span").html()];
+  $(".popup").find(".name").html(`${window[workflowName]} - ${nodeName} 更新`);
+  $(".popup").css("display", "block");
 };
 
 const buildProcess = (nodeList, actionNum) => {

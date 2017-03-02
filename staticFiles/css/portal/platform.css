@@ -147,8 +147,10 @@ input {
     .tab_content{margin-left:100px;margin-right:100px;width:920px;overflow: hidden;position: relative;}
     .dataBox{background:#f2f2f2;border-radius:5px;}
     .dataBox .header{height: 50px;line-height: 50px;font-size: 20px;border-bottom: 1px solid #dbdbdb;padding-left: 35px;}
-    .upload{background:url(../../images/portal/upload.png) no-repeat center 13px;display: inline-block;width:100px;height:50px;cursor:pointer;float:right;}
+    .upload{background:url(../../images/portal/upload.png) no-repeat center 13px; display: inline-block;width:100px;height:50px;cursor:pointer;float:right;}
     .upload:hover{background:url(../../images/portal/upload1.png) no-repeat center 13px;}
+    .detail {background: url(../../images/portal/detail.png) no-repeat center 13px; display: inline-block; width: 30px; height: 50px; cursor: pointer; float: right;}
+    .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 13px;}
     .data{margin-top:15px;margin-left:40px;min-width:810px;}
     .data li{height:66px;border-left:1px solid #dbdbdb;}
     .data li div{height:66px;width:100%;}
@@ -286,13 +288,7 @@ input {
     .tabIcon_development{background-image:url(../../images/portal/development.png);}
     .tabIcon_test{background-image:url(../../images/portal/test.png);}
     .tabIcon_release{background-image:url(../../images/portal/release.png);}
-
-
-
-    .tab_process dl.processActive dt span{color:#00a1df}
-
-
-
+    .tab_process dl.processActive dt span{color:#00a1df;}
     .tab_content{margin-left:0;margin-right:0;width:100%;overflow: hidden;position: relative;}
     .dataBox{background:#f2f2f2;border-radius:5px;}
     .dataBox .header{height: 0.5rem;line-height: 0.5rem;font-size: 0.26rem;border-bottom: 1px solid #dbdbdb;padding-left: 0.35rem;}
@@ -300,13 +296,13 @@ input {
     .data li{margin-left: 0.2rem;height: 1rem;border-left: 1px solid #dbdbdb;width:98%;}
     .data li div{height: 1rem;width: 100%;}
     .data li div i{display: inline-block;width: 0.16rem;height: 0.16rem;border-radius: 50%;background: #dbdbdb;float: left;margin-left: -0.08rem;/* margin-top: 0.08rem;/* margin-top: 0.08rem; */}
-    .data li div span{margin-top: -0.05rem;display: inline-block;float: left;width: 1.85rem;text-align: center;height: 0.5rem;
-    }
+    .data li div span{margin-top: -0.05rem;display: inline-block;float: left;width: 1.85rem;text-align: center;height: 0.5rem;}
     .data li div span.download{dispalay:none};
     .data li div span.name{margin-top: -0.05rem; width: 3.5rem;margin-left: 0.09rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
     .data li div span.time{width: 2rem;margin-left: 0;}
-    .data li div span.dataClose{width: 0;
-    0}
+    .data li div span.dataClose{width: 0;0}
     .data li:last-child{border-left:0;}
     .data li:first-child div i{background:#3d9bff;}
+    .detail {background: url(../../images/portal/detail.png) no-repeat center 0.05rem; cursor: pointer; float: right; height: 0.5rem; line-height: 0.5rem; width: 0.4rem; background-size: contain; margin-right: 0.4rem}
+    .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 0.05rem;}
 }

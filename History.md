@@ -371,3 +371,20 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/workflowInfo.pug  
 
+
+1.0.7 / 2017-3-2 16:40:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加查看详情按钮
+
+
+### new files
+> staticFiles/images/portal/detail.png  
+> staticFiles/images/portal/detail_click.png  
+
+### modify files
+> staticFiles/css/portal/platform.css  
+> template/home.pug  
+> template/platform.pug  
+

@@ -12,6 +12,40 @@ include header
 link(href= static + "css/portal/platform.css?time=" + __time rel="stylesheet")
 link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
 
+style.
+  @media (min-width:769px) {
+    .detail {
+      background: url(http://almcloud.jwis.cn/images/portal/upload.png) no-repeat center 13px;
+      display: inline-block;
+      width: 30px;
+      height: 50px;
+      cursor: pointer;
+      float: right;
+    }
+
+    .detail:hover {
+      background: url(http://almcloud.jwis.cn/images/portal/upload1.png) no-repeat center 13px;
+    }
+  }
+
+  @media (max-width:768px) {
+    .detail {
+      background: url(http://almcloud.jwis.cn/images/portal/upload.png) no-repeat center 0.05rem;
+      cursor: pointer;
+      float: right;
+      height: 0.5rem;
+      line-height: 0.5rem;
+      width: 0.4rem;
+      background-size: contain;
+      margin-right: 0.4rem
+    }
+
+    .detail:hover {
+      background: url(http://almcloud.jwis.cn/images/portal/upload1.png) no-repeat center 0.05rem;
+    }
+  }
+
+
 div(class="popup")
   div(class="mask")
     div(class="box")
@@ -61,11 +95,13 @@ div(class="container platform_content")
               span=_p.name
             dd &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
             div(class="clear")
+
       div(class="tab_content")
         div(class="dataBox")
           div(class="header")
             span(class="data_title")=`${_activeNode.name} 资料`
             span(class=_allowedUpload? "upload":"" onClick="javascript:openUploadView(this);")
+            span(class="detail")
           - const _files = _activeNode.produceList || [];
           ul(class="data")
             each _file in _files

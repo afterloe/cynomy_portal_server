@@ -399,3 +399,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/workflowInfo.pug  
 
+
+1.0.7 / 2017-3-2 17:5:54
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 同步跳转链接
+
+
+### modify files
+> staticFiles/js/portal/src/platform.js  
+> template/platform.pug  
+

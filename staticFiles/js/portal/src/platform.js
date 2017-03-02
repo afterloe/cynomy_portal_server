@@ -150,6 +150,11 @@ const buildUploadList = () => window[UpLoadList].map((file, index) => `<li>
   <span class="closeFile" data-index=${index} onClick="javascript:delUploadFileList(this);"><span>
 </li>`);
 
+const forwardDetail = btn => {
+  const id = $(btn).attr("data-id");
+  window.location.href = `/portal/workflow/${id}`;
+};
+
 const downLoadFile = (btn) => {
   window.open("/fs/download/" + $(btn).attr("data-id"));
 };

@@ -556,3 +556,20 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > tools/webTools/_util.html  
 
+
+1.0.7 / 2017-3-3 15:3:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 网页调整为iframe进行控制
+
+
+### new files
+> tools/webTools/dataManager.html  
+
+### modify files
+> tools/webTools/css/public.css  
+> tools/webTools/index.html  
+> tools/webTools/nodeManager.html  
+> tools/webTools/dataManager.html  
+

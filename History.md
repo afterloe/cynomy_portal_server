@@ -521,3 +521,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > services/workflowService.js  
 
+
+1.0.7 / 2017-3-3 10:19:11
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 优化选择用户的时候出现点击事件冲突的异常
+
+
+### modify files
+> tools/webTools/lib/src/util.js  
+

@@ -532,3 +532,27 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/webTools/lib/src/util.js  
 
+
+1.0.7 / 2017-3-3 14:38:57
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: webTools升级
+
+
+### new files
+> tools/webTools/css/  
+> tools/webTools/index.html  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/myNode.html  
+> tools/webTools/nodeManager.html  
+> tools/webTools/personalSettings.html  
+> tools/webTools/systemSetting.html  
+
+### modify files
+> tools/webTools/lib/src/util.js  
+> tools/webTools/nodeManager.html  
+
+### delete files
+> tools/webTools/_util.html  
+

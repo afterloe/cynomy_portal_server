@@ -397,9 +397,9 @@ registry("getWorkflowList", (err, data) => {
               管理
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:exampleManager(this, 'workflow')">贴标签</a>
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:exampleManager(this, 'workflow')">标签管理</a>
               <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:membersManager(this, 'workflow')">成员管理</a>
-              <a class="dropdown-item" href="#">删除工作流</a>
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:nodeInstance(this)">节点管理</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">文件仓库管理</a>
             </div>

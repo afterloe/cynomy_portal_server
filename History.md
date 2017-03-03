@@ -510,3 +510,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/userService.js  
 > services/workflowService.js  
 
+
+1.0.7 / 2017-3-3 10:17:8
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端修复取消owner出现的异常
+
+
+### modify files
+> services/workflowService.js  
+

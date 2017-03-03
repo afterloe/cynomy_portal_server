@@ -755,7 +755,7 @@ function* obmitUploadFileAuthorize(workflowId, {mail}) {
 }
 
 function* workflowMemberList(workflowId) {
-  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1, name: 1});
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1, name: 1, owner: 1});
   if (!_) {
     throwNosuchThisWorkFlow();
   }
@@ -879,18 +879,14 @@ function* cancelOwner(workflowId, userId) {
     throwNosuchThisWorkFlow();
   }
 
-  const user = yield findUsers(userId);
+  const {owner} = _;
 
-  if (users.length === 0) {
-    return ;
-  }
-
-  if (owner._id.toString() === user[0]._id.toString()) {
+  if (owner._id.toString() === userId) {
     return yield workFlow_instance_dao.update({
       _id: _._id,
       upload: {
-        $set: {
-          owner: "",
+        $unset: {
+          owner: 1,
         }
       }
     });

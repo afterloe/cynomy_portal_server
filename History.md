@@ -588,3 +588,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/initWebPage.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.7 / 2017-3-3 18:49:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 页面更新 完善节点选择
+
+
+### modify files
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/util.js  
+

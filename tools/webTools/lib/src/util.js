@@ -181,9 +181,9 @@ registry("workflowInfo", (err, data) => {
             <ul class="list-group list-group-flush">
               <li class="list-group-item">状态: ${status.stat}</li>
               <li class="list-group-item">启动时间: ${new Date(status.beginTimestamp).toLocaleString()}</li>
-              <li class="list-group-item">节点负责人: ${status.owner} <span class="btn btn-outline-danger btn-sm cardButton">修改负责人</span></li>
+              <li class="list-group-item">节点负责人: ${status.owner} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample">修改负责人</span></li>
               <li class="list-group-item">节点跟新次数: ${status.uploadCount}</li>
-              <li class="list-group-item">svn地址: ${status.svn} <span class="btn btn-outline-danger btn-sm cardButton">修改svn地址</span></li>
+              <li class="list-group-item">svn地址: ${status.svn} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample">修改svn地址</span></li>
             </ul>
             <div class="card-block">
               <a href="#" class="card-link">Card link</a>

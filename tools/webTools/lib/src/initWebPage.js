@@ -48,6 +48,24 @@ window[MODULE].push(`
             <span class="sr-only">Next</span>
           </a>
         </div>
+        <div class="collapse" id="nodeInstanceSetOwner">
+          <div class="card card-block" style="display:block;">
+           <label calss="card-title">项目组成员：</label>
+           <p class="card-text memberList setOwner"></p>
+          </div>
+        </div>
+        <div class="collapse" id="nodeInstanceSetSVN">
+          <div class="card card-block" style="display:block;">
+           <label calss="card-title">SVN地址：</label>
+           <p class="card-text">
+             <div class="form-group">
+              <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="输入svn地址..">
+              <small id="emailHelp" class="form-text text-muted">SVN地址为portal日后扫描文件的地方，请正确设置</small>
+             </div>
+             <a href="javascript:void(0);" class="btn btn-outline-primary btn-sm pull-right">提交</a>
+           </p>
+          </div>
+        </div>
 
       </div>
       <div class="modal-footer">

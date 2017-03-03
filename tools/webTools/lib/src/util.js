@@ -23,6 +23,11 @@ $("#filesInfo").hide();
 const selectedProcess = [];
 let modalService;
 
+const nodeInstanceManager = btn => {
+  const id = $(btn).attr("data-id");
+  websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, status:1})})`);
+};
+
 const buildSelectProcess = () => {
     const _ = [];
     selectedProcess.map((node, index) => _.push(`<span class="badge badge-default" data-id="${index}">${node.name}</span>`));
@@ -157,6 +162,65 @@ const cancelOwner = (btn,workflowId) => {
     websocket.send(`node-manager->workflowService->cancelOwner("${workflowId}"|"${id}")`);
     $(".owner").html("未设置负责人");
 };
+
+registry("workflowInfo", (err, data) => {
+    console.log(data);
+    const {nodeList, status} = data;
+
+    const [olHtml, cardHtml] = [[], []];
+
+    for (let node of nodeList) {
+      if (node.index === status.index) {
+        olHtml.push(`<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>`);
+        cardHtml.push(`<div class="carousel-item active">
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">${status.name}</h4>
+              <p class="card-text">${status.reason}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">状态: ${status.stat}</li>
+              <li class="list-group-item">启动时间: ${new Date(status.beginTimestamp).toLocaleString()}</li>
+              <li class="list-group-item">节点负责人: ${status.owner} <span class="btn btn-outline-danger btn-sm cardButton">修改负责人</span></li>
+              <li class="list-group-item">节点跟新次数: ${status.uploadCount}</li>
+              <li class="list-group-item">svn地址: ${status.svn} <span class="btn btn-outline-danger btn-sm cardButton">修改svn地址</span></li>
+            </ul>
+            <div class="card-block">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>`);
+      } else {
+        olHtml.push(`<li data-target="#carouselExampleIndicators" data-slide-to="0"></li>`);
+        cardHtml.push(`<div class="carousel-item">
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">${node.name}</h4>
+              <p class="card-text">未收到信息</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">状态: - </li>
+              <li class="list-group-item">启动时间: - </li>
+              <li class="list-group-item">节点负责人: - </li>
+              <li class="list-group-item">节点跟新次数: - </li>
+              <li class="list-group-item">svn地址: - </li>
+            </ul>
+            <div class="card-block">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>`);
+      }
+    }
+
+    $("#nodeInstanceView").find(".carousel-indicators").html(olHtml.join(""));
+    $("#nodeInstanceView").find(".carousel-inner").html(cardHtml.join(""));
+
+    $("#nodeInstanceView").carousel("pause");
+    $("#nodeInstanceManager").modal("show");
+});
 
 registry("workflowMemberList", (err, data) => {
     if (!window[MEMBERS]) {
@@ -399,7 +463,7 @@ registry("getWorkflowList", (err, data) => {
             <div class="dropdown-menu">
               <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:exampleManager(this, 'workflow')">标签管理</a>
               <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:membersManager(this, 'workflow')">成员管理</a>
-              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:nodeInstance(this)">节点管理</a>
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:nodeInstanceManager(this)">节点管理</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">文件仓库管理</a>
             </div>

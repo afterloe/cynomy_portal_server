@@ -573,3 +573,18 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/nodeManager.html  
 > tools/webTools/dataManager.html  
 
+
+1.0.7 / 2017-3-3 18:25:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改节点静态页面数据获取完成
+
+
+### modify files
+> tools/webTools/css/public.css  
+> tools/webTools/dataManager.html  
+> tools/webTools/index.html  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/util.js  
+

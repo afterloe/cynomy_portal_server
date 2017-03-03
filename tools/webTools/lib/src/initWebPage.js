@@ -18,7 +18,44 @@ window[MODULE] = [];
 // window[MODULE].push();
 // window[MODULE].push();
 // window[MODULE].push();
-// window[MODULE].push();
+
+/**
+ * 工作流节点管理
+ * @type {String}
+ */
+window[MODULE].push(`
+<div class="modal fade bd-example-modal-lg" id="nodeInstanceManager" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">实例节点管理</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="carousel slide" id="nodeInstanceView" data-ride="carousel">
+          <ol class="carousel-indicators"></ol>
+          <div class="carousel-inner" role="listbox"></div>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>`);
 
 /**
  * 链接 websocket 节点

@@ -13,5 +13,5 @@
   .card-text > span { margin: 0.1rem; cursor: pointer; }
 
   @media (min-width: 576px){
-    .modal-dialog { max-width: 500px; margin: 80px auto; }
+    .modal-dialog {margin: 80px auto; }
   }

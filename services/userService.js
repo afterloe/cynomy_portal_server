@@ -219,9 +219,10 @@ function* loaderFromXlsx(name) {
 }
 
 function* findUsers(userIds) {
-  if (!userIds.length) {
-    userIds = [userIds];
+  if (!userIds.length || "string" === typeof userIds) {
+    userIds = Array.of(userIds);
   }
+  
   const _ = [];
   for (let i = 0; i < userIds.length; i++) {
     const user = yield user_dao.queryById(userIds[i]);
@@ -232,6 +233,7 @@ function* findUsers(userIds) {
   }
 
   return _;
+
 }
 
 function* findUsersByTag(...tags) {

@@ -497,3 +497,16 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.7 / 2017-3-3 10:9:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复设置owner时出现异常问题，serviceCenrer添加异常堆栈输出功能
+
+
+### modify files
+> servers/lib/ws-handlerChain/managerChain.js  
+> services/userService.js  
+> services/workflowService.js  
+

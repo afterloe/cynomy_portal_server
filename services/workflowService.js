@@ -857,7 +857,7 @@ function* setOwner(workflowId, userId) {
     throwNosuchThisWorkFlow();
   }
 
-  const user = yield findUsers(userIds);
+  const users = yield findUsers(userId);
 
   if (users.length === 0) {
     return ;
@@ -867,7 +867,7 @@ function* setOwner(workflowId, userId) {
     _id: _._id,
     upload: {
       $set: {
-        owner: user[0],
+        owner: users[0],
       }
     }
   });
@@ -879,7 +879,7 @@ function* cancelOwner(workflowId, userId) {
     throwNosuchThisWorkFlow();
   }
 
-  const user = yield findUsers(userIds);
+  const user = yield findUsers(userId);
 
   if (users.length === 0) {
     return ;

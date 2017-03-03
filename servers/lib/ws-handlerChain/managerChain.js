@@ -43,6 +43,8 @@ function handlerMsg4Str(message, connection) {
           _: data,
         }));
       }).catch(err => {
+        console.log("websocket error: %s", err.message);
+        console.log(err.stack);
         throw err;
       });
     } catch (err) {

@@ -9,32 +9,6 @@ $(function() {
         $(".wrap").css("height", height);
     }
 
-    const loginSystem = () => {
-      const [email, permit] = [$("#userName").val(), $("#userPassword").val()];
-      $.ajax({
-        type: "POST",
-        url: "/user/login",
-        dataType: "json",
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader("accept","application/json");
-        },
-        data: {
-          mail: email,
-          permit: permit,
-        },
-        success: function(result) {
-          if (200 !== result.code) {
-            $("#error").attr("style", "display: block;");
-            $("#error").html(result.error);
-          } else {
-            $("#error").attr("style", "display: none;");
-            localStorage.setItem("permit", result.result);
-            location.href = "/portal/home";
-          }
-        }
-      });
-    };
-
     $("#obmitLoginPermit").click(function() {
       var email = $("#userName").val();
       if (!email) {
@@ -62,3 +36,29 @@ $(function() {
       });
     });
 });
+
+const loginSystem = () => {
+  const [email, permit] = [$("#userName").val(), $("#userPassword").val()];
+  $.ajax({
+    type: "POST",
+    url: "/user/login",
+    dataType: "json",
+    beforeSend: xhr => {
+      xhr.setRequestHeader("accept","application/json");
+    },
+    data: {
+      mail: email,
+      permit: permit,
+    },
+    success: result => {
+      if (200 !== result.code) {
+        $("#error").attr("style", "display: block;");
+        $("#error").html(result.error);
+      } else {
+        $("#error").attr("style", "display: none;");
+        localStorage.setItem("permit", result.result);
+        location.href = "/portal/home";
+      }
+    }
+  });
+};

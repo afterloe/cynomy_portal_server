@@ -255,3 +255,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-5 7:20:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: portal 登陆异常
+
+
+### modify files
+> staticFiles/js/portal/src/login.js  
+> template/login.pug  
+

@@ -96,11 +96,12 @@ div(class="container platform_content")
               i
               span(class="name") 节点名
               span(class="local" id="nodeName")=_activeNode.name
+          - const _owner = _activeNode.owner || {};
           li
             div
               i
               span(class="name") 该节点负责人
-              span(class="local" id="nodeOwner")=_activeNode.owner
+              span(class="local" id="nodeOwner")=`${_owner.name} (${_owner.mail})`
           li
             div
               i
@@ -153,7 +154,7 @@ script.
   const buildInstancePage = ({name, _id, beginTimestamp, owner, svn, uploadCount}) => {
     $("#nodeName").html(name);
     if (owner) {
-      $("#nodeOwner").html(owner);
+      $("#nodeOwner").html(`${owner.name} (${owner.mail})`);
     } else {
       $("#nodeOwner").html("未设置负责人");
     }

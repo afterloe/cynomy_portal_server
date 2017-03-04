@@ -611,3 +611,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/webTools/lib/src/util.js  
 
+
+1.0.7 / 2017-3-4 16:0:23
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复前端网页不显示owner信息
+
+
+### modify files
+> template/workflowInfo.pug  
+> tools/webTools/lib/src/util.js  
+

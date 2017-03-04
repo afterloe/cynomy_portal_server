@@ -171,6 +171,7 @@ registry("workflowInfo", (err, data) => {
 
     for (let node of nodeList) {
       if (node.index === status.index) {
+        const owner = status.owner || {};
         olHtml.push(`<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>`);
         cardHtml.push(`<div class="carousel-item active">
           <div class="card">
@@ -181,7 +182,7 @@ registry("workflowInfo", (err, data) => {
             <ul class="list-group list-group-flush">
               <li class="list-group-item">状态: ${status.stat}</li>
               <li class="list-group-item">启动时间: ${new Date(status.beginTimestamp).toLocaleString()}</li>
-              <li class="list-group-item">节点负责人: ${status.owner} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample">修改负责人</span></li>
+              <li class="list-group-item">节点负责人: ${owner.name} (${owner.mail}) <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample">修改负责人</span></li>
               <li class="list-group-item">节点跟新次数: ${status.uploadCount}</li>
               <li class="list-group-item">svn地址: ${status.svn} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample">修改svn地址</span></li>
             </ul>
@@ -245,8 +246,9 @@ registry("workflowMemberList", (err, data) => {
     }
 
     $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
-    $(".memberList.setOwner").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-success" onClick="javascript:setOwner(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    $("#setOwner").find(".memberList.setOwner").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-success" onClick="javascript:setOwner(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
     $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    $("#nodeInstanceSetOwner).find(".memberList.setOwner").html();
     if (owner) {
       $(".owner").html(`<span data-id="${owner._id}" class="badge badge-danger" onClick="javascript:cancelOwner(this, '${workflowId}');">${owner.name}(${owner.mail})</span>`);
     } else {

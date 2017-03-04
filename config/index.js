@@ -18,7 +18,7 @@ const defaultRoot = resolve(process.env.HOME, ".cynomys", "protal");
 
 const [num, dataDir, logDir] = [cpus().length, resolve(defaultRoot, "data"), resolve(defaultRoot, "logs")];
 
-siteConfig.set("version", "1.0.7"); // 设置服务器版本
+siteConfig.set("version", "B1.0.8"); // 设置服务器版本
 siteConfig.set("remote", { // 远程节点设置
   enable : false, // 是否开启远程
   host: "namo", // 远程服务器ip

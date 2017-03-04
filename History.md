@@ -623,3 +623,30 @@ commit by afterloe (lm6289511@gmail.com)
 > template/workflowInfo.pug  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-5 6:38:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 1.0.8升级版
+
+
+### new files
+> staticFiles/css/portal/workflowInfo.css  
+> staticFiles/js/portal/src/workflowInfo.js  
+
+### modify files
+> .cynomy  
+> config/index.js  
+> package.json  
+> staticFiles/js/portal/src/directory.js  
+> staticFiles/js/portal/src/footer.js  
+> staticFiles/js/portal/src/header.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/login.js  
+> staticFiles/js/portal/src/platform.js  
+> staticFiles/js/portal/src/product.js  
+> template/home.pug  
+> template/platform.pug  
+> template/workflowInfo.pug  
+

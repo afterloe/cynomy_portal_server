@@ -1,3 +1,5 @@
+"use strict";
+
 $(function() {
     //占满屏幕
     //获取窗口高度

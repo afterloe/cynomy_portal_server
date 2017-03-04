@@ -1,3 +1,5 @@
+"use strict";
+
 const [workflowName,UpLoadList, UploadIndex] = [Symbol("workflowName"), Symbol("UpLoadList"), Symbol("UploadIndex")];
 window[UpLoadList] = [];
 
@@ -150,6 +152,10 @@ const buildUploadList = () => window[UpLoadList].map((file, index) => `<li>
   <span class="closeFile" data-index=${index} onClick="javascript:delUploadFileList(this);"><span>
 </li>`);
 
+const buildLinkedURL = URL => {
+  $(".detail").attr("data-id", URL);
+}
+
 const forwardDetail = btn => {
   const id = $(btn).attr("data-id");
   window.location.href = `/portal/workflow/${id}`;
@@ -168,7 +174,7 @@ const cleanSelect = () => {
 const cleanSelectd = (nodeName) => {
   $("dl").attr("class", "");
   $(".data_title").html(`${nodeName} 资料`);
-}
+};
 
 const buildUploadItem = (allowedUpload = false) => {
   const uploadButton = $("#uploadButton");
@@ -271,6 +277,7 @@ const selectWorkflow = btn => {
         cleanSelect();
         $(btn).find("span").css({color: "#3d9bff"});
         buildProcess(result.result.nodeList, result.result.status.index);
+        buildLinkedURL(result.result._id);
         buildFiles(result.result.status.produceList);
         buildUploadItem(result.result.allowedUpload);
       }

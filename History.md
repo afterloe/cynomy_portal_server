@@ -600,3 +600,14 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/initWebPage.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.7 / 2017-3-4 15:25:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复缺少tags出现的弹出框异常的问题
+
+
+### modify files
+> tools/webTools/lib/src/util.js  
+

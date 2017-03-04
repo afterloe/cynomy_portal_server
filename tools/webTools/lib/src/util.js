@@ -256,7 +256,7 @@ registry("workflowMemberList", (err, data) => {
 });
 
 registry("exampleInfo", (err, data) => {
-    const {tags, name, _id, type} = data;
+    const {tags = [], name, _id, type} = data;
     const tagsHtml = [];
     tags.map(tag => tagsHtml.push(`<span class="badge badge-default" data-type="${type}" data-id="${_id}" onClick="javascript:deleteExampleTag(this);">${tag}</span>`));
     $("#name-exampleManager").html(name);

@@ -244,3 +244,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > routers/portal.js  
 
+
+1.0.8 / 2017-3-5 6:46:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复build问题
+
+
+### modify files
+> tools/webTools/lib/src/util.js  
+

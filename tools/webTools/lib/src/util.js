@@ -248,7 +248,7 @@ registry("workflowMemberList", (err, data) => {
     $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
     $("#setOwner").find(".memberList.setOwner").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-success" onClick="javascript:setOwner(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
     $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
-    $("#nodeInstanceSetOwner).find(".memberList.setOwner").html();
+    $("#nodeInstanceSetOwner").find(".memberList.setOwner").html();
     if (owner) {
       $(".owner").html(`<span data-id="${owner._id}" class="badge badge-danger" onClick="javascript:cancelOwner(this, '${workflowId}');">${owner.name}(${owner.mail})</span>`);
     } else {

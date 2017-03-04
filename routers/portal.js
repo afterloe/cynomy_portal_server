@@ -195,7 +195,6 @@ function* info(next) {
       owner,
       nodeList,
       members,
-      status,
     };
 
     this.pageName = "workflowInfo";

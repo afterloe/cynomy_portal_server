@@ -233,3 +233,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > History.md  
 
+
+1.0.8 / 2017-3-5 6:44:41
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复make问题
+
+
+### modify files
+> routers/portal.js  
+

@@ -14,9 +14,13 @@
 const {resolve} = require("path");
 const [{get}, {setPugTemplatePath, compileTemplate}] = [require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "tools", "buildPage"))];
 
+const VERSION = Symbol("VERSION");
+module[VERSION] = get("version");
+
 const defualt = {
   title: "",
   static: get("sourceHost"),
+  systemVersion: module[VERSION],
 };
 
 module.exports = function* (next) {
@@ -30,17 +34,20 @@ module.exports = function* (next) {
       code: 200,
       error: null,
       result: ctx,
+      systemVersion: module[VERSION],
     });
 
-    this.fail = (msg = "System error", code = 500) => ({
+    this.fail = (msg = "system error", code = 500) => ({
       code: Number.parseInt(code),
       error: msg,
       result: null,
+      systemVersion: module[VERSION],
     });
 
   } else {
     this.way = "web";
     this.set("Content-Type", "text/html;charset=utf-8");
+    this.set("systemVersion", module[VERSION]);
 
     this.render = (template, _) => {
       const _default = defualt;

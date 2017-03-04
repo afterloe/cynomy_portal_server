@@ -40,7 +40,14 @@ module.exports = function * (next) {
     }
 
     console.log(error);
+
+    /**
+     * 如果存在异常
+     */
     if (equal(error)) {
+      /**
+       * 异常是 自定义异常 按照请求方式进行分发处理
+       */
       if ("json" === this.way) {
           this.body = this.fail(error.message, error.code);
       } else {
@@ -51,6 +58,9 @@ module.exports = function * (next) {
           });
       }
     } else {
+      /**
+       * 异常是 系统异常 按照请求方式进行分发处理
+       */
       if ("json" === this.way) {
           this.body = this.fail();
       } else {
@@ -61,12 +71,18 @@ module.exports = function * (next) {
       }
     }
   } else if (pageName || data) {
+    /**
+     * 如果存在数据对象的话就按照请求方式进行分发处理
+     */
     if ("web" === this.way) {
       this.render(pageName, data);
     } else if ("json" === this.way) {
       this.body = this.success(data);
     }
   } else {
+    /**
+     * 如果都不存在 则返回404
+     */
     if ("json" === this.way) {
         this.body = this.fail("no this request", 404);
     } else {

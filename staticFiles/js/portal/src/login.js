@@ -7,12 +7,8 @@ $(function() {
         $(".wrap").css("height", height);
     }
 
-    console.log(height);
-    //$(".error").hide();
-
-    $("#btn").click(function() {
-      var email = $("#userName").val();
-      var permit = $("#userPassword").val();
+    const loginSystem = () => {
+      const [email, permit] = [$("#userName").val(), $("#userPassword").val()];
       $.ajax({
         type: "POST",
         url: "/user/login",
@@ -35,7 +31,8 @@ $(function() {
           }
         }
       });
-    });
+    };
+
     $("#obmitLoginPermit").click(function() {
       var email = $("#userName").val();
       if (!email) {

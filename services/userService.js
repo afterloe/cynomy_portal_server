@@ -13,7 +13,7 @@
 
 const [{resolve}, xlsx, {unlinkSync}] = [require("path"), require("node-xlsx").default, require("fs")];
 const toolsPath = resolve(__dirname, "..", "tools");
-const [{getTagsInfo}, {compileTemplate}, {sendPromise}, {get}, {user_dao}, {sign, setSession}, {throwObjectCanTAes, throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, uuidCode, checkParameter}] =
+const [{getTagsInfo}, {compileTemplate}, {sendPromise}, {get}, {user_dao}, {sign, setSession}, {throwObjectCanTAes, throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, checkParameter}] =
 [require(resolve(__dirname, "tagsService")), require(resolve(toolsPath, "buildPage")), require(resolve(toolsPath, "mailHelper")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "sessionService")),
 require(resolve(__dirname, "..", "errors")), require(resolve(toolsPath, "utilities"))];
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
@@ -185,7 +185,7 @@ function* obmitLoginPermit(mail){
   if (!_) {
     throwUserNotExist();
   }
-  const permit = uuidCode();
+  const permit = randomNum(4);
   const html = compileTemplate("pwdMail", {
     time: new Date().toLocaleString(),
     permit: permit,
@@ -218,10 +218,14 @@ function* loaderFromXlsx(name) {
   }
 }
 
-function* findUsers(users) {
+function* findUsers(userIds) {
+  if (!userIds.length || "string" === typeof userIds) {
+    userIds = Array.of(userIds);
+  }
+  
   const _ = [];
-  for (let i = 0; i < users.length; i++) {
-    const user = yield user_dao.queryById(users[i]);
+  for (let i = 0; i < userIds.length; i++) {
+    const user = yield user_dao.queryById(userIds[i]);
     if (!user) {
       continue;
     }
@@ -229,6 +233,7 @@ function* findUsers(users) {
   }
 
   return _;
+
 }
 
 function* findUsersByTag(...tags) {
@@ -277,7 +282,7 @@ function* exampleInfo(userId) {
 
 function* deleteExampleTag(userId, ..._tags) {
   const user = yield user_dao.queryById(userId);
-  
+
   if (!user) {
     throwUserNotExist();
   }
@@ -303,6 +308,15 @@ function* deleteExampleTag(userId, ..._tags) {
   });
 }
 
+function* deleteUser(userId) {
+  const user = yield user_dao.queryById(userId);
+  if (!user) {
+    throwUserNotExist();
+  }
+
+  return yield user_dao.deleteUser(user._id);
+}
+
 module.exports = {
   loaderUserFromXlsx,
   createUsers,
@@ -318,4 +332,5 @@ module.exports = {
   setTags,
   exampleInfo,
   deleteExampleTag,
+  deleteUser,
 };

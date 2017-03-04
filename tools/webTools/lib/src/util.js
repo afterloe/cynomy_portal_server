@@ -11,6 +11,10 @@
   */
 "use strict";
 
+const [MEMBERS, TAGS, TEMPORARY, TEMPORARYSELECT] = [Symbol("MEMBERS"), Symbol("TAGS"), Symbol("TEMPORARY"), Symbol("TEMPORARYSELECT")];
+
+$("#linkNode").modal("show");
+
 $("#userInfo").hide();
 $("#workflowInfo").hide();
 $("#tagsInfo").hide();
@@ -18,6 +22,11 @@ $("#filesInfo").hide();
 
 const selectedProcess = [];
 let modalService;
+
+const nodeInstanceManager = btn => {
+  const id = $(btn).attr("data-id");
+  websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, status:1})})`);
+};
 
 const buildSelectProcess = () => {
     const _ = [];
@@ -32,84 +41,237 @@ const buildSelectProcess = () => {
     });
 };
 
-function appendTag(btn) {
+const appendTag = btn => {
     const [id, name] = [$(btn).attr("data-id"), $(btn).attr("data-name")];
     const exampleId = $("#exampleId-exampleManager").val();
     websocket.send(`node-manager->${modalService}->setTags("${exampleId}"|"${id}")`);
     let html = $("#tags-exampleManager").html();
-    html += ` <span class="badge badge-default" data-id="${id}" data-name="${name}"> &nbsp;${name}</span>`;
+    html += `<span class="badge badge-default" data-id="${id}" data-name="${name}"> &nbsp;${name}</span>`;
     $("#tags-exampleManager").html(html);
-}
+};
 
-function reflushTag() {
+const reflushTag = () => {
 	websocket.send("node-manager->tagsService->getTagsList");
-}
+};
 
-function exampleManager(btn, modal) {
+const exampleManager = (btn, modal) => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->${modal}Service->exampleInfo("${id}")`);
     modalService = `${modal}Service`;
-}
+};
 
-function deleteUser(btn) {
+const deleteUser = btn => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->userService->deleteUser("${id}")`);
+};
+
+const resetPwd = btn => {
     console.log($(btn).attr("data-id"));
     console.log("123");
-}
+};
 
-function resetPwd(btn) {
-    console.log($(btn).attr("data-id"));
-    console.log("123");
-}
-
-function deleteTag(btn) {
+const deleteTag = btn => {
     btn = $(btn).parent();
     const [name,
         id] = [btn.attr("data-name"), btn.attr("data-id")];
     $("#label-askdeleteTag").html(`删除 ${name}`);
     $("#input-askdeleteTag").val(id);
     $("#askdeleteTag").modal("show");
-}
+};
 
-function uploadNode(btn) {
+const uploadNode = btn =>  {
     btn = $(btn);
-    const [id,
-        nodeName] = [btn.attr("data-id"), btn.attr("data-name")];
+    const [id, nodeName] = [btn.attr("data-id"), btn.attr("data-name")];
     const processName = btn.parent().parent().attr("data-name");
     $("#label-updateNodeProduceList").html(`${processName} - ${nodeName} 节点更新`);
     $("#hidden-views").html(`<input type="hidden" name="workflowId" value="${id}" />`);
     $("#updateNodeProduceList").modal("show");
-}
+};
 
-function promoteProcess(btn) {
+const promoteProcess = btn => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->workflowService->promoteProcess("${id}")`);
-}
+};
 
-function startUpProcess(btn) {
+const retroversionProcess = btn => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->retroversion("${id}")`);
+};
+
+const startUpProcess = btn => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->workflowService->startUpWorkflow("${id}")`);
-}
+};
 
-function deleteExampleTag(btn) {
+const membersManager = btn => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowMemberList("${id}")`);
+};
+
+const deleteExampleTag  = btn => {
     const id = $(btn).attr("data-id");
     const tag = $(btn).text();
     const service = $(btn).attr("data-type");
     websocket.send(`node-manager->${service}Service->deleteExampleTag("${id}"|"${tag}")`);
     $("#exampleManager").modal("toggle");
-}
+};
+
+const removeMember = (btn,workflowId) => {
+    const id = $(btn).attr("data-id");
+    const content = $(btn).text();
+    const index = window[TEMPORARYSELECT].findIndex(temporary => temporary._id === id);
+    if (-1 !== index) {
+      websocket.send(`node-manager->workflowService->removeUserFromMembers("${workflowId}"|"${id}")`);
+      const member = window[TEMPORARYSELECT][index];
+      window[TEMPORARY].push(member);
+      window[TEMPORARYSELECT].splice(index, 1);
+      $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+      $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+      $(".memberList.setOwner").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-success" onClick="javascript:setOwner(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    }
+};
+
+const appendMembers = (btn,workflowId) => {
+    const id = $(btn).attr("data-id");
+    const content = $(btn).text();
+    const index = window[TEMPORARY].findIndex(temporary => temporary._id === id);
+    if (-1 !== index) {
+      websocket.send(`node-manager->workflowService->appendUser2Members("${workflowId}"|"${id}")`);
+      const member = window[TEMPORARY][index];
+      window[TEMPORARYSELECT].push(member);
+      window[TEMPORARY].splice(index, 1);
+      $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+      $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+      $(".memberList.setOwner").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-success" onClick="javascript:setOwner(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    }
+};
+
+const deleteFile = btn => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->goodsService->deleteFile("${id}")`);
+};
+
+const setOwner = (btn,workflowId) => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->setOwner("${workflowId}"|"${id}")`);
+    $(".owner").html(`<span data-id="${id}" class="badge badge-danger" onClick="javascript:cancelOwner(this, '${workflowId}');">${$(btn).text()}</span>`);
+};
+
+const cancelOwner = (btn,workflowId) => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->cancelOwner("${workflowId}"|"${id}")`);
+    $(".owner").html("未设置负责人");
+};
+
+registry("workflowInfo", (err, data) => {
+    console.log(data);
+    const {nodeList, status} = data;
+
+    const [olHtml, cardHtml] = [[], []];
+
+    for (let node of nodeList) {
+      if (node.index === status.index) {
+        const owner = status.owner || {};
+        olHtml.push(`<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>`);
+        cardHtml.push(`<div class="carousel-item active">
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">${status.name}</h4>
+              <p class="card-text">${status.reason}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">状态: ${status.stat}</li>
+              <li class="list-group-item">启动时间: ${new Date(status.beginTimestamp).toLocaleString()}</li>
+              <li class="list-group-item">节点负责人: ${owner.name} (${owner.mail}) <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample">修改负责人</span></li>
+              <li class="list-group-item">节点跟新次数: ${status.uploadCount}</li>
+              <li class="list-group-item">svn地址: ${status.svn} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample">修改svn地址</span></li>
+            </ul>
+            <div class="card-block">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>`);
+      } else {
+        olHtml.push(`<li data-target="#carouselExampleIndicators" data-slide-to="0"></li>`);
+        cardHtml.push(`<div class="carousel-item">
+          <div class="card">
+            <div class="card-block">
+              <h4 class="card-title">${node.name}</h4>
+              <p class="card-text">未收到信息</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">状态: - </li>
+              <li class="list-group-item">启动时间: - </li>
+              <li class="list-group-item">节点负责人: - </li>
+              <li class="list-group-item">节点跟新次数: - </li>
+              <li class="list-group-item">svn地址: - </li>
+            </ul>
+            <div class="card-block">
+              <a href="#" class="card-link">Card link</a>
+              <a href="#" class="card-link">Another link</a>
+            </div>
+          </div>
+        </div>`);
+      }
+    }
+
+    $("#nodeInstanceView").find(".carousel-indicators").html(olHtml.join(""));
+    $("#nodeInstanceView").find(".carousel-inner").html(cardHtml.join(""));
+
+    $("#nodeInstanceView").carousel("pause");
+    $("#nodeInstanceManager").modal("show");
+});
+
+registry("workflowMemberList", (err, data) => {
+    if (!window[MEMBERS]) {
+      websocket.send("node-manager->userService->getUserList");
+      return ;
+    }
+    const {members, workflowId, owner} = data;
+    window[TEMPORARYSELECT] = members;
+    window[TEMPORARY] = [];
+    let flag;
+    for(let member of window[MEMBERS]) {
+      flag = false;
+      for (let _member of members) {
+        if (member.name === _member.name && member.mail === _member.mail) {
+          flag = true;
+        }
+      }
+
+      if (!flag) {
+        window[TEMPORARY].push(member);
+      }
+    }
+
+    $(".memberList").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:removeMember(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    $("#setOwner").find(".memberList.setOwner").html(window[TEMPORARYSELECT].map(member => `<span data-id="${member._id}" class="badge badge-success" onClick="javascript:setOwner(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    $("#addUserToMembers").find("p.card-text").html(window[TEMPORARY].map(member => `<span data-id="${member._id}" class="badge badge-primary" onClick="javascript:appendMembers(this, '${workflowId}');">${member.name}(${member.mail})</span>`).join(""));
+    $("#nodeInstanceSetOwner).find(".memberList.setOwner").html();
+    if (owner) {
+      $(".owner").html(`<span data-id="${owner._id}" class="badge badge-danger" onClick="javascript:cancelOwner(this, '${workflowId}');">${owner.name}(${owner.mail})</span>`);
+    } else {
+      $(".owner").html("未设置负责人");
+    }
+    $("#membersManager").modal("toggle");
+});
 
 registry("exampleInfo", (err, data) => {
-    const {tags, name, _id, type} = data;
+    const {tags = [], name, _id, type} = data;
     const tagsHtml = [];
     tags.map(tag => tagsHtml.push(`<span class="badge badge-default" data-type="${type}" data-id="${_id}" onClick="javascript:deleteExampleTag(this);">${tag}</span>`));
     $("#name-exampleManager").html(name);
     $("#exampleId-exampleManager").val(_id);
+    $("#addTags").hasClass("show")? $("#addTags").removeClass("show"):null;
     $("#tags-exampleManager").html(tagsHtml.join(" "));
     $("#exampleManager").modal("show");
 });
 
 registry("systemInfo", (err, data) => {
-    const {} = data;
+    const _ = [];
+    const {hostName, cpus, platform, network, uname} = data;
+    // TODO
 });
 
 registry("memoryInfo", (err, data) => {
@@ -171,18 +333,9 @@ registry("getWorkflowNodeList", (err, data) => {
 });
 
 registry("getTagsList", (err, data) => {
-    const [tagsTemplate,
-        tagsList] = [
-        [], []
-    ];
-    const colors = [
-        "default",
-        "info",
-        "primary",
-        "success",
-        "warning",
-        "danger"
-    ];
+    const [tagsTemplate, tagsList] = [[], []];
+    window[TAGS] = true;
+    const colors = ["default", "info", "primary", "success", "warning", "danger"];
     data.map(item => {
         let color = item.count > 50
             ? item.count % 50
@@ -195,7 +348,7 @@ registry("getTagsList", (err, data) => {
         tagsList.push(`<span class="badge badge-${colors[color]}" data-id="${item._id}" data-name="${item.name}" onClick="javascript:appendTag(this);"> &nbsp;${item.name}</span>`);
     });
     $("#table-show-tags").html(tagsTemplate.join("  "));
-    $("#addTags > p").html(tagsList.join(" "));
+    $("#addTags").find("p.card-text").html(tagsList.join(" "));
 });
 
 registry("createTag", (err, data) => {
@@ -221,6 +374,10 @@ registry("promoteProcess", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
 });
 
+registry("retroversion", (err, data) => {
+    websocket.send("node-manager->workflowService->getWorkflowList");
+});
+
 registry("startUpWorkflow", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
 });
@@ -236,20 +393,26 @@ registry("getGoodsList", (err, data) => {
         <div class="card-block">
           <h4 class="card-title">${item.name}</h4>
           <p class="card-text">${item.author.name} - ${item.version}</p>
-          <a href="${item.path}" class="btn btn-outline-primary">下载</a>
-          <a href="#" class="btn btn-outline-danger">删除</a>
-		  <a href="#" data-id="${item._id}" class="btn btn-outline-warning" onClick="javascript:exampleManager(this, 'goods');">管理</a>
+          <a href="javascript:void(0);" class="btn btn-outline-primary">下载</a>
+          <a data-id="${item._id}" href="javascript:void(0);" class="btn btn-outline-danger" onClick="javascript:deleteFile(this);">删除</a>
+		      <a href="#" data-id="${item._id}" class="btn btn-outline-warning" onClick="javascript:exampleManager(this, 'goods');">管理</a>
         </div>
       </div>`);
     });
     $("#table-show-files").html(fileList.join(""));
 });
 
+registry("deleteFile", (err, data) => {
+    websocket.send("node-manager->goodsService->getGoodsList");
+});
+
+registry("deleteUser", (err, data) => {
+    websocket.send("node-manager->userService->getUserList");
+});
+
 registry("getUserList", (err, data) => {
-    const [showUser,
-        checkBoxUser] = [
-        [], []
-    ];
+    const [showUser, checkBoxUser] = [[], []];
+    window[MEMBERS] = data;
     data.map(item => {
         showUser.push(`<tr scope="row">
       <td>${item._id}</td>
@@ -268,6 +431,7 @@ registry("getUserList", (err, data) => {
     });
     $("#table-show-user").html(showUser.join(""));
     $("#checkbox-user").html(checkBoxUser.join(""));
+
 });
 
 registry("getWorkflowList", (err, data) => {
@@ -278,22 +442,34 @@ registry("getWorkflowList", (err, data) => {
             const speed = Math.ceil((status.index + 1) / nodeList.length * 100);
             const reason = status.reason || "未更新";
             showWorkflow.push(`<div class="row" style="margin-top: 1rem;" data-name="${name}">
-        <div class="col-sm-6">
+        <div class="col-sm-5">
           <div class="progress">
             <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: ${speed}%" aria-valuenow="${speed}" aria-valuemin="0" aria-valuemax="100">${speed} % ${status.name}</div>
           </div>
           ${name} - ${reason}
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-7">
           <button type="button" data-id="${_id}" data-name="${status.name}" class="btn btn-outline-primary btn-sm" onClick="javascript:uploadNode(this);">
-            更新当前节点
+            更新节点
           </button>
           <button type="button" data-id="${_id}" class="btn btn-outline-success btn-sm" onClick="javascript:promoteProcess(this);">
             推进流程
           </button>
-		  <button type="button" data-id="${_id}" class="btn btn-outline-warning btn-sm" onClick="javascript:exampleManager(this, 'workflow')">
-			管理
-		  </button>
+          <button type="button" data-id="${_id}" class="btn btn-outline-danger btn-sm" onClick="javascript:retroversionProcess(this);">
+    			  回退流程
+    		  </button>
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-warning btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              管理
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:exampleManager(this, 'workflow')">标签管理</a>
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:membersManager(this, 'workflow')">成员管理</a>
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:nodeInstanceManager(this)">节点管理</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">文件仓库管理</a>
+            </div>
+          </div>
         </div>
       </div>`);
         } else {
@@ -441,12 +617,12 @@ $("#module-ok-updateNodeProduceList").click(() => {
     const reader = new FileReader();
     reader.readAsArrayBuffer(tar);
     reader.onload = () => {
-        const fileBuff = reader.result;
-        const length = fileBuff.byteLength;
-        const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
-        const dataView = new DataView(wsBuff, length, 8);
-        dataView.setUint32(0, 2001);
-        websocket.send(wsBuff);
+      const fileBuff = reader.result;
+      const length = fileBuff.byteLength;
+      const wsBuff = ArrayBuffer.transfer(fileBuff, length + 8);
+      const dataView = new DataView(wsBuff, length, 8);
+      dataView.setUint32(0, 2001);
+      websocket.send(wsBuff);
     };
 });
 
@@ -466,15 +642,9 @@ $("#module-ok-crearteTag").click(function() {
     const form = $(this).parent().parent().find("form");
     const data = getFormData(form);
     const {keyWord, pro, domain} = data;
-    data.keyWord = keyWord === ""
-        ? []
-        : keyWord.split(",");
-    data.pro = pro === ""
-        ? []
-        : pro.split(",");
-    data.domain = domain === ""
-        ? []
-        : domain.split(",");
+    data.keyWord = keyWord === "" ? [] : keyWord.split(",");
+    data.pro = pro === "" ? [] : pro.split(",");
+    data.domain = domain === "" ? [] : domain.split(",");
     websocket.send(`node-manager->tagsService->createTag(${JSON.stringify(data)})`);
 });
 

@@ -2,8 +2,8 @@
 
 include header
 
-link(href= static + "css/portal/directory.css" rel="stylesheet")
-link(href= static + "css/portal/mask.css" rel="stylesheet")
+link(href= static + "css/portal/directory.css?time=" + __time rel="stylesheet")
+link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
 
 div(class="popup")
   div(class="mask")
@@ -78,5 +78,5 @@ div(class="container directory_content")
 
 include footer
 
-script(src= static + "js/portal/rem.js")
-script(src= static + "js/portal/bin/directory.js")
+script(src= static + "js/portal/rem.js?time=" + __time)
+script(src= static + "js/portal/bin/directory.js?time=" + __time)

@@ -1,5 +1,7 @@
 //- create by afterloe on 2017-1-15 21:58:10 - MIT
 
+- const __time = locals.systemVersion || "";
+
 doctype html
 html(lang="en")
   head
@@ -8,8 +10,8 @@ html(lang="en")
     meta(name="viewport" content="width=device-width,initial-scale=1")
     title #{title}
     link(href= static + "css/portal/bootstrap.min.css" rel="stylesheet")
-    link(href= static + "css/portal/header.css" rel="stylesheet")
-    link(href= static + "css/portal/footer.css" rel="stylesheet")
+    link(href= static + "css/portal/header.css?time=" + __time rel="stylesheet")
+    link(href= static + "css/portal/footer.css?time=" + __time rel="stylesheet")
 
 - const navbar = [{href: "/portal/home", name: "首页"}, {href: "/portal/platform", name: "TRU平台"}, {href: "/portal/product", name: "TRU产品"}, {href: "/portal/directory", name: "公共目录"}]
 - if (locals.index && locals.index <= navbar.length) {

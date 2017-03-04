@@ -82,11 +82,12 @@ function* platform(next) {
     return yield next;
   }
   try {
-    const [equipmentTags, platformTags] = yield [findTags("设备"), findTags("平台")];
+    const [equipmentTags, platformTags, user] = yield [findTags("设备"), findTags("平台"), this.authorized];
 
     const _ = {
       title: "R&D Portal - platform",
       index: 2,
+      user,
     };
 
     const __ = {};
@@ -97,15 +98,20 @@ function* platform(next) {
       });
     }
 
+    const product = yield findActiveWorkflowExample(__);
+    const {members} = product;
+
+    const index = members.findIndex(member => member.mail === user.mail);
+
     Object.assign(_, {
       products: __,
-      product: yield findActiveWorkflowExample(__),
+      product,
+      allowedUpload: index === -1 ? false:true,
     });
 
     this.pageName = "platform";
     this.data = _;
   } catch (err) {
-    console.log(err);
     this.error = err;
   }
 
@@ -117,10 +123,11 @@ function* product(next) {
     return yield next;
   }
   try {
-    const [equipmentTags, platformTags] = yield [findTags("设备"), findTags("产品")];
+    const [equipmentTags, platformTags, user] = yield [findTags("设备"), findTags("产品"), this.authorized];
     const _ = {
       title: "R&D Portal - product",
       index: 3,
+      user,
     };
 
     const __ = {};
@@ -131,9 +138,15 @@ function* product(next) {
       });
     }
 
+    const product = yield findActiveWorkflowExample(__);
+    const {members} = product;
+
+    const index = members.findIndex(member => member.mail === user.mail);
+
     Object.assign(_, {
       products: __,
-      product: yield findActiveWorkflowExample(__),
+      product,
+      allowedUpload: index === -1 ? false:true,
     });
 
     this.pageName = "platform";
@@ -165,10 +178,39 @@ function* directory(next) {
   return yield next;
 }
 
+function* info(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    const {id} = this.params;
+    const {name, createTimestamp, nodeList, status, owner, members} = yield workflowInfo(id);
+
+    this.data = {
+      title: "R&D Portal - info",
+      index: 8,
+      name,
+      createTimestamp,
+      status,
+      owner,
+      nodeList,
+      members,
+      status,
+    };
+
+    this.pageName = "workflowInfo";
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+}
+
 module.exports = {
   home,
   platform,
   login,
   product,
   directory,
+  info,
 };

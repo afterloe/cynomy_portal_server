@@ -18,6 +18,7 @@ const defaultRoot = resolve(process.env.HOME, ".cynomys", "protal");
 
 const [num, dataDir, logDir] = [cpus().length, resolve(defaultRoot, "data"), resolve(defaultRoot, "logs")];
 
+siteConfig.set("version", "1.0.7"); // 设置服务器版本
 siteConfig.set("remote", { // 远程节点设置
   enable : false, // 是否开启远程
   host: "***", // 远程服务器ip
@@ -43,7 +44,7 @@ siteConfig.set("logDir", logDir); // 日志存储目录
 siteConfig.set("redisConfig", { // redis 设置
   host: "***", // redis服务器地址
   port: "6379", // redis端口
-  timeout: 172800 // 超时设置 秒
+  timeout: 604800 // 超时设置 秒
 });
 siteConfig.set("security", { // 安全设置
   securityKey: "***", // 安全密钥-自定义

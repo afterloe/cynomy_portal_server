@@ -11,7 +11,7 @@
   */
 "use strict";
 
-const [{resolve, basename, sep}, {statSync, existsSync}] = [require("path"), require("fs")];
+const [{resolve, basename, sep}, {statSync, existsSync, mkdirSync, renameSync}] = [require("path"), require("fs")];
 const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed,
 throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move}, {getTagsInfo}] = [
   require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
@@ -35,6 +35,26 @@ const buildGoods = (goods, workflowId, nodeName) => {
   Object.assign(_, goods);
 
   return _;
+};
+
+const checkGoodsExist = pathOfgoods => {
+  if (!existsSync(pathOfgoods)) {
+    return ;
+  }
+
+  const [fileName, whhosePath] = [basename(pathOfgoods), resolve(pathOfgoods, "..")];
+
+  renameSync(pathOfgoods, resolve(whhosePath, fileName + "-same-" + Date.now()));
+};
+
+const getGoodesHouseAddress = workflowNode => {
+  const __path = resolve(get("staticDir"), workflowNode._id.toString());
+
+  if (!existsSync(__path)) {
+    mkdirSync(__path);
+  }
+
+  return __path;
 };
 
 function* production(tmp, workflowId, nodeId, uuidCode) {
@@ -163,6 +183,23 @@ function* increaseCount(id) {
   });
 }
 
+function* createGoods(workflow, {fileName, savePath, mimeType}, {mail, name, id}) {
+  const _ = buildGoods({
+    instanceNode: workflow._id,
+    nodeName: workflow.name,
+    uploadTime: Date.now(),
+    name: fileName,
+    mimeType,
+    path: savePath,
+    author: {mail, name, id},
+    batch: new Date().toDateString(),
+    version: new Date().toLocaleString(),
+  });
+
+  const value = yield goods_dao.insert(_);
+  return value.ops[0];
+}
+
 function* deleteExampleTag(goodsId, ..._tags) {
   const goods = yield goods_dao.queryById(goodsId);
 
@@ -191,6 +228,35 @@ function* deleteExampleTag(goodsId, ..._tags) {
   });
 }
 
+function* findGoodsByNode(goodsId) {
+  const _ = yield goods_dao.searchByWehouse(goodsId);
+  const result = [];
+  let flag;
+  for (let file of _) {
+    flag = false;
+    for (let _file of result) {
+      if (_file.name === file.name) {
+        flag = true;
+      }
+    }
+    if (!flag) {
+      result.push(file);
+    }
+  }
+  
+  return result;
+}
+
+function* deleteFile(goodsId) {
+  const goods = yield goods_dao.queryById(goodsId);
+
+  if (!goods) {
+    throwNotExistsFile();
+  }
+
+  return yield goods_dao.remove(goods._id);
+}
+
 module.exports = {
   cleanDocuments,
   production,
@@ -204,4 +270,9 @@ module.exports = {
   getPublicGoodsesList,
   increaseCount,
   deleteExampleTag,
+  getGoodesHouseAddress,
+  createGoods,
+  checkGoodsExist,
+  findGoodsByNode,
+  deleteFile,
 };

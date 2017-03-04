@@ -11,10 +11,19 @@
   */
 "use strict";
 
-const [{resolve}, {createReadStream}] = [require("path"), require(("fs"))];
+const [{resolve, join}, {createReadStream, createWriteStream}, parse] = [require("path"), require(("fs")), require("co-busboy")];
 const services = resolve(__dirname, "..", "services");
-const [{getGoodsList, getGoodsDetailed, increaseCount}, {getGoodsFileInfo}, {updateNodeProduceFile}] = [require(resolve(services, "goodsService")),
-  require(resolve(services, "fileSystem")), require(resolve(services, "workflowService"))];
+const [
+  {getGoodsList, getGoodsDetailed, increaseCount, checkGoodsExist, createGoods, getGoodesHouseAddress},
+  {getGoodsFileInfo},
+  {getWorkflowNode, updateNodeProduceFile, obmitUploadFileAuthorize},
+  {throwLackParameters}
+] = [
+  require(resolve(services, "goodsService")),
+  require(resolve(services, "fileSystem")),
+  require(resolve(services, "workflowService")),
+  require(resolve(__dirname, "..", "errors"))
+];
 
 const list = function* (next) {
   if (this.error) {
@@ -34,6 +43,7 @@ const download = function* (next) {
   if (this.error) {
     return yield next;
   }
+
   try {
     const {id} = this.params;
     const goods = yield getGoodsDetailed(id);
@@ -52,7 +62,53 @@ const download = function* (next) {
   return yield next;
 };
 
+const updateNode = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const [fields, workflowNodeId, authorized] = [parse(this.req), this.params.nodeId, this.authorized];
+    const _ = yield getWorkflowNode(workflowNodeId);
+    yield obmitUploadFileAuthorize(_.workflow, authorized);
+
+    if (!_) {
+      throwLackParameters();
+    }
+
+    const field = yield fields;
+
+    if (Array.isArray(field)) {
+      throwLackParameters();
+    }
+
+    let {filename, mimeType} = field;
+
+    if (!filename) {
+      throwLackParameters();
+    }
+
+    const address = getGoodesHouseAddress(_);
+    const streamName = resolve(address, filename);
+    checkGoodsExist(streamName);
+    const lock = _._id.toString();
+    const goods = yield createGoods(_, {
+      fileName: filename,
+      savePath: join(lock, filename),
+      mimeType,
+    }, authorized);
+    field.pipe(createWriteStream(streamName));
+    this.data = {goods};
+
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
 module.exports = {
   list,
   download,
+  updateNode,
 };

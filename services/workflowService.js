@@ -12,12 +12,24 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
-  {throwLackParameters, throwParametersError, throwObjectExists, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn,
-  throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate}, {checkParameter}, {findUsers},
-  {structureProduceList}, {getTagsInfo}] = [require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")),
-  require(resolve(__dirname, "..", "tools", "utilities")), require(resolve(__dirname, "userService")), require(resolve(__dirname, "goodsService")),
-  require(resolve(__dirname, "tagsService"))];
+const [
+  {workFlow_instance_dao, workFlow_template_dao, workFlow_node_template_dao, workFlow_node_instance_dao},
+  {throwLackParameters, throwParametersError, throwOauthError, throwObjectExists, throwNosuchThisWorkflowNodeInstance, throwOperationFailed, throwPersonalNotIn, throwBuildFailed, throwBuildWorkFlowNodeFailed, throwNosuchThisWorkFlow, throwNosuchThisWorkFlowTemplate},
+  {checkParameter},
+  {findUsers},
+  {structureProduceList, findGoodsByNode},
+  {getTagsInfo}
+] = [
+  require(resolve(__dirname, "..", "dao")),
+  require(resolve(__dirname, "..", "errors")),
+  require(resolve(__dirname, "..", "tools", "utilities")),
+  require(resolve(__dirname, "userService")),
+  require(resolve(__dirname, "goodsService")),
+  require(resolve(__dirname, "tagsService"))
+];
+
+const UPDATELIST = Symbol("UPDATELIST");
+module[UPDATELIST] = {};
 
 /**
  * 构建工作流节点模板
@@ -483,6 +495,37 @@ function* promoteProcess(id) {
   });
 }
 
+function* appendGoods2Node(nodeId, goods) {
+  const _ = yield workFlow_node_instance_dao.queryById(nodeId);
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  const {produceList} = _;
+
+  const index = produceList.findIndex(_goods => _goods.name === goods.name);
+  if (-1 === index) {
+    produceList.push(goods);
+  }
+
+  produceList[index] = goods;
+
+  yield workFlow_node_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        produceList,
+      }
+    }
+  });
+
+  Object.assign(_, {
+    produceList,
+  });
+
+  yield syncNodeToWorkflow(_);
+}
+
 function* updateNodeProduceFile(nodeId, goods) {
   const _ = yield workFlow_node_instance_dao.queryById(nodeId);
   if (!_) {
@@ -549,12 +592,6 @@ function* updateNodeProduceList(nodeId, {produceList, reason}) {
   return yield syncNodeToWorkflow(_);
 }
 
-/**
- * 获取工作信息
- *
- * @param  {String}    workflow [工作流实例名 或 工作流id]
- * @return {Object}          [工作流对象]
- */
 function* workflowInfo(workflow, hooks) {
   let _ = yield workFlow_instance_dao.queryById(workflow, hooks);
   if (!_) {
@@ -563,6 +600,22 @@ function* workflowInfo(workflow, hooks) {
   if (!_) {
     throwNosuchThisWorkFlow();
   }
+
+  const {status} = _;
+
+  if (!status) {
+    return _;
+  }
+
+  const produceList = yield findGoodsByNode(status._id);
+
+  Object.assign(status, {
+    produceList,
+  });
+
+  Object.assign(_, {
+    status
+  });
 
   return _;
 }
@@ -661,6 +714,7 @@ function* setTags(workflowId, ...tagIds) {
 
 function* deleteExampleTag(workflowId, ..._tags) {
   const workflow = yield workFlow_instance_dao.queryById(workflowId);
+
   if (!workflow) {
     throwNosuchThisWorkFlow();
   }
@@ -686,6 +740,159 @@ function* deleteExampleTag(workflowId, ..._tags) {
   });
 }
 
+function* obmitUploadFileAuthorize(workflowId, {mail}) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  const {members} = _;
+
+  const flag = members.findIndex(member => member.mail === mail);
+  if (-1 === flag) {
+    throwOauthError();
+  }
+}
+
+function* workflowMemberList(workflowId) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1, name: 1, owner: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  delete _._id;
+
+  Object.assign(_, {
+    workflowId: workflowId,
+  });
+
+  return _;
+}
+
+function* appendUser2Members(workflowId, ...userIds) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  const users = yield findUsers(userIds);
+  if (users.length === 0) {
+    return ;
+  }
+
+  const modifyMembers = [];
+  let flag;
+
+  for (let user of users) {
+    flag = false;
+    for (let _user of _.members) {
+        if (_user._id.toString() === user._id.toString()) {
+          flag = true;
+        }
+    }
+
+    if (!flag) {
+      modifyMembers.push(user);
+    }
+  }
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        members: _.members.concat(modifyMembers),
+      }
+    }
+  });
+}
+
+function* removeUserFromMembers(workflowId, ...userIds) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {members: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+  const users = yield findUsers(userIds);
+  if (users.length === 0) {
+    return ;
+  }
+
+  const modifyMembers = [];
+  let flag;
+
+  for (let _user of _.members) {
+    flag = false;
+    for (let user of users) {
+        if (user._id.toString() === _user._id.toString()) {
+          flag = true;
+        }
+    }
+
+    if (!flag) {
+      modifyMembers.push(_user);
+    }
+  }
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        members: modifyMembers,
+      }
+    }
+  });
+}
+
+function* getNodeInstance(nodeId) {
+  const _ = yield workFlow_node_instance_dao.queryById(nodeId);
+
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  return _;
+}
+
+function* setOwner(workflowId, userId) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {_id: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  const users = yield findUsers(userId);
+
+  if (users.length === 0) {
+    return ;
+  }
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        owner: users[0],
+      }
+    }
+  });
+}
+
+function* cancelOwner(workflowId, userId) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {owner: 1});
+  if (!_) {
+    throwNosuchThisWorkFlow();
+  }
+
+  const {owner} = _;
+
+  if (owner._id.toString() === userId) {
+    return yield workFlow_instance_dao.update({
+      _id: _._id,
+      upload: {
+        $unset: {
+          owner: 1,
+        }
+      }
+    });
+  }
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -708,4 +915,12 @@ module.exports = {
   exampleInfo,
   setTags,
   deleteExampleTag,
+  appendGoods2Node,
+  obmitUploadFileAuthorize,
+  workflowMemberList,
+  appendUser2Members,
+  removeUserFromMembers,
+  getNodeInstance,
+  setOwner,
+  cancelOwner,
 };

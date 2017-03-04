@@ -13,8 +13,15 @@
 
 const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
-const [{getWorkflowList, workflowInfo, getWorkflowNode, searchProduct}, {findTags}, {getPublicGoodsesList}] =
-[require(resolve(services, "workflowService")), require(resolve(services, "tagsService")), require(resolve(services, "goodsService"))];
+const [
+  {getWorkflowList, workflowInfo, searchProduct, getNodeInstance},
+  {findTags},
+  {getPublicGoodsesList, findGoodsByNode}
+] = [
+  require(resolve(services, "workflowService")),
+  require(resolve(services, "tagsService")),
+  require(resolve(services, "goodsService"))
+];
 
 const list = function* (next) {
   if (this.error) {
@@ -37,8 +44,16 @@ const simpleInfo = function* (next) {
   }
 
   try {
-    const {id} = this.params;
-    this.data = yield workflowInfo(id, {name : 1, nodeList: 1, status: 1});
+    const [{id}, user] = [this.params, this.authorized];
+    const _ = yield workflowInfo(id, {name : 1, nodeList: 1, status: 1, members: 1});
+
+    const {members} = _;
+
+    const index = members.findIndex(member => member.mail === user.mail);
+
+    Object.assign(_, {allowedUpload: index === -1 ? false:true,});
+
+    this.data = _;
   } catch (err) {
     this.error = err;
   }
@@ -53,7 +68,8 @@ const nodeFiles = function* (next) {
 
   try {
     const {nodeId} = this.params;
-    this.data = yield getWorkflowNode(nodeId, {produceList: 1});
+    const data = yield findGoodsByNode(nodeId);
+    this.data = {produceList: data};
   } catch (err) {
     this.error = err;
   }
@@ -154,6 +170,21 @@ const detail = function* (next) {
   return yield next;
 };
 
+const nodeInstance = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const {id} = this.params;
+    this.data = yield getNodeInstance(id);
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
 module.exports = {
   list,
   nodeFiles,
@@ -162,4 +193,5 @@ module.exports = {
   overviewsPlatform,
   overviewsProduct,
   overviewsDirectory,
+  nodeInstance,
 };

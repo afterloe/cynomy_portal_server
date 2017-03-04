@@ -13,7 +13,6 @@
 
 const [{createServer}, {fork}, {resolve}, cluster] = [require("net"), require("child_process"), require("path"), require("cluster")];
 const {get} = require(resolve(__dirname, "config"));
-
 const [threadManager, slavePath ,bindHost, registryPort, {enable, slaveNum = 1}, remote] = [new Map(), resolve(__dirname, "distributed","slave"), get("bindHost"), get("registryPort"), get("distributed"), get("remote")];
 
 const startSlave = socket => {
@@ -21,8 +20,9 @@ const startSlave = socket => {
   const {pid} = worker;
 
   worker.on("message", msg => {
-    if ("suicide" === msg.act) {
-        startSlave(socket);
+    const {act} = msg;
+    if ("suicide" === act) {
+      startSlave(socket);
     }
   });
 
@@ -30,14 +30,13 @@ const startSlave = socket => {
     threadManager.has(pid) ? threadManager.delete(pid) : null;
     startSlave(socket);
   });
-  worker.send("start-up", socket);
+
+  worker.send({act: "start-up"}, socket);
   threadManager.set(pid, worker);
 };
 
 if (true === remote.enable) {
   require(resolve(__dirname, "bin", "remoteDaemon"))(remote.host, remote.port);
-
-  // process.on("ws");
 }
 
 if (enable) {

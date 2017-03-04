@@ -21,11 +21,13 @@ ws(server);
 let workerServer;
 
 process.on("message", (msg, handler) => {
-  if ("start-up" === msg) {
+  const {act} = msg;
+  if ("start-up" === act) {
     workerServer = handler;
     workerServer.on("connection", socket => server.emit("connection", socket));
     console.log(`${new Date().toLocaleString()} : slave ${process.pid} is ready to running`);
   }
+
 });
 
 process.on("systemError", (err, ctx) => {

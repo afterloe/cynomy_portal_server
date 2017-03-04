@@ -23,8 +23,8 @@ const searchByTags = function* (keywords) {
       state: 200,
     }, {
       name : 1,
-      beginTimestamp: 1,
-    }).toArray();
+      createTimestamp: 1,
+    }).sort({createTimestamp: 1}).toArray();
   }
 
   return [];

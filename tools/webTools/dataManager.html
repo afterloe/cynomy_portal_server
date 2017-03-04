@@ -1,0 +1,254 @@
+<!--
+  create by afterloe, MIT Licensed
+
+  cynomy_portal_server/tools/webTools/dataManager.html
+  Copyright(c) afterloe. 2017-3-3 14:39:50
+  Authors: afterloe <lm6289511@gmail.com> (https://github.com/afterloe)
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+	<meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="renderer" content="webkit|ie-comp|ie-stand" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title></title>
+  </head>
+  <body>
+    <div class="container-fluid" style="padding-top: 4rem;">
+        <div class="row">
+            <nav class="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+                <ul class="nav nav-pills flex-column" id="leftItem">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="overwrite" href="#">概况</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-userInfo" href="#">人员信息</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-workflowInfo" href="#">工作流信息</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-tags" href="#">标签管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-filesInfo" href="#">文件列表</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <main class="col-sm-9">
+                <h1>控制台: <small id="control-small-info">未连接节点<small> </h1>
+                <p id="console">
+                  ...请先 <button type="button" class="btn btn-link btn-sm" data-toggle="modal" data-target="#linkNode">链接节点</button> 才能进行后续的操作
+                </p>
+                <div id="overwriteInfo">
+                  <div class="card">
+                    <h3 class="card-header">系统信息</h3>
+                    <div class="card-block" id="overwriteInfo-systemInfo">
+                      <h4 class="card-title">主机名: afterloe</h4>
+                      <h4 class="card-title">主机平台: Linux</h4>
+                      <h4 class="card-title">uname: Darwin afterloe-macPro.local 16.4.0 Darwin Kernel Version 16.4.0</h4>
+                      <h4 class="card-title">网卡信息: </h4>
+                      <p class="card-text">
+                        <div class="card-deck">
+                          <div class="card">
+                            <div class="card-block">
+                              <h4 class="card-title">awdl0</h4>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-block">
+                              <h4 class="card-title">awdl0</h4>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-block">
+                              <h4 class="card-title">awdl0</h4>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <div class="card-block">
+                              <h4 class="card-title">awdl0</h4>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                              <p class="card-text">
+                                address: "fe80::98e8:89ff:fe39:3f55"
+                                family: "IPv6"
+                                internal: false
+                                mac: "9a:e8:89:39:3f:55"
+                                netmask: "ffff:ffff:ffff:ffff::"
+                                scopeid: 11
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <small class="text-muted">Last updated 3 mins ago</small>
+                            </div>
+                          </div>
+                        </div>
+                      </p>
+                      <h4 class="card-title">CPU信息: </h4>
+                      <p class="card-text">
+                        <div class="card card-inverse card-primary mb-3 text-center">
+                          <div class="card-block">
+                            <blockquote class="card-blockquote">
+                              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                              <footer>Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                            </blockquote>
+                          </div>
+                        </div>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <h3 class="card-header">内存信息</h3>
+                    <div class="card-block">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <h3 class="card-header">硬盘信息</h3>
+                    <div class="card-block">
+                      <h4 class="card-title">Special title treatment</h4>
+                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                      <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                  </div>
+                </div>
+                <div id="userInfo">
+                    <h2>人员信息</h2>
+                    <div class="float-right">
+                        <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#importUserInfo">
+                      导入用户数据
+                    </button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#exportUserInfo">
+                      导出用户数据
+                    </button>
+                    </div>
+                    <br/>
+                    <table class="table table-striped">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>#</th>
+                                <th>姓名</th>
+                                <th>邮箱</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-show-user">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="workflowInfo">
+                    <h2>工作流信息</h2>
+                    <div class="row" style="margin-top: 1rem;">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-outline-warning btn-sm" data-toggle="modal" data-target="#crearteProcess">
+                        创建工作流
+                      </button>
+                            <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#crearteProcessTemplate">
+                        创建工作流模板
+                      </button>
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#crearteProcessNodeTemplate">
+                        创建工作流节点模板
+                      </button>
+                        </div>
+                    </div>
+                    <div id="table-show-workflow"></div>
+                </div>
+                <div id="tagsInfo">
+                    <h2>标签管理</h2>
+                    <h3 id="table-show-tags"></h3>
+                    <div class="row" style="margin-top: 1rem;">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#crearteTag">
+                        添加标签
+                      </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="filesInfo">
+                    <h2>文件列表</h2>
+                    <div class="row" id="table-show-files"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <div id="module-export"></div>
+  </body>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="./css/public.css">
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script src="./lib/src/initWebPage.js"></script>
+  <script src="./lib/src/websocket.js"></script>
+  <script src="./lib/src/util.js"></script>
+
+  <style>
+    .carousel-indicators .active {background-color: #3d9bff; }
+    .carousel-indicators li {background-color: rgba(220, 203, 203, 0.5); }
+    .carousel-control-prev {background: -webkit-radial-gradient(200px 3px,rgba(0, 0, 0, 0.09) 45%,rgba(2, 2, 2, 0.29) 200%);}
+    .carousel-control-next {background: -webkit-radial-gradient(200px 3px,rgba(171, 158, 158, 0.29) 45%,rgba(0, 0, 0, 0.09) 200%);}
+    .carousel-item > .card {width: 70%; margin: 0 auto; }
+    .cardButton { position: absolute; cursor: pointer; margin-left: 29em; margin-top: -1.6em;}
+  </style>
+</html>

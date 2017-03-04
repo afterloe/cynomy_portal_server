@@ -19,6 +19,11 @@ const [authentication] = [require(resolve(interceptors, "authentication"))];
 
 module.exports = _ => {
   /*
+   * 默认首页
+   */
+  _.get("/", authentication, portal.home); // 默认首页
+
+  /*
    * 节点 模块
    */
   _.post("/node", node.registry);
@@ -30,6 +35,7 @@ module.exports = _ => {
   _.get("/portal/home", authentication, portal.home); // *页面跳转 -> 首页
   _.get("/portal/platform", authentication, portal.platform); // *页面跳转 -> 平台
   _.get("/portal/product", authentication, portal.product); // *页面跳转 -> 产品
+  _.get("/portal/workflow/:id", authentication, portal.info); // *页面跳转 -> 工作流详情页
   _.get("/portal/directory", authentication, portal.directory); // *页面跳转 -> 公共目录
 
   /*
@@ -46,6 +52,7 @@ module.exports = _ => {
   _.get("//workflow/:id", authentication, workflow.detail);// 工作流详细信息
   _.get("/workflow/:id/simple", authentication, workflow.simpleInfo); // 获取工作流实例简单信息
   _.get("/workflow/:nodeId/files", authentication, workflow.nodeFiles); // 获取工作流某实例下的文件列表
+  _.get("/workflow/nodeInstance/:id", authentication, workflow.nodeInstance); // 获取工作流下实例节点信息
   _.get("/workflow/overviews/platform", authentication, workflow.overviewsPlatform); // 总览 - 平台工作流
   _.get("/workflow/overviews/product", authentication, workflow.overviewsProduct);// 总览 - 产品工作流
   _.get("/workflow/overviews/directory", authentication, workflow.overviewsDirectory); // 总览 - 公共目录
@@ -54,7 +61,8 @@ module.exports = _ => {
    *  文件系统模块
    */
   _.get("/fs/list", authentication, goodses.list); // 更新文件信息列表
-  _.get("/fs/download/:id", authentication, goodses.download);
+  _.get("/fs/download/:id", authentication, goodses.download); // 文件下载
+  _.post("/fs/update/:nodeId", authentication, goodses.updateNode); // 节点更新
 
   /*
    *  测试：开发者信息

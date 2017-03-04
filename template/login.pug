@@ -8,7 +8,7 @@ html(lang="en")
     meta(name="viewport" content="width=device-width,initial-scale=1")
     title #{title}
     link(href= static + "css/portal/bootstrap.min.css" rel="stylesheet")
-    link(href= static + "css/portal/login.css" rel="stylesheet")
+    link(href= static + "css/portal/login.css?time=" + __time rel="stylesheet")
     link(href= static + "font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css")
 
   body
@@ -32,10 +32,10 @@ html(lang="en")
               small(form-text text-muted)
                 a(href="#" class="pull-right" id="obmitLoginPermit") 获取登录许可
           div(class="form-group")
-            div(class="col-md-12 col-sm-12 col-sm-12 radius last")
-              button(id="btn")
+            div(id="btn" class="col-md-12 col-sm-12 col-sm-12 radius last")
+              button
 
   script(src= static + "js/portal/jquery-2.1.1.js")
   script(src= static + "js/portal/bootstrap.min.js")
-  script(src= static + "js/portal/rem.js")
-  script(src= static + "js/portal/bin/login.js")
+  script(src= static + "js/portal/rem.js?time=" + __time)
+  script(src= static + "js/portal/bin/login.js?time=" + __time)

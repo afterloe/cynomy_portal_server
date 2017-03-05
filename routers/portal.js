@@ -13,7 +13,15 @@
 
 const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
-const [{getPublicGoodsesList}, {searchProduct, workflowInfo}, {findTags}] = [require(resolve(services, "goodsService")), require(resolve(services, "workflowService")), require(resolve(services, "tagsService"))];
+const [
+  {getPublicGoodsesList},
+  {searchProduct, workflowInfo},
+  {findTags}
+] = [
+  require(resolve(services, "goodsService")),
+  require(resolve(services, "workflowService")),
+  require(resolve(services, "tagsService"))
+];
 
 const findWorkflowByTags = function* (equipment, tags, ...hooks) {
   const _ = {};

@@ -66,7 +66,7 @@ div(class="container platform_content")
         div(class="dataBox")
           div(class="header")
             span(class="data_title")=`${_activeNode.name} 资料`
-            span(class=_allowedUpload? "upload":"" onClick="javascript:openUploadView(this);")
+            span(id="uploadButton" class=_allowedUpload? "upload":"" onClick="javascript:openUploadView(this);")
             span(class="detail" onClick="javascript:forwardDetail(this);" data-id=_product_id)
           - const _files = _activeNode.produceList || [];
           ul(class="data")

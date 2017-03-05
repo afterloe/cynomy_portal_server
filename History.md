@@ -267,3 +267,18 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/js/portal/src/login.js  
 > template/login.pug  
 
+
+1.0.8 / 2017-3-5 8:58:28
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: v1.0.8 正式发布
+
+
+### modify files
+> routers/portal.js  
+> staticFiles/css/portal/platform.css  
+> template/login.pug  
+> template/platform.pug  
+> template/workflowInfo.pug  
+

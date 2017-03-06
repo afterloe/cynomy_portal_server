@@ -43,62 +43,71 @@ registry("setLeader", (err, data) => {
 });
 
 registry("workflowInfo", (err, data) => {
-    const {nodeList, status} = data;
-    const [olHtml, cardHtml] = [[], []];
+    const {nodeList, status, customExtensions, name} = data;
 
-    for (let node of nodeList) {
-      if (node.index === status.index) {
-        const ownerInfo = status.owner ? `${status.owner.name} (${status.owner.mail})` : "未设置负责人";
-        const svnInfo = status.svn ? status.svn : "-";
-        olHtml.push(`<li class="active"></li>`);
-        cardHtml.push(`<div class="carousel-item active" data-id="${status._id}">
-          <div class="card">
-            <div class="card-block">
-              <h4 class="card-title">${status.name}</h4>
-              <p class="card-text">${status.reason}</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item status">状态: ${status.stat}</li>
-              <li class="list-group-item beginTimestamp">启动时间: ${new Date(status.beginTimestamp).toLocaleString()}</li>
-              <li class="list-group-item leader">节点负责人: ${ownerInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample">修改负责人</span></li>
-              <li class="list-group-item count">节点更新次数: ${status.uploadCount}</li>
-              <li class="list-group-item svnAddress">svn地址: ${svnInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample">修改svn地址</span></li>
-            </ul>
-            <div class="card-block">
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
-        </div>`);
-        $("#nodeInstanceSetSVN").find("input").attr("placeholder", svnInfo);
-      } else {
-        olHtml.push(`<li></li>`);
-        cardHtml.push(`<div class="carousel-item" data-id="${node._id}">
-          <div class="card">
-            <div class="card-block">
-              <h4 class="card-title">${node.name}</h4>
-              <p class="card-text">未收到信息</p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">状态: - </li>
-              <li class="list-group-item">启动时间: - </li>
-              <li class="list-group-item">节点负责人: - </li>
-              <li class="list-group-item">节点跟新次数: - </li>
-              <li class="list-group-item">svn地址: - </li>
-            </ul>
-            <div class="card-block">
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-          </div>
-        </div>`);
-      }
+    if (name) {
+      console.log(customExtensions, name);
+      // TODO
+      return ;
     }
 
-    $("#nodeInstanceView").find(".carousel-indicators").html(olHtml.join(""));
-    $("#nodeInstanceView").find(".carousel-inner").html(cardHtml.join(""));
+    if (status && nodeList) {
+      const [olHtml, cardHtml] = [[], []];
 
-    $("#nodeInstanceManager").modal("show");
+      for (let node of nodeList) {
+        if (node.index === status.index) {
+          const ownerInfo = status.owner ? `${status.owner.name} (${status.owner.mail})` : "未设置负责人";
+          const svnInfo = status.svn ? status.svn : "-";
+          olHtml.push(`<li class="active"></li>`);
+          cardHtml.push(`<div class="carousel-item active" data-id="${status._id}">
+            <div class="card">
+              <div class="card-block">
+                <h4 class="card-title">${status.name}</h4>
+                <p class="card-text">${status.reason}</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item status">状态: ${status.stat}</li>
+                <li class="list-group-item beginTimestamp">启动时间: ${new Date(status.beginTimestamp).toLocaleString()}</li>
+                <li class="list-group-item leader">节点负责人: ${ownerInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample">修改负责人</span></li>
+                <li class="list-group-item count">节点更新次数: ${status.uploadCount}</li>
+                <li class="list-group-item svnAddress">svn地址: ${svnInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample">修改svn地址</span></li>
+              </ul>
+              <div class="card-block">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+            </div>
+          </div>`);
+          $("#nodeInstanceSetSVN").find("input").attr("placeholder", svnInfo);
+        } else {
+          olHtml.push(`<li></li>`);
+          cardHtml.push(`<div class="carousel-item" data-id="${node._id}">
+            <div class="card">
+              <div class="card-block">
+                <h4 class="card-title">${node.name}</h4>
+                <p class="card-text">未收到信息</p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">状态: - </li>
+                <li class="list-group-item">启动时间: - </li>
+                <li class="list-group-item">节点负责人: - </li>
+                <li class="list-group-item">节点跟新次数: - </li>
+                <li class="list-group-item">svn地址: - </li>
+              </ul>
+              <div class="card-block">
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+            </div>
+          </div>`);
+        }
+      }
+
+      $("#nodeInstanceView").find(".carousel-indicators").html(olHtml.join(""));
+      $("#nodeInstanceView").find(".carousel-inner").html(cardHtml.join(""));
+
+      $("#nodeInstanceManager").modal("show");
+    }
 });
 
 registry("workflowMemberList", (err, data) => {
@@ -349,6 +358,7 @@ registry("getWorkflowList", (err, data) => {
               <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:membersManager(this, 'workflow')">成员管理</a>
               <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:nodeInstanceManager(this)">节点管理</a>
               <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:workflowDataManager(this)">基础数据管理</a>
               <a class="dropdown-item" href="#">文件仓库管理</a>
             </div>
           </div>

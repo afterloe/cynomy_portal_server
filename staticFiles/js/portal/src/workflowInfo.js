@@ -40,7 +40,7 @@ const buildInstancePage = ({name, _id, beginTimestamp, owner, svn, uploadCount})
     $("#nodeOwner").html("未设置负责人");
   }
 
-  $("#nodeBeginTime").html(beginTimestamp === "" ? "未进入该节点": new Date(beginTimestamp).toLocaleString());
+  $("#nodeBeginTime").html(beginTimestamp || beginTimestamp === "" ? "未进入该节点": new Date(beginTimestamp).toLocaleString());
   $("#nodeUpdateCount").html(uploadCount);
   if (svn) {
     $("#nodeSvnInfo").html(`<a href="${svn}">${svn}</a>`);

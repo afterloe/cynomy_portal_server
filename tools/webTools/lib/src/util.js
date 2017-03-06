@@ -23,6 +23,11 @@ $("#filesInfo").hide();
 const selectedProcess = [];
 let modalService;
 
+const workflowDataManager = btn => {
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, name:1, link: 1, customExtensions: 1})})`);
+};
+
 const nodeInstanceManager = btn => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, status:1})})`);

@@ -383,3 +383,17 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/dataManager.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-6 18:13:48
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端工作流添加自定义拓展
+
+
+### modify files
+> config/index.js  
+> staticFiles/js/portal/src/workflowInfo.js  
+> tools/webTools/lib/src/registry.js  
+> tools/webTools/lib/src/util.js  
+

@@ -293,3 +293,16 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > staticFiles/css/portal/platform.css  
 
+
+1.0.8 / 2017-3-6 13:56:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: setLeader 方法升级，前端完成设置工作流实例节点的功能
+
+
+### modify files
+> services/workflowService.js  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/util.js  
+

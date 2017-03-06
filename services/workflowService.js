@@ -363,29 +363,27 @@ function* syncNodeToWorkflow(_node) {
  * @param  {Integer}   index     [工作流实例节点id]
  * @return {Generator}           [description]
  */
-function* setLeader(workflowId, userId, index) {
-  const _ = yield workFlow_instance_dao.queryById(workflowId);
-  if (!_) {
+function* setLeader(workflowId, nodeInstanceId, userId) {
+  const [nodeInstance, workflow] =  yield [workFlow_node_instance_dao.queryById(nodeInstanceId), workFlow_instance_dao.queryById(workflowId)];
+
+  if (!nodeInstance) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  if (!workflow) {
     throwNosuchThisWorkFlow();
   }
-  const leader = _.members.find(member => member._id.toString() === userId);
+
+  const leader = workflow.members.find(member => member._id.toString() === userId);
+
   if (!leader) {
     throwPersonalNotIn();
   }
-  index--;
-  const nodeSubstitute = _.nodeList[index];
-  if (!nodeSubstitute) {
-    throwNosuchThisWorkflowNodeInstance();
-  }
-  const {_id, name, mail, avatar} = leader;
-  const node = yield changeAndSyncNodeStat(nodeSubstitute._id, {
-    owner: {
-      _id,
-      name,
-      mail,
-      avatar,
-    }
+
+  const node = yield changeAndSyncNodeStat(nodeInstance._id, {
+    owner: leader
   });
+
   return yield syncNodeToWorkflow(node);
 }
 

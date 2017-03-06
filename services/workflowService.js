@@ -384,7 +384,9 @@ function* setLeader(workflowId, nodeInstanceId, userId) {
     owner: leader
   });
 
-  return yield syncNodeToWorkflow(node);
+  yield syncNodeToWorkflow(node);
+
+  return leader;
 }
 
 /**

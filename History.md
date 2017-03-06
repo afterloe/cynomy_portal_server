@@ -306,3 +306,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/initWebPage.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-6 14:23:37
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端完成切换工作流节点负责人功能
+
+
+### modify files
+> services/workflowService.js  
+> tools/webTools/lib/src/util.js  
+

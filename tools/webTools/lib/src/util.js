@@ -179,6 +179,11 @@ const setNodeInstanceOwner = (btn, workflowId) => {
     websocket.send(`node-manager->workflowService->setLeader("${workflowId}"|"${nodeInstanceId}"|"${userId}")`);
 };
 
+registry("setLeader", (err, data) => {
+    const {mail, name} = data;
+    $("#nodeInstanceView").find(".list-group-item.leader").html(`节点负责人: ${name} (${mail}) <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample" style="margin-top: 0em;">修改负责人</span>`);
+});
+
 registry("workflowInfo", (err, data) => {
     const {nodeList, status} = data;
     const [olHtml, cardHtml] = [[], []];
@@ -195,11 +200,11 @@ registry("workflowInfo", (err, data) => {
               <p class="card-text">${status.reason}</p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">状态: ${status.stat}</li>
-              <li class="list-group-item">启动时间: ${new Date(status.beginTimestamp).toLocaleString()}</li>
-              <li class="list-group-item">节点负责人: ${ownerInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample">修改负责人</span></li>
-              <li class="list-group-item">节点更新次数: ${status.uploadCount}</li>
-              <li class="list-group-item">svn地址: ${svnInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample">修改svn地址</span></li>
+              <li class="list-group-item status">状态: ${status.stat}</li>
+              <li class="list-group-item beginTimestamp">启动时间: ${new Date(status.beginTimestamp).toLocaleString()}</li>
+              <li class="list-group-item leader">节点负责人: ${ownerInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample">修改负责人</span></li>
+              <li class="list-group-item count">节点更新次数: ${status.uploadCount}</li>
+              <li class="list-group-item svnAddress">svn地址: ${svnInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample">修改svn地址</span></li>
             </ul>
             <div class="card-block">
               <a href="#" class="card-link">Card link</a>

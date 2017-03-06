@@ -318,3 +318,15 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-6 15:11:23
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端完成设置单节点svn数据
+
+
+### modify files
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/util.js  
+

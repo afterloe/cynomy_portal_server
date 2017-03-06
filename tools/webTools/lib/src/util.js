@@ -179,6 +179,15 @@ const setNodeInstanceOwner = (btn, workflowId) => {
     websocket.send(`node-manager->workflowService->setLeader("${workflowId}"|"${nodeInstanceId}"|"${userId}")`);
 };
 
+
+const setSVNAddress = btn => {
+    const nodeInstanceId = $("#nodeInstanceView").find(".carousel-item.active").attr("data-id");
+    const value = $(btn).parent().find("input").val();
+    websocket.send(`node-manager->workflowService->setNodeInstanceSVNAddress("${nodeInstanceId}"|"${userId}")`);
+    $("#nodeInstanceView").find(".list-group-item.svnAddress").html(`svn地址: ${value} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample" style="margin-top: 0em;">修改svn地址</span>`);
+    $(btn).parent().find("input").attr("placeholder", value);
+}
+
 registry("setLeader", (err, data) => {
     const {mail, name} = data;
     $("#nodeInstanceView").find(".list-group-item.leader").html(`节点负责人: ${name} (${mail}) <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample" style="margin-top: 0em;">修改负责人</span>`);
@@ -212,6 +221,7 @@ registry("workflowInfo", (err, data) => {
             </div>
           </div>
         </div>`);
+        $("#nodeInstanceSetSVN").find("input").attr("placeholder", svnInfo);
       } else {
         olHtml.push(`<li data-target="#carouselExampleIndicators" data-slide-to="0"></li>`);
         cardHtml.push(`<div class="carousel-item">

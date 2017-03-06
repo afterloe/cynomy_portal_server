@@ -150,7 +150,7 @@ input {
     .upload{background:url(../../images/portal/upload.png) no-repeat center 13px; display: inline-block;width:100px;height:50px;cursor:pointer;float:right;}
     .upload:hover{background:url(../../images/portal/upload1.png) no-repeat center 13px;}
     .detail {background: url(../../images/portal/detail.png) no-repeat center 9px; display: inline-block; width: 30px; height: 50px; cursor: pointer; float: right;}
-    .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 13px;}
+    .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 9px;}
     .data{margin-top:15px;margin-left:40px;min-width:810px;}
     .data li{height:66px;border-left:1px solid #dbdbdb;}
     .data li div{height:66px;width:100%;}

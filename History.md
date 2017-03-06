@@ -282,3 +282,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > template/workflowInfo.pug  
 
+
+1.0.8 / 2017-3-6 9:53:18
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复detail hover的时图标浮动的异常
+
+
+### modify files
+> staticFiles/css/portal/platform.css  
+

@@ -344,3 +344,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/initWebPage.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-6 16:27:44
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成节点card切换
+
+
+### modify files
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/util.js  
+

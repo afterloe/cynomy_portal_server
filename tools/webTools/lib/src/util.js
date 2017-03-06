@@ -24,8 +24,38 @@ const selectedProcess = [];
 let modalService;
 
 const nodeInstanceManager = btn => {
-  const id = $(btn).attr("data-id");
-  websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, status:1})})`);
+    const id = $(btn).attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, status:1})})`);
+};
+
+const prevCarousel = btn => {
+    const parent = $(btn).parent();
+    const [nav, card] = [parent.find(".carousel-indicators>.active"), parent.find(".carousel-item.active")];
+    nav.removeClass("active");
+    card.removeClass("active");
+    const prevCard = card.prev(".carousel-item");
+    if (0 !== prevCard.length) {
+      nav.prev("li").addClass("active");
+      prevCard.addClass("active");
+    } else {
+      parent.find(".carousel-indicators>li:last").addClass("active");
+      parent.find(".carousel-item:last").addClass("active");
+    }
+};
+
+const nextCarousel = btn => {
+    const parent = $(btn).parent();
+    const [nav, card] = [parent.find(".carousel-indicators>.active"), parent.find(".carousel-item.active")];
+    nav.removeClass("active");
+    card.removeClass("active");
+    const nextCard = card.next(".carousel-item");
+    if (0 !== nextCard.length) {
+      nav.next("li").addClass("active");
+      nextCard.addClass("active");
+    } else {
+      parent.find(".carousel-indicators>li:first").addClass("active");
+      parent.find(".carousel-item:first").addClass("active");
+    }
 };
 
 const buildSelectProcess = () => {
@@ -179,7 +209,6 @@ const setNodeInstanceOwner = (btn, workflowId) => {
     websocket.send(`node-manager->workflowService->setLeader("${workflowId}"|"${nodeInstanceId}"|"${userId}")`);
 };
 
-
 const setSVNAddress = btn => {
     const nodeInstanceId = $("#nodeInstanceView").find(".carousel-item.active").attr("data-id");
     const input = $(btn).parent().find("input");
@@ -203,7 +232,7 @@ registry("workflowInfo", (err, data) => {
       if (node.index === status.index) {
         const ownerInfo = status.owner ? `${status.owner.name} (${status.owner.mail})` : "未设置负责人";
         const svnInfo = status.svn ? status.svn : "-";
-        olHtml.push(`<li data-target="#nodeInstanceView" data-slide-to="0" class="active"></li>`);
+        olHtml.push(`<li class="active"></li>`);
         cardHtml.push(`<div class="carousel-item active" data-id="${status._id}">
           <div class="card">
             <div class="card-block">
@@ -225,8 +254,8 @@ registry("workflowInfo", (err, data) => {
         </div>`);
         $("#nodeInstanceSetSVN").find("input").attr("placeholder", svnInfo);
       } else {
-        olHtml.push(`<li data-target="#carouselExampleIndicators" data-slide-to="0"></li>`);
-        cardHtml.push(`<div class="carousel-item">
+        olHtml.push(`<li></li>`);
+        cardHtml.push(`<div class="carousel-item" data-id="${node._id}">
           <div class="card">
             <div class="card-block">
               <h4 class="card-title">${node.name}</h4>

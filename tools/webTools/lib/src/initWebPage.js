@@ -38,12 +38,12 @@ window[MODULE].push(`
 
         <div class="carousel slide" id="nodeInstanceView">
           <ol class="carousel-indicators"></ol>
-          <div class="carousel-inner" role="listbox"></div>
-          <a class="carousel-control-prev" href="#nodeInstanceManager" role="button" data-slide="prev">
+          <div class="carousel-inner"></div>
+          <a class="carousel-control-prev" href="#nodeInstanceManager" onClick="javascript:prevCarousel(this);">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="carousel-control-next" href="#nodeInstanceManager" role="button" data-slide="next">
+          <a class="carousel-control-next" href="#nodeInstanceManager" onClick="javascript:nextCarousel(this);">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>

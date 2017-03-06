@@ -182,11 +182,13 @@ const setNodeInstanceOwner = (btn, workflowId) => {
 
 const setSVNAddress = btn => {
     const nodeInstanceId = $("#nodeInstanceView").find(".carousel-item.active").attr("data-id");
-    const value = $(btn).parent().find("input").val();
-    websocket.send(`node-manager->workflowService->setNodeInstanceSVNAddress("${nodeInstanceId}"|"${userId}")`);
+    const input = $(btn).parent().find("input");
+    const value = input.val();
+    websocket.send(`node-manager->workflowService->setNodeInstanceSVNAddress("${nodeInstanceId}"|"${value}")`);
     $("#nodeInstanceView").find(".list-group-item.svnAddress").html(`svn地址: ${value} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample" style="margin-top: 0em;">修改svn地址</span>`);
-    $(btn).parent().find("input").attr("placeholder", value);
-}
+    input.val("");
+    input.attr("placeholder", value);
+};
 
 registry("setLeader", (err, data) => {
     const {mail, name} = data;

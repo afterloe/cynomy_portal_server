@@ -893,6 +893,21 @@ function* cancelOwner(workflowId, userId) {
   }
 }
 
+function* setNodeInstanceSVNAddress(nodeInstanceId, SVNAddress) {
+  const _ = yield workFlow_node_instance_dao.queryById(nodeInstanceId);
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  const node = yield changeAndSyncNodeStat(_._id, {
+    svn: SVNAddress
+  });
+
+  yield syncNodeToWorkflow(node);
+
+  return SVNAddress;
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -923,4 +938,5 @@ module.exports = {
   getNodeInstance,
   setOwner,
   cancelOwner,
+  setNodeInstanceSVNAddress,
 };

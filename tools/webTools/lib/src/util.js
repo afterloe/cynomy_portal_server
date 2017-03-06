@@ -28,6 +28,12 @@ const nodeInstanceManager = btn => {
     websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, status:1})})`);
 };
 
+const obmitCardInfo = card => {
+    card.addClass("active");
+    const id = card.attr("data-id");
+    websocket.send(`node-manager->workflowService->getNodeInstance("${id}")`);
+};
+
 const prevCarousel = btn => {
     const parent = $(btn).parent();
     const [nav, card] = [parent.find(".carousel-indicators>.active"), parent.find(".carousel-item.active")];
@@ -36,10 +42,10 @@ const prevCarousel = btn => {
     const prevCard = card.prev(".carousel-item");
     if (0 !== prevCard.length) {
       nav.prev("li").addClass("active");
-      prevCard.addClass("active");
+      obmitCardInfo(prevCard);
     } else {
       parent.find(".carousel-indicators>li:last").addClass("active");
-      parent.find(".carousel-item:last").addClass("active");
+      obmitCardInfo(parent.find(".carousel-item:last"));
     }
 };
 
@@ -51,10 +57,10 @@ const nextCarousel = btn => {
     const nextCard = card.next(".carousel-item");
     if (0 !== nextCard.length) {
       nav.next("li").addClass("active");
-      nextCard.addClass("active");
+      obmitCardInfo(nextCard);
     } else {
       parent.find(".carousel-indicators>li:first").addClass("active");
-      parent.find(".carousel-item:first").addClass("active");
+      obmitCardInfo(parent.find(".carousel-item:first"));
     }
 };
 
@@ -218,6 +224,32 @@ const setSVNAddress = btn => {
     input.val("");
     input.attr("placeholder", value);
 };
+
+registry("getNodeInstance", (err, data) => {
+    const ownerInfo = data.owner && data.owner.name ? `${data.owner.name} (${data.owner.mail})`:"未设置负责人";
+    const timeInfo = data.beginTimestamp ? new Date(data.beginTimestamp).toLocaleString(): "未到达该节点";
+    const svnInfo = data.svn ? data.svn : "-";
+    $("#nodeInstanceSetSVN").find("input").attr("placeholder", svnInfo);
+    $("#nodeInstanceView").find(".carousel-item.active").html(`
+      <div class="card">
+        <div class="card-block">
+          <h4 class="card-title">${data.name}</h4>
+          <p class="card-text">${data.reason}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item status">状态: ${data.stat}</li>
+          <li class="list-group-item beginTimestamp">启动时间: ${timeInfo}</li>
+          <li class="list-group-item leader">节点负责人: ${ownerInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetOwner" aria-expanded="false" aria-controls="collapseExample">修改负责人</span></li>
+          <li class="list-group-item count">节点更新次数: ${data.uploadCount}</li>
+          <li class="list-group-item svnAddress">svn地址: ${svnInfo} <span class="btn btn-outline-danger btn-sm cardButton" data-toggle="collapse" href="#nodeInstanceSetSVN" aria-expanded="false" aria-controls="collapseExample">修改svn地址</span></li>
+        </ul>
+        <div class="card-block">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    `);
+});
 
 registry("setLeader", (err, data) => {
     const {mail, name} = data;

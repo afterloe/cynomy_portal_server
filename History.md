@@ -368,3 +368,18 @@ commit by afterloe (lm6289511@gmail.com)
 > services/workflowService.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-6 17:4:39
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 切换regist文件，将注册响应事件换到其他js中
+
+
+### new files
+> tools/webTools/lib/src/registry.js  
+
+### modify files
+> tools/webTools/dataManager.html  
+> tools/webTools/lib/src/util.js  
+

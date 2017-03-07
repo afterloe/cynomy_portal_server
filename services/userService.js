@@ -21,7 +21,8 @@ const [
   {user_dao},
   {sign, setSession},
   {throwObjectCanTAes, throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist},
-  {randomNum, checkParameter}
+  {randomNum, checkParameter},
+  security,
 ] = [
   require(resolve(__dirname, "tagsService")),
   require(resolve(toolsPath, "buildPage")),
@@ -30,7 +31,8 @@ const [
   require(resolve(__dirname, "..", "dao")),
   require(resolve(__dirname, "sessionService")),
   require(resolve(__dirname, "..", "errors")),
-  require(resolve(toolsPath, "utilities"))
+  require(resolve(toolsPath, "utilities")),
+  require(resolve(toolsPath, "security")),
 ];
 
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
@@ -169,24 +171,15 @@ function* loginSystem(mail, permit) {
   if (!mail || !permit) {
     throwLackParameters();
   }
-  const _ = yield user_dao.login(mail, permit);
+
+  const _ = yield user_dao.login(mail, security.sign(permit));
+
   if (!_) {
     throwAccountOrPwdError();
   }
 
-  yield user_dao.update({
-    _id: _._id,
-    upload: {
-      $set: {
-        isLogin: true,
-      },
-      $unset: {
-        permit: 1,
-      }
-    }
-  });
+  const token = sign(mail, randomNum(6));
 
-  const token = sign(mail, permit);
   yield setSession(token, {
     id: _._id.toString(),
     name: _.name,
@@ -202,8 +195,9 @@ function* forgetPassword(mail){
   if (!_) {
     throwUserNotExist();
   }
+
   const permit = randomNum(6);
-  // TODO
+
   const html = compileTemplate("pwdMail", {
     time: new Date().toLocaleString(),
     permit: permit,
@@ -214,7 +208,7 @@ function* forgetPassword(mail){
     _id: _._id,
     upload: {
       $set: {
-        permit,
+        permit: security.sign(permit),
       }
     }
   });

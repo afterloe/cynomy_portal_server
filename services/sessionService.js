@@ -13,8 +13,17 @@
 
 const {resolve} = require("path");
 const tools = resolve(__dirname, "..", "tools");
-const [{decipher, cipher}, redisService, {uuidCode}, {throwNeedSignIn, throwTokenError}] = [require(resolve(tools, "security")), require(resolve(__dirname, "redisService")),
-  require(resolve(tools, "utilities")), require(resolve(__dirname, "..", "errors"))];
+const [
+  {decipher, cipher},
+  redisService,
+  {randomNum},
+  {throwNeedSignIn, throwTokenError}
+] = [
+  require(resolve(tools, "security")),
+  require(resolve(__dirname, "redisService")),
+  require(resolve(tools, "utilities")),
+  require(resolve(__dirname, "..", "errors"))
+];
 
 const sign = (to, permit) => cipher(`${permit}:${to}`);
 
@@ -23,8 +32,8 @@ function* removeSession(token) {
     throwNeedSignIn();
   }
   try {
-    const [permit, to] = decipher(token).split(":");
-    return yield redisService.del(`${to}-${permit}`);
+    const [, to] = decipher(token).split(":");
+    return yield redisService.del(`${to}-portal`);
   } catch (err) {
     throwTokenError();
   }
@@ -36,7 +45,10 @@ function* getSession(token) {
   }
   try {
     const [permit, to] = decipher(token).split(":");
-    const session = yield redisService.get(`${to}-${permit}`);
+    const session = yield redisService.get(`${to}-portal`);
+    if (permit !== session.secret) {
+      throwNeedSignIn();
+    }
     return session;
   } catch (err) {
     throwTokenError();
@@ -48,10 +60,10 @@ function* upDateSession(token, value) {
     throwNeedSignIn();
   }
   try {
-    const [permit, to] = decipher(token).split(":");
-    const _ = yield redisService.get(`${to}-${permit}`);
+    const [, to] = decipher(token).split(":");
+    const _ = yield redisService.get(`${to}-portal`);
     Object.assign(_, value);
-    return yield redisService.set(`${to}-${permit}`, _);
+    return yield redisService.set(`${to}-portal`, _);
   } catch (err) {
     throwTokenError();
   }
@@ -67,7 +79,7 @@ function* setSession(token, seems = {}) {
       secret: permit,
       timestamp: Date.now(),
     });
-    return yield redisService.set(`${to}-${permit}`, seems);
+    return yield redisService.set(`${to}-portal`, seems);
   } catch (err) {
     console.log(err);
     throwTokenError();
@@ -82,7 +94,7 @@ function* flushSession(token) {
     const [, to] = decipher(token).split(":");
     const seems = yield getSession(token);
     yield removeSession(token);
-    const newPermit = uuidCode();
+    const newPermit = randomNum(6);
     Object.assign(seems, {
       secret: newPermit,
       timestamp: Date.now(),

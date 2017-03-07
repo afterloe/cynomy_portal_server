@@ -12,7 +12,7 @@
 "use strict";
 
 const [
-  {createCipher, createDecipher, createHmac, createHash, publicEncrypt, privateDecrypt},
+  {createCipher, createDecipher, createHmac, createHash, publicEncrypt, privateDecrypt, privateEncrypt, publicDecrypt},
   {resolve},
   {existsSync, createReadStream, readFileSync},
 ] = [
@@ -37,6 +37,16 @@ if (enable) {
   module[PUBLIC_KEY] = readFileSync(resolve(path, "cynomy", name + ".public"), "utf8");
   module[PRIVATE_KEY] = readFileSync(resolve(path, "cynomy", name + ".private"), "utf8");
 }
+
+const encryptWithPrivateKey = toEncrypt => {
+  toEncrypt = new Buffer(toEncrypt);
+  return privateEncrypt(module[PUBLIC_KEY], toEncrypt).toString(outEncoding);
+};
+
+const decryptWithPublicKey = toEncrypt => {
+  toDecrypt = new Buffer(toDecrypt, outEncoding);
+  return publicDecrypt(module[PRIVATE_KEY], toDecrypt).toString("utf8");
+};
 
 const encryptWithPublicKey = toEncrypt => {
     toEncrypt = new Buffer(toEncrypt);
@@ -112,6 +122,8 @@ module.exports = {
   cipher,
   decipher,
   decryptWithPrivateKey,
+  decryptWithPublicKey,
+  encryptWithPrivateKey
   encryptWithPublicKey,
   hash_sha256,
   sign,

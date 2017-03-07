@@ -428,3 +428,16 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > _config.yml  
 
+
+1.0.8 / 2017-3-7 17:17:21
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改登陆逻辑
+
+
+### modify files
+> services/sessionService.js  
+> services/userService.js  
+> tools/security.js  
+

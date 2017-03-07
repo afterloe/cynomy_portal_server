@@ -397,3 +397,14 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/registry.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-7 13:44:31
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改login登陆逻辑
+
+
+### modify files
+> template/login.pug  
+

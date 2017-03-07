@@ -13,8 +13,20 @@
 
 const {resolve} = require("path");
 const interceptors = resolve(__dirname, "..", "interceptors");
-const [user, workflow, goodses, portal, node] = [require(resolve(__dirname, "user")), require(resolve(__dirname, "workflow")),
-  require(resolve(__dirname, "goodses")), require(resolve(__dirname, "portal")), require(resolve(__dirname, "nodeManager"))];
+const [
+  user,
+  workflow,
+  goodses,
+  portal,
+  node
+] = [
+  require(resolve(__dirname, "user")),
+  require(resolve(__dirname, "workflow")),
+  require(resolve(__dirname, "goodses")),
+  require(resolve(__dirname, "portal")),
+  require(resolve(__dirname, "nodeManager"))
+];
+
 const [authentication] = [require(resolve(interceptors, "authentication"))];
 
 module.exports = _ => {
@@ -42,7 +54,7 @@ module.exports = _ => {
    *  用户模块
    */
   _.get("/user/list", authentication, user.list); // 用户信息列表
-  _.get("/user/:mail/forgetPasswordt", user.forgetPassword); // 登录申请
+  _.get("/user/:mail/forgetPassword", user.forgetPwd); // 登录申请
   _.post("/user/login", user.login); // 登录
 
   /*

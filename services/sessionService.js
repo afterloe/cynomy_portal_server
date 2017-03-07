@@ -46,12 +46,14 @@ function* getSession(token) {
   try {
     const [permit, to] = decipher(token).split(":");
     const session = yield redisService.get(`${to}-portal`);
-    if (permit !== session.secret) {
+
+    if (!session || permit !== session.secret) {
       throwNeedSignIn();
     }
+    
     return session;
   } catch (err) {
-    throwTokenError();
+    throwNeedSignIn();
   }
 }
 

@@ -123,7 +123,7 @@ module.exports = {
   decipher,
   decryptWithPrivateKey,
   decryptWithPublicKey,
-  encryptWithPrivateKey
+  encryptWithPrivateKey,
   encryptWithPublicKey,
   hash_sha256,
   sign,

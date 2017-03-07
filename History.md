@@ -441,3 +441,18 @@ commit by afterloe (lm6289511@gmail.com)
 > services/userService.js  
 > tools/security.js  
 
+
+1.0.8 / 2017-3-7 17:33:47
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成单点登录过程
+
+
+### modify files
+> routers/index.js  
+> routers/user.js  
+> services/sessionService.js  
+> template/pwdMail.pug  
+> tools/security.js  
+

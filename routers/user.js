@@ -28,7 +28,7 @@ function* list(next) {
   return yield next;
 }
 
-function* forgetPassword(next) {
+function* forgetPwd(next) {
   if (this.error) {
     return yield next;
   }
@@ -65,6 +65,6 @@ function* login(next) {
 
 module.exports = {
   list,
-  forgetPassword,
+  forgetPwd,
   login,
 };

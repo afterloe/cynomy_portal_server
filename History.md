@@ -468,3 +468,22 @@ commit by afterloe (lm6289511@gmail.com)
 > dao/tag.js  
 > dao/workflow-instance.js  
 
+
+1.0.8 / 2017-3-7 18:14:39
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端改版
+
+
+### new files
+> staticFiles/images/portal/line-default.png  
+> staticFiles/images/portal/line-selected.png  
+> staticFiles/images/portal/loginLogo.png  
+> staticFiles/images/portal/titleLogo.png  
+
+### modify files
+> staticFiles/css/portal/header.css  
+> template/header.pug  
+> template/login.pug  
+

@@ -456,3 +456,15 @@ commit by afterloe (lm6289511@gmail.com)
 > template/pwdMail.pug  
 > tools/security.js  
 
+
+1.0.8 / 2017-3-7 17:40:19
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 产品显示修改为左上为最新
+
+
+### modify files
+> dao/tag.js  
+> dao/workflow-instance.js  
+

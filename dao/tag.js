@@ -24,7 +24,7 @@ const searchByTags = function* (keywords) {
     }, {
       name : 1,
       createTimestamp: 1,
-    }).sort({createTimestamp: 1}).toArray();
+    }).sort({createTimestamp: -1}).toArray();
   }
 
   return [];

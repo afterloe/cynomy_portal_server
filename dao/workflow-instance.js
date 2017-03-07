@@ -60,7 +60,7 @@ function* searchByTags(tags) {
       nodeList: 1,
       status: 1,
       beginTimestamp: 1,
-    }).toArray();
+    }).sort({beginTimestamp: -1}).toArray();
   }
 
   return [];

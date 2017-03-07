@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{throwLackParameters}, {obmitLoginPermit, getUserList, loginSystem}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "services", "userService"))];
+const [{throwLackParameters}, {forgetPassword, getUserList, loginSystem}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "services", "userService"))];
 
 function* list(next) {
   if (this.error) {
@@ -28,13 +28,13 @@ function* list(next) {
   return yield next;
 }
 
-function* permit(next) {
+function* forgetPassword(next) {
   if (this.error) {
     return yield next;
   }
   try {
     const {mail} = this.params;
-    yield obmitLoginPermit(mail);
+    yield forgetPassword(mail);
     this.data = true;
   } catch (err) {
     this.error = err;
@@ -65,6 +65,6 @@ function* login(next) {
 
 module.exports = {
   list,
-  permit,
+  forgetPassword,
   login,
 };

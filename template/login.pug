@@ -81,19 +81,17 @@ script.
     }
 
     $.ajax({
-      url: "/user/" + email +"/loginPermit",
+      url: `/user/${email}/forgetPassword`,
       type: "GET",
       dataType: "json",
-      beforeSend: function(xhr) {
-        xhr.setRequestHeader("accept","application/json");
-      },
-      success: function(result) {
+      beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
+      success: result => {
         if (200 !== result.code) {
-          $("#error").attr("style", "display: block;");
-          $("#error").html(result.error);
+          $("#loginInfoBox").find(".modal-body").html(result.error);
+          $("#loginInfoBox").modal("show");
         } else {
-          $("#error").attr("style", "display: none;");
-          alert("新密码已发送至邮箱");
+          $("#loginInfoBox").find(".modal-body").html("新密码已发送至邮箱,请查收");
+          $("#loginInfoBox").modal("show");
         }
       }
     });

@@ -408,3 +408,23 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/login.pug  
 
+
+1.0.8 / 2017-3-7 16:51:13
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加openssl类库，支持加密解密
+
+
+### modify files
+> config/index.js  
+> routers/index.js  
+> routers/user.js  
+> services/userService.js  
+> template/login.pug  
+> test/funTest.js  
+> tools/security.js  
+
+### delete files
+> _config.yml  
+

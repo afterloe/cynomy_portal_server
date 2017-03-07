@@ -11,10 +11,42 @@
   */
 "use strict";
 
-const [{createCipher, createDecipher, createHmac, createHash}, {resolve}, {existsSync, createReadStream}] = [require("crypto"), require("path"), require("fs")];
+const [
+  {createCipher, createDecipher, createHmac, createHash, publicEncrypt, privateDecrypt},
+  {resolve},
+  {existsSync, createReadStream, readFileSync},
+] = [
+  require("crypto"),
+  require("path"),
+  require("fs")
+];
 const {get} = require(resolve(__dirname, "..", "config"));
-const {outEncoding = "hex", algorithm = "des3", intEncoding = "ascii", securityKey = "cynomy_mkt"} = get("security");
-const secret = "afterloe <lm6289511@gmail.com> (https://github.com/afterloe)";
+const [
+  {outEncoding = "hex", algorithm = "des3", intEncoding = "ascii", securityKey = "cynomy_mkt"},
+  {enable = false, name = "cynomy_rsa", path = resolve(process.env.HOME, ".ssh")},
+  secret,
+] = [
+  get("security"),
+  get("ssl"),
+  "afterloe <lm6289511@gmail.com> (https://github.com/afterloe)",
+];
+
+const [PUBLIC_KEY, PRIVATE_KEY] = [Symbol("PUBLIC_KEY"), Symbol("PRIVATE_KEY")];
+
+if (enable) {
+  module[PUBLIC_KEY] = readFileSync(resolve(path, "cynomy", name + ".public"), "utf8");
+  module[PRIVATE_KEY] = readFileSync(resolve(path, "cynomy", name + ".private"), "utf8");
+}
+
+const encryptWithPublicKey = toEncrypt => {
+    toEncrypt = new Buffer(toEncrypt);
+    return publicEncrypt(module[PUBLIC_KEY], toEncrypt).toString(outEncoding);
+};
+
+const decryptWithPrivateKey = toDecrypt => {
+    toDecrypt = new Buffer(toDecrypt, outEncoding);
+    return privateDecrypt(module[PRIVATE_KEY], toDecrypt).toString("utf8");
+};
 
 /**
  * 加密
@@ -76,4 +108,11 @@ const hash_sha256 = __path => new Promise((solve, reject) => {
   hash.on("error", error => reject(error));
 });
 
-module.exports = {cipher, decipher, sign, hash_sha256};
+module.exports = {
+  cipher,
+  decipher,
+  decryptWithPrivateKey,
+  encryptWithPublicKey,
+  hash_sha256,
+  sign,
+};

@@ -13,9 +13,26 @@
 
 const [{resolve}, xlsx, {unlinkSync}] = [require("path"), require("node-xlsx").default, require("fs")];
 const toolsPath = resolve(__dirname, "..", "tools");
-const [{getTagsInfo}, {compileTemplate}, {sendPromise}, {get}, {user_dao}, {sign, setSession}, {throwObjectCanTAes, throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist}, {randomNum, checkParameter}] =
-[require(resolve(__dirname, "tagsService")), require(resolve(toolsPath, "buildPage")), require(resolve(toolsPath, "mailHelper")), require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "sessionService")),
-require(resolve(__dirname, "..", "errors")), require(resolve(toolsPath, "utilities"))];
+const [
+  {getTagsInfo},
+  {compileTemplate},
+  {sendPromise},
+  {get},
+  {user_dao},
+  {sign, setSession},
+  {throwObjectCanTAes, throwAccountOrPwdError, throwLackParameters, throwParametersError, throwUserExist, throwUserNotExist},
+  {randomNum, checkParameter}
+] = [
+  require(resolve(__dirname, "tagsService")),
+  require(resolve(toolsPath, "buildPage")),
+  require(resolve(toolsPath, "mailHelper")),
+  require(resolve(__dirname, "..", "config")),
+  require(resolve(__dirname, "..", "dao")),
+  require(resolve(__dirname, "sessionService")),
+  require(resolve(__dirname, "..", "errors")),
+  require(resolve(toolsPath, "utilities"))
+];
+
 const [mailRegex] = [/^[a-zA-Z0-9\+\.\_\%\-\+]{1,256}\@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})$/];
 
 /**
@@ -180,18 +197,19 @@ function* loginSystem(mail, permit) {
   return token;
 }
 
-function* obmitLoginPermit(mail){
+function* forgetPassword(mail){
   const _ = yield user_dao.findByMail(mail);
   if (!_) {
     throwUserNotExist();
   }
-  const permit = randomNum(4);
+  const permit = randomNum(6);
+  // TODO
   const html = compileTemplate("pwdMail", {
     time: new Date().toLocaleString(),
     permit: permit,
   });
 
-  sendPromise(mail, "JW R&D Protal System", html);
+  sendPromise(mail, "JWI Protal System", html);
   return yield user_dao.update({
     _id: _._id,
     upload: {
@@ -222,7 +240,7 @@ function* findUsers(userIds) {
   if (!userIds.length || "string" === typeof userIds) {
     userIds = Array.of(userIds);
   }
-  
+
   const _ = [];
   for (let i = 0; i < userIds.length; i++) {
     const user = yield user_dao.queryById(userIds[i]);
@@ -324,7 +342,7 @@ module.exports = {
   getUserList,
   cleanDocuments,
   loginSystem,
-  obmitLoginPermit,
+  forgetPassword,
 
   findUsers,
   loaderFromXlsx,

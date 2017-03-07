@@ -42,7 +42,7 @@ module.exports = _ => {
    *  用户模块
    */
   _.get("/user/list", authentication, user.list); // 用户信息列表
-  _.get("/user/:mail/loginPermit", user.permit); // 登录申请
+  _.get("/user/:mail/forgetPasswordt", user.forgetPassword); // 登录申请
   _.post("/user/login", user.login); // 登录
 
   /*

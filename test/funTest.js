@@ -11,16 +11,30 @@
   */
 "use strict";
 
-const [{resolve}, co] = [require("path"), require("co")];
-// const workflowService = require(resolve(__dirname, "..", "services", "workflowService"));
-const {workFlow_instance_dao} = require(resolve(__dirname, "..", "dao"));
+const {resolve} = require("path");
 
-co(function* () {
-  // const data = yield workflowService.searchProduct("pc", "平台V1.0");
-  // return data;
-  //
-  return yield workFlow_instance_dao.searchByTags(["pc", "平台V1.0"]);
-}).then(data => console.log(data)).catch(err => console.log(err));
+const security = require(resolve(__dirname, "..", "tools", "security"));
+
+const value = "afterloe";
+
+const d = security.encryptWithPublicKey(value);
+console.log(d);
+
+const _value = security.decryptWithPrivateKey(d);
+console.log(_value);
+
+console.log(value === _value);
+
+// const [{resolve}, co] = [require("path"), require("co")];
+// // const workflowService = require(resolve(__dirname, "..", "services", "workflowService"));
+// const {workFlow_instance_dao} = require(resolve(__dirname, "..", "dao"));
+//
+// co(function* () {
+//   // const data = yield workflowService.searchProduct("pc", "平台V1.0");
+//   // return data;
+//   //
+//   return yield workFlow_instance_dao.searchByTags(["pc", "平台V1.0"]);
+// }).then(data => console.log(data)).catch(err => console.log(err));
 
 // vm_stat | awk -F ':' {'print$2.'}
 // ps -caxm -orss,comm

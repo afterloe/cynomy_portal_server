@@ -506,3 +506,20 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/workflow.js  
 > template/header.pug  
 
+
+1.0.8 / 2017-3-8 14:6:23
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: router分级，初步完成portal首页规划
+
+
+### new files
+> routers/ad-portal.js  
+> routers/ps-portal.js  
+> routers/rd-portal.js  
+
+### modify files
+> routers/index.js  
+> routers/portal.js  
+

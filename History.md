@@ -564,3 +564,16 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/css/portal/rd/home.css  
 > tools/security.js  
 
+
+1.0.8 / 2017-3-8 14:59:14
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 开放portal权限,允许未登录的用户查看部分信息，重构了401.5 登陆后重新跳转回页面
+
+
+### modify files
+> interceptors/smartNotFound.js  
+> routers/index.js  
+> template/login.pug  
+

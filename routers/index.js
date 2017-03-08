@@ -50,7 +50,7 @@ module.exports = _ => {
    * portal 模块
    */
   _.get("/portal/login", portal.login); // *页面跳转 -> 登录页
-  _.get("/portal/home", authentication, portal.home); // *页面跳转 -> 首页
+  _.get("/portal/home", portal.home); // *页面跳转 -> 首页
   _.get("/portal/workflow/:id", authentication, portal.info); // *页面跳转 -> 工作流详情页
 
   /** 研发部 **/

@@ -1,6 +1,7 @@
 //- create by afterloe on 2017-2-14 10:53:52 - MIT
 
 - const __time = locals.systemVersion || "";
+- const __href = locals.href || "/portal/home";
 
 doctype html
 html(lang="en")
@@ -20,7 +21,7 @@ html(lang="en")
           div(class="col-xs-12 col-sm-12 col-md-12")
             img(src= static + "images/portal/loginLogo.png" alt="")
       div(class="container container_login")
-        div(class="form-horizontal form_login" id="fm")
+        div(class="form-horizontal form_login" id="fm" data-href=__href)
           div(class="form-group")
             div(class="col-md-12 col-sm-12 col-sm-12 radius")
               input(type="email" id="userName" aria-describedby="emailHelp" placeholder="请输入邮箱" autocomplete="off")
@@ -117,7 +118,7 @@ script.
         } else {
           $("#error").attr("style", "display: none;");
           localStorage.setItem("permit", result.result);
-          location.href = "/portal/home";
+          location.href = $("#fm").attr("data-href");
         }
       }
     });

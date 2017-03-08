@@ -53,7 +53,7 @@ function* login(next) {
   try {
     this.pageName = "login";
     this.data = {
-      title: "R&D Portal login",
+      title: "JWI Portal login",
     };
   } catch (err) {
     this.error = err;
@@ -69,7 +69,7 @@ function* home(next) {
   try {
     this.pageName = "home";
     this.data = {
-      title: "R&D Portal",
+      title: "JWI Portal",
       index: 1,
     };
   } catch (err) {
@@ -134,7 +134,7 @@ function* product(next) {
     const [equipmentTags, platformTags, user] = yield [findTags("设备"), findTags("产品"), this.authorized];
     const _ = {
       title: "R&D Portal - product",
-      index: 3,
+      index: 2,
       user,
     };
 
@@ -175,7 +175,7 @@ function* directory(next) {
     this.pageName = "directory";
     this.data = {
       title: "R&D Portal - directory",
-      index: 4,
+      index: 2,
       produceName: "",
       produceList,
     };
@@ -195,7 +195,7 @@ function* info(next) {
     const {name, createTimestamp, nodeList, status, owner, members} = yield workflowInfo(id);
 
     this.data = {
-      title: "R&D Portal - info",
+      title: "JWI Portal - info",
       index: 8,
       name,
       createTimestamp,
@@ -213,6 +213,57 @@ function* info(next) {
   return yield next;
 }
 
+function* rdHome(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    this.pageName = "rdHome";
+    this.data = {
+      title: "R&D Portal",
+      index: 2,
+    };
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+}
+
+function* adHome(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    this.pageName = "rdHome";
+    this.data = {
+      title: "R&D Portal",
+      index: 3,
+    };
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+}
+
+function* psHome(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    this.pageName = "rdHome";
+    this.data = {
+      title: "R&D Portal",
+      index: 4,
+    };
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+}
+
 module.exports = {
   home,
   platform,
@@ -220,4 +271,7 @@ module.exports = {
   product,
   directory,
   info,
+  rdHome,
+  adHome,
+  psHome,
 };

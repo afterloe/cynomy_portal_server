@@ -487,3 +487,22 @@ commit by afterloe (lm6289511@gmail.com)
 > template/header.pug  
 > template/login.pug  
 
+
+1.0.8 / 2017-3-8 13:48:57
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 初步完成rd各个部门首页
+
+
+### new files
+> template/adHome.pug  
+> template/psHome.pug  
+> template/rdHome.pug  
+
+### modify files
+> routers/index.js  
+> routers/portal.js  
+> routers/workflow.js  
+> template/header.pug  
+

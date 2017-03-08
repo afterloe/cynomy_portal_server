@@ -45,10 +45,17 @@ module.exports = _ => {
    */
   _.get("/portal/login", portal.login); // *页面跳转 -> 登录页
   _.get("/portal/home", authentication, portal.home); // *页面跳转 -> 首页
-  _.get("/portal/platform", authentication, portal.platform); // *页面跳转 -> 平台
-  _.get("/portal/product", authentication, portal.product); // *页面跳转 -> 产品
   _.get("/portal/workflow/:id", authentication, portal.info); // *页面跳转 -> 工作流详情页
-  _.get("/portal/directory", authentication, portal.directory); // *页面跳转 -> 公共目录
+  // _.get("/portal/directory", authentication, portal.directory); // *页面跳转 -> 公共目录
+
+  /** 研发部 **/
+  _.get("/portal/rd/home", authentication, portal.rdHome); // *页面跳转 -> 研发部首页
+  _.get("/portal/rd/platform", authentication, portal.platform); // *页面跳转 -> 平台
+  _.get("/portal/rd/product", authentication, portal.product); // *页面跳转 -> 产品
+
+  _.get("/portal/ad/home", authentication, portal.adHome); // *页面跳转 -> 自主交付部首页
+  _.get("/portal/ps/home", authentication, portal.psHome); // *页面跳转 -> 售前技术部部首页
+
 
   /*
    *  用户模块
@@ -65,9 +72,10 @@ module.exports = _ => {
   _.get("/workflow/:id/simple", authentication, workflow.simpleInfo); // 获取工作流实例简单信息
   _.get("/workflow/:nodeId/files", authentication, workflow.nodeFiles); // 获取工作流某实例下的文件列表
   _.get("/workflow/nodeInstance/:id", authentication, workflow.nodeInstance); // 获取工作流下实例节点信息
-  _.get("/workflow/overviews/platform", authentication, workflow.overviewsPlatform); // 总览 - 平台工作流
-  _.get("/workflow/overviews/product", authentication, workflow.overviewsProduct);// 总览 - 产品工作流
-  _.get("/workflow/overviews/directory", authentication, workflow.overviewsDirectory); // 总览 - 公共目录
+
+  _.get("/workflow/overviews/rd/platform", authentication, workflow.rdOverviewsPlatform); // 总览 - 平台工作流
+  _.get("/workflow/overviews/rd/product", authentication, workflow.rdOverviewsProduct);// 总览 - 产品工作流
+  _.get("/workflow/overviews/rd/directory", authentication, workflow.rdOverviewsDirectory); // 总览 - 公共目录
 
   /*
    *  文件系统模块

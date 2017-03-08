@@ -23,7 +23,7 @@ const [
 const {get} = require(resolve(__dirname, "..", "config"));
 const [
   {outEncoding = "hex", algorithm = "des3", intEncoding = "ascii", securityKey = "cynomy_mkt"},
-  {enable = false, name = "cynomy_rsa", path = resolve(process.env.HOME, ".ssh")},
+  {enable = false, keyName = "cynomy_rsa", path = resolve(process.env.HOME, ".ssh")},
   secret,
 ] = [
   get("security"),
@@ -34,8 +34,8 @@ const [
 const [PUBLIC_KEY, PRIVATE_KEY] = [Symbol("PUBLIC_KEY"), Symbol("PRIVATE_KEY")];
 
 if (enable) {
-  module[PUBLIC_KEY] = readFileSync(resolve(path, "cynomy", name + ".public"), "utf8");
-  module[PRIVATE_KEY] = readFileSync(resolve(path, "cynomy", name + ".private"), "utf8");
+  module[PUBLIC_KEY] = readFileSync(resolve(path, "cynomy", keyName + ".public"), "utf8");
+  module[PRIVATE_KEY] = readFileSync(resolve(path, "cynomy", keyName + ".private"), "utf8");
 }
 
 const encryptWithPrivateKey = toEncrypt => {
@@ -43,7 +43,7 @@ const encryptWithPrivateKey = toEncrypt => {
   return privateEncrypt(module[PUBLIC_KEY], toEncrypt).toString(outEncoding);
 };
 
-const decryptWithPublicKey = toEncrypt => {
+const decryptWithPublicKey = toDecrypt => {
   toDecrypt = new Buffer(toDecrypt, outEncoding);
   return publicDecrypt(module[PRIVATE_KEY], toDecrypt).toString("utf8");
 };

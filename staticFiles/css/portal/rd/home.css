@@ -12,7 +12,7 @@
    margin-left:-7em;
    width:7em;
    height:2em;
-   background: url('../../images/portal/feedback.png') no-repeat center;
+   background: url('../../../images/portal/feedback.png') no-repeat center;
    cursor:pointer;
    background-size:contain; */
     position:absolute;
@@ -21,7 +21,7 @@
     margin-left:-7em;
     width:140px;
     height:40px;
-    background: url('../../images/portal/feedback.png') no-repeat center;
+    background: url('../../../images/portal/feedback.png') no-repeat center;
     cursor:pointer;
     background-size:contain;
 }
@@ -32,11 +32,11 @@
    margin-left:-7em;
    width:7em;
    height:2em;
-   background: url('../../images/portal/feedback.png') no-repeat center;
+   background: url('../../../images/portal/feedback.png') no-repeat center;
    cursor:pointer;
    background-size:contain; */
 
-    background: url('../../images/portal/2-selected.png') no-repeat center;
+    background: url('../../../images/portal/2-selected.png') no-repeat center;
 
 }
 
@@ -112,20 +112,20 @@
     }
 }
 .searchIcon{
-    background: url(../../images/portal/searchIcon.png) center no-repeat;
+    background: url(../../../images/portal/searchIcon.png) center no-repeat;
 }
 .dir-product {
-    background: url(../../images/portal/productCatalog.png) center no-repeat;
+    background: url(../../../images/portal/productCatalog.png) center no-repeat;
     background-size: cover;
 }
 
 .dir-platform {
-    background: url(../../images/portal/plaformCatalog.png) center no-repeat;
+    background: url(../../../images/portal/plaformCatalog.png) center no-repeat;
     background-size: cover;
 }
 
 .dir-public {
-    background: url(../../images/portal/publicCatalog.png) center no-repeat;
+    background: url(../../../images/portal/publicCatalog.png) center no-repeat;
     background-size: cover;
 }
 
@@ -161,7 +161,7 @@
     width:2em;
     height:2em;
     cursor:pointer;
-    background: url('../../images/portal/save.png') no-repeat center;
+    background: url('../../../images/portal/save.png') no-repeat center;
     background-size:contain;
 }
 .save:hover{
@@ -246,7 +246,7 @@
     min-width: 5em;
 }
 .productLink{
-    background: url('../../images/portal/productLink.png') no-repeat center;
+    background: url('../../../images/portal/productLink.png') no-repeat center;
     width:28px;
     height:12px;
     display: inline-block;
@@ -301,72 +301,72 @@
     font-size:15px;
 }
 .planStatus1>.icon{
-    background: url('../../images/portal/productPlanStatus1.png') no-repeat center;
+    background: url('../../../images/portal/productPlanStatus1.png') no-repeat center;
 }
 .designStatus1>.icon{
-    background: url('../../images/portal/productDesignStatus1.png') no-repeat center;
+    background: url('../../../images/portal/productDesignStatus1.png') no-repeat center;
 }
 .developStatus1>.icon{
-    background: url('../../images/portal/productDevelopStatus1.png') no-repeat center;
+    background: url('../../../images/portal/productDevelopStatus1.png') no-repeat center;
 }
 .testStatus1>.icon{
-    background: url('../../images/portal/productTestStatus1.png') no-repeat center;
+    background: url('../../../images/portal/productTestStatus1.png') no-repeat center;
 }
 .releaseStatus1>.icon{
-    background: url('../../images/portal/productReleaseStatus1.png') no-repeat center;
+    background: url('../../../images/portal/productReleaseStatus1.png') no-repeat center;
 }
 
 .planStatus2>.icon{
-    background: url('../../images/portal/productPlanStatus2.png') no-repeat center;
+    background: url('../../../images/portal/productPlanStatus2.png') no-repeat center;
 }
 .designStatus2>.icon{
-    background: url('../../images/portal/productDesignStatus2.png') no-repeat center;
+    background: url('../../../images/portal/productDesignStatus2.png') no-repeat center;
 }
 .developStatus2>.icon{
-    background: url('../../images/portal/productDevelopStatus2.png') no-repeat center;
+    background: url('../../../images/portal/productDevelopStatus2.png') no-repeat center;
 }
 .testStatus2>.icon{
-    background: url('../../images/portal/productTestStatus2.png') no-repeat center;
+    background: url('../../../images/portal/productTestStatus2.png') no-repeat center;
 }
 .releaseStatus2>.icon{
-    background: url('../../images/portal/productReleaseStatus2.png') no-repeat center;
+    background: url('../../../images/portal/productReleaseStatus2.png') no-repeat center;
 }
 
 .planStatus3>.icon{
-    background: url('../../images/portal/productPlanStatus3.png') no-repeat center;
+    background: url('../../../images/portal/productPlanStatus3.png') no-repeat center;
 }
 .designStatus3>.icon{
-    background: url('../../images/portal/productDesignStatus3.png') no-repeat center;
+    background: url('../../../images/portal/productDesignStatus3.png') no-repeat center;
 }
 .developStatus3>.icon{
-    background: url('../../images/portal/productDevelopStatus3.png') no-repeat center;
+    background: url('../../../images/portal/productDevelopStatus3.png') no-repeat center;
 }
 .testStatus3>.icon{
-    background: url('../../images/portal/productTestStatus3.png') no-repeat center;
+    background: url('../../../images/portal/productTestStatus3.png') no-repeat center;
 }
 .releaseStatus3>.icon{
-    background: url('../../images/portal/productReleaseStatus3.png') no-repeat center;
+    background: url('../../../images/portal/productReleaseStatus3.png') no-repeat center;
 }
 .productStatus > li > .icon {
-    background: url('../../images/portal/productPlanStatus4.png') no-repeat center;
+    background: url('../../../images/portal/productPlanStatus4.png') no-repeat center;
 }
 .productStatus > li:last-child > .line {
     display:none;
 }
 .planStatus4>.icon{
-    background: url('../../images/portal/productPlanStatus4.png') no-repeat center;
+    background: url('../../../images/portal/productPlanStatus4.png') no-repeat center;
 }
 .designStatus4>.icon{
-    background: url('../../images/portal/productDesignStatus4.png') no-repeat center;
+    background: url('../../../images/portal/productDesignStatus4.png') no-repeat center;
 }
 .developStatus4>.icon{
-    background: url('../../images/portal/productDevelopStatus4.png') no-repeat center;
+    background: url('../../../images/portal/productDevelopStatus4.png') no-repeat center;
 }
 .testStatus4>.icon{
-    background: url('../../images/portal/productTestStatus4.png') no-repeat center;
+    background: url('../../../images/portal/productTestStatus4.png') no-repeat center;
 }
 .releaseStatus4>.icon{
-    background: url('../../images/portal/productReleaseStatus4.png') no-repeat center;
+    background: url('../../../images/portal/productReleaseStatus4.png') no-repeat center;
 }
 .table>tbody>tr{border-bottom:solid 1px #ddd;}
 

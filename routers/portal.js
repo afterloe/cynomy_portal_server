@@ -14,36 +14,10 @@
 const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
 const [
-  {getPublicGoodsesList},
-  {searchProduct, workflowInfo},
-  {findTags}
+  {workflowInfo},
 ] = [
-  require(resolve(services, "goodsService")),
   require(resolve(services, "workflowService")),
-  require(resolve(services, "tagsService"))
 ];
-
-const findWorkflowByTags = function* (equipment, tags, ...hooks) {
-  const _ = {};
-  for(let tag of tags) {
-    const __ = [equipment, tag].concat(hooks);
-    const result = yield searchProduct.apply(null, __);
-    Object.assign(_, {
-      [tag]: result
-    });
-  }
-  return _;
-};
-
-const findActiveWorkflowExample = function* (data) {
-  for (let equipment in data) {
-    for(let list in data[equipment]) {
-      if (data[equipment][list].length > 0) {
-        return yield workflowInfo(data[equipment][list][0]._id);
-      }
-    }
-  }
-};
 
 function* login(next) {
   if (this.error) {

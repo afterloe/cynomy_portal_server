@@ -550,3 +550,17 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/js/portal/src/platform.js  
 > staticFiles/js/portal/src/product.js  
 
+
+1.0.8 / 2017-3-8 14:45:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复check异常
+
+
+### modify files
+> config/index.js  
+> routers/portal.js  
+> staticFiles/css/portal/rd/home.css  
+> tools/security.js  
+

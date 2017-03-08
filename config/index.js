@@ -21,7 +21,7 @@ const [num, dataDir, logDir] = [cpus().length, resolve(defaultRoot, "data"), res
 siteConfig.set("version", "1.0.8"); // 设置服务器版本
 siteConfig.set("ssl", { // 安全设置
   enable: true, // 是否开启ssl设置
-  name: "cynomy", // ssl公私钥文件名
+  keyName: "cynomy", // ssl公私钥 文件名 // 不写则默认
 // 存放位置,  path: "~/.ssh"  // 不写则默认位置
 });
 siteConfig.set("remote", { // 远程节点设置

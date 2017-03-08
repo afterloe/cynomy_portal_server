@@ -26,11 +26,12 @@ style.
     .catalogShadow .title {padding: 0.03rem 0 0.03rem 0.1rem;}
     .mainBox{vertical-align: top; display:inline-block; width:61%}
     .helpBox{display:inline-block;width:39%}
+    .mainBox .data {margin-top:15px;margin-left:40px;}
+    .helpBox .data {margin-top:15px;}
     .mainBox .content {width:60%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .mainBox .time {width:32%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .helpBox .content {width:35%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .helpBox .time {width:45%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
-    .data {margin-top:15px;margin-left:40px;}
     .data li {height:66px;}
     .data li div{height:66px;width:100%;}
     .data li div i{display: inline-block; width: 16px; height: 16px; border-radius: 50%;background:#dbdbdb;float:left;margin-left:-8px;}
@@ -57,7 +58,7 @@ style.
     .data li:first-child div i {background:#3d9bff;}
   }
 
-if _systemNotice.msg
+if !_systemNotice.msg
   div(class="alert alert-danger" role="alert")
     strong 通知: 系统将重启
 
@@ -102,22 +103,18 @@ div(class="container content")
       ul(class="data")
         li
           div
-            i
             span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
             span(class="time") 2017-3-8 15:24:12
         li
           div
-            i
             span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
             span(class="time") 2017-3-8 15:24:12
         li
           div
-            i
             span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
             span(class="time") 2017-3-8 15:24:12
         li
           div
-            i
             span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
             span(class="time") 2017-3-8 15:24:12
 

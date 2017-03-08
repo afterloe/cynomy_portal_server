@@ -602,3 +602,14 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/css/portal/rd/platform.css  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-8 19:30:52
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: home 微调
+
+
+### modify files
+> template/home.pug  
+

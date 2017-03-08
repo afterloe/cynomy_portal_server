@@ -523,3 +523,30 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > routers/portal.js  
 
+
+1.0.8 / 2017-3-8 14:22:5
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 文件目录调整
+
+
+### new files
+> staticFiles/css/portal/rd/  
+> staticFiles/js/portal/src/rd/  
+
+### modify files
+> template/adHome.pug  
+> template/psHome.pug  
+> template/rdHome.pug  
+
+### delete files
+> staticFiles/css/portal/directory.css  
+> staticFiles/css/portal/home.css  
+> staticFiles/css/portal/platform.css  
+> staticFiles/css/portal/product.css  
+> staticFiles/js/portal/src/directory.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/platform.js  
+> staticFiles/js/portal/src/product.js  
+

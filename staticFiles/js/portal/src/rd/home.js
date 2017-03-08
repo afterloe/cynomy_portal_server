@@ -1,9 +1,12 @@
 "use strict";
 
+const ROUTER = Symbol("ROUTER");
+
 (function($){
     $(function(){
         let $save = $(".save");
 
+        window[ROUTER] = "platform";
         const ajaxData = path => {
           $.ajax({
             type: "GET",
@@ -40,28 +43,16 @@
                 $currentCataMark.show();
                 $currentCataMark.siblings().hide();
             }
-            ajaxData($this.attr("data-path"));
+            window[ROUTER] = $this.attr("data-path");
+            ajaxData(`overviews/rd/${window[ROUTER]}`);
         });
 
         // 点击平台
-        $(".content").on("mousedown",'.platformName',function(e){
-            if(e.button != "2") {
-              return; //非右键单击  不响应
+        $(".content").on("mousedown",".platformName",function(e){
+            if(e.button != "1") {
+              window.location.href = `/portal/rd/${window[ROUTER]}`;
+              return;
             }
-            let $this = $(this);
-            if('pointer' != $this.css('cursor')){
-              return; //不是允许点击的样式 不响应
-            }
-            let $menu = $this.find('.menu');
-            if(!$menu.length){
-                $menu = $(".menu:first");
-                $this.append($menu);
-            }
-            $menu.css({
-                top:e.offsetY +　10,
-                left: e.offsetX +　10
-            }).show();
-
             return false;
         });
 
@@ -79,26 +70,26 @@
         });
 
         // 点击产品名
-        $(".content").on("click",'.productName',function(){
+        $(".content").on("click",".productName",function(){
             // 跳转到TRU平台导航栏中对应的该产品的信息
             const id = $(this).attr("data-id");
             window.location.href = `/portal/workflow/${id}`;
         });
 
         // 点击产品链接
-        $(".content").on("click",'.productLink',function(){
+        $(".content").on("click",".productLink",function(){
             // 跳转到产品对应的主页信息
             const url = $(this).attr("data-link");
             window.open(url);
         });
 
         // 删除平台
-        $(".content").on("click",'.del',function(){
+        $(".content").on("click",".del",function(){
             $(this).parent().parent().parent().remove();
         });
 
         // 增加同级
-        $(".content").on("click",'.addNext',function(){
+        $(".content").on("click",".addNext",function(){
             let  $firstPlatform = $(".platform:first");
             $(this).parent().parent().parent().before($firstPlatform.clone().addClass('platformEdit'));
             // 显示保存按钮
@@ -180,6 +171,6 @@
           }
         };
 
-        ajaxData("overviews/platform"); // 进入页面自动加载数据
+        ajaxData("overviews/rd/platform"); // 进入页面自动加载数据
     });
 })(jQuery);

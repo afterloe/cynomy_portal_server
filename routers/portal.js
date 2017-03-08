@@ -19,6 +19,28 @@ const [
   require(resolve(services, "workflowService")),
 ];
 
+
+function* home(next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  this.pageName = "home";
+  const _ = {
+    title: "JWI Portal",
+    index: 1,
+  };
+  try {
+    const user = yield this.getSession();
+
+  } catch (err) {
+    this.error = err;
+  }
+
+  this.data = _;
+  return yield next;
+}
+
 function* login(next) {
   if (this.error) {
     return yield next;
@@ -36,23 +58,6 @@ function* login(next) {
   return yield next;
 }
 
-function* home(next) {
-  if (this.error) {
-    return yield next;
-  }
-  try {
-    this.pageName = "home";
-    this.data = {
-      title: "JWI Portal",
-      index: 1,
-    };
-  } catch (err) {
-    this.error = err;
-  }
-
-  return yield next;
-}
-
 function* info(next) {
   if (this.error) {
     return yield next;
@@ -62,7 +67,7 @@ function* info(next) {
     const {name, createTimestamp, nodeList, status, owner, members} = yield workflowInfo(id);
 
     this.data = {
-      title: "JWI Portal - info",
+      title: `JWI Portal - ${name}`,
       index: 8,
       name,
       createTimestamp,

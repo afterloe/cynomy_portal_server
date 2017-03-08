@@ -577,3 +577,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > template/login.pug  
 
+
+1.0.8 / 2017-3-8 17:11:49
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 全新首页绘制
+
+
+### modify files
+> routers/portal.js  
+> staticFiles/css/portal/rd/home.css  
+> template/home.pug  
+

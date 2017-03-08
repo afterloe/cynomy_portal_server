@@ -2,45 +2,74 @@
 
 include header
 
-link(href= static + "css/portal/home.css?time=" + __time rel="stylesheet")
+- const _systemNotice = locals.systemNotice || {};
 
-div(class="menu" style="display: none;")
-  p(class="addNext") 新增同级
-  p(class="addSub") 新增子级
-  p(class="del") 删除
+//- link(href= static + "css/portal/home.css?time=" + __time rel="stylesheet")
+style.
+  .alert{margin-bottom:0}
+  .structure {background-color: #ffffff;}
+  .catalogShadow{height:2.5em;background-color: #eee; position:relative; margin-left:15px; margin-right:15px;}
+  .catalogMark{float:left; margin-top:-0.7em; height:1.4em; width:1.4em; background-color: #ccc; }
 
-table(class="table" style="display:none")
-  tbody
-    tr(class="platform")
-      td(class="platformName")
-        input(type="text"  value="" placeholder="平台名")
-      td(class="platformDetail")
-        div(class="product")
-          div(class="productInfo")
-            input(class="productName" type="text" value="" placeholder="平台名")
-            span(class="productLink")
-            input(class="linkURL" type="text" value="" placeholder="下载地址或官网地址")
-          ul(class="nav nav-tabs productStatus")
-            li( style="display:none;")
-              span(class="icon")
-              span(class="line") &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+  .portalWhete {display: -webkit-box; height: 2em; font-size: 2em; margin-left: 1em;}
+  .title {font-size: 2rem; font-weight: 400;}
+  .catalogShadow .title {padding: 0.3rem 0 0.3rem 1rem;}
+  .number{position: inherit; float: right; margin-top: -0.5em; margin-right: -0.5em;}
+  .badge {background-color:#e22d2d}
+  .mainBox{vertical-align: top; display:inline-block; width:61%}
+  .helpBox{display:inline-block;width:39%}
+  .downButton{display: block; cursor:pointer; float: right; border-bottom: 1px solid #333; border-right: 1px solid #333; width: 0.8em; height: 0.8em;}
+  .down{transform: rotate(45deg);}
+  .up{transform: rotate(225deg); margin-top: 1rem;}
+  @media (min-width:769px) {
+  }
+  @media (max-width:768px) {
+  }
+
+if _systemNotice.msg
+  div(class="alert alert-danger" role="alert")
+    strong 通知: 系统将重启
 
 div(class="container content")
   div(class="container structure")
-    ul(class="dir-menu")
-      div(class="feedback")
-      li(data-path="overviews/platform" class="first dir-platform selected")
-      li(data-path="overviews/product" class="dir-product")
-      li(data-path="overviews/directory" class="dir-public")
-    div(class="catalogShadow")
-      div(class="catalogMark currentCataMark1")
-      div(class="catalogMark currentCataMark2")
-      div(class="catalogMark currentCataMark3")
-      div(class="save")
-    div(class="table-responsive")
-      table(class="table")
-        tbody
+    span(class="portalWhete")
+
+    div(class="mainBox")
+      div(class="catalogShadow")
+        span(class="badge number") 2
+        div(class="title")
+          span 公告
+          span(class="downButton down")
+
+    div(class="helpBox")
+      div(class="catalogShadow")
+        span(class="badge number") 2
+        div(class="title")
+          span 公告
+          span(class="downButton up")
+      div(class="catalogShadow")
+        span(class="badge number") 2
+        div(class="title")
+          span 公告
+          span(class="downButton up")
+      div(class="catalogShadow")
+        span(class="badge number") 2
+        div(class="title")
+          span 公告
+          span(class="downButton up")
 
 include footer
 
-script(src= static + "js/portal/bin/home.js?time=" + __time)
+script.
+  ($ => {
+    $(() => {
+      $(".downButton").bind("click", function(){
+          const __self = $(this);
+          const className = __self.hasClass("down") ? "up":"down";
+          __self.attr("class","");
+          __self.attr("class", `downButton ${className}`);
+      });
+    });
+  })(jQuery);
+
+//- script(src= static + "js/portal/bin/home.js?time=" + __time)

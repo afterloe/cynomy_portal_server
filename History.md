@@ -590,3 +590,15 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/css/portal/rd/home.css  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-8 18:49:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 首页完成
+
+
+### modify files
+> staticFiles/css/portal/rd/platform.css  
+> template/home.pug  
+

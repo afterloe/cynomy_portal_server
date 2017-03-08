@@ -138,12 +138,7 @@ input {
     .tabIcon_development{background-image:url(../../images/portal/development.png);}
     .tabIcon_test{background-image:url(../../images/portal/test.png);}
     .tabIcon_release{background-image:url(../../images/portal/release.png);}
-
-
     .tab_process dl.processActive dt span{color:#00a1df}
-
-
-
     .tab_content{margin-left:100px;margin-right:100px;width:920px;overflow: hidden;position: relative;}
     .dataBox{background:#f2f2f2;border-radius:5px;}
     .dataBox .header{height: 50px;line-height: 50px;font-size: 20px;border-bottom: 1px solid #dbdbdb;padding-left: 35px;}

@@ -756,3 +756,17 @@ commit by afterloe (lm6289511@gmail.com)
 > servers/registry.js  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 17:32:55
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 吐槽能够发送了！
+
+
+### modify files
+> dao/public.js  
+> routers/discuss.js  
+> routers/user.js  
+> services/discussService.js  
+

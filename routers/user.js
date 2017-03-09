@@ -12,7 +12,13 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{throwLackParameters}, {forgetPassword, getUserList, loginSystem}] = [require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "services", "userService"))];
+const [
+  {throwLackParameters},
+  {forgetPassword, getUserList, loginSystem}
+] = [
+  require(resolve(__dirname, "..", "errors")),
+  require(resolve(__dirname, "..", "services", "userService"))
+];
 
 function* list(next) {
   if (this.error) {

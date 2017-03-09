@@ -15,9 +15,11 @@ const {resolve} = require("path");
 
 const services = resolve(__dirname, "..", "services");
 const [
-
+  {postSystemNotice},
+  {throwLackParameters},
 ] = [
-
+  require(resolve(services, "discussService")),
+  require(resolve(__dirname, "..", "errors")),
 ];
 
 function* receiveDiscuss(next) {
@@ -26,12 +28,25 @@ function* receiveDiscuss(next) {
   }
 
   try {
+
+    let user;
+    try {
+      user = yield this.getSession();
+    } catch (err) {
+
+    }
+
     const {mail, content} = this.request.body;
     if (!mail || !content) {
       throwLackParameters();
     }
-    this.data = {mail, content};
-    
+
+    if (!user) {
+      this.data = yield postSystemNotice(content, {mail, name: "轶名"});
+    } else {
+      this.data = yield postSystemNotice(content, user);
+    }
+
   } catch (err) {
     this.error = err;
   }

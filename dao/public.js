@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const {throwLackParameters, throwParametersError} = require(resolve(__dirname, "..", "errors"));
+const {throwParametersError} = require(resolve(__dirname, "..", "errors"));
 
 /**
  * 更新文档信息
@@ -38,10 +38,6 @@ function* update (_document) {
  * @return {Generator}           [数据库操作函数，使用co或next来驱动]
  */
 function* insert (_) {
-  if (!_.name) {
-    throwLackParameters(null, "name");
-    return ;
-  }
 
   if (!_.state) {
     _.state = 200;

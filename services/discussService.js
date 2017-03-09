@@ -40,9 +40,13 @@ function* getDiscussesCount() {
   return count ? count : 0;
 }
 
-function* postSystemNotice(content, user) {
-  const discuss = buildDiscuss({user, content});
-  return yield discuss_dao.insert(discuss);
+function* postSystemNotice(content, user, title) {
+  if (!title) {
+    title = content.length > 10 ? content.substr(0, 6) + "...": content;
+  }
+  const discuss = buildDiscuss({user, content, title});
+  yield discuss_dao.insert(discuss);
+  return discuss;
 }
 
 module.exports = {

@@ -22,7 +22,8 @@ const [
   adPortal,
   psPortal,
   node,
-  discuss
+  discuss,
+  notice,
 ] = [
   require(resolve(__dirname, "user")),
   require(resolve(__dirname, "workflow")),
@@ -33,6 +34,7 @@ const [
   require(resolve(__dirname, "ps-portal")),
   require(resolve(__dirname, "nodeManager")),
   require(resolve(__dirname, "discuss")),
+  require(resolve(__dirname, "notice")),
 ];
 
 const [authentication] = [require(resolve(interceptors, "authentication"))];
@@ -69,8 +71,12 @@ module.exports = _ => {
 
   /** 吐槽模块 **/
   _.post("/discuss", discuss.receiveDiscuss); // 发帖
-  _.get("/discuss/:number/:page", authentication, discuss.list); // 吐槽首页
+  _.get("/discuss/:number/:page", authentication, discuss.list); // 吐槽列表
   _.get("/discuss/:id", authentication, discuss.info); // 看帖
+
+  /** 公告模块 **/
+  _.get("/notice/:number/:page", authentication, notice.list) // 公告列表
+  _.get("/notice/:id", authentication, notice.info) // 看公告
 
   /*
    *  用户模块

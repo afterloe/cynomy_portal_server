@@ -801,3 +801,21 @@ commit by afterloe (lm6289511@gmail.com)
 > services/discussService.js  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 22:14:23
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端页面布局调整
+
+
+### new files
+> routers/notice.js  
+> template/noticeInfo.pug  
+> template/noticeList.pug  
+
+### modify files
+> routers/index.js  
+> template/adHome.pug  
+> template/psHome.pug  
+

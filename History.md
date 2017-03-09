@@ -672,3 +672,20 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 15:27:24
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复smartNotFound web页面数据缓存上一次访问的问题
+
+
+### new files
+> template/home-noLogin.pug  
+
+### modify files
+> interceptors/template.js  
+> routers/index.js  
+> routers/portal.js  
+> tools/buildPage.js  
+

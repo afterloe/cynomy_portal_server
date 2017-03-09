@@ -1,0 +1,189 @@
+//- create by afterloe on 2017-2-14 14:58:37 - MIT
+
+include header
+
+- const _systemNotice = locals.systemNotice || {};
+- const _systemAnnouncement = locals.systemAnnouncement || [];
+- const _subscribe = locals.subscribe || [];
+- const _discuss = locals.discuss || [];
+- const _user = locals.user;
+
+link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
+//- link(href= static + "css/portal/home.css?time=" + __time rel="stylesheet")
+
+style.
+  .alert{margin-bottom:0}
+  .structure {background-color: #ffffff;}
+  .catalogShadow{height:2.5em;background-color: #eee; position:relative; margin-left:15px; margin-right:15px;}
+  .catalogMark{float:left; margin-top:-0.7em; height:1.4em; width:1.4em; background-color: #ccc; }
+
+  .number{position: inherit; float: right; margin-top: -0.5em; margin-right: -0.5em;}
+  .badge {background-color:#e22d2d}
+
+  .downButton{display: block; cursor:pointer; float: right; border-bottom: 1px solid #333; border-right: 1px solid #333; width: 0.8em; height: 0.8em;}
+  ul{margin-bottom:0;}
+  ul, ul li {list-style: none;}
+
+  @media (min-width:769px) {
+    .container .structure {min-height: 600px;}
+    .portalWhete {display: -webkit-box; height: 0.5em; font-size: 2em;}
+    .box header span:nth-child(2) {float: right; margin-right: 0.1rem;}
+    .down{transform: rotate(45deg);}
+    .up{transform: rotate(225deg); margin-top: 0.1rem;}
+    .title {font-size: 0.2rem; font-weight: 400;}
+    .catalogShadow .title {padding: 0.03rem 0 0.03rem 0.1rem;}
+    .mainBox {vertical-align: top; display:inline-block; width:55%}
+    .noHelp {width:83%;}
+    .helpBox {display:inline-block;width:32%}
+    .feedback {vertical-align: top; display:inline-block; width:140px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/feedback.png') no-repeat center; cursor:pointer; background-size:contain;}
+    .feedback:hover {background: url('http://almcloud.jwis.cn/images/portal/2-selected.png') no-repeat center;}
+    .form div.description {width: 558px; height: 190px; margin-top: 10px;}
+    .feedbackContent {overflow-y: auto; border-radius: 5px;}
+    textarea.form-control {height: 100%;}
+    .form div.last span:nth-child(3) .submit_re { background: #3d9bff; width: 0.8rem; text-align: center; color: #fff; padding: 0 5px;}
+    .mainBox .data {margin-top:15px;margin-left:40px;}
+    .helpBox .data {margin-top:15px;}
+    .mainBox .content {width:60%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .mainBox .time {width:32%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .helpBox .content {width:35%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .helpBox .time {width:45%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .data li {height:66px;}
+    .data li div{height:66px;width:100%;}
+    .data li div i{display: inline-block; width: 16px; height: 16px; border-radius: 50%;background:#dbdbdb;float:left;margin-left:-8px;}
+    .data li div span{cursor:pointer; display: inline-block; float:left;width:140px;text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .data li:last-child{border-left:0;}
+    .mainBox .data li:first-child div i{background:#3d9bff;}
+    .helpBox .data li:first-child div i{background:#3c763d;}
+  }
+  @media only screen and (max-width: 800px) {
+    .feedback {vertical-align: top; display:inline-block; width:100px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/feedback.png') no-repeat center; cursor:pointer; background-size:contain;}
+    .feedback:hover {width:100px; background: url('http://almcloud.jwis.cn/images/portal/2-selected.png') no-repeat center; background-size:contain;}
+  }
+  @media (max-width:768px) {
+    .container .structure {min-height: 450px;}
+    .feedback {display:none;}
+    .portalWhete {display: -webkit-box; height: 0.3rem; font-size: 2em;}
+    .down{transform: rotate(45deg);}
+    .up{transform: rotate(225deg); margin-top: 0.1rem;}
+    .title {font-size: 0.2rem; font-weight: 200;}
+    .catalogShadow .title {padding: 0.15rem 0 0.3rem 0.2rem;}
+    .mainBox{vertical-align: top; width:100%}
+    .helpBox{width:100%}
+    .data {margin-top: 0.15rem; width: 100%;}
+    .data li {margin-left: 0.2rem;height: 1rem; width:98%;}
+    .data li div{height: 1rem;width: 100%;}
+    .data li div i{display: inline-block;width: 0.16rem;height: 0.16rem;border-radius: 50%;background: #dbdbdb;float: left;margin-left: -0.08rem;}
+    .data li div span{margin-top: -0.05rem; display:inline-block; float:left; width:1.85rem; text-align:center; height:0.5rem;}
+    .data li div span.content {margin-top: -0.05rem; width: 2.3rem;margin-left: 0.09rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+    .data li div span.time {width: 2rem;margin-left: 0;}
+    .data li:last-child {border-left:0;}
+    .data li:first-child div i {background:#3d9bff;}
+  }
+
+if _systemNotice.msg
+  div(class="alert alert-danger" role="alert")
+    strong 通知: 系统将重启
+
+div(class="popup")
+  div(class="mask")
+    div(class="box")
+      header
+        span(class="name") 建议反馈
+        span(class="btn_close")
+      form(action="" class="form")
+        div(class="description")
+          textarea(class="feedbackContent form-control" rows="3")
+        div(class="last")
+          span 联系方式:
+          span
+            input(type="text" placeholder="您的联系方式" value=_user ? _user.mail:null)
+          span
+            div(class="submit_re" style="cursor:pointer;") 提交
+
+div(class="container content")
+  div(class="container structure")
+    span(class="portalWhete")
+
+    div(class=_subscribe.length === 0 ? "mainBox noHelp":"mainBox")
+      div(class="catalogShadow")
+        span(class="badge number")=_systemAnnouncement.length
+        div(class="title")
+          span 公告
+          span(class="downButton down")
+      ul(class="data")
+        each announcement in _systemAnnouncement
+          li
+            div
+              i
+              span(class="content" data-href=announcement.href)=announcement.title
+              span(class="time")=new Date(announcement.createTimestamp).toLocaleString()
+
+      div(class="catalogShadow")
+        span(class="badge number")=_discuss.length
+        div(class="title")
+          span 热点讨论
+          span(class="downButton down")
+      ul(class="data")
+        each discus in _discuss
+          li
+            div
+              i
+              span(class="content" data-href=discus.href)=discus.title
+              span(class="time")=new Date(discus.createTimestamp).toLocaleString()
+
+    div(class="helpBox" style=_subscribe.length === 0 ? "width:0;":"")
+      each subscribe in _subscribe
+        div(class="catalogShadow")
+          span(class="badge number")=subscribe.items.length
+          div(class="title")
+            span=subscribe.title
+            span(class="downButton up")
+        ul(class="data")
+          each subscribeItem in subscribe.items
+            li
+              div
+                i
+                span(class="content" data-href=subscribeItem.href)=subscribeItem.title
+                span(class="time")=new Date(subscribeItem.createTimestamp).toLocaleString()
+    div(class="feedback")
+include footer
+
+script(src= static + "js/portal/rem.js?time=" + __time)
+script.
+  ($ => {
+    $(() => {
+
+      // 点击反馈
+      $(".feedback").bind("click", () => {
+          $(".popup").show();
+      });
+
+      $(".data > li").bind("click", function() {
+          const href = $(this).find(".content").attr("data-href");
+          location.href = href;
+      });
+
+      // 关闭反馈
+      $(".popup").on("click", ".btn_close", () => {
+          $(".popup").css("display", "none");
+      });
+
+      // 关闭反馈
+      $(".popup").on("click", ".submit_re", () => {
+        const content = $(".feedbackContent.form-control").val();
+        $(".popup").css("display", "none");
+        alert(content);
+        $(".feedbackContent.form-control").val("");
+      });
+
+      $(".downButton").bind("click", function() {
+          const __self = $(this);
+          const className = __self.hasClass("down") ? "up":"down";
+          __self.attr("class","");
+          __self.attr("class", `downButton ${className}`);
+      });
+
+    });
+  })(jQuery);
+
+//- script(src= static + "js/portal/bin/home.js?time=" + __time)

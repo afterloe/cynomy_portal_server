@@ -12,16 +12,17 @@
 "use strict";
 
 const {resolve} = require("path");
-const [{get}, {setPugTemplatePath, compileTemplate}] = [require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "..", "tools", "buildPage"))];
+const [
+  {get},
+  {setPugTemplatePath, compileTemplate}
+] = [
+  require(resolve(__dirname, "..", "config")),
+  require(resolve(__dirname, "..", "tools", "buildPage"))
+];
 
-const VERSION = Symbol("VERSION");
+const [VERSION, STATIC] = [Symbol("VERSION"), Symbol("STATIC")];
 module[VERSION] = get("version");
-
-const defualt = {
-  title: "",
-  static: get("sourceHost"),
-  systemVersion: module[VERSION],
-};
+module[STATIC] = get("sourceHost");
 
 module.exports = function* (next) {
   setPugTemplatePath(resolve(__dirname, "..", "template"));
@@ -50,9 +51,14 @@ module.exports = function* (next) {
     this.set("systemVersion", module[VERSION]);
 
     this.render = (template, _) => {
-      const _default = defualt;
-      Object.assign(_default, _);
-      __self.body = compileTemplate(template , _default);
+      const defualt = {
+        title: "",
+        static: module[STATIC],
+        cache: false,
+        systemVersion: module[VERSION],
+      };
+      Object.assign(defualt, _);
+      __self.body = compileTemplate(template , defualt);
     };
   }
 

@@ -661,3 +661,14 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 14:26:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端跳转
+
+
+### modify files
+> template/home.pug  
+

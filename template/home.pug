@@ -115,7 +115,7 @@ div(class="container content")
           li
             div
               i
-              span(class="content" href=announcement.href)=announcement.title
+              span(class="content" data-href=announcement.href)=announcement.title
               span(class="time")=new Date(announcement.createTimestamp).toLocaleString()
 
       div(class="catalogShadow")
@@ -128,7 +128,7 @@ div(class="container content")
           li
             div
               i
-              span(class="content" href=discus.href)=discus.title
+              span(class="content" data-href=discus.href)=discus.title
               span(class="time")=new Date(discus.createTimestamp).toLocaleString()
 
     div(class="helpBox" style=_subscribe.length === 0 ? "width:0;":"")
@@ -143,7 +143,7 @@ div(class="container content")
             li
               div
                 i
-                span(class="content" href=subscribeItem.href)=subscribeItem.title
+                span(class="content" data-href=subscribeItem.href)=subscribeItem.title
                 span(class="time")=new Date(subscribeItem.createTimestamp).toLocaleString()
     div(class="feedback")
 include footer
@@ -156,6 +156,11 @@ script.
       // 点击反馈
       $(".feedback").bind("click", () => {
           $(".popup").show();
+      });
+
+      $(".data > li").bind("click", function() {
+          const href = $(this).find(".content").attr("data-href");
+          location.href = href;
       });
 
       // 关闭反馈

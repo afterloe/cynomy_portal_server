@@ -720,3 +720,22 @@ commit by afterloe (lm6289511@gmail.com)
 > services/noticeService.js  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 16:19:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端获取热门讨论
+
+
+### new files
+> dao/discuss.js  
+> services/discussService.js  
+
+### modify files
+> dao/index.js  
+> routers/portal.js  
+> services/goodsService.js  
+> services/noticeService.js  
+> template/home.pug  
+

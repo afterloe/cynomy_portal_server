@@ -67,7 +67,7 @@ function* getSystemNotice(number, page) {
 
 module.exports = {
   getSystemNotice,
-  getSystemCount,
+  getSystemNoticeCount,
   postSystemNotice,
   readySystemNotice,
 };

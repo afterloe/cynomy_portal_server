@@ -27,4 +27,5 @@ module.exports = {
   goods_dao: loadDao("goods"), // 产出
   produce_dao: loadDao("produce"), // 产品
   notice_dao: loadDao("notice"), // 公告
+  discuss_dao: loadDao("discuss") // 讨论贴
 };

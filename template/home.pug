@@ -173,9 +173,24 @@ script.
       // 关闭反馈
       $(".popup").on("click", ".submit_re", () => {
         const content = $(".feedbackContent.form-control").val();
+        const mail = $(".last").find("input").val();
         $(".popup").css("display", "none");
-        alert(content);
-        $(".feedbackContent.form-control").val("");
+        $.ajax({
+          type: "POST",
+          url: `/discuss`,
+          dataType: "json",
+          data: {
+            content, mail
+          },
+          beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
+          success: result => {
+            if (200 !== result.code) {
+              alert("服务器繁忙");
+            } else {
+              $(".feedbackContent.form-control").val("");
+            }
+          }
+        });
       });
 
       $(".downButton").bind("click", function() {

@@ -21,7 +21,8 @@ const [
   rdPortal,
   adPortal,
   psPortal,
-  node
+  node,
+  discuss
 ] = [
   require(resolve(__dirname, "user")),
   require(resolve(__dirname, "workflow")),
@@ -31,6 +32,7 @@ const [
   require(resolve(__dirname, "ad-portal")),
   require(resolve(__dirname, "ps-portal")),
   require(resolve(__dirname, "nodeManager")),
+  require(resolve(__dirname, "discuss")),
 ];
 
 const [authentication] = [require(resolve(interceptors, "authentication"))];
@@ -65,6 +67,8 @@ module.exports = _ => {
   /** 售前技术部 **/
   _.get("/portal/ps/home", authentication, psPortal.home); // *页面跳转 -> 售前技术部部首页
 
+  /** 吐槽模块 **/
+  _.post("/discuss", discuss.receiveDiscuss); // 发帖
 
   /*
    *  用户模块

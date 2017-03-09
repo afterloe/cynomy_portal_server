@@ -739,3 +739,20 @@ commit by afterloe (lm6289511@gmail.com)
 > services/noticeService.js  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 17:3:49
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 消除html标签
+
+
+### new files
+> routers/discuss.js  
+
+### modify files
+> interceptors/session.js  
+> routers/index.js  
+> servers/registry.js  
+> template/home.pug  
+

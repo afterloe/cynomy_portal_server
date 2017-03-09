@@ -770,3 +770,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/user.js  
 > services/discussService.js  
 
+
+1.0.8 / 2017-3-9 17:44:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 查看吐槽
+
+
+### modify files
+> routers/discuss.js  
+> routers/index.js  
+> services/discussService.js  
+

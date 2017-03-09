@@ -69,6 +69,8 @@ module.exports = _ => {
 
   /** 吐槽模块 **/
   _.post("/discuss", discuss.receiveDiscuss); // 发帖
+  _.get("/discuss/:number/:page", authentication, discuss.list); // 吐槽首页
+  _.get("/discuss/:id", authentication, discuss.info); // 看帖
 
   /*
    *  用户模块

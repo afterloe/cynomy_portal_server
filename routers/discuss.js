@@ -15,7 +15,7 @@ const {resolve} = require("path");
 
 const services = resolve(__dirname, "..", "services");
 const [
-  {postSystemNotice},
+  {postDiscusses, readDiscusses, getDiscussesList},
   {throwLackParameters},
 ] = [
   require(resolve(services, "discussService")),
@@ -42,9 +42,9 @@ function* receiveDiscuss(next) {
     }
 
     if (!user) {
-      this.data = yield postSystemNotice(content, {mail, name: "轶名"});
+      this.data = yield postDiscusses(content, {mail, name: "轶名"});
     } else {
-      this.data = yield postSystemNotice(content, user);
+      this.data = yield postDiscusses(content, user);
     }
 
   } catch (err) {
@@ -54,6 +54,38 @@ function* receiveDiscuss(next) {
   return yield next;
 }
 
+function* info(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    const {id} = this.params;
+    const discuss = yield readDiscusses(id);
+    this.data = discuss;
+    this.pageName = "discussesInfo";
+  } catch (error) {
+    this.error = error;
+  }
+  return yield next;
+}
+
+function* list(next) {
+  if (this.error) {
+    return yield next;
+  }
+  try {
+    const {number, page} = this.params;
+    const list = yield getDiscussesList(number, page);
+    this.data = list;
+    this.pageName = "discussesList";
+  } catch (error) {
+    this.error = error;
+  }
+  return yield next;
+}
+
 module.exports = {
   receiveDiscuss,
+  list,
+  info,
 };

@@ -40,7 +40,7 @@ function* getDiscussesCount() {
   return count ? count : 0;
 }
 
-function* postSystemNotice(content, user, title) {
+function* postDiscusses(content, user, title) {
   if (!title) {
     title = content.length > 10 ? content.substr(0, 6) + "...": content;
   }
@@ -49,8 +49,28 @@ function* postSystemNotice(content, user, title) {
   return discuss;
 }
 
+function* readDiscusses(id) {
+  const discuss = yield discuss_dao.queryById(id);
+
+  if (!discuss) {
+    throwNosuchThisNotice();
+  }
+
+  yield discuss_dao.update({
+    _id: discuss._id,
+    upload: {
+      $inc: {
+        readCount: 1
+      }
+    }
+  });
+
+  return notice;
+}
+
 module.exports = {
   getDiscussesList,
   getDiscussesCount,
-  postSystemNotice,
+  postDiscusses,
+  readDiscusses,
 };

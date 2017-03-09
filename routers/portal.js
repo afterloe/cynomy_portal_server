@@ -15,13 +15,16 @@ const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
 const [
   {workflowInfo},
+  {getSystemNotice},
 ] = [
   require(resolve(services, "workflowService")),
+  require(resolve(services, "noticeService")),
 ];
 
 
 function* home(next) {
   this.pageName = "home";
+  const announcement = yield getSystemNotice(10);
   const _ = {
     title: "JWI Portal",
     index: 1,
@@ -35,6 +38,7 @@ function* home(next) {
   };
 
   if (this.error) {
+    delete this.error;
     this.data = _;
     return yield next;
   }

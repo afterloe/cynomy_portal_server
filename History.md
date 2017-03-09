@@ -689,3 +689,20 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > tools/buildPage.js  
 
+
+1.0.8 / 2017-3-9 15:57:31
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加系统通知
+
+
+### new files
+> dao/notice.js  
+> services/noticeService.js  
+
+### modify files
+> dao/index.js  
+> errors/i18nError.json  
+> routers/portal.js  
+

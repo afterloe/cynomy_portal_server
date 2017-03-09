@@ -613,3 +613,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 10:38:37
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 首页数据后端话
+
+
+### modify files
+> routers/portal.js  
+> template/home.pug  
+

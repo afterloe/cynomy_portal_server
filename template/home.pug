@@ -3,6 +3,8 @@
 include header
 
 - const _systemNotice = locals.systemNotice || {};
+- const _systemAnnouncement = locals.systemAnnouncement || [];
+- const _subscribe = locals.subscribe || [];
 
 //- link(href= static + "css/portal/home.css?time=" + __time rel="stylesheet")
 style.
@@ -58,7 +60,7 @@ style.
     .data li:first-child div i {background:#3d9bff;}
   }
 
-if !_systemNotice.msg
+if _systemNotice.msg
   div(class="alert alert-danger" role="alert")
     strong 通知: 系统将重启
 
@@ -68,87 +70,32 @@ div(class="container content")
 
     div(class="mainBox")
       div(class="catalogShadow")
-        span(class="badge number") 2
+        span(class="badge number")=_systemAnnouncement.length
         div(class="title")
           span 公告
           span(class="downButton down")
       ul(class="data")
-        li
-          div
-            i
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-        li
-          div
-            i
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-        li
-          div
-            i
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-        li
-          div
-            i
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
+        each announcement in _systemAnnouncement
+          li
+            div
+              i
+              span(class="content" href=announcement.href)=announcement.title
+              span(class="time")=new Date(announcement.createTimestamp).toLocaleString()
 
     div(class="helpBox")
-      div(class="catalogShadow")
-        span(class="badge number") 2
-        div(class="title")
-          span 公告
-          span(class="downButton up")
-      ul(class="data")
-        li
-          div
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-        li
-          div
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-        li
-          div
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-        li
-          div
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-
-      div(class="catalogShadow")
-        span(class="badge number") 2
-        div(class="title")
-          span 公告
-          span(class="downButton up")
-      ul(class="data")
-        li
-          div
-            i
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-        li
-          div
-            i
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-        li
-          div
-            i
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-        li
-          div
-            i
-            span(class="content") 系统将于1980年7月1日00:00:00 00:00 重启动，请注意时间备份数据...
-            span(class="time") 2017-3-8 15:24:12
-      div(class="catalogShadow")
-        span(class="badge number") 2
-        div(class="title")
-          span 公告
-          span(class="downButton up")
+      each subscribe in _subscribe
+        div(class="catalogShadow")
+          span(class="badge number")=subscribe.items.length
+          div(class="title")
+            span=subscribe.title
+            span(class="downButton up")
+        ul(class="data")
+          each subscribeItem in subscribe.items
+            li
+              div
+                i
+                span(class="content" href=subscribeItem.href)=subscribeItem.title
+                span(class="time")=new Date(subscribeItem.createTimestamp).toLocaleString()
 
 include footer
 

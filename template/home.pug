@@ -5,8 +5,11 @@ include header
 - const _systemNotice = locals.systemNotice || {};
 - const _systemAnnouncement = locals.systemAnnouncement || [];
 - const _subscribe = locals.subscribe || [];
+- const _discuss = locals.discuss || [];
 
+link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
 //- link(href= static + "css/portal/home.css?time=" + __time rel="stylesheet")
+
 style.
   .alert{margin-bottom:0}
   .structure {background-color: #ffffff;}
@@ -22,6 +25,7 @@ style.
 
   @media (min-width:769px) {
     .portalWhete {display: -webkit-box; height: 0.5em; font-size: 2em;}
+    .box header span:nth-child(2) {float: right; margin-right: 0.1rem;}
     .down{transform: rotate(45deg);}
     .up{transform: rotate(225deg); margin-top: 0.1rem;}
     .title {font-size: 0.2rem; font-weight: 400;}
@@ -31,6 +35,10 @@ style.
     .helpBox {display:inline-block;width:32%}
     .feedback {vertical-align: top; display:inline-block; width:140px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/feedback.png') no-repeat center; cursor:pointer; background-size:contain;}
     .feedback:hover {background: url('http://almcloud.jwis.cn/images/portal/2-selected.png') no-repeat center;}
+    .form div.description {width: 558px; height: 190px; margin-top: 10px;}
+    .feedbackContent {overflow-y: auto; border-radius: 5px;}
+    textarea.form-control {height: 100%;}
+    .form div.last span:nth-child(3) .submit_re { background: #3d9bff; width: 0.8rem; text-align: center; color: #fff; padding: 0 5px;}
     .mainBox .data {margin-top:15px;margin-left:40px;}
     .helpBox .data {margin-top:15px;}
     .mainBox .content {width:60%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
@@ -73,9 +81,26 @@ if _systemNotice.msg
   div(class="alert alert-danger" role="alert")
     strong 通知: 系统将重启
 
+div(class="popup")
+  div(class="mask")
+    div(class="box")
+      header
+        span(class="name") 建议反馈
+        span(class="btn_close")
+      form(action="" class="form")
+        div(class="description")
+          textarea(class="feedbackContent form-control" rows="3")
+        div(class="last")
+          span 联系方式:
+          span
+            input(type="text" placeholder="您的联系方式")
+          span
+            div(class="submit_re" style="cursor:pointer;") 提交
+
 div(class="container content")
   div(class="container structure")
     span(class="portalWhete")
+
     div(class=_subscribe.length === 0 ? "mainBox noHelp":"mainBox")
       div(class="catalogShadow")
         span(class="badge number")=_systemAnnouncement.length
@@ -89,6 +114,19 @@ div(class="container content")
               i
               span(class="content" href=announcement.href)=announcement.title
               span(class="time")=new Date(announcement.createTimestamp).toLocaleString()
+
+      div(class="catalogShadow")
+        span(class="badge number")=_discuss.length
+        div(class="title")
+          span 热点讨论
+          span(class="downButton down")
+      ul(class="data")
+        each discus in _discuss
+          li
+            div
+              i
+              span(class="content" href=discus.href)=discus.title
+              span(class="time")=new Date(discus.createTimestamp).toLocaleString()
 
     div(class="helpBox" style=_subscribe.length === 0 ? "width:0;":"")
       each subscribe in _subscribe
@@ -111,12 +149,32 @@ script(src= static + "js/portal/rem.js?time=" + __time)
 script.
   ($ => {
     $(() => {
-      $(".downButton").bind("click", function(){
+
+      // 点击反馈
+      $(".feedback").bind("click", () => {
+          $(".popup").show();
+      });
+
+      // 关闭反馈
+      $(".popup").on("click", ".btn_close", () => {
+          $(".popup").css("display", "none");
+      });
+
+      // 关闭反馈
+      $(".popup").on("click", ".submit_re", () => {
+        const content = $(".feedbackContent.form-control").val();
+        $(".popup").css("display", "none");
+        alert(content);
+        $(".feedbackContent.form-control").val("");
+      });
+
+      $(".downButton").bind("click", function() {
           const __self = $(this);
           const className = __self.hasClass("down") ? "up":"down";
           __self.attr("class","");
           __self.attr("class", `downButton ${className}`);
       });
+
     });
   })(jQuery);
 

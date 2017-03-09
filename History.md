@@ -638,3 +638,14 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/css/portal/rd/home.css  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 14:0:14
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 反馈信息完成
+
+
+### modify files
+> template/home.pug  
+

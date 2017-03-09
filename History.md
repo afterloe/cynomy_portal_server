@@ -625,3 +625,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 11:19:30
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 微调前端页面
+
+
+### modify files
+> routers/portal.js  
+> staticFiles/css/portal/rd/home.css  
+> template/home.pug  
+

@@ -75,7 +75,7 @@ function* home(next) {
       }]
     });
   } catch (err) {
-    this.error = err;
+    
   }
 
   this.data = _;

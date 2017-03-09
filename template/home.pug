@@ -26,8 +26,11 @@ style.
     .up{transform: rotate(225deg); margin-top: 0.1rem;}
     .title {font-size: 0.2rem; font-weight: 400;}
     .catalogShadow .title {padding: 0.03rem 0 0.03rem 0.1rem;}
-    .mainBox{vertical-align: top; display:inline-block; width:61%}
-    .helpBox{display:inline-block;width:39%}
+    .mainBox {vertical-align: top; display:inline-block; width:55%}
+    .noHelp {width:83%;}
+    .helpBox {display:inline-block;width:32%}
+    .feedback {vertical-align: top; display:inline-block; width:140px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/feedback.png') no-repeat center; cursor:pointer; background-size:contain;}
+    .feedback:hover {background: url('http://almcloud.jwis.cn/images/portal/2-selected.png') no-repeat center;}
     .mainBox .data {margin-top:15px;margin-left:40px;}
     .helpBox .data {margin-top:15px;}
     .mainBox .content {width:60%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
@@ -39,9 +42,15 @@ style.
     .data li div i{display: inline-block; width: 16px; height: 16px; border-radius: 50%;background:#dbdbdb;float:left;margin-left:-8px;}
     .data li div span{cursor:pointer; display: inline-block; float:left;width:140px;text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .data li:last-child{border-left:0;}
-    .data li:first-child div i{background:#3d9bff;}
+    .mainBox .data li:first-child div i{background:#3d9bff;}
+    .helpBox .data li:first-child div i{background:#3c763d;}
+  }
+  @media only screen and (max-width: 800px) {
+    .feedback {vertical-align: top; display:inline-block; width:100px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/feedback.png') no-repeat center; cursor:pointer; background-size:contain;}
+    .feedback:hover {width:100px; background: url('http://almcloud.jwis.cn/images/portal/2-selected.png') no-repeat center; background-size:contain;}
   }
   @media (max-width:768px) {
+    .feedback {display:none;}
     .portalWhete {display: -webkit-box; height: 0.3rem; font-size: 2em;}
     .down{transform: rotate(45deg);}
     .up{transform: rotate(225deg); margin-top: 0.1rem;}
@@ -67,8 +76,7 @@ if _systemNotice.msg
 div(class="container content")
   div(class="container structure")
     span(class="portalWhete")
-
-    div(class="mainBox")
+    div(class=_subscribe.length === 0 ? "mainBox noHelp":"mainBox")
       div(class="catalogShadow")
         span(class="badge number")=_systemAnnouncement.length
         div(class="title")
@@ -82,7 +90,7 @@ div(class="container content")
               span(class="content" href=announcement.href)=announcement.title
               span(class="time")=new Date(announcement.createTimestamp).toLocaleString()
 
-    div(class="helpBox")
+    div(class="helpBox" style=_subscribe.length === 0 ? "width:0;":"")
       each subscribe in _subscribe
         div(class="catalogShadow")
           span(class="badge number")=subscribe.items.length
@@ -96,7 +104,7 @@ div(class="container content")
                 i
                 span(class="content" href=subscribeItem.href)=subscribeItem.title
                 span(class="time")=new Date(subscribeItem.createTimestamp).toLocaleString()
-
+    div(class="feedback")
 include footer
 
 script(src= static + "js/portal/rem.js?time=" + __time)

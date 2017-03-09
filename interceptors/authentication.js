@@ -23,6 +23,9 @@ module.exports = function* (next) {
     if (!user) {
       throwNeedSignIn(this.language);
     }
+    delete user.secret;
+    delete user.timestamp;
+    
     this.authorized = user;
   }catch(err) {
     this.error = err;

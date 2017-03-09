@@ -783,3 +783,21 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > services/discussService.js  
 
+
+1.0.8 / 2017-3-9 22:0:54
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成吐槽详情页开发
+
+
+### new files
+> template/discussesInfo.pug  
+> template/discussesList.pug  
+
+### modify files
+> interceptors/authentication.js  
+> routers/discuss.js  
+> services/discussService.js  
+> template/home.pug  
+

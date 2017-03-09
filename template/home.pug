@@ -148,9 +148,12 @@ div(class="container content")
                 span(class="content" data-href=subscribeItem.href)=subscribeItem.title
                 span(class="time")=new Date(subscribeItem.createTimestamp).toLocaleString()
     div(class="feedback")
+
 include footer
 
 script(src= static + "js/portal/rem.js?time=" + __time)
+//- script(src= static + "js/portal/bin/home.js?time=" + __time)
+
 script.
   ($ => {
     $(() => {
@@ -202,5 +205,3 @@ script.
 
     });
   })(jQuery);
-
-//- script(src= static + "js/portal/bin/home.js?time=" + __time)

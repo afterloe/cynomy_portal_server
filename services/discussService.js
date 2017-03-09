@@ -65,7 +65,7 @@ function* readDiscusses(id) {
     }
   });
 
-  return notice;
+  return discuss;
 }
 
 module.exports = {

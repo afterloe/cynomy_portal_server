@@ -152,14 +152,19 @@ function* searchByTags(tags) {
   return [];
 }
 
+function* count() {
+  return yield this.find().count();
+}
+
 module.exports = () => ({
-  insert,
-  update,
   checkExist,
+  clean,
+  count,
+  insert,
+  insertMany,
   queryAll,
   queryById,
-  clean,
   remove,
-  insertMany,
   searchByTags,
+  update,
 });

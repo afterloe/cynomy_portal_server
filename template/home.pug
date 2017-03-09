@@ -7,6 +7,7 @@ include header
 - const _subscribe = locals.subscribe || [];
 - const _discuss = locals.discuss || [];
 - const _user = locals.user;
+- const _systemAnnouncementNum = locals.systemAnnouncementNum || 0;
 
 link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
 //- link(href= static + "css/portal/home.css?time=" + __time rel="stylesheet")
@@ -106,7 +107,7 @@ div(class="container content")
 
     div(class=_subscribe.length === 0 ? "mainBox noHelp":"mainBox")
       div(class="catalogShadow")
-        span(class="badge number")=_systemAnnouncement.length
+        span(class="badge number")=_systemAnnouncementNum
         div(class="title")
           span 公告
           span(class="downButton down")

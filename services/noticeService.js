@@ -51,6 +51,11 @@ function* readySystemNotice(id) {
   return notice;
 }
 
+function* getSystemNoticeCount() {
+  const count = yield notice_dao.count();
+  return count ? count : 0;
+}
+
 function* postSystemNotice(title, content) {
   const notice = buildSystemNotice({title, content});
   return yield notice_dao.insert(notice);
@@ -62,6 +67,7 @@ function* getSystemNotice(number, page) {
 
 module.exports = {
   getSystemNotice,
-  readySystemNotice,
+  getSystemCount,
   postSystemNotice,
+  readySystemNotice,
 };

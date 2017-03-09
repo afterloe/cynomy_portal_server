@@ -15,7 +15,7 @@ const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
 const [
   {workflowInfo},
-  {getSystemNotice},
+  {getSystemNotice, getSystemNoticeCount},
 ] = [
   require(resolve(services, "workflowService")),
   require(resolve(services, "noticeService")),
@@ -24,17 +24,13 @@ const [
 
 function* home(next) {
   this.pageName = "home";
-  const announcement = yield getSystemNotice(10);
+  const [announcements, announcementsCount] = yield [getSystemNotice(10), getSystemNoticeCount()];
   const _ = {
     title: "JWI Portal",
     index: 1,
     systemNotice: null,
-    systemAnnouncement: [
-      {title: "官方说明", href:"/portal/workflow/58b003524836347c27fcd784", createTimestamp: 1487919369688},
-      {title: "2017-3-2更新公告", href:"/portal/workflow/58b003524836347c27fcd784", createTimestamp: 1487919369688},
-      {title: "2017-2-29更新公告", href:"/portal/workflow/58b003524836347c27fcd784", createTimestamp: 1487919369688},
-      {title: "2016-12-21更新公告", href:"/portal/workflow/58b003524836347c27fcd784", createTimestamp: 1487919369688},
-    ],
+    systemAnnouncementNum: announcementsCount,
+    systemAnnouncement: announcements.map(announcement => ({title: announcement.title, createTimestamp: announcement.createTimestamp, href:`/notice/${announcement._id}`}))
   };
 
   if (this.error) {

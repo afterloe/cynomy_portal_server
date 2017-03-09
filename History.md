@@ -706,3 +706,17 @@ commit by afterloe (lm6289511@gmail.com)
 > errors/i18nError.json  
 > routers/portal.js  
 
+
+1.0.8 / 2017-3-9 16:5:24
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端完成消息体
+
+
+### modify files
+> dao/public.js  
+> routers/portal.js  
+> services/noticeService.js  
+> template/home.pug  
+

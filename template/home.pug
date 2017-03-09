@@ -6,6 +6,7 @@ include header
 - const _systemAnnouncement = locals.systemAnnouncement || [];
 - const _subscribe = locals.subscribe || [];
 - const _discuss = locals.discuss || [];
+- const _user = locals.user;
 
 link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
 //- link(href= static + "css/portal/home.css?time=" + __time rel="stylesheet")
@@ -24,6 +25,7 @@ style.
   ul, ul li {list-style: none;}
 
   @media (min-width:769px) {
+    .container .structure {min-height: 600px;}
     .portalWhete {display: -webkit-box; height: 0.5em; font-size: 2em;}
     .box header span:nth-child(2) {float: right; margin-right: 0.1rem;}
     .down{transform: rotate(45deg);}
@@ -58,6 +60,7 @@ style.
     .feedback:hover {width:100px; background: url('http://almcloud.jwis.cn/images/portal/2-selected.png') no-repeat center; background-size:contain;}
   }
   @media (max-width:768px) {
+    .container .structure {min-height: 450px;}
     .feedback {display:none;}
     .portalWhete {display: -webkit-box; height: 0.3rem; font-size: 2em;}
     .down{transform: rotate(45deg);}
@@ -93,7 +96,7 @@ div(class="popup")
         div(class="last")
           span 联系方式:
           span
-            input(type="text" placeholder="您的联系方式")
+            input(type="text" placeholder="您的联系方式" value=_user ? _user.mail:null)
           span
             div(class="submit_re" style="cursor:pointer;") 提交
 

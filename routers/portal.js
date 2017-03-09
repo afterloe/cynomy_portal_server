@@ -41,7 +41,9 @@ function* home(next) {
 
   try {
     const user = yield this.getSession();
+    console.log(user);
     Object.assign(_, {
+      user: {mail: user.mail},
       subscribe: [
       {
         title: user.name,
@@ -75,7 +77,8 @@ function* home(next) {
       }]
     });
   } catch (err) {
-    
+    delete _.user;
+    delete _.subscribe;
   }
 
   this.data = _;

@@ -649,3 +649,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/home.pug  
 
+
+1.0.8 / 2017-3-9 14:13:52
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复部分兼容性问题
+
+
+### modify files
+> routers/portal.js  
+> template/home.pug  
+

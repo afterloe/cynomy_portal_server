@@ -1003,3 +1003,15 @@ commit by afterloe (lm6289511@gmail.com)
 > template/home.pug  
 > template/noticeInfo.pug  
 
+
+1.0.8 / 2017-3-10 17:26:10
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 消除数据线
+
+
+### modify files
+> staticFiles/css/portal/workflowInfo.css  
+> staticFiles/js/portal/src/rd/platform.js  
+

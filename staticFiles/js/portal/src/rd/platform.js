@@ -68,12 +68,6 @@ $(function() {
 const uploadTask = (id, file, index) => new Promise((solve, reject) => {
   const [xhr, formData] = [new XMLHttpRequest(), new FormData()];
   formData.append("goods", file);
-  /*
-    xhr.timeout = 15 * 1000;
-    xhr.ontimeout = function (event) {
-        alert("请求超时");
-    };
-  */
   xhr.open("POST", `/fs/update/${id}`);
   xhr.setRequestHeader("Accept", "application/json");
   xhr.send(formData);
@@ -107,37 +101,39 @@ const uploadTask = (id, file, index) => new Promise((solve, reject) => {
 });
 
 const uploadTasks = nodeId => {
-    const tasks = window[UpLoadList].map((object, index) => uploadTask(nodeId, object.file, index));
-    return Promise.all(tasks);
+    for(let index in window[UpLoadList]) {
+      uploadTask(nodeId, window[UpLoadList][index].file, index).then().catch(err => console.log(err));
+    }
 };
 
 const beginUpload = () => {
     const nodeId = $(".processActive").find("dt").attr("data-id");
-    uploadTasks(nodeId).then(data => {
-        window[UpLoadList].length = 0;
-        $(".popup").css("display", "none");
-        $(".dataFile").html("");
-        $.ajax({
-          type: "GET",
-          url: `/workflow/${nodeId}/files`,
-          dataType: "json",
-          beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
-          success: result => {
-            if (401.5 === result.code) {
-              alert("登录许可已失效，请重新获取登录许可");
-              location.href = "/portal/login";
-              return ;
-            }
-            if (200 !== result.code) {
-              alert("服务器繁忙");
-            } else {
-              buildFiles(result.result.produceList);
-            }
-          }
-        });
-    }).catch(err => {
-        err.code === 403? alert("非该项目组成员禁止上传文件") : alert("上传失败 " + err.msg);
-    });
+    uploadTasks(nodeId);
+    // then(data => {
+    //     window[UpLoadList].length = 0;
+    //     $(".popup").css("display", "none");
+    //     $(".dataFile").html("");
+    //     $.ajax({
+    //       type: "GET",
+    //       url: `/workflow/${nodeId}/files`,
+    //       dataType: "json",
+    //       beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
+    //       success: result => {
+    //         if (401.5 === result.code) {
+    //           alert("登录许可已失效，请重新获取登录许可");
+    //           location.href = "/portal/login";
+    //           return ;
+    //         }
+    //         if (200 !== result.code) {
+    //           alert("服务器繁忙");
+    //         } else {
+    //           buildFiles(result.result.produceList);
+    //         }
+    //       }
+    //     });
+    // }).catch(err => {
+    //     err.code === 403? alert("非该项目组成员禁止上传文件") : alert("上传失败 " + err.msg);
+    // });
 };
 
 const delUploadFileList = btn => {

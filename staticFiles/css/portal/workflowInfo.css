@@ -100,7 +100,7 @@
       .detail {background: url(../../images/portal/detail.png) no-repeat center 13px; display: inline-block; width: 30px; height: 50px; cursor: pointer; float: right;}
       .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 13px;}
       .data{margin-top:15px;margin-left:40px;min-width:810px;}
-      .data li{height:66px;border-left:1px solid #dbdbdb;}
+      .data li{height:66px;}
       .data li div{height:66px;width:100%;}
       .data li div i{display: inline-block;  width: 16px; height: 16px; border-radius: 50%;background:#dbdbdb;float:left;margin-left:-8px;}
       .data li div span{display: inline-block;float:left;width:140px;text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
@@ -245,7 +245,7 @@
       .dataBox{background:#f2f2f2;border-radius:5px;}
       .dataBox .header{height: 0.5rem;line-height: 0.5rem;font-size: 0.26rem;border-bottom: 1px solid #dbdbdb;padding-left: 0.35rem;}
       .data{margin-top: 0.15rem;/* margin-left: 0.4rem; */width: 100%;}
-      .data li{margin-left: 0.2rem;height: 1rem;border-left: 1px solid #dbdbdb;width:98%;}
+      .data li{margin-left: 0.2rem;height: 1rem;width:98%;}
       .data li div{height: 1rem;width: 100%;}
       .data li div i{display: inline-block;width: 0.16rem;height: 0.16rem;border-radius: 50%;background: #dbdbdb;float: left;margin-left: -0.08rem;/* margin-top: 0.08rem;/* margin-top: 0.08rem; */}
       .data li div span{margin-top: -0.05rem;display: inline-block;float: left;width: 1.85rem;text-align: center;height: 0.5rem;}

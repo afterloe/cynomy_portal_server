@@ -868,3 +868,15 @@ commit by afterloe (lm6289511@gmail.com)
 > template/discussesList.pug  
 > template/header.pug  
 
+
+1.0.8 / 2017-3-10 11:43:8
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端添加信息
+
+
+### modify files
+> template/discussesInfo.pug  
+> template/discussesList.pug  
+

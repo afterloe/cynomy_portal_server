@@ -69,6 +69,8 @@ div(class="container content")
     span(class="portalWhete")
     ol(class="breadcrumb")
       li
+        a(href="/portal/home") 首页
+      li(class="active")
         a(href="/discuss/50/1") 全部讨论
     each discuss in _list
       div(class="mainDiscusses" data-id=discuss._id)

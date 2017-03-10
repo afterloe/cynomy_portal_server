@@ -962,3 +962,20 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > routers/notice.js  
 
+
+1.0.8 / 2017-3-10 16:53:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 公告内容展示优化
+
+
+### new files
+> tools/webTools/lib/src/jbase64.js  
+
+### modify files
+> servers/lib/servicesCenter.js  
+> template/noticeInfo.pug  
+> tools/webTools/dataManager.html  
+> tools/webTools/lib/src/util.js  
+

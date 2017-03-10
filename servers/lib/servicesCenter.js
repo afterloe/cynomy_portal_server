@@ -41,7 +41,16 @@ module[REFISTRY].set("userService", userService);
 module[REFISTRY].set("goodsService", goodsService);
 module[REFISTRY].set("tagsService", tagsService);
 module[REFISTRY].set("systemService", {
-  systemInfo, hardDiskInfo, memoryInfo, postSystemNotice, postAnnouncement
+  systemInfo, hardDiskInfo, memoryInfo,
+  postSystemNotice: function* (content, timeout) {
+    content = new Buffer(content, "base64").toString("utf8");
+    return yield* postSystemNotice(content, timeout);
+  },
+  postAnnouncement: function* (title, content) {
+    title = new Buffer(title, "base64").toString("utf8");
+    content = new Buffer(content, "base64").toString("utf8");
+    return yield* postAnnouncement(title, content);
+  }
 });
 
 /**

@@ -411,7 +411,7 @@ $("#module-ok-askdeleteTag").click(() => {
 $("#module-ok-postNotice").bind("click", function() {
     const form = $(this).parent().parent().find("form");
     const notice = form.find("textarea").val();
-    websocket.send(`node-manager->systemService->postSystemNotice("${notice}")`);
+    websocket.send(`node-manager->systemService->postSystemNotice("${BASE64.encoder(notice)}")`);
     $("#postNotice").modal("toggle");
 });
 
@@ -420,6 +420,6 @@ $("#module-ok-postAnnouncements").bind("click", function() {
     const form = $(this).parent().parent().find("form");
     const title = form.find("input").val();
     const content = form.find("textarea").val();
-    websocket.send(`node-manager->systemService->postAnnouncement("${title}" | "${content}")`);
+    websocket.send(`node-manager->systemService->postAnnouncement("${BASE64.encoder(title)}"|"${BASE64.encoder(content)}")`);
     $("#postAnnouncements").modal("toggle");
 });

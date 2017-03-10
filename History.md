@@ -855,3 +855,16 @@ commit by afterloe (lm6289511@gmail.com)
 > template/discussesList.pug  
 > template/home.pug  
 
+
+1.0.8 / 2017-3-10 11:38:9
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复320宽度下的现实问题
+
+
+### modify files
+> template/discussesInfo.pug  
+> template/discussesList.pug  
+> template/header.pug  
+

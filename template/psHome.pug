@@ -29,8 +29,17 @@ style.
 div(class="container content")
   div(class="container structure")
     span(class="portalWhete")
+    iframe(id="myiframe" src="http://almcloud.jwis.cn/website/info.html" width="100%" onload="changeFrameHeight()" frameborder="0")
 
 include footer
 
 script(src= static + "js/portal/rem.js?time=" + __time)
 //- script(src= static + "js/portal/bin/ps/home.js?time=" + __time)
+
+script.
+  const changeFrameHeight = () => {
+    const ifm = document.getElementById("myiframe");
+    ifm.height = window.screen.height;
+  };
+
+  window.onresize= () => changeFrameHeight();

@@ -880,3 +880,15 @@ commit by afterloe (lm6289511@gmail.com)
 > template/discussesInfo.pug  
 > template/discussesList.pug  
 
+
+1.0.8 / 2017-3-10 13:42:50
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 自主交付部首页修改
+
+
+### modify files
+> template/adHome.pug  
+> template/psHome.pug  
+

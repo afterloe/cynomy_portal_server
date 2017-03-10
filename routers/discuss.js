@@ -79,7 +79,10 @@ function* list(next) {
   try {
     const {number, page} = this.params;
     const list = yield getDiscussesList(number, page);
-    this.data = list;
+    this.data = {
+      title: "JWI Portal Discuss",
+      list,
+    };
     this.pageName = "discussesList";
   } catch (error) {
     this.error = error;

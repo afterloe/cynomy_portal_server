@@ -26,6 +26,8 @@ style.
   ul{margin-bottom:0;}
   ul, ul li {list-style: none;}
 
+  .name {cursor:pointer;}
+
   @media (min-width:769px) {
     .container .structure {min-height: 600px;}
     .portalWhete {display: -webkit-box; height: 0.5em; font-size: 2em;}
@@ -110,7 +112,7 @@ div(class="container content")
       div(class="catalogShadow")
         span(class="badge number")=_systemAnnouncementNum
         div(class="title")
-          span 公告
+          span(class="name" onClick="javascript:openNotice();") 公告
           span(class="downButton down")
       ul(class="data")
         each announcement in _systemAnnouncement
@@ -123,7 +125,7 @@ div(class="container content")
       div(class="catalogShadow")
         span(class="badge number")=_discussCount
         div(class="title")
-          span 热点讨论
+          span(class="name" onClick="javascript:openDiscuss();") 热点讨论
           span(class="downButton down")
       ul(class="data")
         each discus in _discuss
@@ -155,6 +157,9 @@ script(src= static + "js/portal/rem.js?time=" + __time)
 //- script(src= static + "js/portal/bin/home.js?time=" + __time)
 
 script.
+
+  const openNotice = () => location.href = `/notice/50/1`;
+  const openDiscuss = () => location.href = `/discuss/50/1`;
   ($ => {
     $(() => {
 

@@ -2,6 +2,8 @@
 
 include header
 
+- const _list = locals.list || [];
+
 link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
 //- link(href= static + "css/portal/discussesList.css?time=" + __time rel="stylesheet")
 
@@ -18,9 +20,26 @@ style.
   ul{margin-bottom:0;}
   ul, ul li {list-style: none;}
 
+  .breadcrumb>li+li:before {content: ">";}
+  .breadcrumb {background-color: rgb(255, 255, 255);}
+  a:focus, a:hover{text-decoration: none;}
+
   @media (min-width:769px) {
     .container .structure {min-height: 600px;}
     .portalWhete {display: -webkit-box; height: 0.5em; font-size: 2em;}
+    .mainDiscusses {margin: 0.3rem; border: 0.01rem solid #eee; padding: 0.2rem 0 0 0.2rem; background-color: #f5f5f5; cursor: default;}
+    .discussHeader .userAvatar {display: inline-block; width: 0.61rem; height: 0.61rem; background: url('http://almcloud.jwis.cn/images/avatar-default.png') no-repeat center; background-size:contain;}
+    .discussHeader .userInfo {display: inline-block; vertical-align: super; margin-left: 0.1rem;}
+    .userInfo .userName {display: block; font-size: 0.2rem; margin-bottom: 0.1rem;}
+    .userInfo .postTime {display: block;}
+    .discussContent .content {margin: 0.2rem 0 0.3rem 0.3rem;}
+    .discussContent {font-size: 0.18rem; margin-bottom: 0.1rem;}
+    .mainDiscusses i {display: block; width: 98%; height: 0.01rem; background-color: #eee; margin-bottom: 0.1rem;}
+    .discussFooter {margin-right: 0.1rem; color: #337ab7; cursor: default; text-align: center; margin-bottom: 0.1rem}
+    .discussFooter span {border-left: 0.01rem solid #999; width:3rem; display: inline-block; line-height: 0.3rem; text-align: center; cursor: pointer;}
+    .discussFooter span:first-child {border-left: none; cursor:default;}
+    .discussFooter span:hover {background: -webkit-radial-gradient(100% 100%,rgba(224, 215, 215, 0.09) 94%,rgba(255, 255, 255, 0.29) 32%);}
+    .discussFooter span:first-child:hover {background-color:whitesmoke;background: none;}
   }
 
   @media (max-width:768px) {
@@ -30,8 +49,35 @@ style.
 div(class="container content")
   div(class="container structure")
     span(class="portalWhete")
+    ol(class="breadcrumb")
+      li
+        a(href="/discuss/50/1") 全部讨论
+    each discuss in _list
+      div(class="mainDiscusses" data-id=discuss._id)
+        div(class="discussHeader")
+          span(class="userAvatar")
+          div(class="userInfo")
+            span(class="userName")=`${discuss.user.name}(${discuss.user.mail})`
+            span(class="postTime")=new Date(discuss.createTimestamp).toLocaleString()
+        div(class="discussContent")
+          div(class="content")=discuss.content
+        i
+        div(class="discussFooter")
+          span=`阅读量(${discuss.readCount})`
+          span 评论
+          span 点赞
 
 include footer
 
 script(src= static + "js/portal/rem.js?time=" + __time)
 //- script(src= static + "js/portal/bin/discussesList.js?time=" + __time)
+
+script.
+  ($ => {
+    $(() => {
+      $(".discussFooter").on("click", "span:eq(1)", function() {
+        const discuss_id = $(this).parent().parent().attr("data-id");
+        location.href = `/discuss/${discuss_id}`;
+      });
+    });
+  })(jQuery);

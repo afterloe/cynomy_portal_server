@@ -842,3 +842,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/discuss.js  
 > template/discussesInfo.pug  
 
+
+1.0.8 / 2017-3-10 11:16:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成前端反馈列表页面
+
+
+### modify files
+> routers/discuss.js  
+> template/discussesList.pug  
+> template/home.pug  
+

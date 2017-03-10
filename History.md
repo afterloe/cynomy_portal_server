@@ -892,3 +892,16 @@ commit by afterloe (lm6289511@gmail.com)
 > template/adHome.pug  
 > template/psHome.pug  
 
+
+1.0.8 / 2017-3-10 14:25:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 工具添加公告管理
+
+
+### modify files
+> tools/webTools/dataManager.html  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/util.js  
+

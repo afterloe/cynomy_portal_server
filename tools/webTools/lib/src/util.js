@@ -245,6 +245,7 @@ $("#overwrite").click(function() {
     clickFunction($(this));
     $("#userInfo").hide();
     $("#workflowInfo").hide();
+    $("#noticeInfo").hide();
     $("#filesInfo").hide();
     $("#tagsInfo").hide();
     $("#overwriteInfo").show();
@@ -257,6 +258,7 @@ $("#nav-userInfo").click(function() {
     $("#userInfo").show();
     $("#workflowInfo").hide();
     $("#tagsInfo").hide();
+    $("#noticeInfo").hide();
     $("#filesInfo").hide();
     $("#overwriteInfo").hide();
 });
@@ -272,6 +274,7 @@ $("#nav-workflowInfo").click(function() {
     $("#workflowInfo").show();
     $("#tagsInfo").hide();
     $("#filesInfo").hide();
+    $("#noticeInfo").hide();
     $("#overwriteInfo").hide();
 });
 
@@ -284,6 +287,7 @@ $("#nav-tags").click(function() {
     $("#filesInfo").hide();
     $("#tagsInfo").show();
     $("#overwriteInfo").hide();
+    $("#noticeInfo").hide();
 });
 
 // 文件信息
@@ -295,6 +299,18 @@ $("#nav-filesInfo").click(function() {
     $("#workflowInfo").hide();
     $("#filesInfo").show();
     $("#overwriteInfo").hide();
+    $("#noticeInfo").hide();
+});
+
+// 公告管理
+$("#nav-noticeInfo").click(function() {
+    clickFunction($(this));
+    $("#userInfo").hide();
+    $("#tagsInfo").hide();
+    $("#workflowInfo").hide();
+    $("#filesInfo").hide();
+    $("#overwriteInfo").hide();
+    $("#noticeInfo").show();
 });
 
 // 导入用户数据功能 实现

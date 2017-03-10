@@ -990,3 +990,16 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > routers/portal.js  
 
+
+1.0.8 / 2017-3-10 17:13:57
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复detail单击时放大的异常，屏蔽首页大部分信息
+
+
+### modify files
+> staticFiles/css/portal/rd/platform.css  
+> template/home.pug  
+> template/noticeInfo.pug  
+

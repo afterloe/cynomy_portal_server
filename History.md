@@ -830,3 +830,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > dao/public.js  
 
+
+1.0.8 / 2017-3-10 9:57:38
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端反馈单页面查看完成
+
+
+### modify files
+> routers/discuss.js  
+> template/discussesInfo.pug  
+

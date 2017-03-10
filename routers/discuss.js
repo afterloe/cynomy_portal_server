@@ -59,9 +59,12 @@ function* info(next) {
     return yield next;
   }
   try {
-    // const {id} = this.params;
-    // const discuss = yield readDiscusses(id);
-    // this.data = discuss;
+    const {id} = this.params;
+    const discuss = yield readDiscusses(id);
+    this.data = {
+      titile: discuss.title,
+      discuss,
+    };
     this.pageName = "discussesInfo";
   } catch (error) {
     this.error = error;

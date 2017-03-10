@@ -2,6 +2,9 @@
 
 include header
 
+- const _discuss = locals.discuss || {};
+- const _user = _discuss.user || {};
+
 link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
 //- link(href= static + "css/portal/discussesInfo.css?time=" + __time rel="stylesheet")
 
@@ -20,13 +23,13 @@ style.
 
   .breadcrumb>li+li:before {content: ">";}
   .breadcrumb {background-color: rgb(255, 255, 255);}
-  a:hover{text-decoration: none;}
+  a:focus, a:hover{text-decoration: none;}
 
   @media (min-width:769px) {
     .container .structure {min-height: 600px;}
     .portalWhete {display: -webkit-box; height: 0.5em;}
     .mainDiscusses {margin-left: 0.3rem;}
-    .discussHeader .userAvatar {display: inline-block; width: 0.61rem; height: 0.61rem; background: url('http://120.76.75.179/service/appresource/images/weipiaoer.png') no-repeat center; background-size:contain;}
+    .discussHeader .userAvatar {display: inline-block; width: 0.61rem; height: 0.61rem; background: url('http://almcloud.jwis.cn/images/avatar-default.png') no-repeat center; background-size:contain;}
     .discussHeader .userName {display: inline-block; font-size: 0.2rem; vertical-align: super; margin-left: 0.1rem; margin-bottom: 0.1rem;}
     .discussContent {font-size: 0.18rem; margin-bottom: 0.1rem;}
     .discussFooter {margin-right: 0.1rem;color: #9d9d9d;cursor: default;}
@@ -59,20 +62,19 @@ div(class="container content")
       li
         a(href="/discuss/50/1") 全部讨论
       li(class="active")
-        a(href="#") 那我来试试如...
-
+        a(href="#")=_discuss.title
     div(class="mainDiscusses")
       div(class="discussHeader")
         span(class="userAvatar")
-        span(class="userName") per(per@plmchina.net)
-      div(class="discussContent") 那我来试试如果字符长度大雨10会怎么养呢个？好饱
+        span(class="userName")=`${_user.name}(${_user.mail})`
+      div(class="discussContent")=_discuss.content
       div(class="discussFooter")
         div(class="discussOption")
           span 点赞
           span 评论
         div(class="discussInfo")
-          span 2017-3-9 17:29:41
-          span 阅读量(2)
+          span=new Date(_discuss.createTimestamp).toLocaleString()
+          span=`阅读量(${_discuss.readCount})`
 
 
 include footer

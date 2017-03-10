@@ -14,7 +14,7 @@
 const {resolve} = require("path");
 
 const [
-  {get, set},
+  {get, set, del},
   {throwNosuchThisNotice},
 ] = [
   require(resolve(__dirname, "redisService")),
@@ -35,7 +35,12 @@ function* getSystemNotice(number, page) {
   return value;
 }
 
+function* cleanNotice() {
+  return yield del(module[KEY]);
+}
+
 module.exports = {
+  cleanNotice,
   getSystemNotice,
   postSystemNotice,
 };

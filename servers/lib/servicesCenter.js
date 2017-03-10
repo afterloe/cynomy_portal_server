@@ -21,7 +21,7 @@ const [
   goodsService,
   tagsService,
   {systemInfo, hardDiskInfo, memoryInfo},
-  {postSystemNotice},
+  {postSystemNotice, cleanNotice},
   {postAnnouncement},
 ] = [
   require(resolve(services, "workflowService")),
@@ -41,7 +41,7 @@ module[REFISTRY].set("userService", userService);
 module[REFISTRY].set("goodsService", goodsService);
 module[REFISTRY].set("tagsService", tagsService);
 module[REFISTRY].set("systemService", {
-  systemInfo, hardDiskInfo, memoryInfo,
+  systemInfo, hardDiskInfo, memoryInfo, cleanNotice,
   postSystemNotice: function* (content, timeout) {
     content = new Buffer(content, "base64").toString("utf8");
     return yield* postSystemNotice(content, timeout);

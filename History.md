@@ -1015,3 +1015,17 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/css/portal/workflowInfo.css  
 > staticFiles/js/portal/src/rd/platform.js  
 
+
+1.0.8 / 2017-3-10 17:37:21
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 清除通知
+
+
+### modify files
+> servers/lib/servicesCenter.js  
+> services/noticeService.js  
+> tools/webTools/dataManager.html  
+> tools/webTools/lib/src/util.js  
+

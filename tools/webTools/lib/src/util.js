@@ -423,3 +423,8 @@ $("#module-ok-postAnnouncements").bind("click", function() {
     websocket.send(`node-manager->systemService->postAnnouncement("${BASE64.encoder(title)}"|"${BASE64.encoder(content)}")`);
     $("#postAnnouncements").modal("toggle");
 });
+
+// 清除通知
+const clearNotice = () => {
+  websocket.send(`node-manager->systemService->cleanNotice`);
+}

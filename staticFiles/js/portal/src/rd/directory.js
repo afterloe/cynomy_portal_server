@@ -1,3 +1,5 @@
+"use strict";
+
 $(function() {
     //弹窗出来后的一些操作
     var input = document.getElementById("source");

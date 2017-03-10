@@ -1,0 +1,46 @@
+//- create by afterloe on 2017-2-14 14:58:37 - MIT
+
+include header
+
+link(href= static + "css/portal/rd/home.css?time=" + __time rel="stylesheet")
+
+div(class="menu" style="display: none;")
+  p(class="addNext") 新增同级
+  p(class="addSub") 新增子级
+  p(class="del") 删除
+
+table(class="table" style="display:none")
+  tbody
+    tr(class="platform")
+      td(class="platformName")
+        input(type="text"  value="" placeholder="平台名")
+      td(class="platformDetail")
+        div(class="product")
+          div(class="productInfo")
+            input(class="productName" type="text" value="" placeholder="平台名")
+            span(class="productLink")
+            input(class="linkURL" type="text" value="" placeholder="下载地址或官网地址")
+          ul(class="nav nav-tabs productStatus")
+            li( style="display:none;")
+              span(class="icon")
+              span(class="line") &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+
+div(class="container content")
+  div(class="container structure")
+    ul(class="dir-menu")
+      div(class="feedback")
+      li(data-path="platform" class="first dir-platform selected")
+      li(data-path="product" class="dir-product")
+      li(data-path="directory" class="dir-public")
+    div(class="catalogShadow")
+      div(class="catalogMark currentCataMark1")
+      div(class="catalogMark currentCataMark2")
+      div(class="catalogMark currentCataMark3")
+      div(class="save")
+    div(class="table-responsive")
+      table(class="table")
+        tbody
+
+include footer
+
+script(src= static + "js/portal/bin/rd/home.js?time=" + __time)

@@ -77,7 +77,7 @@ const nodeFiles = function* (next) {
   return yield next;
 };
 
-const overviewsPlatform = function* (next) {
+const rdOverviewsPlatform = function* (next) {
   if (this.error) {
     return yield next;
   }
@@ -105,7 +105,7 @@ const overviewsPlatform = function* (next) {
   return yield next;
 };
 
-const overviewsProduct = function* (next) {
+const rdOverviewsProduct = function* (next) {
   if (this.error) {
     return yield next;
   }
@@ -133,7 +133,7 @@ const overviewsProduct = function* (next) {
   return yield next;
 };
 
-const overviewsDirectory = function* (next) {
+const rdOverviewsDirectory = function* (next) {
   if (this.error) {
     return yield next;
   }
@@ -190,8 +190,8 @@ module.exports = {
   nodeFiles,
   simpleInfo,
   detail,
-  overviewsPlatform,
-  overviewsProduct,
-  overviewsDirectory,
+  rdOverviewsPlatform,
+  rdOverviewsProduct,
+  rdOverviewsDirectory,
   nodeInstance,
 };

@@ -88,11 +88,16 @@
     "code": "401.4",
     "en-US": "security code error",
     "zh-CN": "安全码错误"
-  },  
+  },
   "OauthError": {
     "code": "403",
     "en-US": "authentication fail",
     "zh-CN": "授权不足"
+  },
+  "NosuchThisNotice": {
+    "code": "404",
+    "en-US": "notification does not exist",
+    "zh-CN": "通知不存在"
   },
   "NotExistsFile": {
     "code": "404",

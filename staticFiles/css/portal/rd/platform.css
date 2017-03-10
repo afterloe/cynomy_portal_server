@@ -138,19 +138,14 @@ input {
     .tabIcon_development{background-image:url(../../images/portal/development.png);}
     .tabIcon_test{background-image:url(../../images/portal/test.png);}
     .tabIcon_release{background-image:url(../../images/portal/release.png);}
-
-
     .tab_process dl.processActive dt span{color:#00a1df}
-
-
-
     .tab_content{margin-left:100px;margin-right:100px;width:920px;overflow: hidden;position: relative;}
     .dataBox{background:#f2f2f2;border-radius:5px;}
     .dataBox .header{height: 50px;line-height: 50px;font-size: 20px;border-bottom: 1px solid #dbdbdb;padding-left: 35px;}
     .upload{background:url(../../images/portal/upload.png) no-repeat center 13px; display: inline-block;width:100px;height:50px;cursor:pointer;float:right;}
     .upload:hover{background:url(../../images/portal/upload1.png) no-repeat center 13px;}
-    .detail {background: url(../../images/portal/detail.png) no-repeat center 13px; display: inline-block; width: 30px; height: 50px; cursor: pointer; float: right;}
-    .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 13px;}
+    .detail {background: url(../../images/portal/detail.png) no-repeat center 9px; display: inline-block; width: 30px; height: 50px; cursor: pointer; float: right;}
+    .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 9px;}
     .data{margin-top:15px;margin-left:40px;min-width:810px;}
     .data li{height:66px;border-left:1px solid #dbdbdb;}
     .data li div{height:66px;width:100%;}
@@ -304,5 +299,5 @@ input {
     .data li:last-child{border-left:0;}
     .data li:first-child div i{background:#3d9bff;}
     .detail {background: url(../../images/portal/detail.png) no-repeat center 0.05rem; cursor: pointer; float: right; height: 0.5rem; line-height: 0.5rem; width: 0.4rem; background-size: contain; margin-right: 0.4rem}
-    .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 0.05rem;}
+    .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 0.05rem; background-size: contain;}
 }

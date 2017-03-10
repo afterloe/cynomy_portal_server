@@ -1,0 +1,36 @@
+//- create by afterloe on 2017-3-9 17:45:22 - MIT
+
+include header
+
+- const _list = locals.list || [];
+
+link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
+link(href= static + "css/portal/discussesList.css?time=" + __time rel="stylesheet")
+
+div(class="container content")
+  div(class="container structure")
+    span(class="portalWhete")
+    ol(class="breadcrumb")
+      li
+        a(href="/portal/home") 首页
+      li(class="active")
+        a(href="/discuss/50/1") 全部讨论
+    each discuss in _list
+      div(class="mainDiscusses" data-id=discuss._id)
+        div(class="discussHeader")
+          span(class="userAvatar")
+          div(class="userInfo")
+            span(class="userName")=`${discuss.user.name}(${discuss.user.mail})`
+            span(class="postTime")=new Date(discuss.createTimestamp).toLocaleString()
+        div(class="discussContent")
+          div(class="content")=discuss.content
+        i
+        div(class="discussFooter")
+          span=`阅读量(${discuss.readCount})`
+          span 评论
+          span 点赞
+
+include footer
+
+script(src= static + "js/portal/rem.js?time=" + __time)
+script(src= static + "js/portal/bin/discussesList.js?time=" + __time)

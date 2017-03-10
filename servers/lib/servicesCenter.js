@@ -15,9 +15,23 @@ const {resolve} = require("path");
 const {throwNoThisFunction, throwNoThisServer, throwOperationFailed} = require(resolve(__dirname, "..", "..", "errors"));
 const services = resolve(resolve(__dirname, "..", "..", "services"));
 
-const [workflowService, userService, goodsService, tagsService, {systemInfo, hardDiskInfo, memoryInfo}] = [
-  require(resolve(services, "workflowService")), require(resolve(services, "userService")), require(resolve(services, "goodsService")),
-  require(resolve(services, "tagsService")), require(resolve(services, "fileSystem"))];
+const [
+  workflowService,
+  userService,
+  goodsService,
+  tagsService,
+  {systemInfo, hardDiskInfo, memoryInfo},
+  {postSystemNotice, cleanNotice},
+  {postAnnouncement},
+] = [
+  require(resolve(services, "workflowService")),
+  require(resolve(services, "userService")),
+  require(resolve(services, "goodsService")),
+  require(resolve(services, "tagsService")),
+  require(resolve(services, "fileSystem")),
+  require(resolve(services, "noticeService")),
+  require(resolve(services, "announcementService")),
+];
 
 const REFISTRY = Symbol("REFISTRY");
 module[REFISTRY] = new Map();
@@ -27,7 +41,16 @@ module[REFISTRY].set("userService", userService);
 module[REFISTRY].set("goodsService", goodsService);
 module[REFISTRY].set("tagsService", tagsService);
 module[REFISTRY].set("systemService", {
-  systemInfo, hardDiskInfo, memoryInfo
+  systemInfo, hardDiskInfo, memoryInfo, cleanNotice,
+  postSystemNotice: function* (content, timeout) {
+    content = new Buffer(content, "base64").toString("utf8");
+    return yield* postSystemNotice(content, timeout);
+  },
+  postAnnouncement: function* (title, content) {
+    title = new Buffer(title, "base64").toString("utf8");
+    content = new Buffer(content, "base64").toString("utf8");
+    return yield* postAnnouncement(title, content);
+  }
 });
 
 /**

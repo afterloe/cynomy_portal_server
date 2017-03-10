@@ -12,7 +12,7 @@
 "use strict";
 
 const {resolve} = require("path");
-const {throwLackParameters, throwParametersError} = require(resolve(__dirname, "..", "errors"));
+const {throwParametersError} = require(resolve(__dirname, "..", "errors"));
 
 /**
  * 更新文档信息
@@ -38,10 +38,6 @@ function* update (_document) {
  * @return {Generator}           [数据库操作函数，使用co或next来驱动]
  */
 function* insert (_) {
-  if (!_.name) {
-    throwLackParameters(null, "name");
-    return ;
-  }
 
   if (!_.state) {
     _.state = 200;
@@ -125,6 +121,8 @@ function* queryById(_, state) {
  * @return {Array}                               [文档数组]
  */
 function* queryAll(filed = {}, number = 100, page = 0, order = "createTimestamp") {
+  number = Number.parseInt(number);
+  page = Number.parseInt(page);
   page < 1 ? page = 0 : page--;
   return yield this.find({
     state : 200
@@ -152,14 +150,19 @@ function* searchByTags(tags) {
   return [];
 }
 
+function* count() {
+  return yield this.find().count();
+}
+
 module.exports = () => ({
-  insert,
-  update,
   checkExist,
+  clean,
+  count,
+  insert,
+  insertMany,
   queryAll,
   queryById,
-  clean,
   remove,
-  insertMany,
   searchByTags,
+  update,
 });

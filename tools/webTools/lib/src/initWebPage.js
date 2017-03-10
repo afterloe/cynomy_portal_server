@@ -16,8 +16,73 @@ window[MODULE] = [];
 
 // window[MODULE].push();
 // window[MODULE].push();
-// window[MODULE].push();
-// window[MODULE].push();
+/**
+ * 发通知
+ * @type {String}
+ */
+window[MODULE].push(`
+  <div class="modal fade bd-example-modal-lg" id="postNotice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">发送系统通知</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+                <label>通知内容</label>
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-outline-success" id="module-ok-postNotice">发布</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`);
+
+/**
+ * 发公告
+ * @type {String}
+ */
+window[MODULE].push(`
+<div class="modal fade bd-example-modal-lg" id="postAnnouncements" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          <h4 class="modal-title">发布公告</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label>公告标题</label>
+            <input type="text" class="form-control" placeholder="请输入公告标题">
+          </div>
+          <div class="form-group">
+              <label>公告正文</label>
+              <textarea class="form-control" rows="10"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-outline-success" id="module-ok-postAnnouncements">发布</button>
+      </div>
+    </div>
+  </div>
+</div>
+`);
 
 /**
  * 工作流节点管理
@@ -36,14 +101,14 @@ window[MODULE].push(`
       </div>
       <div class="modal-body">
 
-        <div class="carousel slide" id="nodeInstanceView" data-ride="carousel">
+        <div class="carousel slide" id="nodeInstanceView">
           <ol class="carousel-indicators"></ol>
-          <div class="carousel-inner" role="listbox"></div>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <div class="carousel-inner"></div>
+          <a class="carousel-control-prev" href="#nodeInstanceManager" onClick="javascript:prevCarousel(this);">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
           </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <a class="carousel-control-next" href="#nodeInstanceManager" onClick="javascript:nextCarousel(this);">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
           </a>
@@ -59,10 +124,10 @@ window[MODULE].push(`
            <label calss="card-title">SVN地址：</label>
            <p class="card-text">
              <div class="form-group">
-              <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="输入svn地址..">
+              <input class="form-control" placeholder="输入svn地址..">
               <small id="emailHelp" class="form-text text-muted">SVN地址为portal日后扫描文件的地方，请正确设置</small>
              </div>
-             <a href="javascript:void(0);" class="btn btn-outline-primary btn-sm pull-right">提交</a>
+             <a href="javascript:void(0);" onClick="javascript:setSVNAddress(this);" class="btn btn-outline-primary btn-sm pull-right">提交</a>
            </p>
           </div>
         </div>
@@ -425,8 +490,7 @@ window[MODULE].push(`<div class="modal fade bd-example-modal-lg" id="membersMana
       <div class="modal-body">
         <div class="row">
           <label class="col-3 col-form-label">已有成员:</label>
-          <div class="col-8 memberList">
-          </div>
+          <div class="col-8 memberList"></div>
           <span>
             <a class="btn btn-outline-success btn-sm" data-toggle="collapse" href="#addUserToMembers" aria-expanded="false" aria-controls="collapseExample">
               +

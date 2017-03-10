@@ -29,11 +29,33 @@ const parseLanguage = header => {
   return language;
 };
 
+const delHtmlTag = str => str.replace(/<[^>]+>/g,"");
+
+const filter = (object = {}) => {
+    let filterObject = {};
+
+    for (let key in object) {
+        let value = object[key];
+        value = "string" === typeof value ? delHtmlTag(value) : value;
+        key = delHtmlTag(key);
+        filterObject[key] = value;
+    }
+
+    return filterObject;
+};
+
 module.exports = function* (next) {
   let [start, cookie, requestIp, header, __self] = [Date.now(), this.cookies.get(key), this.request.ip,
     this.request.header, this];
-    
+
+  let {params, request, query} = __self;
+
+  this["request"].body = filter(request.body);
+  this.params = filter(params);
+  this.query = filter(query);
+
   const {token} = header;
+
   if (!cookie) {
     cookie = token;
   }

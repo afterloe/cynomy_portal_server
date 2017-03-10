@@ -1,0 +1,39 @@
+//- create by afterloe on 2017-3-9 17:45:13 - MIT
+
+include header
+
+- const _discuss = locals.discuss || {};
+- const _user = _discuss.user || {};
+
+link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
+link(href= static + "css/portal/discussesInfo.css?time=" + __time rel="stylesheet")
+
+div(class="container content")
+  div(class="container structure")
+    span(class="portalWhete")
+
+    ol(class="breadcrumb")
+      li
+        a(href="/portal/home") 首页
+      li
+        a(href="/discuss/50/1") 全部讨论
+      li(class="active")
+        a(href="#")=_discuss.title
+    div(class="mainDiscusses")
+      div(class="discussHeader")
+        span(class="userAvatar")
+        span(class="userName")=`${_user.name}(${_user.mail})`
+      div(class="discussContent")=_discuss.content
+      div(class="discussFooter")
+        div(class="discussOption")
+          span 点赞
+          span 评论
+        div(class="discussInfo")
+          span=new Date(_discuss.createTimestamp).toLocaleString()
+          span=`阅读量(${_discuss.readCount})`
+
+
+include footer
+
+script(src= static + "js/portal/rem.js?time=" + __time)
+//- script(src= static + "js/portal/bin/discussesInfo.js?time=" + __time)

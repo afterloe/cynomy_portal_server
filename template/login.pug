@@ -1,5 +1,8 @@
 //- create by afterloe on 2017-2-14 10:53:52 - MIT
 
+- const __time = locals.systemVersion || "";
+- const __href = locals.href || "/portal/home";
+
 doctype html
 html(lang="en")
   head
@@ -16,24 +19,36 @@ html(lang="en")
       div(class="container login_center")
         div(class="row")
           div(class="col-xs-12 col-sm-12 col-md-12")
-            img(src= static + "images/portal/logoin.png" alt="")
+            img(src= static + "images/portal/loginLogo.png" alt="")
       div(class="container container_login")
-        div(class="form-horizontal form_login" id="fm")
+        div(class="form-horizontal form_login" id="fm" data-href=__href)
           div(class="form-group")
             div(class="col-md-12 col-sm-12 col-sm-12 radius")
-              input(type="text" id="userName" placeholder="请输入公司邮箱" autocomplete="off")
+              input(type="email" id="userName" aria-describedby="emailHelp" placeholder="请输入邮箱" autocomplete="off")
           div(class="error")
             span(style="display: none;" id="error") 错误提示语
           div(class="form-group")
             div(class="col-md-12 col-sm-12 col-sm-12 radius")
-              input(type="password" id="userPassword" placeholder="输入登录许可" autocomplete="off" name="password")
+              input(type="password" id="userPassword" placeholder="请输入密码" autocomplete="off" name="password")
           div(class="form-group")
             div(class="col-md-12 col-sm-12 col-sm-12")
               small(form-text text-muted)
-                a(href="#" class="pull-right" id="obmitLoginPermit") 获取登录许可
+                a(href="#" class="pull-right" onClick="javascript:forgetPassword();") 忘记密码
           div(class="form-group")
-            div(id="btn" class="col-md-12 col-sm-12 col-sm-12 radius last")
-              button
+            div(onClick="javascript:loginSystem(this);" class="col-md-12 col-sm-12 col-sm-12 radius last")
+              #btn
+
+      div(class="modal fade" id="loginInfoBox" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true")
+        div(class="modal-dialog modal-sm" role="document")
+          div(class="modal-content")
+            div(class="modal-header")
+              button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                span(aria-hidden="true") &times;
+                span(class="sr-only") Close
+              h4(class="modal-title") JWI Portal
+            div(class="modal-body")
+            div(class="modal-footer")
+              button(type="button" class="btn btn-outline-secondary btn-sm" data-dismiss="modal") 关闭
 
   script(src= static + "js/portal/jquery-2.1.1.js")
   script(src= static + "js/portal/bootstrap.min.js")

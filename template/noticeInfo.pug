@@ -1,0 +1,25 @@
+//- create by afterloe on 2017-3-9 22:10:02 - MIT
+
+include header
+
+- const _announcement = locals.announcement || {};
+
+link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
+link(href= static + "css/portal/noticeInfo.css?time=" + __time rel="stylesheet")
+
+div(class="container content")
+  div(class="container structure")
+    span(class="portalWhete")
+    div(class="announcementContent")
+      h1=_announcement.title
+      div(class="abstract")
+        span=new Date(_announcement.createTimestamp).toLocaleString()
+        span=`阅读量(${_announcement.readCount})`
+      div(class="content")
+        each content in _announcement.content.split("\n")
+          p=content
+
+include footer
+
+script(src= static + "js/portal/rem.js?time=" + __time)
+//- script(src= static + "js/portal/bin/noticeInfo.js?time=" + __time)

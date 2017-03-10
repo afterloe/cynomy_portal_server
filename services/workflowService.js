@@ -363,30 +363,30 @@ function* syncNodeToWorkflow(_node) {
  * @param  {Integer}   index     [工作流实例节点id]
  * @return {Generator}           [description]
  */
-function* setLeader(workflowId, userId, index) {
-  const _ = yield workFlow_instance_dao.queryById(workflowId);
-  if (!_) {
+function* setLeader(workflowId, nodeInstanceId, userId) {
+  const [nodeInstance, workflow] =  yield [workFlow_node_instance_dao.queryById(nodeInstanceId), workFlow_instance_dao.queryById(workflowId)];
+
+  if (!nodeInstance) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  if (!workflow) {
     throwNosuchThisWorkFlow();
   }
-  const leader = _.members.find(member => member._id.toString() === userId);
+
+  const leader = workflow.members.find(member => member._id.toString() === userId);
+
   if (!leader) {
     throwPersonalNotIn();
   }
-  index--;
-  const nodeSubstitute = _.nodeList[index];
-  if (!nodeSubstitute) {
-    throwNosuchThisWorkflowNodeInstance();
-  }
-  const {_id, name, mail, avatar} = leader;
-  const node = yield changeAndSyncNodeStat(nodeSubstitute._id, {
-    owner: {
-      _id,
-      name,
-      mail,
-      avatar,
-    }
+
+  const node = yield changeAndSyncNodeStat(nodeInstance._id, {
+    owner: leader
   });
-  return yield syncNodeToWorkflow(node);
+
+  yield syncNodeToWorkflow(node);
+
+  return leader;
 }
 
 /**
@@ -893,34 +893,50 @@ function* cancelOwner(workflowId, userId) {
   }
 }
 
+function* setNodeInstanceSVNAddress(nodeInstanceId, SVNAddress) {
+  const _ = yield workFlow_node_instance_dao.queryById(nodeInstanceId);
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  const node = yield changeAndSyncNodeStat(_._id, {
+    svn: SVNAddress
+  });
+
+  yield syncNodeToWorkflow(node);
+
+  return SVNAddress;
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
   workflowInfo,
   buildProduct,
   startUpWorkflow,
-  setLeader,
   updateNodeProduceList,
   promoteProcess,
   retroversion,
 
-  searchProduct,
+  appendGoods2Node,
+  appendUser2Members,
+  cancelOwner,
   cleanDocuments,
-  updateNodeProduceFile,
+  deleteExampleTag,
+  exampleInfo,
+  getNodeInstance,
   getWorkflowNodeList,
   getWorkflowNode,
   getWorkflowList,
   getWorkflowTemplateList,
-  updateProcess,
-  exampleInfo,
-  setTags,
-  deleteExampleTag,
-  appendGoods2Node,
   obmitUploadFileAuthorize,
-  workflowMemberList,
-  appendUser2Members,
   removeUserFromMembers,
-  getNodeInstance,
+  searchProduct,
+  setLeader,
+  setNodeInstanceSVNAddress,
   setOwner,
-  cancelOwner,
+  setTags,
+  updateNodeProduceFile,
+  updateProcess,
+  workflowMemberList,
 };

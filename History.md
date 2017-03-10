@@ -153,15 +153,31 @@ commit by afterloe (lm6289511@gmail.com)
 8）修复 portal home 页面最后一个工作流出现延长线的异常。  
 9）修复 util工具页面获取概况功能时websocket自动断开的异常。  
 
-1.0.7 / 2017-3-2 10:16:33
+1.0.8 / 2017-3-5 6:38:35
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: 修改build log History
+  * master: 1.0.8升级版
 
+
+### new files
+> staticFiles/css/portal/workflowInfo.css  
+> staticFiles/js/portal/src/workflowInfo.js  
 
 ### modify files
-> History.md  
+> .cynomy  
+> config/index.js  
+> package.json  
+> staticFiles/js/portal/src/directory.js  
+> staticFiles/js/portal/src/footer.js  
+> staticFiles/js/portal/src/header.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/login.js  
+> staticFiles/js/portal/src/platform.js  
+> staticFiles/js/portal/src/product.js  
+> template/home.pug  
+> template/platform.pug  
+> template/workflowInfo.pug  
 
 2017-3-5 更新公告  
 
@@ -197,72 +213,102 @@ commit by afterloe (lm6289511@gmail.com)
   问题 ：portal周日的时候访问有时候会出现500   
   回答 ：portal是每周日进行维护更新，由于项目立项时间短，没有能够先行通知，我们感到很抱歉，在portal首页公告栏功能发布之前，每周更新都会采用邮件的形式进行公告。多有不便之处请谅解。  
 
-下周更新预告
+下周更新预告  
 ————————————————  
-1）登陆过程将进行优化
-2）丰富工作流信息，支持更多链接
-3）页面版图调整
-4）portal工具推广内测
+1）登陆过程将进行优化  
+2）丰富工作流信息，支持更多链接  
+3）页面版图调整  
+4）portal工具推广内测  
 
 
-如果您在portal的使用上有问题或想吐槽的可以邮件联系我(afterloeliu@jwis.cn)或联系涂露(lucy.tu@jwis.cn)。在或者在portal的建议反馈内进行留言。我们会在第一时间内回复，对于典型的问题将在下次的更新公告中的 策划面对面 板块上墙。
+如果您在portal的使用上有问题或想吐槽的可以邮件联系我(afterloeliu@jwis.cn)或联系涂露(lucy.tu@jwis.cn)。在或者在portal的建议反馈内进行留言。我们会在第一时间内回复，对于典型的问题将在下次的更新公告中的 策划面对面 板块上墙。  
 
-1.0.7 / 2017-3-5 6:20:26
+1.0.9 / 2017-3-10 18:19:25
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * release: 更新公告
+  * master: 版本升级
+
+
+### new files
+> staticFiles/css/portal/ad/  
+> staticFiles/css/portal/discussesInfo.css  
+> staticFiles/css/portal/discussesList.css  
+> staticFiles/css/portal/home.css  
+> staticFiles/css/portal/noticeInfo.css  
+> staticFiles/css/portal/noticeList.css  
+> staticFiles/css/portal/ps/  
+> staticFiles/js/portal/src/discussesList.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/ps/  
+
+### modify files
+> .cynomy  
+> config/index.js  
+> package.json  
+> staticFiles/js/portal/src/login.js  
+> template/adHome.pug  
+> template/discussesInfo.pug  
+> template/discussesList.pug  
+> template/header.pug  
+> template/home.pug  
+> template/login.pug  
+> template/noticeInfo.pug  
+> template/noticeList.pug  
+> template/psHome.pug  
+
+### delete files
+> template/home-noLogin.pug  
+
+1.0.9 / 2017-3-10 18:21:31
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * release: release 信息
 
 
 ### modify files
 > .cynomy  
-> Makefile  
 > config/index.js  
-> dao/goods.js  
+> dao/index.js  
+> dao/public.js  
 > dao/tag.js  
-> dao/user.js  
-> distributed/slave.js  
+> dao/workflow-instance.js  
 > errors/i18nError.json  
-> index.js  
+> interceptors/authentication.js  
 > interceptors/session.js  
 > interceptors/smartNotFound.js  
 > interceptors/template.js  
 > package.json  
-> routers/goodses.js  
 > routers/index.js  
 > routers/portal.js  
+> routers/user.js  
 > routers/workflow.js  
-> servers/lib/ws-handlerChain/managerChain.js  
-> services/fileSystem.js  
+> servers/lib/servicesCenter.js  
+> servers/registry.js  
 > services/goodsService.js  
+> services/sessionService.js  
 > services/userService.js  
 > services/workflowService.js  
-> template/directory.pug  
+> staticFiles/css/portal/header.css  
+> staticFiles/css/portal/home.css  
+> staticFiles/js/portal/src/footer.js  
+> staticFiles/js/portal/src/header.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/login.js  
 > template/header.pug  
 > template/home.pug  
 > template/login.pug  
 > template/platform.pug  
-> template/product.pug  
 > template/pwdMail.pug  
+> template/workflowInfo.pug  
+> test/funTest.js  
+> tools/buildPage.js  
+> tools/security.js  
 > tools/webTools/dataManager.html  
+> tools/webTools/lib/src/initWebPage.js  
 > tools/webTools/lib/src/util.js  
-> tools/webTools/nodeManager.html  
 
 ### delete files
-> webPage/images/portal/productDesignStatus.png  
-> webPage/images/portal/productDesignStatus1.png  
-> webPage/images/portal/productDesignStatus2.png  
-> webPage/images/portal/productDesignStatus3.png  
-> webPage/images/portal/productDesignStatus4.png  
-> webPage/images/portal/productDevelopStatus.png  
-> webPage/images/portal/productDevelopStatus1.png  
-> webPage/images/portal/productDevelopStatus2.png  
-> webPage/images/portal/productDevelopStatus3.png  
-> webPage/images/portal/productDevelopStatus4.png  
-> tools/webTools/_util.html  
-> webPage/directory.html  
-> webPage/home.html  
-> webPage/js/portal/src/platform.js  
-> webPage/platform.html  
-> webPage/product.html  
+> _config.yml  
 

@@ -34,6 +34,9 @@
                     <li class="nav-item">
                         <a class="nav-link" id="nav-filesInfo" href="#">文件列表</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="nav-noticeInfo" href="#">公告管理</a>
+                    </li>
                 </ul>
             </nav>
 
@@ -215,7 +218,6 @@
                 </div>
                 <div id="tagsInfo">
                     <h2>标签管理</h2>
-                    <h3 id="table-show-tags"></h3>
                     <div class="row" style="margin-top: 1rem;">
                         <div class="col-sm-12">
                             <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#crearteTag">
@@ -223,10 +225,27 @@
                       </button>
                         </div>
                     </div>
+                    <h3 id="table-show-tags"></h3>
                 </div>
                 <div id="filesInfo">
                     <h2>文件列表</h2>
                     <div class="row" id="table-show-files"></div>
+                </div>
+                <div id="noticeInfo">
+                    <h2>公告管理</>
+                    <div class="row" style="margin-top: 1rem;">
+                        <div class="col-sm-12">
+                          <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#postAnnouncements">
+                            发公告
+                          </button>
+                          <button type="button" class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#postNotice">
+                            发通知
+                          </button>
+                          <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" onClick="javascript:clearNotice(this);">
+                            清除通知
+                          </button>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
@@ -239,9 +258,11 @@
   <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <script src="./lib/src/jbase64.js"></script>
   <script src="./lib/src/initWebPage.js"></script>
   <script src="./lib/src/websocket.js"></script>
   <script src="./lib/src/util.js"></script>
+  <script src="./lib/src/registry.js"></script>
 
   <style>
     .carousel-indicators .active {background-color: #3d9bff; }
@@ -250,5 +271,6 @@
     .carousel-control-next {background: -webkit-radial-gradient(200px 3px,rgba(171, 158, 158, 0.29) 45%,rgba(0, 0, 0, 0.09) 200%);}
     .carousel-item > .card {width: 70%; margin: 0 auto; }
     .cardButton { position: absolute; cursor: pointer; margin-left: 29em; margin-top: -1.6em;}
+    .svnAddress { overflow: hidden;}
   </style>
 </html>

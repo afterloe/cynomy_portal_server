@@ -11,11 +11,28 @@
   */
 "use strict";
 
-const [{resolve, basename, sep}, {statSync, existsSync, mkdirSync, renameSync}] = [require("path"), require("fs")];
-const [{goods_dao, workFlow_node_instance_dao, workFlow_instance_dao}, {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed,
-throwParametersError, throwLackParameters}, {checkParameter, readyConfig}, {get}, {decompression, move}, {getTagsInfo}] = [
-  require(resolve(__dirname, "..", "dao")), require(resolve(__dirname, "..", "errors")), require(resolve(__dirname, "..", "tools", "utilities")),
-  require(resolve(__dirname, "..", "config")), require(resolve(__dirname, "fileSystem")), require(resolve(__dirname, "tagsService"))];
+const [
+  {resolve, basename, sep},
+  {statSync, existsSync, mkdirSync, renameSync}
+] = [
+  require("path"),
+  require("fs")
+];
+const [
+  {goods_dao, workFlow_node_instance_dao, workFlow_instance_dao},
+  {throwNotExistsFile, throwCfgFormatMismatch, throwBuildFailed, throwParametersError, throwLackParameters},
+  {checkParameter, readyConfig},
+  {get},
+  {decompression, move},
+  {getTagsInfo}
+] = [
+  require(resolve(__dirname, "..", "dao")),
+  require(resolve(__dirname, "..", "errors")),
+  require(resolve(__dirname, "..", "tools", "utilities")),
+  require(resolve(__dirname, "..", "config")),
+  require(resolve(__dirname, "fileSystem")),
+  require(resolve(__dirname, "tagsService"))
+];
 
 const buildGoods = (goods, workflowId, nodeName) => {
   const lackParameter = checkParameter(goods, "name", "batch", "version", "author");
@@ -243,7 +260,7 @@ function* findGoodsByNode(goodsId) {
       result.push(file);
     }
   }
-  
+
   return result;
 }
 

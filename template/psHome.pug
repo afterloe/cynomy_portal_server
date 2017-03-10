@@ -1,0 +1,15 @@
+//- create by afterloe on 2017-2-14 14:58:37 - MIT
+include header
+
+link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
+link(href= static + "css/portal/ps/home.css?time=" + __time rel="stylesheet")
+
+div(class="container content")
+  div(class="container structure")
+    span(class="portalWhete")
+    iframe(id="myiframe" src="http://almcloud.jwis.cn/website/info.html" width="100%" onload="changeFrameHeight()" frameborder="0")
+
+include footer
+
+script(src= static + "js/portal/rem.js?time=" + __time)
+script(src= static + "js/portal/bin/ps/home.js?time=" + __time)

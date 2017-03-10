@@ -1,11 +1,12 @@
 {
   "name": "cynomy_portal_server",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "the config portal of server",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha ./test/*_test.js"
+    "test": "mocha ./test/*_test.js",
+    "stop": "node bin/stopServer.js"
   },
   "repository": {
     "type": "git",

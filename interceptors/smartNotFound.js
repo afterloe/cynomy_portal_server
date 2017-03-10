@@ -33,8 +33,10 @@ module.exports = function * (next) {
       if ("json" === this.way) {
         this.body = this.fail(error.message, error.code);
       } else {
-        this.status = 302;
-        this.set("Location", "/portal/login");
+        this.render("login", {
+          title: "JWI Portal login",
+          href: this.request.url
+        });
       }
       return ;
     }

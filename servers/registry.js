@@ -11,10 +11,29 @@
   */
 "use strict";
 
-const [{resolve}, koa, bodyParser, router] = [require("path"), require("koa"), require("koa-bodyparser"), require("koa-router")()];
+const [
+  {resolve},
+  koa,
+  bodyParser,
+  router
+] = [
+  require("path"),
+  require("koa"),
+  require("koa-bodyparser"),
+  require("koa-router")()
+];
 const interceptors = resolve(__dirname, "..", "interceptors");
-const [registration, session, smartNotFound, template] = [require(resolve(__dirname, "..", "routers")), require(resolve(interceptors, "session")),
-  require(resolve(interceptors, "smartNotFound")), require(resolve(interceptors, "template"))];
+const [
+  registration,
+  session,
+  smartNotFound,
+  template
+] = [
+  require(resolve(__dirname, "..", "routers")),
+  require(resolve(interceptors, "session")),
+  require(resolve(interceptors, "smartNotFound")),
+  require(resolve(interceptors, "template"))
+];
 
 const app = koa();
 

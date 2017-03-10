@@ -819,3 +819,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/adHome.pug  
 > template/psHome.pug  
 
+
+1.0.8 / 2017-3-10 9:36:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复queryAll方法 传入参数会报错的异常
+
+
+### modify files
+> dao/public.js  
+

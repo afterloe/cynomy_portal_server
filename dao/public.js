@@ -121,6 +121,8 @@ function* queryById(_, state) {
  * @return {Array}                               [文档数组]
  */
 function* queryAll(filed = {}, number = 100, page = 0, order = "createTimestamp") {
+  number = Number.parseInt(number);
+  page = Number.parseInt(page);
   page < 1 ? page = 0 : page--;
   return yield this.find({
     state : 200

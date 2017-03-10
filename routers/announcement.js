@@ -1,5 +1,5 @@
 /**
-  * afterloe - cynomy_portal_server/routers/notice.js
+  * afterloe - cynomy_portal_server/routers/announcement.js
   *
   * Copyright(c) afterloe.
   * MIT Licensed
@@ -14,11 +14,12 @@
 const {resolve} = require("path");
 
 const services = resolve(__dirname, "..", "services");
+
 const [
-  {readySystemNotice, getSystemNotice},
+  {readyAnnouncement, getAnnouncementsList},
   {throwLackParameters},
 ] = [
-  require(resolve(services, "noticeService")),
+  require(resolve(services, "announcementService")),
   require(resolve(__dirname, "..", "errors")),
 ];
 
@@ -27,9 +28,12 @@ function* info(next) {
     return yield next;
   }
   try {
-    // const {id} = this.params;
-    // const notice = yield readySystemNotice(id);
-    // this.data = notice;
+    const {id} = this.params;
+    const announcement = yield readyAnnouncement(id);
+    this.data = {
+      title : announcement.title,
+      announcement,
+    };
     this.pageName = "noticeInfo";
   } catch (error) {
     this.error = error;
@@ -43,8 +47,11 @@ function* list(next) {
   }
   try {
     const {number, page} = this.params;
-    const list = yield getSystemNotice(number, page);
-    this.data = list;
+    const list = yield getAnnouncementsList(number, page);
+    this.data = {
+      title: "Portal Server - Announcements",
+      list,
+    };
     this.pageName = "noticeList";
   } catch (error) {
     this.error = error;

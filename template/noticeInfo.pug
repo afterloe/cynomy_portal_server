@@ -2,6 +2,8 @@
 
 include header
 
+- const _announcement = locals.announcement || {};
+
 link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
 //- link(href= static + "css/portal/noticeInfo.css?time=" + __time rel="stylesheet")
 
@@ -21,6 +23,10 @@ style.
   @media (min-width:769px) {
     .container .structure {min-height: 600px;}
     .portalWhete {display: -webkit-box; height: 0.5em; font-size: 2em;}
+    .announcementContent h1 {text-align: center;}
+    .abstract {text-align: center;}
+    .abstract span {color: #ccc; font-size: 0.01rem; display: inline-block; margin: 0 0.05rem;}
+    .announcementContent .content {line-height: 0.05rem; margin: 0.04rem 0.5rem 2rem 0.5rem;}
   }
 
   @media (max-width:768px) {
@@ -30,6 +36,14 @@ style.
 div(class="container content")
   div(class="container structure")
     span(class="portalWhete")
+    div(class="announcementContent")
+      h1=_announcement.title
+      div(class="abstract")
+        span=new Date(_announcement.createTimestamp).toLocaleString()
+        span=`阅读量(${_announcement.readCount})`
+      div(class="content")
+        div=_announcement.content
+
 
 include footer
 

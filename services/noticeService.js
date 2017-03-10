@@ -24,7 +24,7 @@ const [
 const [KEY, TIMEOUT] = [Symbol("KEY"), Symbol("TIMEOUT")];
 module[KEY] = "cynomy_portal_server:systemNotice";
 
-module[TIMEOUT] = 30;
+module[TIMEOUT] = 60 * 60; // 体统通知持续1小时
 
 function* postSystemNotice(content, timeout = module[TIMEOUT]) {
   return yield set(module[KEY], {content}, timeout);

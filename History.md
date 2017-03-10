@@ -942,3 +942,23 @@ commit by afterloe (lm6289511@gmail.com)
 > template/home.pug  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-10 16:9:23
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 调整公告详情页
+
+
+### new files
+> routers/announcement.js  
+
+### modify files
+> routers/index.js  
+> services/noticeService.js  
+> template/noticeInfo.pug  
+> tools/webTools/lib/src/util.js  
+
+### delete files
+> routers/notice.js  
+

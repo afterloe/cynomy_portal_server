@@ -412,6 +412,7 @@ $("#module-ok-postNotice").bind("click", function() {
     const form = $(this).parent().parent().find("form");
     const notice = form.find("textarea").val();
     websocket.send(`node-manager->systemService->postSystemNotice("${notice}")`);
+    $("#postNotice").modal("toggle");
 });
 
 // 发布公告
@@ -420,4 +421,5 @@ $("#module-ok-postAnnouncements").bind("click", function() {
     const title = form.find("input").val();
     const content = form.find("textarea").val();
     websocket.send(`node-manager->systemService->postAnnouncement("${title}" | "${content}")`);
+    $("#postAnnouncements").modal("toggle");
 });

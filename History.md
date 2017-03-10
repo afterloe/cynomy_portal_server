@@ -979,3 +979,14 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/dataManager.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-10 16:55:37
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 首页消息整合
+
+
+### modify files
+> routers/portal.js  
+

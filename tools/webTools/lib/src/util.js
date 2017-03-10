@@ -406,3 +406,19 @@ $("#module-ok-askdeleteTag").click(() => {
     websocket.send(`node-manager->tagsService->deleteTag("${id}")`);
     $("inp-askdeleteTag").val(null);
 });
+
+// 发布通知
+$("#module-ok-postNotice").bind("click", function() {
+    const form = $(this).parent().parent().find("form");
+    const notice = form.find("textarea").val();
+    websocket.send(`node-manager->tagsService->createTag(${JSON.stringify(data)})`);
+});
+
+// 发布公告
+$("#module-ok-postAnnouncements").bind("click", function() {
+    const form = $(this).parent().parent().find("form");
+    const title = form.find("input").val();
+    const content = form.find("textarea").val();
+
+
+});

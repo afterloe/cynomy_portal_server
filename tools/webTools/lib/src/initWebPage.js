@@ -41,7 +41,7 @@ window[MODULE].push(`
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-outline-success">发布</button>
+            <button type="button" class="btn btn-outline-success" id="module-ok-postNotice">发布</button>
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@ window[MODULE].push(`
       </div>
       <div class="modal-footer">
           <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
-          <button type="button" class="btn btn-outline-success">发布</button>
+          <button type="button" class="btn btn-outline-success" id="module-ok-postAnnouncements">发布</button>
       </div>
     </div>
   </div>

@@ -15,9 +15,21 @@ const {resolve} = require("path");
 const {throwNoThisFunction, throwNoThisServer, throwOperationFailed} = require(resolve(__dirname, "..", "..", "errors"));
 const services = resolve(resolve(__dirname, "..", "..", "services"));
 
-const [workflowService, userService, goodsService, tagsService, {systemInfo, hardDiskInfo, memoryInfo}] = [
-  require(resolve(services, "workflowService")), require(resolve(services, "userService")), require(resolve(services, "goodsService")),
-  require(resolve(services, "tagsService")), require(resolve(services, "fileSystem"))];
+const [
+  workflowService,
+  userService,
+  goodsService,
+  tagsService,
+  {systemInfo, hardDiskInfo, memoryInfo},
+  {postSystemNotice, getSystemNotice},
+] = [
+  require(resolve(services, "workflowService")),
+  require(resolve(services, "userService")),
+  require(resolve(services, "goodsService")),
+  require(resolve(services, "tagsService")),
+  require(resolve(services, "fileSystem")),
+  require(resolve(services, "noticeService")),
+];
 
 const REFISTRY = Symbol("REFISTRY");
 module[REFISTRY] = new Map();

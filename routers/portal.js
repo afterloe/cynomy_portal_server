@@ -15,22 +15,36 @@ const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
 const [
   {workflowInfo},
-  {getSystemNotice, getSystemNoticeCount},
+  {getAnnouncementsList, getAnnouncementCount},
   {getDiscussesList, getDiscussesCount},
+  {getSystemNotice},
 ] = [
   require(resolve(services, "workflowService")),
-  require(resolve(services, "noticeService")),
+  require(resolve(services, "announcementService")),
   require(resolve(services, "discussService")),
+  require(resolve(services, "noticeService")),
 ];
 
 
 function* home(next) {
   this.pageName = "home";
-  const [announcements, announcementsCount, discusses, discussCount] = yield [getSystemNotice(10), getSystemNoticeCount(), getDiscussesList(10), getDiscussesCount()];
+  const [
+    announcements,
+    announcementsCount,
+    discusses,
+    discussCount,
+    systemNotice,
+  ] = yield [
+    getAnnouncementsList(10),
+    getAnnouncementCount(),
+    getDiscussesList(10),
+    getDiscussesCount(),
+    getSystemNotice(),
+  ];
   const _ = {
     title: "JWI Portal",
     index: 1,
-    systemNotice: null,
+    systemNotice ,
     systemAnnouncementNum: announcementsCount,
     systemAnnouncement: announcements.map(announcement => ({title: announcement.title, createTimestamp: announcement.createTimestamp, href:`/notice/${announcement._id}`})),
     discussCount,

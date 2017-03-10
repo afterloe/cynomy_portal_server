@@ -905,3 +905,26 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/initWebPage.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-10 15:6:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 重构通知和公告系统
+
+
+### new files
+> dao/announcement.js  
+> services/announcementService.js  
+
+### modify files
+> dao/index.js  
+> routers/portal.js  
+> servers/lib/servicesCenter.js  
+> services/noticeService.js  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/util.js  
+
+### delete files
+> dao/notice.js  
+

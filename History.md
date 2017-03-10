@@ -1029,3 +1029,14 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/dataManager.html  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.8 / 2017-3-10 17:43:12
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 清除通知操作
+
+
+### modify files
+> tools/webTools/dataManager.html  
+

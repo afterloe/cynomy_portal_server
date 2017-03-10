@@ -1040,3 +1040,41 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/webTools/dataManager.html  
 
+
+1.0.9 / 2017-3-10 18:19:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 版本升级
+
+
+### new files
+> staticFiles/css/portal/ad/  
+> staticFiles/css/portal/discussesInfo.css  
+> staticFiles/css/portal/discussesList.css  
+> staticFiles/css/portal/home.css  
+> staticFiles/css/portal/noticeInfo.css  
+> staticFiles/css/portal/noticeList.css  
+> staticFiles/css/portal/ps/  
+> staticFiles/js/portal/src/discussesList.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/ps/  
+
+### modify files
+> .cynomy  
+> config/index.js  
+> package.json  
+> staticFiles/js/portal/src/login.js  
+> template/adHome.pug  
+> template/discussesInfo.pug  
+> template/discussesList.pug  
+> template/header.pug  
+> template/home.pug  
+> template/login.pug  
+> template/noticeInfo.pug  
+> template/noticeList.pug  
+> template/psHome.pug  
+
+### delete files
+> template/home-noLogin.pug  
+

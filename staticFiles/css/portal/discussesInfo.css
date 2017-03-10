@@ -1,0 +1,56 @@
+/**
+  * afterloe - cynomy_portal_server/staticFiles/css/portal/discussesInfo.css
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <lm6289511@gmail.com> (https://github.com/afterloe)
+  * Date:
+  *   2017-3-10 17:57:56
+  */
+  .alert{margin-bottom:0}
+  .structure {background-color: #ffffff;}
+  .catalogShadow{height:2.5em;background-color: #eee; position:relative; margin-left:15px; margin-right:15px;}
+  .catalogMark{float:left; margin-top:-0.7em; height:1.4em; width:1.4em; background-color: #ccc; }
+
+  .number{position: inherit; float: right; margin-top: -0.5em; margin-right: -0.5em;}
+  .badge {background-color:#e22d2d}
+
+  .downButton{display: block; cursor:pointer; float: right; border-bottom: 1px solid #333; border-right: 1px solid #333; width: 0.8em; height: 0.8em;}
+  ul{margin-bottom:0;}
+  ul, ul li {list-style: none;}
+
+  .breadcrumb>li+li:before {content: ">";}
+  .breadcrumb {background-color: rgb(255, 255, 255);}
+  a:focus, a:hover{text-decoration: none;}
+
+  @media (min-width:769px) {
+    .container .structure {min-height: 600px;}
+    .portalWhete {display: -webkit-box; height: 0.5em;}
+    .mainDiscusses {margin-left: 0.3rem;}
+    .discussHeader .userAvatar {display: inline-block; width: 0.61rem; height: 0.61rem; background: url('http://almcloud.jwis.cn/images/avatar-default.png') no-repeat center; background-size:contain;}
+    .discussHeader .userName {display: inline-block; font-size: 0.2rem; vertical-align: super; margin-left: 0.1rem; margin-bottom: 0.1rem;}
+    .discussContent {font-size: 0.18rem; margin-bottom: 0.1rem;}
+    .discussFooter {margin-right: 0.1rem;color: #9d9d9d;cursor: default;}
+    .discussFooter .discussInfo {display: inline-block; float: right;}
+    .discussFooter .discussOption {display: inline-block; float: right;}
+    .discussInfo {margin-right: 0.05rem}
+    .discussInfo span {padding-right: 0.03rem}
+    .discussOption span {cursor:pointer; padding-left: 0.03rem}
+  }
+
+  @media (max-width:768px) {
+    .container .structure {min-height: 450px;}
+    .portalWhete {display: -webkit-box; height: 0.5em;}
+    .mainDiscusses {margin-left: 0.3rem;}
+    .discussHeader .userAvatar {display: inline-block; width: 0.61rem; height: 0.61rem; background: url('http://almcloud.jwis.cn/images/avatar-default.png') no-repeat center; background-size:contain;}
+    .discussHeader .userName {display: inline-block; font-size: 0.3rem; font-weight: 400; vertical-align: super; margin-bottom: 0.1rem; margin-left: 0.2rem;}
+    .discussContent {font-size: 0.22rem; margin-bottom: 0.1rem;color: #555}
+    .discussFooter {margin-right: 0.1rem;color: #9d9d9d;cursor: default;}
+    .discussFooter .discussInfo {display: inline-block; float: left;}
+    .discussFooter .discussOption {display: inline-block; float: right;}
+    .discussInfo {margin-right: 0.05rem}
+    .discussInfo span {padding-right: 0.03rem}
+    .discussOption span {cursor:pointer; padding-left: 0.2rem}
+  }

@@ -928,3 +928,17 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > dao/notice.js  
 
+
+1.0.8 / 2017-3-10 15:27:54
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 系统公告功能调试成功
+
+
+### modify files
+> servers/lib/servicesCenter.js  
+> services/noticeService.js  
+> template/home.pug  
+> tools/webTools/lib/src/util.js  
+

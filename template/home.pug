@@ -84,9 +84,9 @@ style.
     .data li:first-child div i {background:#3d9bff;}
   }
 
-if _systemNotice.msg
+if _systemNotice.content
   div(class="alert alert-danger" role="alert")
-    strong 通知: 系统将重启
+    strong=_systemNotice.content
 
 div(class="popup")
   div(class="mask")

@@ -21,12 +21,18 @@ const [
   require(resolve(__dirname, "..", "errors")),
 ];
 
-function* postSystemNotice(content) {
-  return yield set(content);
+const [KEY, TIMEOUT] = [Symbol("KEY"), Symbol("TIMEOUT")];
+module[KEY] = "cynomy_portal_server:systemNotice";
+
+module[TIMEOUT] = 30;
+
+function* postSystemNotice(content, timeout = module[TIMEOUT]) {
+  return yield set(module[KEY], {content}, timeout);
 }
 
 function* getSystemNotice(number, page) {
-  return yield get("cynomy_portal_server:systemNotice");
+  const value = yield get(module[KEY]);
+  return value;
 }
 
 module.exports = {

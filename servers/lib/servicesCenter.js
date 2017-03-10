@@ -21,7 +21,8 @@ const [
   goodsService,
   tagsService,
   {systemInfo, hardDiskInfo, memoryInfo},
-  {postSystemNotice, getSystemNotice},
+  {postSystemNotice},
+  {postAnnouncement},
 ] = [
   require(resolve(services, "workflowService")),
   require(resolve(services, "userService")),
@@ -29,6 +30,7 @@ const [
   require(resolve(services, "tagsService")),
   require(resolve(services, "fileSystem")),
   require(resolve(services, "noticeService")),
+  require(resolve(services, "announcementService")),
 ];
 
 const REFISTRY = Symbol("REFISTRY");
@@ -39,7 +41,7 @@ module[REFISTRY].set("userService", userService);
 module[REFISTRY].set("goodsService", goodsService);
 module[REFISTRY].set("tagsService", tagsService);
 module[REFISTRY].set("systemService", {
-  systemInfo, hardDiskInfo, memoryInfo
+  systemInfo, hardDiskInfo, memoryInfo, postSystemNotice, postAnnouncement
 });
 
 /**

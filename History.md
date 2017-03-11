@@ -275,3 +275,14 @@ commit by afterloe (lm6289511@gmail.com)
 > services/discussService.js  
 > services/noticeService.js  
 
+
+1.0.9 / 2017-3-11 14:24:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * release: 修改dataManager中的信息
+
+
+### modify files
+> tools/webTools/dataManager.html  
+

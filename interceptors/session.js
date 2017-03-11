@@ -50,7 +50,7 @@ module.exports = function* (next) {
 
   let {params, request, query} = __self;
 
-  this["request"].body = filter(request.body);
+  this.request.body = filter(request.body);
   this.params = filter(params);
   this.query = filter(query);
 

@@ -60,7 +60,7 @@ function* home(next) {
   const {mail, name} = this.authorized;
 
   Object.assign(_, {
-    user: {mail},
+    user: {mail, name},
     subscribe: [
     // {
     //   title: name,

@@ -14,9 +14,11 @@
 const {resolve} = require("path");
 
 const [
-  {discuss_dao}
+  {discuss_dao},
+  {throwNosuchThisNotice},
 ] = [
   require(resolve(__dirname, "..", "dao")),
+  require(resolve(__dirname, "..", "errors")),
 ];
 
 const buildDiscuss = notice => {

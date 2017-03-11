@@ -260,55 +260,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > template/home-noLogin.pug  
 
-1.0.9 / 2017-3-10 18:21:31
+1.0.9 / 2017-3-11 14:21:34
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * release: release 信息
+  * release: release info 
 
 
 ### modify files
-> .cynomy  
-> config/index.js  
-> dao/index.js  
-> dao/public.js  
-> dao/tag.js  
-> dao/workflow-instance.js  
-> errors/i18nError.json  
-> interceptors/authentication.js  
 > interceptors/session.js  
-> interceptors/smartNotFound.js  
-> interceptors/template.js  
-> package.json  
+> routers/announcement.js  
 > routers/index.js  
 > routers/portal.js  
-> routers/user.js  
-> routers/workflow.js  
-> servers/lib/servicesCenter.js  
-> servers/registry.js  
-> services/goodsService.js  
-> services/sessionService.js  
-> services/userService.js  
-> services/workflowService.js  
-> staticFiles/css/portal/header.css  
-> staticFiles/css/portal/home.css  
-> staticFiles/js/portal/src/footer.js  
-> staticFiles/js/portal/src/header.js  
-> staticFiles/js/portal/src/home.js  
-> staticFiles/js/portal/src/login.js  
-> template/header.pug  
-> template/home.pug  
-> template/login.pug  
-> template/platform.pug  
-> template/pwdMail.pug  
-> template/workflowInfo.pug  
-> test/funTest.js  
-> tools/buildPage.js  
-> tools/security.js  
-> tools/webTools/dataManager.html  
-> tools/webTools/lib/src/initWebPage.js  
-> tools/webTools/lib/src/util.js  
-
-### delete files
-> _config.yml  
+> services/discussService.js  
+> services/noticeService.js  
 

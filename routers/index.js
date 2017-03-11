@@ -75,8 +75,8 @@ module.exports = _ => {
   _.get("/discuss/:id", authentication, discuss.info); // 看帖
 
   /** 公告模块 **/
-  _.get("/notice/:number/:page", authentication, announcement.list) // 公告列表
-  _.get("/notice/:id", authentication, announcement.info) // 看公告
+  _.get("/notice/:number/:page", authentication, announcement.list); // 公告列表
+  _.get("/notice/:id", authentication, announcement.info); // 看公告
 
   /*
    *  用户模块

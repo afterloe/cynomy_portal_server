@@ -17,10 +17,8 @@ const services = resolve(__dirname, "..", "services");
 
 const [
   {readyAnnouncement, getAnnouncementsList},
-  {throwLackParameters},
 ] = [
   require(resolve(services, "announcementService")),
-  require(resolve(__dirname, "..", "errors")),
 ];
 
 function* info(next) {

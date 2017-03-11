@@ -102,43 +102,30 @@ const uploadTask = (id, file, index) => new Promise((solve, reject) => {
 
 const uploadTasks = nodeId => {
     for(let index in window[UpLoadList]) {
-      uploadTask(nodeId, window[UpLoadList][index].file, index).then().catch(err => console.log(err));
+      uploadTask(nodeId, window[UpLoadList][index].file, index).then(() => {
+        buildUploadSuccess(index, window[UpLoadList][index].file);
+      }).catch(err => console.log(err));
     }
 };
 
 const beginUpload = () => {
     const nodeId = $(".processActive").find("dt").attr("data-id");
     uploadTasks(nodeId);
-    // then(data => {
-    //     window[UpLoadList].length = 0;
-    //     $(".popup").css("display", "none");
-    //     $(".dataFile").html("");
-    //     $.ajax({
-    //       type: "GET",
-    //       url: `/workflow/${nodeId}/files`,
-    //       dataType: "json",
-    //       beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
-    //       success: result => {
-    //         if (401.5 === result.code) {
-    //           alert("登录许可已失效，请重新获取登录许可");
-    //           location.href = "/portal/login";
-    //           return ;
-    //         }
-    //         if (200 !== result.code) {
-    //           alert("服务器繁忙");
-    //         } else {
-    //           buildFiles(result.result.produceList);
-    //         }
-    //       }
-    //     });
-    // }).catch(err => {
-    //     err.code === 403? alert("非该项目组成员禁止上传文件") : alert("上传失败 " + err.msg);
-    // });
 };
 
 const delUploadFileList = btn => {
     window[UpLoadList].splice($(btn).attr("data-index"), 1);
     $(".dataFile").html(buildUploadList());
+};
+
+const buildUploadSuccess = (index, file) => {
+  $(`.dataFile>li:eq(${index})`).html(`<li>
+      <span>${index + 1}</span>
+      <span>${file.name}</span>
+      <span><span style="color:red">成功</span></span>
+      <span class="closeFile" data-index=${index} onClick="javascript:delUploadFileList(this);"><span>
+    </li>
+  `);
 };
 
 const buildUploadList = () => window[UpLoadList].map((file, index) => `<li>
@@ -188,6 +175,7 @@ const openUploadView = btn => {
   }
   const [nodeId, nodeName] = [__self.attr("data-id"), __self.find("span").html()];
   $(".popup").find(".name").html(`${window[workflowName]} - ${nodeName} 更新`);
+  window[UpLoadList].length = 0;
   $(".popup").css("display", "block");
 };
 

@@ -1094,3 +1094,19 @@ commit by afterloe (lm6289511@gmail.com)
 > services/discussService.js  
 > services/noticeService.js  
 
+
+1.0.9 / 2017-3-11 15:42:3
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: debug 修复上传提示
+
+
+### modify files
+> config/index.js  
+> staticFiles/css/portal/rd/directory.css  
+> staticFiles/css/portal/rd/platform.css  
+> staticFiles/css/portal/rd/product.css  
+> staticFiles/js/portal/src/rd/platform.js  
+> template/platform.pug  
+

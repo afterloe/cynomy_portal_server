@@ -1078,3 +1078,19 @@ commit by afterloe (lm6289511@gmail.com)
 ### delete files
 > template/home-noLogin.pug  
 
+
+1.0.9 / 2017-3-11 14:20:35
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复make check问题
+
+
+### modify files
+> interceptors/session.js  
+> routers/announcement.js  
+> routers/index.js  
+> routers/portal.js  
+> services/discussService.js  
+> services/noticeService.js  
+

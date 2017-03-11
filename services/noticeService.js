@@ -15,10 +15,8 @@ const {resolve} = require("path");
 
 const [
   {get, set, del},
-  {throwNosuchThisNotice},
 ] = [
   require(resolve(__dirname, "redisService")),
-  require(resolve(__dirname, "..", "errors")),
 ];
 
 const [KEY, TIMEOUT] = [Symbol("KEY"), Symbol("TIMEOUT")];
@@ -30,7 +28,7 @@ function* postSystemNotice(content, timeout = module[TIMEOUT]) {
   return yield set(module[KEY], {content}, timeout);
 }
 
-function* getSystemNotice(number, page) {
+function* getSystemNotice() {
   const value = yield get(module[KEY]);
   return value;
 }

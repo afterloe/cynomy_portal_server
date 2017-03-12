@@ -276,3 +276,15 @@ commit by afterloe (lm6289511@gmail.com)
 4)  
   问题：portal部门链接会不会增多？  
   回答：portal由研发部升级为公司portal，后续的维护和升级将加强工作流系统和权限系统，也就是说未来portal会接入更多的部门，只要登入http://rd.jwis.cn 就能查看公司所有部门和文件信息，实现公司内部资料人员信息共享，方便了解所有部门的最新动态，想加入的我们portal系统的部门可以联系我(afterloeliu@jwis.cn)，目前售前技术部和自主研发部已经加入，请期待后续的维护和升级。  
+
+1.0.9 / 2017-3-12 23:33:6
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完善云端微调信息
+
+
+### modify files
+> staticFiles/css/portal/discussesInfo.css  
+> template/directory.pug  
+

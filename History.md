@@ -389,3 +389,15 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/js/portal/src/rd/platform.js  
 > template/platform.pug  
 
+
+1.0.9 / 2017-3-13 16:55:38
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改部分样式信息
+
+
+### modify files
+> index.js  
+> routers/portal.js  
+

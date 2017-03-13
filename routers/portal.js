@@ -122,7 +122,7 @@ function* info(next) {
   }
   try {
     const {id} = this.params;
-    const {name, createTimestamp, nodeList, status, owner, members, produceList} = yield workflowInfo(id);
+    const {name, createTimestamp, nodeList, status, owner, members} = yield workflowInfo(id);
 
     this.data = {
       title: `JWI Portal - ${name}`,

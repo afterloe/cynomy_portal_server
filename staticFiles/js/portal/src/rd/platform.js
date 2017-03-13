@@ -209,7 +209,7 @@ const buildFiles = (files) => {
       </span>
       <span class="time">${timeToDate(file.uploadTime)}</span>
       <span>${file.downloadCount || 0}</span>
-      <span>${file.author ? file.author.name : "admin"}</span>
+      <span class="author">${file.author ? file.author.name : "admin"}</span>
       <span data-id=${file._id} class="download" onClick="javascript:downLoadFile(this);"></span>
     </div>
   </li>`);

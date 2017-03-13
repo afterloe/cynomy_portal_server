@@ -377,3 +377,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/login.pug  
 
+
+1.0.9 / 2017-3-13 16:41:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复ajax platform信息
+
+
+### modify files
+> staticFiles/js/portal/src/rd/platform.js  
+> template/platform.pug  
+

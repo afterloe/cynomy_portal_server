@@ -41,7 +41,7 @@ if (true === remote.enable) {
 
 if (enable) {
   console.log("portal server engine use cluster module, %s threads will startup", slaveNum);
-  cluster.schedulingPolicy = cluster.SCHED_RR; // 启用轮叫调度策略
+  // cluster.schedulingPolicy = cluster.SCHED_RR; // 启用轮叫调度策略 - 不启用轮叫调度模式
   const server = createServer();
   server.listen(registryPort, bindHost, () => {
     console.log("TCP net socket is runnig in %s:%s", bindHost, registryPort);

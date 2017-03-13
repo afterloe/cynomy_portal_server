@@ -288,3 +288,14 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/css/portal/discussesInfo.css  
 > template/directory.pug  
 
+
+1.0.9 / 2017-3-13 10:42:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 关闭轮叫调度策略，采用默认抢占式服务
+
+
+### modify files
+> index.js  
+

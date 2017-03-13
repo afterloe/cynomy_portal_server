@@ -299,3 +299,16 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > index.js  
 
+
+1.0.9 / 2017-3-13 10:50:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: smartNotFound添加多维code
+
+
+### modify files
+> interceptors/smartNotFound.js  
+> routers/ad-portal.js  
+> routers/ps-portal.js  
+

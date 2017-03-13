@@ -47,13 +47,13 @@ module.exports = function * (next) {
      * 如果存在异常
      */
     if (equal(error)) {
-      this.status = error.code;
       /**
        * 异常是 自定义异常 按照请求方式进行分发处理
        */
       if ("json" === this.way) {
           this.body = this.fail(error.message, error.code);
       } else {
+          this.status = error.code;
           this.render("journalError", {
             title: "oh no!",
             msg: error.message,

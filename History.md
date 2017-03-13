@@ -312,3 +312,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/ad-portal.js  
 > routers/ps-portal.js  
 
+
+1.0.9 / 2017-3-13 11:51:6
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 改版工作开始
+
+
+### modify files
+> interceptors/smartNotFound.js  
+> interceptors/template.js  
+> template/workflowInfo.pug  
+

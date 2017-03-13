@@ -39,7 +39,7 @@ module.exports = function* (next) {
     });
 
     this.fail = (msg = "system error", code = 500) => ({
-      code: Number.parseInt(code),
+      code: Number.parseFloat(code),
       error: msg,
       result: null,
       systemVersion: module[VERSION],

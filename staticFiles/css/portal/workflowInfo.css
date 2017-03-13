@@ -9,24 +9,11 @@
   * Date:
   *   2017-3-5 06:27:51
   */
-  * {
-      margin: 0;
-      padding: 0;
-      border: 0;
-  }
+  * { margin: 0; padding: 0; border: 0;}
   ul{margin-bottom:0;}
-
-  ul, ul li {
-      list-style: none;
-  }
-
-  a {
-      text-decoration: none;
-  }
-
-  input {
-      border: 0;
-  }
+  ul, ul li {list-style: none;}
+  a {text-decoration: none;}
+  input {border: 0;}
 
   @media (min-width:769px) {
       .container {
@@ -49,11 +36,7 @@
           border-radius: 5px;
           padding-bottom:10px;
       }
-      .tru {
-          padding: 0px;
-          width: 810px;
-          margin: 0 auto;
-      }
+      .tru {padding: 0px; width: 810px; margin: 0 auto;}
       .truTitle {border-bottom: 1px solid #dbdbdb; height: 45px; line-height: 50px; background-position:left 15px; background-repeat: no-repeat; padding-left: 30px; color: #333333; font-weight: 600; font-size: 18px;}
       .pc{background-image:url(../../images/portal/pc.png);}
       .android{background-image:url(../../images/portal/android.png);}
@@ -114,6 +97,7 @@
       .change { display: inline-block; width: 100px; height: 50px; cursor: pointer; float: right;}
       .svn {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus2.png) no-repeat center 13px;}
       .cloud {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus4.png) no-repeat center 13px;}
+      .files .topic {margin-left: 40%}
   }
 
   @media (max-width:768px) {
@@ -260,4 +244,5 @@
       .change {cursor: pointer; float: right; height: 0.5rem; line-height: 0.5rem; width: 0.4rem; background-size: contain; margin-right: 0.4rem}
       .svn {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus2.png) no-repeat center 0.05rem;}
       .cloud {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus4.png) no-repeat center 0.05rem;}
+      .files .topic {margin-left: 30%}
   }

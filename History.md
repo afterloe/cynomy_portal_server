@@ -337,3 +337,17 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/css/portal/workflowInfo.css  
 > template/workflowInfo.pug  
 
+
+1.0.9 / 2017-3-13 15:39:47
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改前端展示信息
+
+
+### modify files
+> routers/portal.js  
+> staticFiles/css/portal/workflowInfo.css  
+> template/platform.pug  
+> template/workflowInfo.pug  
+

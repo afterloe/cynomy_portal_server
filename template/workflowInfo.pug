@@ -5,12 +5,23 @@ include header
 link(href= static + "css/portal/workflowInfo.css?time=" + __time rel="stylesheet")
 
 style.
-  .files .topic {margin-left: 40%}
+  @media (min-width:769px) {
+    .files .topic {margin-left: 40%}
+  }
+  
+  @media (max-width:768px) {
+    .files .topic {margin-left: 30%}
+    .data li div span { margin-top: -0.05rem; display: none; float: left; width: 1.85rem; text-align: center; height: 0.5rem;}
+    .data li div span.name{ width:30%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+    .data li div span.local{ width:50%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+    .files li div span.name{ width:60%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+    .files li div span.author{ width:30%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+  }
 
 - const _members = locals.members || [];
 - const _process = locals.nodeList || [];
 - const _activeNode = locals.status || {};
-- const _files = locals.produceList || [];
+- const _files = _activeNode.produceList || [];
 
 div(class="container platform_content")
   div(class="content_one")
@@ -80,12 +91,11 @@ div(class="container platform_content")
           each _file in _files
             li
               div
-                i
                 span(class="name" data-id=_file._id onClick="javascript:downLoadFile(this);")
                   a(href="javascript:void(0);")=_file.name
                 span(class="time")=_file.uploadTime? new Date(_file.uploadTime).toLocaleString() : new Date().toLocaleString()
                 span=_file.downloadCount || 0
-                span=_file.author?_file.author.name : "admin"
+                span(class="author")=_file.author?_file.author.name : "admin"
                 span(data-id=_file._id class="download" onClick="javascript:downLoadFile(this);")
         ul(class="data path")
           li
@@ -182,7 +192,7 @@ script.
           </span>
           <span class="time">${timeToDate(produce.uploadTime)}</span>
           <span>${produce.downloadCount || 0}</span>
-          <span>${produce.author ? produce.author.name : "admin"}</span>
+          <span class="author">${produce.author ? produce.author.name : "admin"}</span>
           <span data-id=${produce._id} class="download" onClick="javascript:downLoadFile(this);"></span>
         </div>
       </li>`).join(""));

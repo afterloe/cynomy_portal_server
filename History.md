@@ -366,3 +366,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/systemError.pug  
 > template/workflowInfo.pug  
 
+
+1.0.9 / 2017-3-13 16:17:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改忘记密码提示
+
+
+### modify files
+> template/login.pug  
+

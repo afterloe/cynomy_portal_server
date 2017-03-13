@@ -177,7 +177,10 @@ const nodeInstance = function* (next) {
 
   try {
     const {id} = this.params;
-    this.data = yield getNodeInstance(id);
+    const nodeInstance = yield getNodeInstance(id);
+    const produceList = yield findGoodsByNode(id);
+    Object.assign(nodeInstance, {produceList});
+    this.data = nodeInstance;
   } catch (err) {
     this.error = err;
   }

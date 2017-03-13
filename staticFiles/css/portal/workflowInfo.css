@@ -99,7 +99,7 @@
       .upload:hover{background:url(../../images/portal/upload1.png) no-repeat center 13px;}
       .detail {background: url(../../images/portal/detail.png) no-repeat center 13px; display: inline-block; width: 30px; height: 50px; cursor: pointer; float: right;}
       .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 13px;}
-      .data{margin-top:15px;margin-left:40px;min-width:810px;}
+      .data {margin-top:15px;margin-left:40px;min-width:810px;}
       .data li{height:66px;}
       .data li div{height:66px;width:100%;}
       .data li div i{display: inline-block;  width: 16px; height: 16px; border-radius: 50%;background:#dbdbdb;float:left;margin-left:-8px;}

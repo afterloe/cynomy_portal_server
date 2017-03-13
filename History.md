@@ -325,3 +325,15 @@ commit by afterloe (lm6289511@gmail.com)
 > interceptors/template.js  
 > template/workflowInfo.pug  
 
+
+1.0.9 / 2017-3-13 15:13:12
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端workflowInfo添加文件信息
+
+
+### modify files
+> staticFiles/css/portal/workflowInfo.css  
+> template/workflowInfo.pug  
+

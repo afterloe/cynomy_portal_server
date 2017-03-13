@@ -4,9 +4,13 @@ include header
 
 link(href= static + "css/portal/workflowInfo.css?time=" + __time rel="stylesheet")
 
+style.
+  .files .topic {margin-left: 40%}
+
 - const _members = locals.members || [];
 - const _process = locals.nodeList || [];
 - const _activeNode = locals.status || {};
+- const _files = locals.produceList || [];
 
 div(class="container platform_content")
   div(class="content_one")
@@ -50,29 +54,40 @@ div(class="container platform_content")
         ul(class="data")
           li
             div
-              i
               span(class="name") 节点名
               span(class="local" id="nodeName")=_activeNode.name
           - const _owner = _activeNode.owner || {};
           li
             div
-              i
               span(class="name") 该节点负责人
               span(class="local" id="nodeOwner")=_owner.name ? `${_owner.name} (${_owner.mail})`: `未设置负责人`
           li
             div
-              i
               span(class="name") 进入节点时间
               span(class="local" id="nodeBeginTime")=new Date(_activeNode.beginTimestamp).toLocaleString()
           li
             div
-              i
               span(class="name") 节点更新次数
               span(class="local" id="nodeUpdateCount")=_activeNode.uploadCount
         div(class="header")
-          span(class="data_title") 资料仓库
-          span(class="change cloud")
-        ul(class="data")
+          span(class="data_title") 数据仓库
+          span(class="change svn")
+        ul(class="data files")
+          if _files.length === 0
+            li
+              div
+                span(class="topic") 未上传文件至云服务器
+          each _file in _files
+            li
+              div
+                i
+                span(class="name" data-id=_file._id onClick="javascript:downLoadFile(this);")
+                  a(href="javascript:void(0);")=_file.name
+                span(class="time")=_file.uploadTime? new Date(_file.uploadTime).toLocaleString() : new Date().toLocaleString()
+                span=_file.downloadCount || 0
+                span=_file.author?_file.author.name : "admin"
+                span(data-id=_file._id class="download" onClick="javascript:downLoadFile(this);")
+        ul(class="data path")
           li
             div
               span(class="name") svn地址
@@ -98,7 +113,8 @@ script.
     */
   "use strict";
 
-  $(function() {
+  ($ => {
+    $(() => {
       //进入该页面，content_one从上往下运动
       const width = $(window).width();
       if (width > 768) {
@@ -113,14 +129,34 @@ script.
       } else {
           $(".content_one").css("margin-top", 0);
       }
-  });
+
+      // 点击svn切换数据源
+      $(".header").on("click", ".change", function() {
+        const __self = $(this);
+
+        if (__self.hasClass("svn")) {
+          $(".data.files").show();
+          $(".data.path").hide();
+          __self.attr("class", "change cloud");
+        } else {
+          $(".data.files").hide();
+          $(".data.path").show();
+          __self.attr("class", "change svn");
+        }
+      });
+
+      $(".data.files").hide(); // 初始时隐藏datas 列表
+
+    });
+  })(jQuery);
 
   const cleanSelectd = (nodeName) => {
     $("dl").attr("class", "");
   };
 
-  const buildInstancePage = ({name, _id, beginTimestamp, owner, svn, uploadCount}) => {
+  const buildInstancePage = ({name, _id, beginTimestamp, produceList = [], owner, svn, uploadCount}) => {
     $("#nodeName").html(name);
+
     if (owner) {
       $("#nodeOwner").html(`${owner.name} (${owner.mail})`);
     } else {
@@ -135,6 +171,33 @@ script.
       $("#nodeSvnInfo").html(`<a href="javascript:void(0)">-</a>`);
     }
     $(".change").attr("data-id", _id);
+
+    if (produceList.length === 0) {
+      $(".data.files").html(`<li><div><span class="topic">未上传文件至云服务器</span></div></li>`);
+    } else {
+      $(".data.files").html(produceList.map(produce => `<li>
+        <div>
+          <span class="name" data-id=${produce._id} onClick="javascript:downLoadFile(this);">
+            <a href="javascript:void(0)">${produce.name}</a>
+          </span>
+          <span class="time">${timeToDate(produce.uploadTime)}</span>
+          <span>${produce.downloadCount || 0}</span>
+          <span>${produce.author ? produce.author.name : "admin"}</span>
+          <span data-id=${produce._id} class="download" onClick="javascript:downLoadFile(this);"></span>
+        </div>
+      </li>`).join(""));
+    }
+
+    $(".data.files").hide();
+    $(".data.path").show();
+  };
+
+  const timeToDate = time => {
+    if (!time) {
+      return new Date().toLocaleString();
+    }
+    const data = new Date(time);
+    return data.toLocaleString();
   };
 
   const loadNodeInstance = btn => {
@@ -154,7 +217,9 @@ script.
           alert("服务器繁忙");
         } else {
           cleanSelectd();
+          $(".header > span:eq(2)").attr("class", "change svn");
           $(btn).parent().attr("class", "processActive");
+          $(".data.files").hide();
           buildInstancePage(result.result);
         }
       }

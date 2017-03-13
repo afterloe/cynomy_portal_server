@@ -53,7 +53,6 @@ module.exports = function * (next) {
       if ("json" === this.way) {
           this.body = this.fail(error.message, error.code);
       } else {
-          this.status = error.code;
           this.render("journalError", {
             title: "oh no!",
             msg: error.message,

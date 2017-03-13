@@ -351,3 +351,18 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > template/workflowInfo.pug  
 
+
+1.0.9 / 2017-3-13 16:13:1
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改404 等公共页面样式
+
+
+### modify files
+> interceptors/smartNotFound.js  
+> template/404NotFound.pug  
+> template/journalError.pug  
+> template/systemError.pug  
+> template/workflowInfo.pug  
+

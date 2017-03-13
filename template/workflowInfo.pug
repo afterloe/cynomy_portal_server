@@ -8,7 +8,7 @@ style.
   @media (min-width:769px) {
     .files .topic {margin-left: 40%}
   }
-  
+
   @media (max-width:768px) {
     .files .topic {margin-left: 30%}
     .data li div span { margin-top: -0.05rem; display: none; float: left; width: 1.85rem; text-align: center; height: 0.5rem;}
@@ -234,6 +234,10 @@ script.
         }
       }
     });
+  };
+
+  const downLoadFile = (btn) => {
+    window.open("/fs/download/" + $(btn).attr("data-id"));
   };
 
   // 点击反馈跳转到bbs

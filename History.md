@@ -401,3 +401,14 @@ commit by afterloe (lm6289511@gmail.com)
 > index.js  
 > routers/portal.js  
 
+
+1.0.9 / 2017-3-14 10:40:2
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 隐藏搜索框
+
+
+### modify files
+> template/header.pug  
+

@@ -437,3 +437,15 @@ commit by afterloe (lm6289511@gmail.com)
 > template/footer.pug  
 > template/header.pug  
 
+
+1.0.9 / 2017-3-14 13:47:43
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 首页开始变更
+
+
+### modify files
+> staticFiles/css/portal/home.css  
+> template/home.pug  
+

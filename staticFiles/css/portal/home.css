@@ -54,10 +54,12 @@
     .mainBox .data li:first-child div i{background:#3d9bff;}
     .helpBox .data li:first-child div i{background:#3c763d;}
   }
+  
   @media only screen and (max-width: 800px) {
     .feedback {vertical-align: top; display:inline-block; width:100px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/feedback.png') no-repeat center; cursor:pointer; background-size:contain;}
     .feedback:hover {width:100px; background: url('http://almcloud.jwis.cn/images/portal/2-selected.png') no-repeat center; background-size:contain;}
   }
+
   @media (max-width:768px) {
     .container .structure {min-height: 450px;}
     .feedback {display:none;}

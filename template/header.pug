@@ -14,16 +14,28 @@ html(lang="en")
     link(href= static + "css/portal/footer.css?time=" + __time rel="stylesheet")
 
 - const _navbar = locals.navbar || [{href: "/portal/home", name: "首页"}];
-- if (locals.index && locals.index <= _navbar.length) {
--   _navbar[index - 1].isAction = "active";
-- }
+- let _actionNumer = locals.index || 0;
+- _actionNumer-- < 0? _actionNumer=0: null;
+
+  style.
+    @media (min-width:769px) {
+      .dropdown-menu {padding: 0 0 0 0;}
+      .dropdown-menu>li>a {padding: 8px; font-size: 15px; text-align: center; line-height: 35px; height: 50px;}
+      .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {color: #3d9bff;}
+    }
+
+    @media (max-width:768px) {
+      .dropdown-menu>li>a {display:none;}
+      .dropdown-menu {height: 0; width: 0; min-height: 0; min-width: 0; border: none;}
+    }
+
 
   body(oncontextmenu="javascript:return false;")
     header
       div(class="header-body")
         nav(class="header-navbar navbar navbar-default navbar-fixed-top" role="navigation")
           div(class="container header-container-fluid")
-            button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse")
+            button(type="button" class="navbar-toggle" data-toggle="collapse" data-target="#cynomy-portal-collapse")
               span(class="sr-only") 切换导航
               span(class="icon-bar")
               span(class="icon-bar")
@@ -31,9 +43,9 @@ html(lang="en")
             div(class="navbar-header  header-navbar-header" onClick="javascript:location.href='/';")
               a(class="navbar-brand" href="/")
             div
-              ul(class="nav navbar-nav navbar-left collapse navbar-collapse" aria-expanded = "false" id="example-navbar-collapse")
-                each nav in _navbar
-                  li(class=nav.isAction)
+              ul(class="nav navbar-nav navbar-left collapse navbar-collapse" aria-expanded="false" id="cynomy-portal-collapse")
+                each nav,index in _navbar
+                  li(class=index ===_actionNumer ? "active":"")
                     a(href= nav.href)= nav.name
                     if nav.subNav
                       ul(class="dropdown-menu")

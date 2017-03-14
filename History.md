@@ -424,3 +424,16 @@ commit by afterloe (lm6289511@gmail.com)
 > interceptors/template.js  
 > template/header.pug  
 
+
+1.0.9 / 2017-3-14 11:50:27
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 首页链接样式优化，手机等小屏幕不显示下拉选
+
+
+### modify files
+> staticFiles/js/portal/src/header.js  
+> template/footer.pug  
+> template/header.pug  
+

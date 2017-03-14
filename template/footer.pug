@@ -7,3 +7,28 @@ footer(class="footer")
 
 script(src= static + "js/portal/jquery-2.1.1.js")
 script(src= static + "js/portal/bootstrap.min.js")
+//- script(src= static + "js/portal/header.js")
+script.
+  "use strict";
+
+  ($ => {
+      $(() => {
+
+        $("#cynomy-portal-collapse").children("li").bind("mouseenter", function() {
+            const subNav = $(this).find(".dropdown-menu");
+            if (subNav.length === 0) {
+              return ;
+            }
+            subNav.attr("style", "display:block;");
+        });
+
+        $("#cynomy-portal-collapse").children("li").bind("mouseleave", function() {
+            const subNav = $(this).find(".dropdown-menu");
+            if (subNav.length === 0) {
+              return ;
+            }
+            subNav.removeAttr("style");
+        });
+
+      });
+  })(jQuery);

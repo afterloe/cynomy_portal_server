@@ -449,3 +449,14 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/css/portal/home.css  
 > template/home.pug  
 
+
+1.0.9 / 2017-3-14 19:0:30
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成改版后首页静态页面
+
+
+### modify files
+> template/home.pug  
+

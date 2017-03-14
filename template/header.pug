@@ -13,9 +13,9 @@ html(lang="en")
     link(href= static + "css/portal/header.css?time=" + __time rel="stylesheet")
     link(href= static + "css/portal/footer.css?time=" + __time rel="stylesheet")
 
-- const navbar = [{href: "/portal/home", name: "首页"}, {href: "/portal/rd/home", name: "研发部"}, {href: "/portal/ad/home", name: "自主交付部"}, {href: "/portal/ps/home", name: "售前技术部"}]
-- if (locals.index && locals.index <= navbar.length) {
--   navbar[index - 1].isAction = "active";
+- const _navbar = locals.navbar || [{href: "/portal/home", name: "首页"}];
+- if (locals.index && locals.index <= _navbar.length) {
+-   _navbar[index - 1].isAction = "active";
 - }
 
   body(oncontextmenu="javascript:return false;")
@@ -32,9 +32,14 @@ html(lang="en")
               a(class="navbar-brand" href="/")
             div
               ul(class="nav navbar-nav navbar-left collapse navbar-collapse" aria-expanded = "false" id="example-navbar-collapse")
-                each nav in navbar
+                each nav in _navbar
                   li(class=nav.isAction)
                     a(href= nav.href)= nav.name
+                    if nav.subNav
+                      ul(class="dropdown-menu")
+                          each subNav in nav.subNav
+                            li
+                              a(href=subNav.href)=subNav.name
               form(class="navbar-form navbar-right header-search" role="search")
                 div(class="input-group")
 //-                  input(type="search" class="form-control nav-search" placeholder="输入查找关键字")

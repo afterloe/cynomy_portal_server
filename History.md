@@ -412,3 +412,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/header.pug  
 
+
+1.0.9 / 2017-3-14 10:59:37
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: Header 信息由后端传递
+
+
+### modify files
+> interceptors/template.js  
+> template/header.pug  
+

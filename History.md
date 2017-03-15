@@ -486,3 +486,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/home.pug  
 
+
+1.0.9 / 2017-3-15 10:1:12
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 默认portal首页权限修改无登陆无法查看内容
+
+
+### modify files
+> routers/portal.js  
+

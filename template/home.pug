@@ -25,9 +25,14 @@ style.
   .downButton{display: block; cursor:pointer; float: right; border-bottom: 1px solid #333; border-right: 1px solid #333; width: 0.8em; height: 0.8em;}
   ul{margin-bottom:0;}
   ul, ul li {list-style: none;}
+  .active {color:#3d9bff;}
+  .chatHeader {text-align: center;}
+  .dynamic.data li div:hover {background-color: #f5f5f5; color:#000}
+  .discuss.data li div:hover {background-color: #f5f5f5; color:#000}
+
   /** TODO **/
-  .record {vertical-align: top; display:inline-block; width:140px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/record.png') no-repeat center; cursor:pointer; background-size:contain;}
-  .dynamic {vertical-align: top; display:inline-block; width:140px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/dynamic.png') no-repeat center; cursor:pointer; background-size:contain;}
+  .recordPic {vertical-align: top; display:inline-block; width:140px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/record.png') no-repeat center; cursor:pointer; background-size:contain;}
+  .dynamicPic {vertical-align: top; display:inline-block; width:140px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/dynamic.png') no-repeat center; cursor:pointer; background-size:contain;}
   .name {cursor:pointer;}
 
   .chat div:nth-child(2) {background-color:#8bc34a;}
@@ -48,7 +53,7 @@ style.
     .down {transform: rotate(45deg); margin: 0 0.1rem 0.1rem 0; }
     .title {font-size: 0.2rem; font-weight: 400;}
     .catalogShadow .title {padding: 0.03rem 0 0.03rem 0.1rem;}
-    .active {color:#3d9bff;}
+
     .mainBox {vertical-align: top; display:inline-block; width:55%}
     .noHelp {width:83%;}
     .helpBox {display:inline-block;width:32%}
@@ -60,7 +65,6 @@ style.
     .form div.last span:nth-child(3) .submit_re { background: #3d9bff; width: 0.8rem; text-align: center; color: #fff; padding: 0 5px;}
 
     .projectChat {margin-top: 0.3rem; height: 3.5rem; margin-bottom: -0.3rem; cursor: default;}
-    .chatHeader {text-align: center;}
     .chatHeader h4 {margin-top: 0.2rem}
     .chatBody .chat {height: 2rem; width: 100%; text-align:center; margin-top:0.4rem;}
     .chat div {cursor:pointer; vertical-align: bottom; display:inline-block; width: 0.40rem; margin-right: 1rem; -moz-border-radius: 0.05rem 0.05rem 0 0; -webkit-border-radius: 0.05rem 0.05rem 0 0; border-radius: 0.05rem 0.05rem 0 0; }
@@ -72,7 +76,7 @@ style.
     .legend div:last-child {margin-right: 0}
 
     .mainBox .data {margin-top:15px;margin-left:40px;}
-    .mainBox .content {width:60%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .mainBox .content {width:60%;margin-left:10px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .mainBox .time {width:32%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
 
     .dynamic.data {height: 88%; overflow: hidden; padding: 0.15rem 0 0.15rem 0.15rem; margin-left: 0.15rem; border-left: 0.01rem solid #ececec; border-right: 0.01rem solid #ececec; border-bottom: 0.01rem solid #ececec; width: 92%;}
@@ -81,7 +85,6 @@ style.
 
     .dynamic.data li {height: 0.3rem;}
     .dynamic.data li div {height: 0.3rem; line-height: 0.3rem; width:100%;color:#9E9E9E;}
-    .dynamic.data li div:hover {background-color: #f5f5f5; color:#000}
     .dynamic.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .dynamic.data li:last-child{border-left:0;}
 
@@ -91,7 +94,7 @@ style.
 
     .discuss.data li {height: 0.3rem;}
     .discuss.data li div {height: 0.3rem; line-height: 0.3rem; width:100%;color:#9E9E9E;}
-    .discuss.data li div:hover {background-color: #f5f5f5; color:#000}
+
     .discuss.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .discuss.data li:last-child{border-left:0;}
 
@@ -118,7 +121,6 @@ style.
     .down {transform: rotate(45deg); margin: 0 0.1rem 0.1rem 0; }
     .title {font-size: 0.2rem; font-weight: 400;}
     .catalogShadow .title {padding: 0.03rem 0 0.03rem 0.1rem;}
-    .active {color:#3d9bff;}
     .mainBox {vertical-align: top; display:inline-block; width:55%}
     .noHelp {width:83%;}
     .helpBox {display:inline-block;width:32%}
@@ -130,7 +132,6 @@ style.
     .form div.last span:nth-child(3) .submit_re { background: #3d9bff; width: 0.8rem; text-align: center; color: #fff; padding: 0 5px;}
 
     .projectChat {margin-top: 0.3rem; height: 3.5rem; margin-bottom: -0.3rem; cursor: default;}
-    .chatHeader {text-align: center;}
     .chatHeader h4 {margin-top: 0.2rem}
     .chatBody .chat {height: 2rem; width: 100%; text-align:center; margin-top:0.4rem;}
     .chat div {cursor:pointer; vertical-align: bottom; display:inline-block; width: 0.40rem; margin-right: 1rem; -moz-border-radius: 0.05rem 0.05rem 0 0; -webkit-border-radius: 0.05rem 0.05rem 0 0; border-radius: 0.05rem 0.05rem 0 0; }
@@ -151,7 +152,6 @@ style.
 
     .dynamic.data li {height: 0.3rem;}
     .dynamic.data li div {height: 0.3rem; line-height: 0.3rem; width:100%;color:#9E9E9E;}
-    .dynamic.data li div:hover {background-color: #f5f5f5; color:#000}
     .dynamic.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .dynamic.data li:last-child{border-left:0;}
 
@@ -161,7 +161,6 @@ style.
 
     .discuss.data li {height: 0.3rem;}
     .discuss.data li div {height: 0.3rem; line-height: 0.3rem; width:100%;color:#9E9E9E;}
-    .discuss.data li div:hover {background-color: #f5f5f5; color:#000}
     .discuss.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .discuss.data li:last-child{border-left:0;}
 
@@ -195,7 +194,6 @@ style.
     .helpBox{width:100%}
 
     .projectChat {margin-top: 0.3rem; height: 3.5rem; margin-bottom: -0.3rem; cursor: default;}
-    .chatHeader {text-align: center;}
     .chatHeader h4 {margin-top: 0.2rem}
     .chatBody .chat {height: 2rem; width: 100%; text-align:center; margin-top:0.4rem;}
     .chat div {cursor:pointer; vertical-align: bottom; display:inline-block; width: 0.40rem; margin-right: 1rem; -moz-border-radius: 0.05rem 0.05rem 0 0; -webkit-border-radius: 0.05rem 0.05rem 0 0; border-radius: 0.05rem 0.05rem 0 0; }
@@ -228,7 +226,6 @@ style.
 
     .dynamic.data li {height: 0.5rem;}
     .dynamic.data li div {height: 0.5rem; line-height: 0.5rem; width:100%;color:#9E9E9E;}
-    .dynamic.data li div:hover {background-color: #f5f5f5; color:#000}
     .dynamic.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .dynamic.data li:last-child{border-left:0;}
 
@@ -238,7 +235,6 @@ style.
 
     .discuss.data li {height: 0.5rem;}
     .discuss.data li div {height: 0.5rem; line-height: 0.5rem; width:100%;color:#9E9E9E;}
-    .discuss.data li div:hover {background-color: #f5f5f5; color:#000}
     .discuss.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .discuss.data li:last-child{border-left:0;}
 
@@ -258,7 +254,6 @@ style.
     .helpBox{width:100%}
 
     .projectChat {margin-top: 0.3rem; height: 3.5rem; margin-bottom: -0.3rem; cursor: default;}
-    .chatHeader {text-align: center;}
     .chatHeader h4 {margin-top: 0.2rem}
     .chatBody .chat {height: 2rem; width: 100%; text-align:center; margin-top:0.4rem;}
     .chat div {cursor:pointer; vertical-align: bottom; display:inline-block; width: 0.40rem; margin-right: 1rem; -moz-border-radius: 0.05rem 0.05rem 0 0; -webkit-border-radius: 0.05rem 0.05rem 0 0; border-radius: 0.05rem 0.05rem 0 0; }
@@ -291,7 +286,6 @@ style.
 
     .dynamic.data li {height: 0.5rem;}
     .dynamic.data li div {height: 0.5rem; line-height: 0.5rem; width:100%;color:#9E9E9E;}
-    .dynamic.data li div:hover {background-color: #f5f5f5; color:#000}
     .dynamic.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .dynamic.data li:last-child{border-left:0;}
 
@@ -301,7 +295,6 @@ style.
 
     .discuss.data li {height: 0.5rem;}
     .discuss.data li div {height: 0.5rem; line-height: 0.5rem; width:100%;color:#9E9E9E;}
-    .discuss.data li div:hover {background-color: #f5f5f5; color:#000}
     .discuss.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
     .discuss.data li:last-child{border-left:0;}
 
@@ -343,8 +336,10 @@ div(class="container content")
         .chatBody
           .chat
             span(class="pillar")
+            - let __index = 0;
             each val,key in _workflowInfo
-              div(data-key=key style=`height: ${val.length / _workflowNum * 100}%`)
+              div(data-key=key data-index=__index style=`height: ${val.length / _workflowNum * 100}%`)
+                - __index++;
                 span=val.length
         .chatFooter
           .legend
@@ -418,7 +413,7 @@ script.
         $(".projectList").find(".data.project").html(_.join(""));
       };
 
-      const obmitWorkflowInfoByDepartment = departmentName => {
+      const obmitWorkflowInfoByDepartment = (departmentName, chatId) => {
         $.ajax({
           url: `/workflow/department/${departmentName}`,
           type: "GET",
@@ -433,6 +428,7 @@ script.
             if (200 !== result.code) {
               alert("服务器繁忙");
             } else {
+              $(".chatFooter .legend").find(`div:eq(${chatId})`).addClass("active");
               $(".projectList .catalogShadow").find("span.name").html(`${departmentName} 项目列表 (正在进行的项目)`);
               buildProjectList(result.result);
             }
@@ -440,16 +436,18 @@ script.
         });
       };
 
-      obmitWorkflowInfoByDepartment($(".legend div:eq(0)").html());
+      obmitWorkflowInfoByDepartment($(".legend div:eq(0)").html(), 0);
 
       // 点击反馈
       $(".feedback").bind("click", () => {
           $(".popup").show();
       });
 
+      // 点击图表 切换 工作流列表
       $(".chat").on("click", "div", function() {
         const department = $(this).attr("data-key");
-        obmitWorkflowInfoByDepartment(department);
+        $(".chatFooter .legend").find("div").removeClass("active");
+        obmitWorkflowInfoByDepartment(department, Number.parseInt($(this).attr("data-index")));
       });
 
       // 绑定data 下的li的单击事件

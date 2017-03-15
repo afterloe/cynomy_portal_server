@@ -547,3 +547,14 @@ commit by afterloe (lm6289511@gmail.com)
 > template/home.pug  
 > tools/buildPage.js  
 
+
+1.0.9 / 2017-3-15 15:44:20
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完善首页活动节点显示
+
+
+### modify files
+> template/home.pug  
+

@@ -471,3 +471,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/home.pug  
 
+
+1.0.9 / 2017-3-15 9:54:44
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加基础png信息用于显示
+
+
+### new files
+> staticFiles/images/portal/dynamic.png  
+> staticFiles/images/portal/record.png  
+
+### modify files
+> template/home.pug  
+

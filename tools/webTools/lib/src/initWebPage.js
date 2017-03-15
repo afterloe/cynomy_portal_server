@@ -421,6 +421,7 @@ window[MODULE].push(`<div class="modal fade" id="crearteTag" tabindex="-1" role=
                           <option value="应用">应用</option>
                           <option value="类型">类型</option>
                           <option value="用户">用户</option>
+                          <option value="部门">部门</option>
                           <option value="设备">设备</option>
                           <option value="权限">权限</option>
                           <option value="公共">公共</option>

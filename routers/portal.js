@@ -14,43 +14,58 @@
 const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
 const [
-  {workflowInfo},
+  {workflowInfo, searchProduct},
   {getAnnouncementsList, getAnnouncementCount},
   {getDiscussesList, getDiscussesCount},
   {getSystemNotice},
+  {findTags},
 ] = [
   require(resolve(services, "workflowService")),
   require(resolve(services, "announcementService")),
   require(resolve(services, "discussService")),
   require(resolve(services, "noticeService")),
+  require(resolve(services, "tagsService")),
 ];
-
 
 function* home(next) {
   if (this.error) {
     return yield next;
   }
   try {
-    const {mail, name} = this.authorized;
+    const {mail, name, tags} = this.authorized;
+
     const [
       announcements,
-      announcementsCount,
       discusses,
       discussCount,
       systemNotice,
+      departments, // 拉取所有部门信息
     ] = yield [
       getAnnouncementsList(10),
-      getAnnouncementCount(),
       getDiscussesList(10),
       getDiscussesCount(),
       getSystemNotice(),
+      findTags("部门"),
     ];
+
+    const workflowInfo = {};
+    for(let department of departments) {
+      Object.assign(workflowInfo, {
+        [department]: yield searchProduct(department),
+      });
+    }
+
+    let workflowNums = 0;
+    for (let key of workflowInfo) {
+      workflowNum += workflowInfo[key].length;
+    }
+
     const _ = {
       title: "JWI Portal",
       index: 1,
-      systemNotice ,
+      systemNotice,
+      chat: {workflowNums, workflowInfo},
       user: {mail, name},
-      systemAnnouncementNum: announcementsCount,
       systemAnnouncement: announcements.map(announcement => ({title: announcement.title, createTimestamp: announcement.createTimestamp, href:`/notice/${announcement._id}`})),
       discussCount,
       discuss: discusses.map(discuss => ({title: discuss.title, createTimestamp: discuss.createTimestamp, href: `/discuss/${discuss._id}`}))

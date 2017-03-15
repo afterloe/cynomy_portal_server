@@ -497,3 +497,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > routers/portal.js  
 
+
+1.0.9 / 2017-3-15 10:40:26
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 后端完成portal数据节选
+
+
+### modify files
+> routers/portal.js  
+> tools/webTools/lib/src/initWebPage.js  
+

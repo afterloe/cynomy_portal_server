@@ -32,7 +32,7 @@ function* home(next) {
     return yield next;
   }
   try {
-    const {mail, name, tags} = this.authorized;
+    const {mail, name} = this.authorized;
 
     const [
       announcements,

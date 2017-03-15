@@ -581,3 +581,14 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/index.js  
 > template/home.pug  
 
+
+1.0.9 / 2017-3-15 16:31:53
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复check异常
+
+
+### modify files
+> routers/portal.js  
+

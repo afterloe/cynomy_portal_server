@@ -460,3 +460,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/home.pug  
 
+
+1.0.9 / 2017-3-15 9:29:39
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端首页调整
+
+
+### modify files
+> template/home.pug  
+

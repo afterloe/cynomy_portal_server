@@ -28,7 +28,7 @@ style.
 
   .name {cursor:pointer;}
 
-  @media (min-width:769px) {
+  @media (min-width:1025px) {
     .container .structure {min-height: 600px;}
     .portalWhete {display: -webkit-box; height: 0.5em; font-size: 2em;}
     .box header span:nth-child(2) {float: right; margin-right: 0.1rem;}
@@ -107,12 +107,159 @@ style.
     .announcement {height: 3.5rem;}
   }
 
-  @media only screen and (max-width: 800px) {
+  @media only screen and (max-width: 1024px) {
+    .container .structure {min-height: 600px;}
+    .portalWhete {display: -webkit-box; height: 0.5em; font-size: 2em;}
+    .box header span:nth-child(2) {float: right; margin-right: 0.1rem;}
+    .up {transform: rotate(225deg); margin: 0.1rem 0.1rem 0 0; }
+    .down {transform: rotate(45deg); margin: 0 0.1rem 0.1rem 0; }
+    .title {font-size: 0.2rem; font-weight: 400;}
+    .catalogShadow .title {padding: 0.03rem 0 0.03rem 0.1rem;}
+    .active {color:#3d9bff;}
+    .mainBox {vertical-align: top; display:inline-block; width:55%}
+    .noHelp {width:83%;}
+    .helpBox {display:inline-block;width:32%}
+    .feedback {vertical-align: top; display:inline-block; width:140px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/feedback.png') no-repeat center; cursor:pointer; background-size:contain;}
+    .feedback:hover {background: url('http://almcloud.jwis.cn/images/portal/2-selected.png') no-repeat center;}
+    .form div.description {width: 558px; height: 190px; margin-top: 10px;}
+    .feedbackContent {overflow-y: auto; border-radius: 5px;}
+    textarea.form-control {height: 100%;}
+    .form div.last span:nth-child(3) .submit_re { background: #3d9bff; width: 0.8rem; text-align: center; color: #fff; padding: 0 5px;}
+
+    .projectChat {margin-top: 0.3rem; height: 3.5rem; margin-bottom: -0.3rem; cursor: default;}
+    .chatHeader {text-align: center;}
+    .chatHeader h4 {margin-top: 0.2rem}
+    .chatBody .chat {height: 2rem; width: 100%; text-align:center; margin-top:0.4rem;}
+    .chat div {cursor:pointer; vertical-align: bottom; display:inline-block; width: 0.40rem; margin-right: 1rem; -moz-border-radius: 0.05rem 0.05rem 0 0; -webkit-border-radius: 0.05rem 0.05rem 0 0; border-radius: 0.05rem 0.05rem 0 0; }
+    .chat div:last-child {margin-right: 0}
+    .chat div span {position: absolute; display: block; margin-top: -0.25rem; margin-left: 0.12rem;}
+    .chat .pillar {height:98%; display:inline-block;}
+    .chat .rd {background-color:#8bc34a;}
+    .chat .ad {background-color:#2196f3;}
+    .chat .ps {background-color:#F44336;}
+    .chatFooter .legend {text-align:center;}
+    .legend div {vertical-align: bottom; display:inline-block; width: 1.4rem; border-top: 0.02rem solid #dbdbdb; line-height: 0.4rem; font-size: 0.15rem;}
+    .legend div:last-child {margin-right: 0}
+
+    .mainBox .data {margin-top:15px;}
+    .mainBox .content {width:60%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .mainBox .time {width:32%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+
+    .dynamic.data {height: 88%; overflow: hidden; padding: 0.15rem 0 0.15rem; margin-left: 0.15rem; border-left: 0.01rem solid #ececec; border-right: 0.01rem solid #ececec; border-bottom: 0.01rem solid #ececec; width: 90%;}
+    .dynamic.data .content {width:50%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .dynamic.data .time {width:40%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+
+    .dynamic.data li {height: 0.3rem;}
+    .dynamic.data li div {height: 0.3rem; line-height: 0.3rem; width:100%;color:#9E9E9E;}
+    .dynamic.data li div:hover {background-color: #f5f5f5; color:#000}
+    .dynamic.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .dynamic.data li:last-child{border-left:0;}
+
+    .discuss.data {padding: 0.15rem 0 0.15rem 0; margin-left: 0.15rem; border-left: 0.01rem solid #ececec; border-right: 0.01rem solid #ececec; border-bottom: 0.01rem solid #ececec; width: 90%;}
+    .discuss.data .content {width:50%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .discuss.data .time {width:40%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+
+    .discuss.data li {height: 0.3rem;}
+    .discuss.data li div {height: 0.3rem; line-height: 0.3rem; width:100%;color:#9E9E9E;}
+    .discuss.data li div:hover {background-color: #f5f5f5; color:#000}
+    .discuss.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .discuss.data li:last-child{border-left:0;}
+
+    .project.data {cursor:default; padding: 0; margin: 0 0 0 0.14rem; border-left: 0.01rem solid #ececec; border-right: 0.01rem solid #ececec; width: 95%;}
+    .project.data li div {height: 0.5rem;border-bottom: 0.01rem solid #dbdbdb;}
+    .project.data li {cursor:pointer;}
+    .data.process {display: inline-block;overflow:hidden;}
+    .data.process li {display: inline-block; border-bottom:none;}
+    .mainBox .projectList {padding-bottom: 1rem;}
+    .icon {width:0.03rem; height:0.03rem;}
+    .line {color: #95defb; line-height: 0.05rem; height:0.05rem; font-size:0.15rem;}
+    .data.process > li:last-child > .line {display:none;}
+    .data.project > li span.content {margin-left: 0.5rem;}
+    .data.project li span.lump {margin: 0 0.15rem 0 0.15rem; position: absolute; margin-left: 0.198rem; margin-top: 0.14rem; }
+    .data.project > li i {transform: rotate(225deg); width: 0.22rem; height: 0.22rem; position: absolute; margin-left: 0.13rem; margin-top: 0.14rem; }
+    .data.project > li:nth-child(-n+4) .lump {color: #ffffff;}
+    .data.project > li:nth-child(1) i {display: block; background-color: #ff5722;}
+    .data.project > li:nth-child(2) i {display: block; background-color: #03A9F4;}
+    .data.project > li:nth-child(3) i {display: block; background-color: #8BC34A;}
+    .data.project > li:nth-child(4) i {display: block; background-color: #9E9E9E;}
+
+    .announcement {height: 3.5rem;}
     .feedback {vertical-align: top; display:inline-block; width:100px; height:40px; background: url('http://almcloud.jwis.cn/images/portal/feedback.png') no-repeat center; cursor:pointer; background-size:contain;}
     .feedback:hover {width:100px; background: url('http://almcloud.jwis.cn/images/portal/2-selected.png') no-repeat center; background-size:contain;}
   }
 
-  @media (max-width:768px) {
+  @media (max-width: 767px) {
+    .container .structure {min-height: 450px;}
+    .feedback {display:none;}
+    .portalWhete {display: -webkit-box; height: 0.3rem; font-size: 2em;}
+    .up {transform: rotate(225deg); margin: 0.1rem 0.1rem 0 0; }
+    .down {transform: rotate(45deg); margin: 0 0.1rem 0.1rem 0; }
+    .title {font-size: 0.2rem; font-weight: 200;}
+    .catalogShadow .title {}
+    .mainBox{vertical-align: top; width:100%}
+    .helpBox{width:100%}
+
+    .projectChat {margin-top: 0.3rem; height: 3.5rem; margin-bottom: -0.3rem; cursor: default;}
+    .chatHeader {text-align: center;}
+    .chatHeader h4 {margin-top: 0.2rem}
+    .chatBody .chat {height: 2rem; width: 100%; text-align:center; margin-top:0.4rem;}
+    .chat div {cursor:pointer; vertical-align: bottom; display:inline-block; width: 0.40rem; margin-right: 1rem; -moz-border-radius: 0.05rem 0.05rem 0 0; -webkit-border-radius: 0.05rem 0.05rem 0 0; border-radius: 0.05rem 0.05rem 0 0; }
+    .chat div:last-child {margin-right: 0}
+    .chat div span {position: absolute; display: block; margin-top: -0.35rem; margin-left: 0.08rem;}
+    .chat .pillar {height:96%; display:inline-block;}
+    .chat .rd {background-color:#8bc34a;}
+    .chat .ad {background-color:#2196f3;}
+    .chat .ps {background-color:#F44336;}
+    .chatFooter .legend {text-align:center;}
+    .legend div {vertical-align: bottom; display:inline-block; width: 1.4rem; border-top: 0.02rem solid #dbdbdb; line-height: 0.4rem; font-size: 0.15rem;}
+    .legend div:last-child {margin-right: 0}
+
+
+    .project.data {cursor: default; padding: 0; margin: 0 0 0 0.23rem; border-left: 0.01rem solid #ececec; border-right: 0.01rem solid #ececec; width: 92%;}
+    .project.data li div {height: 0.5rem;border-bottom: 0.01rem solid #dbdbdb;}
+    .project.data li {cursor:pointer;}
+    .data.process {display: inline-block;}
+    .data.process li {display: inline-block; border-bottom:none;}
+    .mainBox .projectList {padding-bottom: 0.2rem;}
+    .icon {width:0.03rem; height:0.03rem;}
+    .line {color: #95defb; line-height: 0.05rem; height:0.05rem; font-size:0.15rem;}
+    .data.process > li:last-child > .line {display:none;}
+    .data.project > li span.content {margin-left: 1rem; line-height: 0.5rem;}
+    .data.project li span.lump {position: absolute; margin-left: 0.21rem; margin-top: 0.16rem;}
+    .data.project > li i {transform: rotate(225deg); width: 0.25rem; height: 0.25rem; position: absolute; margin-left: 0.13rem; margin-top: 0.14rem; }
+    .data.project > li:nth-child(-n+4) .lump {color: #ffffff;}
+    .data.project > li:nth-child(1) i {display: block; background-color: #ff5722;}
+    .data.project > li:nth-child(2) i {display: block; background-color: #03A9F4;}
+    .data.project > li:nth-child(3) i {display: block; background-color: #8BC34A;}
+    .data.project > li:nth-child(4) i {display: block; background-color: #9E9E9E;}
+
+    .data.process {display: none;}
+
+    .dynamic.data {cursor: default; padding: 0; margin: 0 0 0 0.23rem; border-left: 0.01rem solid #ececec; border-right: 0.01rem solid #ececec; border-bottom: 0.01rem solid #ececec; width: 92%;}
+    .dynamic.data .content {width:50%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .dynamic.data .time {width:40%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+
+    .dynamic.data li {height: 0.5rem;}
+    .dynamic.data li div {height: 0.5rem; line-height: 0.5rem; width:100%;color:#9E9E9E;}
+    .dynamic.data li div:hover {background-color: #f5f5f5; color:#000}
+    .dynamic.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .dynamic.data li:last-child{border-left:0;}
+
+    .discuss.data {cursor: default; padding: 0; margin: 0 0 0 0.23rem; border-left: 0.01rem solid #ececec; border-right: 0.01rem solid #ececec; border-bottom: 0.01rem solid #ececec; width: 92%;}
+    .discuss.data .content {width:50%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .discuss.data .time {width:40%;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+
+    .discuss.data li {height: 0.5rem;}
+    .discuss.data li div {height: 0.5rem; line-height: 0.5rem; width:100%;color:#9E9E9E;}
+    .discuss.data li div:hover {background-color: #f5f5f5; color:#000}
+    .discuss.data li div span{cursor:pointer; display: inline-block; float:left;width:1.6rem; text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .discuss.data li:last-child{border-left:0;}
+
+    .announcement {margin-bottom: 0.3rem;}
+    .subscribe {margin-bottom: 0.3rem;}
+  }
+
+  @media (max-width:700px) {
     .container .structure {min-height: 450px;}
     .feedback {display:none;}
     .portalWhete {display: -webkit-box; height: 0.3rem; font-size: 2em;}

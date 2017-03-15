@@ -194,8 +194,8 @@ const departmentList = function* (next) {
   }
 
   try {
-    const {department} = this.params;
-    this.data = yield searchProduct(department);
+    const {name} = this.params;
+    this.data = yield searchProduct(name);
   } catch (err) {
     this.error = err;
   }

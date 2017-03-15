@@ -534,3 +534,16 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/workflow.js  
 > template/home.pug  
 
+
+1.0.9 / 2017-3-15 15:24:52
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: portal 首页完成图表功能
+
+
+### modify files
+> routers/workflow.js  
+> template/home.pug  
+> tools/buildPage.js  
+

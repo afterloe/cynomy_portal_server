@@ -98,13 +98,13 @@ style.
     .project.data {cursor:default; padding: 0; margin: 0 0 0 0.17rem; border-left: 0.01rem solid #ececec; border-right: 0.01rem solid #ececec; width: 95%;}
     .project.data li div {height: 0.5rem;border-bottom: 0.01rem solid #dbdbdb;}
     .project.data li {cursor:pointer;}
-    .data.process {display: inline-block;}
+    .data.process {display: inline-block; float: right; margin-right: 0.2rem; margin-left: 0;}
     .data.process li {display: inline-block; border-bottom:none;}
     .mainBox .projectList {padding-bottom: 1rem;}
     .icon {width:0.03rem; height:0.03rem;}
     .line {color: #95defb; line-height: 0.05rem; height:0.05rem; font-size:0.15rem;}
     .data.process > li:last-child > .line {display:none;}
-    .data.project > li span.content {margin-left: 0.5rem;}
+    .data.project > li span.content {margin: 0.14rem 0 0 0.5rem; display: inline-block; width: 20%;}
     .data.project li span.lump {margin: 0 0.15rem 0 0.15rem; position: absolute; margin-left: 0.198rem; margin-top: 0.14rem; }
     .data.project > li i {transform: rotate(225deg); width: 0.22rem; height: 0.22rem; position: absolute; margin-left: 0.13rem; margin-top: 0.14rem; }
     .announcement {height: 3.5rem;}
@@ -168,13 +168,13 @@ style.
     .project.data {cursor:default; padding: 0; margin: 0 0 0 0.14rem; border-left: 0.01rem solid #ececec; border-right: 0.01rem solid #ececec; width: 95%;}
     .project.data li div {height: 0.5rem;border-bottom: 0.01rem solid #dbdbdb;}
     .project.data li {cursor:pointer;}
-    .data.process {display: inline-block;overflow:hidden;}
+    .data.process {display: inline-block; float: right; margin-right: 0.2rem; margin-left: 0; padding-left:0;}
     .data.process li {display: inline-block; border-bottom:none;}
     .mainBox .projectList {padding-bottom: 1rem;}
     .icon {width:0.03rem; height:0.03rem;}
     .line {color: #95defb; line-height: 0.05rem; height:0.05rem; font-size:0.15rem;}
     .data.process > li:last-child > .line {display:none;}
-    .data.project > li span.content {margin-left: 0.5rem;}
+    .data.project > li span.content {margin: 0.14rem 0 0 0.5rem; display: inline-block; width: 20%;}
     .data.project li span.lump {margin: 0 0.15rem 0 0.15rem; position: absolute; margin-left: 0.198rem; margin-top: 0.14rem; }
     .data.project > li i {transform: rotate(225deg); width: 0.22rem; height: 0.22rem; position: absolute; margin-left: 0.13rem; margin-top: 0.14rem; }
 
@@ -344,7 +344,7 @@ div(class="container content")
           .chat
             span(class="pillar")
             each val,key in _workflowInfo
-              div(class=key style=`height: ${val.length / _workflowNum * 100}%`)
+              div(data-key=key style=`height: ${val.length / _workflowNum * 100}%`)
                 span=val.length
         .chatFooter
           .legend
@@ -405,11 +405,13 @@ script.
           _.push(`<li>
             <div>
               <i></i>
-              <span class="lump">${index + 1}</span>
-              <span class="content">${workflows[index].name}</span>
-              <ul class="data process">
-                ${workflows[index].process.map(item => `<li><span class="icon">${item.name}</span><span class="line">•••••••••</span></li>`).join("")}
-              </ul>
+              <span class="lump">${Number.parseInt(index) + 1}</span>
+              <span class="content" data-href="/portal/workflow/${workflows[index]._id}">${workflows[index].name}</span>
+              <span class="processView">
+                <ul class="data process">
+                  ${workflows[index].process.map(item => `<li><span class="icon">${item.name}</span><span class="line">•••••</span></li>`).join("")}
+                </ul>
+              </span>
             </div>
           </li>`);
         }
@@ -445,10 +447,15 @@ script.
           $(".popup").show();
       });
 
+      $(".chat").on("click", "div", function() {
+        const department = $(this).attr("data-key");
+        obmitWorkflowInfoByDepartment(department);
+      });
+
       // 绑定data 下的li的单击事件
-      $(".data > li").bind("click", function() {
-          const href = $(this).find(".content").attr("data-href");
-          location.href = href;
+      $(".data").on("click", "li", function() {
+        const href = $(this).find(".content").attr("data-href");
+        location.href = href;
       });
 
       // 关闭反馈

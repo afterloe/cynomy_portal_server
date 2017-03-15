@@ -509,3 +509,15 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > tools/webTools/lib/src/initWebPage.js  
 
+
+1.0.9 / 2017-3-15 11:13:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端表格数据活化
+
+
+### modify files
+> routers/portal.js  
+> template/home.pug  
+

@@ -15,7 +15,7 @@ const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
 const [
   {workflowInfo, searchProduct},
-  {getAnnouncementsList, getAnnouncementCount},
+  {getAnnouncementsList},
   {getDiscussesList, getDiscussesCount},
   {getSystemNotice},
   {findTags},
@@ -55,8 +55,8 @@ function* home(next) {
       });
     }
 
-    let workflowNums = 0;
-    for (let key of workflowInfo) {
+    let workflowNum = 0;
+    for (let key in workflowInfo) {
       workflowNum += workflowInfo[key].length;
     }
 
@@ -64,7 +64,7 @@ function* home(next) {
       title: "JWI Portal",
       index: 1,
       systemNotice,
-      chat: {workflowNums, workflowInfo},
+      chat: {workflowNum, workflowInfo},
       user: {mail, name},
       systemAnnouncement: announcements.map(announcement => ({title: announcement.title, createTimestamp: announcement.createTimestamp, href:`/notice/${announcement._id}`})),
       discussCount,

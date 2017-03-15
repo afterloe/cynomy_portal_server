@@ -121,6 +121,10 @@ module.exports = _ => {
     this.body = this.success("send " + info + "success");
     return yield next;
   });
+  _.get("/favicon.ico", function* () {
+    this.status = 302;
+    this.set("location", "http://almcloud.jwis.cn/images/favicon.ico");
+  });
   _.get("/author", function* (next) {
     this.body = JSON.stringify({
         name: "afterloe",

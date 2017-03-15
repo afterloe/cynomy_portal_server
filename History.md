@@ -569,3 +569,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/home.pug  
 
+
+1.0.9 / 2017-3-15 16:31:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 重定向favicon图表
+
+
+### modify files
+> routers/index.js  
+> template/home.pug  
+

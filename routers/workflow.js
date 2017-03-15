@@ -188,13 +188,29 @@ const nodeInstance = function* (next) {
   return yield next;
 };
 
+const departmentList = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const {department} = this.params;
+    this.data = yield searchProduct(department);
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
 module.exports = {
+  detail,
+  departmentList,
   list,
   nodeFiles,
-  simpleInfo,
-  detail,
+  nodeInstance,
   rdOverviewsPlatform,
   rdOverviewsProduct,
   rdOverviewsDirectory,
-  nodeInstance,
+  simpleInfo,
 };

@@ -592,3 +592,19 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > routers/portal.js  
 
+
+1.0.9 / 2017-3-16 10:19:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: iba属性开启
+
+
+### new files
+> test/module.html  
+
+### modify files
+> tools/webTools/dataManager.html  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/registry.js  
+

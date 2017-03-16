@@ -43,7 +43,7 @@ registry("setLeader", (err, data) => {
 });
 
 registry("workflowInfo", (err, data) => {
-    const {nodeList, status, customExtensions, name} = data;
+    const {nodeList, status, customExtensions, link, name} = data;
 
     if (name) {
       console.log(customExtensions, name);
@@ -358,7 +358,7 @@ registry("getWorkflowList", (err, data) => {
               <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:membersManager(this, 'workflow')">成员管理</a>
               <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:nodeInstanceManager(this)">节点管理</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:workflowDataManager(this)">基础数据管理</a>
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:workflowDataManager(this), 'workflow'">基础数据管理</a>
               <a class="dropdown-item" href="#">文件仓库管理</a>
             </div>
           </div>

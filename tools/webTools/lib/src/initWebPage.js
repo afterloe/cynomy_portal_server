@@ -15,7 +15,39 @@ const MODULE = Symbol("MODULE");
 window[MODULE] = [];
 
 // window[MODULE].push();
-// window[MODULE].push();
+
+/**
+ * 基础数据管理
+ * @type {String}
+ */
+window[MODULE].push(`
+  <div class="modal fade bd-example-modal-lg" id="postNotice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">发送系统通知</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+                <label>通知内容</label>
+                <textarea class="form-control" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-outline-success" id="module-ok-postNotice">发布</button>
+        </div>
+      </div>
+    </div>
+  </div>
+`);
+
 /**
  * 发通知
  * @type {String}

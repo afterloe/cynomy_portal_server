@@ -45,9 +45,13 @@ registry("setLeader", (err, data) => {
 registry("workflowInfo", (err, data) => {
     const {nodeList, status, customExtensions, link, name} = data;
 
+    // TODO
     if (name) {
-      console.log(customExtensions, name);
-      // TODO
+      const dataManager = $("#dataManager");
+      dataManager.find("h4.modal-title").html(`${name} 基础数据管理`);
+      dataManager.find("p.form-control-static:eq(0)").html(name);
+      dataManager.find("p.form-control-static:eq(1)").html(link);
+      dataManager.modal("show");
       return ;
     }
 

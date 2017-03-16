@@ -21,7 +21,7 @@ window[MODULE] = [];
  * @type {String}
  */
 window[MODULE].push(`
-  <div class="modal fade bd-example-modal-lg" id="postNotice" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal fade bd-example-modal-lg" id="dataManager" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -29,20 +29,69 @@ window[MODULE].push(`
               <span aria-hidden="true">&times;</span>
               <span class="sr-only">Close</span>
             </button>
-            <h4 class="modal-title">发送系统通知</h4>
+            <h4 class="modal-title">XX 基础数据管理</h4>
         </div>
+
         <div class="modal-body">
-          <form>
-            <div class="form-group">
-                <label>通知内容</label>
-                <textarea class="form-control" rows="3"></textarea>
+          <h3>常规属性</h3>
+          <div class="dropdown-divider"></div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" data-key="name">名字</label>
+            <div class="col-sm-10">
+              <p class="form-control-static">XX</p>
+              <span class="dataMagager_modify">
+                <span class="btn btn-outline-warning btn-sm">修改</span>
+              </span>
             </div>
-          </form>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" data-key="link">链接</label>
+            <div class="col-sm-10">
+              <p class="form-control-static">http://tru.jwis.cn</p>
+              <span class="dataMagager_modify">
+                <span class="btn btn-outline-warning btn-sm">修改</span>
+              </span>
+            </div>
+          </div>
+
+          <span class="dataManager_header">
+            <h3>IBA属性</h3>
+            <span class="dataMagager_modify">
+              <a class="btn btn-outline-success btn-sm" href="#">新增IBA属性</a>
+            </span>
+          </span>
+
+          <div class="dropdown-divider"></div>
+
+          <div class="ibaAttribute">
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">链接</label>
+              <div class="col-sm-10">
+                <p class="form-control-static">http://tru.jwis.cn</p>
+                <span class="dataMagager_modify">
+                  <span class="btn btn-outline-warning btn-sm">修改</span>
+                  <span class="btn btn-outline-danger btn-sm">删除</span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="dropdown-divider"></div>
+
+          <div class="collapse" id="dataManager_collapse">
+            <div class="card card-block" style="display:block;">
+              <div class="card-text"></div>
+            </div>
+          </div>
+
         </div>
+
         <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
-            <button type="button" class="btn btn-outline-success" id="module-ok-postNotice">发布</button>
         </div>
+
       </div>
     </div>
   </div>

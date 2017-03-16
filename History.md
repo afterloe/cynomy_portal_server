@@ -620,3 +620,18 @@ commit by afterloe (lm6289511@gmail.com)
 > test/module.html  
 > tools/webTools/lib/src/registry.js  
 
+
+1.0.9 / 2017-3-16 16:57:51
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加前端添加ima属性
+
+
+### modify files
+> test/module.html  
+> tools/webTools/dataManager.html  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/registry.js  
+> tools/webTools/lib/src/util.js  
+

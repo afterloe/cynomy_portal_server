@@ -26,6 +26,7 @@ let modalService;
 const workflowDataManager = btn => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, name:1, link: 1, customExtensions: 1})})`);
+    $("#dataManager").attr("data-id", id);
 };
 
 const nodeInstanceManager = btn => {
@@ -426,5 +427,67 @@ $("#module-ok-postAnnouncements").bind("click", function() {
 
 // 清除通知
 const clearNotice = () => {
-  websocket.send(`node-manager->systemService->cleanNotice`);
+    websocket.send(`node-manager->systemService->cleanNotice`);
 }
+
+// 基础数据管理 修改按钮 单击事件
+$("#dataManager .dataMagager_modify").on("click", ".btn-outline-warning", function() {
+    const dataManager_collapse = $("#dataManager_collapse");
+
+    if ($(this).attr("isOpen") && dataManager_collapse.hasClass("show")) {
+      dataManager_collapse.removeClass("show");
+      $(this).removeAttr("isOpen");
+      return ;
+    }
+
+    const parent = $(this).parent();
+
+    const value = parent.prev(".form-control-static").html();
+    const key = parent.parent().prev(".col-form-label").attr("data-key");
+    const card_text = dataManager_collapse.find(".card-text");
+    card_text.attr("data-key", key);
+    card_text.html(`
+      <div class="form-group">
+       <input class="form-control" value="${value}">
+       <small class="form-text text-muted">修改完毕之后记得点击保存</small>
+      </div>
+      <a href="javascript:void(0);" onClick="javascript:saveChangedItem(this);" class="btn btn-outline-primary btn-sm pull-right">保存</a>
+    `);
+
+    $("#dataManager .dataMagager_modify").find(".btn-outline-warning").removeAttr("isOpen");
+    dataManager_collapse.addClass("show");
+    $(this).attr("isOpen", true);
+});
+
+const saveChangedItem = btn => {
+    
+};
+
+const addonCustomExtension = btn => {
+    const __self = $(btn).parent();
+    const [key, value, workflowId] = [__self.find("input:eq(0)").val(), __self.find("input:eq(1)").val(), $("#dataManager").attr("data-id")];
+    websocket.send(`node-manager->workflowService->attributeAddon("${workflowId}"|${JSON.stringify({key, value})})`);
+};
+
+// 基础数据管理 新增iba属性 按钮单击事件
+$("#dataManager .dataMagager_modify").on("click", ".btn-outline-success", function() {
+    const dataManager_collapse = $("#dataManager_collapse");
+    if (dataManager_collapse.hasClass("show")) {
+      dataManager_collapse.removeClass("show");
+      return ;
+    }
+
+    dataManager_collapse.find(".card-text").html(`
+      <div class="form-group">
+       <label class="col-sm-2 col-form-label" data-key="customExtension_name">属性名</label>
+       <input class="form-control" placeholder="请输入属性名">
+      </div>
+      <div class="form-group">
+       <label class="col-sm-2 col-form-label" data-key="customExtension_value">属性值</label>
+       <input class="form-control" placeholder="请输入属性值">
+      </div>
+      <a href="javascript:void(0);" onClick="javascript:addonCustomExtension(this);" class="btn btn-outline-primary btn-sm pull-right">新增</a>
+    `);
+
+    dataManager_collapse.addClass("show");
+});

@@ -81,25 +81,27 @@ registry("workflowInfo", (err, data) => {
           $("#nodeInstanceSetSVN").find("input").attr("placeholder", svnInfo);
         } else {
           olHtml.push(`<li></li>`);
-          cardHtml.push(`<div class="carousel-item" data-id="${node._id}">
-            <div class="card">
-              <div class="card-block">
-                <h4 class="card-title">${node.name}</h4>
-                <p class="card-text">未收到信息</p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">状态: - </li>
-                <li class="list-group-item">启动时间: - </li>
-                <li class="list-group-item">节点负责人: - </li>
-                <li class="list-group-item">节点跟新次数: - </li>
-                <li class="list-group-item">svn地址: - </li>
-              </ul>
-              <div class="card-block">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+          cardHtml.push(`
+            <div class="carousel-item" data-id="${node._id}">
+              <div class="card">
+                <div class="card-block">
+                  <h4 class="card-title">${node.name}</h4>
+                  <p class="card-text">未收到信息</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">状态: - </li>
+                  <li class="list-group-item">启动时间: - </li>
+                  <li class="list-group-item">节点负责人: - </li>
+                  <li class="list-group-item">节点跟新次数: - </li>
+                  <li class="list-group-item">svn地址: - </li>
+                </ul>
+                <div class="card-block">
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
               </div>
             </div>
-          </div>`);
+          `);
         }
       }
 

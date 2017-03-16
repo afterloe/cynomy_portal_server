@@ -608,3 +608,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/initWebPage.js  
 > tools/webTools/lib/src/registry.js  
 
+
+1.0.9 / 2017-3-16 13:48:17
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 基础数据管理页面开发完毕
+
+
+### modify files
+> test/module.html  
+> tools/webTools/lib/src/registry.js  
+

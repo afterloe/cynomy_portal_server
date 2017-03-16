@@ -436,13 +436,55 @@ const saveChangedItem = btn => {
     websocket.send(`node-manager->workflowService->updateWorkflowItem("${workflowId}"|"${key}"|"${value}")`);
 };
 
+const saveChangedAddonAttribut = btn => {
+    const __self = $(btn).parent();
+    const [key, value, workflowId] = [__self.attr("data-key"), __self.find("input").val(), $("#dataManager").attr("data-id")];
+    websocket.send(`node-manager->workflowService->attributeAddon("${workflowId}"|${JSON.stringify({[key]:value})})`);
+}
+
 const addonCustomExtension = btn => {
     const __self = $(btn).parent();
     const [key, value, workflowId] = [__self.find("input:eq(0)").val(), __self.find("input:eq(1)").val(), $("#dataManager").attr("data-id")];
     websocket.send(`node-manager->workflowService->attributeAddon("${workflowId}"|${JSON.stringify({[key]:value})})`);
 };
 
-// 基础数据管理 修改按钮 单击事件
+// 基础数据管理 iba属性 修改按钮 单击事件
+const modifyAddonAttributr = btn => {
+    const __self = $(btn);
+    const dataManager_collapse = $("#dataManager_collapse");
+
+    if (__self.attr("isOpen") && dataManager_collapse.hasClass("show")) {
+      dataManager_collapse.removeClass("show");
+      __self.removeAttr("isOpen");
+      return ;
+    }
+
+    const content = __self.parent().prev("p");
+    const [key, value, workflowId] = [content.attr("data-key"), content.html(), $("#dataManager").attr("data-id")];
+    const card_text = dataManager_collapse.find(".card-text");
+    card_text.attr("data-key", key);
+    card_text.html(`
+      <div class="form-group">
+       <input class="form-control" value="${value}">
+       <small class="form-text text-muted">修改完毕之后记得点击保存</small>
+      </div>
+      <a href="javascript:void(0);" onClick="javascript:saveChangedAddonAttribut(this);" class="btn btn-outline-primary btn-sm pull-right">保存</a>
+    `);
+    
+    dataManager_collapse.addClass("show");
+    __self.attr("isOpen", true);
+};
+
+// 基础数据管理 iba属性 删除按钮 单击事件
+const deleteAddonAttributr = btn => {
+    const __self = $(btn);
+
+    const content = __self.parent().prev("p");
+    const [key, workflowId] = [content.attr("data-key"), $("#dataManager").attr("data-id")];
+    websocket.send(`node-manager->workflowService->removeAttribute("${workflowId}"|"${key}")`);
+};
+
+// 基础数据管理 常规属性 修改按钮 单击事件
 $("#dataManager .dataMagager_modify").on("click", ".btn-outline-warning", function() {
     const dataManager_collapse = $("#dataManager_collapse");
 

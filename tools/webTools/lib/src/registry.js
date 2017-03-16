@@ -55,12 +55,12 @@ registry("workflowInfo", (err, data) => {
         for (let key in addon) {
           addonList.push(`
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label" data-key="${key}">${key}</label>
+              <label class="col-sm-2 col-form-label">${key}</label>
               <div class="col-sm-10">
-                <p class="form-control-static">${addon[key]}</p>
+                <p class="form-control-static" data-key="${key}">${addon[key]}</p>
                 <span class="dataMagager_modify">
-                  <span class="btn btn-outline-warning btn-sm">修改</span>
-                  <span class="btn btn-outline-danger btn-sm">删除</span>
+                  <span class="btn btn-outline-warning btn-sm" onClick="javascript:modifyAddonAttributr(this);">修改</span>
+                  <span class="btn btn-outline-danger btn-sm" onClick="javascript:deleteAddonAttributr(this);">删除</span>
                 </span>
               </div>
             </div>

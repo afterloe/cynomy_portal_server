@@ -927,6 +927,26 @@ function* attributeAddon(workflowId, ibaAttribute) {
   });
 }
 
+function* removeAttribute(workflowId, attribute) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {addon: 1});
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  const {addon = {}} = _;
+
+  const keyName = `addon.${attribute}`;
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $unset: {
+        [keyName]: 1,
+      }
+    }
+  });
+}
+
 function* updateWorkflowItem(workflowId, key, value) {
   const _ = yield workFlow_instance_dao.queryById(workflowId, {_id: 1});
   if (!_) {
@@ -970,6 +990,7 @@ module.exports = {
   getWorkflowList,
   getWorkflowTemplateList,
   obmitUploadFileAuthorize,
+  removeAttribute,
   removeUserFromMembers,
   searchProduct,
   setLeader,

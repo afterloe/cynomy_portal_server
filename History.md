@@ -649,3 +649,16 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/registry.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.9 / 2017-3-16 18:37:20
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 删除修改iba属性
+
+
+### modify files
+> services/workflowService.js  
+> tools/webTools/lib/src/registry.js  
+> tools/webTools/lib/src/util.js  
+

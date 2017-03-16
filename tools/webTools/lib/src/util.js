@@ -25,7 +25,7 @@ let modalService;
 
 const workflowDataManager = btn => {
     const id = $(btn).attr("data-id");
-    websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, name:1, link: 1, customExtensions: 1})})`);
+    websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, name:1, link: 1, addon: 1})})`);
     $("#dataManager").attr("data-id", id);
 };
 
@@ -430,6 +430,18 @@ const clearNotice = () => {
     websocket.send(`node-manager->systemService->cleanNotice`);
 }
 
+const saveChangedItem = btn => {
+    const __self = $(btn).parent();
+    const [key, value, workflowId] = [__self.attr("data-key"), __self.find("input").val(), $("#dataManager").attr("data-id")];
+    websocket.send(`node-manager->workflowService->updateWorkflowItem("${workflowId}"|"${key}"|"${value}")`);
+};
+
+const addonCustomExtension = btn => {
+    const __self = $(btn).parent();
+    const [key, value, workflowId] = [__self.find("input:eq(0)").val(), __self.find("input:eq(1)").val(), $("#dataManager").attr("data-id")];
+    websocket.send(`node-manager->workflowService->attributeAddon("${workflowId}"|${JSON.stringify({[key]:value})})`);
+};
+
 // 基础数据管理 修改按钮 单击事件
 $("#dataManager .dataMagager_modify").on("click", ".btn-outline-warning", function() {
     const dataManager_collapse = $("#dataManager_collapse");
@@ -458,16 +470,6 @@ $("#dataManager .dataMagager_modify").on("click", ".btn-outline-warning", functi
     dataManager_collapse.addClass("show");
     $(this).attr("isOpen", true);
 });
-
-const saveChangedItem = btn => {
-    
-};
-
-const addonCustomExtension = btn => {
-    const __self = $(btn).parent();
-    const [key, value, workflowId] = [__self.find("input:eq(0)").val(), __self.find("input:eq(1)").val(), $("#dataManager").attr("data-id")];
-    websocket.send(`node-manager->workflowService->attributeAddon("${workflowId}"|${JSON.stringify({key, value})})`);
-};
 
 // 基础数据管理 新增iba属性 按钮单击事件
 $("#dataManager .dataMagager_modify").on("click", ".btn-outline-success", function() {

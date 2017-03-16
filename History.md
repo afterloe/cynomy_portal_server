@@ -635,3 +635,17 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/registry.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.9 / 2017-3-16 17:56:4
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完成修改link和name属性，完成添加iba属性
+
+
+### modify files
+> services/workflowService.js  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/registry.js  
+> tools/webTools/lib/src/util.js  
+

@@ -43,14 +43,32 @@ registry("setLeader", (err, data) => {
 });
 
 registry("workflowInfo", (err, data) => {
-    const {nodeList, status, customExtensions, link, name} = data;
+    const {nodeList, status, addon, link, name} = data;
 
-    // TODO
     if (name) {
       const dataManager = $("#dataManager");
       dataManager.find("h4.modal-title").html(`${name} 基础数据管理`);
       dataManager.find("p.form-control-static:eq(0)").html(name);
       dataManager.find("p.form-control-static:eq(1)").html(link);
+      if (addon) {
+        const addonList = [];
+        for (let key in addon) {
+          addonList.push(`
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label" data-key="${key}">${key}</label>
+              <div class="col-sm-10">
+                <p class="form-control-static">${addon[key]}</p>
+                <span class="dataMagager_modify">
+                  <span class="btn btn-outline-warning btn-sm">修改</span>
+                  <span class="btn btn-outline-danger btn-sm">删除</span>
+                </span>
+              </div>
+            </div>
+          `);
+        }
+        dataManager.find(".ibaAttribute").html(addonList.join(""));
+      }
+      $("#dataManager_collapse").removeClass("show");
       dataManager.modal("show");
       return ;
     }

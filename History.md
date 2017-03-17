@@ -8,7 +8,7 @@ Portal build历史
 Portal build历史
 ===
 
-0.0.1 / 2017-1-11 14:34:46
+1.0.1 / 2017-1-11 14:34:46
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
@@ -241,7 +241,7 @@ commit by afterloe (lm6289511@gmail.com)
 2017-3-11 更新公告  
 
 更新时间  
-————————————————  
+————————————————   
 2017-3-11 16:00 ～ 2017-3-11 17：00，预计维护时间为1小时，维护期间访问可能出现404或500异常，对您的使用产生不变深感抱歉。  
 
 更新内容  
@@ -277,509 +277,18 @@ commit by afterloe (lm6289511@gmail.com)
   问题：portal部门链接会不会增多？  
   回答：portal由研发部升级为公司portal，后续的维护和升级将加强工作流系统和权限系统，也就是说未来portal会接入更多的部门，只要登入http://rd.jwis.cn 就能查看公司所有部门和文件信息，实现公司内部资料人员信息共享，方便了解所有部门的最新动态，想加入的我们portal系统的部门可以联系我(afterloeliu@jwis.cn)，目前售前技术部和自主研发部已经加入，请期待后续的维护和升级。  
 
-1.0.9 / 2017-3-12 23:33:6
+1.0.10 / 2017-3-17 16:51:59
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: 完善云端微调信息
+  * master: 版本升级 v1.0.10
 
 
 ### modify files
-> staticFiles/css/portal/discussesInfo.css  
-> template/directory.pug  
-
-
-1.0.9 / 2017-3-13 10:42:1
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 关闭轮叫调度策略，采用默认抢占式服务
-
-
-### modify files
-> index.js  
-
-
-1.0.9 / 2017-3-13 10:50:56
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: smartNotFound添加多维code
-
-
-### modify files
-> interceptors/smartNotFound.js  
-> routers/ad-portal.js  
-> routers/ps-portal.js  
-
-
-1.0.9 / 2017-3-13 11:51:6
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 改版工作开始
-
-
-### modify files
-> interceptors/smartNotFound.js  
-> interceptors/template.js  
-> template/workflowInfo.pug  
-
-
-1.0.9 / 2017-3-13 15:13:12
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 前端workflowInfo添加文件信息
-
-
-### modify files
-> staticFiles/css/portal/workflowInfo.css  
-> template/workflowInfo.pug  
-
-
-1.0.9 / 2017-3-13 15:39:47
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修改前端展示信息
-
-
-### modify files
-> routers/portal.js  
-> staticFiles/css/portal/workflowInfo.css  
-> template/platform.pug  
-> template/workflowInfo.pug  
-
-
-1.0.9 / 2017-3-13 16:13:1
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修改404 等公共页面样式
-
-
-### modify files
-> interceptors/smartNotFound.js  
-> template/404NotFound.pug  
-> template/journalError.pug  
-> template/systemError.pug  
-> template/workflowInfo.pug  
-
-
-1.0.9 / 2017-3-13 16:17:17
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修改忘记密码提示
-
-
-### modify files
-> template/login.pug  
-
-
-1.0.9 / 2017-3-13 16:41:56
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修复ajax platform信息
-
-
-### modify files
-> staticFiles/js/portal/src/rd/platform.js  
-> template/platform.pug  
-
-
-1.0.9 / 2017-3-13 16:55:38
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修改部分样式信息
-
-
-### modify files
-> index.js  
-> routers/portal.js  
-
-
-1.0.9 / 2017-3-14 10:40:2
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 隐藏搜索框
-
-
-### modify files
-> template/header.pug  
-
-
-1.0.9 / 2017-3-14 10:59:37
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: Header 信息由后端传递
-
-
-### modify files
-> interceptors/template.js  
-> template/header.pug  
-
-
-1.0.9 / 2017-3-14 11:50:27
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 首页链接样式优化，手机等小屏幕不显示下拉选
-
-
-### modify files
-> staticFiles/js/portal/src/header.js  
-> template/footer.pug  
-> template/header.pug  
-
-
-1.0.9 / 2017-3-14 13:47:43
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 首页开始变更
-
-
-### modify files
-> staticFiles/css/portal/home.css  
-> template/home.pug  
-
-
-1.0.9 / 2017-3-14 19:0:30
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 完成改版后首页静态页面
-
-
-### modify files
-> template/home.pug  
-
-
-1.0.9 / 2017-3-15 9:29:39
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 前端首页调整
-
-
-### modify files
-> template/home.pug  
-
-
-1.0.9 / 2017-3-15 9:54:44
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 添加基础png信息用于显示
-
-
-### new files
-> staticFiles/images/portal/dynamic.png  
-> staticFiles/images/portal/record.png  
-
-### modify files
-> template/home.pug  
-
-
-1.0.9 / 2017-3-15 10:1:12
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 默认portal首页权限修改无登陆无法查看内容
-
-
-### modify files
-> routers/portal.js  
-
-
-1.0.9 / 2017-3-15 10:40:26
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 后端完成portal数据节选
-
-
-### modify files
-> routers/portal.js  
-> tools/webTools/lib/src/initWebPage.js  
-
-
-1.0.9 / 2017-3-15 11:13:46
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 前端表格数据活化
-
-
-### modify files
-> routers/portal.js  
-> template/home.pug  
-
-
-1.0.9 / 2017-3-15 14:41:27
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: ajax 异步加载数据
-
-
-### modify files
-> routers/index.js  
-> routers/workflow.js  
-> template/home.pug  
-
-
-1.0.9 / 2017-3-15 15:24:52
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: portal 首页完成图表功能
-
-
-### modify files
-> routers/workflow.js  
-> template/home.pug  
-> tools/buildPage.js  
-
-
-1.0.9 / 2017-3-15 15:44:20
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 完善首页活动节点显示
-
-
-### modify files
-> template/home.pug  
-
-
-1.0.9 / 2017-3-15 16:14:36
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 首页流程图表显示
-
-
-### modify files
-> template/home.pug  
-
-
-1.0.9 / 2017-3-15 16:31:0
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 重定向favicon图表
-
-
-### modify files
-> routers/index.js  
-> template/home.pug  
-
-
-1.0.9 / 2017-3-15 16:31:53
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修复check异常
-
-
-### modify files
-> routers/portal.js  
-
-
-1.0.9 / 2017-3-16 10:19:25
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: iba属性开启
-
-
-### new files
-> test/module.html  
-
-### modify files
-> tools/webTools/dataManager.html  
-> tools/webTools/lib/src/initWebPage.js  
-> tools/webTools/lib/src/registry.js  
-
-
-1.0.9 / 2017-3-16 13:48:17
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 基础数据管理页面开发完毕
-
-
-### modify files
-> test/module.html  
-> tools/webTools/lib/src/registry.js  
-
-
-1.0.9 / 2017-3-16 16:57:51
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 添加前端添加ima属性
-
-
-### modify files
-> test/module.html  
-> tools/webTools/dataManager.html  
-> tools/webTools/lib/src/initWebPage.js  
-> tools/webTools/lib/src/registry.js  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.9 / 2017-3-16 17:56:4
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 完成修改link和name属性，完成添加iba属性
-
-
-### modify files
-> services/workflowService.js  
-> tools/webTools/lib/src/initWebPage.js  
-> tools/webTools/lib/src/registry.js  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.9 / 2017-3-16 18:37:20
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 删除修改iba属性
-
-
-### modify files
-> services/workflowService.js  
-> tools/webTools/lib/src/registry.js  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.9 / 2017-3-17 10:10:37
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 前端iba属性添加成功
-
-
-### modify files
-> tools/webTools/lib/src/registry.js  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.9 / 2017-3-17 10:50:46
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 前端页面添加iba属性显示，和标签显示
-
-
-### modify files
-> routers/portal.js  
-> template/workflowInfo.pug  
-
-
-1.0.9 / 2017-3-17 11:22:29
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 上传方式改成队列上传
-
-
-### modify files
-> template/home.pug  
-> template/platform.pug  
-
-
-1.0.9 / 2017-3-17 11:43:13
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 同步云端修改
-
-
-### modify files
+> .cynomy  
+> Makefile  
 > config/index.js  
-> template/workflowInfo.pug  
-
-
-1.0.9 / 2017-3-17 13:49:46
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 上传功能优化处理
-
-
-### modify files
-> template/platform.pug  
-
-
-1.0.9 / 2017-3-17 15:0:36
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 详情页添加上传接口
-
-
-### modify files
-> routers/portal.js  
-> template/workflowInfo.pug  
-
-
-1.0.9 / 2017-3-17 15:18:56
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修复切换节点时被强制绑定iba属性
-
-
-### modify files
-> tools/webTools/lib/src/registry.js  
-
-
-1.0.9 / 2017-3-17 15:38:0
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 添加远程关闭节点功能
-
-
-### modify files
-> index.js  
-> servers/lib/servicesCenter.js  
-> tools/webTools/dataManager.html  
-> tools/webTools/lib/src/initWebPage.js  
-> tools/webTools/lib/src/util.js  
-
-
-1.0.9 / 2017-3-17 15:41:20
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修改关闭pid号
-
-
-### modify files
-> index.js  
-> servers/lib/servicesCenter.js  
-
-
-1.0.9 / 2017-3-17 16:43:24
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 测试通过允许发布
-
-
-### modify files
+> package.json  
 > staticFiles/css/portal/header.css  
 > staticFiles/css/portal/home.css  
 > staticFiles/css/portal/rd/platform.css  
@@ -794,17 +303,55 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > template/workflowInfo.pug  
 
+2017-3-18 v1.0.10 更新公告  
 
-1.0.10 / 2017-3-17 16:51:59
+更新时间  
+————————————————   
+2017-3-18 16:00 ～ 2017-3-18 17：00，预计维护时间为1小时，维护期间访问可能出现404或500异常，对您的使用产生不变深感抱歉。  
+
+更新内容  
+————————————————  
+1）修复 portal页面上传功能，将并发上传功能修改为队列上传，上传结束的时候会显示该文件上传的结果，成功或失败。  
+2）修复 工作流文件列表页面在手机端会出现文件名和用户名重叠的问题。  
+3）修复 工具页面点击发布流程时，出现失败的异常  
+4）修复 portal home页面需要登陆才能查看，默认进入登陆页面。  
+5）修复 v1.0.9页面微调 portal公告查看公告阅读量字体太小。  
+6）修复 高并发下概率性出现请求丢失的问题。由轮叫调度策略切换为抢占式调度策略。  
+7）修复 异常code前端被转换为int型导致的，登陆token失效不跳转而显示服务器异常。
+8）优化 404，SystemError等页面样式优化。   
+10）优化 登陆页 忘记密码修改为 发送密码到邮箱。  
+11）优化 页面头部 暂时隐藏搜索框，将伴随搜索功能一同推出。  
+12）新功能 首页 显示所有部门活动工作流，并显示为柱状图，点击柱状图可以查看不同部门活动的工作流信息。  
+13）新功能 首页 公告显示切换为右侧，同时添加新图表标示。  
+14）新功能 首页 显示所有用户的建议反馈，支持查看反馈内容。  
+15）新功能 页面头部 鼠标移动到header 研发部时，弹出子菜单 子菜单内容为 TRU产品 和 TRU平台的链接。  
+16）新功能 工作流详情页面 添加显示 工作流标签信息。  
+17）新功能 工作流详情页面 数据仓库显示该节点上传的文件列表，
+18）新功能 工作流详情页面 开放上传文件功能，规则为该工作流下的成员才能上传文件。  
+19）新功能 工作流详情页面 数据仓库右侧的电脑标志，点击切换视图，视图显示为svn链接，点击链接则自动跳转到svn查看，再次点击切换回文件列表  
+20）新功能 工具 支持给工作流添加／删除软属性，软属性可以理解为自定义的key-value值。同时工作流详情页面将同步展示。  
+21）新功能 工具 支持修改工作流的名字和链接信息。  
+22）新功能 工具 添加关闭节点功能。  
+
+策划面对面  
+————————————————  
+1）
+  问题：可以自己定义密码嘛？  
+  回答：自己定义密码功能在考虑中，将随着个人中心页面一同推出。
+
+下周更新预告  
+————————————————  
+1）售前技术部 和 自主交付部资料回收完毕，将开启自主交付部的首页  
+2）售前技术部首页切换为rd自己的页面  
+3）更多内容请期待下次(v1.0.11)更新  
+
+1.0.10 / 2017-3-17 17:34:56
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: 版本升级 v1.0.10
+  * master: v1.0.10 changLog
 
 
 ### modify files
-> .cynomy  
-> Makefile  
-> config/index.js  
-> package.json  
+> History.md  
 

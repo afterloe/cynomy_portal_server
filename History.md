@@ -674,3 +674,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/registry.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.9 / 2017-3-17 10:50:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端页面添加iba属性显示，和标签显示
+
+
+### modify files
+> routers/portal.js  
+> template/workflowInfo.pug  
+

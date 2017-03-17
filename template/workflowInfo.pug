@@ -5,6 +5,10 @@ include header
 link(href= static + "css/portal/workflowInfo.css?time=" + __time rel="stylesheet")
 
 style.
+
+  .badge {color: #ffffff; background-color: #ddd; border-radius: 0.05rem;}
+  .badge:first-child {margin-left: 0.1rem};
+
   @media (min-width:769px) {
     .files .topic {margin-left: 40%}
   }
@@ -22,6 +26,8 @@ style.
 - const _process = locals.nodeList || [];
 - const _activeNode = locals.status || {};
 - const _files = _activeNode.produceList || [];
+- const _iba = locals.addon || {};
+- const _tags = locals.tags || [];
 
 div(class="container platform_content")
   div(class="content_one")
@@ -33,6 +39,12 @@ div(class="container platform_content")
           ul
             li
               span(class="aLink")= new Date(locals.createTimestamp).toLocaleString()
+        .truBox
+          div 标签
+          ul
+            each __tag in _tags
+              li
+                span(class="badge")=__tag
         div(class="truBox")
           - const __workflowOwner = locals.owner;
           div 项目负责人
@@ -80,6 +92,11 @@ div(class="container platform_content")
             div
               span(class="name") 节点更新次数
               span(class="local" id="nodeUpdateCount")=_activeNode.uploadCount
+          each value,key in _iba
+            li
+              div
+                span(class="name")=key
+                span(class="local")=value
         div(class="header")
           span(class="data_title") 数据仓库
           span(class="change svn")

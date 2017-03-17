@@ -662,3 +662,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/registry.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.9 / 2017-3-17 10:10:37
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 前端iba属性添加成功
+
+
+### modify files
+> tools/webTools/lib/src/registry.js  
+> tools/webTools/lib/src/util.js  
+

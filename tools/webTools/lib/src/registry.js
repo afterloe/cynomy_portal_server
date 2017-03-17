@@ -69,7 +69,7 @@ registry("workflowInfo", (err, data) => {
         dataManager.find(".ibaAttribute").html(addonList.join(""));
       }
       $("#dataManager_collapse").removeClass("show");
-      dataManager.modal("show");
+
       return ;
     }
 
@@ -287,6 +287,21 @@ registry("createWorkflow", (err, data) => {
 
 registry("promoteProcess", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
+});
+
+registry("attributeAddon", (err, data) => {
+    const workflowId = $("#dataManager").attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowInfo("${workflowId}"|${JSON.stringify({nodeList:1, name:1, link: 1, addon: 1})})`);
+});
+
+registry("updateWorkflowItem", (err, data) => {
+    const workflowId = $("#dataManager").attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowInfo("${workflowId}"|${JSON.stringify({nodeList:1, name:1, link: 1, addon: 1})})`);
+});
+
+registry("removeAttribute", (err, data) => {
+    const workflowId = $("#dataManager").attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowInfo("${workflowId}"|${JSON.stringify({nodeList:1, name:1, link: 1, addon: 1})})`);
 });
 
 registry("retroversion", (err, data) => {

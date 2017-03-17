@@ -26,7 +26,7 @@ let modalService;
 const workflowDataManager = btn => {
     const id = $(btn).attr("data-id");
     websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, name:1, link: 1, addon: 1})})`);
-    $("#dataManager").attr("data-id", id);
+    $("#dataManager").attr("data-id", id).modal("show");
 };
 
 const nodeInstanceManager = btn => {
@@ -434,18 +434,24 @@ const saveChangedItem = btn => {
     const __self = $(btn).parent();
     const [key, value, workflowId] = [__self.attr("data-key"), __self.find("input").val(), $("#dataManager").attr("data-id")];
     websocket.send(`node-manager->workflowService->updateWorkflowItem("${workflowId}"|"${key}"|"${value}")`);
+    $("#dataManager_collapse").removeClass("show");
+    __self.removeAttr("isOpen");
 };
 
 const saveChangedAddonAttribut = btn => {
     const __self = $(btn).parent();
     const [key, value, workflowId] = [__self.attr("data-key"), __self.find("input").val(), $("#dataManager").attr("data-id")];
     websocket.send(`node-manager->workflowService->attributeAddon("${workflowId}"|${JSON.stringify({[key]:value})})`);
-}
+    $("#dataManager_collapse").removeClass("show");
+    __self.removeAttr("isOpen");
+};
 
 const addonCustomExtension = btn => {
     const __self = $(btn).parent();
     const [key, value, workflowId] = [__self.find("input:eq(0)").val(), __self.find("input:eq(1)").val(), $("#dataManager").attr("data-id")];
     websocket.send(`node-manager->workflowService->attributeAddon("${workflowId}"|${JSON.stringify({[key]:value})})`);
+    $("#dataManager_collapse").removeClass("show");
+    __self.removeAttr("isOpen");
 };
 
 // 基础数据管理 iba属性 修改按钮 单击事件
@@ -470,7 +476,7 @@ const modifyAddonAttributr = btn => {
       </div>
       <a href="javascript:void(0);" onClick="javascript:saveChangedAddonAttribut(this);" class="btn btn-outline-primary btn-sm pull-right">保存</a>
     `);
-    
+
     dataManager_collapse.addClass("show");
     __self.attr("isOpen", true);
 };

@@ -103,8 +103,10 @@ function* info(next) {
     return yield next;
   }
   try {
-    const {id} = this.params;
+    const [{id}, user] = [this.params, this.authorized];
     const {name, createTimestamp, nodeList, status, owner, tags, addon, members} = yield workflowInfo(id);
+
+    const index = members.findIndex(member => member.mail === user.mail);
 
     this.data = {
       title: `JWI Portal - ${name}`,
@@ -117,6 +119,8 @@ function* info(next) {
       addon,
       tags,
       members,
+      user,
+      allowedUpload: index === -1 ? false:true,
     };
 
     this.pageName = "workflowInfo";

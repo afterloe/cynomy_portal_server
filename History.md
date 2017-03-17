@@ -721,3 +721,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > template/platform.pug  
 
+
+1.0.9 / 2017-3-17 15:0:36
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 详情页添加上传接口
+
+
+### modify files
+> routers/portal.js  
+> template/workflowInfo.pug  
+

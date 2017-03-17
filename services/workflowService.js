@@ -908,6 +908,65 @@ function* setNodeInstanceSVNAddress(nodeInstanceId, SVNAddress) {
   return SVNAddress;
 }
 
+function* attributeAddon(workflowId, ibaAttribute) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {addon: 1});
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  const {addon = {}} = _;
+  Object.assign(addon, ibaAttribute);
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        addon,
+      }
+    }
+  });
+}
+
+function* removeAttribute(workflowId, attribute) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {addon: 1});
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  const {addon = {}} = _;
+
+  const keyName = `addon.${attribute}`;
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $unset: {
+        [keyName]: 1,
+      }
+    }
+  });
+}
+
+function* updateWorkflowItem(workflowId, key, value) {
+  const _ = yield workFlow_instance_dao.queryById(workflowId, {_id: 1});
+  if (!_) {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  if (key !== "name" && key !== "link") {
+    throwNosuchThisWorkflowNodeInstance();
+  }
+
+  return yield workFlow_instance_dao.update({
+    _id: _._id,
+    upload: {
+      $set: {
+        [key]: value,
+      }
+    }
+  });
+}
+
 module.exports = {
   createWorkflowNode,
   createWorkflow,
@@ -918,6 +977,7 @@ module.exports = {
   promoteProcess,
   retroversion,
 
+  attributeAddon,
   appendGoods2Node,
   appendUser2Members,
   cancelOwner,
@@ -930,6 +990,7 @@ module.exports = {
   getWorkflowList,
   getWorkflowTemplateList,
   obmitUploadFileAuthorize,
+  removeAttribute,
   removeUserFromMembers,
   searchProduct,
   setLeader,
@@ -938,5 +999,6 @@ module.exports = {
   setTags,
   updateNodeProduceFile,
   updateProcess,
+  updateWorkflowItem,
   workflowMemberList,
 };

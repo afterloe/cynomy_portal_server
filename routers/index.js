@@ -97,6 +97,7 @@ module.exports = _ => {
   _.get("/workflow/overviews/rd/platform", authentication, workflow.rdOverviewsPlatform); // 总览 - rd部门 平台预览
   _.get("/workflow/overviews/rd/product", authentication, workflow.rdOverviewsProduct);// 总览 - rd部门 产品预览
   _.get("/workflow/overviews/rd/directory", authentication, workflow.rdOverviewsDirectory); // 总览 - rd部门 公共目录预览
+  _.get("/workflow/department/:name", authentication, workflow.departmentList); // 总览 - 部门工作流
 
   /*
    *  文件系统模块
@@ -119,6 +120,10 @@ module.exports = _ => {
     process.emit("sendRemotesInfo", info);
     this.body = this.success("send " + info + "success");
     return yield next;
+  });
+  _.get("/favicon.ico", function* () {
+    this.status = 302;
+    this.set("location", "http://almcloud.jwis.cn/images/favicon.ico");
   });
   _.get("/author", function* (next) {
     this.body = JSON.stringify({

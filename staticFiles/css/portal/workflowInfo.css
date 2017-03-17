@@ -9,51 +9,20 @@
   * Date:
   *   2017-3-5 06:27:51
   */
-  * {
-      margin: 0;
-      padding: 0;
-      border: 0;
-  }
+  * { margin: 0; padding: 0; border: 0;}
   ul{margin-bottom:0;}
+  ul, ul li {list-style: none;}
+  a {text-decoration: none;}
+  input {border: 0;}
 
-  ul, ul li {
-      list-style: none;
-  }
-
-  a {
-      text-decoration: none;
-  }
-
-  input {
-      border: 0;
-  }
+  .badge {color: #ffffff; background-color: #ddd; border-radius: 0.05rem;}
+  .badge:first-child {margin-left: 0.1rem};
 
   @media (min-width:769px) {
-      .container {
-          padding-right: 0;
-          padding-left: 0;
-          margin-right: auto;
-          margin-left: auto;
-      }
-      .platform_content {
-          background: #fff;
-          min-width: 1170px;
-          padding-bottom: 125px;
-      }
-      .content_one {
-          margin-left: 100px;
-          overflow: hidden;
-          min-width: 920px;
-          background: #f2f2f2;
-          float: left;
-          border-radius: 5px;
-          padding-bottom:10px;
-      }
-      .tru {
-          padding: 0px;
-          width: 810px;
-          margin: 0 auto;
-      }
+      .container {padding-right: 0; padding-left: 0; margin-right: auto; margin-left: auto;}
+      .platform_content {background: #fff; min-width: 1170px; padding-bottom: 125px;}
+      .content_one {margin-left: 100px; overflow: hidden; min-width: 920px; background: #f2f2f2; float: left; border-radius: 5px; padding-bottom:10px;}
+      .tru {padding: 0px; width: 810px; margin: 0 auto;}
       .truTitle {border-bottom: 1px solid #dbdbdb; height: 45px; line-height: 50px; background-position:left 15px; background-repeat: no-repeat; padding-left: 30px; color: #333333; font-weight: 600; font-size: 18px;}
       .pc{background-image:url(../../images/portal/pc.png);}
       .android{background-image:url(../../images/portal/android.png);}
@@ -99,7 +68,7 @@
       .upload:hover{background:url(../../images/portal/upload1.png) no-repeat center 13px;}
       .detail {background: url(../../images/portal/detail.png) no-repeat center 13px; display: inline-block; width: 30px; height: 50px; cursor: pointer; float: right;}
       .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 13px;}
-      .data{margin-top:15px;margin-left:40px;min-width:810px;}
+      .data {margin-top:15px;margin-left:40px;min-width:810px;}
       .data li{height:66px;}
       .data li div{height:66px;width:100%;}
       .data li div i{display: inline-block;  width: 16px; height: 16px; border-radius: 50%;background:#dbdbdb;float:left;margin-left:-8px;}
@@ -112,115 +81,33 @@
       .data li:last-child{border-left:0;}
       .data li:first-child div i{background:#3d9bff;}
       .change { display: inline-block; width: 100px; height: 50px; cursor: pointer; float: right;}
-      .svn {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus2.png) no-repeat center 13px;}
-      .cloud {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus4.png) no-repeat center 13px;}
+      .svn {background: url(../../images/portal/productTestStatus2.png) no-repeat center 13px;}
+      .cloud {background: url(../../images/portal/productTestStatus4.png) no-repeat center 13px;}
+      .files .topic {margin-left: 40%}
   }
 
   @media (max-width:768px) {
-      html body {
-          width: 100%;
-          font-size: 0.26rem;
-          background: #fff;
-          box-sizing: border-box;
-          overflow-x: hidden;
-      }
-      .popup {
-          display: none;
-      }
-      .platform_content {
-          width: 100%;
-          padding-bottom: 200px;
-      }
-      .container {
-          padding-right: 15px;
-          padding-left: 15px;
-          margin-right: 0;
-          margin-left: 0;
-      }
-      .content_one {
-          width: 100%;
-          margin-left: 0;
-          margin-right: 0;
-          margin: 0 auto;
-          overflow: hidden;
-          background: #f2f2f2;
-          border-radius: 5px;
-          padding-bottom:0.15rem;
-      }
-      .tru {
-          padding: 0px;
-          width: 100%;
-          margin: 0 auto;
-      }
-      .truTitle {
-          border-bottom: 1px solid #dbdbdb;
-          height: 0.7rem;
-          line-height: 0.7rem;
-          background-position:left 0.18rem;
-          background-repeat: no-repeat;
-          padding-left: 0.5rem;
-          color: #333333;
-          font-weight: 600;
-          font-size: 18px;
-          margin-left: 0.1rem;
-      }
+      html body {width: 100%; font-size: 0.26rem; background: #fff; box-sizing: border-box; overflow-x: hidden; }
+      .popup {display: none;}
+      .platform_content {width: 100%; padding-bottom: 200px; }
+      .container {padding-right: 15px; padding-left: 15px; margin-right: 0; margin-left: 0; }
+      .content_one {width: 100%; margin-left: 0; margin-right: 0; margin: 0 auto; overflow: hidden; background: #f2f2f2; border-radius: 5px; padding-bottom:0.15rem; }
+      .tru {padding: 0px; width: 100%; margin: 0 auto; }
+      .truTitle {border-bottom: 1px solid #dbdbdb; height: 0.7rem; line-height: 0.7rem; background-position:left 0.18rem; background-repeat: no-repeat; padding-left: 0.5rem; color: #333333; font-weight: 600; font-size: 18px; margin-left: 0.1rem;}
       .pc{background-image:url(../../images/portal/pc.png);}
       .android{background-image:url(../../images/portal/android.png);}
 
-      .truContent {
-          width: 100%;
-          overflow: hidden;
-      }
-      .truContent .truBox {
-          padding-left: 0.1rem;
-          width: 90%px;
-          overflow: hidden;
-      }
-      .truContent .truBox:first-child {
-          margin-top: 0.1rem;
-      }
-      .truContent .truBox div, .truContent .truBox ul {
-          float: left;
-      }
-      .truContent .truBox div {
-          width: 1.5rem;
-          font-size: 16px;
-          font-weight: 600;
-          color: #333;
-      }
-      .truContent .truBox ul {
-          width: 4.2rem;
-          overflow: hidden;
-      }
-      .truContent .truBox ul li {
-          overflow: hidden;
-          float: left;
-          height: 0.5rem;
-      }
-      .truContent .truBox ul li span {
-          float: left;
-          display: inline-block;
-          padding: 0;
-          color: #333;
-          text-decoration: none;
-          line-height: 0.4rem;
-          cursor: pointer;
-          padding: 0 0.1rem;
-      }
-      .truContent .truBox ul li span:hover {
-          color: #3d9bff;
-      }
-      .truContent .truBox ul li span.activeLink {
-          color: #00a1df;
-      }
-      .wrapper {
-          width: 100%;
-          margin-left: 0;
-          margin-right: 0;
-          margin: 0 auto;
-          overflow: hidden;
-          padding-top: 0.5rem;
-      }
+      .truContent {width: 100%; overflow: hidden; }
+      .truContent .truBox {padding-left: 0.1rem; width: 90%px; overflow: hidden; }
+      .truContent .truBox:first-child {margin-top: 0.1rem;}
+      .truContent .truBox div, .truContent .truBox ul {float: left;}
+      .truContent .truBox div {width: 1.5rem; font-size: 16px; font-weight: 600; color: #333;}
+      .truContent .truBox ul {width: 4.2rem; overflow: hidden;}
+      .truContent .truBox ul li {overflow: hidden; float: left; height: 0.5rem;}
+      .truContent .truBox ul li span {float: left; display: inline-block; padding: 0; color: #333; text-decoration: none; line-height: 0.4rem; cursor: pointer; padding: 0 0.1rem; }
+      .truContent .truBox ul li span:hover {color: #3d9bff;}
+      .truContent .truBox ul li span.activeLink {color: #00a1df;}
+      .wrapper {width: 100%; margin-left: 0; margin-right: 0; margin: 0 auto; overflow: hidden; padding-top: 0.5rem; }
       .proposal{display: none;}
       .tab_process{width: 100%;margin-left: 0;margin-right: 0;margin: 0 auto;overflow: hidden;padding-top:0.5rem;}
       .clear{width:100%;height:0;float:right;}
@@ -248,9 +135,10 @@
       .data li{margin-left: 0.2rem;height: 1rem;width:98%;}
       .data li div{height: 1rem;width: 100%;}
       .data li div i{display: inline-block;width: 0.16rem;height: 0.16rem;border-radius: 50%;background: #dbdbdb;float: left;margin-left: -0.08rem;/* margin-top: 0.08rem;/* margin-top: 0.08rem; */}
-      .data li div span{margin-top: -0.05rem;display: inline-block;float: left;width: 1.85rem;text-align: center;height: 0.5rem;}
+      .data li div span {margin-top: -0.05rem; display: none; float: left; width: 1.85rem; text-align: center; height: 0.5rem;}
+
       .data li div span.download{dispalay:none};
-      .data li div span.name{margin-top: -0.05rem; width: 3.5rem;margin-left: 0.09rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+      .data li div span.name{ width:30%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
       .data li div span.time{width: 2rem;margin-left: 0;}
       .data li div span.dataClose{width: 0;0}
       .data li:last-child{border-left:0;}
@@ -258,6 +146,11 @@
       .detail {background: url(../../images/portal/detail.png) no-repeat center 0.05rem; cursor: pointer; float: right; height: 0.5rem; line-height: 0.5rem; width: 0.4rem; background-size: contain; margin-right: 0.4rem}
       .detail:hover {background: url(../../images/portal/detail_click.png) no-repeat center 0.05rem;}
       .change {cursor: pointer; float: right; height: 0.5rem; line-height: 0.5rem; width: 0.4rem; background-size: contain; margin-right: 0.4rem}
-      .svn {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus2.png) no-repeat center 0.05rem;}
-      .cloud {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus4.png) no-repeat center 0.05rem;}
+      .svn {background: url(../../images/portal/productTestStatus2.png) no-repeat center 0.05rem;}
+      .cloud {background: url(../../images/portal/productTestStatus4.png) no-repeat center 0.05rem;}
+      .files .topic {margin-left: 30%}
+
+      .data li div span.local{ width:50%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+      .files li div span.name{ width:60%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+      .files li div span.author{ width:30%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
   }

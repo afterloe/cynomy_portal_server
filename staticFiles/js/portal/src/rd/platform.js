@@ -1,3 +1,14 @@
+/**
+  * afterloe - cynomy_portal_server/staticFiles/js/portal/src/platform.js
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <lm6289511@gmail.com> (https://github.com/afterloe)
+  * Date:
+  *   2017-3-10 18:02:35
+  */
 "use strict";
 
 const [workflowName,UpLoadList, UploadIndex] = [Symbol("workflowName"), Symbol("UpLoadList"), Symbol("UploadIndex")];
@@ -65,7 +76,7 @@ $(function() {
 
 });
 
-const uploadTask = (id, file, index) => new Promise((solve, reject) => {
+const uploadTask = (id, file, index, callback) => {
   const [xhr, formData] = [new XMLHttpRequest(), new FormData()];
   formData.append("goods", file);
   xhr.open("POST", `/fs/update/${id}`);
@@ -78,10 +89,7 @@ const uploadTask = (id, file, index) => new Promise((solve, reject) => {
                 const result = JSON.parse(xhr.responseText);
 
                 if (200 !== result.code) {
-                  reject({
-                    msg: result.error,
-                    code: result.code,
-                  });
+                  callback(new Error(result.error));
                   return ;
                 }
 
@@ -89,56 +97,50 @@ const uploadTask = (id, file, index) => new Promise((solve, reject) => {
                   [UploadIndex]: index,
                 });
 
-                solve(result);
+                callback(null, result);
 
               } catch(err) {
-                reject(xhr.responseText);
+                callback(err);
               }
           }
-          reject();
+          callback(new Error("callFailed!"));
       }
   };
-});
+};
 
-const uploadTasks = nodeId => {
-    for(let index in window[UpLoadList]) {
-      uploadTask(nodeId, window[UpLoadList][index].file, index).then().catch(err => console.log(err));
+const uploadTasks = (nodeId, index) => {
+    const file = window[UpLoadList].shift();
+    if (!file) {
+      return ;
     }
+    uploadTask(nodeId, file.file, index, (err, data) => {
+      if (err) {
+        buildUploadFlag(index, file, "失败");
+      } else {
+        buildUploadFlag(index, file, "成功");
+      }
+      index++;
+      uploadTasks(nodeId, index);
+    });
 };
 
 const beginUpload = () => {
     const nodeId = $(".processActive").find("dt").attr("data-id");
-    uploadTasks(nodeId);
-    // then(data => {
-    //     window[UpLoadList].length = 0;
-    //     $(".popup").css("display", "none");
-    //     $(".dataFile").html("");
-    //     $.ajax({
-    //       type: "GET",
-    //       url: `/workflow/${nodeId}/files`,
-    //       dataType: "json",
-    //       beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
-    //       success: result => {
-    //         if (401.5 === result.code) {
-    //           alert("登录许可已失效，请重新获取登录许可");
-    //           location.href = "/portal/login";
-    //           return ;
-    //         }
-    //         if (200 !== result.code) {
-    //           alert("服务器繁忙");
-    //         } else {
-    //           buildFiles(result.result.produceList);
-    //         }
-    //       }
-    //     });
-    // }).catch(err => {
-    //     err.code === 403? alert("非该项目组成员禁止上传文件") : alert("上传失败 " + err.msg);
-    // });
+    uploadTasks(nodeId, 0);
 };
 
 const delUploadFileList = btn => {
     window[UpLoadList].splice($(btn).attr("data-index"), 1);
     $(".dataFile").html(buildUploadList());
+};
+
+const buildUploadFlag = (index, file, result) => {
+  $(`.dataFile>li:eq(${index})`).html(`<li>
+      <span>${index + 1}</span>
+      <span>${file.name}</span>
+      <span><span style="color:red">${result}</span></span>
+    </li>
+  `);
 };
 
 const buildUploadList = () => window[UpLoadList].map((file, index) => `<li>
@@ -188,6 +190,7 @@ const openUploadView = btn => {
   }
   const [nodeId, nodeName] = [__self.attr("data-id"), __self.find("span").html()];
   $(".popup").find(".name").html(`${window[workflowName]} - ${nodeName} 更新`);
+  window[UpLoadList].length = 0;
   $(".popup").css("display", "block");
 };
 
@@ -221,7 +224,7 @@ const buildFiles = (files) => {
       </span>
       <span class="time">${timeToDate(file.uploadTime)}</span>
       <span>${file.downloadCount || 0}</span>
-      <span>${file.author ? file.author.name : "admin"}</span>
+      <span class="author">${file.author ? file.author.name : "admin"}</span>
       <span data-id=${file._id} class="download" onClick="javascript:downLoadFile(this);"></span>
     </div>
   </li>`);

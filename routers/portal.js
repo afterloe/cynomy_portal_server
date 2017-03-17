@@ -14,88 +14,70 @@
 const {resolve} = require("path");
 const services = resolve(__dirname, "..", "services");
 const [
-  {workflowInfo},
-  {getAnnouncementsList, getAnnouncementCount},
+  {workflowInfo, searchProduct},
+  {getAnnouncementsList},
   {getDiscussesList, getDiscussesCount},
   {getSystemNotice},
+  {findTags},
 ] = [
   require(resolve(services, "workflowService")),
   require(resolve(services, "announcementService")),
   require(resolve(services, "discussService")),
   require(resolve(services, "noticeService")),
+  require(resolve(services, "tagsService")),
 ];
 
-
 function* home(next) {
-  this.pageName = "home";
-  const [
-    announcements,
-    announcementsCount,
-    discusses,
-    discussCount,
-    systemNotice,
-  ] = yield [
-    getAnnouncementsList(10),
-    getAnnouncementCount(),
-    getDiscussesList(10),
-    getDiscussesCount(),
-    getSystemNotice(),
-  ];
-  const _ = {
-    title: "JWI Portal",
-    index: 1,
-    systemNotice ,
-    systemAnnouncementNum: announcementsCount,
-    systemAnnouncement: announcements.map(announcement => ({title: announcement.title, createTimestamp: announcement.createTimestamp, href:`/notice/${announcement._id}`})),
-    discussCount,
-    discuss: discusses.map(discuss => ({title: discuss.title, createTimestamp: discuss.createTimestamp, href: `/discuss/${discuss._id}`}))
-  };
-
   if (this.error) {
-    delete this.error;
-    this.data = _;
     return yield next;
   }
+  try {
+    const {mail, name} = this.authorized;
 
-  const {mail, name} = this.authorized;
+    const [
+      announcements,
+      discusses,
+      discussCount,
+      systemNotice,
+      departments, // 拉取所有部门信息
+    ] = yield [
+      getAnnouncementsList(10),
+      getDiscussesList(10),
+      getDiscussesCount(),
+      getSystemNotice(),
+      findTags("部门"),
+    ];
 
-  Object.assign(_, {
-    user: {mail, name},
-    subscribe: [
-    // {
-    //   title: name,
-    //   items:[
-    //     {title: "Market", href:"/portal/workflow/58b003524836347c27fcd784", createTimestamp: 1487919369688},
-    //     {title: "Mate", href:"/portal/workflow/58b003584836347c27fcd78a", createTimestamp: 1487919329688},
-    //   ]
-    // },
-    // {
-    //   title: "TRU 平台",
-    //   items:[
-    //     {title: "Market", href:"/portal/workflow/58b003524836347c27fcd784", createTimestamp: 1487919369688},
-    //     {title: "Mate", href:"/portal/workflow/58b003584836347c27fcd78a", createTimestamp: 1487919329688},
-    //     {title: "Enterprise", href:"/portal/workflow/58b003444836347c27fcd77e", createTimestamp: 1487911369688}
-    //   ]
-    // }, {
-    //   title: "TRU 产品",
-    //   items:[
-    //     {title: "雨水项目 V1.0", href:"/portal/workflow/58b02e7cb275c088b24065f7", createTimestamp: 1487919359688},
-    //     {title: "设计导引", href:"/portal/workflow/58b006b84836347c27fcd80b", createTimestamp: 1487913329688},
-    //     {title: "PLM数据融合", href:"/portal/workflow/58b006394836347c27fcd7f3", createTimestamp: 1487911361688},
-    //     {title: "销售选配", href:"/portal/workflow/58b006584836347c27fcd7ff", createTimestamp: 1487411361688},
-    //     {title: "My Research V1.1", href:"/portal/workflow/58b02c78b275c088b24065e3", createTimestamp: 1487411391688},
-    //   ]
-    // }, {
-    //   title: "雨水项目",
-    //   items:[
-    //     {title: "当前节点 - 发布", href:"/portal/workflow/58b02e7cb275c088b24065f7", createTimestamp: 1487919359688},
-    //     {title: "1.0发布.docx", href:"/fs/download/58b02e90b275c088b24065fd", createTimestamp: 1487919359688},
-    //   ]
-    // }
-    ]
-  });
+    const workflowInfo = {};
+    for(let department of departments) {
+      Object.assign(workflowInfo, {
+        [department]: yield searchProduct(department),
+      });
+    }
 
-  this.data = _;
+    let workflowNum = 0;
+    for (let key in workflowInfo) {
+      workflowNum += workflowInfo[key].length;
+    }
+
+    const _ = {
+      title: "JWI Portal",
+      index: 1,
+      systemNotice,
+      chat: {workflowNum, workflowInfo},
+      user: {mail, name},
+      systemAnnouncement: announcements.map(announcement => ({title: announcement.title, createTimestamp: announcement.createTimestamp, href:`/notice/${announcement._id}`})),
+      discussCount,
+      discuss: discusses.map(discuss => ({title: discuss.title, createTimestamp: discuss.createTimestamp, href: `/discuss/${discuss._id}`}))
+    };
+
+
+    this.data = _;
+    this.pageName = "home";
+  } catch (error) {
+    this.error = error;
+  }
+
   return yield next;
 }
 
@@ -121,8 +103,10 @@ function* info(next) {
     return yield next;
   }
   try {
-    const {id} = this.params;
-    const {name, createTimestamp, nodeList, status, owner, members} = yield workflowInfo(id);
+    const [{id}, user] = [this.params, this.authorized];
+    const {name, createTimestamp, nodeList, status, owner, tags, addon, members} = yield workflowInfo(id);
+
+    const index = members.findIndex(member => member.mail === user.mail);
 
     this.data = {
       title: `JWI Portal - ${name}`,
@@ -132,10 +116,15 @@ function* info(next) {
       status,
       owner,
       nodeList,
+      addon,
+      tags,
       members,
+      user,
+      allowedUpload: index === -1 ? false:true,
     };
 
     this.pageName = "workflowInfo";
+
   } catch (err) {
     this.error = err;
   }

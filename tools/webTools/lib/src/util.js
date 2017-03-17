@@ -25,7 +25,8 @@ let modalService;
 
 const workflowDataManager = btn => {
     const id = $(btn).attr("data-id");
-    websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, name:1, link: 1, customExtensions: 1})})`);
+    websocket.send(`node-manager->workflowService->workflowInfo("${id}"|${JSON.stringify({nodeList:1, name:1, link: 1, addon: 1})})`);
+    $("#dataManager").attr("data-id", id).modal("show");
 };
 
 const nodeInstanceManager = btn => {
@@ -313,6 +314,11 @@ $("#nav-noticeInfo").click(function() {
     $("#noticeInfo").show();
 });
 
+// 关机
+$("#nav-shutdown").click(() => {
+    $("#askShtdownService").modal("toggle");
+});
+
 // 导入用户数据功能 实现
 $("#module-ok-importUserInfo").click(function() {
     const inputElement = document.getElementById("exampleInputFile");
@@ -426,5 +432,123 @@ $("#module-ok-postAnnouncements").bind("click", function() {
 
 // 清除通知
 const clearNotice = () => {
-  websocket.send(`node-manager->systemService->cleanNotice`);
+    websocket.send(`node-manager->systemService->cleanNotice`);
 }
+
+const saveChangedItem = btn => {
+    const __self = $(btn).parent();
+    const [key, value, workflowId] = [__self.attr("data-key"), __self.find("input").val(), $("#dataManager").attr("data-id")];
+    websocket.send(`node-manager->workflowService->updateWorkflowItem("${workflowId}"|"${key}"|"${value}")`);
+    $("#dataManager_collapse").removeClass("show");
+    __self.removeAttr("isOpen");
+};
+
+const saveChangedAddonAttribut = btn => {
+    const __self = $(btn).parent();
+    const [key, value, workflowId] = [__self.attr("data-key"), __self.find("input").val(), $("#dataManager").attr("data-id")];
+    websocket.send(`node-manager->workflowService->attributeAddon("${workflowId}"|${JSON.stringify({[key]:value})})`);
+    $("#dataManager_collapse").removeClass("show");
+    __self.removeAttr("isOpen");
+};
+
+const addonCustomExtension = btn => {
+    const __self = $(btn).parent();
+    const [key, value, workflowId] = [__self.find("input:eq(0)").val(), __self.find("input:eq(1)").val(), $("#dataManager").attr("data-id")];
+    websocket.send(`node-manager->workflowService->attributeAddon("${workflowId}"|${JSON.stringify({[key]:value})})`);
+    $("#dataManager_collapse").removeClass("show");
+    __self.removeAttr("isOpen");
+};
+
+// 基础数据管理 iba属性 修改按钮 单击事件
+const modifyAddonAttributr = btn => {
+    const __self = $(btn);
+    const dataManager_collapse = $("#dataManager_collapse");
+
+    if (__self.attr("isOpen") && dataManager_collapse.hasClass("show")) {
+      dataManager_collapse.removeClass("show");
+      __self.removeAttr("isOpen");
+      return ;
+    }
+
+    const content = __self.parent().prev("p");
+    const [key, value, workflowId] = [content.attr("data-key"), content.html(), $("#dataManager").attr("data-id")];
+    const card_text = dataManager_collapse.find(".card-text");
+    card_text.attr("data-key", key);
+    card_text.html(`
+      <div class="form-group">
+       <input class="form-control" value="${value}">
+       <small class="form-text text-muted">修改完毕之后记得点击保存</small>
+      </div>
+      <a href="javascript:void(0);" onClick="javascript:saveChangedAddonAttribut(this);" class="btn btn-outline-primary btn-sm pull-right">保存</a>
+    `);
+
+    dataManager_collapse.addClass("show");
+    __self.attr("isOpen", true);
+};
+
+// 基础数据管理 iba属性 删除按钮 单击事件
+const deleteAddonAttributr = btn => {
+    const __self = $(btn);
+
+    const content = __self.parent().prev("p");
+    const [key, workflowId] = [content.attr("data-key"), $("#dataManager").attr("data-id")];
+    websocket.send(`node-manager->workflowService->removeAttribute("${workflowId}"|"${key}")`);
+};
+
+// 基础数据管理 常规属性 修改按钮 单击事件
+$("#dataManager .dataMagager_modify").on("click", ".btn-outline-warning", function() {
+    const dataManager_collapse = $("#dataManager_collapse");
+
+    if ($(this).attr("isOpen") && dataManager_collapse.hasClass("show")) {
+      dataManager_collapse.removeClass("show");
+      $(this).removeAttr("isOpen");
+      return ;
+    }
+
+    const parent = $(this).parent();
+
+    const value = parent.prev(".form-control-static").html();
+    const key = parent.parent().prev(".col-form-label").attr("data-key");
+    const card_text = dataManager_collapse.find(".card-text");
+    card_text.attr("data-key", key);
+    card_text.html(`
+      <div class="form-group">
+       <input class="form-control" value="${value}">
+       <small class="form-text text-muted">修改完毕之后记得点击保存</small>
+      </div>
+      <a href="javascript:void(0);" onClick="javascript:saveChangedItem(this);" class="btn btn-outline-primary btn-sm pull-right">保存</a>
+    `);
+
+    $("#dataManager .dataMagager_modify").find(".btn-outline-warning").removeAttr("isOpen");
+    dataManager_collapse.addClass("show");
+    $(this).attr("isOpen", true);
+});
+
+// 基础数据管理 新增iba属性 按钮单击事件
+$("#dataManager .dataMagager_modify").on("click", ".btn-outline-success", function() {
+    const dataManager_collapse = $("#dataManager_collapse");
+    if (dataManager_collapse.hasClass("show")) {
+      dataManager_collapse.removeClass("show");
+      return ;
+    }
+
+    dataManager_collapse.find(".card-text").html(`
+      <div class="form-group">
+       <label class="col-sm-2 col-form-label" data-key="customExtension_name">属性名</label>
+       <input class="form-control" placeholder="请输入属性名">
+      </div>
+      <div class="form-group">
+       <label class="col-sm-2 col-form-label" data-key="customExtension_value">属性值</label>
+       <input class="form-control" placeholder="请输入属性值">
+      </div>
+      <a href="javascript:void(0);" onClick="javascript:addonCustomExtension(this);" class="btn btn-outline-primary btn-sm pull-right">新增</a>
+    `);
+
+    dataManager_collapse.addClass("show");
+});
+
+// 确认关闭服务
+$("#module-ok-askShtdownService").on("click", () => {
+    $("#askShtdownService").modal("hide");
+    websocket.send(`node-manager->systemService->shutDownSystem`);
+});

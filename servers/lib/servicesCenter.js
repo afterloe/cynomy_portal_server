@@ -42,6 +42,13 @@ module[REFISTRY].set("goodsService", goodsService);
 module[REFISTRY].set("tagsService", tagsService);
 module[REFISTRY].set("systemService", {
   systemInfo, hardDiskInfo, memoryInfo, cleanNotice,
+  shutDownSystem: function* () {
+    if (process.send) {
+      process.send({act: "SHUTDOWN"});
+    } else {
+      process.exit(0);
+    }
+  },
   postSystemNotice: function* (content, timeout) {
     content = new Buffer(content, "base64").toString("utf8");
     return yield* postSystemNotice(content, timeout);

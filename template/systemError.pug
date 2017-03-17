@@ -2,17 +2,30 @@
 
 include header
 
+style.
+  .jumbotron {background-color:#ffffff;}
+
+  @media (max-width:768px) {
+    .jumbotron small {display:none;}
+    .jumbotron p:last-child {text-align:center;margin-top: 3rem;}
+    .btn {display:block;margin-top:1rem;}
+  }
+
+  @media (min-width:769px) {
+    .jumbotron p:last-child {margin-top: 1rem;margin-bottom:0;}
+    .btn {margin-right: 1rem;}
+  }
+
 div(class="container content")
   div(class="container structure")
     div(class="container-fluid")
       div(class="jumbotron")
-        p(class="lead") System is Busy
+        p(class="lead") 🙄 system is busy
         hr(class="my-4")
-        p System is busy
-        small try argin
+        p system is busy
+        small please try argin!
         p(class="lead")
-          a(class="btn btn-outline-success" href="#" onClick = "javascript:history.go(0);" role="button") reflush
-
-          a(class="btn btn-outline-danger" href="/portal/home" role="button") homePage
+          a(class="btn btn-success" href="#" onClick = "javascript:history.go(0);" role="button") reflush
+          a(class="btn btn-danger" href="/portal/home" role="button") homePage
 
 include footer

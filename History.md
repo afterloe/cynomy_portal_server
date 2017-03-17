@@ -8,7 +8,7 @@ Portal build历史
 Portal build历史
 ===
 
-0.0.1 / 2017-1-11 14:34:46
+1.0.1 / 2017-1-11 14:34:46
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
@@ -223,6 +223,7 @@ commit by afterloe (lm6289511@gmail.com)
 
 如果您在portal的使用上有问题或想吐槽的可以邮件联系我(afterloeliu@jwis.cn)或联系涂露(lucy.tu@jwis.cn)。在或者在portal的建议反馈内进行留言。我们会在第一时间内回复，对于典型的问题将在下次的更新公告中的 策划面对面 板块上墙。  
 
+<<<<<<< HEAD
 1.0.9 / 2017-3-10 18:19:25
 ==================
 commit by afterloe (lm6289511@gmail.com)
@@ -264,7 +265,7 @@ commit by afterloe (lm6289511@gmail.com)
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * release: release info 
+  * release: release info
 
 
 ### modify files
@@ -274,15 +275,187 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > services/discussService.js  
 > services/noticeService.js  
-
-
-1.0.9 / 2017-3-11 14:24:36
+=======
+1.0.9 / 2017-3-11 15:42:3
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * release: 修改dataManager中的信息
+  * master: debug 修复上传提示
 
 
 ### modify files
+> config/index.js  
+> staticFiles/css/portal/rd/directory.css  
+> staticFiles/css/portal/rd/platform.css  
+> staticFiles/css/portal/rd/product.css  
+> staticFiles/js/portal/src/rd/platform.js  
+> template/platform.pug  
+
+2017-3-11 更新公告  
+
+更新时间  
+————————————————   
+2017-3-11 16:00 ～ 2017-3-11 17：00，预计维护时间为1小时，维护期间访问可能出现404或500异常，对您的使用产生不变深感抱歉。  
+
+更新内容  
+————————————————  
+1）优化 登陆过程，去除了动态邮件验证码登陆功能，用户可使用固定密码登陆portal，如果遗忘了自己的登陆密码可用在http://rd.jwis.cn/portal/login 处点击忘记密码，系统会发送一个新的6位随机密码到邮箱，使用该密码就可以登陆系统。同时开启了自动登陆功能（需浏览器支持）  
+2) 优化 登陆界面，v1.0.9的portal升级为公司级别的portal，由tru的logo统一切换成公司logo  
+3）优化 首页优化，首页不再显示研发工作流信息，调整为显示portal系统中的公告，同时开放了首页的权限，用户不进行登陆也能够访问portal的首页，不过后续的操作仍需要登陆才行  
+4）优化 首页建议反馈，首页的建议反馈不再跳到bbs论坛，而直接在页面上进行反馈。其他地方的建议反馈仍然跳转到bbs不做处理，将在下次更新时所有意见反馈将会统一在页面上进行处理    
+5）优化 导航栏优化，导航栏按照入驻的部门进行显示，目前入驻的部门有售前技术部和自主交付部，后续的维护和升级中portal 将会打通入驻部门的项目信息，人员信息，届时首页将会再次优化显示信息，敬请期待  
+6）优化 研发部链接，v1.0.9版本的portal将v1.0.8版本的首页移动到了研发部，作为研发部部门首页，保留所有功能，v1.0.8版的TRU产品和TRU平台两个链接放到了研发部首页的平台和产品下，点击对应的平台或产品目录就能够跳转到TRU产品页和TRU平台页  
+7）优化 自主交付部链接，v1.0.9版本中正在与胡琦(Kiweenhu@jwis.cn)进行沟通，沟通完毕之后将会放上自主交付部的项目信息和页面，敬请期待  
+8）优化 售前技术部链接，v1.0.9版本中沿用了http://almcloud.jwis.cn 中售前页面，我将会和方方(frank.fang@jwis.cn)进一步沟通，届时将统一页面展示方式并显示所有售前资料和参与人员信息，敬请期待  
+9）优化 研发部工作流上传功能，添加了提示，当文件上传成功之后对应的上传条目会显示红色的成功标示
+10）优化 研发部工作流详情，查看详情页按钮划过的时候会出现按钮放大的异常
+11）新功能 添加系统公告，使用v1.0.9版本中自带的webTools可以向服务器首页发送公告，公告分为标题和内容，发送成功之后首页将会展示该条公告，所有登陆后的成员可以看到公告信息，未登陆的人员将会看到公告的标题和发布时间。目前系统公告处于调试阶段，仅支持纯文本，后续的跟新中将继续加强公告功能，敬请期待  
+12）新功能 添加反馈页面，为了保证大家的反馈能够及时归档，首页的建议反馈不再跳转bbs，而在页面进行提交。首页公告模块下的热点讨论中将会看到所有提交的反馈信息，用户可以在对他人的反馈信息进行点赞，评论等操作。【产品要求该功能不上线，所以线上版本屏蔽了该功能，用户可在内网版本中体验该功能】  
+13）新功能 讨论贴，在讨论贴上用户可以进行发帖和查看他人发帖，也可进行点赞和评论操作。【产品要求该功能不上线，所以线上版本屏蔽了该功能，用户可在内网版本中体验该功能】  
+14）新功能 自定义首页，登陆的用户和未登陆的用户所看到的首页是不一样的，登陆之后的用户可以对首页进行定制，定制之后的首页和别人的是不同的，定制之后的首页右侧会出现关注列表，用户可以查看自己参与的所有项目，同时还有自己订阅的项目【产品要求该功能不上线，所以线上版本屏蔽了该功能，用户可在内网版本中体验该功能】  
+15）新功能 系统通知，维护或有重大信息的时候，首页顶部将会弹出红色通知窗，进行通知展示，为期1小时，使用v1.0.9版本中自带的webTools可以向服务器首页发送通知  
+
+策划面对面  
+————————————————  
+1)    
+  问题：portal为什么发送不出邮件？  
+  回答：portal使用的邮箱是tru.jwis.cn 是tru平台提供的邮件功能，该功能已上线3年，日发送邮件量较大，非公司的邮箱可能会把该发送者发送的邮件视为垃圾邮件进行处理，所有可以到垃圾箱查收。如果垃圾箱没有收到邮件可以给我(afterloeliu@jwis.cn)发送邮件，万分感谢  
+2）    
+  问题：portal支持ie吗？  
+  回答：portal的开发人员没有使用windows平台进行开发，目前portal测试之后支持的浏览器有 firfox火狐浏览器，safari, google, edge。微软公司已经宣布放弃IE的开发,所以IE 11 之前的版本我们没有安排进行测试，而且360，百度浏览器的一类的使用ie内核的浏览器使用portal也是会出现问题的，为了更好的页面体验请使用google浏览器，或edge浏览器，或非ie内核的浏览器。关于ie的支持计划，将视项目组任务安排，请关注portal上的公告  
+3）  
+  问题：portal上传文件怎么那么慢？  
+  回答：portal采用的是云端部署，文件系统为分布式文件系，上传文件之后会被同步到子节点上，上传文件需要点时间。而且上传文件取决于网络的带宽，云端服务器上行带宽最大为512kb/s ,也就是说上传1M的文件理论上最快需要2秒，如果客户端链接的网络带宽不足，那么上传速度会被进一步限制，以工勘大厦为例，工勘大厦采用的宽带上传速度为512kb，加上ap分发和客户端io损耗，测试出上传速度为106kb～210kb之间，所以请网页上传文件耐性等待，而且断点续传在前端的实现主要依赖着HTML5的新特性，所以一般来说在老旧的浏览器或ie上支持度是不高的。我们会在后续的版本中发出pc 移动客户端，用户可用客户端进行大文件的上传，前期大文件上传请联系我(afterloeliu@jwis.cn)  
+4)  
+  问题：portal部门链接会不会增多？  
+  回答：portal由研发部升级为公司portal，后续的维护和升级将加强工作流系统和权限系统，也就是说未来portal会接入更多的部门，只要登入http://rd.jwis.cn 就能查看公司所有部门和文件信息，实现公司内部资料人员信息共享，方便了解所有部门的最新动态，想加入的我们portal系统的部门可以联系我(afterloeliu@jwis.cn)，目前售前技术部和自主研发部已经加入，请期待后续的维护和升级。  
+
+1.0.10 / 2017-3-17 16:51:59
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 版本升级 v1.0.10
+
+
+### modify files
+> .cynomy  
+> Makefile  
+> config/index.js  
+> package.json  
+> staticFiles/css/portal/header.css  
+> staticFiles/css/portal/home.css  
+> staticFiles/css/portal/rd/platform.css  
+> staticFiles/css/portal/workflowInfo.css  
+> staticFiles/js/portal/src/header.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/rd/platform.js  
+> staticFiles/js/portal/src/workflowInfo.js  
+> template/footer.pug  
+> template/header.pug  
+> template/home.pug  
+> template/platform.pug  
+> template/workflowInfo.pug  
+
+2017-3-18 v1.0.10 更新公告  
+
+更新时间  
+————————————————   
+2017-3-18 16:00 ～ 2017-3-18 17：00，预计维护时间为1小时，维护期间访问可能出现404或500异常，对您的使用产生不变深感抱歉。  
+
+更新内容  
+————————————————  
+1）修复 portal页面上传功能，将并发上传功能修改为队列上传，上传结束的时候会显示该文件上传的结果，成功或失败。  
+2）修复 工作流文件列表页面在手机端会出现文件名和用户名重叠的问题。  
+3）修复 工具页面点击发布流程时，出现失败的异常  
+4）修复 portal home页面需要登陆才能查看，默认进入登陆页面。  
+5）修复 v1.0.9页面微调 portal公告查看公告阅读量字体太小。  
+6）修复 高并发下概率性出现请求丢失的问题。由轮叫调度策略切换为抢占式调度策略。  
+7）修复 异常code前端被转换为int型导致的，登陆token失效不跳转而显示服务器异常。
+8）优化 404，SystemError等页面样式优化。   
+10）优化 登陆页 忘记密码修改为 发送密码到邮箱。  
+11）优化 页面头部 暂时隐藏搜索框，将伴随搜索功能一同推出。  
+12）新功能 首页 显示所有部门活动工作流，并显示为柱状图，点击柱状图可以查看不同部门活动的工作流信息。  
+13）新功能 首页 公告显示切换为右侧，同时添加新图表标示。  
+14）新功能 首页 显示所有用户的建议反馈，支持查看反馈内容。  
+15）新功能 页面头部 鼠标移动到header 研发部时，弹出子菜单 子菜单内容为 TRU产品 和 TRU平台的链接。  
+16）新功能 工作流详情页面 添加显示 工作流标签信息。  
+17）新功能 工作流详情页面 数据仓库显示该节点上传的文件列表，
+18）新功能 工作流详情页面 开放上传文件功能，规则为该工作流下的成员才能上传文件。  
+19）新功能 工作流详情页面 数据仓库右侧的电脑标志，点击切换视图，视图显示为svn链接，点击链接则自动跳转到svn查看，再次点击切换回文件列表  
+20）新功能 工具 支持给工作流添加／删除软属性，软属性可以理解为自定义的key-value值。同时工作流详情页面将同步展示。  
+21）新功能 工具 支持修改工作流的名字和链接信息。  
+22）新功能 工具 添加关闭节点功能。  
+
+策划面对面  
+————————————————  
+1）
+  问题：可以自己定义密码嘛？  
+  回答：自己定义密码功能在考虑中，将随着个人中心页面一同推出。
+
+下周更新预告  
+————————————————  
+1）售前技术部 和 自主交付部资料回收完毕，将开启自主交付部的首页  
+2）售前技术部首页切换为rd自己的页面  
+3）更多内容请期待下次(v1.0.11)更新  
+
+1.0.10 / 2017-3-17 17:34:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: v1.0.10 changLog
+
+
+### modify files
+> History.md  
+
+1.0.10 / 2017-3-17 17:38:4
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * release: release v1.0.10
+
+
+### modify files
+> .cynomy  
+> Makefile  
+> config/index.js  
+> index.js  
+> interceptors/session.js  
+> interceptors/smartNotFound.js  
+> interceptors/template.js  
+> package.json  
+> routers/ad-portal.js  
+> routers/index.js  
+> routers/portal.js  
+> routers/ps-portal.js  
+> routers/workflow.js  
+> servers/lib/servicesCenter.js  
+> services/workflowService.js  
+> staticFiles/css/portal/discussesInfo.css  
+> staticFiles/css/portal/header.css  
+> staticFiles/css/portal/home.css  
+> staticFiles/css/portal/noticeInfo.css  
+> staticFiles/css/portal/rd/directory.css  
+> staticFiles/css/portal/rd/platform.css  
+> staticFiles/css/portal/rd/product.css  
+> staticFiles/css/portal/workflowInfo.css  
+> staticFiles/js/portal/src/header.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/rd/platform.js  
+> staticFiles/js/portal/src/workflowInfo.js  
+> template/404NotFound.pug  
+> template/directory.pug  
+> template/footer.pug  
+> template/header.pug  
+> template/home.pug  
+> template/journalError.pug  
+> template/login.pug  
+> template/platform.pug  
+> template/systemError.pug  
+> template/workflowInfo.pug  
+> tools/buildPage.js  
 > tools/webTools/dataManager.html  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/registry.js  
+> tools/webTools/lib/src/util.js  
 

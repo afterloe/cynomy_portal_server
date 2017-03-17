@@ -56,10 +56,11 @@ module.exports = function * (next) {
           this.render("journalError", {
             title: "oh no!",
             msg: error.message,
-            code: error.code
+            code: error.code,
           });
       }
     } else {
+      this.status = 500;
       /**
        * 异常是 系统异常 按照请求方式进行分发处理
        */
@@ -73,6 +74,7 @@ module.exports = function * (next) {
       }
     }
   } else if (pageName || data) {
+    this.status = 200;
     /**
      * 如果存在数据对象的话就按照请求方式进行分发处理
      */
@@ -82,6 +84,7 @@ module.exports = function * (next) {
       this.body = this.success(data);
     }
   } else {
+    this.status = 404;
     /**
      * 如果都不存在 则返回404
      */

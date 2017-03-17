@@ -52,7 +52,7 @@ function* home(next) {
   try {
     this.pageName = "adHome";
     this.data = {
-      title: "R&D Portal",
+      title: "A&D Portal",
       index: 3,
     };
   } catch (err) {

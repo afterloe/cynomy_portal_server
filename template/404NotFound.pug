@@ -2,17 +2,30 @@
 
 include header
 
+style.
+  .jumbotron {background-color:#ffffff;}
+
+  @media (max-width:768px) {
+    .jumbotron small {display:none;}
+    .jumbotron p:last-child {text-align:center;margin-top: 3rem;}
+    .btn {display:block;margin-top:1rem;}
+  }
+
+  @media (min-width:769px) {
+    .jumbotron p:last-child {margin-top: 1rem;margin-bottom:0;}
+    .btn {margin-right: 1rem;}
+  }
+
 div(class="container content")
   div(class="container structure")
     div(class="container-fluid")
       div(class="jumbotron")
-        p(class="lead") There is nothing here
+        p(class="lead") 😔 there is nothing here
         hr(class="my-4")
-        p No web page for this address
-        small 404 Error
+        p no web page for this address
+        small 404
         p(class="lead")
-          a(class="btn btn-outline-success" href="#" onClick="javascript:history.go(-1);" role="button") back
-
-          a(class="btn btn-outline-danger" href="/portal/home" role="button") homePage
+          a(class="btn btn-success" href="#" onClick="javascript:history.go(-1);" role="button") back
+          a(class="btn btn-danger" href="/portal/home" role="button") homePage
 
 include footer

@@ -106,6 +106,9 @@ const compileTemplates = outPath => {
 };
 
 const compileTemplate = (template, data) => {
+  if (!template) {
+    return "";
+  }
   const suffix = extname(template);
   if (".pug" !== suffix) {
     template += ".pug";

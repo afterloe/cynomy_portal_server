@@ -49,6 +49,10 @@ module.exports = function* (next) {
     this.request.header, this];
 
   let {params, request, query} = __self;
+  
+  if (header["x-real-ip"]) {
+    requestIp = header["x-real-ip"];
+  }
 
   this.request.body = filter(request.body);
   this.params = filter(params);

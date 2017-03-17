@@ -37,48 +37,57 @@ div(class="container content")
   div(class="container structure")
     span(class="portalWhete")
 
-    div(class=_subscribe.length === 0 ? "mainBox noHelp":"mainBox")
-      div(class="catalogShadow")
-        span(class="badge number")=_systemAnnouncementNum
-        div(class="title")
-          span(class="name") 公告
-          span(class="downButton down")
-      ul(class="data")
-        each announcement in _systemAnnouncement
-          li
-            div
-              i
-              span(class="content" data-href=announcement.href)=announcement.title
-              span(class="time")=new Date(announcement.createTimestamp).toLocaleString()
+    - const _workflowNum = locals.chat.workflowNum || 0;
+    - const _workflowInfo = locals.chat.workflowInfo || {} ;
+    .mainBox
+      .projectChat
+        .chatHeader
+          h4=`正在进行项目数量 ${_workflowNum}`
+        .chatBody
+          .chat
+            span(class="pillar")
+            - let __index = 0;
+            each val,key in _workflowInfo
+              div(data-key=key data-index=__index style=`height: ${val.length / _workflowNum * 100}%`)
+                - __index++;
+                span=val.length
+        .chatFooter
+          .legend
+            each val, key in _workflowInfo
+              div=key
 
-    //-
-      div(class="catalogShadow")
-        span(class="badge number")=_discussCount
-        div(class="title")
-          span(class="name" onClick="javascript:openDiscuss();") 热点讨论
-          span(class="downButton down")
-      ul(class="data")
-        each discus in _discuss
-          li
-            div
-              i
-              span(class="content" data-href=discus.href)=discus.title
-              span(class="time")=new Date(discus.createTimestamp).toLocaleString()
+      .projectList
+        .catalogShadow
+          .title
+            span(class="recordPic")
+            span(class="name") 项目列表 (正在进行的项目)
+        ul(class="data project")
 
-    div(class="helpBox" style=_subscribe.length === 0 ? "width:0;":"")
-      each subscribe in _subscribe
+    .helpBox
+      .announcement
         div(class="catalogShadow")
-          span(class="badge number")=subscribe.items.length
-          div(class="title")
-            span=subscribe.title
-            span(class="downButton up")
-        ul(class="data")
-          each subscribeItem in subscribe.items
+          .title
+            span(class="dynamicPic")
+            span(class="name") 公告
+        ul(class="data dynamic")
+          each announcement in _systemAnnouncement
             li
               div
-                i
-                span(class="content" data-href=subscribeItem.href)=subscribeItem.title
-                span(class="time")=new Date(subscribeItem.createTimestamp).toLocaleString()
+                span(class="time")=new Date(announcement.createTimestamp).toLocaleString()
+                span(class="content" data-href=announcement.href)=announcement.title
+      .subscribe
+        div(class="catalogShadow")
+          span(class="badge number")=_discussCount
+          div(class="title")
+            span(class="name" onClick="javascript:openDiscuss();") 热点讨论
+            span(class="downButton down")
+        ul(class="data discuss")
+          each discus in _discuss
+            li
+              div
+                span(class="content" data-href=discus.href)=discus.title
+                span(class="time")=new Date(discus.createTimestamp).toLocaleString()
+
     div(class="feedback")
 
 include footer

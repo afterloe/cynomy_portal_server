@@ -14,8 +14,100 @@
 const MODULE = Symbol("MODULE");
 window[MODULE] = [];
 
-// window[MODULE].push();
-// window[MODULE].push();
+window[MODULE].push(`
+  <div class="modal fade" id="askShtdownService" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content modal-sm">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                  <h4 class="modal-title"></h4>
+              </div>
+              <div class="modal-body modal-sm">
+                  是否自动关闭服务？
+                  <small>关闭服务之后，是无法进行连接的。确定要关闭吗？</small>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-outline-primary" id="module-ok-askShtdownService">确认</button>
+              </div>
+          </div>
+      </div>
+  </div>
+`);
+
+/**
+ * 基础数据管理
+ * @type {String}
+ */
+window[MODULE].push(`
+  <div class="modal fade bd-example-modal-lg" id="dataManager" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            <h4 class="modal-title">XX 基础数据管理</h4>
+        </div>
+
+        <div class="modal-body">
+          <h3>常规属性</h3>
+          <div class="dropdown-divider"></div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" data-key="name">名字</label>
+            <div class="col-sm-10">
+              <p class="form-control-static">XX</p>
+              <span class="dataMagager_modify">
+                <span class="btn btn-outline-warning btn-sm">修改</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="col-sm-2 col-form-label" data-key="link">链接</label>
+            <div class="col-sm-10">
+              <p class="form-control-static">http://tru.jwis.cn</p>
+              <span class="dataMagager_modify">
+                <span class="btn btn-outline-warning btn-sm">修改</span>
+              </span>
+            </div>
+          </div>
+
+          <span class="dataManager_header">
+            <h3>IBA属性</h3>
+            <span class="dataMagager_modify">
+              <a class="btn btn-outline-success btn-sm" href="#">新增IBA属性</a>
+            </span>
+          </span>
+
+          <div class="dropdown-divider"></div>
+
+          <div class="ibaAttribute"></div>
+
+          <div class="dropdown-divider"></div>
+
+          <div class="collapse" id="dataManager_collapse">
+            <div class="card card-block" style="display:block;">
+              <div class="card-text"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">关闭</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+`);
+
 /**
  * 发通知
  * @type {String}
@@ -421,6 +513,7 @@ window[MODULE].push(`<div class="modal fade" id="crearteTag" tabindex="-1" role=
                           <option value="应用">应用</option>
                           <option value="类型">类型</option>
                           <option value="用户">用户</option>
+                          <option value="部门">部门</option>
                           <option value="设备">设备</option>
                           <option value="权限">权限</option>
                           <option value="公共">公共</option>
@@ -451,7 +544,8 @@ window[MODULE].push(`<div class="modal fade" id="crearteTag" tabindex="-1" role=
  * 询问是否删除标签
  * @type {String}
  */
-window[MODULE].push(`<div class="modal fade" id="askdeleteTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+window[MODULE].push(`
+<div class="modal fade" id="askdeleteTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-sm">
             <div class="modal-header">

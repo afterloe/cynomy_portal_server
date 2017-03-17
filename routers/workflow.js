@@ -177,7 +177,25 @@ const nodeInstance = function* (next) {
 
   try {
     const {id} = this.params;
-    this.data = yield getNodeInstance(id);
+    const nodeInstance = yield getNodeInstance(id);
+    const produceList = yield findGoodsByNode(id);
+    Object.assign(nodeInstance, {produceList});
+    this.data = nodeInstance;
+  } catch (err) {
+    this.error = err;
+  }
+
+  return yield next;
+};
+
+const departmentList = function* (next) {
+  if (this.error) {
+    return yield next;
+  }
+
+  try {
+    const {name} = this.params;
+    this.data = yield searchProduct(name);
   } catch (err) {
     this.error = err;
   }
@@ -186,12 +204,13 @@ const nodeInstance = function* (next) {
 };
 
 module.exports = {
+  detail,
+  departmentList,
   list,
   nodeFiles,
-  simpleInfo,
-  detail,
+  nodeInstance,
   rdOverviewsPlatform,
   rdOverviewsProduct,
   rdOverviewsDirectory,
-  nodeInstance,
+  simpleInfo,
 };

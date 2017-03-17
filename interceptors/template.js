@@ -20,9 +20,38 @@ const [
   require(resolve(__dirname, "..", "tools", "buildPage"))
 ];
 
-const [VERSION, STATIC] = [Symbol("VERSION"), Symbol("STATIC")];
+const [VERSION, STATIC, NAVBAR] = [Symbol("VERSION"), Symbol("STATIC"), Symbol("NAVBAR")];
 module[VERSION] = get("version");
 module[STATIC] = get("sourceHost");
+
+module[NAVBAR] = [
+  {
+    href: "/portal/home",
+    name: "首页",
+  },
+  {
+    href: "/portal/rd/home",
+    name: "研发部",
+    subNav: [
+      {
+        name : "TRU 平台",
+        href : "/portal/rd/platform",
+      },
+      {
+        name: "TRU 产品",
+        href: "/portal/rd/product",
+      }
+    ],
+  },
+  {
+    href: "/portal/ad/home",
+    name: "自主交付部",
+  },
+  {
+    href: "/portal/ps/home",
+    name: "售前技术部",
+  },
+];
 
 module.exports = function* (next) {
   setPugTemplatePath(resolve(__dirname, "..", "template"));
@@ -39,7 +68,7 @@ module.exports = function* (next) {
     });
 
     this.fail = (msg = "system error", code = 500) => ({
-      code: Number.parseInt(code),
+      code: Number.parseFloat(code),
       error: msg,
       result: null,
       systemVersion: module[VERSION],
@@ -55,6 +84,7 @@ module.exports = function* (next) {
         title: "",
         static: module[STATIC],
         cache: false,
+        navbar: module[NAVBAR],
         systemVersion: module[VERSION],
       };
       Object.assign(defualt, _);

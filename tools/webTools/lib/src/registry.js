@@ -43,11 +43,35 @@ registry("setLeader", (err, data) => {
 });
 
 registry("workflowInfo", (err, data) => {
-    const {nodeList, status, customExtensions, name} = data;
+    const {nodeList, status, addon, link, name} = data;
 
     if (name) {
-      console.log(customExtensions, name);
-      // TODO
+      const dataManager = $("#dataManager");
+      dataManager.find("h4.modal-title").html(`${name} 基础数据管理`);
+      dataManager.find("p.form-control-static:eq(0)").html(name);
+      dataManager.find("p.form-control-static:eq(1)").html(link);
+      if (addon) {
+        const addonList = [];
+        for (let key in addon) {
+          addonList.push(`
+            <div class="form-group row">
+              <label class="col-sm-2 col-form-label">${key}</label>
+              <div class="col-sm-10">
+                <p class="form-control-static" data-key="${key}">${addon[key]}</p>
+                <span class="dataMagager_modify">
+                  <span class="btn btn-outline-warning btn-sm" onClick="javascript:modifyAddonAttributr(this);">修改</span>
+                  <span class="btn btn-outline-danger btn-sm" onClick="javascript:deleteAddonAttributr(this);">删除</span>
+                </span>
+              </div>
+            </div>
+          `);
+        }
+        dataManager.find(".ibaAttribute").html(addonList.join(""));
+      } else {
+        dataManager.find(".ibaAttribute").html("");
+      }
+      $("#dataManager_collapse").removeClass("show");
+
       return ;
     }
 
@@ -81,25 +105,27 @@ registry("workflowInfo", (err, data) => {
           $("#nodeInstanceSetSVN").find("input").attr("placeholder", svnInfo);
         } else {
           olHtml.push(`<li></li>`);
-          cardHtml.push(`<div class="carousel-item" data-id="${node._id}">
-            <div class="card">
-              <div class="card-block">
-                <h4 class="card-title">${node.name}</h4>
-                <p class="card-text">未收到信息</p>
-              </div>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">状态: - </li>
-                <li class="list-group-item">启动时间: - </li>
-                <li class="list-group-item">节点负责人: - </li>
-                <li class="list-group-item">节点跟新次数: - </li>
-                <li class="list-group-item">svn地址: - </li>
-              </ul>
-              <div class="card-block">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+          cardHtml.push(`
+            <div class="carousel-item" data-id="${node._id}">
+              <div class="card">
+                <div class="card-block">
+                  <h4 class="card-title">${node.name}</h4>
+                  <p class="card-text">未收到信息</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">状态: - </li>
+                  <li class="list-group-item">启动时间: - </li>
+                  <li class="list-group-item">节点负责人: - </li>
+                  <li class="list-group-item">节点跟新次数: - </li>
+                  <li class="list-group-item">svn地址: - </li>
+                </ul>
+                <div class="card-block">
+                  <a href="#" class="card-link">Card link</a>
+                  <a href="#" class="card-link">Another link</a>
+                </div>
               </div>
             </div>
-          </div>`);
+          `);
         }
       }
 
@@ -265,6 +291,21 @@ registry("promoteProcess", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
 });
 
+registry("attributeAddon", (err, data) => {
+    const workflowId = $("#dataManager").attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowInfo("${workflowId}"|${JSON.stringify({nodeList:1, name:1, link: 1, addon: 1})})`);
+});
+
+registry("updateWorkflowItem", (err, data) => {
+    const workflowId = $("#dataManager").attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowInfo("${workflowId}"|${JSON.stringify({nodeList:1, name:1, link: 1, addon: 1})})`);
+});
+
+registry("removeAttribute", (err, data) => {
+    const workflowId = $("#dataManager").attr("data-id");
+    websocket.send(`node-manager->workflowService->workflowInfo("${workflowId}"|${JSON.stringify({nodeList:1, name:1, link: 1, addon: 1})})`);
+});
+
 registry("retroversion", (err, data) => {
     websocket.send("node-manager->workflowService->getWorkflowList");
 });
@@ -358,7 +399,7 @@ registry("getWorkflowList", (err, data) => {
               <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:membersManager(this, 'workflow')">成员管理</a>
               <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:nodeInstanceManager(this)">节点管理</a>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:workflowDataManager(this)">基础数据管理</a>
+              <a class="dropdown-item" href="javascript:void(0);" data-id="${_id}" onClick="javascript:workflowDataManager(this), 'workflow'">基础数据管理</a>
               <a class="dropdown-item" href="#">文件仓库管理</a>
             </div>
           </div>

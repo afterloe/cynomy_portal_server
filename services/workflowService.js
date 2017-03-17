@@ -933,8 +933,6 @@ function* removeAttribute(workflowId, attribute) {
     throwNosuchThisWorkflowNodeInstance();
   }
 
-  const {addon = {}} = _;
-
   const keyName = `addon.${attribute}`;
 
   return yield workFlow_instance_dao.update({

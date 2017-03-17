@@ -794,3 +794,17 @@ commit by afterloe (lm6289511@gmail.com)
 > template/platform.pug  
 > template/workflowInfo.pug  
 
+
+1.0.10 / 2017-3-17 16:51:59
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 版本升级 v1.0.10
+
+
+### modify files
+> .cynomy  
+> Makefile  
+> config/index.js  
+> package.json  
+

@@ -36,6 +36,10 @@ test-cov: $(MOCHA_FILES)
 install:
 	cnpm install --production
 
+# 启动
+start:
+	nohup node index.js > log/portal.log 2>&1 &
+
 # 移动文件
 .ONESHELL:
 move:

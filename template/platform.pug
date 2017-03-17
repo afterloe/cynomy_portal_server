@@ -202,14 +202,14 @@ script.
       if (!file) {
         return ;
       }
-      uploadTask(nodeId, file, index, (err, data) => {
+      uploadTask(nodeId, file.file, index, (err, data) => {
         if (err) {
           buildUploadFlag(index, file, "失败");
         } else {
           buildUploadFlag(index, file, "成功");
         }
         index++;
-        uploadTask(nodeId, index);
+        uploadTasks(nodeId, index);
       });
   };
 

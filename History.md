@@ -710,3 +710,14 @@ commit by afterloe (lm6289511@gmail.com)
 > config/index.js  
 > template/workflowInfo.pug  
 
+
+1.0.9 / 2017-3-17 13:49:46
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 上传功能优化处理
+
+
+### modify files
+> template/platform.pug  
+

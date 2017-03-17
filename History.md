@@ -698,3 +698,15 @@ commit by afterloe (lm6289511@gmail.com)
 > template/home.pug  
 > template/platform.pug  
 
+
+1.0.9 / 2017-3-17 11:43:13
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 同步云端修改
+
+
+### modify files
+> config/index.js  
+> template/workflowInfo.pug  
+

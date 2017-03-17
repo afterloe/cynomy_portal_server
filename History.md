@@ -744,3 +744,18 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > tools/webTools/lib/src/registry.js  
 
+
+1.0.9 / 2017-3-17 15:38:0
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加远程关闭节点功能
+
+
+### modify files
+> index.js  
+> servers/lib/servicesCenter.js  
+> tools/webTools/dataManager.html  
+> tools/webTools/lib/src/initWebPage.js  
+> tools/webTools/lib/src/util.js  
+

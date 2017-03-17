@@ -14,7 +14,29 @@
 const MODULE = Symbol("MODULE");
 window[MODULE] = [];
 
-// window[MODULE].push();
+window[MODULE].push(`
+  <div class="modal fade" id="askShtdownService" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content modal-sm">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                  </button>
+                  <h4 class="modal-title"></h4>
+              </div>
+              <div class="modal-body modal-sm">
+                  是否自动关闭服务？
+                  <small>关闭服务之后，是无法进行连接的。确定要关闭吗？</small>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">取消</button>
+                  <button type="button" class="btn btn-outline-primary" id="module-ok-askShtdownService">确认</button>
+              </div>
+          </div>
+      </div>
+  </div>
+`);
 
 /**
  * 基础数据管理
@@ -66,7 +88,7 @@ window[MODULE].push(`
           <div class="dropdown-divider"></div>
 
           <div class="ibaAttribute"></div>
-          
+
           <div class="dropdown-divider"></div>
 
           <div class="collapse" id="dataManager_collapse">
@@ -522,7 +544,8 @@ window[MODULE].push(`<div class="modal fade" id="crearteTag" tabindex="-1" role=
  * 询问是否删除标签
  * @type {String}
  */
-window[MODULE].push(`<div class="modal fade" id="askdeleteTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+window[MODULE].push(`
+<div class="modal fade" id="askdeleteTag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-sm">
             <div class="modal-header">

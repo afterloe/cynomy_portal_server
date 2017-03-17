@@ -314,6 +314,11 @@ $("#nav-noticeInfo").click(function() {
     $("#noticeInfo").show();
 });
 
+// 关机
+$("#nav-shutdown").click(() => {
+    $("#askShtdownService").modal("toggle");
+});
+
 // 导入用户数据功能 实现
 $("#module-ok-importUserInfo").click(function() {
     const inputElement = document.getElementById("exampleInputFile");
@@ -540,4 +545,10 @@ $("#dataManager .dataMagager_modify").on("click", ".btn-outline-success", functi
     `);
 
     dataManager_collapse.addClass("show");
+});
+
+// 确认关闭服务
+$("#module-ok-askShtdownService").on("click", () => {
+    $("#askShtdownService").modal("hide");
+    websocket.send(`node-manager->systemService->shutDownSystem`);
 });

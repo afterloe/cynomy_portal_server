@@ -759,3 +759,15 @@ commit by afterloe (lm6289511@gmail.com)
 > tools/webTools/lib/src/initWebPage.js  
 > tools/webTools/lib/src/util.js  
 
+
+1.0.9 / 2017-3-17 15:41:20
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修改关闭pid号
+
+
+### modify files
+> index.js  
+> servers/lib/servicesCenter.js  
+

@@ -25,7 +25,7 @@ const startSlave = socket => {
     if ("suicide" === act) {
       startSlave(socket);
     } else if ("SHUTDOWN" === act) {
-      process.exit(1);
+      process.exit(0);
     }
   });
 

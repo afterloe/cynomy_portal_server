@@ -43,7 +43,11 @@ module[REFISTRY].set("tagsService", tagsService);
 module[REFISTRY].set("systemService", {
   systemInfo, hardDiskInfo, memoryInfo, cleanNotice,
   shutDownSystem: function* () {
-    process.send({act: "SHUTDOWN"});
+    if (process.send) {
+      process.send({act: "SHUTDOWN"});
+    } else {
+      process.exit(0);
+    }
   },
   postSystemNotice: function* (content, timeout) {
     content = new Buffer(content, "base64").toString("utf8");

@@ -686,3 +686,15 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > template/workflowInfo.pug  
 
+
+1.0.9 / 2017-3-17 11:22:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 上传方式改成队列上传
+
+
+### modify files
+> template/home.pug  
+> template/platform.pug  
+

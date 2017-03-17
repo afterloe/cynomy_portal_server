@@ -67,6 +67,8 @@ registry("workflowInfo", (err, data) => {
           `);
         }
         dataManager.find(".ibaAttribute").html(addonList.join(""));
+      } else {
+        dataManager.find(".ibaAttribute").html("");
       }
       $("#dataManager_collapse").removeClass("show");
 

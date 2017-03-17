@@ -733,3 +733,14 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/portal.js  
 > template/workflowInfo.pug  
 
+
+1.0.9 / 2017-3-17 15:18:56
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复切换节点时被强制绑定iba属性
+
+
+### modify files
+> tools/webTools/lib/src/registry.js  
+

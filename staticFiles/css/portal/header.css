@@ -37,31 +37,28 @@ header{background-color: #ffffff;position: fixed;width:100%;top:0;z-index:9999;}
 .header-searchIcon{background-color: transparent;background: url(../../images/portal/searchIcon.png) center no-repeat;}
 .navbar-header{background: url('../../images/portal/titleLogo.png') no-repeat center;background-size: contain;}
 @media screen and (max-width: 767px) {
-    .header-search,.navbar-nav,footer{
-        display: none;
-    }
+    .header-search,.navbar-nav,footer {display: none;}
 }
 @media screen and (min-width: 992px) and (max-width: 1201px) {
-    .nav>li>a{
-        padding: 1.4em 1.5em;
-    }
-
+    .nav>li>a{ padding: 1.4em 1.5em;}
 }
 @media screen and (min-width: 768px) and (max-width: 992px) {
-    .nav>li>a{
-        padding: 1.4em 0.6em;
-    }
-    .navbar-form{
-        padding-left:0px;
-    }
-    .input-group{
-        width:160px;
-    }
+    .nav>li>a {padding: 1.4em 0.6em; }
+    .navbar-form {padding-left:0px;}
+    .input-group{width:160px;}
 }
 
-
 @media screen and (min-width: 769px) {
-    .navbar-nav{
-        margin: 1em 1em 0 1em;
-    }
+    .navbar-nav{margin: 1em 1em 0 1em;}
+}
+
+@media (min-width:769px) {
+  .dropdown-menu {padding: 0 0 0 0;}
+  .dropdown-menu>li>a {padding: 8px; font-size: 15px; text-align: center; line-height: 35px; height: 50px;}
+  .dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {color: #3d9bff;}
+}
+
+@media (max-width:768px) {
+  .dropdown-menu>li>a {display:none;}
+  .dropdown-menu {height: 0; width: 0; min-height: 0; min-width: 0; border: none;}
 }

@@ -300,4 +300,8 @@ input {
     .data li:first-child div i{background:#3d9bff;}
     .detail {background: url(../../../images/portal/detail.png) no-repeat center 0.05rem; cursor: pointer; float: right; height: 0.5rem; line-height: 0.5rem; width: 0.4rem; background-size: contain; margin-right: 0.4rem}
     .detail:hover {background: url(../../../images/portal/detail_click.png) no-repeat center 0.05rem; background-size: contain;}
+
+    .data li div span { margin-top: -0.05rem; display: none; float: left; width: 1.85rem; text-align: center; height: 0.5rem;}
+    .data li div span.name{ width:60%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+    .data li div span.author{ width:30%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
 }

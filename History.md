@@ -771,3 +771,26 @@ commit by afterloe (lm6289511@gmail.com)
 > index.js  
 > servers/lib/servicesCenter.js  
 
+
+1.0.9 / 2017-3-17 16:43:24
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 测试通过允许发布
+
+
+### modify files
+> staticFiles/css/portal/header.css  
+> staticFiles/css/portal/home.css  
+> staticFiles/css/portal/rd/platform.css  
+> staticFiles/css/portal/workflowInfo.css  
+> staticFiles/js/portal/src/header.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/rd/platform.js  
+> staticFiles/js/portal/src/workflowInfo.js  
+> template/footer.pug  
+> template/header.pug  
+> template/home.pug  
+> template/platform.pug  
+> template/workflowInfo.pug  
+

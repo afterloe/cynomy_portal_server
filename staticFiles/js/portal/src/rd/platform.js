@@ -1,3 +1,14 @@
+/**
+  * afterloe - cynomy_portal_server/staticFiles/js/portal/src/platform.js
+  *
+  * Copyright(c) afterloe.
+  * MIT Licensed
+  *
+  * Authors:
+  *   afterloe <lm6289511@gmail.com> (https://github.com/afterloe)
+  * Date:
+  *   2017-3-10 18:02:35
+  */
 "use strict";
 
 const [workflowName,UpLoadList, UploadIndex] = [Symbol("workflowName"), Symbol("UpLoadList"), Symbol("UploadIndex")];
@@ -65,7 +76,7 @@ $(function() {
 
 });
 
-const uploadTask = (id, file, index) => new Promise((solve, reject) => {
+const uploadTask = (id, file, index, callback) => {
   const [xhr, formData] = [new XMLHttpRequest(), new FormData()];
   formData.append("goods", file);
   xhr.open("POST", `/fs/update/${id}`);
@@ -78,10 +89,7 @@ const uploadTask = (id, file, index) => new Promise((solve, reject) => {
                 const result = JSON.parse(xhr.responseText);
 
                 if (200 !== result.code) {
-                  reject({
-                    msg: result.error,
-                    code: result.code,
-                  });
+                  callback(new Error(result.error));
                   return ;
                 }
 
@@ -89,28 +97,36 @@ const uploadTask = (id, file, index) => new Promise((solve, reject) => {
                   [UploadIndex]: index,
                 });
 
-                solve(result);
+                callback(null, result);
 
               } catch(err) {
-                reject(xhr.responseText);
+                callback(err);
               }
           }
-          reject();
+          callback(new Error("callFailed!"));
       }
   };
-});
+};
 
-const uploadTasks = nodeId => {
-    for(let index in window[UpLoadList]) {
-      uploadTask(nodeId, window[UpLoadList][index].file, index).then(() => {
-        buildUploadSuccess(index, window[UpLoadList][index].file);
-      }).catch(err => console.log(err));
+const uploadTasks = (nodeId, index) => {
+    const file = window[UpLoadList].shift();
+    if (!file) {
+      return ;
     }
+    uploadTask(nodeId, file.file, index, (err, data) => {
+      if (err) {
+        buildUploadFlag(index, file, "失败");
+      } else {
+        buildUploadFlag(index, file, "成功");
+      }
+      index++;
+      uploadTasks(nodeId, index);
+    });
 };
 
 const beginUpload = () => {
     const nodeId = $(".processActive").find("dt").attr("data-id");
-    uploadTasks(nodeId);
+    uploadTasks(nodeId, 0);
 };
 
 const delUploadFileList = btn => {
@@ -118,12 +134,11 @@ const delUploadFileList = btn => {
     $(".dataFile").html(buildUploadList());
 };
 
-const buildUploadSuccess = (index, file) => {
+const buildUploadFlag = (index, file, result) => {
   $(`.dataFile>li:eq(${index})`).html(`<li>
       <span>${index + 1}</span>
       <span>${file.name}</span>
-      <span><span style="color:red">成功</span></span>
-      <span class="closeFile" data-index=${index} onClick="javascript:delUploadFileList(this);"><span>
+      <span><span style="color:red">${result}</span></span>
     </li>
   `);
 };

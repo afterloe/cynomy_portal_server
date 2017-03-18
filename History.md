@@ -355,3 +355,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > History.md  
 
+
+1.0.10 / 2017-3-18 15:28:9
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复workflowInfo 页面css失效问题
+
+
+### modify files
+> staticFiles/css/portal/workflowInfo.css  
+

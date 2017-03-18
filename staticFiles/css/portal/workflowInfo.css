@@ -14,9 +14,8 @@
   ul, ul li {list-style: none;}
   a {text-decoration: none;}
   input {border: 0;}
-
   .badge {color: #ffffff; background-color: #ddd; border-radius: 0.05rem;}
-  .badge:first-child {margin-left: 0.1rem};
+  .badge:first-child {margin-left: 0.1rem;}
 
   @media (min-width:769px) {
       .container {padding-right: 0; padding-left: 0; margin-right: auto; margin-left: auto;}
@@ -135,7 +134,7 @@
       .data li{margin-left: 0.2rem;height: 1rem;width:98%;}
       .data li div{height: 1rem;width: 100%;}
       .data li div i{display: inline-block;width: 0.16rem;height: 0.16rem;border-radius: 50%;background: #dbdbdb;float: left;margin-left: -0.08rem;/* margin-top: 0.08rem;/* margin-top: 0.08rem; */}
-      .data li div span {margin-top: -0.05rem; display: none; float: left; width: 1.85rem; text-align: center; height: 0.5rem;}
+      .data li div span {margin-top: -0.05rem; display: inline-block; float: left; width: 1.85rem; text-align: center; height: 0.5rem;}
 
       .data li div span.download{dispalay:none};
       .data li div span.name{ width:30%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}

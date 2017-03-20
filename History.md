@@ -390,3 +390,16 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/js/portal/src/rd/platform.js  
 > template/adHome.pug  
 
+
+1.0.10 / 2017-3-20 16:14:41
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 下载调试
+
+
+### modify files
+> staticFiles/js/portal/src/rd/platform.js  
+> staticFiles/js/portal/src/workflowInfo.js  
+> template/adHome.pug  
+

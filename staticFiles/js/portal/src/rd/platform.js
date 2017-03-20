@@ -25,8 +25,12 @@ $(function() {
     function readFile() {
         const file = this.files[0];
 
+        const name = file.name;
+
+        const index = window[UPLOADLIST].findIndex(_file => _file.name === name);
+
         window[UPLOADLIST].push({
-          name : file.name,
+          name,
           file,
         });
 

@@ -11,8 +11,9 @@
   */
 "use strict";
 
-const [workflowName,UpLoadList, UploadIndex] = [Symbol("workflowName"), Symbol("UpLoadList"), Symbol("UploadIndex")];
-window[UpLoadList] = [];
+const [workflowName,UPLOADLIST] = [Symbol("workflowName"), Symbol("UPLOADLIST")];
+
+window[UPLOADLIST] = [];
 
 $(function() {
     //弹窗出来后的一些操作
@@ -24,7 +25,7 @@ $(function() {
     function readFile() {
         const file = this.files[0];
 
-        window[UpLoadList].push({
+        window[UPLOADLIST].push({
           name : file.name,
           file,
         });
@@ -93,10 +94,6 @@ const uploadTask = (id, file, index, callback) => {
                   return ;
                 }
 
-                Object.assign(result, {
-                  [UploadIndex]: index,
-                });
-
                 callback(null, result);
 
               } catch(err) {
@@ -109,7 +106,7 @@ const uploadTask = (id, file, index, callback) => {
 };
 
 const uploadTasks = (nodeId, index) => {
-    const file = window[UpLoadList].shift();
+    const file = window[UPLOADLIST].shift();
     if (!file) {
       return ;
     }
@@ -143,7 +140,7 @@ const buildUploadFlag = (index, file, result) => {
   `);
 };
 
-const buildUploadList = () => window[UpLoadList].map((file, index) => `<li>
+const buildUploadList = () => window[UPLOADLIST].map((file, index) => `<li>
   <span>${index + 1}</span>
   <span>${file.name}</span>
   <span>${new Date().toLocaleDateString()}</span>
@@ -190,7 +187,7 @@ const openUploadView = btn => {
   }
   const [nodeId, nodeName] = [__self.attr("data-id"), __self.find("span").html()];
   $(".popup").find(".name").html(`${window[workflowName]} - ${nodeName} 更新`);
-  window[UpLoadList].length = 0;
+  window[UPLOADLIST].length = 0;
   $(".popup").css("display", "block");
 };
 

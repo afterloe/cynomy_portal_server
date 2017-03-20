@@ -233,8 +233,9 @@ script(src= static + "js/portal/rem.js?time=" + __time)
 script.
   "use strict";
 
-  const [workflowName,UpLoadList, UploadIndex] = [Symbol("workflowName"), Symbol("UpLoadList"), Symbol("UploadIndex")];
-  window[UpLoadList] = [];
+  const [workflowName,UPLOADLIST] = [Symbol("workflowName"), Symbol("UPLOADLIST")];
+
+  window[UPLOADLIST] = [];
 
   $(function() {
       //弹窗出来后的一些操作
@@ -246,7 +247,15 @@ script.
       function readFile() {
           const file = this.files[0];
 
-          window[UpLoadList].push({
+          const name = file.name;
+
+          const index = window[UPLOADLIST].findIndex(_file => _file.name === name);
+          if (-1 !== index) {
+            alert("有同名的文件！");
+            return ;
+          }
+
+          window[UPLOADLIST].push({
             name : file.name,
             file,
           });
@@ -315,10 +324,6 @@ script.
                     return ;
                   }
 
-                  Object.assign(result, {
-                    [UploadIndex]: index,
-                  });
-
                   callback(null, result);
 
                 } catch(err) {
@@ -331,7 +336,7 @@ script.
   };
 
   const uploadTasks = (nodeId, index) => {
-      const file = window[UpLoadList].shift();
+      const file = window[UPLOADLIST].shift();
       if (!file) {
         return ;
       }
@@ -365,7 +370,7 @@ script.
     `);
   };
 
-  const buildUploadList = () => window[UpLoadList].map((file, index) => `<li>
+  const buildUploadList = () => window[UPLOADLIST].map((file, index) => `<li>
     <span>${index + 1}</span>
     <span>${file.name}</span>
     <span>${new Date().toLocaleDateString()}</span>
@@ -412,7 +417,7 @@ script.
     }
     const [nodeId, nodeName] = [__self.attr("data-id"), __self.find("span").html()];
     $(".popup").find(".name").html(`${window[workflowName]} - ${nodeName} 更新`);
-    window[UpLoadList].length = 0;
+    window[UPLOADLIST].length = 0;
     $(".popup").css("display", "block");
   };
 

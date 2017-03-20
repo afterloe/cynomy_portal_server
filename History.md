@@ -378,3 +378,15 @@ commit by afterloe (lm6289511@gmail.com)
 > routers/ad-portal.js  
 > template/adHome.pug  
 
+
+1.0.10 / 2017-3-20 11:57:24
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 完善上传功能
+
+
+### modify files
+> staticFiles/js/portal/src/rd/platform.js  
+> template/adHome.pug  
+

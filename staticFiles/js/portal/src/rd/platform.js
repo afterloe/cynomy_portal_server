@@ -84,7 +84,7 @@ $(function() {
 const uploadTask = (id, file, index, callback) => {
   const [xhr, formData] = [new XMLHttpRequest(), new FormData()];
   formData.append("goods", file);
-  xhr.open("POST", `/fs/update/${id}`);
+  xhr.open("POST", `/fs/update/${id}`, true);
   xhr.setRequestHeader("Accept", "application/json");
   xhr.send(formData);
   xhr.onreadystatechange = () => {

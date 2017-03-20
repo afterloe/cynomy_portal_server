@@ -403,3 +403,17 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/js/portal/src/workflowInfo.js  
 > template/adHome.pug  
 
+
+1.0.10 / 2017-3-20 18:20:42
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 设置最大上传数量
+
+
+### modify files
+> servers/registry.js  
+> staticFiles/js/portal/src/rd/platform.js  
+> staticFiles/js/portal/src/workflowInfo.js  
+> template/adHome.pug  
+

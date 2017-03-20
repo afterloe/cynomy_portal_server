@@ -3,14 +3,505 @@
 include header
 
 link(href= static + "css/portal/mask.css?time=" + __time rel="stylesheet")
-link(href= static + "css/portal/ad/home.css?time=" + __time rel="stylesheet")
+//- link(href= static + "css/portal/ad/home.css?time=" + __time rel="stylesheet")
 
-div(class="container content")
-  div(class="container structure")
-    span(class="portalWhete")
-    div(style="text-align:center;margin-top:2rem;")
-      h1 🚧 施工中...
+- const _user = locals.user || {};
+
+style.
+  * { margin: 0; padding: 0; border: 0;}
+  ul{margin-bottom:0;}
+  ul, ul li {list-style: none;}
+  a {text-decoration: none;}
+  input {border: 0;}
+  .badge {color: #ffffff; background-color: #ddd; border-radius: 0.05rem;}
+  .badge:first-child {margin-left: 0.1rem;}
+
+  @media (min-width:769px) {
+      .container {padding-right: 0; padding-left: 0; margin-right: auto; margin-left: auto;}
+      .platform_content {background: #fff; min-width: 1170px; padding-bottom: 125px;}
+      .content_one {margin-left: 100px; overflow: hidden; min-width: 920px; background: #f2f2f2; float: left; border-radius: 5px; padding-bottom:10px;}
+      .tru {padding: 0px; width: 810px; margin: 0 auto;}
+      .truTitle {border-bottom: 1px solid #dbdbdb; height: 45px; line-height: 50px; background-position:left 15px; background-repeat: no-repeat; padding-left: 30px; color: #333333; font-weight: 600; font-size: 18px;}
+      .pc{background-image:url(http://almcloud.jwis.cn/images/portal/pc.png);}
+      .android{background-image:url(http://almcloud.jwis.cn/images/portal/android.png);}
+      .mobile{background-image:url(http://almcloud.jwis.cn/images/portal/android.png);}
+      .truContent {width: 810px; overflow: hidden;}
+      .truContent .truBox{padding-left: 10px; width: 800px; overflow: hidden;}
+      .truContent .truBox:first-child{margin-top: 10px;}
+      .truContent .truBox div, .truContent .truBox ul{float: left;}
+      .truContent .truBox div{width: 90px; font-size: 16px; font-weight: 600; color: #333;}
+      .truContent .truBox ul {width: 640px; overflow: hidden;}
+      .truContent .truBox ul li {overflow: hidden; float: left; height: 30px;}
+      .truContent .truBox ul li span{float: left; display: inline-block; padding: 0 13px; color: #333; text-decoration: none; line-height: 30px; cursor: pointer;}
+      .truContent .truBox ul li span:hover {color: #3d9bff;}
+      .truContent .truBox ul li span.activeLink {color: #00a1df;}
+      .proposal {background: url(http://almcloud.jwis.cn/images/portal/1-default.png) no-repeat center; width: 140px; height: 40px; float: right; margin-top: 15px; cursor: pointer; margin-right: 5px;}
+      .proposal:hover {background: url(http://almcloud.jwis.cn/images/portal/2-selected.png) no-repeat center;}
+      .wrapper {padding-top: 50px; width:100%; overflow: hidden;}
+      .tab_process{margin-left:100px;margin-right:100px;width:920px;overflow: hidden;}
+      .clear{width:100%;height:0;float:right;}
+      .tab_process dl{height:120px;width:180px;float:left;}
+      .tab_process dl:last-child dd{color:transparent;}
+      .tab_process dl dt,.tab_process dl dd{float:left;}
+      .tab_process dl dt{width:100px;text-align: center;}
+      .tab_process dl dd{width:80px;height:120px;color: #94defb;font-weight: 600;font-size: 20px;line-height: 75px;overflow: hidden;}
+      .tab_process dl dt a{display: inline-block;width:100%;height:80px;padding-top:10px;}
+      .tab_process dl dt a:hover{transfrom:scale(1.1) ;-webkit-transform:scale(1.1) ;-moz-transform:scale(1.1);-o-transform:scale(1.1);}
+      .tab_process dl dt span{display: inline-block;height:30px;font-size: 16px;color: #323232;cursor:pointer;line-height: 28px;width:100px;font-weight:500;}
+      .tab_process dl dt:hover span{color:#00a1df}
+
+      .tabIcon{background-position:center;background-repeat: no-repeat;}
+      .tabIcon_plan{background-image:url(http://almcloud.jwis.cn/images/portal/plan.png);}
+      .tabIcon_design{background-image:url(http://almcloud.jwis.cn/images/portal/design.png);}
+      .tabIcon_development{background-image:url(http://almcloud.jwis.cn/images/portal/development.png);}
+      .tabIcon_test{background-image:url(http://almcloud.jwis.cn/images/portal/test.png);}
+      .tabIcon_release{background-image:url(http://almcloud.jwis.cn/images/portal/release.png);}
+
+      .tab_process dl.processActive dt span{color:#00a1df}
+
+      .tab_content{margin-left:100px;margin-right:100px;width:920px;overflow: hidden;position: relative;}
+      .dataBox{background:#f2f2f2;border-radius:5px;}
+      .dataBox .header{height: 50px;line-height: 50px;font-size: 20px;border-bottom: 1px solid #dbdbdb;padding-left: 35px;}
+      .upload{background:url(http://almcloud.jwis.cn/images/portal/upload.png) no-repeat center 13px; display: inline-block;width:100px;height:50px;cursor:pointer;float:right;}
+      .upload:hover{background:url(http://almcloud.jwis.cn/images/portal/upload1.png) no-repeat center 13px;}
+      .detail {background: url(http://almcloud.jwis.cn/images/portal/detail.png) no-repeat center 13px; display: inline-block; width: 30px; height: 50px; cursor: pointer; float: right;}
+      .detail:hover {background: url(http://almcloud.jwis.cn/images/portal/detail_click.png) no-repeat center 13px;}
+      .data {margin-top:15px;margin-left:40px;min-width:810px;}
+      .data li{height:66px;}
+      .data li div{height:66px;width:100%;}
+      .data li div i{display: inline-block;  width: 16px; height: 16px; border-radius: 50%;background:#dbdbdb;float:left;margin-left:-8px;}
+      .data li div span{display: inline-block;float:left;width:140px;text-align: center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+      .data li div span.name{width:200px;margin-left:10px;;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+      .data li div span.download{cursor: pointer;background:url(http://almcloud.jwis.cn/images/portal/down.png) no-repeat center;height:24px;margin-top:-4px;cursor: pointer;margin-left:11px;}
+      .data li div span.local {width: 650px;}
+      .data li div span.dataClose{background:url(http://almcloud.jwis.cn/images/portal/close-bounced-default.png) no-repeat center;width:80px;height:20px;cursor: pointer;}
+      .data li div span.dataClose:hover{background:url(http://almcloud.jwis.cn/images/portal/close-bounced-selected.png) no-repeat  center;}
+      .data li:last-child{border-left:0;}
+      .data li:first-child div i{background:#3d9bff;}
+      .change { display: inline-block; width: 100px; height: 50px; cursor: pointer; float: right;}
+      .svn {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus2.png) no-repeat center 13px;}
+      .cloud {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus4.png) no-repeat center 13px;}
+      .files .topic {margin-left: 40%}
+  }
+
+  @media (max-width:768px) {
+      html body {width: 100%; font-size: 0.26rem; background: #fff; box-sizing: border-box; overflow-x: hidden; }
+      .popup {display: none;}
+      .platform_content {width: 100%; padding-bottom: 200px; }
+      .container {padding-right: 15px; padding-left: 15px; margin-right: 0; margin-left: 0; }
+      .content_one {width: 100%; margin-left: 0; margin-right: 0; margin: 0 auto; overflow: hidden; background: #f2f2f2; border-radius: 5px; padding-bottom:0.15rem; }
+      .tru {padding: 0px; width: 100%; margin: 0 auto; }
+      .truTitle {border-bottom: 1px solid #dbdbdb; height: 0.7rem; line-height: 0.7rem; background-position:left 0.18rem; background-repeat: no-repeat; padding-left: 0.5rem; color: #333333; font-weight: 600; font-size: 18px; margin-left: 0.1rem;}
+      .pc{background-image:url(http://almcloud.jwis.cn/images/portal/pc.png);}
+      .android{background-image:url(http://almcloud.jwis.cn/images/portal/android.png);}
+
+      .truContent {width: 100%; overflow: hidden; }
+      .truContent .truBox {padding-left: 0.1rem; width: 90%px; overflow: hidden; }
+      .truContent .truBox:first-child {margin-top: 0.1rem;}
+      .truContent .truBox div, .truContent .truBox ul {float: left;}
+      .truContent .truBox div {width: 1.5rem; font-size: 16px; font-weight: 600; color: #333;}
+      .truContent .truBox ul {width: 4.2rem; overflow: hidden;}
+      .truContent .truBox ul li {overflow: hidden; float: left; height: 0.5rem;}
+      .truContent .truBox ul li span {float: left; display: inline-block; padding: 0; color: #333; text-decoration: none; line-height: 0.4rem; cursor: pointer; padding: 0 0.1rem; }
+      .truContent .truBox ul li span:hover {color: #3d9bff;}
+      .truContent .truBox ul li span.activeLink {color: #00a1df;}
+      .wrapper {width: 100%; margin-left: 0; margin-right: 0; margin: 0 auto; overflow: hidden; padding-top: 0.5rem; }
+      .proposal{display: none;}
+      .tab_process{width: 100%;margin-left: 0;margin-right: 0;margin: 0 auto;overflow: hidden;padding-top:0.5rem;}
+      .clear{width:100%;height:0;float:right;}
+      .tab_process dl{height:1.2rem;width:20%;float:left;}
+      .tab_process dl:last-child dd{color:transparent;}
+      .tab_process dl dt,.tab_process dl dd{float:left;}
+      .tab_process dl dt{width:100%;text-align: center;}
+      .tab_process dl dd{width:0;height:100%;color: transparent;font-weight: 600;font-size: 0.2rem;line-height: 0.75rem;}
+      .tab_process dl dt a{display: inline-block;width:100%;height:0.8rem;padding-top:0.1rem;}
+      .tab_process dl dt a:hover{transfrom:scale(1.1) ;-webkit-transform:scale(1.1) ;-moz-transform:scale(1.1);-o-transform:scale(1.1);}
+      .tab_process dl dt span{display: inline-block;height:0.3rem;font-size: 0.24rem;color: #323232;cursor:pointer;line-height: 0.28rem;width:100%;font-weight:500;}
+      .tab_process dl dt:hover span{color:#00a1df}
+
+      .tabIcon{background-position:center;background-repeat: no-repeat;background-size:contain;}
+      .tabIcon_plan{background-image:url(http://almcloud.jwis.cn/images/portal/plan.png);}
+      .tabIcon_design{background-image:url(http://almcloud.jwis.cn/images/portal/design.png);}
+      .tabIcon_development{background-image:url(http://almcloud.jwis.cn/images/portal/development.png);}
+      .tabIcon_test{background-image:url(http://almcloud.jwis.cn/images/portal/test.png);}
+      .tabIcon_release{background-image:url(http://almcloud.jwis.cn/images/portal/release.png);}
+      .tab_process dl.processActive dt span{color:#00a1df;}
+      .tab_content{margin-left:0;margin-right:0;width:100%;overflow: hidden;position: relative;}
+      .dataBox{background:#f2f2f2;border-radius:5px;}
+      .dataBox .header{height: 0.5rem;line-height: 0.5rem;font-size: 0.26rem;border-bottom: 1px solid #dbdbdb;padding-left: 0.35rem;}
+      .data{margin-top: 0.15rem;/* margin-left: 0.4rem; */width: 100%;}
+      .data li{margin-left: 0.2rem;height: 1rem;width:98%;}
+      .data li div{height: 1rem;width: 100%;}
+      .data li div i{display: inline-block;width: 0.16rem;height: 0.16rem;border-radius: 50%;background: #dbdbdb;float: left;margin-left: -0.08rem;/* margin-top: 0.08rem;/* margin-top: 0.08rem; */}
+      .data li div span {margin-top: -0.05rem; display: inline-block; float: left; width: 1.85rem; text-align: center; height: 0.5rem;}
+
+      .data li div span.download{dispalay:none};
+      .data li div span.name{ width:30%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+      .data li div span.time{width: 2rem;margin-left: 0;}
+      .data li div span.dataClose{width: 0;0}
+      .data li:last-child{border-left:0;}
+      .data li:first-child div i{background:#3d9bff;}
+      .detail {background: url(http://almcloud.jwis.cn/images/portal/detail.png) no-repeat center 0.05rem; cursor: pointer; float: right; height: 0.5rem; line-height: 0.5rem; width: 0.4rem; background-size: contain; margin-right: 0.4rem}
+      .detail:hover {background: url(http://almcloud.jwis.cn/images/portal/detail_click.png) no-repeat center 0.05rem;}
+      .change {cursor: pointer; float: right; height: 0.5rem; line-height: 0.5rem; width: 0.4rem; background-size: contain; margin-right: 0.4rem}
+      .svn {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus2.png) no-repeat center 0.05rem;}
+      .cloud {background: url(http://almcloud.jwis.cn/images/portal/productTestStatus4.png) no-repeat center 0.05rem;}
+      .files .topic {margin-left: 30%}
+
+      .data li div span.local{ width:50%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+      .files li div span.name{ width:60%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+      .files li div span.author{ width:30%; margin-left:10px; display: inline-block; overflow:hidden; white-space:nowrap; text-overflow:ellipsis;}
+  }
+
+div(class="popup")
+  div(class="mask")
+    div(class="box")
+      header
+        span(class="name")
+        span(class="btn_close")
+      form(action="" class="form")
+        div(class="file")
+          span 新增产出文件列表
+          span
+            input(type="file" placeholder="" id="source")
+            input(type="button" value="上传文件" id="uploadFile")
+        div(class="description")
+          ul(class="dataFile")
+        div(class="last")
+          span 上传人：
+          span
+            input(type="text" placeholder= _user.name || "用户名字" disabled)
+          span
+            div(class="submit_re" style="cursor:pointer;" onClick="javascript:beginUpload();") 开始上传
+
+- const _products = locals.products || {};
+- const _product = locals.product || {};
+- const _allowedUpload = locals.allowedUpload || false;
+- const _product_id = _product._id? _product._id.toString(): "";
+- const _activeNode = _product.status || {};
+
+div(class="container platform_content")
+  div(class="content_one")
+    div(class="tru")
+      div(class="truTitle pc") 项目列表
+      div(class="truContent")
+        div(class="truBox")
+          div
+          ul
+            each _p in _products
+              - let __flag = _product._id.toString() == _p._id;
+              li(data-id=_p._id onClick="javascript:selectWorkflow(this);")
+                span(class= __flag? "aLink Active" : "aLink" style=__flag? "color:rgb(61, 155, 255)":"")= _p.name
+
+  div(class="proposal")
+
+  div(class="wrapper")
+    - const _process = _product.nodeList || [];
+    if _activeNode
+      div(class="tab_process")
+        each _p,index in _process
+          dl(class= _activeNode.index === _p.index? "processActive": "")
+            dt(data-id=_p._id onClick="javascript:showFiles(this);")
+              a(href="javascript:void(0);" class="tabIcon tabIcon_plan")
+              span=_p.name
+            dd &bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;
+            div(class="clear")
+
+      div(class="tab_content")
+        div(class="dataBox")
+          div(class="header")
+            span(class="data_title")=`${_activeNode.name} 资料`
+            span(id="uploadButton" class=_allowedUpload? "upload":"" onClick="javascript:openUploadView(this);")
+            span(class="detail" onClick="javascript:forwardDetail(this);" data-id=_product_id)
+          - const _files = _activeNode.produceList || [];
+          ul(class="data")
+            each _file in _files
+              li
+                div
+                  i
+                  span(class="name" data-id=_file._id onClick="javascript:downLoadFile(this);")
+                    a(href="javascript:void(0);")=_file.name
+                  span(class="time")=_file.uploadTime? new Date(_file.uploadTime).toLocaleString() : new Date().toLocaleString()
+                  span=_file.downloadCount || 0
+                  span(class="author")=_file.author?_file.author.name : "admin"
+                  span(data-id=_file._id class="download" onClick="javascript:downLoadFile(this);")
+
 include footer
 
 script(src= static + "js/portal/rem.js?time=" + __time)
 //- script(src= static + "js/portal/bin/ad/home.js?time=" + __time)
+script.
+  "use strict";
+
+  const [workflowName,UpLoadList, UploadIndex] = [Symbol("workflowName"), Symbol("UpLoadList"), Symbol("UploadIndex")];
+  window[UpLoadList] = [];
+
+  $(function() {
+      //弹窗出来后的一些操作
+      const input = document.getElementById("source");
+
+      //文件域选择文件时, 执行readFile函数,把上传的文档信息放置dataFile中
+      input.addEventListener("change", readFile, true);
+
+      function readFile() {
+          const file = this.files[0];
+
+          window[UpLoadList].push({
+            name : file.name,
+            file,
+          });
+
+          $(".dataFile").html(buildUploadList());
+      }
+
+      // 点击反馈跳转到bbs
+      $(".proposal").bind("click", function() {
+          window.open("http://bbs.jwis.cn/forum.php?mod=forumdisplay&fid=37");
+      });
+
+      //关闭遮罩层
+      $(".btn_close").on("click", function() {
+          $(".popup").css("display", "none");
+      });
+
+      //点击关闭按钮，取消该项文档的添加
+      $(".dataClose").on("click", function() {
+          console.log($(this).parent("div").parent("li"))
+          $(this).parent("div").parent("li").remove();
+      });
+
+      //进入该页面，content_one从上往下运动
+      const width = $(window).width();
+      if (width > 768) {
+          var contentOne = $(".content_one").height();
+          var height = -contentOne;
+          $(".content_one").css("margin-top", height);
+          $(".content_one").animate({
+              "margin-top": 0
+          }, 1000, function() {
+              $(".content_one").css("margin-top", 0);
+          });
+      } else {
+          $(".content_one").css("margin-top", 0);
+      }
+
+      //点击不同端的不同产品，显示wrapper 默认显示第一个
+      $(".aLink").on("click", function() {
+          //动态wrapper
+
+          //tab切换
+          $("body .tab_process").find("dl").on("click", function() {
+              $(this).addClass("processActive").siblings("dl").removeClass("processActive");
+              //每次点击更换 dataBox中的内容
+          });
+      });
+
+  });
+
+  const uploadTask = (id, file, index, callback) => {
+    const [xhr, formData] = [new XMLHttpRequest(), new FormData()];
+    formData.append("goods", file);
+    xhr.open("POST", `/fs/update/${id}`);
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.send(formData);
+    xhr.onreadystatechange = () => {
+        if (4 === xhr.readyState) {
+            if (200 === xhr.status) {
+                try {
+                  const result = JSON.parse(xhr.responseText);
+
+                  if (200 !== result.code) {
+                    callback(new Error(result.error));
+                    return ;
+                  }
+
+                  Object.assign(result, {
+                    [UploadIndex]: index,
+                  });
+
+                  callback(null, result);
+
+                } catch(err) {
+                  callback(err);
+                }
+            }
+            callback(new Error("callFailed!"));
+        }
+    };
+  };
+
+  const uploadTasks = (nodeId, index) => {
+      const file = window[UpLoadList].shift();
+      if (!file) {
+        return ;
+      }
+      uploadTask(nodeId, file.file, index, (err, data) => {
+        if (err) {
+          buildUploadFlag(index, file, "失败");
+        } else {
+          buildUploadFlag(index, file, "成功");
+        }
+        index++;
+        uploadTasks(nodeId, index);
+      });
+  };
+
+  const beginUpload = () => {
+      const nodeId = $(".processActive").find("dt").attr("data-id");
+      uploadTasks(nodeId, 0);
+  };
+
+  const delUploadFileList = btn => {
+      window[UpLoadList].splice($(btn).attr("data-index"), 1);
+      $(".dataFile").html(buildUploadList());
+  };
+
+  const buildUploadFlag = (index, file, result) => {
+    $(`.dataFile>li:eq(${index})`).html(`<li>
+        <span>${index + 1}</span>
+        <span>${file.name}</span>
+        <span><span style="color:red">${result}</span></span>
+      </li>
+    `);
+  };
+
+  const buildUploadList = () => window[UpLoadList].map((file, index) => `<li>
+    <span>${index + 1}</span>
+    <span>${file.name}</span>
+    <span>${new Date().toLocaleDateString()}</span>
+    <span class="closeFile" data-index=${index} onClick="javascript:delUploadFileList(this);"><span>
+  </li>`);
+
+  const buildLinkedURL = URL => {
+    $(".detail").attr("data-id", URL);
+  }
+
+  const forwardDetail = btn => {
+    const id = $(btn).attr("data-id");
+    window.location.href = `/portal/workflow/${id}`;
+  };
+
+  const downLoadFile = (btn) => {
+    window.open("/fs/download/" + $(btn).attr("data-id"));
+  };
+
+  const cleanSelect = () => {
+    $(".aLink").each(function() {
+      $(this).css({color: "#333"});
+    });
+  };
+
+  const cleanSelectd = (nodeName) => {
+    $("dl").attr("class", "");
+    $(".data_title").html(`${nodeName} 资料`);
+  };
+
+  const buildUploadItem = (allowedUpload = false) => {
+    const uploadButton = $("#uploadButton");
+    if (allowedUpload) {
+      uploadButton.hasClass("upload") ? "": uploadButton.addClass("upload");
+    } else {
+      uploadButton.hasClass("upload") ? uploadButton.removeClass("upload"): "";
+    }
+  };
+
+  const openUploadView = btn => {
+    const __self = $(".processActive").find("dt");
+    if (undefined === window[workflowName]) {
+      window[workflowName] = $(".aLink.Active").html();
+    }
+    const [nodeId, nodeName] = [__self.attr("data-id"), __self.find("span").html()];
+    $(".popup").find(".name").html(`${window[workflowName]} - ${nodeName} 更新`);
+    window[UpLoadList].length = 0;
+    $(".popup").css("display", "block");
+  };
+
+  const buildProcess = (nodeList, actionNum) => {
+    $(".data_title").html(`${nodeList[actionNum].name} 资料`);
+    const html = nodeList.map((node, index) => `<dl class=${actionNum === index? "processActive":""}>
+      <dt data-id=${node._id} onClick="javascript:showFiles(this);">
+        <a class="tabIcon tabIcon_plan" href="javascript:void(0);"></a>
+        <span>${node.name}</span>
+      </dt>
+      <dd>&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</dd>
+      <div class="clear"></div>
+    </dl>`);
+    $(".tab_process:first").html(html.join(""));
+  };
+
+  const timeToDate = time => {
+    if (!time) {
+      return new Date().toLocaleString();
+    }
+    const data = new Date(time);
+    return data.toLocaleString();
+  };
+
+  const buildFiles = (files) => {
+    const html = files.map((file) => `<li>
+      <div>
+        <i></i>
+        <span class="name" data-id=${file._id} onClick="javascript:downLoadFile(this);">
+          <a href="javascript:void(0)">${file.name}</a>
+        </span>
+        <span class="time">${timeToDate(file.uploadTime)}</span>
+        <span>${file.downloadCount || 0}</span>
+        <span class="author">${file.author ? file.author.name : "admin"}</span>
+        <span data-id=${file._id} class="download" onClick="javascript:downLoadFile(this);"></span>
+      </div>
+    </li>`);
+    $(".data:last").html(html.join(""));
+  };
+
+  const showFiles = btn => {
+    const id = $(btn).attr("data-id");
+    const nodeName = $(btn).find("span").html();
+    $.ajax({
+      type: "GET",
+      url: `/workflow/${id}/files`,
+      dataType: "json",
+      beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
+      success: result => {
+        if (401.5 === result.code) {
+          alert("登录许可已失效，请重新获取登录许可");
+          location.href = "/portal/login";
+          return ;
+        }
+        if (200 !== result.code) {
+          alert("服务器繁忙");
+        } else {
+          cleanSelectd(nodeName);
+          $(btn).parent().attr("class", "processActive");
+          buildFiles(result.result.produceList);
+        }
+      }
+    });
+  };
+
+  const selectWorkflow = btn => {
+    const _id = $(btn).attr("data-id");
+    window[workflowName] = $(btn).find("span").html();
+    $.ajax({
+      type: "GET",
+      url: `/workflow/${_id}/simple`,
+      dataType: "json",
+      beforeSend: xhr => xhr.setRequestHeader("accept","application/json"),
+      success: result => {
+        if (401.5 === result.code) {
+          alert("登录许可已失效，请重新获取登录许可");
+          location.href = "/portal/login";
+          return ;
+        }
+        if (200 !== result.code) {
+          alert("服务器繁忙");
+        } else {
+          cleanSelect();
+          $(btn).find("span").css({color: "#3d9bff"});
+          buildProcess(result.result.nodeList, result.result.status.index);
+          buildLinkedURL(result.result._id);
+          buildFiles(result.result.status.produceList);
+          buildUploadItem(result.result.allowedUpload);
+        }
+      }
+    });
+  };

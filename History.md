@@ -366,3 +366,15 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > staticFiles/css/portal/workflowInfo.css  
 
+
+1.0.10 / 2017-3-20 11:48:10
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 自主交付部页面开放
+
+
+### modify files
+> routers/ad-portal.js  
+> template/adHome.pug  
+

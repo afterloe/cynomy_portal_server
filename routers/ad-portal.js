@@ -23,38 +23,26 @@ const [
   require(resolve(services, "tagsService"))
 ];
 
-const findWorkflowByTags = function* (equipment, tags, ...hooks) {
-  const _ = {};
-  for(let tag of tags) {
-    const __ = [equipment, tag].concat(hooks);
-    const result = yield searchProduct.apply(null, __);
-    Object.assign(_, {
-      [tag]: result
-    });
-  }
-  return _;
-};
-
-const findActiveWorkflowExample = function* (data) {
-  for (let equipment in data) {
-    for(let list in data[equipment]) {
-      if (data[equipment][list].length > 0) {
-        return yield workflowInfo(data[equipment][list][0]._id);
-      }
-    }
-  }
-};
-
 function* home(next) {
   if (this.error) {
     return yield next;
   }
   try {
+    const [user, products] = yield [this.authorized, searchProduct("自主交付部")];
+    const product = products.length === 0 ? {} : yield workflowInfo(products[0]._id);
+    const {members} = product;
+
+    const index = members.findIndex(member => member.mail === user.mail);
+
     this.pageName = "adHome";
     this.data = {
       title: "A&D Portal",
       index: 3,
+      user,
+      products,
+      product,
     };
+
   } catch (err) {
     this.error = err;
   }

@@ -417,3 +417,19 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/js/portal/src/workflowInfo.js  
 > template/adHome.pug  
 
+
+1.0.10 / 2017-3-22 15:27:18
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: css, js 精简
+
+
+### new files
+> staticFiles/js/portal/src/ad/  
+
+### modify files
+> bin/wsCli  
+> staticFiles/css/portal/ad/home.css  
+> template/adHome.pug  
+

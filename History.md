@@ -433,3 +433,14 @@ commit by afterloe (lm6289511@gmail.com)
 > staticFiles/css/portal/ad/home.css  
 > template/adHome.pug  
 
+
+1.0.10 / 2017-3-22 16:6:29
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 编写安装说明文档
+
+
+### modify files
+> INSTALL.md  
+

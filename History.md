@@ -223,6 +223,59 @@ commit by afterloe (lm6289511@gmail.com)
 
 如果您在portal的使用上有问题或想吐槽的可以邮件联系我(afterloeliu@jwis.cn)或联系涂露(lucy.tu@jwis.cn)。在或者在portal的建议反馈内进行留言。我们会在第一时间内回复，对于典型的问题将在下次的更新公告中的 策划面对面 板块上墙。  
 
+<<<<<<< HEAD
+1.0.9 / 2017-3-10 18:19:25
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 版本升级
+
+
+### new files
+> staticFiles/css/portal/ad/  
+> staticFiles/css/portal/discussesInfo.css  
+> staticFiles/css/portal/discussesList.css  
+> staticFiles/css/portal/home.css  
+> staticFiles/css/portal/noticeInfo.css  
+> staticFiles/css/portal/noticeList.css  
+> staticFiles/css/portal/ps/  
+> staticFiles/js/portal/src/discussesList.js  
+> staticFiles/js/portal/src/home.js  
+> staticFiles/js/portal/src/ps/  
+
+### modify files
+> .cynomy  
+> config/index.js  
+> package.json  
+> staticFiles/js/portal/src/login.js  
+> template/adHome.pug  
+> template/discussesInfo.pug  
+> template/discussesList.pug  
+> template/header.pug  
+> template/home.pug  
+> template/login.pug  
+> template/noticeInfo.pug  
+> template/noticeList.pug  
+> template/psHome.pug  
+
+### delete files
+> template/home-noLogin.pug  
+
+1.0.9 / 2017-3-11 14:21:34
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * release: release info
+
+
+### modify files
+> interceptors/session.js  
+> routers/announcement.js  
+> routers/index.js  
+> routers/portal.js  
+> services/discussService.js  
+> services/noticeService.js  
+=======
 1.0.9 / 2017-3-11 15:42:3
 ==================
 commit by afterloe (lm6289511@gmail.com)
@@ -345,7 +398,7 @@ commit by afterloe (lm6289511@gmail.com)
 2）售前技术部首页切换为rd自己的页面  
 3）更多内容请期待下次(v1.0.11)更新  
 
-1.0.10 / 2017-3-17 17:34:56
+1.0.11 / 2017-3-17 17:34:56
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
@@ -355,103 +408,28 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > History.md  
 
+2017-3-24 v1.0.11 更新公告  
 
-1.0.10 / 2017-3-18 15:28:9
+更新时间  
+————————————————   
+2017-3-24 16:00 ～ 2017-3-24 17：00，预计维护时间为1小时，维护期间访问可能出现404或500异常，对您的使用产生不变深感抱歉。  
+
+更新内容  
+————————————————  
+1）新功能 开放自主交付部首页  
+2）修复 部分页面样式显示错误的问题  
+3）修复 后端相关问题  
+
+1.0.11 / 2017-3-23 14:35:50
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * master: 修复workflowInfo 页面css失效问题
+  * master: v1.0.11迭代开始
 
 
 ### modify files
-> staticFiles/css/portal/workflowInfo.css  
-
-
-1.0.10 / 2017-3-20 11:48:10
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 自主交付部页面开放
-
-
-### modify files
-> routers/ad-portal.js  
-> template/adHome.pug  
-
-
-1.0.10 / 2017-3-20 11:57:24
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 完善上传功能
-
-
-### modify files
-> staticFiles/js/portal/src/rd/platform.js  
-> template/adHome.pug  
-
-
-1.0.10 / 2017-3-20 16:14:41
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 下载调试
-
-
-### modify files
-> staticFiles/js/portal/src/rd/platform.js  
-> staticFiles/js/portal/src/workflowInfo.js  
-> template/adHome.pug  
-
-
-1.0.10 / 2017-3-20 18:20:42
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 设置最大上传数量
-
-
-### modify files
-> servers/registry.js  
-> staticFiles/js/portal/src/rd/platform.js  
-> staticFiles/js/portal/src/workflowInfo.js  
-> template/adHome.pug  
-
-
-1.0.10 / 2017-3-22 15:27:18
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: css, js 精简
-
-
-### new files
-> staticFiles/js/portal/src/ad/  
-
-### modify files
-> bin/wsCli  
-> staticFiles/css/portal/ad/home.css  
-> template/adHome.pug  
-
-
-1.0.10 / 2017-3-22 16:6:29
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 编写安装说明文档
-
-
-### modify files
-> INSTALL.md  
-
-
-1.0.10 / 2017-3-23 14:16:50
-==================
-commit by afterloe (lm6289511@gmail.com)
-
-  * master: 修复make check提示bug
-
-
-### modify files
-> routers/ad-portal.js  
+> .cynomy  
+> History.md  
+> config/index.js  
+> package.json  
 

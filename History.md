@@ -444,3 +444,14 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > INSTALL.md  
 
+
+1.0.10 / 2017-3-23 14:16:50
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 修复make check提示bug
+
+
+### modify files
+> routers/ad-portal.js  
+

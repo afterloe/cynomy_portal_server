@@ -41,8 +41,12 @@ window[UPLOADLIST] = [];
     function readFile() {
         const file = this.files[0];
 
+        const name = file.name;
+
+        const index = window[UPLOADLIST].findIndex(_file => _file.name === name);
+
         window[UPLOADLIST].push({
-          name : file.name,
+          name,
           file,
         });
 
@@ -83,7 +87,7 @@ window[UPLOADLIST] = [];
 const uploadTask = (id, file, index, callback) => {
   const [xhr, formData] = [new XMLHttpRequest(), new FormData()];
   formData.append("goods", file);
-  xhr.open("POST", `/fs/update/${id}`);
+  xhr.open("POST", `/fs/update/${id}`, true);
   xhr.setRequestHeader("Accept", "application/json");
   xhr.send(formData);
   xhr.onreadystatechange = () => {

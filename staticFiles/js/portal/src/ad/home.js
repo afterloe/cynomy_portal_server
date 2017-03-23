@@ -1,5 +1,5 @@
 /**
-  * afterloe - cynomy_portal_server/staticFiles/js/portal/src/platform.js
+  * afterloe - cynomy_portal_server/staticFiles/js/portal/src/ad/home.js
   *
   * Copyright(c) afterloe.
   * MIT Licensed
@@ -7,7 +7,7 @@
   * Authors:
   *   afterloe <lm6289511@gmail.com> (https://github.com/afterloe)
   * Date:
-  *   2017-3-10 18:02:35
+  *   2017-3-22 15:23:20
   */
 "use strict";
 
@@ -28,6 +28,10 @@ $(function() {
         const name = file.name;
 
         const index = window[UPLOADLIST].findIndex(_file => _file.name === name);
+        if (-1 !== index) {
+          alert("有同名的文件！");
+          return ;
+        }
 
         window[UPLOADLIST].push({
           name,

@@ -398,7 +398,7 @@ commit by afterloe (lm6289511@gmail.com)
 2）售前技术部首页切换为rd自己的页面  
 3）更多内容请期待下次(v1.0.11)更新  
 
-1.0.10 / 2017-3-17 17:34:56
+1.0.11 / 2017-3-17 17:34:56
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
@@ -408,54 +408,33 @@ commit by afterloe (lm6289511@gmail.com)
 ### modify files
 > History.md  
 
-1.0.10 / 2017-3-17 17:38:4
+2017-3-24 v1.0.11 更新公告  
+
+更新时间  
+————————————————   
+2017-3-24 16:00 ～ 2017-3-24 17：00，预计维护时间为1小时，维护期间访问可能出现404或500异常，对您的使用产生不变深感抱歉。  
+
+更新内容  
+————————————————  
+1）新功能 开放自主交付部首页  
+2）修复 部分页面样式显示错误的问题  
+3）修复 后端相关问题
+
+1.0.10 / 2017-3-23 14:32:53
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * release: release v1.0.10
+  * release: v1.0.11 发布
 
 
 ### modify files
-> .cynomy  
-> Makefile  
-> config/index.js  
-> index.js  
-> interceptors/session.js  
-> interceptors/smartNotFound.js  
-> interceptors/template.js  
-> package.json  
+> INSTALL.md  
+> bin/wsCli  
 > routers/ad-portal.js  
-> routers/index.js  
-> routers/portal.js  
-> routers/ps-portal.js  
-> routers/workflow.js  
-> servers/lib/servicesCenter.js  
-> services/workflowService.js  
-> staticFiles/css/portal/discussesInfo.css  
-> staticFiles/css/portal/header.css  
-> staticFiles/css/portal/home.css  
-> staticFiles/css/portal/noticeInfo.css  
-> staticFiles/css/portal/rd/directory.css  
-> staticFiles/css/portal/rd/platform.css  
-> staticFiles/css/portal/rd/product.css  
+> servers/registry.js  
+> staticFiles/css/portal/ad/home.css  
 > staticFiles/css/portal/workflowInfo.css  
-> staticFiles/js/portal/src/header.js  
-> staticFiles/js/portal/src/home.js  
 > staticFiles/js/portal/src/rd/platform.js  
 > staticFiles/js/portal/src/workflowInfo.js  
-> template/404NotFound.pug  
-> template/directory.pug  
-> template/footer.pug  
-> template/header.pug  
-> template/home.pug  
-> template/journalError.pug  
-> template/login.pug  
-> template/platform.pug  
-> template/systemError.pug  
-> template/workflowInfo.pug  
-> tools/buildPage.js  
-> tools/webTools/dataManager.html  
-> tools/webTools/lib/src/initWebPage.js  
-> tools/webTools/lib/src/registry.js  
-> tools/webTools/lib/src/util.js  
+> template/adHome.pug  
 

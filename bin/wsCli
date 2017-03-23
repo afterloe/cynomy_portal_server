@@ -25,7 +25,7 @@ module[WEBSOCKET].on("connectFailed", error => {
   console.log("Connection Error: %s", error.toString());
   process.send({
     act: "suicide", // 线程退出
-    msg: error.toString()
+    msg: error.toString(),
   });
   process.exit(106);
 });

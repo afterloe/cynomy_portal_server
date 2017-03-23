@@ -37,7 +37,7 @@ const [
 
 const app = koa();
 
-app.use(bodyParser());
+app.use(bodyParser({formLimit: "300mb"}));
 app.use(session);
 app.use(template);
 

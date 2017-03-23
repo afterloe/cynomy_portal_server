@@ -398,12 +398,12 @@ commit by afterloe (lm6289511@gmail.com)
 2）售前技术部首页切换为rd自己的页面  
 3）更多内容请期待下次(v1.0.11)更新  
 
+
 1.0.11 / 2017-3-17 17:34:56
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
   * master: v1.0.10 changLog
-
 
 ### modify files
 > History.md  
@@ -418,23 +418,17 @@ commit by afterloe (lm6289511@gmail.com)
 ————————————————  
 1）新功能 开放自主交付部首页  
 2）修复 部分页面样式显示错误的问题  
-3）修复 后端相关问题
+3）修复 后端相关问题  
 
-1.0.10 / 2017-3-23 14:32:53
+1.0.11 / 2017-3-23 14:38:23
 ==================
 commit by afterloe (lm6289511@gmail.com)
 
-  * release: v1.0.11 发布
+  * release: v1.0.11 Bate 
 
 
 ### modify files
-> INSTALL.md  
-> bin/wsCli  
-> routers/ad-portal.js  
-> servers/registry.js  
-> staticFiles/css/portal/ad/home.css  
-> staticFiles/css/portal/workflowInfo.css  
-> staticFiles/js/portal/src/rd/platform.js  
-> staticFiles/js/portal/src/workflowInfo.js  
-> template/adHome.pug  
+> .cynomy  
+> config/index.js  
+> package.json  
 

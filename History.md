@@ -432,3 +432,15 @@ commit by afterloe (lm6289511@gmail.com)
 > config/index.js  
 > package.json  
 
+
+1.0.11 / 2017-3-23 18:14:42
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * release: 自主交付部代码
+
+
+### modify files
+> routers/ad-portal.js  
+> template/adHome.pug  
+

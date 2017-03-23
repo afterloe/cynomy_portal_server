@@ -26,7 +26,7 @@ function* home(next) {
   try {
     const [user, products] = yield [this.authorized, searchProduct("自主交付部")];
     const product = products.length === 0 ? {} : yield workflowInfo(products[0]._id);
-    const {members} = product;
+    const {members = []} = product;
 
     const index = members.findIndex(member => member.mail === user.mail);
 

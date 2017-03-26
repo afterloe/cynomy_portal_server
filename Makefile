@@ -5,7 +5,9 @@ SHELL := /bin/bash
 MOCHA_FILES := $(shell find ./test -name '*_test.js')
 LIB := node_modules
 FILELIST := bin config dao distributed doc errors interceptors lib routers servers services template tools staticFiles History.md index.js INSTALL.md LICENSE package.json README.md Makefile
-TMPDIR := /tmp/portal-server
+PROJECRNAME = portal-server
+TEMPDIR = /tmp
+TEMPPROJECT := $(TEMPDIR)/$(PROJECRNAME)
 
 # 轮询指令
 all: check mocha-test
@@ -14,7 +16,7 @@ all: check mocha-test
 test: mocha-test test-cov
 
 # 构建指令
-build: check move compile-js cleanCompile
+build: check move compile-js cleanCompile tarProject
 
 # 检测代码是否符合标准
 check: $(shell find . -name '*.js' ! -path './node_modules/*' ! -path './coverage/*' ! -path './mochawesome-reports/*' ! -path './staticFiles/*' ! -path './tools/webTools/*')
@@ -43,15 +45,21 @@ start:
 # 移动文件
 .ONESHELL:
 move:
-	rm -rf $(TMPDIR)
-	mkdir -p $(TMPDIR)
-	cp -R $(FILELIST) $(TMPDIR)
+	rm -rf $(TEMPPROJECT)
+	mkdir -p $(TEMPPROJECT)
+	cp -R $(FILELIST) $(TEMPPROJECT)
 
 # 编译js
 compile-js:
-	@babel staticFiles/js/portal/src -d $(TMPDIR)/staticFiles/js/portal/bin
-	@babel tools/webTools/lib/src -d $(TMPDIR)/tools/webTools/lib/bin
+	@babel staticFiles/js/portal/src -d $(TEMPPROJECT)/staticFiles/js/portal/bin
+	@babel tools/webTools/lib/src -d $(TEMPPROJECT)/tools/webTools/lib/bin
 
 cleanCompile:
-	@rm -rf $(TMPDIR)/staticFiles/js/portal/src
-	@rm -rf $(TMPDIR)/tools/webTools/lib/src
+	@rm -rf $(TEMPPROJECT)/staticFiles/js/portal/src
+	@rm -rf $(TEMPPROJECT)/tools/webTools/lib/src
+
+# 压缩项目jar包
+tarProject:
+	@tar -czvf $(PROJECRNAME).tar.gz $(TEMPPROJECT)
+	@rm -rf $(TEMPPROJECT)
+	@echo $(PROJECRNAME).tar.gz BUILD SUCCESS

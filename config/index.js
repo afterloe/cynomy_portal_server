@@ -18,7 +18,7 @@ const defaultRoot = resolve(process.env.HOME, ".cynomys", "protal");
 
 const [num, dataDir, logDir] = [cpus().length, resolve(defaultRoot, "data"), resolve(defaultRoot, "logs")];
 
-siteConfig.set("version", "1.0.11B"); // 设置服务器版本
+siteConfig.set("version", "1.0.12"); // 设置服务器版本
 siteConfig.set("ssl", { // 安全设置
   enable: false, // 是否开启ssl设置
   keyName: "cynomy", // ssl公私钥 文件名 // 不写则默认

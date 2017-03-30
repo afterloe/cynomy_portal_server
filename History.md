@@ -433,3 +433,14 @@ commit by afterloe (lm6289511@gmail.com)
 > config/index.js  
 > package.json  
 
+
+1.0.11 / 2017-3-30 10:11:21
+==================
+commit by afterloe (lm6289511@gmail.com)
+
+  * master: 添加通知信息
+
+
+### new files
+> test/noticeService_test.js  
+
